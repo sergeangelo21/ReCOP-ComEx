@@ -1,0 +1,1 @@
+from blueprints.registered.views import registered
