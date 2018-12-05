@@ -1,0 +1,1 @@
+from blueprints.beneficiaries.views import beneficiaries
