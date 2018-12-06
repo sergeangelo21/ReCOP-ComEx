@@ -8,4 +8,4 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 @partners.route('/partners')
 def sample():
 
-	return render_template('index.html')
+	return render_template('/partners/index.html')

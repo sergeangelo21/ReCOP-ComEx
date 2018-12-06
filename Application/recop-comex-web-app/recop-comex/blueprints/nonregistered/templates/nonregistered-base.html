@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		{% if title %}
+		<title>{{ title }} | ReCOP-ComEx</title>
+		{% else %}
+		<title>ReCOP-ComEx</title>
+		{% endif %}
+
+		<link rel="stylesheet" type="text/css" href="../../../../static/bulma-0.7.2/css/bulma.min.css">
+		<link rel="stylesheet" href="../../../../static/fontawesome-5.5.0/css/fontawesome.min.css">
+
+	</head>
+
+	<body>
+		{% block content %} {% endblock %}
+	</body>
+	
+</html>
