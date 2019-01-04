@@ -1,4 +1,6 @@
 from flask import Blueprint, render_template
+from queries import query_sample
+
 import os
 
 unregistered = Blueprint('unregistered', __name__, template_folder="templates")
@@ -7,8 +9,8 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @unregistered.route('/')
 def index():
-
-	return render_template('/unregistered/index.html')
+	a = query_sample()
+	return render_template('/unregistered/index.html', a=a)
 
 @unregistered.route('/events')
 def events():
