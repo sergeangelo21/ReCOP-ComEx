@@ -17,7 +17,7 @@
         <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="">
-                    <img src="../../../static/images/menu.png">
+                    <img src="../../../static/images/logo-menu.png">
                 </a>
 
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
@@ -28,46 +28,33 @@
               </div>
 
             <div class="navbar-menu">
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('unregistered.index')}}">
                     <strong>Home</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('unregistered.events')}}">
                     <strong>Events</strong>
                 </a>
-                <a class="navbar-item">
-                    <strong>Proposals</strong>
+                <a class="navbar-item" href="{{url_for('unregistered.partners')}}">
+                    <strong>Partners</strong>
                 </a>
-                <a class="navbar-item">
-                    <strong>Beneficiaries</strong>
-                </a>
-                <a class="navbar-item">
-                    <strong>Reports</strong>
-                </a>
-                <a class="navbar-item">
-                    <strong>Terms & Conditions</strong>
+                <a class="navbar-item" href="{{url_for('unregistered.contactus')}}">
+                    <strong>Contact Us</strong>
                 </a>
             </div>
             <div class="navber-end">
-      			<div class="navbar-item has-dropdown is-hoverable">
-        			<a class="navbar-link">
-        				<div>
-          					<i class="fas fa-user-circle fa-2x"></i>
-          				</div>
-        			</a>
-
-					<div class="navbar-dropdown is-right">
-						<a class="navbar-item">
-							My Profile
-						</a>
-						<hr class="navbar-divider">
-						<a class="navbar-item">
-							Logout
-						</a>
-					</div>
-				</div>
-			</div>
-		</nav>
-		{% block content %} {% endblock %}
-	</body>
-
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary" href="{{url_for('unregistered.signup')}}">
+                            <strong>Sign up</strong>
+                        </a>
+                        <a class="button is-light" href="{{url_for('unregistered.login')}}">
+                            Log in
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% block content %} {% endblock %}
+    </body>
+  
 </html>

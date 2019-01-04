@@ -28,19 +28,22 @@
               </div>
 
             <div class="navbar-menu">
-                <a class="navbar-item" href="{{url_for('beneficiaries.index')}}">
+                <a class="navbar-item" href="{{url_for('linkages.index')}}">
                     <strong>Home</strong>
                 </a>
-                <a class="navbar-item" href="{{url_for('beneficiaries.events')}}">
+                <a class="navbar-item" href="{{url_for('linkages.events')}}">
                     <strong>Events</strong>
                 </a>
-                <a class="navbar-item" href="{{url_for('beneficiaries.reports')}}">
+                <a class="navbar-item" href="{{url_for('linkages.proposals')}}">
+                    <strong>Proposals</strong>
+                </a>
+                <a class="navbar-item" href="{{url_for('linkages.beneficiaries')}}">
+                    <strong>Beneficiaries</strong>
+                </a>
+                <a class="navbar-item" href="{{url_for('linkages.reports')}}">
                     <strong>Reports</strong>
                 </a>
-                <a class="navbar-item" href="{{url_for('beneficiaries.contactus')}}">
-                    <strong>Contact Us</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('beneficiaries.termsandconditions')}}">
+                <a class="navbar-item" href="{{url_for('linkages.termsandconditions')}}">
                     <strong>Terms & Conditions</strong>
                 </a>
             </div>
@@ -53,7 +56,7 @@
         			</a>
 
 					<div class="navbar-dropdown is-right">
-						<a class="navbar-item" href="{{url_for('beneficiaries.profile')}}">
+						<a class="navbar-item" href="{{url_for('linkages.profile')}}">
 							My Profile
 						</a>
 						<hr class="navbar-divider">

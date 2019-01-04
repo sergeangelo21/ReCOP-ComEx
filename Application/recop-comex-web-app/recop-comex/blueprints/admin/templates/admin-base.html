@@ -17,7 +17,7 @@
         <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="">
-                    <img src="../../../static/images/menu.png">
+                    <img src="../../../static/images/logo-menu.png">
                 </a>
 
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
@@ -28,25 +28,25 @@
               </div>
 
             <div class="navbar-menu">
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('admin.index')}}">
                     <strong>Home</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('admin.events')}}">
                     <strong>Events</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('admin.proposals')}}">
                     <strong>Proposals</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('admin.partners')}}">
                     <strong>Partners</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('admin.beneficiaries')}}">
                     <strong>Beneficiaries</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('admin.reports')}}">
                     <strong>Reports</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('admin.feedbacks')}}">
                     <strong>Feedbacks</strong>
                 </a>
             </div>
@@ -59,7 +59,7 @@
         			</a>
 
 					<div class="navbar-dropdown is-right">
-						<a class="navbar-item">
+						<a class="navbar-item" href="{{url_for('admin.profile')}}">
 							My Profile
 						</a>
 						<hr class="navbar-divider">

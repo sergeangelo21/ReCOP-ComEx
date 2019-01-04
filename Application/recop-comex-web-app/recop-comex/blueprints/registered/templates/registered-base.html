@@ -17,7 +17,7 @@
         <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="">
-                    <img src="../../../static/images/menu.png">
+                    <img src="../../../static/images/logo-menu.png">
                 </a>
 
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
@@ -28,22 +28,22 @@
               </div>
 
             <div class="navbar-menu">
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('registered.index')}}">
                     <strong>Home</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('registered.events')}}">
                     <strong>Events</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('registered.partners')}}">
                     <strong>Partners</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('registered.donate')}}">
                     <strong>Donate</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('registered.contactus')}}">
                     <strong>Contact Us</strong>
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="{{url_for('registered.termsandservices')}}">
                     <strong>Terms & Services</strong>
                 </a>
             </div>
@@ -56,7 +56,7 @@
         			</a>
 
 					<div class="navbar-dropdown is-right">
-						<a class="navbar-item">
+						<a class="navbar-item" href="{{url_for('registered.profile')}}">
 							My Profile
 						</a>
 						<hr class="navbar-divider">

@@ -1,0 +1,1 @@
+from blueprints.linkages.views import linkages

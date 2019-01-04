@@ -1,1 +1,0 @@
-from blueprints.partners.views import partners
