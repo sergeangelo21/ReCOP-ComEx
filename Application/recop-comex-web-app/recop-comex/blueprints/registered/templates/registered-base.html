@@ -1,20 +1,73 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		{% if title %}
-		<title>{{ title }} | ReCOP-ComEx</title>
-		{% else %}
-		<title>ReCOP-ComEx</title>
-		{% endif %}
+    <head>
+        {% if title %}
+        <title>{{ title }} | ReCOP-ComEx</title>
+        {% else %}
+        <title>ReCOP-ComEx</title>
+        {% endif %}
 
-		<link rel="stylesheet" type="text/css" href="../../../../static/bulma-0.7.2/css/bulma.min.css">
-		<link rel="stylesheet" href="../../../../static/fontawesome-5.5.0/css/fontawesome.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../static/css/bulma-0.7.2/css/bulma.css">
+        <link rel="stylesheet" href="../../../static/css/fontawesome-5.5.0/css/all.css">
 
-	</head>
+    </head>
 
-	<body>
+    <body>
+        <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="">
+                    <img src="../../../static/images/menu.png">
+                </a>
+
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+              </div>
+
+            <div class="navbar-menu">
+                <a class="navbar-item">
+                    <strong>Home</strong>
+                </a>
+                <a class="navbar-item">
+                    <strong>Events</strong>
+                </a>
+                <a class="navbar-item">
+                    <strong>Partners</strong>
+                </a>
+                <a class="navbar-item">
+                    <strong>Donate</strong>
+                </a>
+                <a class="navbar-item">
+                    <strong>Contact Us</strong>
+                </a>
+                <a class="navbar-item">
+                    <strong>Terms & Services</strong>
+                </a>
+            </div>
+            <div class="navber-end">
+      			<div class="navbar-item has-dropdown is-hoverable">
+        			<a class="navbar-link">
+        				<div>
+          					<i class="fas fa-user-circle fa-2x"></i>
+          				</div>
+        			</a>
+
+					<div class="navbar-dropdown is-right">
+						<a class="navbar-item">
+							My Profile
+						</a>
+						<hr class="navbar-divider">
+						<a class="navbar-item">
+							Logout
+						</a>
+					</div>
+				</div>
+			</div>
+		</nav>
 		{% block content %} {% endblock %}
 	</body>
-	
+
 </html>
