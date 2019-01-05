@@ -9,8 +9,8 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @unregistered.route('/')
 def index():
-	a = query_sample()
-	return render_template('/unregistered/index.html', a=a)
+	result = query_sample()
+	return render_template('/unregistered/index.html', result=result)
 
 @unregistered.route('/events')
 def events():
