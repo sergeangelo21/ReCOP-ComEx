@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from queries import query_sample
+from data_access.queries import query_sample
 
 import os
 
