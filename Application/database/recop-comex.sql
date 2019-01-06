@@ -25,10 +25,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `audit trail`
+-- Table structure for table `audit_trail`
 --
 
-CREATE TABLE `audit trail` (
+CREATE TABLE `audit_trail` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `affected_id` int(11) NOT NULL,

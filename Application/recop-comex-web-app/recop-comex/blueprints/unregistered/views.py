@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template
-from data_access.queries import query_sample
+from data_access.models import audit_trail
 
 import os
 
@@ -9,8 +9,8 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @unregistered.route('/')
 def index():
-	result = query_sample()
-	return render_template('/unregistered/index.html', result=result)
+	#audit_trail.query_sample()
+	return render_template('/unregistered/index.html')
 
 @unregistered.route('/events')
 def events():
