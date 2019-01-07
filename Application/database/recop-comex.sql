@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2019 at 01:37 PM
+-- Generation Time: Jan 07, 2019 at 04:25 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -64,6 +64,7 @@ CREATE TABLE `donation` (
   `amount` decimal(10,2) NOT NULL,
   `date_given` datetime NOT NULL,
   `transaction_slip` varchar(30) NOT NULL,
+  `is_event` char(1) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -136,7 +137,6 @@ CREATE TABLE `referral` (
   `referrer_id` int(11) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
   `email_address` varchar(30) NOT NULL,
-  `contact_number` varchar(15) NOT NULL,
   `type` char(1) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -172,7 +172,8 @@ CREATE TABLE `user_information` (
   `company_name` varchar(50) NOT NULL,
   `gender` char(1) NOT NULL,
   `address` varchar(50) NOT NULL,
-  `contact_number` varchar(15) NOT NULL,
+  `telephone` varchar(15) DEFAULT NULL,
+  `mobile_number` varchar(15) DEFAULT NULL,
   `type` char(1) NOT NULL,
   `is_active` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -194,9 +195,9 @@ CREATE TABLE `user_type` (
 --
 
 --
--- Indexes for table `audit trail`
+-- Indexes for table `audit_trail`
 --
-ALTER TABLE `audit trail`
+ALTER TABLE `audit_trail`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -265,9 +266,9 @@ ALTER TABLE `user_type`
 --
 
 --
--- AUTO_INCREMENT for table `audit trail`
+-- AUTO_INCREMENT for table `audit_trail`
 --
-ALTER TABLE `audit trail`
+ALTER TABLE `audit_trail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -292,7 +293,7 @@ ALTER TABLE `event_category`
 -- AUTO_INCREMENT for table `event_information`
 --
 ALTER TABLE `event_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `event_participation`

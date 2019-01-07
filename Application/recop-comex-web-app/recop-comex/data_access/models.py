@@ -29,7 +29,7 @@ class donation(db.Model):
 	transaction_slip = db.Column(db.VARCHAR(30), nullable=False)
 	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
-	
+
 class event_category(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -47,6 +47,18 @@ class event_information(db.Model):
 	event_date = db.Column(db.DATETIME, nullable=False)
 	type = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
+
+	def add(value):
+
+		record = event_information(id=value[0], organizer_id=value[1], category_id=value[2], name=value[3], description=value[4],location=value[5],event_date=value[6],type=value[7],status=value[8])
+		db.session.add(record)
+		db.session.commit()
+
+	def show(status):
+
+		result = event_information.query.filter(event_information.status==status).first()
+
+		return result.name
 
 class event_participation(db.Model):
 

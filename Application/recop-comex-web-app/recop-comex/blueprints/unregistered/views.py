@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from data_access.models import event_information
 
 import os
 
@@ -9,8 +10,12 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 @unregistered.route('/')
 def index():
 
-	return render_template('/unregistered/index.html')
-	
+	#value = [1,1,1,'LALALA','1','1','1998-01-21','1','A'] 
+	#event_information.add(value)
+	event_information.show('A')
+
+	return render_template('/unregistered/index.html', result=result)
+
 @unregistered.route('/events')
 def events():
 
