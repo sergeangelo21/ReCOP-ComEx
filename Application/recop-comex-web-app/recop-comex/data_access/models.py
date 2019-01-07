@@ -48,6 +48,12 @@ class event_information(db.Model):
 	type = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
+	def count():
+
+		rows = session.query(event_information).count()
+
+		return rows
+
 	def add(value):
 
 		record = event_information(
@@ -64,8 +70,6 @@ class event_information(db.Model):
 			 
 		db.session.add(record)
 		db.session.commit()
-
-		return "hey"
 
 	def show(status):
 
