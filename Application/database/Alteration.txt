@@ -1,0 +1,8 @@
+alter table `donation` add `is_event` CHAR(1) NOT NULL AFTER `transaction_slip`;
+
+alter table `referral` drop COLUMN `contact_number`; 
+
+ALTER TABLE `user_information` CHANGE `contact_number` `telephone` VARCHAR(15);
+
+alter table `user_information` add `mobile_number` VARCHAR(15) AFTER `telephone`;
+
