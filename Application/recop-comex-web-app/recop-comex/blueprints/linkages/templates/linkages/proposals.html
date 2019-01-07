@@ -2,11 +2,237 @@
 
 {% block content %}
 		linkages
-		<div class="columns">
-			<div class="column">1</div>
-			<div class="column">2</div>
-			<div class="column">3</div>
-			<div class="column">4</div>
-			<div class="column">5</div>
-		</div>
+		<style>
+			.hero{
+				background-color: #e6e6e6;
+			}
+
+			.box.white{
+				transform: translateX(6%);
+				width: 90%;
+			}
+
+			.fa-arrow-circle-left{
+				color: #072000; 
+			}
+
+			.button.submit{
+				background-color: #072000; 
+				color: #ffb901;
+				border-color: #072000;
+			}
+		</style>
+	</head>
+	<body>
+
+		<section class="hero is-fullheight">
+			<div class="hero-body">
+			    <div class="box white is-white">
+			    	<form action ="" method = "POST">
+					    <div class="columns">
+					      	<div class="column">
+					      		<article class="media">
+									<figure class="media-left">
+									    <a class="btn btn-follow btn-sm text-center" href="#" role="button">
+											<span class="back-icon">
+									  			<i class="fas fa-arrow-circle-left icon is-medium"></i>
+									  		</span>
+									  	</a>
+									</figure>
+								  
+								  	<div class="media-right has-text-weight-bold">
+								   		 <p class="subtitle has-text-weight-bold">Propose</p>
+								 	 </div>
+								</article>
+					      	</div>
+					    </div>
+
+				        <div class="columns">
+					      	<div class="column">
+					      		<p class="title has-text-centered">Outreach Activity Proposal Form</p>
+					      	</div>
+				     	</div>
+
+				     	<div class="columns">
+					      	<div class="column">
+					         	<div class="field">
+							          <label class="label">Date of Filling</label>
+							       
+						            <div class="control">
+						              <input class="input" type="date" data-validate="require">
+						            </div>
+					          	</div>
+					        </div>
+							       
+							<div class="column">
+								 <div class="field">
+							          <label class="label">Title of the Activity</label>
+						            <div class="control">
+						              <input class="input" type="text" data-validate="require">
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								 <div class="field">
+							          <label class="label">Sponsor/s</label>
+						            <div class="control">
+						              <input class="input" type="text" data-validate="require">
+						            </div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+					      	<div class="column">
+					         	<div class="field">
+							          <label class="label">Name of Representive</label>
+							       
+						            <div class="control">
+						              <input class="input" type="text" data-validate="require">
+						            </div>
+					          	</div>
+					        </div>
+							       
+							<div class="column">
+								 <div class="field">
+							          <label class="label">Contact Number of Represenative</label>
+						            <div class="control">
+						              <input class="input" type="text" data-validate="require">
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								 <div class="field">
+							          <label class="label">Target Date of the Activity</label>
+						            <div class="control">
+						              <input class="input" type="date" data-validate="require">
+						            </div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+					      	<div class="column">
+					         	<div class="field">
+							          <label class="label">Target Partners/Beneficiaries</label>
+							       
+						            <div class="control">
+						              <input class="input" type="text" data-validate="require">
+						            </div>
+					          	</div>
+					        </div>
+							       
+							<div class="column">
+								 <div class="field">
+							          <label class="label">Venue</label>
+						            <div class="control">
+						              <input class="input" type="text" data-validate="require">
+						            </div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+							          <label class="label">Category</label>
+						            <div class="control">
+						              	<div class="select">
+										    <select>
+										      <option>Please choose</option>
+										      <option>Spiritual</option>
+										      <option>Education</option>
+										      <option>Health</option>
+										      <option>Livelihood</option>
+										      <option>Environmental</option>
+										      <option>Socio-political Concerns</option>
+										      <option>Other</option>
+										    </select>
+									 	 </div>
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									<label class="label">If OTHER, please specify here</label>
+						            <div class="control">
+						              <input class="input" type="text" data-validate="require">
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									<label class="label">Purpose/Objective</label>
+						            <div class="control">
+						              <input class="input" type="text" data-validate="require">
+						            </div>
+						        </div>
+							</div>
+						</div>
+
+						<hr>
+
+						<label class="label">Resources (Please fill up all items)</label>
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+									<label class="label">Human Resource</label>
+						            <div class="control">
+						              	<textarea class="textarea"></textarea>
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									<label class="label">Materials</label>
+						            <div class="control is-expanded">
+						              <textarea class="textarea"></textarea>
+						            </div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+									<label class="label">Estimated Budget</label>
+						            <div class="control">
+						              	<textarea class="textarea"></textarea>
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									<label class="label">Source of Fund</label>
+						            <div class="control is-expanded">
+						              <textarea class="textarea"></textarea>
+						            </div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="field is-grouped is-grouped-centered">
+							  <p class="control">
+							    <a class="button previous">
+							      Cancel
+							    </a>
+							  </p>
+							  <p class="control">
+							    <a class="button submit">
+							      Submit
+							    </a>
+							  </p>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</section>
 {% endblock %}

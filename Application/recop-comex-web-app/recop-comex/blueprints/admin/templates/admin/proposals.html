@@ -2,17 +2,172 @@
 
 {% block content %}
 		Admin
-		<div class="columns">
-			<div class="column">
-				<div class="control has-icons-left has-icons-right">
-					<span class="icon is-small is-left">
-						<i class="fas fa-spinner fa-pulse"></i>
-					</span>1
+		<style>
+			.notification.proposals{
+				background-color:#ecad00;
+				text-decoration: none;
+			}
+
+			.box.white{
+				transform: translateX(6%);
+				width: 90%;
+			}
+
+			.tabs.proposal.is-toggle li a{
+		    	color: #ffb901;
+		    	background-color: #072000; 
+		    	border-color: #072000;
+		    	text-decoration: none;
+		    }
+
+		    .tabs.proposal.is-toggle li.is-active a, .tabs.proposal.is-toggle li a:hover{
+		    	background-color: white;
+		    	color: #072000;
+		    	border-color: white;
+		    }
+
+		    th.newlist{
+		    	background-color: white;
+		    }
+
+		    tr.plist:hover {
+		        background-color: white;
+		    }
+
+		    .button.search, .button.add{
+				background-color: #072000; 
+				color: #ffb901;
+				border-color: #072000;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<div class="notification proposals">
+				<div class="columns partners">
+					<div class="column">
+						<div class="tabs proposal is-toggle has-text-weight-bold">
+						  <ul>
+						    <li class="is-active">
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-plus" aria-hidden="true"></i></span>
+						        <span class="proposal">New</span>
+						      </a>
+						    </li>
+						    <li>
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+						        <span class="prop">Ongoing</span>
+						      </a>
+						    </li>
+						    <li>
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-check" aria-hidden="true"></i></span>
+						        <span>Completed</span>
+						      </a>
+						    </li>
+						  </ul>
+						</div>
+					</div>
+
+					<div class="column">
+						<article class="media">
+						  	<figure class="media-left">
+						  		<button class="button add"><i class="fas fa-plus-circle"></i>&nbsp Add</button>
+						  	</figure>
+						  	<div class="media-content">
+							    <div class="field is-horizontal">
+						  	<div class="field-label">
+						    	<label class="label">Filter by:</label>
+						  	</div>
+						  	<div class="field-body">
+							    <div class="field is-narrow">
+							      	<div class="control">
+							       		<div class="select">
+										    <select>
+										      <option>Please choose</option>
+										      <option>All</option>
+										      <option>Organizations</option>
+										      <option>Departmental</option>
+										      <option>Partners</option>
+										    </select>
+									 	</div>
+							      	</div>
+							   	</div>
+							  </div>
+							</div>
+						 	</div>
+						</article>
+					</div>
+
+					<div class="column is-3">
+						<div class="field has-addons has-addons-centered">
+							<p class="control">
+							    <input class="input" type="text" placeholder="Search">
+							</p>
+							<p class="control">
+							    <a class="button search">
+							      Search
+							    </a>
+							</p>
+						</div>
+					</div>
 				</div>
-		</div>
-			<div class="column">2</div>
-			<div class="column">3</div>
-			<div class="column">4</div>
-			<div class="column">5</div>
-		</div>
+			</div>
+			    <div class="box white is-white">
+			    	<div class="columns">
+				        <div class="column is-12">
+				            <div class="card">
+								<table class="table is-fullwidth">
+									<thead>
+									    <tr>
+									      <th class="newlist">Title</th>
+									      <th class="newlist">Venue</th>
+									      <th class="newlist">Date</th>
+									      <th class="newlist">Actions</th>
+									    </tr>
+									</thead>
+
+								  	<tbody>
+									    <tr class="plist">
+									      <td>Tree Planting</td>
+									      <td>San Sebastian College-Recoletos de Cavite, Cavite City</td>
+									      <td>January 10, 2019</td>
+									      <td>
+									      	<div class="dropdown is-hoverable">
+												<div class="dropdown-trigger">
+													<button class="button">
+														<span>Actions</span>
+														<span class="icon">
+															<i class="fa fa-angle-down"></i>
+														</span>
+													</button>
+												</div>
+												<div class="dropdown-menu">
+													<div class="dropdown-content">
+														<a class="dropdown-item">
+															<span class="icon">
+																<i class="fas fa-eye"></i>
+															</span>
+															View
+														</a>
+														<a class="dropdown-item">
+															<span class="icon">
+																<i class="fa fa-archive"></i>
+															</span>
+															Archive
+														</a>
+													</div>
+												</div>
+											</div>
+									      </td>
+									    </tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+		
+		</section>
 {% endblock %}
