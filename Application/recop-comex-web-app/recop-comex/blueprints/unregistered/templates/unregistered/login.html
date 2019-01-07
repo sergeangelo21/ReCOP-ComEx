@@ -1,16 +1,84 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
+<style type="text/css">
+	/*body{
+		background-color: #f3f3f3;
+	}*/
+	.green{
+		background-color:#0d3105;
+		color: #feb801;
+		}
+
+	.green:hover{
+		color:#feb801;
+		
+	}
+
+	.whitesmoke{
+		background-color: #f3f3f3;
+	}
+	.white{
+		background-color: #ffffff;
+	}
+
+</style>
+<br>
 		<div class="columns is-centered is-mobile">
-			<div class="column is-half">
+			<div class="column is-7">
 				<div class="card">
 			    	<div class="card-content">
 					    <div class="columns">
-							<div class="column">
+							<div class="column has-text-centered">
+								<br>
 								<img src="../../../static/images/logo.png" height="256" width="256">
 							</div>
-							<div class="column">
-								Login forms here
+							<div class="column is-6">
+								<div class="field has-text-centered">
+									<label class="title is-3">LOGIN</label><br>
+									<label class="size is-size-7 has-text-grey">Please login to proceed</label>
+								</div>
+								<br>
+								<div class="field">						
+									<label class=" title is-6 "> Username</label>
+									<div class="control has-icons-left has-icons-right">
+										<input class="input" type="text" placeholder="doodle@example.com">
+									<span class="icon is-small is-left">
+				      					<i class="fa fa-user"></i>
+				    				</span>
+									</div>
+								</div>
+
+								<div class="field">						
+							<label class="title is-6">Password</label>
+						<div class="control has-icons-left has-icons-right">
+							<input class="input" type="text" placeholder="**********">
+								<span class="icon is-small is-left">
+			      					<i class="fa fa-key"></i>
+			    				</span>
+						</div>
+					</div>
+
+					<div class="field">
+						<p class="control has-text-left">
+	                    	<label class="checkbox has-text-grey-light is-size-7">
+	                      		<input type="checkbox">
+	                      			Remember me
+	                    	</label>
+	               	    </p>	
+	                  	
+					</div>
+					<div class="field">
+						<div class="button green is-fullwidth is-medium is-size-5"><strong>Login</strong></div>
+					</div>
+
+					<div class="field has-text-centered">
+						
+						<a class="has-text-grey is-size-7" href="../">Not a Member? Sign up here</a>
+						
+					</div>
+			
+
 							</div>
 						</div>
 			    	</div>
