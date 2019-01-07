@@ -65,6 +65,8 @@ class event_information(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
+		return "hey"
+
 	def show(status):
 
 		result = event_information.query.filter(event_information.status==status).first()
