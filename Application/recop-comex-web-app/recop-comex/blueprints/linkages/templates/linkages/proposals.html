@@ -1,7 +1,6 @@
 {% extends "linkages-base.html" %}
 
 {% block content %}
-		linkages
 		<style>
 			.hero{
 				background-color: #e6e6e6;
@@ -28,7 +27,8 @@
 		<section class="hero is-fullheight">
 			<div class="hero-body">
 			    <div class="box white is-white">
-			    	<form action ="" method = "POST">
+			    	<form action="" method="POST">
+			    		{{form.hidden_tag()}}
 					    <div class="columns">
 					      	<div class="column">
 					      		<article class="media">
@@ -41,8 +41,8 @@
 									</figure>
 								  
 								  	<div class="media-right has-text-weight-bold">
-								   		 <p class="subtitle has-text-weight-bold">Propose</p>
-								 	 </div>
+								   		<p class="subtitle has-text-weight-bold">Propose</p>
+								 	</div>
 								</article>
 					      	</div>
 					    </div>
@@ -54,81 +54,11 @@
 				     	</div>
 
 				     	<div class="columns">
-					      	<div class="column">
-					         	<div class="field">
-							          <label class="label">Date of Filling</label>
-							       
-						            <div class="control">
-						              <input class="input" type="date" data-validate="require">
-						            </div>
-					          	</div>
-					        </div>
-							       
 							<div class="column">
 								 <div class="field">
-							          <label class="label">Title of the Activity</label>
+							        {{form.title.label(class_='label')}}
 						            <div class="control">
-						              <input class="input" type="text" data-validate="require">
-						            </div>
-						        </div>
-							</div>
-
-							<div class="column">
-								 <div class="field">
-							          <label class="label">Sponsor/s</label>
-						            <div class="control">
-						              <input class="input" type="text" data-validate="require">
-						            </div>
-						        </div>
-							</div>
-						</div>
-
-						<div class="columns">
-					      	<div class="column">
-					         	<div class="field">
-							          <label class="label">Name of Representive</label>
-							       
-						            <div class="control">
-						              <input class="input" type="text" data-validate="require">
-						            </div>
-					          	</div>
-					        </div>
-							       
-							<div class="column">
-								 <div class="field">
-							          <label class="label">Contact Number of Represenative</label>
-						            <div class="control">
-						              <input class="input" type="text" data-validate="require">
-						            </div>
-						        </div>
-							</div>
-
-							<div class="column">
-								 <div class="field">
-							          <label class="label">Target Date of the Activity</label>
-						            <div class="control">
-						              <input class="input" type="date" data-validate="require">
-						            </div>
-						        </div>
-							</div>
-						</div>
-
-						<div class="columns">
-					      	<div class="column">
-					         	<div class="field">
-							          <label class="label">Target Partners/Beneficiaries</label>
-							       
-						            <div class="control">
-						              <input class="input" type="text" data-validate="require">
-						            </div>
-					          	</div>
-					        </div>
-							       
-							<div class="column">
-								 <div class="field">
-							          <label class="label">Venue</label>
-						            <div class="control">
-						              <input class="input" type="text" data-validate="require">
+						            	{{form.title(class_='input')}}
 						            </div>
 						        </div>
 							</div>
@@ -136,37 +66,59 @@
 
 						<div class="columns">
 							<div class="column">
-								<div class="field">
-							          <label class="label">Category</label>
+								 <div class="field">
+							        {{form.date.label(class_='label')}}
 						            <div class="control">
-						              	<div class="select">
-										    <select>
-										      <option>Please choose</option>
-										      <option>Spiritual</option>
-										      <option>Education</option>
-										      <option>Health</option>
-										      <option>Livelihood</option>
-										      <option>Environmental</option>
-										      <option>Socio-political Concerns</option>
-										      <option>Other</option>
-										    </select>
-									 	 </div>
+						            	{{form.date(class_='input', type='date')}}
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								 <div class="field">
+							        {{form.venue.label(class_='label')}}
+						            <div class="control">
+						            	{{form.venue(class_='input')}}
+						            </div>
+						        </div>
+							</div>
+
+						</div>
+
+						<div class="columns">
+					      	<div class="column">
+					         	<div class="field">
+							        <label class="label">Target Partner/s</label>
+						            <div class="control">
+						            	<input class="input" type="text" data-validate="require">
+						            </div>
+					          	</div>
+					        </div>
+
+					      	<div class="column">
+					         	<div class="field">
+							        <label class="label">Target Beneficiaries</label>
+						            <div class="control">
+						            	<input class="input" type="text" data-validate="require">
+						            </div>
+					          	</div>
+					        </div>
+
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+							        {{form.category.label(class_='label')}}
+						            <div class="control">
+						              	{{form.category(class_='input', placeholder="Category")}}
 						            </div>
 						        </div>
 							</div>
 
 							<div class="column">
 								<div class="field">
-									<label class="label">If OTHER, please specify here</label>
-						            <div class="control">
-						              <input class="input" type="text" data-validate="require">
-						            </div>
-						        </div>
-							</div>
-
-							<div class="column">
-								<div class="field">
-									<label class="label">Purpose/Objective</label>
+									{{form.purpose.label(class_='label')}}
 						            <div class="control">
 						              <input class="input" type="text" data-validate="require">
 						            </div>
@@ -218,16 +170,14 @@
 						</div>
 
 						<div class="field is-grouped is-grouped-centered">
-							  <p class="control">
+							<p class="control">
 							    <a class="button previous">
-							      Cancel
+							    	Cancel
 							    </a>
-							  </p>
-							  <p class="control">
-							    <a class="button submit">
-							      Submit
-							    </a>
-							  </p>
+							</p>
+							<p class="control">
+							  	{{form.submit(class_='button submit')}}
+							</p>
 						</div>
 
 					</form>
