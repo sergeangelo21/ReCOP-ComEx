@@ -10,11 +10,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 @unregistered.route('/')
 def index():
 
-	#value = [1,1,1,'LALALA','1','1','1998-01-21','1','A'] 
-	#event_information.add(value)
-	event_information.show('A')
-
-	return render_template('/unregistered/index.html', result=result)
+	return render_template('/unregistered/index.html')
 
 @unregistered.route('/events')
 def events():
