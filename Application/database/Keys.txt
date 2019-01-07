@@ -1,0 +1,16 @@
+event_information.type
+
+A = Institutional Annual
+B = Institutional One Time
+C = Outside Annual
+D = Outside One Time
+
+++++++++++++++++++++++++++++++++++++++++
+
+event_information.status
+
+N = New
+O = Ongoing
+A = Approved
+
+

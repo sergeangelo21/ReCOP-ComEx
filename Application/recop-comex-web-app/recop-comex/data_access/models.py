@@ -50,7 +50,18 @@ class event_information(db.Model):
 
 	def add(value):
 
-		record = event_information(id=value[0], organizer_id=value[1], category_id=value[2], name=value[3], description=value[4],location=value[5],event_date=value[6],type=value[7],status=value[8])
+		record = event_information(
+			id=value[0], 
+			organizer_id=value[1], 
+			category_id=value[2], 
+			name=value[3], 
+			description=value[4],
+			location=value[5],
+			event_date=value[6],
+			type=value[7],
+			status=value[8]
+			)
+			 
 		db.session.add(record)
 		db.session.commit()
 
