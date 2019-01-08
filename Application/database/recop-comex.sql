@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2019 at 04:25 PM
+-- Generation Time: Jan 08, 2019 at 04:15 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -34,7 +34,7 @@ CREATE TABLE `audit_trail` (
   `affected_id` int(11) NOT NULL,
   `target_table` varchar(25) NOT NULL,
   `date_created` datetime NOT NULL,
-  `type` char(1) NOT NULL
+  `type` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -63,9 +63,22 @@ CREATE TABLE `donation` (
   `sponsor_id` int(11) DEFAULT NULL,
   `amount` decimal(10,2) NOT NULL,
   `date_given` datetime NOT NULL,
-  `transaction_slip` varchar(30) NOT NULL,
+  `transaction_slip` varchar(200) NOT NULL,
   `is_event` char(1) NOT NULL,
   `status` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_attachment`
+--
+
+CREATE TABLE `event_attachment` (
+  `id` int(11) NOT NULL,
+  `event_id` int(11) DEFAULT NULL,
+  `path` varchar(200) NOT NULL,
+  `type` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -92,11 +105,20 @@ CREATE TABLE `event_information` (
   `category_id` int(11) DEFAULT NULL,
   `name` varchar(30) NOT NULL,
   `description` varchar(30) NOT NULL,
+  `objective` varchar(30) NOT NULL,
+  `budget` decimal(10,2) NOT NULL,
   `location` varchar(50) NOT NULL,
   `event_date` datetime NOT NULL,
-  `type` char(1) NOT NULL,
+  `type` int(1) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `event_information`
+--
+
+INSERT INTO `event_information` (`id`, `organizer_id`, `category_id`, `name`, `description`, `objective`, `budget`, `location`, `event_date`, `type`, `status`) VALUES
+(1, 1, 1, 'Sasas', 'sadas', '', '0.00', 'asadasd', '2019-01-04 00:00:00', 0, 'A');
 
 -- --------------------------------------------------------
 
@@ -116,6 +138,19 @@ CREATE TABLE `event_participation` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `event_resource`
+--
+
+CREATE TABLE `event_resource` (
+  `id` int(11) NOT NULL,
+  `event_id` int(11) DEFAULT NULL,
+  `name` varchar(30) NOT NULL,
+  `type` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `event_signatory`
 --
 
@@ -129,6 +164,24 @@ CREATE TABLE `event_signatory` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `proposal_tracker`
+--
+
+CREATE TABLE `proposal_tracker` (
+  `id` int(11) NOT NULL,
+  `event_id` int(11) DEFAULT NULL,
+  `proposed_on` datetime NOT NULL,
+  `recop_accepted` datetime DEFAULT NULL,
+  `fmi_signed` datetime DEFAULT NULL,
+  `acad_signed` datetime DEFAULT NULL,
+  `approved_on` datetime DEFAULT NULL,
+  `comment` varchar(20) DEFAULT NULL,
+  `status` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `referral`
 --
 
@@ -137,7 +190,7 @@ CREATE TABLE `referral` (
   `referrer_id` int(11) DEFAULT NULL,
   `name` varchar(50) NOT NULL,
   `email_address` varchar(30) NOT NULL,
-  `type` char(1) NOT NULL,
+  `type` int(1) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -150,10 +203,10 @@ CREATE TABLE `referral` (
 CREATE TABLE `user_account` (
   `id` int(11) NOT NULL,
   `info_id` int(11) DEFAULT NULL,
-  `type_id` int(11) DEFAULT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `email_address` varchar(30) NOT NULL,
+  `type` int(1) NOT NULL,
   `last_active` datetime NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -174,20 +227,8 @@ CREATE TABLE `user_information` (
   `address` varchar(50) NOT NULL,
   `telephone` varchar(15) DEFAULT NULL,
   `mobile_number` varchar(15) DEFAULT NULL,
-  `type` char(1) NOT NULL,
+  `type` int(1) NOT NULL,
   `is_active` char(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_type`
---
-
-CREATE TABLE `user_type` (
-  `id` int(11) NOT NULL,
-  `name` varchar(15) NOT NULL,
-  `privileges` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -213,6 +254,12 @@ ALTER TABLE `donation`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `event_attachment`
+--
+ALTER TABLE `event_attachment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `event_category`
 --
 ALTER TABLE `event_category`
@@ -231,9 +278,21 @@ ALTER TABLE `event_participation`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `event_resource`
+--
+ALTER TABLE `event_resource`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `event_signatory`
 --
 ALTER TABLE `event_signatory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `proposal_tracker`
+--
+ALTER TABLE `proposal_tracker`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -253,12 +312,6 @@ ALTER TABLE `user_account`
 -- Indexes for table `user_information`
 --
 ALTER TABLE `user_information`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `user_type`
---
-ALTER TABLE `user_type`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -293,7 +346,7 @@ ALTER TABLE `event_category`
 -- AUTO_INCREMENT for table `event_information`
 --
 ALTER TABLE `event_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `event_participation`
@@ -323,12 +376,6 @@ ALTER TABLE `user_account`
 -- AUTO_INCREMENT for table `user_information`
 --
 ALTER TABLE `user_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `user_type`
---
-ALTER TABLE `user_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
