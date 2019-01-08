@@ -10,6 +10,7 @@
 
         <link rel="stylesheet" type="text/css" href="../../../static/css/bulma-0.7.2/css/bulma.css">
         <link rel="stylesheet" href="../../../static/css/fontawesome-5.5.0/css/all.css">
+        <link rel="stylesheet" type="text/css" href="../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.css">
 
     </head>
 
@@ -54,6 +55,13 @@
                 </div>
             </div>
         </nav>
+        <script type="text/javascript" src="../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.js"></script>
+<script>
+    new bulmaSteps(document.getElementById('stepsDemo'), {
+    onShow: (id) => console.log(id)
+})
+  </script>
+
         {% block content %} {% endblock %}
     </body>
   
