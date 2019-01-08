@@ -26,7 +26,7 @@ class donation(db.Model):
 	sponsor_id = db.Column(db.INT)
 	amount = db.Column(db.NUMERIC(10,2), nullable=False)
 	date_given = db.Column(db.DATETIME, nullable=False)
-	transaction_slip = db.Column(db.VARCHAR(30), nullable=False)
+	transaction_slip = db.Column(db.VARCHAR(200), nullable=False)
 	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
