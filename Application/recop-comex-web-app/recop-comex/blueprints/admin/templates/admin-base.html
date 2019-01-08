@@ -11,65 +11,103 @@
         <link rel="stylesheet" type="text/css" href="../../../static/css/bulma-0.7.2/css/bulma.css">
         <link rel="stylesheet" href="../../../static/css/fontawesome-5.5.0/css/all.css">
 
+            <style>
+            .navbar, .navbar-dropdown, .navbar-menu{
+                background-color: #072000; 
+            }
+
+            .nav-text{
+                color: #ffb901;
+                font-size: 25px;
+            }
+
+            .navbar-item, a.navbar-link, .navbar-end{
+                color: white;
+                font-weight: bold;
+            }
+
+            a.navbar-item:hover, a.navbar-item.is-active{
+                background-color: #092d01;
+                color: #ffb901; 
+            }
+
+            .burger{
+                color: white;
+            }
+        </style>
+
     </head>
 
     <body>
-        <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="">
                     <img src="../../../static/images/logo-menu.png">
                 </a>
 
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+                <span class="navbar-burger burger" data-target="navMenu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
-                </a>
+                </span>
             </div>
 
-            <div class="navbar-menu">
-                <a class="navbar-item" href="{{url_for('admin.index')}}">
-                    <strong>Home</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('admin.events')}}">
-                    <strong>Events</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('admin.proposals')}}">
-                    <strong>Proposals</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('admin.partners')}}">
-                    <strong>Partners</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('admin.beneficiaries')}}">
-                    <strong>Beneficiaries</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('admin.reports')}}">
-                    <strong>Reports</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('admin.feedbacks')}}">
-                    <strong>Feedbacks</strong>
-                </a>
-            </div>
-            <div class="navber-end">
-      			<div class="navbar-item has-dropdown is-hoverable">
-        			<a class="navbar-link">
-        				<div>
-          					<i class="fas fa-user-circle fa-2x"></i>
-          				</div>
-        			</a>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="{{url_for('admin.index')}}">
+                        <strong>Home</strong>
+                    </a>
+                    <a class="navbar-item" href="{{url_for('admin.events')}}">
+                        <strong>Events</strong>
+                    </a>
+                    <a class="navbar-item" href="{{url_for('admin.proposals')}}">
+                        <strong>Proposals</strong>
+                    </a>
+                    <a class="navbar-item" href="{{url_for('admin.partners')}}">
+                        <strong>Partners</strong>
+                    </a>
+                    <a class="navbar-item" href="{{url_for('admin.beneficiaries')}}">
+                        <strong>Beneficiaries</strong>
+                    </a>
+                    <a class="navbar-item" href="{{url_for('admin.reports')}}">
+                        <strong>Reports</strong>
+                    </a>
+                    <a class="navbar-item" href="{{url_for('admin.feedbacks')}}">
+                        <strong>Feedbacks</strong>
+                    </a>
+                
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            <div>
+                                <i class="fas fa-user-circle fa-2x"></i>
+                            </div>
+                        </a>
 
-					<div class="navbar-dropdown is-right">
-						<a class="navbar-item" href="{{url_for('admin.profile')}}">
-							My Profile
-						</a>
-						<hr class="navbar-divider">
-						<a class="navbar-item">
-							Logout
-						</a>
-					</div>
-				</div>
-			</div>
-		</nav>
+                        <div class="navbar-dropdown is-right">
+                            <a class="navbar-item" href="{{url_for('admin.profile')}}">
+                                My Profile
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <script type="text/javascript">
+            (function() {
+              var burger = document.querySelector('.burger');
+              var nav = document.querySelector('#'+burger.dataset.target);
+             
+              burger.addEventListener('click', function(){
+                burger.classList.toggle('is-active');
+                nav.classList.toggle('is-active');
+              });
+        })();
+        </script>
 		{% block content %} {% endblock %}
 	</body>
 

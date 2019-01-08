@@ -1,9 +1,12 @@
 {% extends "admin-base.html" %}
 
 {% block content %}
-		Admin
 		<style>
-			.notification.proposals{
+			.hero{
+				background-color: #e6e6e6;
+			}
+
+			.notification.gold{
 				background-color:#ecad00;
 				text-decoration: none;
 			}
@@ -40,10 +43,9 @@
 				border-color: #072000;
 			}
 		</style>
-	</head>
-	<body>
-		<section>
-			<div class="notification proposals">
+
+		<section class="hero">
+			<div class="notification gold">
 				<div class="columns partners">
 					<div class="column">
 						<div class="tabs proposal is-toggle has-text-weight-bold">
@@ -114,60 +116,63 @@
 					</div>
 				</div>
 			</div>
-			    <div class="box white is-white">
-			    	<div class="columns">
-				        <div class="column is-12">
-				            <div class="card">
-								<table class="table is-fullwidth">
-									<thead>
-									    <tr>
-									      <th class="newlist">Title</th>
-									      <th class="newlist">Venue</th>
-									      <th class="newlist">Date</th>
-									      <th class="newlist">Actions</th>
-									    </tr>
-									</thead>
 
-								  	<tbody>
-									    <tr class="plist">
-									      <td>Tree Planting</td>
-									      <td>San Sebastian College-Recoletos de Cavite, Cavite City</td>
-									      <td>January 10, 2019</td>
-									      <td>
-									      	<div class="dropdown is-hoverable">
-												<div class="dropdown-trigger">
-													<button class="button">
-														<span>Actions</span>
+			<div class="hero-body">
+			    <div class="box white is-white">
+			    	<div class="column">
+			            <div class="card-header">
+							<p class="card-header-title">Proposals</p>
+						</div>
+						<div class="card-content">
+							<table class="table is-fullwidth">
+								<thead>
+								    <tr>
+								      <th class="newlist">Title</th>
+								      <th class="newlist">Venue</th>
+								      <th class="newlist">Date</th>
+								      <th class="newlist">Actions</th>
+								    </tr>
+								</thead>
+
+							  	<tbody>
+								    <tr class="plist">
+								      <td>Tree Planting</td>
+								      <td>San Sebastian College-Recoletos de Cavite, Cavite City</td>
+								      <td>January 10, 2019</td>
+								      <td>
+								      	<div class="dropdown is-hoverable">
+											<div class="dropdown-trigger">
+												<button class="button">
+													<span>Actions</span>
+													<span class="icon">
+														<i class="fa fa-angle-down"></i>
+													</span>
+												</button>
+											</div>
+											<div class="dropdown-menu">
+												<div class="dropdown-content">
+													<a class="dropdown-item">
 														<span class="icon">
-															<i class="fa fa-angle-down"></i>
+															<i class="fas fa-eye"></i>
 														</span>
-													</button>
-												</div>
-												<div class="dropdown-menu">
-													<div class="dropdown-content">
-														<a class="dropdown-item">
-															<span class="icon">
-																<i class="fas fa-eye"></i>
-															</span>
-															View
-														</a>
-														<a class="dropdown-item">
-															<span class="icon">
-																<i class="fa fa-archive"></i>
-															</span>
-															Archive
-														</a>
-													</div>
+														View
+													</a>
+													<a class="dropdown-item">
+														<span class="icon">
+															<i class="fa fa-archive"></i>
+														</span>
+														Archive
+													</a>
 												</div>
 											</div>
-									      </td>
-									    </tr>
-									</tbody>
-								</table>
-							</div>
+										</div>
+								      </td>
+								    </tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
 				</div>
-		
+			</div>
 		</section>
 {% endblock %}
