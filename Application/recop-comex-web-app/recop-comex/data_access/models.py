@@ -9,7 +9,7 @@ class audit_trail(db.Model):
 	affected_id = db.Column(db.INT, nullable=False)
 	target_table = db.Column(db.VARCHAR(25), nullable=False)
 	date_created = db.Column(db.DATETIME, nullable=False)
-	type = db.Column(db.INT(1), nullable=False)
+	type = db.Column(db.INT, nullable=False)
 
 class beneficiary(db.Model):
 
@@ -35,7 +35,7 @@ class event_attachment(db.Model):
 	id = db.Column(db.INT, primary_key=True)
 	event_id = db.Column(db.INT)
 	path = db.Column(db.VARCHAR(200), nullable=False)
-	type = db.Column(db.INT(1), nullable=False)
+	type = db.Column(db.INT, nullable=False)
 
 class event_category(db.Model):
 
@@ -54,7 +54,7 @@ class event_information(db.Model):
 	budget = db.Column(db.NUMERIC(10,2), nullable=False)
 	location = db.Column(db.VARCHAR(50),nullable=False)
 	event_date = db.Column(db.DATETIME, nullable=False)
-	type = db.Column(db.INT(1), nullable=False)
+	type = db.Column(db.INT, nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
 	def count():
@@ -101,14 +101,14 @@ class event_resource(db.Model):
 	id = db.Column(db.INT, primary_key=True)
 	event_id = db.Column(db.INT)
 	name = db.Column(db.VARCHAR(30), nullable=False)
-	type = db.Column(db.INT(1), nullable=False)
+	type = db.Column(db.INT, nullable=False)
 
 class event_signatory(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
 	signatory_id = db.Column(db.INT)
 	description = db.Column(db.VARCHAR(20),nullable=False)
-	order = db.Column(db.INT(1), nullable=False)
+	order = db.Column(db.INT, nullable=False)
 
 class proposal_tracker(db.Model):
 
@@ -128,7 +128,7 @@ class referral(db.Model):
 	referrer_id = db.Column(db.INT)
 	name = db.Column(db.VARCHAR(50),nullable=False)
 	email_address = db.Column(db.VARCHAR(30),nullable=False)
-	type = db.Column(db.INT(1), nullable=False)
+	type = db.Column(db.INT, nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
 class user_account(db.Model):
@@ -153,5 +153,5 @@ class user_information(db.Model):
 	address = db.Column(db.VARCHAR(50),nullable=False)
 	telephone = db.Column(db.VARCHAR(15))
 	mobile_number = db.Column(db.VARCHAR(15))
-	type = db.Column(db.INT(1), nullable=False)
+	type = db.Column(db.INT, nullable=False)
 	is_active = db.Column(db.CHAR(1), nullable=False)
