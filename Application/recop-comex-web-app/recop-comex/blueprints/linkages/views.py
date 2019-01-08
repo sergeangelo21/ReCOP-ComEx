@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, url_for
 from blueprints.linkages.forms import ProposalForm
-from data_access.models import event_information
+from data_access.models import event_information, event_category
 import os
 
 linkages = Blueprint('linkages', __name__, template_folder="templates")
@@ -22,9 +22,13 @@ def proposals():
 
 	form = ProposalForm()
 
+	form.category.choices = event_category.select()
+
 	if form.validate_on_submit():
-		value = [1,1,1,form.title.data,form.purpose.data,form.venue.data,form.date.data,"A","A"]
+		id = event_information.count()
+		value = [id,1,form.category.data,form.title.data,form.purpose.data,form.venue.data,form.date.data,1,"A"]
 		event_information.add(value)
+		return redirect(url_for('linkages.proposals'))
 
 	return render_template('/linkages/proposals.html', title="Proposals | Partners", form=form)
 

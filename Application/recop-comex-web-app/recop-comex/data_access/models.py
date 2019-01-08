@@ -43,14 +43,21 @@ class event_category(db.Model):
 	name = db.Column(db.VARCHAR(20), nullable=False)
 	description = db.Column(db.VARCHAR(30), nullable=False)
 
+	def select():
+
+		result = event_category.query.all()
+		choice = ((row.id, row.name) for row in result)
+
+		return choice
+
 class event_information(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
 	organizer_id = db.Column(db.INT)
 	category_id = db.Column(db.INT)
 	name = db.Column(db.VARCHAR(30),nullable=False)
-	description = db.Column(db.VARCHAR(30),nullable=False)
-	objective = db.Column(db.VARCHAR(30),nullable=False)
+	description = db.Column(db.VARCHAR(140),nullable=False)
+	objective = db.Column(db.VARCHAR(140),nullable=False)
 	budget = db.Column(db.NUMERIC(10,2), nullable=False)
 	location = db.Column(db.VARCHAR(50),nullable=False)
 	event_date = db.Column(db.DATETIME, nullable=False)
@@ -59,8 +66,8 @@ class event_information(db.Model):
 
 	def count():
 
-		rows = session.query(event_information).count()
-
+		rows = db.session.query(event_information).count()
+		rows+=1
 		return rows
 
 	def add(value):
@@ -70,8 +77,9 @@ class event_information(db.Model):
 			organizer_id=value[1], 
 			category_id=value[2], 
 			name=value[3], 
-			description=value[4],
-			objective='For the trees',
+			description='event ko to',
+			objective=value[4],
+			budget = '1000.00',
 			location=value[5],
 			event_date=value[6],
 			type=value[7],
@@ -94,6 +102,7 @@ class event_participation(db.Model):
 	participant_id = db.Column(db.INT)
 	rating = db.Column(db.INT, nullable=False)
 	comment = db.Column(db.VARCHAR(140),nullable=False)
+	is_target = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
 class event_resource(db.Model):

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2019 at 04:15 PM
+-- Generation Time: Jan 08, 2019 at 06:22 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -93,6 +93,13 @@ CREATE TABLE `event_category` (
   `description` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `event_category`
+--
+
+INSERT INTO `event_category` (`id`, `name`, `description`) VALUES
+(1, 'Educational', 'Promotes academic well-being');
+
 -- --------------------------------------------------------
 
 --
@@ -104,21 +111,14 @@ CREATE TABLE `event_information` (
   `organizer_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
   `name` varchar(30) NOT NULL,
-  `description` varchar(30) NOT NULL,
-  `objective` varchar(30) NOT NULL,
+  `description` varchar(140) NOT NULL,
+  `objective` varchar(140) NOT NULL,
   `budget` decimal(10,2) NOT NULL,
   `location` varchar(50) NOT NULL,
   `event_date` datetime NOT NULL,
   `type` int(1) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `event_information`
---
-
-INSERT INTO `event_information` (`id`, `organizer_id`, `category_id`, `name`, `description`, `objective`, `budget`, `location`, `event_date`, `type`, `status`) VALUES
-(1, 1, 1, 'Sasas', 'sadas', '', '0.00', 'asadasd', '2019-01-04 00:00:00', 0, 'A');
 
 -- --------------------------------------------------------
 
@@ -132,6 +132,7 @@ CREATE TABLE `event_participation` (
   `participant_id` int(11) DEFAULT NULL,
   `rating` int(11) NOT NULL,
   `comment` varchar(140) DEFAULT NULL,
+  `is_target` char(1) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -340,13 +341,13 @@ ALTER TABLE `donation`
 -- AUTO_INCREMENT for table `event_category`
 --
 ALTER TABLE `event_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `event_information`
 --
 ALTER TABLE `event_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `event_participation`
