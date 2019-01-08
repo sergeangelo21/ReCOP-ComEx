@@ -9,7 +9,7 @@ class audit_trail(db.Model):
 	affected_id = db.Column(db.INT, nullable=False)
 	target_table = db.Column(db.VARCHAR(25), nullable=False)
 	date_created = db.Column(db.DATETIME, nullable=False)
-	type = db.Column(db.CHAR(1), nullable=False)
+	type = db.Column(db.INT(1), nullable=False)
 
 class beneficiary(db.Model):
 
@@ -30,6 +30,13 @@ class donation(db.Model):
 	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
+class event_attachment(db.Model):
+
+	id = db.Column(db.INT, primary_key=True)
+	event_id = db.Column(db.INT)
+	path = db.Column(db.VARCHAR(200), nullable=False)
+	type = db.Column(db.INT(1), nullable=False)
+
 class event_category(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -43,9 +50,11 @@ class event_information(db.Model):
 	category_id = db.Column(db.INT)
 	name = db.Column(db.VARCHAR(30),nullable=False)
 	description = db.Column(db.VARCHAR(30),nullable=False)
+	objective = db.Column(db.VARCHAR(30),nullable=False)
+	budget = db.Column(db.NUMERIC(10,2), nullable=False)
 	location = db.Column(db.VARCHAR(50),nullable=False)
 	event_date = db.Column(db.DATETIME, nullable=False)
-	type = db.Column(db.CHAR(1), nullable=False)
+	type = db.Column(db.INT(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
 	def count():
@@ -62,6 +71,7 @@ class event_information(db.Model):
 			category_id=value[2], 
 			name=value[3], 
 			description=value[4],
+			objective='For the trees',
 			location=value[5],
 			event_date=value[6],
 			type=value[7],
@@ -86,12 +96,31 @@ class event_participation(db.Model):
 	comment = db.Column(db.VARCHAR(140),nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
+class event_resource(db.Model):
+
+	id = db.Column(db.INT, primary_key=True)
+	event_id = db.Column(db.INT)
+	name = db.Column(db.VARCHAR(30), nullable=False)
+	type = db.Column(db.INT(1), nullable=False)
+
 class event_signatory(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
 	signatory_id = db.Column(db.INT)
 	description = db.Column(db.VARCHAR(20),nullable=False)
-	order = db.Column(db.CHAR(1), nullable=False)
+	order = db.Column(db.INT(1), nullable=False)
+
+class proposal_tracker(db.Model):
+
+	id = db.Column(db.INT, primary_key=True)
+	event_id = db.Column(db.INT)
+	proposed_on = db.Column	(db.DATETIME, nullable=False)
+	recop_accepted = db.Column(db.DATETIME)
+	fmi_signed = db.Column(db.DATETIME)
+	acad_signed = db.Column(db.DATETIME)
+	approved_on = db.Column(db.DATETIME)
+	comment = db.Column(db.VARCHAR(20))
+	status = db.Column(db.CHAR(1), nullable=False)	
 
 class referral(db.Model):
 
@@ -99,7 +128,7 @@ class referral(db.Model):
 	referrer_id = db.Column(db.INT)
 	name = db.Column(db.VARCHAR(50),nullable=False)
 	email_address = db.Column(db.VARCHAR(30),nullable=False)
-	type = db.Column(db.CHAR(1), nullable=False)
+	type = db.Column(db.INT(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
 class user_account(db.Model):
@@ -124,11 +153,5 @@ class user_information(db.Model):
 	address = db.Column(db.VARCHAR(50),nullable=False)
 	telephone = db.Column(db.VARCHAR(15))
 	mobile_number = db.Column(db.VARCHAR(15))
-	type = db.Column(db.CHAR(1), nullable=False)
+	type = db.Column(db.INT(1), nullable=False)
 	is_active = db.Column(db.CHAR(1), nullable=False)
-
-class user_type(db.Model):
-
-	id = db.Column(db.INT, primary_key=True)
-	name = db.Column(db.VARCHAR(15),nullable=False)
-	privileges = db.Column(db.VARCHAR(15),nullable=False)
