@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, redirect, url_for
 from blueprints.linkages.forms import ProposalForm
-from data_access.models import event_information, event_category
+from data_access.models import event_information, event_category, proposal_tracker
 import os
 
 linkages = Blueprint('linkages', __name__, template_folder="templates")
@@ -26,7 +26,7 @@ def proposals():
 
 	if form.validate_on_submit():
 		id = event_information.count()
-		value = [id,1,form.category.data,form.title.data,form.purpose.data,form.venue.data,form.date.data,1,"A"]
+		value = [id,1,form.category.data,form.title.data,'event ko to', form.purpose.data,1000.50,form.venue.data,form.date.data,1,'N']
 		event_information.add(value)
 		return redirect(url_for('linkages.proposals'))
 
