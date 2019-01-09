@@ -144,12 +144,34 @@ class user_account(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
 	info_id = db.Column(db.INT)
-	type_id = db.Column(db.INT)
 	username = db.Column(db.VARCHAR(20),nullable=False)
 	password = db.Column(db.VARCHAR(20),nullable=False)
 	email_address = db.Column(db.VARCHAR(30),nullable=False)
+	type = db.Column(db.INT, nullable=False)
 	last_active = db.Column(db.DATETIME, nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
+
+	def count():
+
+		rows = db.session.query(user_account).count()
+		rows+=1
+		return rows
+
+	def add(value_user_account):
+
+		record = user_account(
+			id=value_user_account[0], 
+			info_id=value_user_account[1],
+			username=value_user_account[2],
+			password=value_user_account[3],
+			email_address=value_user_account[4],
+			type=value_user_account[5],
+			last_active=value_user_account[6],
+			status=value_user_account[7]
+			)
+			 
+		db.session.add(record)
+		db.session.commit()
 
 class user_information(db.Model):
 
@@ -164,3 +186,28 @@ class user_information(db.Model):
 	mobile_number = db.Column(db.VARCHAR(15))
 	type = db.Column(db.INT, nullable=False)
 	is_active = db.Column(db.CHAR(1), nullable=False)
+
+	def count():
+
+		rows = db.session.query(user_information).count()
+		rows+=1
+		return rows
+
+	def add(value_user_information):
+
+		record = user_information(
+			id=value_user_information[0], 
+			first_name=value_user_information[1],
+			middle_name=value_user_information[2],
+			last_name=value_user_information[3],
+			company_name='company_name',
+			gender=value_user_information[4],
+			address=value_user_information[5],
+			telephone=value_user_information[6],
+			mobile_number=value_user_information[7],
+			type=value_user_information[8],
+			is_active=value_user_information[9]
+			)
+			 
+		db.session.add(record)
+		db.session.commit()
