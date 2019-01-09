@@ -39,10 +39,17 @@ def signup():
 		id_user_account = user_account.count()
 		id_user_information = user_information.count()
 
-		value_user_account = [id_user_account,id_user_information,form.username.data,form.password.data,form.email.data,"X",datetime.utcnow(),"A"]
+		value_user_account = [
+			id_user_account,id_user_information,form.username.data,
+			form.password.data,form.email.data,1,datetime.utcnow(),"A"
+			]
 		user_account.add(value_user_account)
 
-		value_user_information = [id_user_information,form.firstname.data,form.middlename.data,form.lastname.data,form.gender.data,form.address.data,form.telephone.data,form.mobile.data,"X","Y"]
+		value_user_information = [
+			id_user_information,form.firstname.data,form.middlename.data,
+			form.lastname.data,form.company.data,form.gender.data,
+			form.address.data,form.telephone.data,form.mobile.data,form.type.data,"Y"
+			]
 		user_information.add(value_user_information)
 
 	return render_template('/unregistered/signup.html', form=form)

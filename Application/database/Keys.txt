@@ -13,4 +13,17 @@ N = New
 O = Ongoing
 A = Approved
 
+++++++++++++++++++++++++++++++++++++++++
 
+user_account.type
+
+0 = admin
+1 = user
+
+++++++++++++++++++++++++++++++++++++++++
+
+user_information.type
+
+0 = participant
+1 = partner
+2 = beneficiaries

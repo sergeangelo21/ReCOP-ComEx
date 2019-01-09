@@ -200,13 +200,13 @@ class user_information(db.Model):
 			first_name=value_user_information[1],
 			middle_name=value_user_information[2],
 			last_name=value_user_information[3],
-			company_name='company_name',
-			gender=value_user_information[4],
-			address=value_user_information[5],
-			telephone=value_user_information[6],
-			mobile_number=value_user_information[7],
-			type=value_user_information[8],
-			is_active=value_user_information[9]
+			company_name=value_user_information[4],
+			gender=value_user_information[5],
+			address=value_user_information[6],
+			telephone=value_user_information[7],
+			mobile_number=value_user_information[8],
+			type=value_user_information[9],
+			is_active=value_user_information[10]
 			)
 			 
 		db.session.add(record)
