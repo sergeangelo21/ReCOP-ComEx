@@ -10,57 +10,72 @@
 
         <link rel="stylesheet" type="text/css" href="../../../static/css/bulma-0.7.2/css/bulma.css">
         <link rel="stylesheet" href="../../../static/css/fontawesome-5.5.0/css/all.css">
+        <link rel="stylesheet" href="../../../static/css/recop-comex-style/css/style.css">
         <link rel="stylesheet" type="text/css" href="../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.css">
 
     </head>
 
     <body>
-        <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
+        <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="">
                     <img src="../../../static/images/logo-menu.png">
                 </a>
 
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+                <span class="navbar-burger burger" data-target="navMenu">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
-                </a>
+                </span>
             </div>
 
-            <div class="navbar-menu">
-                <a class="navbar-item" href="{{url_for('unregistered.index')}}">
-                    <strong>Home</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('unregistered.events')}}">
-                    <strong>Events</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('unregistered.partners')}}">
-                    <strong>Partners</strong>
-                </a>
-                <a class="navbar-item" href="{{url_for('unregistered.contactus')}}">
-                    <strong>Contact Us</strong>
-                </a>
-            </div>
-            <div class="navber-end">
-                <div class="navbar-item">
-                    <div class="buttons">
-                        <a class="button is-primary" href="{{url_for('unregistered.signup')}}">
-                            <strong>Sign up</strong>
-                        </a>
-                        <a class="button is-light" href="{{url_for('unregistered.login')}}">
-                            Log in
-                        </a>
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="{{url_for('unregistered.index')}}">
+                        <strong>Home</strong>
+                    </a>
+                    <a class="navbar-item" href="{{url_for('unregistered.events')}}">
+                        <strong>Events</strong>
+                    </a>
+                    <a class="navbar-item" href="{{url_for('unregistered.partners')}}">
+                        <strong>Partners</strong>
+                    </a>
+                    <a class="navbar-item" href="{{url_for('unregistered.contactus')}}">
+                        <strong>Contact Us</strong>
+                    </a>
+
+                    <div class="navbar-item">
+                        <div class="buttons">
+                            <a class="button is-primary" href="{{url_for('unregistered.signup')}}">
+                                <strong>Sign up</strong>
+                            </a>
+                            <a class="button is-light" href="{{url_for('unregistered.login')}}">
+                                Log in
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </nav>
+
+        <script type="text/javascript">
+            (function() {
+              var burger = document.querySelector('.burger');
+              var nav = document.querySelector('#'+burger.dataset.target);
+             
+              burger.addEventListener('click', function(){
+                burger.classList.toggle('is-active');
+                nav.classList.toggle('is-active');
+              });
+        })();
+        </script>
+
         <script type="text/javascript" src="../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.js"></script>
-<script>
-    new bulmaSteps(document.getElementById('stepsDemo'), {
-    onShow: (id) => console.log(id)
-})
-  </script>
+            <script>
+                new bulmaSteps(document.getElementById('stepsDemo'), {
+                onShow: (id) => console.log(id)
+            })
+            </script>
 
         {% block content %} {% endblock %}
     </body>
