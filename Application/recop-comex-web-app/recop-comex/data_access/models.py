@@ -200,6 +200,7 @@ class user_information(db.Model):
 	last_name = db.Column(db.VARCHAR(20),nullable=False)
 	company_name = db.Column(db.VARCHAR(50),nullable=False)
 	gender = db.Column(db.CHAR(1), nullable=False)
+	birthday = db.Column(db.DATE, nullable = False)
 	address = db.Column(db.VARCHAR(50),nullable=False)
 	telephone = db.Column(db.VARCHAR(15))
 	mobile_number = db.Column(db.VARCHAR(15))
@@ -220,6 +221,7 @@ class user_information(db.Model):
 			last_name=value[3],
 			company_name=value[4],
 			gender=value[5],
+			birthday = '1998-01-21',
 			address=value[6],
 			telephone=value[7],
 			mobile_number=value[8],
