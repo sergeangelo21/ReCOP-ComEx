@@ -15,7 +15,7 @@ class SignupForm(FlaskForm):
     firstname = StringField('First Name', validators=[DataRequired()])
     middlename = StringField('Middle Name', validators=[DataRequired()])
     lastname = StringField('Last Name', validators=[DataRequired()])
-    gender = SelectField('Gender', choices=[("","---"),("M","Male"),("F","Female")], validators=[DataRequired()])
+    gender = RadioField('Gender', choices=[("M","Male"),("F","Female")], validators=[DataRequired()])
     company = StringField('Company Name', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
     telephone = StringField('Telephone Number', validators=[DataRequired()])

@@ -3,7 +3,7 @@
 from extensions import flask_login as login
 from extensions import db
 
-from flask_login import UserMixin
+from flask_login import UserMixin, current_user
 
 @login.user_loader
 def load_user(id):
@@ -180,6 +180,13 @@ class user_account(db.Model, UserMixin):
 		db.session.add(record)
 		db.session.commit()
 
+	def logout():
+
+		last_active = user_account.query.filter_by(id=current_user.id).first()
+		last_active.last_active = datetime.now()
+
+		db.session.commit()
+
 class user_information(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -192,7 +199,6 @@ class user_information(db.Model):
 	telephone = db.Column(db.VARCHAR(15))
 	mobile_number = db.Column(db.VARCHAR(15))
 	type = db.Column(db.INT, nullable=False)
-	is_active = db.Column(db.CHAR(1), nullable=False)
 
 	def count():
 
@@ -212,8 +218,7 @@ class user_information(db.Model):
 			address=value_user_information[6],
 			telephone=value_user_information[7],
 			mobile_number=value_user_information[8],
-			type=value_user_information[9],
-			is_active=value_user_information[10]
+			type=value_user_information[9]
 			)
 			 
 		db.session.add(record)

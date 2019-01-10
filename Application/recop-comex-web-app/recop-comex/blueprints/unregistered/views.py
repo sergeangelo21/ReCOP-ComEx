@@ -4,7 +4,6 @@ from blueprints.unregistered.forms import LoginForm, SignupForm
 from data_access.models import user_account, user_information
 
 from datetime import datetime
-from extensions import db
 
 import os
 
@@ -41,18 +40,24 @@ def signup():
 		id_user_account = user_account.count()
 		id_user_information = user_information.count()
 
-		value_user_account = [
-			id_user_account,id_user_information,form.username.data,
-			form.password.data,form.email.data,1,datetime.utcnow(),"A"
-			]
-		user_account.add(value_user_account)
-
 		value_user_information = [
 			id_user_information,form.firstname.data,form.middlename.data,
 			form.lastname.data,form.company.data,form.gender.data,
-			form.address.data,form.telephone.data,form.mobile.data,form.type.data,"Y"
+			form.address.data,form.telephone.data,form.mobile.data,form.type.data
 			]
 		user_information.add(value_user_information)
+
+		if int(form.type.data) > 0:
+			status = "D"
+		else:
+			status = "A"
+
+		value_user_account = [
+			id_user_account,id_user_information,form.username.data,
+			form.password.data,form.email.data,1,datetime.utcnow(),status
+			]
+		user_account.add(value_user_account)
+
 
 	return render_template('/unregistered/signup.html', form=form)
 
@@ -73,20 +78,11 @@ def login():
 			flash('Invalid username or password')
 			return redirect(url_for('unregistered.login'))
 
-		# else:
-            
-        #     role = user_role.query.filter(user_role.id==user.role_id).first()
-        #     session['role']=role.id
-
 		login_user(user, remember=form.remember_me.data)
 
-        # if session['role']==1:
-        #     return redirect(url_for('backend.dashboard'))
-        # elif session['role']==2:
-        #     return redirect(url_for('admin_hospital.dashboard'))
-        # elif session['role']==6:
-        #     return redirect(url_for('onevents.onevent'))
-        # else:
+		if current_user.type == "1":
+			return redirect(url_for(''))
+
 		return redirect(url_for('registered.index'))
 
 	return render_template('/unregistered/login.html', form=form)
@@ -94,10 +90,7 @@ def login():
 @unregistered.route('/logout')
 def logout():
 
-	last_active = user_account.query.filter_by(id=current_user.id).first()
-	last_active.last_active = datetime.now()
-
-	db.session.commit()
+	user_account.logout()
 
 	logout_user()
 
