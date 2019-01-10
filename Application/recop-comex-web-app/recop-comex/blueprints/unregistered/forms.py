@@ -20,6 +20,6 @@ class SignupForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired()])
     telephone = StringField('Telephone Number', validators=[DataRequired()])
     mobile = StringField('Mobile Number', validators=[DataRequired()])
-    type = RadioField('I am a', choices=[("0","Participant"),("1","Partner"),("2","Beneifciary")], validators=[DataRequired()])
+    type = RadioField('I am a', choices=[("1","Participant"),("2","Partner"),("3","Beneficiary")], validators=[DataRequired()])
     email = StringField('Email Address', validators=[DataRequired()])
     submit = SubmitField('Submit')

@@ -1,6 +1,6 @@
 #Table specifications and simple queries goes here
 
-from extensions import flask_login as login
+from extensions import login
 from extensions import db
 
 from flask_login import UserMixin, current_user
@@ -164,26 +164,31 @@ class user_account(db.Model, UserMixin):
 		rows+=1
 		return rows
 
-	def add(value_user_account):
+	def add(value):
 
 		record = user_account(
-			id=value_user_account[0], 
-			info_id=value_user_account[1],
-			username=value_user_account[2],
-			password=value_user_account[3],
-			email_address=value_user_account[4],
-			type=value_user_account[5],
-			last_active=value_user_account[6],
-			status=value_user_account[7]
+			id=value[0], 
+			info_id=value[1],
+			username=value[2],
+			password=value[3],
+			email_address=value[4],
+			type=value[5],
+			last_active=value[6],
+			status=value[7]
 			)
 			 
 		db.session.add(record)
 		db.session.commit()
 
+	def login(value):
+
+		user = user_account.query.filter(user_account.username==value).first()
+		return user
+
 	def logout():
 
-		last_active = user_account.query.filter_by(id=current_user.id).first()
-		last_active.last_active = datetime.now()
+		user = user_account.query.filter_by(id=current_user.id).first()
+		user.last_active = datetime.utcnow()
 
 		db.session.commit()
 
@@ -206,19 +211,19 @@ class user_information(db.Model):
 		rows+=1
 		return rows
 
-	def add(value_user_information):
+	def add(value):
 
 		record = user_information(
-			id=value_user_information[0], 
-			first_name=value_user_information[1],
-			middle_name=value_user_information[2],
-			last_name=value_user_information[3],
-			company_name=value_user_information[4],
-			gender=value_user_information[5],
-			address=value_user_information[6],
-			telephone=value_user_information[7],
-			mobile_number=value_user_information[8],
-			type=value_user_information[9]
+			id=value[0], 
+			first_name=value[1],
+			middle_name=value[2],
+			last_name=value[3],
+			company_name=value[4],
+			gender=value[5],
+			address=value[6],
+			telephone=value[7],
+			mobile_number=value[8],
+			type=value[9]
 			)
 			 
 		db.session.add(record)

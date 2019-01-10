@@ -37,26 +37,27 @@ def signup():
 	form = SignupForm()
 
 	if form.validate_on_submit():
-		id_user_account = user_account.count()
-		id_user_information = user_information.count()
 
-		value_user_information = [
-			id_user_information,form.firstname.data,form.middlename.data,
+		id_information = user_information.count()
+		id_account = user_account.count()
+
+		value_information = [
+			id_information,form.firstname.data,form.middlename.data,
 			form.lastname.data,form.company.data,form.gender.data,
 			form.address.data,form.telephone.data,form.mobile.data,form.type.data
 			]
-		user_information.add(value_user_information)
+		user_information.add(value_information)
 
 		if int(form.type.data) > 0:
 			status = "D"
 		else:
 			status = "A"
 
-		value_user_account = [
-			id_user_account,id_user_information,form.username.data,
-			form.password.data,form.email.data,1,datetime.utcnow(),status
+		value_account = [
+			id_account,id_information,form.username.data,
+			form.password.data,form.email.data,form.type.data,datetime.utcnow(),status
 			]
-		user_account.add(value_user_account)
+		user_account.add(value_account)
 
 
 	return render_template('/unregistered/signup.html', form=form)
@@ -65,13 +66,14 @@ def signup():
 def login():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
+
 		return redirect(url_for(''))
 
 	form = LoginForm()
 
 	if form.validate_on_submit():
         
-		user = user_account.query.filter(user_account.username==form.username.data).first()
+		user = user_account.login(form.username.data)
 
 		if user is None or user.password!=form.password.data:
 

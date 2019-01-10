@@ -7,7 +7,7 @@ from blueprints.beneficiaries import beneficiaries
 from blueprints.registered import registered
 from blueprints.unregistered import unregistered
 
-from extensions import flask_login, db
+from extensions import login, db
 
 def create_app():
 
@@ -26,7 +26,7 @@ def create_app():
 
 def extensions(app):
 
-	flask_login.init_app(app)
+	login.init_app(app)
 	db.init_app(app)
 
 	return None
