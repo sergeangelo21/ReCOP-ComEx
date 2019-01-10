@@ -1,12 +1,13 @@
 from flask import Flask
 from config import Config
-from extensions import db
 
 from blueprints.admin import admin
 from blueprints.linkages import linkages
 from blueprints.beneficiaries import beneficiaries
 from blueprints.registered import registered
 from blueprints.unregistered import unregistered
+
+from extensions import flask_login, db
 
 def create_app():
 
@@ -25,8 +26,9 @@ def create_app():
 
 def extensions(app):
 
-    db.init_app(app)
+	flask_login.init_app(app)
+	db.init_app(app)
 
-    return None
+	return None
 
 create_app().run(port=8000, debug=1)

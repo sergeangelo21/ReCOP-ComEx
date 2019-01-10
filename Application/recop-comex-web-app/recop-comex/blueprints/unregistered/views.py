@@ -1,8 +1,10 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, url_for, redirect, flash
+from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
 from data_access.models import user_account, user_information
 
 from datetime import datetime
+from extensions import db
 
 import os
 
@@ -62,4 +64,41 @@ def login():
 
 	form = LoginForm()
 
-	return render_template('/unregistered/login.html')
+	if form.validate_on_submit():
+        
+		user = user_account.query.filter(user_account.username==form.username.data).first()
+
+		if user is None or user.password!=form.password.data:
+
+			flash('Invalid username or password')
+			return redirect(url_for('unregistered.login'))
+
+		# else:
+            
+        #     role = user_role.query.filter(user_role.id==user.role_id).first()
+        #     session['role']=role.id
+
+		login_user(user, remember=form.remember_me.data)
+
+        # if session['role']==1:
+        #     return redirect(url_for('backend.dashboard'))
+        # elif session['role']==2:
+        #     return redirect(url_for('admin_hospital.dashboard'))
+        # elif session['role']==6:
+        #     return redirect(url_for('onevents.onevent'))
+        # else:
+		return redirect(url_for('registered.index'))
+
+	return render_template('/unregistered/login.html', form=form)
+
+@unregistered.route('/logout')
+def logout():
+
+	last_active = user_account.query.filter_by(id=current_user.id).first()
+	last_active.last_active = datetime.now()
+
+	db.session.commit()
+
+	logout_user()
+
+	return redirect('/')

@@ -1,6 +1,13 @@
 #Table specifications and simple queries goes here
 
+from extensions import flask_login as login
 from extensions import db
+
+from flask_login import UserMixin
+
+@login.user_loader
+def load_user(id):
+	return user_account.query.get((id))
 
 class audit_trail(db.Model):
 
@@ -140,7 +147,7 @@ class referral(db.Model):
 	type = db.Column(db.INT, nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
-class user_account(db.Model):
+class user_account(db.Model, UserMixin):
 
 	id = db.Column(db.INT, primary_key=True)
 	info_id = db.Column(db.INT)

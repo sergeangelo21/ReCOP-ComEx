@@ -31,61 +31,69 @@
 				<div class="column is-7">
 					<div class="card">
 						<div class="card-content">
-						<div class="columns">
-							<div class="column is-half">
-								<br>
-								<img src="../../../static/images/logo.png">
-							</div>
-							<div class="column">
-								<div class="field has-text-centered">
-									<label class="title is-3">LOGIN</label><br>
-									<label class="size is-size-7 has-text-grey">Please login to proceed</label>
+							<div class="columns">
+								<div class="column is-half">
+									<br>
+									<img src="../../../static/images/logo.png">
 								</div>
-								<br>
-								<div class="field">						
-									<label class=" title is-6 "> Username</label>
-									<div class="control has-icons-left has-icons-right">
-										<input class="input" type="text" placeholder="doodle@example.com">
-									<span class="icon is-small is-left">
-				      					<i class="fa fa-user"></i>
-				    				</span>
+								<div class="column">
+									<div class="field has-text-centered">
+										<label class="title is-3">LOGIN</label><br>
+										<label class="size is-size-7 has-text-grey">Please login to proceed</label>
 									</div>
+
+									<br>
+									<form action="" method="POST">
+										{{form.hidden_tag()}}
+										<div class="field">
+											{{form.username.label(class_='label')}}
+											<div class="control has-icons-left has-icons-right">
+												{{form.username(class_='input', placeholder='Username')}}
+                                                {% for error in form.username.errors %}
+                                                <span style="color: red;">[{{ error }}]</span>
+                                                {% endfor %}
+												<span class="icon is-small is-left">
+							      					<i class="fa fa-user"></i>
+							    				</span>
+											</div>
+										</div>
+
+										<div class="field">	
+											{{form.password.label(class_='label')}}
+											<div class="control has-icons-left has-icons-right">
+												{{form.password(class_='input', placeholder='Password')}}
+												{% for error in form.password.errors %}
+                                                <span style="color: red;">[{{ error }}]</span>
+                                                {% endfor %}
+												<span class="icon is-small is-left">
+							      					<i class="fa fa-key"></i>
+							    				</span>
+											</div>
+										</div>
+
+										<div class="field">
+											<p class="control has-text-left">
+						                    	<label class="checkbox has-text-grey-light is-size-7">
+						                      		<input type="checkbox">
+					                      			Remember me
+						                    	</label>
+						               	    </p>
+										</div>
+
+										<div class="field">
+											{{form.submit(class_='button submit')}}
+										</div>
+
+										<div class="field has-text-centered">
+											<a class="has-text-grey is-size-7" href="{{url_for('unregistered.signup')}}">Not a Member? Sign up here</a>
+										</div>
+									</form>
 								</div>
-
-								<div class="field">						
-							<label class="title is-6">Password</label>
-						<div class="control has-icons-left has-icons-right">
-							<input class="input" type="text" placeholder="**********">
-								<span class="icon is-small is-left">
-			      					<i class="fa fa-key"></i>
-			    				</span>
-						</div>
-					</div>
-
-					<div class="field">
-						<p class="control has-text-left">
-	                    	<label class="checkbox has-text-grey-light is-size-7">
-	                      		<input type="checkbox">
-	                      			Remember me
-	                    	</label>
-	               	    </p>	
-	                  	
-					</div>
-					<div class="field">
-						<div class="button green is-fullwidth is-medium is-size-5"><strong>Login</strong></div>
-					</div>
-
-					<div class="field has-text-centered">
-						
-						<a class="has-text-grey is-size-7" href="../">Not a Member? Sign up here</a>
-						
-					</div>
-							</div>	
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	
 
 {% endblock %}
