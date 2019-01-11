@@ -1,9 +1,9 @@
 #Table specifications and simple queries goes here
 
-from extensions import login
-from extensions import db
-
+from extensions import login, db, bcrypt
 from flask_login import UserMixin, current_user
+
+from datetime import datetime
 
 @login.user_loader
 def load_user(id):
@@ -170,7 +170,7 @@ class user_account(db.Model, UserMixin):
 			id=value[0], 
 			info_id=value[1],
 			username=value[2],
-			password=value[3],
+			password= bcrypt.generate_password_hash(value[3]).decode('utf-8'),
 			email_address=value[4],
 			type=value[5],
 			last_active=value[6],
@@ -182,7 +182,12 @@ class user_account(db.Model, UserMixin):
 
 	def login(value):
 
-		user = user_account.query.filter(user_account.username==value).first()
+		user = user_account.query.filter(user_account.username==value[0]).first()
+		password = bcrypt.check_password_hash(user.password.encode('utf-8'), value[1].encode('utf-8'))
+
+		if user is None and password==False:
+			user = None
+
 		return user
 
 	def logout():
