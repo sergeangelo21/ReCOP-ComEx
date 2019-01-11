@@ -1,14 +1,27 @@
-from flask import Blueprint, render_template
-from flask_login import login_required
+from flask import Blueprint, render_template, url_for, redirect
+from flask_login import current_user, login_required
+from data_access.models import user_account, user_information
+
 import os
 
 registered = Blueprint('registered', __name__, template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# @registered.before_request
-# def before_request():
-# 	if current_user.is_authenticated and not current_user.is_anonymous:
+@registered.before_request
+def before_request():
+
+	if current_user.is_authenticated and not current_user.is_anonymous:
+
+		check = user_information.query.filter_by(id=current_user.id).first()
+
+		if current_user.type != 9:
+			if check.type == 2:
+				return redirect(url_for('linkages.index'))
+			if check.type == 3:
+				return redirect(url_for('beneficiaries.index'))
+		else:
+			return redirect(url_for('admin.index'))
 
 @registered.route('/registered')
 @login_required

@@ -1,12 +1,27 @@
-from flask import Blueprint, render_template, redirect, url_for
-from flask_login import login_required
+from flask import Blueprint, render_template, redirect, url_for, flash
+from flask_login import current_user, login_required
 from blueprints.linkages.forms import ProposalForm
-from data_access.models import event_information, event_category, proposal_tracker
+from data_access.models import user_account, event_information, event_category, proposal_tracker, user_information
 import os
 
 linkages = Blueprint('linkages', __name__, template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+@linkages.before_request
+def before_request():
+
+	if current_user.is_authenticated and not current_user.is_anonymous:
+
+		check = user_information.query.filter_by(id=current_user.id).first()
+
+		if current_user.type != 9:
+			if check.type == 1:
+				return redirect(url_for('registered.index'))
+			if check.type == 3:
+				return redirect(url_for('beneficiaries.index'))
+		else:
+			return redirect(url_for('admin.index'))
 
 @linkages.route('/linkages')
 @login_required

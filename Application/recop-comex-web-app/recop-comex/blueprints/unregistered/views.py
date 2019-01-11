@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
-from blueprints.unregistered.checker import authenticate
 from data_access.models import user_account, user_information
 
 from datetime import datetime
@@ -15,50 +14,25 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 @unregistered.route('/')
 def index():
 
-	check = authenticate()
-	
-	if check:
-		return check
-
 	return render_template('/unregistered/index.html')
 
 @unregistered.route('/events')
 def events():
-
-	check = authenticate()
-	
-	if check:
-		return check
 
 	return render_template('/unregistered/events.html')
 
 @unregistered.route('/partners')
 def partners():
 
-	check = authenticate()
-	
-	if check:
-		return check
-
 	return render_template('/unregistered/partners.html')
 
 @unregistered.route('/contactus')
 def contactus():
 
-	check = authenticate()
-	
-	if check:
-		return check
-
 	return render_template('/unregistered/contactus.html')
 
 @unregistered.route('/signup', methods=['GET', 'POST'])
 def signup():
-
-	check = authenticate()
-	
-	if check:
-		return check
 
 	form = SignupForm()
 
@@ -75,14 +49,14 @@ def signup():
 
 		user_information.add(value_information)
 
-		if int(form.type.data) > 0:
+		if int(form.type.data) > 1:
 			status = "D"
 		else:
 			status = "A"
 
 		value_account = [
 			id_account,id_information,form.username.data,
-			form.password.data,form.email.data,form.type.data,datetime.utcnow(),status
+			form.password.data,form.email.data,datetime.utcnow(),status
 			]
 		user_account.add(value_account)
 
@@ -93,11 +67,6 @@ def signup():
 
 @unregistered.route('/login', methods=['GET', 'POST'])
 def login():
-
-	check = authenticate()
-	
-	if check:
-		return check
 
 	form = LoginForm()
 
@@ -111,8 +80,8 @@ def login():
 
 		login_user(user, remember=form.remember_me.data)
 
-		if current_user.type == 2:	
-			return redirect(url_for('linkages.index'))
+		if current_user.type == 0:	
+			return redirect(url_for('registered.index'))
 	
 	return render_template('/unregistered/login.html', form=form)
 

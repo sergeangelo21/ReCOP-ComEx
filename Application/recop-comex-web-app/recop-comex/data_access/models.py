@@ -1,5 +1,6 @@
 #Table specifications and simple queries goes here
 
+from flask import redirect, url_for
 from extensions import login, db, bcrypt
 from flask_login import UserMixin, current_user
 
@@ -172,9 +173,9 @@ class user_account(db.Model, UserMixin):
 			username=value[2],
 			password= bcrypt.generate_password_hash(value[3]).decode('utf-8'),
 			email_address=value[4],
-			type=value[5],
-			last_active=value[6],
-			status=value[7]
+			type="0",
+			last_active=value[5],
+			status=value[6]
 			)
 			 
 		db.session.add(record)

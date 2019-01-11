@@ -1,1 +1,5 @@
 ALTER TABLE `user_information` DROP `is_active`
+
+alter table user_information add birthday DATE NOT NULL AFTER gender;
+
+alter table `user_account` change `password` `password` varchar(60) NOT NULL;
