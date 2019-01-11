@@ -86,6 +86,8 @@ def signup():
 			]
 		user_account.add(value_account)
 
+		return redirect(url_for('unregistered.login'))
+
 
 	return render_template('/unregistered/signup.html', form=form)
 

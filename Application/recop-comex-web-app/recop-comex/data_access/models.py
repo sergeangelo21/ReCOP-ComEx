@@ -185,7 +185,7 @@ class user_account(db.Model, UserMixin):
 		user = user_account.query.filter(user_account.username==value[0]).first()
 		password = bcrypt.check_password_hash(user.password.encode('utf-8'), value[1].encode('utf-8'))
 
-		if user is None and password==False:
+		if user is None or password==False:
 			user = None
 
 		return user
