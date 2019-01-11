@@ -43,7 +43,7 @@ def signup():
 
 		value_information = [
 			id_information,form.firstname.data,form.middlename.data,
-			form.lastname.data,form.company.data,form.gender.data,
+			form.lastname.data,form.company.data,form.gender.data,form.birthday.data,
 			form.address.data,form.telephone.data,form.mobile.data,form.type.data
 			]
 
@@ -80,8 +80,17 @@ def login():
 
 		login_user(user, remember=form.remember_me.data)
 
-		if current_user.type == 0:	
-			return redirect(url_for('registered.index'))
+		check = user_information.query.filter_by(id=current_user.id).first()
+		
+		if current_user.type != 9:
+			if check.type == 1:
+				return redirect(url_for('registered.index'))
+			if check.type == 2:
+				return redirect(url_for('linkages.index'))
+			if check.type == 3:
+				return redirect(url_for('beneficiaries.index'))
+		else:
+			return redirect(url_for('admin.index'))
 	
 	return render_template('/unregistered/login.html', form=form)
 

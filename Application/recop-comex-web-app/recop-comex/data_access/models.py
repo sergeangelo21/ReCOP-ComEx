@@ -85,13 +85,13 @@ class event_information(db.Model):
 			organizer_id=value[1], 
 			category_id=value[2], 
 			name=value[3], 
-			description='event ko to',
-			objective=value[4],
-			budget = '1000.00',
-			location=value[5],
-			event_date=value[6],
-			type=value[7],
-			status=value[8]
+			description=value[4],
+			objective=value[5],
+			budget = value[6],
+			location=value[7],
+			event_date=value[8],
+			type=value[9],
+			status=value[10]
 			)
 			 
 		db.session.add(record)
@@ -227,11 +227,11 @@ class user_information(db.Model):
 			last_name=value[3],
 			company_name=value[4],
 			gender=value[5],
-			birthday = '1998-01-21',
-			address=value[6],
-			telephone=value[7],
-			mobile_number=value[8],
-			type=value[9]
+			birthday = value[6],
+			address=value[7],
+			telephone=value[8],
+			mobile_number=value[9],
+			type=value[10]
 			)
 			 
 		db.session.add(record)

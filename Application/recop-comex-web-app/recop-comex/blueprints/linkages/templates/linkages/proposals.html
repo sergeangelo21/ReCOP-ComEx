@@ -68,23 +68,35 @@
 						<div class="columns">
 							<div class="column">
 								 <div class="field">
-							        {{form.date.label(class_='label')}}
+							        {{form.event_date.label(class_='label')}}
 						            <div class="control">
-						            	{{form.date(class_='input', type='date')}}
+						            	{{form.event_date(class_='input', type='date')}}
 						            </div>
 						        </div>
 							</div>
 
 							<div class="column">
 								 <div class="field">
-							        {{form.venue.label(class_='label')}}
+							        {{form.location.label(class_='label')}}
 						            <div class="control">
-						            	{{form.venue(class_='input')}}
+						            	{{form.location(class_='input')}}
 						            </div>
 						        </div>
 							</div>
 
 						</div>
+
+						<div class="columns">
+							<div class="column">
+								 <div class="field">
+							        {{form.description.label(class_='label')}}
+						            <div class="control">
+						            	{{form.description(class_='input')}}
+						            </div>
+						        </div>
+							</div>
+						</div>
+
 
 						<div class="columns">
 					      	<div class="column">
@@ -119,9 +131,18 @@
 
 							<div class="column">
 								<div class="field">
-									{{form.purpose.label(class_='label')}}
+									{{form.objective.label(class_='label')}}
 						            <div class="control">
-										{{form.purpose(class_='input')}}					
+										{{form.objective(class_='input')}}
+									</div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									{{form.budget.label(class_='label')}}
+						            <div class="control">
+										{{form.budget(class_='input')}}
 									</div>
 						        </div>
 							</div>

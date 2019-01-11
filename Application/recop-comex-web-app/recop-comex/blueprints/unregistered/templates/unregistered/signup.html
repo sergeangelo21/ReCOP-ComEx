@@ -168,8 +168,23 @@
                                             <div class="field-body">
                                                 <div class="field">
                                                     <div class="control has-icon has-icon-right">
-                                                        {{form.company(class_='input', placeholder='Last Name')}}
+                                                        {{form.company(class_='input', placeholder='Company Name')}}
                                                         {% for error in form.company.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.birthday.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        {{form.birthday(class_='input', type='date')}}
+                                                        {% for error in form.birthday.errors %}
                                                         <span style="color: red;">[{{ error }}]</span>
                                                         {% endfor %}
                                                     </div>

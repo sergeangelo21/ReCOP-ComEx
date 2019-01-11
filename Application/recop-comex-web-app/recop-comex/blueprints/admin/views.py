@@ -32,40 +32,57 @@ def index():
 @login_required
 def events():
 
-	return render_template('/admin/events.html', title="Admin")
+	return render_template('/admin/events.html', title="Events | Admin")
 
 @admin.route('/admin/proposals')
 @login_required
 def proposals():
 
-	return render_template('/admin/proposals.html', title="Admin")
+	return render_template('/admin/proposals.html', title="Proposals | Admin")
 
 @admin.route('/admin/partners')
 @login_required
 def partners():
 
-	return render_template('/admin/partners.html', title="Admin")
+	# partners = user_account.query.join(
+	# 	user_information
+	# 	).add_columns(
+	# 	user_information.id,
+	# 	user_information.first_name,
+	# 	user_information.middle_name,
+	# 	user_information.last_name,
+	# 	user_information.company_name,
+	# 	user_information.gender,
+	# 	user_information.birthday,
+	# 	user_information,address,
+	# 	user_information.telephone,
+	# 	user_information.mobile_number,
+	# 	user_information.type
+	# 	).filter(user_information.type==2
+	# 	).first()
+
+	return render_template('/admin/partners/partners.html', title="Partners | Admin")
 
 @admin.route('/admin/beneficiaries')
 @login_required
 def beneficiaries():
 
-	return render_template('/admin/beneficiaries.html', title="Admin")
+	return render_template('/admin/beneficiaries.html', title="Beneficiaries | Admin")
 
 @admin.route('/admin/reports')
 @login_required
 def reports():
 
-	return render_template('/admin/reports.html', title="Admin")
+	return render_template('/admin/reports.html', title="Reports | Admin")
 
 @admin.route('/admin/feedbacks')
 @login_required
 def feedbacks():
 
-	return render_template('/admin/feedbacks.html', title="Admin")
+	return render_template('/admin/feedbacks.html', title="Feedbacks | Admin")
 
 @admin.route('/admin/profile')
 @login_required
 def profile():
 
-	return render_template('/admin/profile.html', title="Admin")
+	return render_template('/admin/profile.html', title="Profile | Admin")

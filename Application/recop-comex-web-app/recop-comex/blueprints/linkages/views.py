@@ -45,7 +45,11 @@ def proposals():
 
 	if form.validate_on_submit():
 		id = event_information.count()
-		value = [id,1,form.category.data,form.title.data,'event ko to', form.purpose.data,1000.50,form.venue.data,form.date.data,1,'N']
+		value = [
+		id,1,form.category.data,form.title.data,
+		form.description.data,form.objective.data,form.budget.data,form.location.data,
+		form.event_date.data,1,'N'
+		]
 		event_information.add(value)
 		return redirect(url_for('linkages.proposals'))
 
