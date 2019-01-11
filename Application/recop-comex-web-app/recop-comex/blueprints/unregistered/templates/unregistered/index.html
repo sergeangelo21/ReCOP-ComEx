@@ -1,11 +1,201 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
-		<div class="columns">
-			<div class="column">1</div>
-			<div class="column">2</div>
-			<div class="column">3</div>
-			<div class="column">4</div>
-			<div class="column">5</div>
+<style type="text/css">
+	.image{
+		background-image:url("../../../static/images/pic1.jpg"); 
+		background-size: cover;
+		opacity: 0.9;
+
+	}
+	.cover
+	{
+
+	}
+
+	/* -------------------------------- 
+
+Primary style
+
+-------------------------------- */
+body {
+  font-size: 100%;
+  font-family: "Roboto", sans-serif;
+  color: #3d3536;
+  background-color: white;
+}
+
+body, html {
+  /* important */
+  height: 100%;
+}
+a {
+  color: #a6989a;
+}
+/* -------------------------------- 
+
+Modules - reusable parts of our design
+
+-------------------------------- */
+
+
+.cd-fixed-bg {
+  position: relative;
+  min-height: 75%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 1;
+}
+.cd-fixed-bg h1, .cd-fixed-bg h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+  max-width: 1170px;
+  text-align: center;
+  font-size: 30px;
+  font-size: 1.875rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+.cd-fixed-bg.cd-bg-1 {
+  background-image: url("../../../static/images/pic1.jpg");
+}
+.cd-fixed-bg.cd-bg-2 {
+  background-image: url("../../../static/images/pic1.jpg");
+}
+
+@media only screen and (min-width: 320px) {
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 36px;
+  }
+}
+@media only screen and (min-width: 480px) {
+  .cd-fixed-bg {
+    background-attachment: fixed;
+  }
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 48px;
+    font-weight: 300;
+  }
+}
+
+.cd-scrolling-bg {
+  position: relative;
+  min-height: 50%;
+  padding: 4em 0;
+  line-height: 1.6;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+.cd-scrolling-bg.cd-color-1 {
+  background-color: #3d3536;
+  color: #a6989a;
+}
+.cd-scrolling-bg.cd-color-2 {
+  background-color:#262626;
+  color: #a6989a;
+}
+
+
+</style>
+
+		<div class="cd-fixed-bg cd-bg-1">
+			<h1>Lorem ipsum dolor sit amet, consectetur</h1>
+		</div> <!-- cd-fixed-bg -->
+
+
+
+
+
+
+<!-- Start Content -->
+		<div class="container">
+			<div class="card">
+				<div class="card-content">
+					<div class="columns">
+						<div class="column is-5">
+							<div class='carousel carousel-animated carousel-animate-slide' data-autoplay="true">
+  								<div class='carousel-container'>
+    					<!-- CAROUSEL ITEMS -->
+    		<div class='carousel-item has-background is-active'>
+      			<img class="is-background" src="../../../static/images/pic1.jpg" alt="" width="640" height="310" />
+         	</div>
+    
+    		<div class='carousel-item has-background'>
+      			<div class='carousel-item has-background is-active'>
+      				<img class="is-background" src="../../../static/images/pic2.jpg" alt="" width="640" height="310" />
+    			</div>
+			</div>
+								</div>
+							</div>
+					</div>
+						<!--END CAROUSEL  -->
+<!-- DETAILS -->
+		<div class="column">
+			<a class="title is-2" href="../">Re-COP ComEx</a>
+        		<br><br>
+        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+        		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.		
+        		</p>				
 		</div>
+					</div>		
+				</div>
+			</div>
+		</div>
+		<!-- END CARD -->
+
+<br>
+
+
+
+
+<div class="container">
+				<div class="columns is-centered">
+					<div class="column is-3"> 
+						<div class="card">
+							<div class="card-content">
+								<figure class="avatar">
+									<img src="../../../static/images/about-us.png">
+								</figure>
+								<h4 class="title is-6 has-text-centered">WHO WE ARE</h4>
+							</div>
+						</div>
+
+					</div>
+					<div class="column is-3"> 
+						<div class="card">
+							<div class="card-content">
+								<h4 class="title is-6 has-text-centered">WHAT WE DO</h4>
+							</div>
+						</div>
+
+					</div>
+					<div class="column is-3"> 
+						<div class="card">
+							<div class="card-content">
+								<h4 class="title is-6 has-text-centered">NEWS AND CURRENT EVENTS</h4>
+							</div>
+						</div>
+
+					</div>
+	
+				</div>
+			</div>
+	
+
+ <script type="text/javascript" src="../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.js"></script>
+
+<script>
+	var carousels = bulmaCarousel.attach(); // carousels now contains an array of all Carousel instances
+	setInterval(slide, 3000);
+</script>
 {% endblock %}

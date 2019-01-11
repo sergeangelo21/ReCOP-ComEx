@@ -1,22 +1,108 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
-		<div class="columns">
-			<div class="column is-2">
-				<aside class="menu">
-					<ul class="menu-list">
-						<li>
-							<a><strong>Events</strong></a>
-							<ul>
-								<li><a>Education</a></li>
-								<li><a>Environmental</a></li>
-								<li><a>Health</a></li>
-								<li><a>Livelihood</a></li>
-								<li><a>Sociopolitical</a></li>
-								<li><a>Spiritual</a></li>
-							</ul>
-						</li>
-				</aside>
+<style type="text/css">
+	.image
+	{
+	width:300px;
+	height: auto; 		
+	}
+</style>
+<br>
+<div class="container">
+	<div class="columns is-centered">
+		<div class="column is-half">	
+			<div class="field has-addons">
+  				<div class="control">
+    				<button type="submit" class="button is-primary"><strong>FILTER</strong></button>
+  				</div>
+  			<div class="control">
+    			<div class="select">
+      				<select name="country">
+        				<option>Select Category</option>
+						<option>Spiritual</option>
+						<option>Education</option>
+						<option>Health</option>
+						<option>Livelihood</option>
+						<option>Environmental</option>
+						<option>Socio-Political Concerns</option> 
+      				</select>
+    			</div>
+  			</div>
+
 			</div>
 		</div>
+
+		<div class="column is-half">
+			<nav class="level is-mobile is-pulled-right">
+      			<div class="level-left">
+        			<a class="level-item">
+          				<span class="icon is-small is-active"><i class="fas fa-list"></i></span>
+        			</a>
+        			<a class="level-item">
+          				<span class="icon is-small"><i class="fas fa-calendar-alt"></i></span>
+        			</a>
+      			</div>
+    		</nav>
+		</div>
+	</div>
+	<div class="columns">
+		<div class="column">
+
+			<div class="card">
+				<div class="card-content">
+										
+<!-- 
+    							<div class="content has-pulled-right">
+									<a class="button item" href=""><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>						
+								</div> -->
+    						
+    								
+    								<table class="table is-fullwidth">
+								<thead>
+									<tr>
+									    <th class="newlist">Event Name</th>
+									    <th class="newlist">Description</th>
+									    <th class="newlist">Venue</th>
+									    <th class="newlist">Event Date</th>
+									    <th></th>
+									 </tr>
+									</thead>
+								<tbody>
+									<tr class="table-row">
+										
+										<td>	
+										<article class="media">
+  											<figure class="media-left">
+    											<p class="image">
+      												<img src="../../../static/images/pic1.jpg">
+    											</p>
+  											</figure>
+  										</article>
+
+  										</td>
+									    <td>Eat well</td>
+									    <td>Cavite City</td>
+									    <td>03/21/19</td>
+									    <td><div class="content is-pulled-right">
+									<a class="button item" href=""><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>						
+								</div></td>
+									   </tr>
+
+									   	</div>
+									</tbody>
+								</table>
+							
+							
+  							
+  								
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 {% endblock %}

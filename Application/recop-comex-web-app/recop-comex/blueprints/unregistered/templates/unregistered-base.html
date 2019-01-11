@@ -12,6 +12,7 @@
         <link rel="stylesheet" href="../../../static/css/fontawesome-5.5.0/css/all.css">
         <link rel="stylesheet" href="../../../static/css/recop-comex-style/css/style.css">
         <link rel="stylesheet" type="text/css" href="../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.css">
 
     </head>
 
@@ -71,11 +72,16 @@
         </script>
 
         <script type="text/javascript" src="../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.js"></script>
+         <script type="text/javascript" src="../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.js"></script>
             <script>
                 new bulmaSteps(document.getElementById('stepsDemo'), {
                 onShow: (id) => console.log(id)
             })
             </script>
+            <script>
+    var carousels = bulmaCarousel.attach(); // carousels now contains an array of all Carousel instances
+    setInterval(slide, 3000);
+</script>
 
         {% block content %} {% endblock %}
     </body>
