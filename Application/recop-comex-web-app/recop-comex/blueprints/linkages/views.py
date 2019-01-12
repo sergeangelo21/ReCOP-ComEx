@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.linkages.forms import ProposalForm
 from data_access.models import user_account, event_information, event_category, proposal_tracker, user_information
+
 import os
 
 linkages = Blueprint('linkages', __name__, template_folder="templates")
