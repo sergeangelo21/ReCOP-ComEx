@@ -1,6 +1,4 @@
 #Table specifications and simple queries goes here
-
-from flask import redirect, url_for
 from extensions import login, db, bcrypt
 from flask_login import UserMixin, current_user
 
@@ -13,30 +11,38 @@ def load_user(id):
 class audit_trail(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	user_id = db.Column(db.INT)
+	user_id = db.Column(db.INT, db.ForeignKey('user_account.id'), nullable=False)
 	affected_id = db.Column(db.INT, nullable=False)
 	target_table = db.Column(db.VARCHAR(25), nullable=False)
 	date_created = db.Column(db.DATETIME, nullable=False)
 	type = db.Column(db.INT, nullable=False)
 
+	audit_account_id = db.relationship('user_account', backref='audit_trail', lazy=True)
+
 class beneficiary(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	donor_id = db.Column(db.INT)
-	beneficiary_id = db.Column(db.INT)
+	donor_id = db.Column(db.INT,db.ForeignKey('user_information.id'), nullable=False)
+	beneficiary_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
 	budget = db.Column(db.NUMERIC(10,2))
 	status = db.Column(db.CHAR(1), nullable=False)
+
+	donor_info_id = db.relationship('user_information', backref='beneficiary', lazy=True)
+	bene_info_id = db.relationship('user_information', backref='beneficiary', lazy=True)
 
 class donation(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	sponsee_id = db.Column(db.INT)
-	sponsor_id = db.Column(db.INT)
+	sponsee_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
+	sponsor_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
 	amount = db.Column(db.NUMERIC(10,2), nullable=False)
 	date_given = db.Column(db.DATETIME, nullable=False)
 	transaction_slip = db.Column(db.VARCHAR(200), nullable=False)
 	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
+
+	sponsee_info_id = db.relationship('user_information', backref='donation', lazy=True)
+	sponsor_info_id = db.relationship('user_information', backref='donation', lazy=True)
 
 class event_attachment(db.Model):
 
@@ -151,13 +157,15 @@ class referral(db.Model):
 class user_account(db.Model, UserMixin):
 
 	id = db.Column(db.INT, primary_key=True)
-	info_id = db.Column(db.INT)
+	info_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
 	username = db.Column(db.VARCHAR(20),nullable=False)
 	password = db.Column(db.VARCHAR(20),nullable=False)
 	email_address = db.Column(db.VARCHAR(30),nullable=False)
 	type = db.Column(db.INT, nullable=False)
 	last_active = db.Column(db.DATETIME, nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
+
+	account_info_id = db.relationship('user_information', backref = 'user_information', lazy = True)
 
 	def count():
 
@@ -184,10 +192,13 @@ class user_account(db.Model, UserMixin):
 	def login(value):
 
 		user = user_account.query.filter(user_account.username==value[0]).first()
-		password = bcrypt.check_password_hash(user.password.encode('utf-8'), value[1].encode('utf-8'))
 
-		if user is None or password==False:
-			user = None
+		if user:
+
+			password = bcrypt.check_password_hash(user.password.encode('utf-8'), value[1].encode('utf-8'))
+
+			if password==False:
+				user = None
 
 		return user
 
