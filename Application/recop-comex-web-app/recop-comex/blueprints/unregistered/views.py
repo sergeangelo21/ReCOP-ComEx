@@ -44,7 +44,7 @@ def signup():
 		value_information = [
 			id_information,form.firstname.data,form.middlename.data,
 			form.lastname.data,form.company.data,form.gender.data,form.birthday.data,
-			form.address.data,form.telephone.data,form.mobile.data,form.type.data
+			form.address.data,form.telephone.data,form.mobile.data
 			]
 
 		user_information.add(value_information)
@@ -56,7 +56,7 @@ def signup():
 
 		value_account = [
 			id_account,id_information,form.username.data,
-			form.password.data,form.email.data,datetime.utcnow(),status
+			form.password.data,form.email.data,datetime.utcnow(),form.type.data,status
 			]
 		user_account.add(value_account)
 
@@ -79,16 +79,13 @@ def login():
 			return redirect(url_for('unregistered.login'))
 
 		login_user(user, remember=form.remember_me.data)
-
-		check = user_information.query.filter_by(id=current_user.id).first()
 		
-		if current_user.type != 9:
-			if check.type == 1:
-				return redirect(url_for('registered.index'))
-			if check.type == 2:
-				return redirect(url_for('linkages.index'))
-			if check.type == 3:
-				return redirect(url_for('beneficiaries.index'))
+		if current_user.type == 1:
+			return redirect(url_for('registered.index'))
+		elif current_user.type == 2:
+			return redirect(url_for('linkages.index'))
+		elif current_user.type == 3:
+			return redirect(url_for('beneficiaries.index'))
 		else:
 			return redirect(url_for('admin.index'))
 	

@@ -13,14 +13,14 @@ def before_request():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
 
-		check = user_information.query.filter_by(id=current_user.id).first()
-
-		if check.type == 1:
+		if current_user.type == 1:
 			return redirect(url_for('registered.index'))
-		if check.type == 2:
+		elif current_user.type == 2:
 			return redirect(url_for('linkages.index'))
-		if check.type == 3:
+		elif current_user.type == 3:
 			return redirect(url_for('beneficiaries.index'))
+		else:
+			return redirect(url_for('admin.index'))
 
 @admin.route('/admin')
 @login_required

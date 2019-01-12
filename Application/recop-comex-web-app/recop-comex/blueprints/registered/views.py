@@ -13,13 +13,12 @@ def before_request():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
 
-		check = user_information.query.filter_by(id=current_user.id).first()
-
-		if current_user.type != 9:
-			if check.type == 2:
-				return redirect(url_for('linkages.index'))
-			if check.type == 3:
-				return redirect(url_for('beneficiaries.index'))
+		if current_user.type == 1:
+			return redirect(url_for('registered.index'))
+		elif current_user.type == 2:
+			return redirect(url_for('linkages.index'))
+		elif current_user.type == 3:
+			return redirect(url_for('beneficiaries.index'))
 		else:
 			return redirect(url_for('admin.index'))
 

@@ -173,9 +173,9 @@ class user_account(db.Model, UserMixin):
 			username=value[2],
 			password= bcrypt.generate_password_hash(value[3]).decode('utf-8'),
 			email_address=value[4],
-			type="0",
-			last_active=value[5],
-			status=value[6]
+			type=value[5],
+			last_active=value[6],
+			status=value[7]
 			)
 			 
 		db.session.add(record)
@@ -210,7 +210,6 @@ class user_information(db.Model):
 	address = db.Column(db.VARCHAR(50),nullable=False)
 	telephone = db.Column(db.VARCHAR(15))
 	mobile_number = db.Column(db.VARCHAR(15))
-	type = db.Column(db.INT, nullable=False)
 
 	def count():
 
@@ -230,8 +229,7 @@ class user_information(db.Model):
 			birthday = value[6],
 			address=value[7],
 			telephone=value[8],
-			mobile_number=value[9],
-			type=value[10]
+			mobile_number=value[9]
 			)
 			 
 		db.session.add(record)
