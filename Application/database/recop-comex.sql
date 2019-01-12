@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2019 at 06:22 PM
+-- Generation Time: Jan 12, 2019 at 10:25 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -120,6 +120,14 @@ CREATE TABLE `event_information` (
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `event_information`
+--
+
+INSERT INTO `event_information` (`id`, `organizer_id`, `category_id`, `name`, `description`, `objective`, `budget`, `location`, `event_date`, `type`, `status`) VALUES
+(1, 1, 1, 'Sapakan sa Baste', 'event ko to', 'Silver Lining', '1000.50', 'SSCRdC', '2019-01-18 00:00:00', 1, 'N'),
+(2, 1, 1, 'Catriona Elisa Magnayon Gray', 'event ko to', 'a', '1000.50', 'a', '2019-01-10 00:00:00', 1, 'N');
+
 -- --------------------------------------------------------
 
 --
@@ -180,6 +188,14 @@ CREATE TABLE `proposal_tracker` (
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `proposal_tracker`
+--
+
+INSERT INTO `proposal_tracker` (`id`, `event_id`, `proposed_on`, `recop_accepted`, `fmi_signed`, `acad_signed`, `approved_on`, `comment`, `status`) VALUES
+(1, 1, '2019-01-09 11:20:45', NULL, NULL, NULL, NULL, NULL, 'N'),
+(2, 2, '2019-01-09 12:03:05', NULL, NULL, NULL, NULL, NULL, 'N');
+
 -- --------------------------------------------------------
 
 --
@@ -205,12 +221,23 @@ CREATE TABLE `user_account` (
   `id` int(11) NOT NULL,
   `info_id` int(11) DEFAULT NULL,
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(60) NOT NULL,
   `email_address` varchar(30) NOT NULL,
   `type` int(1) NOT NULL,
   `last_active` datetime NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_account`
+--
+
+INSERT INTO `user_account` (`id`, `info_id`, `username`, `password`, `email_address`, `type`, `last_active`, `status`) VALUES
+(1, 1, 'sergeangelo21', '$2b$12$aLUMJqDekK/DY8nU5c4y3O2lWmP4.af.YCWeol5Cc.nAgw6Wau7ia', 'sergeangelomajillo@gmail.com', 2, '2019-01-12 01:43:53', 'D'),
+(2, 2, 'aa', '$2b$12$l0KXxXB4oQHH2KxSTtAE1.mngJiAlCCTKBeou.Lgyiz7lkynpL8w.', 'a', 2, '2019-01-11 00:40:07', 'D'),
+(3, 3, 'bb', '$2b$12$e8cHonSTCvGoQmD/zvolbepe/THyHyXMxHbErjAYXiZbnKao8xile', 'e', 2, '2019-01-11 00:45:57', 'D'),
+(4, 4, 'asd', '$2b$12$B.OYLD3ABe8x7wM8.3xSfOTHKgcczkIb9KtOeHr7HvP3SA7hXdZ2S', 'a', 2, '2019-01-11 01:00:50', 'D'),
+(5, 5, 'a', '$2b$12$p4gCYqX8do2GdY6h.MLBJuHaoZ3nuydDnSm0rohN2cNVeUjpVsf8C', 'a', 2019, '2019-01-12 01:44:17', 'A');
 
 -- --------------------------------------------------------
 
@@ -225,12 +252,22 @@ CREATE TABLE `user_information` (
   `last_name` varchar(20) NOT NULL,
   `company_name` varchar(50) NOT NULL,
   `gender` char(1) NOT NULL,
+  `birthday` date NOT NULL,
   `address` varchar(50) NOT NULL,
   `telephone` varchar(15) DEFAULT NULL,
-  `mobile_number` varchar(15) DEFAULT NULL,
-  `type` int(1) NOT NULL,
-  `is_active` char(1) NOT NULL
+  `mobile_number` varchar(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_information`
+--
+
+INSERT INTO `user_information` (`id`, `first_name`, `middle_name`, `last_name`, `company_name`, `gender`, `birthday`, `address`, `telephone`, `mobile_number`) VALUES
+(1, 'Serge Angelo', 'Isanan', 'Majillo', 'TaskUs Inc.', 'M', '1998-01-21', '33 Marulas, Kawit, Cavite', '---', '---'),
+(2, 'a', 'a', 'a', 'a', 'M', '1998-01-21', 'a', 'a', 'a'),
+(3, 'e', 'e', 'e', 'e', 'F', '1998-01-21', 'e', 'e', 'e'),
+(4, 'a', 'a', 'a', 'a', 'M', '1998-01-21', 'a', 'a', 'a'),
+(5, 'a', 'a', 'a', 'a', 'M', '2019-01-21', 'a', 'a', 'a');
 
 --
 -- Indexes for dumped tables
@@ -306,8 +343,7 @@ ALTER TABLE `referral`
 -- Indexes for table `user_account`
 --
 ALTER TABLE `user_account`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user_information`
@@ -347,7 +383,7 @@ ALTER TABLE `event_category`
 -- AUTO_INCREMENT for table `event_information`
 --
 ALTER TABLE `event_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `event_participation`
@@ -371,13 +407,13 @@ ALTER TABLE `referral`
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user_information`
 --
 ALTER TABLE `user_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

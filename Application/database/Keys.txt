@@ -17,13 +17,8 @@ A = Approved
 
 user_account.type
 
-9 = admin
-0 = user
+1 = admin
+2 = participant
+3 = partner
+4 = beneficiaries
 
-++++++++++++++++++++++++++++++++++++++++
-
-user_information.type
-
-1 = participant
-2 = partner
-3 = beneficiaries
