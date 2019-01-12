@@ -17,8 +17,6 @@ class audit_trail(db.Model):
 	date_created = db.Column(db.DATETIME, nullable=False)
 	type = db.Column(db.INT, nullable=False)
 
-	audit_account_id = db.relationship('user_account', backref='audit_trail', lazy=True)
-
 class beneficiary(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -26,9 +24,6 @@ class beneficiary(db.Model):
 	beneficiary_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
 	budget = db.Column(db.NUMERIC(10,2))
 	status = db.Column(db.CHAR(1), nullable=False)
-
-	donor_info_id = db.relationship('user_information', backref='beneficiary', lazy=True)
-	bene_info_id = db.relationship('user_information', backref='beneficiary', lazy=True)
 
 class donation(db.Model):
 
@@ -40,9 +35,6 @@ class donation(db.Model):
 	transaction_slip = db.Column(db.VARCHAR(200), nullable=False)
 	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
-
-	sponsee_info_id = db.relationship('user_information', backref='donation', lazy=True)
-	sponsor_info_id = db.relationship('user_information', backref='donation', lazy=True)
 
 class event_attachment(db.Model):
 
@@ -165,7 +157,7 @@ class user_account(db.Model, UserMixin):
 	last_active = db.Column(db.DATETIME, nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
-	account_info_id = db.relationship('user_information', backref = 'user_information', lazy = True)
+	audit_account_id = db.relationship('audit_trail', backref='user_account', lazy=True)
 
 	def count():
 
@@ -221,6 +213,12 @@ class user_information(db.Model):
 	address = db.Column(db.VARCHAR(50),nullable=False)
 	telephone = db.Column(db.VARCHAR(15))
 	mobile_number = db.Column(db.VARCHAR(15))
+
+	account_info_id = db.relationship('user_account', backref = 'user_information', lazy = True)
+	sponsee_info_id = db.relationship('donation', backref='user_information', lazy=True)
+	sponsor_info_id = db.relationship('donation', backref='user_information', lazy=True)
+	donor_info_id = db.relationship('beneficiary', backref='user_information', lazy=True)
+	bene_info_id = db.relationship('beneficiary', backref='user_information', lazy=True)
 
 	def count():
 
