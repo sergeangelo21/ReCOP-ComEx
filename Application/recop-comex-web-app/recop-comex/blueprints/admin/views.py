@@ -19,8 +19,6 @@ def before_request():
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 3:
 			return redirect(url_for('beneficiaries.index'))
-		else:
-			return redirect(url_for('admin.index'))
 
 @admin.route('/admin')
 @login_required

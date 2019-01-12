@@ -11,6 +11,20 @@ unregistered = Blueprint('unregistered', __name__, template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
+@unregistered.before_request
+def before_request():
+
+	if current_user.is_authenticated and not current_user.is_anonymous:
+
+		if current_user.type == 1:
+			return redirect(url_for('registered.index'))
+		elif current_user.type == 2:
+			return redirect(url_for('linkages.index'))
+		elif current_user.type == 3:
+			return redirect(url_for('beneficiaries.index'))
+		elif current_user.type == 4:
+			return redirect(url_for('admin.index'))
+
 @unregistered.route('/')
 def index():
 
@@ -79,15 +93,15 @@ def login():
 			return redirect(url_for('unregistered.login'))
 
 		login_user(user, remember=form.remember_me.data)
-		
+
 		if current_user.type == 1:
 			return redirect(url_for('registered.index'))
 		elif current_user.type == 2:
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 3:
 			return redirect(url_for('beneficiaries.index'))
-		else:
-			return redirect(url_for('admin.index'))
+		elif current_user.type == 4:
+			return redirect(url_for('admin.index'))	
 	
 	return render_template('/unregistered/login.html', form=form)
 
