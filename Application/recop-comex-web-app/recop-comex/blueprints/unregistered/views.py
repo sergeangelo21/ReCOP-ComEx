@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, flash
+from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
 from data_access.models import user_account, user_information
@@ -11,19 +11,19 @@ unregistered = Blueprint('unregistered', __name__, template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-@unregistered.before_request
-def before_request():
+@unregistered.after_request
+def after_request():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
 
 		if current_user.type == 1:
-			return redirect(url_for('registered.index'))
-		elif current_user.type == 2:
-			return redirect(url_for('linkages.index'))
-		elif current_user.type == 3:
-			return redirect(url_for('beneficiaries.index'))
-		elif current_user.type == 4:
 			return redirect(url_for('admin.index'))
+		elif current_user.type == 2:
+			return redirect(url_for('registered.index'))
+		elif current_user.type == 3:
+			return redirect(url_for('linkages.index'))
+		elif current_user.type == 4:
+			return redirect(url_for('beneficiaries.index'))
 
 @unregistered.route('/')
 def index():
@@ -94,13 +94,13 @@ def login():
 
 		login_user(user, remember=form.remember_me.data)
 
-		if current_user.type == 1:
+		if current_user.type == 2:
 			return redirect(url_for('registered.index'))
-		elif current_user.type == 2:
-			return redirect(url_for('linkages.index'))
 		elif current_user.type == 3:
-			return redirect(url_for('beneficiaries.index'))
+			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
+			return redirect(url_for('beneficiaries.index'))
+		elif current_user.type == 1:
 			return redirect(url_for('admin.index'))	
 	
 	return render_template('/unregistered/login.html', form=form)

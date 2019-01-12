@@ -15,13 +15,12 @@ def before_request():
 
 		check = user_information.query.filter_by(id=current_user.id).first()
 
-		if current_user.type != 9:
-			if check.type == 1:
-				return redirect(url_for('registered.index'))
-			if check.type == 2:
-				return redirect(url_for('linkages.index'))
-		else:
+		if current_user.type == 1:
 			return redirect(url_for('admin.index'))
+		elif current_user.type == 2:
+			return redirect(url_for('registered.index'))
+		elif current_user.type == 3:
+			return redirect(url_for('linkages.index'))
 
 @beneficiaries.route('/beneficiaries')
 @login_required

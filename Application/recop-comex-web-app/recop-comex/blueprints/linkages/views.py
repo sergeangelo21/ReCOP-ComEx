@@ -14,11 +14,11 @@ def before_request():
 	if current_user.is_authenticated and not current_user.is_anonymous:
 
 		if current_user.type == 1:
-			return redirect(url_for('registered.index'))
-		elif current_user.type == 3:
-			return redirect(url_for('beneficiaries.index'))
-		elif current_user.type == 4:
 			return redirect(url_for('admin.index'))
+		elif current_user.type == 2:
+			return redirect(url_for('registered.index'))
+		elif current_user.type == 4:
+			return redirect(url_for('beneficiaries.index'))
 
 @linkages.route('/linkages')
 @login_required
