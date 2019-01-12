@@ -215,10 +215,10 @@ class user_information(db.Model):
 	mobile_number = db.Column(db.VARCHAR(15))
 
 	account_info_id = db.relationship('user_account', backref = 'user_information', lazy = True)
-	sponsee_info_id = db.relationship('donation', backref='user_information', lazy=True)
-	sponsor_info_id = db.relationship('donation', backref='user_information', lazy=True)
-	donor_info_id = db.relationship('beneficiary', backref='user_information', lazy=True)
-	bene_info_id = db.relationship('beneficiary', backref='user_information', lazy=True)
+	sponsee_info_id = db.relationship('donation', foreign_keys=[donation.sponsee_id], backref='user_information_sponsee', lazy=True)
+	sponsor_info_id = db.relationship('donation', foreign_keys=[donation.sponsor_id], backref='user_information_sponsor', lazy=True)
+	donor_info_id = db.relationship('beneficiary', foreign_keys=[beneficiary.donor_id], backref='user_information_donor', lazy=True)
+	bene_info_id = db.relationship('beneficiary', foreign_keys=[beneficiary.beneficiary_id], backref='user_information_bene', lazy=True)
 
 	def count():
 
