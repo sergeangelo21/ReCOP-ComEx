@@ -11,19 +11,22 @@ unregistered = Blueprint('unregistered', __name__, template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-@unregistered.after_request
-def after_request():
+# @unregistered.teardown_request
+# def after_request():
 
-	if current_user.is_authenticated and not current_user.is_anonymous:
+# 	if current_user.is_authenticated and not current_user.is_anonymous:
 
-		if current_user.type == 1:
-			return redirect(url_for('admin.index'))
-		elif current_user.type == 2:
-			return redirect(url_for('registered.index'))
-		elif current_user.type == 3:
-			return redirect(url_for('linkages.index'))
-		elif current_user.type == 4:
-			return redirect(url_for('beneficiaries.index'))
+# 		if not current_user is None:
+# 			if current_user.type == 1:
+# 				return redirect(url_for('admin.index'))
+# 			elif current_user.type == 2:
+# 				return redirect(url_for('registered.index'))
+# 			elif current_user.type == 3:
+# 				return redirect(url_for('linkages.index'))
+# 			elif current_user.type == 4:
+# 				return redirect(url_for('beneficiaries.index'))
+# 		else:
+# 			return 'tangina'
 
 @unregistered.route('/')
 def index():
@@ -70,7 +73,7 @@ def signup():
 
 		value_account = [
 			id_account,id_information,form.username.data,
-			form.password.data,form.email.data,form.type.data,datetime.utcnow(),status
+			form.password.data,form.email.data,datetime.utcnow(),form.type.data,status
 			]
 		user_account.add(value_account)
 
