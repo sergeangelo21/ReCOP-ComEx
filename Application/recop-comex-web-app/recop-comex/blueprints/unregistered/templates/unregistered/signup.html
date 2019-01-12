@@ -14,31 +14,79 @@
                       		  <div class="step-item is-active is-success">
                           	    <div class="step-marker">1</div>
                               	    <div class="step-details">
-                                	      <p class="step-title">Account</p>
+                                	      <p class="step-title">I am a</p>
                               	    </div>
                             	  </div>
                         	  <div class="step-item">
                           	    <div class="step-marker">2</div>
                               	    <div class="step-details">
-                                	      <p class="step-title">Personal</p>
+                                	      <p class="step-title">Account</p>
                               	    </div>
                             	  </div>
                         	  <div class="step-item">
                           	    <div class="step-marker">3</div>
                               	    <div class="step-details">
-                                	      <p class="step-title">Contact Info</p>
+                                	      <p class="step-title">Personal</p>
                               	    </div>
                             	  </div>
                         	  <div class="step-item">
                           	    <div class="step-marker">4</div>
                               	    <div class="step-details">
-                                	      <p class="step-title">Finish</p>
+                                	      <p class="step-title">Contact Info</p>
                               	    </div>
                             	  </div>
+                                   <div class="step-item">
+                                <div class="step-marker">5</div>
+                                    <div class="step-details">
+                                          <p class="step-title">Finish</p>
+                                    </div>
+                                  </div>
                             <!-- Steps-Content -->
                             <div class="steps-content">
                                 <form action="" method="POST">
                                     {{form.hidden_tag()}}
+
+                                    <div class="step-content has-text-centered">
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+
+                                         <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        <div class="columns">
+                                                            <div class="column is-4">
+                                                                <div class="card">
+                                                                    <div class="card-content">
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="column is-4">
+                                                                <div class="card">
+                                                                    <div class="card-content">
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                            <div class="column">
+                                                                <div class="card">
+                                                                    <div class="card-content">
+                                                                        
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{form.type(class_='input')}}
+                                                        {% for error in form.type.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
                                     <div class="step-content has-text-centered is-active">
                                         <div class="field is-horizontal">
                                             <div class="field-label is-normal">
@@ -82,21 +130,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="field is-horizontal">
-                                            <div class="field-label is-normal">
-                                                {{form.type.label(class_='label')}}
-                                            </div>
-                                            <div class="field-body">
-                                                <div class="field">
-                                                    <div class="control">
-                                                        {{form.type(class_='input')}}
-                                                        {% for error in form.type.errors %}
-                                                        <span style="color: red;">[{{ error }}]</span>
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> 
+                                        
                                     </div>
 
 

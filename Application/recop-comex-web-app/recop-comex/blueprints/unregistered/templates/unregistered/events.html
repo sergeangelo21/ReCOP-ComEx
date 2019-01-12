@@ -1,108 +1,103 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
-<style type="text/css">
-	.image
-	{
-	width:300px;
-	height: auto; 		
-	}
-</style>
-<br>
-<div class="container">
-	<div class="columns is-centered">
-		<div class="column is-half">	
-			<div class="field has-addons">
-  				<div class="control">
-    				<button type="submit" class="button is-primary"><strong>FILTER</strong></button>
-  				</div>
-  			<div class="control">
-    			<div class="select">
-      				<select name="country">
-        				<option>Select Category</option>
-						<option>Spiritual</option>
-						<option>Education</option>
-						<option>Health</option>
-						<option>Livelihood</option>
-						<option>Environmental</option>
-						<option>Socio-Political Concerns</option> 
-      				</select>
-    			</div>
-  			</div>
+<section class="hero">
+			<div class="notification gold">
+				<div class="columns">
+					<div class="column is-2">
+						
 
+						<a href="" class="button eventbtn is-active">
+							<span class="icon">
+								<i class="fa fa-list"></i>
+							</span>
+						</a>
+
+						<a href="" class="button eventbtn">
+							<span class="icon">
+								<i class="fa fa-calendar-alt"></i>
+							</span>
+						</a>
+					</div>
+
+					<div class="column">
+						<article class="media">
+							<figure class="media-left">
+							   	<p class="has-text-black has-text-weight-bold">Filter by:</p>
+							</figure>
+							<div class="media-content">
+							    <div class="content">
+								    <div class="field-body">
+										<div class="field is-narrow">
+										    <div class="control">
+										        <div class="select is-fullwidth">
+										          <select>
+										          	<option>Select Category</option>
+										            <option>Spiritual</option>
+										            <option>Education</option>
+										            <option>Health</option>
+										            <option>Livelihood</option>
+										            <option>Environmental</option>
+										            <option>Socio-Political Concerns</option>
+										          </select>
+										        </div>
+										    </div>
+										</div>
+									</div>
+							    </div>    
+							</div>
+						</article>
+					</div>
+
+					<div class="column is-2">
+						<div class="field has-addons has-addons-centered">
+							<p class="control">
+							    <input class="input" type="text" placeholder="Search">
+							</p>
+							<p class="control">
+							    <a class="button search">
+							      Search
+							    </a>
+							</p>
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
 
-		<div class="column is-half">
-			<nav class="level is-mobile is-pulled-right">
-      			<div class="level-left">
-        			<a class="level-item">
-          				<span class="icon is-small is-active"><i class="fas fa-list"></i></span>
-        			</a>
-        			<a class="level-item">
-          				<span class="icon is-small"><i class="fas fa-calendar-alt"></i></span>
-        			</a>
-      			</div>
-    		</nav>
-		</div>
-	</div>
-	<div class="columns">
-		<div class="column">
-
-			<div class="card">
-				<div class="card-content">
-										
-<!-- 
-    							<div class="content has-pulled-right">
-									<a class="button item" href=""><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>						
-								</div> -->
-    						
-    								
-    								<table class="table is-fullwidth">
+			<div class="hero-body">
+				<div class="box white is-white">
+					<div class="column">
+						<div class="card-header">
+							<p class="card-header-title">Events</p>
+						</div>
+						<div class="card-content">
+							<table class="table is-fullwidth">
 								<thead>
 									<tr>
-									    <th class="newlist">Event Name</th>
+										
+									    <th class="newlist">Name</th>
 									    <th class="newlist">Description</th>
 									    <th class="newlist">Venue</th>
 									    <th class="newlist">Event Date</th>
-									    <th></th>
+									    
 									 </tr>
-									</thead>
+									
+								</thead>
 								<tbody>
 									<tr class="table-row">
 										
-										<td>	
-										<article class="media">
-  											<figure class="media-left">
-    											<p class="image">
-      												<img src="../../../static/images/pic1.jpg">
-    											</p>
-  											</figure>
-  										</article>
-
-  										</td>
-									    <td>Eat well</td>
-									    <td>Cavite City</td>
-									    <td>03/21/19</td>
-									    <td><div class="content is-pulled-right">
-									<a class="button item" href=""><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>						
-								</div></td>
-									   </tr>
-
-									   	</div>
-									</tbody>
-								</table>
-							
-							
-  							
-  								
-
-
-
+									    <td>E-environment</td>
+									    <td>Tree planting</td>
+									    <td>San Sebastian College-Recoletos de Cavite City</td>
+									    <td>January 21, 2019</td>
+										
+									</tr>	
+								</tbody>
+							</table>
+						</div>
+					</div>	
 				</div>
 			</div>
-		</div>
-	</div>
-</div>
+		</section>
 
 {% endblock %}
