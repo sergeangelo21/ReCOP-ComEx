@@ -111,6 +111,10 @@
 	.panelbox{
 		background-color: white;
 	}
+
+	.card-content.profile{
+		padding: 0rem;
+	}
 	/*		END		*/
 
 	/*		STARS		*/
