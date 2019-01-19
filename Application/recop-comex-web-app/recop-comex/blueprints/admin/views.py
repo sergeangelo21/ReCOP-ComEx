@@ -42,24 +42,51 @@ def proposals():
 @login_required
 def partners():
 
-	# partners = user_account.query.join(
-	# 	user_information
-	# 	).add_columns(
-	# 	user_information.id,
-	# 	user_information.first_name,
-	# 	user_information.middle_name,
-	# 	user_information.last_name,
-	# 	user_information.company_name,
-	# 	user_information.gender,
-	# 	user_information.birthday,
-	# 	user_information,address,
-	# 	user_information.telephone,
-	# 	user_information.mobile_number,
-	# 	user_information.type
-	# 	).filter(user_information.type==2
-	# 	).first()
+	partners = user_account.query.join(
+		user_information
+		).add_columns(
+		user_information.id,
+		user_information.company_name,
+		user_information.address,
+		user_account.status,
+		).filter(user_account.type==3
+		).all()
 
-	return render_template('/admin/partners/partners.html', title="Partners | Admin")
+	return render_template('/admin/partners/index.html', title="Partners | Admin", partners=partners)
+
+@admin.route('/admin/partners/show/<partners>')
+@login_required
+def partners_show(partners):
+
+	partners = user_account.query.join(
+		user_information
+		).add_columns(
+		user_information.id,
+		user_information.first_name,
+		user_information.middle_name,
+		user_information.last_name,
+		user_information.company_name,
+		user_information.gender,
+		user_information.birthday,
+		user_information.address,
+		user_information.telephone,
+		user_information.mobile_number,
+		).filter(user_account.id==partners
+		).first()
+
+	return render_template('/admin/partners/show.html', title="Partners | Admin", partners=partners)
+
+@admin.route('/admin/partners/action/<partners>')
+@login_required
+def partners_action(partners):
+
+	if current_user.status == "A":
+		current_user.status == "D"
+
+	elif current_user.status == "D":
+		current_user.status == "A"
+
+	return redirect(url_for('admin.partners'))
 
 @admin.route('/admin/beneficiaries')
 @login_required

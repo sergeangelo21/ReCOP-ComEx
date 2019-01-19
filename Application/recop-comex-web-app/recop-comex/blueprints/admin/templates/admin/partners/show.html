@@ -1,0 +1,77 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+
+			<div class="column">
+				<div class="columns">
+					<div class="column"><br>
+						<a href="{{url_for('admin.partners')}}" class="button">
+							<span class="icon is-small">
+                				<i class="fas fa-arrow-circle-left"></i>
+							</span>
+							<span>Back</span>
+						</a>
+					</div>
+				</div>
+				<div class="columns">
+					<div class="column">
+						<div class="card box">
+							<div class="card-header">
+								<p class="card-header-title">{{ partners.company_name }}'s Information</p>
+							</div>
+							<div class="card-content">
+								<table class="table is-fullwidth">
+									<tbody>
+										<tr>
+											<th width="200">ID</th>
+											<td>{{ partners.id }}</td>
+										</tr>
+										<tr>
+											<th width="200">First Name</th>
+											<td>{{ partners.first_name }}</td>
+										</tr>
+										<tr>
+											<th width="200">Middle Name</th>
+											<td>{{ partners.middle_name }}</td>
+										</tr>
+										<tr>
+											<th width="200">Last Name</th>
+											<td>{{ partners.last_name }}</td>
+										</tr>
+										<tr>
+											<th width="200">Company Name</th>
+											<td>{{ partners.company_name }}</td>
+										</tr>
+										<tr>
+											<th width="200">Gender</th>
+											{% if partners.gender == "M" %}
+												<td>Male</td>
+											{% elif partners.gender == "F" %}
+												<td>Female</td>
+											{% endif %}
+										</tr>
+										<tr>
+											<th width="200">Birthday</th>
+											<td>{{ partners.birthday }}</td>
+										</tr>
+										<tr>
+											<th width="200">Address</th>
+											<td>{{ partners.address }}</td>
+										</tr>
+										<tr>
+											<th width="200">Telephone Number</th>
+											<td>{{ partners.telephone }}</td>
+										</tr>
+										<tr>
+											<th width="200">Mobile Number</th>
+											<td>{{ partners.mobile_number }}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+{% endblock %}

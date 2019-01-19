@@ -1,8 +1,9 @@
 								<tbody>
 									<tr class="table-row">
-										<td>1</td>
-									    <td>Red Cross Cavite Chapter</td>
-									    <td>Cavite City</td>
+										<td>{{ partners.id }}</td>
+									    <td>{{ partners.company_name }}</td>
+									    <td>{{ partners.address }}</td>
+									    <td>{{ partners.status }}</td>
 										<td>
 											<div class="dropdown is-hoverable">
 												<div class="dropdown-trigger">
@@ -15,8 +16,8 @@
 												</div>
 												<div class="dropdown-menu">
 													<div class="dropdown-content">
-														<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
-														<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-archive"></i></span>&nbsp Archive</a>
+														<a class="dropdown-item" href="{{url_for('admin.partners_show', partners=partners.id)}}"><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
+														<a class="dropdown-item" href="{{url_for('admin.partners_action', partners=partners.id)}}"><span class="icon is-small"><i class="fa fa-archive"></i></span>&nbsp Archive</a>
 													</div>
 												</div>
 											</div>
