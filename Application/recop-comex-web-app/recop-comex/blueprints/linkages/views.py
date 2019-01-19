@@ -31,15 +31,15 @@ def index():
 @login_required
 def events():
 
-	return render_template('/linkages/events.html')
+	return render_template('/linkages/events/events.html')
 
-@linkages.route('/linkages/proposals', methods=['GET', 'POST'])
+@linkages.route('/linkages/events/create')
 @login_required
-def proposals():
+def events_create():
 
 	form = ProposalForm()
 
-	form.category.choices = event_category.select()
+	form.category.choices = event_category.select();
 
 	if form.validate_on_submit():
 		id = event_information.count()
@@ -49,9 +49,11 @@ def proposals():
 		form.event_date.data,1,'N'
 		]
 		event_information.add(value)
-		return redirect(url_for('linkages.proposals'))
+		return redirect(url_for('linkages.events'))
 
-	return render_template('/linkages/proposals.html', title="Proposals | Partners", form=form)
+	return render_template('/linkages/events/create.html', form=form)
+
+
 
 @linkages.route('/linkages/beneficiaries')
 @login_required
