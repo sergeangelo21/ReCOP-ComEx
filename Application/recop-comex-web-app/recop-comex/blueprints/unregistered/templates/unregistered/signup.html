@@ -1,7 +1,18 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
-		
+	<style type="text/css">
+  
+
+.card:hover{ 
+     box-shadow: 1px 8px 20px grey;
+    -webkit-transition:  box-shadow .2s ease-in;
+  }
+ 
+body {
+  background-color: #F0EFEE;
+}   
+    </style>	
         <br>
         <br>
         <div class="container">	
@@ -20,27 +31,22 @@
                         	  <div class="step-item">
                           	    <div class="step-marker">2</div>
                               	    <div class="step-details">
-                                	      <p class="step-title">Account</p>
+                                	      <p class="step-title">Personal</p>
                               	    </div>
                             	  </div>
                         	  <div class="step-item">
                           	    <div class="step-marker">3</div>
                               	    <div class="step-details">
-                                	      <p class="step-title">Personal</p>
+                                	      <p class="step-title">Contact</p>
                               	    </div>
                             	  </div>
                         	  <div class="step-item">
                           	    <div class="step-marker">4</div>
                               	    <div class="step-details">
-                                	      <p class="step-title">Contact Info</p>
+                                	      <p class="step-title">Account</p>
                               	    </div>
                             	  </div>
-                                   <div class="step-item">
-                                <div class="step-marker">5</div>
-                                    <div class="step-details">
-                                          <p class="step-title">Finish</p>
-                                    </div>
-                                  </div>
+                                   
                             <!-- Steps-Content -->
                             <div class="steps-content">
                                 <form action="" method="POST">
@@ -57,14 +63,18 @@
                                                             <div class="column is-4">
                                                                 <div class="card">
                                                                     <div class="card-content">
-                                                                        
-                                                                    </div>
+                                                                         <a href="../">
+                                                                            <strong>Participant</strong>
+                                                                        </a>
+                                                                        </div>
                                                                 </div>
                                                             </div>
                                                             <div class="column is-4">
                                                                 <div class="card">
                                                                     <div class="card-content">
-                                                                        
+                                                                        <a href="../">
+                                                                            <strong>Partner</strong>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -72,12 +82,14 @@
                                                             <div class="column">
                                                                 <div class="card">
                                                                     <div class="card-content">
-                                                                        
+                                                                        <a href="../">
+                                                                            <strong>Benificiary</strong>
+                                                                        </a>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{form.type(class_='input')}}
+                                                        {{form.type(class_='input.radio')}}
                                                         {% for error in form.type.errors %}
                                                         <span style="color: red;">[{{ error }}]</span>
                                                         {% endfor %}
@@ -87,53 +99,7 @@
                                         </div>
                                     </div>
                                     </div>
-                                    <div class="step-content has-text-centered is-active">
-                                        <div class="field is-horizontal">
-                                            <div class="field-label is-normal">
-                                                {{form.username.label(class_='label')}}
-                                            </div>
-                                            <div class="field-body">
-                                                <div class="field">
-                                                    <div class="control">
-                                                        {{form.username(class_='input', placeholder='Username')}}
-                                                        {% for error in form.username.errors %}
-                                                        <span style="color: red;">[{{ error }}]</span>
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="field is-horizontal">
-                                            <div class="field-label is-normal">
-                                                {{form.password.label(class_='label')}}
-                                            </div>
-                                            <div class="field-body">
-                                                <div class="field">
-                                                    <div class="control has-icon has-icon-right">
-                                                        {{form.password(class_='input', placeholder='Password')}}
-                                                        {% for error in form.password.errors %}
-                                                        <span style="color: red;">[{{ error }}]</span>
-                                                        {% endfor %}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="field is-horizontal">
-                                            <div class="field-label is-normal">
-                                                <label class="label">Confirm password</label>
-                                            </div>
-                                            <div class="field-body">
-                                                <div class="field">
-                                                    <div class="control has-icon has-icon-right">
-                                                        <input class="input" type="password" name="password_confirm" id="password_confirm" placeholder="Confirm password" data-validate="require">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                    </div>
-
-
+                                    
                                     <div class="step-content has-text-centered">
                                         <div class="field is-horizontal">
                                             <div class="field-label is-normal">
@@ -187,11 +153,11 @@
                                             <div class="field-body">
                                                 <div class="field">
                                                     <div class="control has-icon has-icon-right">
-                                          		        {{form.gender(class_='input')}}
+                                                        {{form.gender(class_='input')}}
                                                         {% for error in form.gender.errors %}
                                                         <span style="color: red;">[{{ error }}]</span>
                                                         {% endfor %}
-                                        			</div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -226,6 +192,9 @@
                                             </div>
                                         </div>
                                     </div>
+                                    
+
+
 
                                     <div class="step-content has-text-centered">
                                         <div class="field is-horizontal">
@@ -289,10 +258,52 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="step-content has-text-centered">
-                                        <h1 class="title is-4">Your account is now created!</h1>
-                                        {{form.submit(class_='button submit')}}
+                                    <div class="step-content has-text-centered is-active">
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.username.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        {{form.username(class_='input', placeholder='Username')}}
+                                                        {% for error in form.username.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.password.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        {{form.password(class_='input', placeholder='Password')}}
+                                                        {% for error in form.password.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                <label class="label">Confirm password</label>
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        <input class="input" type="password" name="password_confirm" id="password_confirm" placeholder="Confirm password" data-validate="require">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
                                     </div>
+                                    
                                 </form>
                             </div>
                                 
