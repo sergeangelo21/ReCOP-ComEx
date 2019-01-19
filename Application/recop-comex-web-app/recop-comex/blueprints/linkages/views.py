@@ -31,7 +31,9 @@ def index():
 @login_required
 def events():
 
-	return render_template('/linkages/events/events.html')
+	events = event_information.query.all()
+
+	return render_template('/linkages/events/index.html', events=events)
 
 @linkages.route('/linkages/events/create')
 @login_required
