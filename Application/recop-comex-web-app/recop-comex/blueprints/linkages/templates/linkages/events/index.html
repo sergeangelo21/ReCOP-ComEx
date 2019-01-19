@@ -71,49 +71,10 @@
 		<div class="container">
 			<div class="columns is-centered">
 				<div class="column is-8">
-					<div class="card select-list">
-						<div class="card-content">
-							<article class="media">
-  								<figure class="media-left">
-    								<p class="image is-128x128">
-      									<img class="event" src="https://www.projectpearls.org/wp-content/uploads/2013/06/12841195_10153962703412905_7874811344446667017_o-300x300.jpg">
-    								</p>
-  								</figure>
-	  							<div class="media-content">
-	    							<div class="content">
-	    								<thead>
-									<tr>
-										<th class="newlist">Name</th><br>
-									    <th class="newlist">Location</th><br>
-									   	<th class="newlist">Date</th><br>
-									 </tr>
-									
-								</thead>
-	      									
-			    				<!-- icons -->
-				 				   <nav class="level is-mobile">
-				      					<div class="level-left">
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-reply"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-retweet"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-heart"></i></span>
-					         				{% for events in events %}
-												{% include 'linkages/events/_events.html' %}
-											{% endfor %}
-			        						</a>
-			      						</div>
-			    					</nav>
-	  							</div>
-							</article>
-						</div>
-					</div>
+					{% for events in events %}
+						{% include 'linkages/events/_events.html' %}
+					{% endfor %}
 
-
-				</div>
 				<div class="column has-text-centered">
 					<div class="card">
 					    <div class="card-content">  
