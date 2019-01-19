@@ -65,10 +65,10 @@ def signup():
 
 		user_information.add(value_information)
 
-		if int(form.type.data) > 1:
-			status = "D"
-		else:
+		if form.type.data == 2:
 			status = "A"
+		else:
+			status = "D"
 
 		value_account = [
 			id_account,id_information,form.username.data,

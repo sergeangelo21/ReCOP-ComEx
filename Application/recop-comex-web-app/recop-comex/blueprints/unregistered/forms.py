@@ -21,6 +21,6 @@ class SignupForm(FlaskForm):
     address = StringField('Address', validators=[DataRequired()])
     telephone = StringField('Telephone Number', validators=[DataRequired()])
     mobile = StringField('Mobile Number', validators=[DataRequired()])
-    type = RadioField('I am a', choices=[("2","Participant"),("3","Partner"),("4","Beneficiary")], validators=[DataRequired()])
+    type = StringField('Type', validators=[DataRequired()])
     email = StringField('Email Address', validators=[DataRequired()])
     submit = SubmitField('Submit')
