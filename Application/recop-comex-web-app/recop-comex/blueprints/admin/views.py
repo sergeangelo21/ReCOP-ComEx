@@ -2,6 +2,8 @@ from flask import Blueprint, render_template, url_for, redirect
 from flask_login import current_user, login_required
 from data_access.models import user_account, user_information
 
+from extensions import db
+
 import os
 
 admin = Blueprint('admin', __name__, template_folder="templates")
@@ -71,6 +73,7 @@ def partners_show(partners):
 		user_information.address,
 		user_information.telephone,
 		user_information.mobile_number,
+		user_account.status,
 		).filter(user_account.id==partners
 		).first()
 
@@ -80,11 +83,15 @@ def partners_show(partners):
 @login_required
 def partners_action(partners):
 
-	if current_user.status == "A":
-		current_user.status == "D"
+	action = user_account.query.filter(user_account.id==partners).first()
 
-	elif current_user.status == "D":
-		current_user.status == "A"
+	if action.status == "A":
+		action.status = "D"
+		db.session.commit()
+
+	elif action.status == "D":
+		action.status = "A"
+		db.session.commit()
 
 	return redirect(url_for('admin.partners'))
 

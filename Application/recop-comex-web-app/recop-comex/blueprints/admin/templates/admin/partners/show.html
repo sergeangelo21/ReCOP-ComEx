@@ -20,6 +20,13 @@
 								<p class="card-header-title">{{ partners.company_name }}'s Information</p>
 							</div>
 							<div class="card-content">
+								<a href="{{url_for('admin.partners_action', partners=partners.id)}}" class="button">
+									<span class="icon is-small">
+										<i class="fa fa-archive">
+										</i>
+									</span>
+									&nbsp Enable/Disable
+								</a>
 								<table class="table is-fullwidth">
 									<tbody>
 										<tr>
@@ -65,6 +72,10 @@
 										<tr>
 											<th width="200">Mobile Number</th>
 											<td>{{ partners.mobile_number }}</td>
+										</tr>
+										<tr>
+											<th width="200">Status</th>
+											<td>{{ partners.status }}</td>
 										</tr>
 									</tbody>
 								</table>
