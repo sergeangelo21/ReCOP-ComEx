@@ -94,6 +94,10 @@ def login():
 			flash('Invalid username or password')
 			return redirect(url_for('unregistered.login'))
 
+		if user.status == "D":
+			flash('Disabled account. Please contact Re-COP Director.')
+			return redirect(url_for('unregistered.login'))
+
 		login_user(user, remember=form.remember_me.data)
 
 		if current_user.type == 2:

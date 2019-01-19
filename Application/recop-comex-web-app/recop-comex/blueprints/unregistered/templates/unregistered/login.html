@@ -87,6 +87,17 @@
 										<div class="field has-text-centered">
 											<a class="has-text-grey is-size-7" href="{{url_for('unregistered.signup')}}">Not a Member? <p style="color:#006400  ";>Sign up here.</p></a>
 										</div>
+										<script type="text/javascript">
+											function messages(){
+											{% with messages = get_flashed_messages() %}
+											  {% if messages %}
+											    {% for message in messages %}
+											      alert('{{ message }}')
+											    {% endfor %}
+											  {% endif %}
+											{% endwith %}
+										}
+										</script>
 									</form>
 								</div>
 							</div>
