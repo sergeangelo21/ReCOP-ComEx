@@ -81,15 +81,18 @@
   								</figure>
 	  							<div class="media-content">
 	    							<div class="content">
-	    								<thead>
-									<tr>
-										<th class="newlist">Name</th><br>
-									    <th class="newlist">Location</th><br>
-									   	<th class="newlist">Date</th><br>
-									 </tr>
-									
-								</thead>
-	      									
+	    							<table>
+										<thead>
+											<tr>
+												<th class="newlist">Name</th>
+											    <th class="newlist">Location</th>
+											   	<th class="newlist">Date</th>
+											 </tr>
+										</thead>
+				      						{% for events in events %}
+												{% include 'linkages/events/_events.html' %}
+											{% endfor %}
+	      							</table>
 			    				<!-- icons -->
 				 				   <nav class="level is-mobile">
 				      					<div class="level-left">
@@ -101,9 +104,7 @@
 			        						</a>
 			        						<a class="level-item">
 			          							<span class="icon is-small"><i class="fas fa-heart"></i></span>
-					         				{% for events in events %}
-												{% include 'linkages/events/_events.html' %}
-											{% endfor %}
+
 			        						</a>
 			      						</div>
 			    					</nav>
