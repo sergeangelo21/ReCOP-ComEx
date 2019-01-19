@@ -37,18 +37,18 @@ body {
                                                             <div class="column is-4">
                                                                 <div class="card">
                                                                     <div class="card-content">
-                                                                         <a href="../">
+                                                                         <button id = "Participant" onclick='show_form()'>
                                                                             <strong>Participant</strong>
-                                                                        </a>
+                                                                        </button>
                                                                         </div>
                                                                 </div>
                                                             </div>
                                                             <div class="column is-4">
                                                                 <div class="card">
                                                                     <div class="card-content">
-                                                                        <a href="../">
+                                                                        <button id = "Partner" onclick='show_form()'>
                                                                             <strong>Partner</strong>
-                                                                        </a>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                                 
@@ -56,9 +56,9 @@ body {
                                                             <div class="column">
                                                                 <div class="card">
                                                                     <div class="card-content">
-                                                                        <a href="../">
-                                                                            <strong>Benificiary</strong>
-                                                                        </a>
+                                                                        <button id = "Beneficiary" onclick='show_form()'>
+                                                                            <strong>Beneficiary</strong>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -326,6 +326,12 @@ body {
                 new bulmaSteps(document.getElementById('signup'), {
                 onShow: (id) => console.log(id)
                 })
+
+                function show_form(){
+
+                    form = document.getElementById('signup');
+
+                }
             </script>
         </div>
 

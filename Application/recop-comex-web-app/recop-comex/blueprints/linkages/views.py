@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.linkages.forms import ProposalForm
 from data_access.models import user_account, event_information, event_category, proposal_tracker, user_information
-
+		
 import os
 
 linkages = Blueprint('linkages', __name__, template_folder="templates")
@@ -42,13 +42,19 @@ def proposals():
 	form.category.choices = event_category.select()
 
 	if form.validate_on_submit():
+
 		id = event_information.count()
-		value = [
-		id,1,form.category.data,form.title.data,
+		value_event = [
+		id,current_user.id,form.category.data,form.title.data,
 		form.description.data,form.objective.data,form.budget.data,form.location.data,
 		form.event_date.data,1,'N'
 		]
-		event_information.add(value)
+		event_information.add(value_event)
+
+		id = proposal_tracker.count()
+		value_tracker = [id, value_event[0]]
+		proposal_tracker.add(value_tracker)
+
 		return redirect(url_for('linkages.proposals'))
 
 	return render_template('/linkages/proposals.html', title="Proposals | Partners", form=form)

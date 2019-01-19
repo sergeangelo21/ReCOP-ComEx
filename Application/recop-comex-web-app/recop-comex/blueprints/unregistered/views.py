@@ -72,7 +72,7 @@ def signup():
 
 		value_account = [
 			id_account,id_information,form.username.data,
-			form.password.data,form.email.data,datetime.utcnow(),form.type.data,status
+			form.password.data,form.email.data,form.type.data,datetime.now(),status
 			]
 		user_account.add(value_account)
 
