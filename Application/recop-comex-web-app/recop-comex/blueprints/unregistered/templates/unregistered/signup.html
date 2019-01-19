@@ -11,43 +11,22 @@
  
 body {
   background-color: #F0EFEE;
-}   
+
+} 
+.hidden{
+    visibility: hidden;
+}
+
     </style>	
         <br>
         <br>
         <div class="container">	
             <div class="columns is-centered">
-                <div class="column is-7">
+                <div class="column is-7 ">
         		        <div class="box">
         	              <h1 class="title has-text-centered">SIGN UP</h1>
                         <!-- Steps -->
-                	      <div class="steps" id="signup">
-                      		 
-                        	  <div class="step-item is-active is-success">
-                          	    <div class="step-marker">2</div>
-                              	    <div class="step-details">
-                                	      <p class="step-title">Personal</p>
-                              	    </div>
-                            	  </div>
-                        	  <div class="step-item">
-                          	    <div class="step-marker">3</div>
-                              	    <div class="step-details">
-                                	      <p class="step-title">Contact</p>
-                              	    </div>
-                            	  </div>
-                        	  <div class="step-item">
-                          	    <div class="step-marker">4</div>
-                              	    <div class="step-details">
-                                	      <p class="step-title">Account</p>
-                              	    </div>
-                            	  </div>
-                                   
-                            <!-- Steps-Content -->
-                            <div class="steps-content">
-                                <form action="" method="POST">
-                                    {{form.hidden_tag()}}
-
-                                    <div class="step-content has-text-centered">
+                        
                                         <div class="field is-horizontal">
                                             <div class="field-label is-normal">
 
@@ -84,17 +63,45 @@ body {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{form.type(class_='input.radio')}}
-                                                        {% for error in form.type.errors %}
-                                                        <span style="color: red;">[{{ error }}]</span>
-                                                        {% endfor %}
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    </div>
-                                    
+                                  
+
+
+
+
+
+
+                	      <div class="steps hidden" id="signup">
+                      		 
+                        	  <div class="step-item is-active is-success">
+                          	    <div class="step-marker">1</div>
+                              	    <div class="step-details">
+                                	      <p class="step-title">Personal</p>
+                              	    </div>
+                            	  </div>
+                        	  <div class="step-item">
+                          	    <div class="step-marker">2</div>
+                              	    <div class="step-details">
+                                	      <p class="step-title">Contact</p>
+                              	    </div>
+                            	  </div>
+                        	  <div class="step-item">
+                          	    <div class="step-marker">3</div>
+                              	    <div class="step-details">
+                                	      <p class="step-title">Account</p>
+                              	    </div>
+                            	  </div>
+                                   
+                            <!-- Steps-Content -->
+                            <div class="steps-content">
+                                <form action="" method="POST">
+                                    {{form.hidden_tag()}}
+
                                     <div class="step-content has-text-centered">
                                         <div class="field is-horizontal">
                                             <div class="field-label is-normal">
@@ -253,7 +260,51 @@ body {
                                             </div>
                                         </div>
                                     </div>
-                                    
+                                    <div class="step-content has-text-centered is-active">
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.username.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        {{form.username(class_='input', placeholder='Username')}}
+                                                        {% for error in form.username.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.password.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        {{form.password(class_='input', placeholder='Password')}}
+                                                        {% for error in form.password.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                <label class="label">Confirm password</label>
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        <input class="input" type="password" name="password_confirm" id="password_confirm" placeholder="Confirm password" data-validate="require">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
                                 </form>
                             </div>
                                 
