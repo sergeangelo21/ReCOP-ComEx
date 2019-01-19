@@ -137,6 +137,28 @@ class proposal_tracker(db.Model):
 	comment = db.Column(db.VARCHAR(20))
 	status = db.Column(db.CHAR(1), nullable=False)	
 
+	def count():
+
+		rows = db.session.query(proposal_tracker).count()
+		rows+=1
+		return rows
+
+	def add(value):
+
+		record = proposal_tracker(
+			id = value[0],
+			event_id = value[1],
+			proposed_on = datetime.now(),
+			recop_accepted = None,
+			fmi_signed = None,
+			acad_signed = None,
+			approved_on = None,
+			comment = None,
+			status = 'N')
+
+		db.session.add(record)
+		db.session.commit()
+
 class referral(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -197,7 +219,7 @@ class user_account(db.Model, UserMixin):
 	def logout():
 
 		user = user_account.query.filter_by(id=current_user.id).first()
-		user.last_active = datetime.utcnow()
+		user.last_active = datetime.now()
 
 		db.session.commit()
 
