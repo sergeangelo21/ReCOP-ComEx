@@ -13,8 +13,6 @@ def before_request():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
 
-		check = user_information.query.filter_by(id=current_user.id).first()
-
 		if current_user.type == 1:
 			return redirect(url_for('admin.index'))
 		elif current_user.type == 2:
