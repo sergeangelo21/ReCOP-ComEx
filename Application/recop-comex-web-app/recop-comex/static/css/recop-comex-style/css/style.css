@@ -122,3 +122,22 @@
 		  color: orange;
 	}
 	/*		END		*/
+
+
+	/* EVENT */
+
+	.upcoming-event{
+		margin-bottom: 5px;
+		padding: 10px;
+	}
+
+	a .upcoming-event:hover{
+		background-color: whitesmoke;
+	}
+
+	.select-list:hover{
+	background-color: whitesmoke;
+	cursor: pointer;
+	}
+
+	/* END */
