@@ -141,3 +141,34 @@
 	}
 
 	/* END */
+
+
+	/*   LINKAGES PROPOSAL   */
+	.fa-arrow-circle-left{
+		color: #072000; 
+	}
+
+	.button.submit{
+		background-color: #072000; 
+		color: #ffb901;
+		border-color: #072000;
+	}
+	/*   END   */
+
+	/*    DONATE    */
+	.responsive {
+	  width: 100%;
+	  height: auto;
+	}
+
+	.nav-gold{
+      background-color: #ffb901;
+      padding: 15px;
+      border: 2px solid #072000;  
+      color: #072000;
+    }
+
+    .box.person-details{
+      box-shadow: none;
+    }
+    /*   END  */
