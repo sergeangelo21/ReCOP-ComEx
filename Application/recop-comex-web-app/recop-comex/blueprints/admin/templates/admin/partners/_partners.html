@@ -3,7 +3,14 @@
 										<td>{{ partners.id }}</td>
 									    <td>{{ partners.company_name }}</td>
 									    <td>{{ partners.address }}</td>
-									    <td>{{ partners.status }}</td>
+									    <td>
+									    	{% if partners.status=='A' %}
+									    		Active
+									    	{% elif partners.status=='D' %}
+									    		Disabled
+									    	{% endif %}
+
+										</td>
 										<td>
 											<div class="dropdown is-hoverable">
 												<div class="dropdown-trigger">

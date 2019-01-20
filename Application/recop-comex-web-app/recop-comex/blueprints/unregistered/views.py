@@ -5,7 +5,7 @@ from data_access.models import user_account, user_information
 
 from datetime import datetime
 
-import os
+import os, json
 
 unregistered = Blueprint('unregistered', __name__, template_folder="templates")
 
@@ -67,8 +67,10 @@ def signup():
 
 		if form.type.data == 2:
 			status = "A"
+			flash('Your account was successfully created!')
 		else:
 			status = "D"
+			flash('Your account has been created! Please wait for admin to activate it.')
 
 		value_account = [
 			id_account,id_information,form.username.data,
@@ -95,10 +97,11 @@ def login():
 			return redirect(url_for('unregistered.login'))
 
 		if user.status == "D":
-			flash('Disabled account. Please contact Re-COP Director.')
+			flash('Inactive account. Please contact Re-COP Director.')
 			return redirect(url_for('unregistered.login'))
 
 		login_user(user, remember=form.remember_me.data)
+		flash('Welcome ' + current_user.username + '!')
 
 		if current_user.type == 2:
 			return redirect(url_for('registered.index'))
@@ -117,5 +120,7 @@ def logout():
 	user_account.logout()
 
 	logout_user()
+
+	flash('You are logged out.')
 
 	return redirect('/')

@@ -1,8 +1,17 @@
 #Queries involving multiple tables goes here
 from extensions import db
-from data_access.models import user_account, user_information
+from data_access.models import *
 
-def partner_view():
+def partners_view():
 
-	record = user_information.query.join(user_account).add_columns(user_information.first_name,user_account.password).filter(user_information.id==user_account.info_id).first()
+	record = user_account.query.join(
+		user_information
+		).add_columns(
+		user_information.id,
+		user_information.company_name,
+		user_information.address,
+		user_account.status,
+		).filter(user_account.type==3
+		).all()
+
 	return record

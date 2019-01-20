@@ -14,10 +14,20 @@
         <link rel="stylesheet" href="../../../static/css/recop-comex-style/css/style.css">
         <link rel="stylesheet" type="text/css" href="../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.css">
         <link rel="stylesheet" type="text/css" href="../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.css">
+        <script type="text/javascript" src = "../../../static/scripts/base.js" ></script>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <script>alert("{{message}}")</script>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}       
 
     </head>
 
-    <body onload = 'messages()'>
+    <body>
+
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="{{url_for('unregistered.index')}}">
@@ -59,32 +69,11 @@
                 </div>
             </div>
         </nav>
-
-        <script type="text/javascript">
-            (function() {
-              var burger = document.querySelector('.burger');
-              var nav = document.querySelector('#'+burger.dataset.target);
-             
-              burger.addEventListener('click', function(){
-                burger.classList.toggle('is-active');
-                nav.classList.toggle('is-active');
-              });
-        })();
-        </script>
-
-        <script type="text/javascript" src="../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.js"></script>
-         <script type="text/javascript" src="../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.js"></script>
-            <script>
-                new bulmaSteps(document.getElementById('stepsDemo'), {
-                onShow: (id) => console.log(id)
-            })
-            </script>
-            <script>
-    var carousels = bulmaCarousel.attach(); // carousels now contains an array of all Carousel instances
-    setInterval(slide, 3000);
-</script>
-
         {% block content %} {% endblock %}
     </body>
-  
+
+    <script type="text/javascript" src="../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.js"></script>
+    <script type="text/javascript" src="../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.js"></script>
+   <script type="text/javascript" src = "../../../static/scripts/unregistered.js" ></script>
+   
 </html>

@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect
 from flask_login import current_user, login_required
 from data_access.models import user_account, user_information
+from data_access.queries import partners_view
 
 from extensions import db
 
@@ -44,15 +45,11 @@ def proposals():
 @login_required
 def partners():
 
-	partners = user_account.query.join(
-		user_information
-		).add_columns(
-		user_information.id,
-		user_information.company_name,
-		user_information.address,
-		user_account.status,
-		).filter(user_account.type==3
-		).all()
+	partners = partners_view()
+
+	if partners is None:
+
+		return 'None'
 
 	return render_template('/admin/partners/index.html', title="Partners | Admin", partners=partners)
 

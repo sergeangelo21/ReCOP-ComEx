@@ -60,6 +60,7 @@
 						</div>
 						<div class="card-content">
 							<table class="table is-fullwidth">
+								{% if partners %}
 								<thead>
 									<tr>
 										<th class="newlist">ID</th>
@@ -70,9 +71,22 @@
 									 </tr>
 									
 								</thead>
-								{% for partners in partners %}
-									{% include 'admin/partners/_partners.html' %}
-								{% endfor %}
+
+									{% for partners in partners %}
+										{% include 'admin/partners/_partners.html' %}
+									{% endfor %}
+
+								{% else %}
+
+								<tbody>
+
+									<tr class = "table-row">
+										<td class = "has-text-centered">---Nothing to show---</td>
+								 	</tr>
+									
+								</tbody>
+
+								{% endif %}
 							</table>
 						</div>
 					</div>	

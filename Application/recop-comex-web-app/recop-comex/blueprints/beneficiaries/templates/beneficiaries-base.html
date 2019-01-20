@@ -12,10 +12,20 @@
         <link rel="stylesheet" type="text/css" href="../../../static/css/bulma-0.7.2/css/bulma.css">
         <link rel="stylesheet" href="../../../static/css/fontawesome-5.5.0/css/all.css">
         <link rel="stylesheet" href="../../../static/css/recop-comex-style/css/style.css">
+        <script type="text/javascript" src = "../../../static/scripts/base.js" ></script>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <script>alert("{{message}}")</script>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}       
 
     </head>
 
     <body>
+
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="">
@@ -68,18 +78,8 @@
             </div>
 		</nav>
         
-        <script type="text/javascript">
-            (function() {
-              var burger = document.querySelector('.burger');
-              var nav = document.querySelector('#'+burger.dataset.target);
-             
-              burger.addEventListener('click', function(){
-                burger.classList.toggle('is-active');
-                nav.classList.toggle('is-active');
-              });
-        })();
-        </script>
 		{% block content %} {% endblock %}
+
 	</body>
 
 </html>
