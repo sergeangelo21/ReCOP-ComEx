@@ -7,7 +7,7 @@
     padding: 20px;
 }
 
-.card:hover{ 
+.card1:hover{ 
      box-shadow: 1px 8px 10px grey;
     -webkit-transition:  box-shadow .2s ease-in;
   }
@@ -20,30 +20,27 @@
     position: absolute;
 }
 /* Lazy Load Styles */
-.card-image {
+
+.card1-image {
     display: block;
     min-height: 20rem; /* layout hack */
     background: #fff center center no-repeat;
     background-size: cover;
-    filter: blur(3px); /* blur the lowres image */
+   
 }
 
-.card-image > img {
+.card1-image > img {
     display: block;
     width: 100%;
     opacity: 0; /* visually hide the img element */
 }
 
-.card-image.is-loaded {
-    filter: none; /* remove the blur on fullres image */
-    transition: filter 1s;
-}
 
 
 /* Layout Styles */
 
 
-.card-list {
+.card1-list {
     display: block;
     margin: 1rem auto;
     padding: 0;
@@ -52,7 +49,7 @@
     list-style: none;
 }
 
-.card {
+.card1 {
     display: inline-block;
     width: 90%;
     max-width: 20rem;
@@ -64,70 +61,73 @@
     transition: transform 0.1s ease-in-out, box-shadow 0.1s;
 }
 
-.card:hover {
+.card1:hover {
     transform: translateY(-0.5rem) scale(1.0125);
     box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
 }
 
-.card-description {
+.card1-description {
     display: block;
     padding: 1em 0.5em;
     color: #515151;
     text-decoration: none;
 }
 
-.card-description > h2 {
+.card1-description > h2 {
     margin: 0 0 0.5em;
 }
 
-.card-description > p {
+.card1-description > p {
     margin: 0;
 }
     </style>
 
 <br>
 <div class="container">
-    <ul class="card-list" id="select_type">
+    <ul class="card1-list" id="select_type">
 
     <div class="title has-text-centered">Create Your Account</div>
-    <li class="card">
-        <a class="card-image" id = "2" onclick='show_form(this.id)' style="background-image: url(../../../static/images/volunteer.jpg);" data-image-full="../../../static/images/volunteer.jpg">
-            <img src="../../../static/images/volunteer.jpg"/>
+    <li class="card1">
+        <a class="card1-image" id = "2" onclick='show_form(this.id)' style="background-image: url(../../../static/images/);" data-image-full="../../../static/images/">
+            <img src="../../../static/images/"/>
         </a>
-        <a class="card-description notification is-info" id = "2" onclick='show_form(this.id)'>
+        <a class="card1-description notification is-info" id = "2" onclick='show_form(this.id)'>
             <h2 class="title is-5">I am a Participant</h2>
             
         </a>
     </li>
     
     
-    <li class="card">
-        <a class="card-image" id = "3" onclick='show_form(this.id)' style="background-image: url(../../../static/images/partners.jpg);" data-image-full="../../../static/images/partners.jpg">
-            <img src="../../../static/images/partners.jpg"/>
+    <li class="card1">
+        <a class="card1-image" id = "3" onclick='show_form(this.id)' style="background-image: url(../../../static/images/);" data-image-full="../../../static/images/">
+            <img src="../../../static/images/"/>
         </a>
-        <a class="card-description notification gold" id = "3" onclick='show_form(this.id)' >
+        <a class="card1-description notification gold" id = "3" onclick='show_form(this.id)' >
             <h2 class="title is-5">I am a Partner</h2>
             
         </a>
     </li>
 
-    <li class="card">
-        <a class="card-image" id = "4" onclick='show_form(this.id)' style="background-image: url(../../../static/images/beneficiary.jpg);" data-image-full="../../../static/images/beneficiary.jpg">
-            <img src="../../../static/images/beneficiary.jpg"/>
+    <li class="card1">
+        <a class="card1-image" id = "4" onclick='show_form(this.id)' style="background-image: url(../../../static/images/);" data-image-full="../../../static/images/">
+            <img src="../../../static/images/"/>
         </a>
-        <a class="card-description notification is-primary" id = "4" onclick='show_form(this.id)'>
+        <a class="card1-description notification is-primary" id = "4" onclick='show_form(this.id)'>
             <h2 class="title is-5">I am a Beneficiary</h2>
         </a>
     </li>
  
     
 </ul>	
-</div>
-    <br>
-                <div class="hidden" id="signup">
+
+    <div class="columns is-centered">
+        <div class="column is-10">
+                <div class="card hidden" id="signup">
                       <div class="columns is-centered">
-                        <div class="column is-7">
-                     
+
+                        <div class="column is-10">
+                            
+                     <br>
                             <h1 class="title is-3 has-text-centered">SIGN UP</h1>
                 	      <div class="steps">
                               <div class="step-item is-active is-success">
@@ -391,8 +391,9 @@
                                 </div>
                             
                                 </div>
-
-                            
+                                </form>
+                                </div>    
+                            </form>
                         </div>
 
         </div>
