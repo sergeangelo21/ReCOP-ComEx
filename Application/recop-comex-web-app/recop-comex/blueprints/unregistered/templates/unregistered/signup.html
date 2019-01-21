@@ -23,20 +23,11 @@
 
 .card1-image {
     display: block;
-    min-height: 20rem; /* layout hack */
     background: #fff center center no-repeat;
-    background-size: cover;
-   
+    background-size: cover; 
+    padding-top: 20%;
+    padding-bottom: 15%;  
 }
-
-.card1-image > img {
-    display: block;
-    width: 100%;
-    opacity: 0; /* visually hide the img element */
-}
-
-
-
 /* Layout Styles */
 
 
@@ -86,21 +77,11 @@
 <div class="container">
     <ul class="card1-list" id="select_type">
 
-    <div class="title has-text-centered">Create Your Account</div>
-    <li class="card1">
-        <a class="card1-image" id = "2" onclick='show_form(this.id)' style="background-image: url(../../../static/images/);" data-image-full="../../../static/images/">
-            <img src="../../../static/images/"/>
-        </a>
-        <a class="card1-description notification is-info" id = "2" onclick='show_form(this.id)'>
-            <h2 class="title is-5">I am a Participant</h2>
-            
-        </a>
-    </li>
-    
+    <div class="title has-text-centered">Create Your Account</div> 
     
     <li class="card1">
-        <a class="card1-image" id = "3" onclick='show_form(this.id)' style="background-image: url(../../../static/images/);" data-image-full="../../../static/images/">
-            <img src="../../../static/images/"/>
+        <a class="card1-image has-text-success" id = "3" onclick='show_form(this.id)'>
+            <span class="fas fa-handshake fa-10x" aria-hidden="true"></span>
         </a>
         <a class="card1-description notification gold" id = "3" onclick='show_form(this.id)' >
             <h2 class="title is-5">I am a Partner</h2>
@@ -109,13 +90,23 @@
     </li>
 
     <li class="card1">
-        <a class="card1-image" id = "4" onclick='show_form(this.id)' style="background-image: url(../../../static/images/);" data-image-full="../../../static/images/">
-            <img src="../../../static/images/"/>
+        <a class="card1-image has-text-success" id = "2" onclick='show_form(this.id)'>
+            <span class="fas fa-users fa-10x" aria-hidden="true"></span>
         </a>
-        <a class="card1-description notification is-primary" id = "4" onclick='show_form(this.id)'>
-            <h2 class="title is-5">I am a Beneficiary</h2>
+        <a class="card1-description notification gold" id = "2" onclick='show_form(this.id)'>
+            <h2 class="title is-5">I am a Participant</h2>
+            
         </a>
     </li>
+
+    <li class="card1">
+        <a class="card1-image has-text-success" id = "4" onclick='show_form(this.id)'>
+            <span class="fas fa-hands-helping fa-10x" aria-hidden="true"></span>
+        </a>
+        <a class="card1-description notification gold" id = "4" onclick='show_form(this.id)'>
+            <h2 class="title is-5">I am a Beneficiary</h2>
+        </a>
+    </li>    
  
     
 </ul>	
@@ -123,13 +114,15 @@
     <div class="columns is-centered">
         <div class="column is-10">
                 <div class="card hidden" id="signup">
+                     
                       <div class="columns is-centered">
 
                         <div class="column is-10">
                             
-                     <br>
+                            <br>
                             <h1 class="title is-3 has-text-centered">SIGN UP</h1>
-                	      <div class="steps">
+
+                	       <div class="steps">
                               <div class="step-item is-active is-success">
                           	    <div class="step-marker">1</div>
                               	    <div class="step-details">
@@ -376,48 +369,22 @@
                                         <!--  -->
                                     </div>
                                 
-                                <!-- PREVIOUS & NEXT -->
-                                <div class="steps-actions padding">
-                                    <div class="steps-action">
-                                        <button href="#" data-nav="previous" class="button is-primary hidden"  id = "prev" onclick='btn(this.id)'>Previous</button>
-                                        <button class="button is-primary hidden absolute" id="illusion" onclick='hide_form()'>Previous</button>
+                                     <!-- PREVIOUS & NEXT -->
+                                    <div class="steps-actions padding">
+                                        <div class="steps-action">
+                                            <button href="#" data-nav="previous" class="button is-primary hidden"  id = "prev" onclick='btn(this.id)'>Previous</button>
+                                            <button class="button is-primary hidden absolute" id="illusion" onclick='hide_form()'>Previous</button>
+                                        </div>
+                                        <div class="steps-action">
+                                            <button href="#" data-nav="next" class="button is-success" id = "next" onclick='btn(this.id)'>Next</button>
+                                            {{form.submit(class_='button is-success hidden absolute')}}
+                                        </div>
                                     </div>
-                                    <div class="steps-action">
-                                        <button href="#" data-nav="next" class="button is-success" id = "next" onclick='btn(this.id)'>Next</button>
-                                        {{form.submit(class_='button is-success hidden absolute')}}
-                                    </div>
-                                </div>
-
-                                </div>
-                            
-                                </div>
                                 </form>
-                                </div>    
-                            </form>
+                            </div>
                         </div>
+                    </div>
 
         </div>
 
-        <script type="text/javascript">
-            window.addEventListener('load', function() {
-                lazyload()
-    
-});
-
-function lazyLoad() {
-    var card_images = document.querySelectorAll('.card-image');
-
-    card_images.forEach(function(card_image) {
-        var image_url = card_image.getAttribute('data-image-full');
-        var content_image = card_image.querySelector('img');
-        
-        content_image.src = image_url;
-        
-        content_image.addEventListener('load', function() {
-            card_image.style.backgroundImage = 'url(' + image_url + ')';
-            card_image.className = card_image.className + ' is-loaded';
-        });
-        
-    });
-        </script>
 {% endblock %}
