@@ -35,11 +35,11 @@ def events():
 
 	return render_template('/admin/events.html', title="Events | Admin")
 
-@admin.route('/admin/proposals')
+@admin.route('/admin/proposals/<status>')
 @login_required
-def proposals():
+def proposals(status):
 
-	return render_template('/admin/proposals.html', title="Proposals | Admin")
+	return render_template('/admin/proposals/index.html', title="Proposals | Admin")
 
 @admin.route('/admin/partners')
 @login_required

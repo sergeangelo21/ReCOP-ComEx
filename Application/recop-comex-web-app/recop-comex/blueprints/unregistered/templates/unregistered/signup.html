@@ -4,7 +4,7 @@
 	<style type="text/css">
   
 .padding{
-    padding: 20px;
+    padding: 10px;
 }
 
 .card1:hover{ 
@@ -13,11 +13,7 @@
   }
  
 .hidden{
-    visibility: hidden;
-}
-
-.absolute{
-    position: absolute;
+    display: none;  
 }
 /* Lazy Load Styles */
 
@@ -74,10 +70,14 @@
     </style>
 
 <br>
-<div class="container">
-    <ul class="card1-list" id="select_type">
 
-    <div class="title has-text-centered">Create Your Account</div> 
+<div class="container">
+
+    <div class="title has-text-centered" id = "select_type">
+
+    Create Your Account
+
+    <ul class="card1-list">
     
     <li class="card1">
         <a class="card1-image has-text-success" id = "3" onclick='show_form(this.id)'>
@@ -108,12 +108,12 @@
         </a>
     </li>    
  
-    
-</ul>	
+</ul>
+</div>	
 
     <div class="columns is-centered">
-        <div class="column is-10">
-                <div class="card hidden" id="signup">
+        <div class="column is-10 hidden" id="signup">
+                <div class="card">
                      
                       <div class="columns is-centered">
 
@@ -373,11 +373,11 @@
                                     <div class="steps-actions padding">
                                         <div class="steps-action">
                                             <button href="#" data-nav="previous" class="button is-primary hidden"  id = "prev" onclick='btn(this.id)'>Previous</button>
-                                            <button class="button is-primary hidden absolute" id="illusion" onclick='hide_form()'>Previous</button>
+                                            <button class="button is-primary" id="illusion" onclick='hide_form()'>Previous</button>
                                         </div>
                                         <div class="steps-action">
                                             <button href="#" data-nav="next" class="button is-success" id = "next" onclick='btn(this.id)'>Next</button>
-                                            {{form.submit(class_='button is-success hidden absolute')}}
+                                            {{form.submit(class_='button is-success hidden')}}
                                         </div>
                                     </div>
                                 </form>

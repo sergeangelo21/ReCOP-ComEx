@@ -99,7 +99,7 @@ class event_information(db.Model):
 
 		result = event_information.query.filter(event_information.status==status).first()
 
-		return result.name
+		return result
 
 class event_participation(db.Model):
 
