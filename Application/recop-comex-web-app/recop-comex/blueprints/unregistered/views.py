@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
-from data_access.models import user_account, user_information
+from data_access.models import user_account, user_information, audit_trail
 from data_access.queries import user_views
 from datetime import datetime
+
+from static.token import confirm
 
 import os, json
 
@@ -81,7 +83,7 @@ def login():
 			return redirect(url_for('unregistered.login'))
 
 		if user.status != "A":
-			
+
 			if user.status== "P":
 				flash('MOA not yet acknowledged. Please check your email.')
 			else:
@@ -121,3 +123,25 @@ def logout():
 	flash('You are logged out.')
 
 	return redirect('/')
+
+@unregistered.route('/linkages/confirm/<token>')
+def confirm_partner(token):
+
+	id = confirm(token)
+	status = 'A'
+
+	user = user_account.retrieve_user(id)
+
+	if id and user.status=='N':
+
+		user_account.update_status(id, status)
+
+		audit_id = audit_trail.count()
+		value = [audit_id,id,'partner',2]
+		audit_trail.add(value)
+
+		flash("MOA acknowledged! Your account is now active.")
+		return redirect(url_for('unregistered.login'))
+	else:
+		flash("MOA already acknowledged. Please login.")
+		return redirect(url_for('unregistered.login'))

@@ -1,7 +1,9 @@
 
 class Config(object):
 	
-	SECRET_KEY = 'random_string'
+	SECRET_KEY = 'together_we_can'
+	SECURITY_PASSWORD_SALT = "yes_we_can"
+
 	SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@localhost/recop-comex'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 

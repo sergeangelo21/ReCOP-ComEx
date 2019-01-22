@@ -28,7 +28,8 @@
 												<div class="dropdown-menu">
 													<div class="dropdown-content">
 														<a class="dropdown-item" href="{{url_for('admin.partner_show', id=partner.id)}}"><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
-														<a class="dropdown-item" href="{{url_for('admin.partner_action', id=partner.id, name = partner.company_name, status = partner.status)}}")'><span class="icon is-small"><i class="fas fa-location-arrow"></i></span>
+														{% if partner.status!='P'%}
+														<a class="dropdown-item" href="{{url_for('admin.partner_action', id = partner.id)}}")'><span class="icon is-small"><i class="fas fa-location-arrow"></i></span>
 														{% if partner.status=='N' %}
 															Activate
 														{% elif partner.status=='A' %}
@@ -38,6 +39,7 @@
 														{% endif %}
 														</span>
 														</a>
+														{% endif %}
 													</div>
 												</div>
 											</div>

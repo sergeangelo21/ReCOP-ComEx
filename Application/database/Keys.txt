@@ -1,7 +1,7 @@
 audit_trail.type
 
-1 - Approval	
-2 - Enable/Disable
+1 - Approval and Moa
+2 - Partner Accepted Moa
 
 event_information.type
 

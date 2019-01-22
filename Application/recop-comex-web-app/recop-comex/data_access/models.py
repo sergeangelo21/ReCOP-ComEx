@@ -19,7 +19,7 @@ class audit_trail(db.Model):
 
 	def count():
 
-		rows = db.session.query(event_information).count()
+		rows = db.session.query(audit_trail).count()
 		rows+=1
 		return rows
 
@@ -222,10 +222,16 @@ class user_account(db.Model, UserMixin):
 		db.session.add(record)
 		db.session.commit()
 
-	def update_status(value):
+	def retrieve_user(value):
 
-		user = user_account.query.filter(user_account.id==value[0]).first()
-		user.status = value[1]
+		user = user_account.query.filter(user_account.id==value).first()
+
+		return user
+
+	def update_status(id, status):
+
+		user = user_account.query.filter(user_account.id==id).first()
+		user.status = status
 		db.session.commit()
 
 	def login(value):

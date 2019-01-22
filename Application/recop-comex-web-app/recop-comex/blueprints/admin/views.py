@@ -1,9 +1,11 @@
 from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
+from flask_mail import Message
 from data_access.models import *
 from data_access.queries import *
 
-from extensions import db
+from extensions import db, mail
+from static.token import generate
 
 import os
 
@@ -57,31 +59,44 @@ def partner_show(id):
 
 	return render_template('/admin/partners/show.html', title="Partners | Admin", partner=partner, mem_since = mem_since)
 
-@admin.route('/admin/partners/action/<name><id><status>')
+@admin.route('/admin/partners/action/id=<id>')
 @login_required
-def partner_action(id, name, status):
+def partner_action(id):
 
-	if status == "A":
+	user = user_account.retrieve_user(id)
+
+	if user.status == "A":
 		status = "D"
-		flash(name + " was disabled!")
+		flash("Partner was disabled!")
 	else:
 
-		if status=='N':
+		if user.status=='N':
+			
+			token = generate(user.id)
+			link = url_for('unregistered.confirm_partner', token=token , _external = True)
+
+			msg = Message(html="<p style='font-family: Century Gothic; font-size: 30px'>Hello " +
+				user.username + "! Please acknowledge <a href=" + link + ">this.</p>",
+				subject="Memorandum of Agreement for Partners",
+				sender = ("ReCOP Community Extension", "recop.baste@gmail.com"),
+				recipients=[user.email_address])
+
+			mail.send(msg)
+			
 			new = 'MOA was sent to email.'
 			status = "P"
+			
+			audit_id = audit_trail.count()
+			value = [audit_id,id,'partner', 1]
+			audit_trail.add(value)
+
 		else:
 			new = ''
 			status = "A"
 
-		flash(name + " was activated! " + new)
+		flash("Partner was activated! " + new)
 
-	user = user_account.update_status([id, status])
-
-	audit_id = audit_trail.count()
-
-	value = [audit_id,id,'partner',1]
-
-	audit_trail.add(value)
+	user_account.update_status(id, status)
 
 	return redirect(url_for('admin.partners'))
 

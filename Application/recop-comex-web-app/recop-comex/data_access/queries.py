@@ -58,7 +58,7 @@ class partner_views():
 		membership = audit_trail.query.filter(
 			and_(audit_trail.affected_id==value, 
 				audit_trail.target=='partner', 
-				audit_trail.type==1)).first()
+				audit_trail.type==2)).first()
 
 
 		return record, membership
