@@ -1,60 +1,42 @@
 {% extends "admin-base.html" %}
 
 {% block content %}
-		<section class="hero">
 			<div class="notification gold">
 				<div class="columns">
-					<div class="column is-2">
-						<a href="" class="button add has-text-weight-bold">
-							<span class="icon">
-								<i class="fa fa-plus"></i>
-							</span>
-							<span>Add</span>
-						</a>
-
-						<a href="" class="button eventbtn is-active">
-							<span class="icon">
-								<i class="fa fa-list"></i>
-							</span>
-						</a>
-
-						<a href="" class="button eventbtn">
-							<span class="icon">
-								<i class="fa fa-calendar-alt"></i>
-							</span>
-						</a>
+					<div class="column">
+						<div class="tabs proposal is-toggle has-text-weight-bold">
+						  <ul>
+						    <li class="is-active">
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-plus" aria-hidden="true"></i></span>
+						        <span class="proposal">New</span>
+						      </a>
+						    </li>
+						    <li>
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+						        <span class="prop">Ongoing</span>
+						      </a>
+						    </li>
+						    <li>
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-check" aria-hidden="true"></i></span>
+						        <span>Completed</span>
+						      </a>
+						    </li>
+						  </ul>
+						</div>
 					</div>
 
 					<div class="column">
 						<article class="media">
-							<figure class="media-left">
-							   	<p class="has-text-black has-text-weight-bold">Filter by:</p>
-							</figure>
-							<div class="media-content">
-							    <div class="content">
-								    <div class="field-body">
-										<div class="field is-narrow">
-										    <div class="control">
-										        <div class="select is-fullwidth">
-										          <select>
-										          	<option>Select Category</option>
-										            <option>Spiritual</option>
-										            <option>Education</option>
-										            <option>Health</option>
-										            <option>Livelihood</option>
-										            <option>Environmental</option>
-										            <option>Socio-Political Concerns</option>
-										          </select>
-										        </div>
-										    </div>
-										</div>
-									</div>
-							    </div>    
-							</div>
+						  	<figure class="media-left">
+						  		<button class="button add"><i class="fas fa-plus-circle"></i>&nbsp Add</button>
+						  	</figure>
 						</article>
 					</div>
 
-					<div class="column is-2">
+					<div class="column is-3">
 						<div class="field has-addons has-addons-centered">
 							<p class="control">
 							    <input class="input" type="text" placeholder="Search">
@@ -69,57 +51,119 @@
 				</div>
 			</div>
 
-			<div class="hero-body">
-				<div class="box white is-white">
-					<div class="column">
-						<div class="card-header">
-							<p class="card-header-title">Events</p>
-						</div>
-						<div class="card-content">
-							<table class="table is-fullwidth">
-								<thead>
-									<tr>
-										<th class="newlist">ID</th>
-									    <th class="newlist">Name</th>
-									    <th class="newlist">Description</th>
-									    <th class="newlist">Venue</th>
-									    <th class="newlist">Event Date</th>
-									    <th class="newlist hidedesktop">Actions</th>
-									 </tr>
-									
-								</thead>
-								<tbody>
-									<tr class="table-row">
-										<td>1</td>
-									    <td>E-environment</td>
-									    <td>Tree planting</td>
-									    <td>San Sebastian College-Recoletos de Cavite City</td>
-									    <td>January 21, 2019</td>
-										<td>
-											<div class="dropdown is-hoverable">
-												<div class="dropdown-trigger">
-													<button class="button">
-														<span>Actions</span>
-														<span class="icon">
-															<i class="fa fa-angle-down"></i>
-														</span>
-													</button>
-												</div>
-												<div class="dropdown-menu">
-													<div class="dropdown-content">
-														<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
-														<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-edit"></i></span>&nbsp Edit</a>
-														<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-archive"></i></span>&nbsp Archive</a>
-													</div>
+			<div class="columns is-gapless">
+				<div class="column is-2">
+		    		<div class="notification filter">
+		    			<p class="title is-size-5">View</p>
+		    			<div class="columns">
+		    				<div class="column has-text-centered">
+								<a href="" class="button eventbtn is-active">
+									<span class="icon">
+										<i class="fa fa-list"></i>
+									</span>
+								</a>
+
+								<a href="" class="button eventbtn">
+									<span class="icon">
+										<i class="fa fa-calendar-alt"></i>
+									</span>
+								</a>
+							</div>
+		    			</div>
+
+		    			<p class="title is-size-5">Filter</p>
+		    			<div class="columns">
+		    				<div class="column">
+		    					<div class="select is-fullwidth">
+								    <select>
+								      <option>Please choose</option>
+								      <option>All</option>
+								      <option>Organizations</option>
+								      <option>Departmental</option>
+								      <option>Partners</option>
+								    </select>
+							 	</div>
+		    				</div>
+		    			</div>
+
+		    			<div class="columns">
+		    				<div class="column">
+		    					<div class="select is-fullwidth">
+								    <select>
+								      <option>Please choose</option>
+								      <option>All</option>
+								      <option>Organizations</option>
+								      <option>Departmental</option>
+								      <option>Partners</option>
+								    </select>
+							 	</div>
+		    				</div>
+		    			</div>
+
+		    			<div class="columns">
+		    				<div class="column">
+		    					<div class="select is-fullwidth">
+								    <select>
+								      <option>Please choose</option>
+								      <option>All</option>
+								      <option>Organizations</option>
+								      <option>Departmental</option>
+								      <option>Partners</option>
+								    </select>
+							 	</div>
+		    				</div>
+		    			</div>
+					 	
+		    		</div>
+		    	</div>
+
+				<div class="column">
+					<div class="card-header">
+						<p class="card-header-title">Events</p>
+					</div>
+					<div class="card-content">
+						<table class="table is-fullwidth">
+							<thead>
+								<tr>
+									<th class="newlist">ID</th>
+								    <th class="newlist">Name</th>
+								    <th class="newlist">Description</th>
+								    <th class="newlist">Venue</th>
+								    <th class="newlist">Event Date</th>
+								    <th class="newlist hidedesktop">Actions</th>
+								 </tr>
+								
+							</thead>
+							<tbody>
+								<tr class="table-row">
+									<td>1</td>
+								    <td>E-environment</td>
+								    <td>Tree planting</td>
+								    <td>San Sebastian College-Recoletos de Cavite City</td>
+								    <td>January 21, 2019</td>
+									<td>
+										<div class="dropdown is-hoverable">
+											<div class="dropdown-trigger">
+												<button class="button">
+													<span>Actions</span>
+													<span class="icon">
+														<i class="fa fa-angle-down"></i>
+													</span>
+												</button>
+											</div>
+											<div class="dropdown-menu">
+												<div class="dropdown-content">
+													<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
+													<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-edit"></i></span>&nbsp Edit</a>
+													<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-archive"></i></span>&nbsp Archive</a>
 												</div>
 											</div>
-										</td>
-									</tr>	
-								</tbody>
-							</table>
-						</div>
-					</div>	
-				</div>
+										</div>
+									</td>
+								</tr>	
+							</tbody>
+						</table>
+					</div>
+				</div>	
 			</div>
-		</section>
 {% endblock %}

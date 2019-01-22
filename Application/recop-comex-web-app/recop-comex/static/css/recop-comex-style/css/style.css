@@ -35,6 +35,12 @@
 	.notification.gold{
 		background-color:#ecad00;
 		text-decoration: none;
+		margin-bottom: 0;
+		border-radius: 0;
+	}
+
+	.notification.filter{
+		background-color: white;
 	}
 
 

@@ -1,7 +1,6 @@
 {% extends "admin-base.html" %}
 
 {% block content %}
-		<section class="hero">
 			<div class="notification gold">
 				<div class="columns partners">
 					<div class="column">
@@ -34,28 +33,6 @@
 						  	<figure class="media-left">
 						  		<button class="button add"><i class="fas fa-plus-circle"></i>&nbsp Add</button>
 						  	</figure>
-						  	<div class="media-content">
-							    <div class="field is-horizontal">
-						  	<div class="field-label">
-						    	<label class="label">Filter by:</label>
-						  	</div>
-						  	<div class="field-body">
-							    <div class="field is-narrow">
-							      	<div class="control">
-							       		<div class="select">
-										    <select>
-										      <option>Please choose</option>
-										      <option>All</option>
-										      <option>Organizations</option>
-										      <option>Departmental</option>
-										      <option>Partners</option>
-										    </select>
-									 	</div>
-							      	</div>
-							   	</div>
-							  </div>
-							</div>
-						 	</div>
 						</article>
 					</div>
 
@@ -74,10 +51,58 @@
 				</div>
 			</div>
 
-			<div class="hero-body">
-			    <div class="box white is-white">
+			    <div class="columns is-gapless">
+			    	<div class="column is-2">
+			    		<div class="notification filter">
+			    			<p class="title is-size-5">Filter</p>
+
+			    			<div class="columns">
+			    				<div class="column">
+			    					<div class="select is-fullwidth">
+									    <select>
+									      <option>Please choose</option>
+									      <option>All</option>
+									      <option>Organizations</option>
+									      <option>Departmental</option>
+									      <option>Partners</option>
+									    </select>
+								 	</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="columns">
+			    				<div class="column">
+			    					<div class="select is-fullwidth">
+									    <select>
+									      <option>Please choose</option>
+									      <option>All</option>
+									      <option>Organizations</option>
+									      <option>Departmental</option>
+									      <option>Partners</option>
+									    </select>
+								 	</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="columns">
+			    				<div class="column">
+			    					<div class="select is-fullwidth">
+									    <select>
+									      <option>Please choose</option>
+									      <option>All</option>
+									      <option>Organizations</option>
+									      <option>Departmental</option>
+									      <option>Partners</option>
+									    </select>
+								 	</div>
+			    				</div>
+			    			</div>
+						 	
+			    		</div>
+			    	</div>
 			    	<div class="column">
-			            <div class="card-header">
+			            <div class="card box">
+			            	<div class="card-header">
 							<p class="card-header-title">Proposals</p>
 						</div>
 						<div class="card-content">
@@ -128,8 +153,7 @@
 								</tbody>
 							</table>
 						</div>
+			            </div>
 					</div>
 				</div>
-			</div>
-		</section>
 {% endblock %}
