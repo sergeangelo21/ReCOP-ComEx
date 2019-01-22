@@ -1,3 +1,1 @@
-UPDATE `user_information` SET `first_name` = 'Ana', `middle_name` = 'Dula', `last_name` = 'Manzano', `company_name` = 'San Sebastian College Recoletos de Cavite', `gender` = 'F' WHERE `user_information`.`id` = 1;
-
-UPDATE `user_account` SET `username` = 'admin-recop', `email_address` = 'recop.baste@gmail.com', `type` = '1', `status` = 'A' WHERE `user_account`.`id` = 1;
+ALTER TABLE `audit_trail` CHANGE `target` `target` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
