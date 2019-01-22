@@ -31,11 +31,11 @@
 														{% if partner.status!='P'%}
 														<a class="dropdown-item" href="{{url_for('admin.partner_action', id = partner.id)}}")'><span class="icon is-small"><i class="fas fa-location-arrow"></i></span>
 														{% if partner.status=='N' %}
-															Activate
+															Send MOA
 														{% elif partner.status=='A' %}
 															Disable
 														{% else %}
-															Enable
+															Activate
 														{% endif %}
 														</span>
 														</a>

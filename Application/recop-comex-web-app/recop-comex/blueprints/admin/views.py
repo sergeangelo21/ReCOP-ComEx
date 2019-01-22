@@ -74,9 +74,9 @@ def partner_action(id):
 			
 			token = generate(user.id)
 			link = url_for('unregistered.confirm_partner', token=token , _external = True)
+			html = render_template('email/moa.html', user = user.username, link = link)
 
-			msg = Message(html="<p style='font-family: Century Gothic; font-size: 30px'>Hello " +
-				user.username + "! Please acknowledge <a href=" + link + ">this.</p>",
+			msg = Message(html=html,
 				subject="Memorandum of Agreement for Partners",
 				sender = ("ReCOP Community Extension", "recop.baste@gmail.com"),
 				recipients=[user.email_address])

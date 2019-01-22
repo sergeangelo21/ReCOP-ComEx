@@ -84,7 +84,7 @@ def login():
 
 		if user.status != "A":
 
-			if user.status== "P":
+			if user.status=="P":
 				flash('MOA not yet acknowledged. Please check your email.')
 			else:
 				flash('Inactive account. Please contact Re-COP Director.')
@@ -132,8 +132,8 @@ def confirm_partner(token):
 
 	user = user_account.retrieve_user(id)
 
-	if id and user.status=='N':
-
+	if id and user.status=='P':
+		
 		user_account.update_status(id, status)
 
 		audit_id = audit_trail.count()

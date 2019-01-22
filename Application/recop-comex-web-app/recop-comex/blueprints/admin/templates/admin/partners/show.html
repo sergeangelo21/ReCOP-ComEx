@@ -71,7 +71,10 @@
 			      	<div class="card">
 						<header class="card-header is-active">
 						    <p class="card-header-title">
-						      Company Information
+						     {% if partner.address == 'San Sebastian College Recoletos de Cavite' %} Organizational Information
+						     {% else %}
+						     Company Information
+						     {% endif %}
 						    </p>
 						    <a href="#" class="card-header-icon" aria-label="more options">
 						      <span class="icon">
@@ -94,7 +97,7 @@
 								  	</div>
 								</article>
 							</a>
-							
+							{% if partner.address != 'San Sebastian College Recoletos de Cavite' %}
 							<a class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
@@ -109,11 +112,12 @@
 							  		</div>
 								</article>
 						  	</a>
+						  	{% endif %}
 
 							<a class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
-							    		<p>Contact Person:</p>
+							    		<p>Outreach Coordinator:</p>
 							  		</figure>
 							  		<div class="media-content">
 							   			<div class="content">
