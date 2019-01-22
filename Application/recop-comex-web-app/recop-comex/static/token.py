@@ -1,4 +1,4 @@
-from itsdangerous import URLSafeTimedSerializer
+from itsdangerous import URLSafeTimedSerializer, BadSignature	
 from config import Config
 
 
@@ -12,10 +12,11 @@ def confirm(token, expiration=3600):
 
     serializer = URLSafeTimedSerializer(Config.SECRET_KEY)
 
+    if BadSignature:
+    	return 'bad'
+
     email = serializer.loads(
     	token, salt=Config.SECURITY_PASSWORD_SALT, max_age=expiration)
-    
-    if not email:
-    	return False
-    	
+
+        	
     return email

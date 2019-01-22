@@ -128,6 +128,11 @@ def logout():
 def confirm_partner(token):
 
 	id = confirm(token)
+
+	if id=='bad':
+		flash('Link already expired. Please contact the ReCOP Administrator.')
+		return redirect(url_for('unregistered.index'))
+
 	status = 'A'
 
 	user = user_account.retrieve_user(id)
@@ -141,7 +146,8 @@ def confirm_partner(token):
 		audit_trail.add(value)
 
 		flash("MOA acknowledged! Your account is now active.")
-		return redirect(url_for('unregistered.login'))
+
 	else:
 		flash("MOA already acknowledged. Please login.")
-		return redirect(url_for('unregistered.login'))
+	
+	return redirect(url_for('unregistered.login'))
