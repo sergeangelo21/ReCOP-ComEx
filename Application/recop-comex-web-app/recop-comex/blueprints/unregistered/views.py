@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
 from data_access.models import user_account, user_information
-
+from data_access.queries import user_views
 from datetime import datetime
 
 import os, json
@@ -10,22 +10,6 @@ import os, json
 unregistered = Blueprint('unregistered', __name__, template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
-
-@unregistered.before_request
-def before_request():
-
-	if current_user.is_anonymous:
-
-		return None
-
-	else:
-
-		if current_user.id:
-			return None
-
-		elif current_user.type == 5:
-
-			return redirect(url_for('admin.index'))
 
 @unregistered.route('/')
 def index():
@@ -69,7 +53,7 @@ def signup():
 			status = "A"
 			flash('Your account was successfully created!')
 		else:
-			status = "D"
+			status = "N"
 			flash('Your account has been created! Please wait for admin to activate it.')
 
 		value_account = [
@@ -96,12 +80,25 @@ def login():
 			flash('Invalid username or password')
 			return redirect(url_for('unregistered.login'))
 
-		if user.status == "D":
-			flash('Inactive account. Please contact Re-COP Director.')
+		if user.status != "A":
+			
+			if user.status== "P":
+				flash('MOA not yet acknowledged. Please check your email.')
+			else:
+				flash('Inactive account. Please contact Re-COP Director.')
+			
 			return redirect(url_for('unregistered.login'))
 
 		login_user(user, remember=form.remember_me.data)
-		flash('Welcome ' + current_user.username + '!')
+
+		name = user_views.login_info(current_user.id)
+
+		if current_user.type == 3:
+			name = name.company_name
+		else:
+			name = name.first_name
+			
+		flash('Welcome ' + name + '!')
 
 		if current_user.type == 2:
 			return redirect(url_for('registered.index'))

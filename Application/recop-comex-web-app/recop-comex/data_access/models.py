@@ -13,9 +13,28 @@ class audit_trail(db.Model):
 	id = db.Column(db.INT, primary_key=True)
 	user_id = db.Column(db.INT, db.ForeignKey('user_account.id'), nullable=False)
 	affected_id = db.Column(db.INT, nullable=False)
-	target_table = db.Column(db.VARCHAR(25), nullable=False)
+	target = db.Column(db.VARCHAR(25), nullable=False)
 	date_created = db.Column(db.DATETIME, nullable=False)
 	type = db.Column(db.INT, nullable=False)
+
+	def count():
+
+		rows = db.session.query(event_information).count()
+		rows+=1
+		return rows
+
+	def add(value):
+
+		record = audit_trail(
+			id = value[0],
+			user_id	= current_user.id,
+			affected_id = value[1],
+			target = value[2],
+			date_created = datetime.now(),
+			type = value[3])
+
+		db.session.add(record)
+		db.session.commit()
 
 class beneficiary(db.Model):
 
@@ -203,6 +222,12 @@ class user_account(db.Model, UserMixin):
 		db.session.add(record)
 		db.session.commit()
 
+	def update_status(value):
+
+		user = user_account.query.filter(user_account.id==value[0]).first()
+		user.status = value[1]
+		db.session.commit()
+
 	def login(value):
 
 		user = user_account.query.filter(user_account.username==value[0]).first()
@@ -218,7 +243,8 @@ class user_account(db.Model, UserMixin):
 
 	def logout():
 
-		user = user_account.query.filter_by(id=current_user.id).first()
+		user = user_account.query.filter(user_account.id==current_user.id).first()
+
 		user.last_active = datetime.now()
 
 		db.session.commit()

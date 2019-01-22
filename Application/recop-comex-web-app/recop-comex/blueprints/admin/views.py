@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, url_for, redirect
+from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
-from data_access.models import user_account, user_information
-from data_access.queries import partners_view
+from data_access.models import *
+from data_access.queries import *
 
 from extensions import db
 
@@ -45,50 +45,43 @@ def proposals(status):
 @login_required
 def partners():
 
-	partners = partners_view()
-
-	if partners is None:
-
-		return 'None'
+	partners = partner_views.show_all()
 
 	return render_template('/admin/partners/index.html', title="Partners | Admin", partners=partners)
 
-@admin.route('/admin/partners/show/<partners>')
+@admin.route('/admin/partners/show/id=<id>')
 @login_required
-def partners_show(partners):
+def partner_show(id):
 
-	partners = user_account.query.join(
-		user_information
-		).add_columns(
-		user_information.id,
-		user_information.first_name,
-		user_information.middle_name,
-		user_information.last_name,
-		user_information.company_name,
-		user_information.gender,
-		user_information.birthday,
-		user_information.address,
-		user_information.telephone,
-		user_information.mobile_number,
-		user_account.status,
-		).filter(user_account.id==partners
-		).first()
+	partner, mem_since = partner_views.show_info(id)
 
-	return render_template('/admin/partners/show.html', title="Partners | Admin", partners=partners)
+	return render_template('/admin/partners/show.html', title="Partners | Admin", partner=partner, mem_since = mem_since)
 
-@admin.route('/admin/partners/action/<partners>')
+@admin.route('/admin/partners/action/<name><id><status>')
 @login_required
-def partners_action(partners):
+def partner_action(id, name, status):
 
-	action = user_account.query.filter(user_account.id==partners).first()
+	if status == "A":
+		status = "D"
+		flash(name + " was disabled!")
+	else:
 
-	if action.status == "A":
-		action.status = "D"
-		db.session.commit()
+		if status=='N':
+			new = 'MOA was sent to email.'
+			status = "P"
+		else:
+			new = ''
+			status = "A"
 
-	elif action.status == "D":
-		action.status = "A"
-		db.session.commit()
+		flash(name + " was activated! " + new)
+
+	user = user_account.update_status([id, status])
+
+	audit_id = audit_trail.count()
+
+	value = [audit_id,id,'partner',1]
+
+	audit_trail.add(value)
 
 	return redirect(url_for('admin.partners'))
 

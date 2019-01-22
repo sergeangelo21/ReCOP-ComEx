@@ -1,13 +1,17 @@
 								<tbody>
 									<tr class="table-row">
-										<td>{{ partners.id }}</td>
-									    <td>{{ partners.company_name }}</td>
-									    <td>{{ partners.address }}</td>
+										<td>{{ partner.id }}</td>
+									    <td>{{ partner.company_name }}</td>
+									    <td>{{ partner.address }}</td>
 									    <td>
-									    	{% if partners.status=='A' %}
+									    	{% if partner.status=='A' %}
 									    		Active
-									    	{% elif partners.status=='D' %}
+									    	{% elif partner.status=='D' %}
 									    		Disabled
+									    	{% elif partner.status=='P' %}
+									    		MOA sent
+									    	{% else %}
+									    		New
 									    	{% endif %}
 
 										</td>
@@ -23,8 +27,17 @@
 												</div>
 												<div class="dropdown-menu">
 													<div class="dropdown-content">
-														<a class="dropdown-item" href="{{url_for('admin.partners_show', partners=partners.id)}}"><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
-														<a class="dropdown-item" href="{{url_for('admin.partners_action', partners=partners.id)}}"><span class="icon is-small"><i class="fa fa-archive"></i></span>&nbsp Enable/Disable</a>
+														<a class="dropdown-item" href="{{url_for('admin.partner_show', id=partner.id)}}"><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
+														<a class="dropdown-item" href="{{url_for('admin.partner_action', id=partner.id, name = partner.company_name, status = partner.status)}}")'><span class="icon is-small"><i class="fas fa-location-arrow"></i></span>
+														{% if partner.status=='N' %}
+															Activate
+														{% elif partner.status=='A' %}
+															Disable
+														{% else %}
+															Enable
+														{% endif %}
+														</span>
+														</a>
 													</div>
 												</div>
 											</div>

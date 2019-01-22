@@ -1,88 +1,192 @@
 {% extends "admin-base.html" %}
 
 {% block content %}
+		<div class="panel panel-default">
+			<div style ="position:absolute; margin: 1%">
+				<a href="{{ url_for('admin.partners') }}" class = "button">
+					<span class="icon is-small">
+                		<i class="fas fa-arrow-alt-circle-left"></i>
+					</span>
+					<span>Back</span>
+				</a>
+			</div>
+		    <div class="overlay-card has-text-centered">
 
-			<div class="column">
-				<div class="columns">
-					<div class="column"><br>
-						<a href="{{url_for('admin.partners')}}" class="button">
-							<span class="icon is-small">
-                				<i class="fas fa-arrow-circle-left"></i>
-							</span>
-							<span>Back</span>
-						</a>
-					</div>
-				</div>
-				<div class="columns">
-					<div class="column">
-						<div class="card box">
-							<div class="card-header">
-								<p class="card-header-title">{{ partners.company_name }}'s Information</p>
-							</div>
-							<div class="card-content">
-								<a href="{{url_for('admin.partners_action', partners=partners.id)}}" class="button">
-									<span class="icon is-small">
-										<i class="fa fa-archive">
-										</i>
-									</span>
-									&nbsp Enable/Disable
-								</a>
-								<table class="table is-fullwidth">
-									<tbody>
-										<tr>
-											<th width="200">ID</th>
-											<td>{{ partners.id }}</td>
-										</tr>
-										<tr>
-											<th width="200">First Name</th>
-											<td>{{ partners.first_name }}</td>
-										</tr>
-										<tr>
-											<th width="200">Middle Name</th>
-											<td>{{ partners.middle_name }}</td>
-										</tr>
-										<tr>
-											<th width="200">Last Name</th>
-											<td>{{ partners.last_name }}</td>
-										</tr>
-										<tr>
-											<th width="200">Company Name</th>
-											<td>{{ partners.company_name }}</td>
-										</tr>
-										<tr>
-											<th width="200">Gender</th>
-											{% if partners.gender == "M" %}
-												<td>Male</td>
-											{% elif partners.gender == "F" %}
-												<td>Female</td>
-											{% endif %}
-										</tr>
-										<tr>
-											<th width="200">Birthday</th>
-											<td>{{ partners.birthday }}</td>
-										</tr>
-										<tr>
-											<th width="200">Address</th>
-											<td>{{ partners.address }}</td>
-										</tr>
-										<tr>
-											<th width="200">Telephone Number</th>
-											<td>{{ partners.telephone }}</td>
-										</tr>
-										<tr>
-											<th width="200">Mobile Number</th>
-											<td>{{ partners.mobile_number }}</td>
-										</tr>
-										<tr>
-											<th width="200">Status</th>
-											<td>{{ partners.status }}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
+		    	<div class="circular">
+		    		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpor1YLOvnGDBQ_kPENgXeX8Nk0m_WQ9TCmQrFyFmHFqlZICVqIA">
+		    	</div>
+		        
+		        <div class="row has-text-centered">
+		            <p class="has-text-white is-size-3 has-text-weight-bold">{{partner.company_name}}</p>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{partner.email_address}}</a>
+		            <p class="has-text-white is-size-6"> Last active on {{partner.last_active.strftime('%b %e, %Y at %I:%M %p')}} </p>
+		        </div>
+		    </div>
+		</div>
+
+		<nav class="level is-mobile">
+			<div class="level-item has-text-centered">
+			    <div>
+			      	<a class="menu">
+			      		<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-user fa-2x"></i>
+					      	</span>
+					    </p>
+			     	 	<p class="is-size-6 has-text-weight-bold">About</p>
+			  	  	</a>
+			    </div>
 			</div>
 
+			<div class="level-item has-text-centered">
+			    <div>
+			    	<a class="menu">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-calendar-alt icon fa-2x""></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Events Attended</p>
+				    </a>
+			    </div>
+			</div>
+
+			<div class="level-item has-text-centered">
+			    <div>
+			    	<a class="menu">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-cog icon fa-2x"></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
+				    </a>
+			    </div>
+			</div>
+		</nav>
+
+		<section class="hero">
+			<div class="hero-body">
+			    <div class="container">
+			      	<div class="card">
+						<header class="card-header is-active">
+						    <p class="card-header-title">
+						      Company Information
+						    </p>
+						    <a href="#" class="card-header-icon" aria-label="more options">
+						      <span class="icon">
+						        <i class="fas fa-edit" aria-hidden="true"></i>
+						      </span>
+						    </a>
+					  	</header>
+					  	<div class="card-content profile">
+						    <a class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Name:</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{partner.company_name}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</a>
+							
+							<a class="panel-block">
+						    	<article class="media">
+									<figure class="media-left">
+							    		<p>Address:</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{partner.address}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+							<a class="panel-block">
+						    	<article class="media">
+									<figure class="media-left">
+							    		<p>Contact Person:</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{partner.first_name}} {{partner.middle_name}} {{partner.last_name}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+						  	<a class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Telephone:</p>
+							  		</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{partner.telephone}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+						  	<a class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Mobile:</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{partner.mobile_number}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+						  	{% if mem_since %}
+						  	<a class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Member Since:</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{mem_since.date_created.strftime('%b %e, %Y')}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+						  	{% endif %}
+						  	<a class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Status:</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{partner.status}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+						</div>
+					</div>
+			    </div>
+			</div>
+		</section>
 {% endblock %}
