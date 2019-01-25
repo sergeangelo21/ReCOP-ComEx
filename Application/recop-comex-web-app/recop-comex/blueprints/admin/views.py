@@ -35,7 +35,17 @@ def index():
 @login_required
 def events():
 
-	return render_template('/admin/events.html', title="Events | Admin")
+	return render_template('/admin/events/events.html', title="Events | Admin")
+
+@admin.route('/admin/events/create')
+@login_required
+def events_create():
+
+
+
+	return render_template('/admin/events/create.html', )
+
+
 
 @admin.route('/admin/proposals/<status>')
 @login_required
