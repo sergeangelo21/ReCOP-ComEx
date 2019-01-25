@@ -118,6 +118,14 @@ def partner_action(id):
 
 	return redirect(url_for('admin.partners'))
 
+@admin.route('/admin/partners/create')
+@login_required
+def partners_create():
+
+
+
+	return render_template('/admin/partners/create.html', )
+
 @admin.route('/admin/beneficiaries')
 @login_required
 def beneficiaries():
