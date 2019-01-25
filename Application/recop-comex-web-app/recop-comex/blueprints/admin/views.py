@@ -53,6 +53,14 @@ def proposals(status):
 
 	return render_template('/admin/proposals/index.html', title="Proposals | Admin")
 
+@admin.route('/admin/proposals/create')
+@login_required
+def proposals_create():
+
+
+
+	return render_template('/admin/proposals/create.html', )
+
 @admin.route('/admin/partners')
 @login_required
 def partners():
