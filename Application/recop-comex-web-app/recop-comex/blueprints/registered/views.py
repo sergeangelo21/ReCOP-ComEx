@@ -54,7 +54,7 @@ def contactus():
 @login_required
 def termsandservices():
 
-	return render_template('/registered/termsandservices.html')
+	return render_template('/registered/termsandconditions.html')
 
 @registered.route('/registered/profile')
 @login_required
