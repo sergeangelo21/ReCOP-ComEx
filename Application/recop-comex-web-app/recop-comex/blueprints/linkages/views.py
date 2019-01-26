@@ -81,8 +81,22 @@ def termsandconditions():
 
 	return render_template('/linkages/termsandconditions.html')
 
-@linkages.route('/linkages/profile')
+@linkages.route('/linkages/profile/about')
 @login_required
-def profile():
+def profile_about():
 
-	return render_template('/linkages/profile.html')	
+	return render_template('/linkages/profile/about.html')	
+
+@linkages.route('/linkages/profile/eventsattended')
+@login_required
+def profile_eventsattended():
+
+	return render_template('/linkages/profile/eventsattended.html')	
+
+@linkages.route('/linkages/profile/settings')
+@login_required
+def profile_settings():
+
+	return render_template('/linkages/profile/settings.html')	
+
+
