@@ -35,13 +35,31 @@ def index():
 @login_required
 def events():
 
-	return render_template('/admin/events.html', title="Events | Admin")
+	return render_template('/admin/events/events.html', title="Events | Admin")
+
+@admin.route('/admin/events/create')
+@login_required
+def events_create():
+
+
+
+	return render_template('/admin/events/create.html', )
+
+
 
 @admin.route('/admin/proposals/<status>')
 @login_required
 def proposals(status):
 
 	return render_template('/admin/proposals/index.html', title="Proposals | Admin")
+
+@admin.route('/admin/proposals/create')
+@login_required
+def proposals_create():
+
+
+
+	return render_template('/admin/proposals/create.html', )
 
 @admin.route('/admin/partners')
 @login_required
@@ -99,6 +117,14 @@ def partner_action(id):
 	user_account.update_status(id, status)
 
 	return redirect(url_for('admin.partners'))
+
+@admin.route('/admin/partners/create')
+@login_required
+def partners_create():
+
+
+
+	return render_template('/admin/partners/create.html', )
 
 @admin.route('/admin/beneficiaries')
 @login_required

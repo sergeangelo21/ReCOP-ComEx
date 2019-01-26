@@ -1,43 +1,43 @@
 {% extends "admin-base.html" %}
 
 {% block content %}
-		<section class="hero">
 			<div class="notification gold">
 				<div class="columns">
 					<div class="column">
+						<div class="tabs proposal is-toggle has-text-weight-bold">
+						  <ul>
+						    <li class="is-active">
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-plus" aria-hidden="true"></i></span>
+						        <span class="proposal">New</span>
+						      </a>
+						    </li>
+						    <li>
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
+						        <span class="prop">Ongoing</span>
+						      </a>
+						    </li>
+						    <li>
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-check" aria-hidden="true"></i></span>
+						        <span>Completed</span>
+						      </a>
+						    </li>
+						  </ul>
+						</div>
+					</div>
+
+					<div class="column">
 						<article class="media">
-							<figure class="media-left">
-							   	<p class="has-text-black has-text-weight-bold">Filter by:</p>
-							</figure>
-							<div class="media-content">
-							    <div class="content">
-								    <div class="field-body">
-										<div class="field is-narrow">
-										    <div class="control">
-										        <div class="select is-fullwidth">
-										          <select>
-										          	<option>Select Category</option>
-										            <option>Spiritual</option>
-										            <option>Education</option>
-										            <option>Health</option>
-										            <option>Livelihood</option>
-										            <option>Environmental</option>
-										            <option>Socio-Political Concerns</option>
-										          </select>
-										        </div>
-										    </div>
-										</div>
-									</div>
-							    </div>    
-							</div>
+						  	<figure class="media-left"> 
+						  		<button class="button add">
+						  		<a href="{{url_for('admin.partners_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</button>
+						  	</figure>
 						</article>
 					</div>
 
-					<div class="column">
-						
-					</div>
-
-					<div class="column">
+					<div class="column is-3">
 						<div class="field has-addons has-addons-centered">
 							<p class="control">
 							    <input class="input" type="text" placeholder="Search">
@@ -52,9 +52,57 @@
 				</div>
 			</div>
 
-			<div class="hero-body">
-				<div class="box white is-white">
-					<div class="column">
+			<div class="columns is-gapless">
+				<div class="column is-2">
+					<div class="notification filter">
+						<p class="title is-size-5">Filter</p>
+
+		    			<div class="columns">
+		    				<div class="column">
+		    					<div class="select is-fullwidth">
+								    <select>
+								      <option>Please choose</option>
+								      <option>All</option>
+								      <option>Organizations</option>
+								      <option>Departmental</option>
+								      <option>Partners</option>
+								    </select>
+							 	</div>
+		    				</div>
+		    			</div>
+
+		    			<div class="columns">
+		    				<div class="column">
+		    					<div class="select is-fullwidth">
+								    <select>
+								      <option>Please choose</option>
+								      <option>All</option>
+								      <option>Organizations</option>
+								      <option>Departmental</option>
+								      <option>Partners</option>
+								    </select>
+							 	</div>
+		    				</div>
+		    			</div>
+
+		    			<div class="columns">
+		    				<div class="column">
+		    					<div class="select is-fullwidth">
+								    <select>
+								      <option>Please choose</option>
+								      <option>All</option>
+								      <option>Organizations</option>
+								      <option>Departmental</option>
+								      <option>Partners</option>
+								    </select>
+							 	</div>
+		    				</div>
+		    			</div>
+					</div>
+				</div>
+
+				<div class="column">
+					<div class="card box">
 						<div class="card-header">
 							<p class="card-header-title">Partners</p>
 						</div>
@@ -92,5 +140,4 @@
 					</div>	
 				</div>
 			</div>
-		</section>
 {% endblock %}
