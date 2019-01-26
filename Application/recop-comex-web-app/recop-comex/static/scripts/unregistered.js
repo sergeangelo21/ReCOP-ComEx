@@ -1,8 +1,16 @@
 var page=0	
 var user = 0;
 
-new bulmaSteps(document.getElementById('signup'), {	
-})
+var carousels = bulmaCarousel.attach(); // carousels now contains an array of all Carousel instances
+setInterval(3000);
+
+if(window.location.pathname=='/signup'){
+    
+    new bulmaSteps(document.getElementById('signup'), {	
+    })
+    
+}
+
 
 function check_pass(){
 

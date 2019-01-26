@@ -7,7 +7,7 @@ class ProposalForm(FlaskForm):
 	title = StringField('Title of the Activity', validators=[DataRequired()])
 	description = StringField('Description', validators=[DataRequired()])
 	objective = StringField('Objective', validators=[DataRequired()])
-	budget = StringField('Proposed Budget', validators=[DataRequired()])
+	budget = StringField('Estimated Budget', validators=[DataRequired()])
 	location = StringField('Venue', validators=[DataRequired()])
 	event_date = StringField('Target Date', validators=[DataRequired()])
 	submit = SubmitField('Submit')
