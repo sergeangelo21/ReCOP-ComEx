@@ -50,9 +50,9 @@ def contactus():
 
 	return render_template('/registered/contactus.html')
 
-@registered.route('/registered/termsandservices')
+@registered.route('/registered/termsandconditions')
 @login_required
-def termsandservices():
+def termsandconditions():
 
 	return render_template('/registered/termsandconditions.html')
 
