@@ -29,7 +29,7 @@
     
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="">
+                <a class="navbar-item" href="{{url_for('linkages.index')}}">
                     <img src="../../../static/images/logo-menu.png">
                 </a>
 
@@ -92,7 +92,5 @@
 		</nav>
 		{% block content %} {% endblock %}
 	</body>
-
-    <script type="text/javascript" src = "../../../static/scripts/linkages.js" ></script>
 
 </html>
