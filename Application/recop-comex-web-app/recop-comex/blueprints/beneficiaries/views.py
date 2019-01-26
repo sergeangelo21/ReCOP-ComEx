@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect
 from flask_login import current_user, login_required
-from data_access.models import user_account, user_information
+from blueprints.beneficiaries.forms import ProposalForm
+from data_access.models import user_account, user_information, event_category, proposal_tracker
 
 import os
 
@@ -36,9 +37,31 @@ def events():
 @login_required
 def create():
 
+	form = ProposalForm()
+
+	form.category.choices = event_category.select();
+
+	if form.validate_on_submit():
+
+		id = event_information.count()
+		value_event = [
+		id,current_user.id,form.category.data,form.title.data,
+		form.description.data,form.objective.data,form.budget.data,form.location.data,
+		form.event_date.data,1,'N'
+		]
+
+		event_information.add(value_event)
+
+		id = proposal_tracker.count()
+		value_tracker = [id, value_event[0]]
+		proposal_tracker.add(value_tracker)
+
+		event_information.add(value)
+		return redirect(url_for('beneficiaries.events'))
 
 
-	return render_template('/beneficiaries/events/create.html', title="Beneficiaries")
+
+	return render_template('/beneficiaries/events/create.html', title="Beneficiaries", form=form)
 
 @beneficiaries.route('/beneficiaries/reports')
 @login_required
