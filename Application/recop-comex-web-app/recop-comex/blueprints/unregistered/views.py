@@ -26,7 +26,9 @@ def events():
 @unregistered.route('/partners')
 def partners():
 
-	return render_template('/unregistered/partners.html')
+	partners = user_information.query.filter(user_information.partner_thrust!=0).all()
+
+	return render_template('/unregistered/partners/index.html', partners=partners)
 
 @unregistered.route('/contactus')
 def contactus():
