@@ -30,7 +30,15 @@ def index():
 @login_required
 def events():
 
-	return render_template('/registered/events.html')
+	return render_template('/registered/events/_events.html')
+
+@registered.route('/registered/events/create')
+@login_required
+def events_create():
+
+
+
+	return render_template('/registered/events/create.html', )
 
 @registered.route('/registered/partners')
 @login_required
@@ -50,9 +58,9 @@ def contactus():
 
 	return render_template('/registered/contactus.html')
 
-@registered.route('/registered/termsandservices')
+@registered.route('/registered/termsandconditions')
 @login_required
-def termsandservices():
+def termsandconditions():
 
 	return render_template('/registered/termsandconditions.html')
 
