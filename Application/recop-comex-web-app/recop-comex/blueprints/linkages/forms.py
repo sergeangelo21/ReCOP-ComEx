@@ -3,7 +3,7 @@ from wtforms import StringField, TextAreaField, PasswordField, SubmitField, Sele
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class ProposalForm(FlaskForm):
-	category = SelectField('Category', coerce = int, validators=[DataRequired()])
+	category = SelectField('Thrust', choices = [("1","Educational")], validators = [DataRequired()])
 	title = StringField('Title of the Activity', validators=[DataRequired()])
 	description = StringField('Description', validators=[DataRequired()])
 	objective = StringField('Objective', validators=[DataRequired()])

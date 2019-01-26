@@ -49,6 +49,9 @@ function choose(sender){
         field.style.display = "none"
         lbl.innerHTML = "Organization"
         active.placeholder = "Organization"
+        document.getElementById('thrust_field').style.display="none"
+        document.getElementById('thrust').value=0
+
 
     }
     else{
@@ -56,18 +59,28 @@ function choose(sender){
         field.style.display = ""
         lbl.innerHTML = revert
         active.placeholder = revert
+        document.getElementById('thrust_field').style.display=""
     }
 
 }
 
 function show_form(sender){
-
     document.getElementById('signup').style.display = "block"
     document.getElementById('illusion').style.display = ""
     document.getElementById('next').style.display = ""
     types = document.getElementById('select_type')
     types.style.display = "none"
     document.getElementById('type').value=sender
+
+    if(sender==3){
+        document.getElementById('thrust_field').style.display=""
+        document.getElementById('thrust').options.item(0).selected="True"
+        document.getElementById('thrust').options.item(0).hidden="True"
+    }
+    else{
+        document.getElementById('thrust_field').style.display="none" 
+        document.getElementById('thrust').value = 0       
+    }
 
     if (sender==4){
         document.getElementById('sscr_field').style.display = "none"
@@ -83,14 +96,14 @@ function show_form(sender){
 
 function hide_form(){
 
-   document.getElementById('signup_form').reset()
+
    document.getElementById('address_field').style.display = ""
    document.getElementById('company_field').style.display = ""
    document.getElementById('add_label').innerHTML = "Address"
    document.getElementById('address').placeholder = "Address"
    document.getElementById('company').placeholder = "Company Name"
    document.getElementById('com_label').innerHTML = "Company Name"
-
+    document.getElementById('signup_form').reset()
 
    document.getElementById('signup').style.display = "none"
    document.getElementById('illusion').style.display = "none"

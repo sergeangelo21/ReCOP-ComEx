@@ -1,1 +1,3 @@
-ALTER TABLE `audit_trail` CHANGE `target` `target` VARCHAR(20) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
+alter table `user_information` add `bio` VARCHAR(160) after `company_name`;
+
+alter table `user_information` add `partner_thrust` INT(1) NOT NULL;

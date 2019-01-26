@@ -45,8 +45,8 @@ def signup():
 
 		value_information = [
 			id_information,form.firstname.data,form.middlename.data,
-			form.lastname.data,form.company.data,form.gender.data,form.birthday.data,
-			form.address.data,form.telephone.data,form.mobile.data
+			form.lastname.data,form.company.data,form.bio.data,form.gender.data,form.birthday.data,
+			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
 			]
 
 		user_information.add(value_information)

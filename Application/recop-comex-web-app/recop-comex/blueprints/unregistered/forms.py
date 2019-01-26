@@ -17,6 +17,7 @@ class SignupForm(FlaskForm):
     lastname = StringField('Last Name', validators=[DataRequired()])
     gender = RadioField('Gender', choices=[("M","Male"),("F","Female")], validators=[DataRequired()])
     company = StringField('Company Name', validators=[DataRequired()])
+    bio = StringField('Bio')
     birthday = DateField('Birthday', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
     telephone = StringField('Telephone', validators=[DataRequired()])
@@ -24,4 +25,5 @@ class SignupForm(FlaskForm):
     sscr = RadioField('SSCR Member?', choices=[("Y","Yes"),("F","No")], validators= [DataRequired()])
     type = StringField('Type', validators=[DataRequired()])
     email = StringField('Email Address', validators=[DataRequired()])
+    thrust = SelectField('Thrust', choices = [("0","Please Choose One"),("1","Education"),("2","Environmental"),("3","Health"),("4","Livelihood"),("5","Sociopolitical"),("6","Spiritual")])
     submit = SubmitField('Submit')

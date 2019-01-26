@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect
 from flask_login import current_user, login_required
 from blueprints.beneficiaries.forms import ProposalForm
-from data_access.models import user_account, user_information, event_category, proposal_tracker
+from data_access.models import user_account, user_information,proposal_tracker
 
 import os
 
@@ -38,8 +38,6 @@ def events():
 def create():
 
 	form = ProposalForm()
-
-	form.category.choices = event_category.select();
 
 	if form.validate_on_submit():
 

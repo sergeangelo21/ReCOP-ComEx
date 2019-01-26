@@ -62,24 +62,11 @@ class event_attachment(db.Model):
 	path = db.Column(db.VARCHAR(200), nullable=False)
 	type = db.Column(db.INT, nullable=False)
 
-class event_category(db.Model):
-
-	id = db.Column(db.INT, primary_key=True)
-	name = db.Column(db.VARCHAR(20), nullable=False)
-	description = db.Column(db.VARCHAR(30), nullable=False)
-
-	def select():
-
-		result = event_category.query.all()
-		choice = ((row.id, row.name) for row in result)
-
-		return choice
-
 class event_information(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
 	organizer_id = db.Column(db.INT)
-	category_id = db.Column(db.INT)
+	category_id = db.Column(db.INT, nullable=False)
 	name = db.Column(db.VARCHAR(30),nullable=False)
 	description = db.Column(db.VARCHAR(140),nullable=False)
 	objective = db.Column(db.VARCHAR(140),nullable=False)
@@ -262,11 +249,13 @@ class user_information(db.Model):
 	middle_name = db.Column(db.VARCHAR(20),nullable=False)
 	last_name = db.Column(db.VARCHAR(20),nullable=False)
 	company_name = db.Column(db.VARCHAR(50),nullable=False)
+	bio = db.Column(db.VARCHAR(160),nullable=True)
 	gender = db.Column(db.CHAR(1), nullable=False)
 	birthday = db.Column(db.DATE, nullable = False)
 	address = db.Column(db.VARCHAR(50),nullable=False)
 	telephone = db.Column(db.VARCHAR(15))
 	mobile_number = db.Column(db.VARCHAR(15))
+	partner_thrust = db.Column(db.INT, nullable=False)
 
 	account_info_id = db.relationship('user_account', backref = 'user_information', lazy = True)
 	sponsee_info_id = db.relationship('donation', foreign_keys=[donation.sponsee_id], backref='user_information_sponsee', lazy=True)
@@ -288,11 +277,13 @@ class user_information(db.Model):
 			middle_name=value[2],
 			last_name=value[3],
 			company_name=value[4],
-			gender=value[5],
-			birthday = value[6],
-			address=value[7],
-			telephone=value[8],
-			mobile_number=value[9]
+			bio = value[5],
+			gender=value[6],
+			birthday = value[7],
+			address=value[8],
+			telephone=value[9],
+			mobile_number=value[10],
+			partner_thrust = value[11]
 			)
 			 
 		db.session.add(record)
