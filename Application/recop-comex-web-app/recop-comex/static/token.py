@@ -8,12 +8,9 @@ def generate(email):
 
     return serializer.dumps(email, salt=Config.SECURITY_PASSWORD_SALT)
 
-def confirm(token, expiration=3600):
+def confirm(token):
 
     serializer = URLSafeTimedSerializer(Config.SECRET_KEY)
-
-    if BadSignature:
-    	return 'bad'
 
     email = serializer.loads(
     	token, salt=Config.SECURITY_PASSWORD_SALT, max_age=expiration)

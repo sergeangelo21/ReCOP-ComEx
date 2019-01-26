@@ -125,7 +125,7 @@ def logout():
 	return redirect('/')
 
 @unregistered.route('/linkages/confirm/<token>')
-def confirm_partner(token):
+def confirm_partner(token, expiration = 3600):
 
 	id = confirm(token)
 
