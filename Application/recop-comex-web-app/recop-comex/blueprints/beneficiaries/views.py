@@ -30,7 +30,15 @@ def index():
 @login_required
 def events():
 
-	return render_template('/beneficiaries/events.html', title="Beneficiaries")
+	return render_template('/beneficiaries/events/_events.html', title="Beneficiaries")
+
+@beneficiaries.route('/beneficiaries/events/create')
+@login_required
+def create():
+
+
+
+	return render_template('/beneficiaries/events/create.html', title="Beneficiaries")
 
 @beneficiaries.route('/beneficiaries/reports')
 @login_required
