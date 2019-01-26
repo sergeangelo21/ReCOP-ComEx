@@ -8,7 +8,7 @@ def generate(email):
 
     return serializer.dumps(email, salt=Config.SECURITY_PASSWORD_SALT)
 
-def confirm(token):
+def confirm(token, expiration=3600):
 
     serializer = URLSafeTimedSerializer(Config.SECRET_KEY)
 
