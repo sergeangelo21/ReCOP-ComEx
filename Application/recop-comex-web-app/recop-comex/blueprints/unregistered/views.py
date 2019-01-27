@@ -30,6 +30,11 @@ def partners():
 
 	return render_template('/unregistered/partners/index.html', partners=partners)
 
+@unregistered.route('/donate')
+def donate():
+
+	return render_template('/unregistered/donate.html')
+
 @unregistered.route('/contactus')
 def contactus():
 
