@@ -27,5 +27,14 @@ user_account.type
 3 = partner
 4 = community
 
+++++++++++++++++++++++++++++++++++++++++
 
+user_information.partner_thrust
 
+0 = none
+1 = education
+2 = environmental
+3 = health
+4 = livelihood
+5 = sociopolitical
+6 = spiritual

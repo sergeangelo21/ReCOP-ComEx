@@ -81,7 +81,7 @@
                         </a>
 
                         <div class="navbar-dropdown is-right">
-                            <a class="navbar-item" href="{{url_for('registered.profile')}}">
+                            <a class="navbar-item" href="{{url_for('registered.profile', registered=current_user.id)}}">
                                 My Profile
                             </a>
                             <hr class="navbar-divider">
