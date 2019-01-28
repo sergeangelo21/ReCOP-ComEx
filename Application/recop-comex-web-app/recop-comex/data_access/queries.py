@@ -1,6 +1,6 @@
 #Queries involving multiple tables goes here
 from extensions import db
-from sqlalchemy import and_, or_
+from sqlalchemy import and_, or_, func
 from data_access.models import *
 
 
@@ -26,9 +26,9 @@ class partner_views():
 				).add_columns(
 				user_information.id,
 				user_information.company_name,
-				user_information.first_name,
-				user_information.middle_name,
-				user_information.last_name,
+				(user_information.first_name + ' ' +
+				func.left(user_information.middle_name,1) + '. ' +
+				user_information.last_name).label('coordinator'),
 				user_information.address,
 				user_account.status,
 				).filter(user_account.type==3
@@ -40,16 +40,15 @@ class partner_views():
 				).add_columns(
 				user_information.id,
 				user_information.company_name,
-				user_information.first_name,
-				user_information.middle_name,
-				user_information.last_name,
+				(user_information.first_name + ' ' +
+				func.left(user_information.middle_name,1) + '. ' +
+				user_information.last_name).label('coordinator'),
 				user_information.address,
 				user_account.status,
 				).filter(and_(user_account.type==3,
 				or_(user_information.company_name.like('%'+search+'%'),
 				user_information.address.like('%'+search+'%'),
 				user_information.first_name.like('%'+search+'%'),
-				user_information.middle_name.like('%'+search+'%'),
 				user_information.last_name.like('%'+search+'%')))
 				).order_by(user_information.id.asc()
 				).all()
@@ -59,16 +58,15 @@ class partner_views():
 				).add_columns(
 				user_information.id,
 				user_information.company_name,
-				user_information.first_name,
-				user_information.middle_name,
-				user_information.last_name,
+				(user_information.first_name + ' ' +
+				func.left(user_information.middle_name,1) + '. ' +
+				user_information.last_name).label('coordinator'),
 				user_information.address,
 				user_account.status,
 				).filter(and_(user_account.type==3,user_account.status==value,
 				or_(user_information.company_name.like('%'+search+'%'),
 				user_information.address.like('%'+search+'%'),
 				user_information.first_name.like('%'+search+'%'),
-				user_information.middle_name.like('%'+search+'%'),
 				user_information.last_name.like('%'+search+'%')))
 				).order_by(user_information.id.asc()
 				).all()	
@@ -78,9 +76,9 @@ class partner_views():
 				).add_columns(
 				user_information.id,
 				user_information.company_name,
-				user_information.first_name,
-				user_information.middle_name,
-				user_information.last_name,
+				(user_information.first_name + ' ' +
+				func.left(user_information.middle_name,1) + '. ' +
+				user_information.last_name).label('coordinator'),
 				user_information.address,
 				user_account.status,
 				).filter(and_(user_account.type==3, 
@@ -121,17 +119,61 @@ class partner_views():
 
 class event_views():
 
-	def show_all():
+	def show_list(value,search):
 
-		record = event_information.query.join(
-			user_information
-			).add_columns(
-			user_information.company_name,
-			event_information.id,
-			event_information.name,
-			event_information.event_date,
-			event_information.event_status
-			).all()
+		if value=='all' and search==' ':
+			record = event_information.query.join(
+				user_information
+				).add_columns(
+				user_information.company_name,
+				event_information.id,
+				event_information.name,
+				event_information.event_date,
+				event_information.event_status
+				).order_by(event_information.id.asc()
+				).all()
+
+		elif value=='all' and search!=' ':
+			record = event_information.query.join(
+				user_information
+				).add_columns(
+				user_information.company_name,
+				event_information.id,
+				event_information.name,
+				event_information.event_date,
+				event_information.event_status
+				).filter(or_(user_information.company_name.like('%'+search+'%'),
+				event_information.name.like('%'+search+'%'))
+				).order_by(event_information.id.asc()
+				).all()
+
+		elif search!=' ':
+			record = event_information.query.join(
+				user_information
+				).add_columns(
+				user_information.company_name,
+				event_information.id,
+				event_information.name,
+				event_information.event_date,
+				event_information.event_status
+				).filter(and_(event_information.event_status==value,or_(
+				user_information.company_name.like('%'+search+'%'),
+				event_information.name.like('%'+search+'%')))
+				).order_by(event_information.id.asc()
+				).all()
+		else:
+			record = event_information.query.join(
+				user_information
+				).add_columns(
+				user_information.company_name,
+				event_information.id,
+				event_information.name,
+				event_information.event_date,
+				event_information.event_status
+				).filter(event_information.event_status==value
+				).order_by(event_information.id.asc()
+				).all()			
+
 
 		return record
 

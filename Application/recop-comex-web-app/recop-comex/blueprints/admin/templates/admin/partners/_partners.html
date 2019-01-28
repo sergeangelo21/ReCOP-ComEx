@@ -2,8 +2,9 @@
 									<tr class="table-row">
 										<td>{{ partner.id }}</td>
 									    <td>{{ partner.company_name }}</td>
-									    <td>{{ partner.first_name + ' ' + partner.middle_name + ' ' + partner.last_name}}</td>
+									    <td>{{ partner.coordinator }}</td>
 									    <td>{{ partner.address }}</td>
+									    {% if status=='all' %}
 									    <td>
 									    	{% if partner.status=='A' %}
 									    		Active
@@ -16,6 +17,7 @@
 									    	{% endif %}
 
 										</td>
+										{% endif %}
 										<td>
 											<div class="dropdown is-hoverable">
 												<div class="dropdown-trigger">
