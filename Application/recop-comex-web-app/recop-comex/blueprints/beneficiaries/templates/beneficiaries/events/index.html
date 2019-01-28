@@ -1,0 +1,122 @@
+{% extends "beneficiaries-base.html" %}
+
+{% block content %}
+			<div class="notification gold">
+				<div class="columns">
+					<div class="column is-9">
+						<p class="has-text-weight-bold title">
+							Events
+						</p>
+					</div>
+					<div class="column is-3">
+						<div class="field has-addons has-addons-centered">
+							<p class="control">
+							    <input class="input" type="text" placeholder="Search">
+							</p>
+							<p class="control">
+							    <a class="button search">
+							      Search
+							    </a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="columns is-gapless">
+				<div class="column is-2">
+		    		<div class="notification filter">
+		    			<p class="title is-size-5">View</p>
+		    			<div class="columns">
+		    				<div class="column has-text-centered">
+								<a href="" class="button eventbtn is-active">
+									<span class="icon">
+										<i class="fa fa-list"></i>
+									</span>
+								</a>
+
+								<a href="" class="button eventbtn">
+									<span class="icon">
+										<i class="fa fa-calendar-alt"></i>
+									</span>
+								</a>
+							</div>
+		    			</div>
+
+		    			<p class="title is-size-5">Filter</p>
+		    			<div class="columns">
+		    				<div class="column">
+		    					<div class="select is-fullwidth">
+								    <select>
+								      <option>Please choose</option>
+								      <option>All</option>
+								      <option>Organizations</option>
+								      <option>Departmental</option>
+								      <option>Partners</option>
+								    </select>
+							 	</div>
+		    				</div>
+		    			</div>
+
+		    			<div class="columns">
+		    				<div class="column">
+		    					<div class="select is-fullwidth">
+								    <select>
+								      <option>Please choose</option>
+								      <option>All</option>
+								      <option>Organizations</option>
+								      <option>Departmental</option>
+								      <option>Partners</option>
+								    </select>
+							 	</div>
+		    				</div>
+		    			</div>
+
+		    			<div class="columns">
+		    				<div class="column">
+		    					<div class="select is-fullwidth">
+								    <select>
+								      <option>Please choose</option>
+								      <option>All</option>
+								      <option>Organizations</option>
+								      <option>Departmental</option>
+								      <option>Partners</option>
+								    </select>
+							 	</div>
+		    				</div>
+		    			</div>
+					 	
+		    		</div>
+		    	</div>
+
+				<div class="column">
+					<div class="card box">
+						<div class="card-header">
+							<p class="card-header-title">Events</p>
+						</div>
+						<div class="card-content">
+							<table class="table is-fullwidth">
+								{% if events %}
+
+									{% for events in events %}
+										{% include 'beneficiaries/events/_events.html' %}
+									{% endfor %}
+
+								{% else %}
+
+								<tbody>
+
+									<tr class = "table-row">
+										<td class = "has-text-centered">---Nothing to show---</td>
+								 	</tr>
+									
+								</tbody>
+
+								{% endif %}									
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>	
+			</div>
+{% endblock %}
