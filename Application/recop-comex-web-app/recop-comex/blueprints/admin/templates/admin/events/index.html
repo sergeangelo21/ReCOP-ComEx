@@ -12,8 +12,8 @@
 						</article>
 					</div>
 
-					<div class="column is-5">
-						<div class="tabs proposal is-toggle has-text-weight-bold">
+					<div class="column is-6">
+						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.events', status='all', search=search)}}">
@@ -44,18 +44,20 @@
 					</div>
 
 					<div class="column is-3">
-						<div class="field is-horizontal has-addons has-addons-centered">
-							<form action="" method="POST">
-								{{form.hidden_tag()}}
-							<div class="field-body">
-								<p class="control">
-							    	{{form.search(class_='input', placeholder='Search')}}
-								</p>
-								<p class="control">
-							     	{{form.submit(class_='button search')}}
-								</p>
+						<div class="is-pulled-right">
+							<div class="field is-horizontal has-addons has-addons-centered">
+								<form action="" method="POST">
+									{{form.hidden_tag()}}
+								<div class="field-body">
+									<p class="control">
+								    	{{form.search(class_='input', placeholder='Search')}}
+									</p>
+									<p class="control">
+								     	{{form.submit(class_='button search')}}
+									</p>
+								</div>
+								</form>
 							</div>
-							</form>
 						</div>
 					</div>
 				</div>
