@@ -1,6 +1,6 @@
 #Queries involving multiple tables goes here
 from extensions import db
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from data_access.models import *
 
 
@@ -18,18 +18,74 @@ class user_views():
 
 class partner_views():
 
-	def show_all():
+	def show_list(value, search):
 
-		record = user_account.query.join(
-			user_information
-			).add_columns(
-			user_information.id,
-			user_information.company_name,
-			user_information.address,
-			user_account.email_address,
-			user_account.status,
-			).filter(user_account.type==3
-			).all()
+		if value=='all' and search==' ' :
+			record = user_account.query.join(
+				user_information
+				).add_columns(
+				user_information.id,
+				user_information.company_name,
+				user_information.first_name,
+				user_information.middle_name,
+				user_information.last_name,
+				user_information.address,
+				user_account.status,
+				).filter(user_account.type==3
+				).order_by(user_information.id.asc()
+				).all()
+		elif value=='all' and search!=' ' :
+			record = user_account.query.join(
+				user_information
+				).add_columns(
+				user_information.id,
+				user_information.company_name,
+				user_information.first_name,
+				user_information.middle_name,
+				user_information.last_name,
+				user_information.address,
+				user_account.status,
+				).filter(and_(user_account.type==3,
+				or_(user_information.company_name.like('%'+search+'%'),
+				user_information.address.like('%'+search+'%'),
+				user_information.first_name.like('%'+search+'%'),
+				user_information.middle_name.like('%'+search+'%'),
+				user_information.last_name.like('%'+search+'%')))
+				).order_by(user_information.id.asc()
+				).all()
+		elif search!=' ':
+			record = user_account.query.join(
+				user_information
+				).add_columns(
+				user_information.id,
+				user_information.company_name,
+				user_information.first_name,
+				user_information.middle_name,
+				user_information.last_name,
+				user_information.address,
+				user_account.status,
+				).filter(and_(user_account.type==3,user_account.status==value,
+				or_(user_information.company_name.like('%'+search+'%'),
+				user_information.address.like('%'+search+'%'),
+				user_information.first_name.like('%'+search+'%'),
+				user_information.middle_name.like('%'+search+'%'),
+				user_information.last_name.like('%'+search+'%')))
+				).order_by(user_information.id.asc()
+				).all()	
+		else:
+			record = user_account.query.join(
+				user_information
+				).add_columns(
+				user_information.id,
+				user_information.company_name,
+				user_information.first_name,
+				user_information.middle_name,
+				user_information.last_name,
+				user_information.address,
+				user_account.status,
+				).filter(and_(user_account.type==3, 
+				user_account.status==value)
+				).all()			
 
 		return record
 

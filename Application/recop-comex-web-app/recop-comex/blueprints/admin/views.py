@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
 from flask_mail import Message
+from blueprints.admin.forms import SearchForm
 from data_access.models import *
 from data_access.queries import *
 
@@ -56,13 +57,30 @@ def events_create():
 	return render_template('/admin/events/create.html', )
 
 
-@admin.route('/admin/partners')
+@admin.route('/admin/partners/filter_<status>_<search>', methods=['GET', 'POST'])
 @login_required
-def partners():
+def partners(status, search):
 
-	partners = partner_views.show_all()
+	if status=='active':
+		value='A'
+	elif status=='new':
+		value='N'
+	elif status=='pending':
+		value='P'
+	elif status=='disabled':
+		value='D'
+	else:
+		value=status
 
-	return render_template('/admin/partners/index.html', title="Partners | Admin", partners=partners)
+	partners = partner_views.show_list(value, search=search)
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('admin.partners', status=status, search=form.search.data))
+
+	return render_template('/admin/partners/index.html', title="Partners | Admin", form=form, partners=partners, status=status, search=search)
 
 @admin.route('/admin/partners/show/id=<id>')
 @login_required
@@ -111,7 +129,7 @@ def partner_action(id):
 
 	user_account.update_status(id, status)
 
-	return redirect(url_for('admin.partners'))
+	return redirect(url_for('admin.partners', status='all', search=' '))
 
 @admin.route('/admin/partners/create')
 @login_required

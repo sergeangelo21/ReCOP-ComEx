@@ -2,6 +2,7 @@
 									<tr class="table-row">
 										<td>{{ partner.id }}</td>
 									    <td>{{ partner.company_name }}</td>
+									    <td>{{ partner.first_name + ' ' + partner.middle_name + ' ' + partner.last_name}}</td>
 									    <td>{{ partner.address }}</td>
 									    <td>
 									    	{% if partner.status=='A' %}
