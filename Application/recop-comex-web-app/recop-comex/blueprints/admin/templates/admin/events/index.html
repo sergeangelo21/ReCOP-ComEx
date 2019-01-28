@@ -6,26 +6,26 @@
 					<div class="column">
 						<div class="tabs proposal is-toggle has-text-weight-bold">
 						  <ul>
-						    <li class="is-active">
-						      <a>
+						    <li {% if status=='all' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='all', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
 						        <span class="proposal">All</span>
 						      </a>
 						    </li>
-						    <li>
-						      <a>
-						        <span class="icon is-small"><i class="fas fa-signature" aria-hidden="true"></i></span>
+						    <li {% if status=='pending' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='pending', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
 						        <span class="prop">Pending</span>
 						      </a>
 						    </li>
-						    <li>
-						      <a>
+						    <li {% if status=='ongoing' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='ongoing', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
 						        <span class="prop">Ongoing</span>
 						      </a>
 						    </li>
-						    <li>
-						      <a>
+						    <li {% if status=='finished' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='finished', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-check" aria-hidden="true"></i></span>
 						        <span>Finished</span>
 						      </a>
@@ -38,21 +38,24 @@
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<button class="button add">
-						  		<a href="{{url_for('admin.events_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</button>
+						  		<a href="{{url_for('admin.events_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</button></a>
 						  	</figure>
 						</article>
 					</div>
 
 					<div class="column is-3">
-						<div class="field has-addons has-addons-centered">
-							<p class="control">
-							    <input class="input" type="text" placeholder="Search">
-							</p>
-							<p class="control">
-							    <a class="button search">
-							      Search
-							    </a>
-							</p>
+						<div class="field is-horizontal has-addons has-addons-centered">
+							<form action="" method="POST">
+								{{form.hidden_tag()}}
+							<div class="field-body">
+								<p class="control">
+							    	{{form.search(class_='input', placeholder='Search')}}
+								</p>
+								<p class="control">
+							     	{{form.submit(class_='button search')}}
+								</p>
+							</div>
+							</form>
 						</div>
 					</div>
 				</div>

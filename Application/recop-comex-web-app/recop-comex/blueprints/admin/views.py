@@ -32,13 +32,19 @@ def index():
 
 	return render_template('/admin/index.html', title="Admin")
 
-@admin.route('/admin/events')
+@admin.route('/admin/events/filter_<status>_<search>', methods=['GET', 'POST'])
 @login_required
-def events():
+def events(status, search):
 
 	events = event_views.show_all()
 
-	return render_template('/admin/events/index.html', title="Events | Admin", events=events)
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('admin.events', status=status, search=form.search.data))
+
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, search=search)
 
 @admin.route('/admin/events/show/id=<id>')
 @login_required

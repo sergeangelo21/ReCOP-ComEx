@@ -45,7 +45,7 @@
                     <a class="navbar-item" href="{{url_for('admin.index')}}">
                         <strong>Home</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('admin.events')}}">
+                    <a class="navbar-item" href="{{url_for('admin.events', status='all', search=' ')}}">
                         <strong>Events</strong>
                     </a>
                     <a class="navbar-item" href="{{url_for('admin.partners', status='all', search=' ')}}">

@@ -20,7 +20,7 @@
 						    </li>
 						    <li {% if status=='pending' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.partners', status='pending', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-signature" aria-hidden="true"></i></span>
+						        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
 						        <span class="proposal">Pending</span>
 						      </a>
 						    </li>
@@ -55,13 +55,13 @@
 							<form action="" method="POST">
 								{{form.hidden_tag()}}
 							<div class="field-body">
-							<p class="control">
-							    {{form.search(class_='input', placeholder='Search')}}
-							</p>
-							<p class="control">
-							      {{form.submit(class_='button search')}}
-							</p>
-						</div>
+								<p class="control">
+							    	{{form.search(class_='input', placeholder='Search')}}
+								</p>
+								<p class="control">
+							     	{{form.submit(class_='button search')}}
+								</p>
+							</div>
 							</form>
 						</div>
 					</div>
