@@ -142,7 +142,7 @@ class event_views():
 			).add_columns(
 			event_information.id,
 			user_information.company_name,
-			user_information.thrust,
+			user_information.partner_thrust,
 			event_information.name,
 			event_information.description,
 			event_information.objective,
