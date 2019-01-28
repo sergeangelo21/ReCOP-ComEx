@@ -5,10 +5,10 @@ audit_trail.type
 
 event_information.type
 
-A = Institutional Annual
-B = Institutional One Time
-C = Outside Annual
-D = Outside One Time
+1 = Institutional Annual
+2 = Institutional One Time
+3 = Outside Annual
+4 = Outside One Time
 
 ++++++++++++++++++++++++++++++++++++++++
 

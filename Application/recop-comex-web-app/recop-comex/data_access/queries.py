@@ -62,3 +62,45 @@ class partner_views():
 
 
 		return record, membership
+
+class event_views():
+
+	def show_all():
+
+		record = event_information.query.join(
+			user_information
+			).add_columns(
+			user_information.company_name,
+			event_information.id,
+			event_information.name,
+			event_information.event_date,
+			event_information.event_status
+			).all()
+
+		return record
+
+	def show_info(value):
+		
+		record = event_information.query.join(
+			user_information, proposal_tracker
+			).add_columns(
+			event_information.id,
+			user_information.company_name,
+			event_information.name,
+			event_information.description,
+			event_information.objective,
+			event_information.budget,
+			event_information.location,
+			event_information.event_date,
+			event_information.thrust,
+			event_information.event_status,
+			proposal_tracker.proposed_on,
+			proposal_tracker.recop_accepted,
+			proposal_tracker.fmi_signed,
+			proposal_tracker.acad_signed,
+			proposal_tracker.approved_on,
+			proposal_tracker.status
+			).filter(event_information.id==value
+			).first()
+
+		return record

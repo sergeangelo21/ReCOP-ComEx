@@ -35,7 +35,17 @@ def index():
 @login_required
 def events():
 
-	return render_template('/admin/events/events.html', title="Events | Admin")
+	events = event_views.show_all()
+
+	return render_template('/admin/events/index.html', title="Events | Admin", events=events)
+
+@admin.route('/admin/events/show/id=<id>')
+@login_required
+def event_show(id):
+
+	event = event_views.show_info(id)
+
+	return render_template('/admin/events/show.html', title="Events | Admin", event = event)
 
 @admin.route('/admin/events/create')
 @login_required
@@ -45,21 +55,6 @@ def events_create():
 
 	return render_template('/admin/events/create.html', )
 
-
-
-@admin.route('/admin/proposals/<status>')
-@login_required
-def proposals(status):
-
-	return render_template('/admin/proposals/index.html', title="Proposals | Admin")
-
-@admin.route('/admin/proposals/create')
-@login_required
-def proposals_create():
-
-
-
-	return render_template('/admin/proposals/create.html', )
 
 @admin.route('/admin/partners')
 @login_required

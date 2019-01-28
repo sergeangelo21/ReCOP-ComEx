@@ -35,7 +35,7 @@ def events():
 
 	return render_template('/linkages/events/index.html', events=events)
 
-@linkages.route('/linkages/events/create')
+@linkages.route('/linkages/events/create', methods=['GET','POST'])
 @login_required
 def events_create():
 
@@ -43,11 +43,18 @@ def events_create():
 
 	if form.validate_on_submit():
 
+		det = user_information.query.filter(user_information.id==current_user.info_id).first()
+
+		if det.company_name=='San Sebastian College Recoletos de Cavite':
+			event_type=1
+		else:
+			event_type=2
+
 		id = event_information.count()
 		value_event = [
-		id,current_user.id,form.category.data,form.title.data,
+		id,current_user.info_id,form.title.data,
 		form.description.data,form.objective.data,form.budget.data,form.location.data,
-		form.event_date.data,1,'N'
+		form.event_date.data,form.thrust.data,event_type,'N'
 		]
 
 		event_information.add(value_event)
@@ -56,7 +63,8 @@ def events_create():
 		value_tracker = [id, value_event[0]]
 		proposal_tracker.add(value_tracker)
 
-		event_information.add(value)
+		flash('Event proposal submitted! Please standby for the approval.')
+
 		return redirect(url_for('linkages.events'))
 
 	return render_template('/linkages/events/create.html', form=form)

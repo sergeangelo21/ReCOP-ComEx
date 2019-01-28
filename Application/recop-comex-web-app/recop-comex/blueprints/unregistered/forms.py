@@ -25,5 +25,5 @@ class SignupForm(FlaskForm):
     sscr = RadioField('SSCR Member?', choices=[("Y","Yes"),("F","No")], validators= [DataRequired()])
     type = StringField('Type', validators=[DataRequired()])
     email = StringField('Email Address', validators=[DataRequired()])
-    thrust = SelectField('Thrust', choices = [("0","Please Choose One"),("1","Education"),("2","Environmental"),("3","Health"),("4","Livelihood"),("5","Sociopolitical"),("6","Spiritual")])
+    thrust = SelectField('Thrust', choices = [("0","Please Choose One"),("1","Educational"),("2","Environmental"),("3","Health"),("4","Livelihood"),("5","Socio-Political"),("6","Spiritual")])
     submit = SubmitField('Submit')

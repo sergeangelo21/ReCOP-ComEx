@@ -1,0 +1,28 @@
+								<tbody>
+									<tr class="table-row">
+										<td>{{event.id}}</td>
+									    <td>{{event.name}}</td>
+									    <td>{{event.company_name}}</td>
+									    <td>{{event.event_date.strftime('%B %e, %Y')}}</td>
+									    <td>{{event.event_status}}</td>
+										<td>
+											<div class="dropdown is-hoverable">
+												<div class="dropdown-trigger">
+													<button class="button">
+														<span>Actions</span>
+														<span class="icon">
+															<i class="fa fa-angle-down"></i>
+														</span>
+													</button>
+												</div>
+												<div class="dropdown-menu">
+													<div class="dropdown-content">
+														<a class="dropdown-item" href="{{url_for('admin.event_show', id=event.id)}}"><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
+														<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-edit"></i></span>&nbsp Edit</a>
+														<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-archive"></i></span>&nbsp Archive</a>
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>	
+								</tbody>

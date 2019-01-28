@@ -65,16 +65,18 @@ class event_attachment(db.Model):
 class event_information(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	organizer_id = db.Column(db.INT)
-	category_id = db.Column(db.INT, nullable=False)
+	organizer_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
 	name = db.Column(db.VARCHAR(30),nullable=False)
 	description = db.Column(db.VARCHAR(140),nullable=False)
 	objective = db.Column(db.VARCHAR(140),nullable=False)
 	budget = db.Column(db.NUMERIC(10,2), nullable=False)
 	location = db.Column(db.VARCHAR(50),nullable=False)
 	event_date = db.Column(db.DATETIME, nullable=False)
+	thrust = db.Column(db.INT, nullable=False)
 	type = db.Column(db.INT, nullable=False)
-	status = db.Column(db.CHAR(1), nullable=False)
+	event_status = db.Column(db.CHAR(1), nullable=False)
+
+	event_info_id = db.relationship('proposal_tracker', backref='event_information', lazy=True)
 
 	def count():
 
@@ -87,25 +89,19 @@ class event_information(db.Model):
 		record = event_information(
 			id=value[0], 
 			organizer_id=value[1], 
-			category_id=value[2], 
-			name=value[3], 
-			description=value[4],
-			objective=value[5],
-			budget = value[6],
-			location=value[7],
-			event_date=value[8],
+			name=value[2], 
+			description=value[3],
+			objective=value[4],
+			budget = value[5],
+			location=value[6],
+			event_date=value[7],
+			thrust=value[8], 
 			type=value[9],
-			status=value[10]
+			event_status=value[10]
 			)
 			 
 		db.session.add(record)
 		db.session.commit()
-
-	def show(status):
-
-		result = event_information.query.filter(event_information.status==status).first()
-
-		return result
 
 class event_participation(db.Model):
 
@@ -134,7 +130,7 @@ class event_signatory(db.Model):
 class proposal_tracker(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	event_id = db.Column(db.INT)
+	event_id = db.Column(db.INT, db.ForeignKey('event_information.id'), nullable=False)
 	proposed_on = db.Column	(db.DATETIME, nullable=False)
 	recop_accepted = db.Column(db.DATETIME)
 	fmi_signed = db.Column(db.DATETIME)
@@ -262,6 +258,7 @@ class user_information(db.Model):
 	sponsor_info_id = db.relationship('donation', foreign_keys=[donation.sponsor_id], backref='user_information_sponsor', lazy=True)
 	donor_info_id = db.relationship('beneficiary', foreign_keys=[beneficiary.donor_id], backref='user_information_donor', lazy=True)
 	bene_info_id = db.relationship('beneficiary', foreign_keys=[beneficiary.beneficiary_id], backref='user_information_bene', lazy=True)
+	organizer_info_id = db.relationship('event_information', backref='user_information', lazy=True)
 
 	def count():
 

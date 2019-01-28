@@ -1,3 +1,5 @@
-alter table `user_information` add `bio` VARCHAR(160) after `company_name`;
+alter table `event_information` drop `category_id`;
 
-alter table `user_information` add `partner_thrust` INT(1) NOT NULL;
+alter table `event_information` add `thrust` INT NOT NULL AFTER `event_date`;
+
+ALTER TABLE `event_information` CHANGE `status` `event_status` CHAR(1) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL;
