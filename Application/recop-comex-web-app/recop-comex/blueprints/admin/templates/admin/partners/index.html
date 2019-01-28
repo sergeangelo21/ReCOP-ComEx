@@ -2,8 +2,18 @@
 
 {% block content %}
 			<div class="notification gold">
-				<div class="columns">
-					<div class="column">
+				<div class="columns is-centered">
+					<div class="column is-3">
+						<article class="media">
+						  	<figure class="media-left"> 
+						  		<button class="button add">
+						  		<a href="{{url_for('admin.partners_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</button>
+						  		</a>
+						  	</figure>
+						</article>
+					</div>
+
+					<div class="column is-5">
 						<div class="tabs proposal is-toggle has-text-weight-bold">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
@@ -38,16 +48,6 @@
 						    </li>
 						  </ul>
 						</div>
-					</div>
-
-					<div class="column">
-						<article class="media">
-						  	<figure class="media-left"> 
-						  		<button class="button add">
-						  		<a href="{{url_for('admin.partners_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</button>
-						  		</a>
-						  	</figure>
-						</article>
 					</div>
 
 					<div class="column is-3">
@@ -129,9 +129,11 @@
 							{% endif %}
 							{{status}} partners
 							</p>
-							<p class="card-header-title">
-							Total: {{partners|length}}
-							</p>
+							<div class="is-pulled-right">
+								<p class="card-header-title">
+									Total: {{partners|length}}
+								</p>
+							</div>
 						</div>
 						<div class="card-content">
 							<table class="table is-fullwidth">
