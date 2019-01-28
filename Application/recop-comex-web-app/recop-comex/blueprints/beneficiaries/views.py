@@ -84,3 +84,15 @@ def termsandconditions():
 def about():
 
 	return render_template('/beneficiaries/profile/about.html', title="Beneficiaries")
+
+@beneficiaries.route('/beneficiaries/profile/eventsattended')
+@login_required
+def profile_eventsattended():
+
+	return render_template('/beneficiaries/profile/eventsattended.html', title="Beneficiaries")	
+
+@beneficiaries.route('/beneficiaries/profile/settings')
+@login_required
+def profile_settings():
+
+	return render_template('/beneficiaries/profile/settings.html', title="Beneficiaries")	
