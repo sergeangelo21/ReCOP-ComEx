@@ -1,16 +1,15 @@
-{% extends "registered-base.html" %}
+{% extends "beneficiaries-base.html" %}
 
 {% block content %}
-		<div class="panel panel-default">
+<div class="panel panel-default">
 		    <div class="overlay-card has-text-centered">
 		    	<div class="circular">
 		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
 		    	</div>
-
+		        
 		        <div class="row has-text-centered">
-		            <p class="has-text-white is-size-3 has-text-weight-bold">{{ registered.first_name }} {{ registered.middle_name }} {{ registered.last_name}} ({{ registered.username }}) </p>
-		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ registered.company_name }}</a><br>
-		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ registered.email_address }}</a>
+		            <p class="has-text-white is-size-3 has-text-weight-bold">Liza Soberano</p>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">hopesoberano@gmail.com</a>
 		        </div>
 		    </div>
 		   	
@@ -22,7 +21,8 @@
 			      	<a class="menu">
 			      		<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-user fa-2x"></i>
+					      		<a href= "{{url_for('beneficiaries.about')}}">	
+					      	<i class="fas fa-user fa-2x"></i>
 					      	</span>
 					    </p>
 			     	 	<p class="is-size-6 has-text-weight-bold">About</p>
@@ -47,7 +47,8 @@
 			    <div>
 			    	<a class="menu">
 				      	<p class="icon">
-					      	<span class="icon">
+					      	<span class="icon"> 
+					      			<a href= "{{url_for('beneficiaries.profile_settings')}}">
 					      		<i class="fas fa-cog icon fa-2x"></i>
 					      	</span>
 					    </p>
@@ -65,14 +66,14 @@
 						    <p class="card-header-title">
 						      Basic Information
 						    </p>
-						    <a href="{{url_for('registered.profile_update', registered=current_user.username)}}" class="card-header-icon" aria-label="more options">
+						    <a href="#" class="card-header-icon" aria-label="more options">
 						      <span class="icon">
 						        <i class="fas fa-edit" aria-hidden="true"></i>
 						      </span>
 						    </a>
 					  	</header>
 					  	<div class="card-content profile">
-						    <div class="panel-block">
+						    <a class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
 								    	<p>Name</p>
@@ -80,30 +81,14 @@
 								  	<div class="media-content">
 								    	<div class="content">
 								      		<p>
-								        		<strong>{{ registered.first_name }} {{ registered.middle_name }} {{ registered.last_name }}</strong>
+								        		<strong>Hope Elizabeth Soberano</strong>
 								      		</p>
 								    	</div>
 								  	</div>
 								</article>
-							</div>
-
-					  	
-						    <div class="panel-block">
-							    <article class="media">
-								  	<figure class="media-left">
-								    	<p>Bio</p>
-								  	</figure>
-								  	<div class="media-content">
-								    	<div class="content">
-								      		<p>
-								        		<strong>{{ registered.bio }}</strong>
-								      		</p>
-								    	</div>
-								  	</div>
-								</article>
-							</div>
-
-							<div class="panel-block">
+							</a>
+							
+							<a class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
 							    		<p>Lives in</p>
@@ -111,14 +96,14 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ registered.address }}</strong>
+							        			<strong>123 Sampaguita St. San Antonio</strong>
 							      			</p>
 							    		</div>
 							  		</div>
 								</article>
-						  	</div>
+						  	</a>
 
-						  	<div class="panel-block">
+						  	<a class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
 							    		<p>Birthday</p>
@@ -126,14 +111,14 @@
 							  		<div class="media-content">
 							    		<div class="content">
 							      			<p>
-							        			<strong>{{ registered.birthday }}</strong>
+							        			<strong>January 20, 1997</strong>
 							      			</p>
 							    		</div>
 							  		</div>
 								</article>
-						  	</div>
+						  	</a>
 
-						  	<div class="panel-block">
+						  	<a class="panel-block">
 						     	<article class="media">
 							  		<figure class="media-left">
 							    		<p>Gender</p>
@@ -141,18 +126,29 @@
 							  		<div class="media-content">
 							    		<div class="content">
 							      			<p>
-							      				{% if registered.gender == 'M' %}
-								        			<strong>Male</strong>
-								        		{% else %}
-								        			<strong>Female</strong>
-								        		{% endif %}
+							        			<strong>Female</strong>
 							      			</p>
 							    		</div>
 							  		</div>
 								</article>
-						  	</div>
+						  	</a>
 
-						  	<div class="panel-block">
+						  	<a class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Civil Status </p>
+							  		</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>Single</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+						  	<a class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
 							    		<p>Telephone Number</p>
@@ -160,14 +156,14 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ registered.telephone }}</strong>
+							        			<strong>4311213</strong>
 							      			</p>
 							    		</div>
 							  		</div>
 								</article>
-						  	</div>
+						  	</a>
 
-						  	<div class="panel-block">
+						  	<a class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
 							    		<p>Phone Number</p>
@@ -175,13 +171,27 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ registered.mobile_number }}</strong>
+							        			<strong>09123456789</strong>
 							      			</p>
 							    		</div>
 							  		</div>
 								</article>
-						  	</div>
+						  	</a>
 
+						  	<a class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>I am a</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>Participant</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
 						</div>
 					</div>
 			    </div>

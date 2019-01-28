@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
-from data_access.models import user_account, user_information, audit_trail
+from data_access.models import user_account, user_information, audit_trail, event_information
 from data_access.queries import user_views
 from datetime import datetime
 
@@ -21,7 +21,9 @@ def index():
 @unregistered.route('/events')
 def events():
 
-	return render_template('/unregistered/events.html')
+		events = event_information.query.all()
+
+		return render_template('/unregistered/events/index.html', events=events)
 
 @unregistered.route('/partners')
 def partners():

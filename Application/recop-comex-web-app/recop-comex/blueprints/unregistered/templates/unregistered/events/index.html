@@ -1,0 +1,10 @@
+{% extends "unregistered-base.html" %}
+
+{% block content %}
+
+
+					{% for events in events %}
+						{% include 'unregistered/events/_events.html' %}
+					{% endfor %}
+
+{% endblock %}

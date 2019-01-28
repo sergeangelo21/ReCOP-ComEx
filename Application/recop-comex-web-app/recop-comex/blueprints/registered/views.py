@@ -93,65 +93,60 @@ def profile(registered):
 @login_required
 def profile_update(registered):
 
-	registered = user_information.query.join(
-		user_account
-		).add_columns(
-		user_information.first_name,
-		user_information.middle_name,
-		user_information.last_name,
-		user_information.company_name,
-		user_information.bio,
-		user_information.gender,
-		user_information.birthday,
-		user_information.address,
-		user_information.address,
-		user_information.telephone,
-		user_information.mobile_number,
-		user_account.username,
-		user_account.password,
-		user_account.email_address
-		).filter_by(id=current_user.id).first()
+	user_information_update = user_information.query.filter_by(id=current_user.id).first()
+	user_account_update = user_account.query.filter_by(id=current_user.id).first()
 
 	form = ProfileUpdateForm()
 
 	if form.validate_on_submit():
 
-		registered.user_information.first_name = form.firstname.data
-		registered.user_information.middle_name = form.middlename.data
-		registered.user_information.last_name = form.lastname.data
-		registered.user_information.gender = form.gender.data
-		registered.user_information.birthday = form.birthday.data
-		registered.user_information.bio = form.bio.data
+		user = user_account.login([current_user.username, form.oldpassword.data])
 
-		registered.user_information.company_name = form.company.data
-		registered.user_information.address = form.address.data
-		registered.user_information.telephone = form.telephone.data
-		registered.user_information.mobile_number = form.mobile.data
-		registered.user_information.email_address = form.email.data
+		if user:
 
-		registered.user_information.username = form.username.data
-		registered.user_information.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+			user_information_update.first_name = form.firstname.data
+			user_information_update.middle_name = form.middlename.data
+			user_information_update.last_name = form.lastname.data
+			user_information_update.gender = form.gender.data
+			user_information_update.birthday = form.birthday.data
+			user_information_update.bio = form.bio.data
 
-		db.session.commit()
+			user_information_update.company_name = form.company.data
+			user_information_update.address = form.address.data
+			user_information_update.telephone = form.telephone.data
+			user_information_update.mobile_number = form.mobile.data
 
-		return redirect(url_for('registered.profile', registered=current_user.id))
+			db.session.commit()
+
+			user_account_update.email_address = form.email.data
+
+			user_account_update.username = form.username.data
+			user_account_update.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+
+			db.session.commit()
+
+			return redirect(url_for('registered.profile', registered=current_user.username))
+
+		else:
+
+			flash('Wrong password.')
 
 	else:
 
-		form.firstname.data = registered.first_name
-		form.middlename.data = registered.middle_name
-		form.lastname.data = registered.last_name
-		form.gender.data = registered.gender
-		form.birthday.data = registered.birthday
-		form.bio.data = registered.bio
+		form.firstname.data = user_information_update.first_name
+		form.middlename.data = user_information_update.middle_name
+		form.lastname.data = user_information_update.last_name
+		form.gender.data = user_information_update.gender
+		form.birthday.data = user_information_update.birthday
+		form.bio.data = user_information_update.bio
 		
-		form.company.data = registered.company_name
-		form.address.data = registered.address
-		form.telephone.data = registered.telephone
-		form.mobile.data = registered.mobile_number
-		form.email.data = registered.email_address
+		form.company.data = user_information_update.company_name
+		form.address.data = user_information_update.address
+		form.telephone.data = user_information_update.telephone
+		form.mobile.data = user_information_update.mobile_number
+		form.email.data = user_account_update.email_address
 
-		form.username.data = registered.username
-		form.password.data = registered.password
+		form.username.data = user_account_update.username
+		form.password.data = user_account_update.password
 
-	return render_template('/registered/profile/profile_update.html', form=form, registered=registered)
+	return render_template('/registered/profile/profile_update.html', form=form, user_account=registered)

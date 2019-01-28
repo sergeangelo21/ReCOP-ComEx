@@ -16,5 +16,6 @@ class ProfileUpdateForm(FlaskForm):
     mobile = StringField('Mobile Number')
     email = StringField('Email Address')
     username = StringField('Username')
+    oldpassword = PasswordField('Old Password')
     password = PasswordField('Password')
     submit = SubmitField('Update')
