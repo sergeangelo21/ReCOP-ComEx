@@ -230,6 +230,22 @@
 
                                     <div class="field is-horizontal">
                                         <div class="field-label is-normal">
+                                            {{form.oldpassword.label(class_='label')}}
+                                        </div>
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                    {{form.oldpassword(class_='input', placeholder='Old Password')}}
+                                                    {% for error in form.oldpassword.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
                                             {{form.password.label(class_='label')}}
                                         </div>
                                         <div class="field-body">
@@ -243,6 +259,7 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="field is-horizontal">
                                         <div class="field-label is-normal">
                                             <label class="label">Confirm</label>
