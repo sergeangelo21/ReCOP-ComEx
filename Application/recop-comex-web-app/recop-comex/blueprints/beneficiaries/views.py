@@ -79,8 +79,8 @@ def termsandconditions():
 
 	return render_template('/beneficiaries/termsandconditions.html', title="Beneficiaries")
 
-@beneficiaries.route('/beneficiaries/profile')
+@beneficiaries.route('/beneficiaries/profile/about')
 @login_required
-def profile():
+def about():
 
-	return render_template('/beneficiaries/profile.html', title="Beneficiaries")
+	return render_template('/beneficiaries/profile/about.html', title="Beneficiaries")
