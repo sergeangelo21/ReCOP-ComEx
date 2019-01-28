@@ -60,7 +60,7 @@ def signup():
 
 		user_information.add(value_information)
 
-		if form.type.data == 2:
+		if form.type.data == '2':
 			status = "A"
 			flash('Your account was successfully created!')
 		else:

@@ -49,8 +49,11 @@ function choose(sender){
         field.style.display = "none"
         lbl.innerHTML = "Organization"
         active.placeholder = "Organization"
+
+        if (user!=2){
         document.getElementById('thrust_field').style.display="none"
         document.getElementById('thrust').value=0
+        }
 
 
     }
@@ -59,12 +62,15 @@ function choose(sender){
         field.style.display = ""
         lbl.innerHTML = revert
         active.placeholder = revert
+        if (user!=2){
         document.getElementById('thrust_field').style.display=""
+        }
     }
 
 }
 
 function show_form(sender){
+
     document.getElementById('signup').style.display = "block"
     document.getElementById('illusion').style.display = ""
     document.getElementById('next').style.display = ""
