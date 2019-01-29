@@ -51,7 +51,6 @@
 		border-color: #072000;
 	}
 	
-
 	a.button.eventbtn{
 		background-color: #ecad00;
 		color: #072000;
@@ -88,18 +87,6 @@
 		  padding-top:25px;
 	}
 
-	.overlay-card-donation{
-		  background-color:#ecad00;
-		  background-image: url("https://sponsorship.worldvision.org.ph/sites/default/files/D310-0932-54_473452.jpg");
-		  height:400px;
-		  padding-top:25px;
-		  background-position: center; /* Center the image */
-		  background-repeat: no-repeat; /* Do not repeat the image */
-		  background-size: cover;
-		  margin-bottom: -25px;
-	}
-
-
 	.circular{
 		  width: 200px;
 		  height: 200px;
@@ -126,12 +113,24 @@
 		  transform: translate(-50%, -50%);
 	}
 
-	.panelbox{
-		background-color: white;
-	}
-
 	.card-content.profile{
 		padding: 0rem;
+	}
+
+	.prof-icon{
+		color: #072000;  
+	}
+
+	.backbtnprof{
+		background-color: #072000; 
+		color: #ffb901;
+		border-color: #072000;
+	}
+
+	.backbtnprof:hover{
+		background-color: #ffb901;
+		color: #072000; 
+		border-color: #072000;
 	}
 	/*		END		*/
 
@@ -142,7 +141,7 @@
 	/*		END		*/
 
 
-	/* EVENT */
+	/*      EVENT     */
 
 	.upcoming-event{
 		margin-bottom: 5px;
@@ -158,7 +157,7 @@
 	cursor: pointer;
 	}
 
-	/* END */
+	/*       END        */
 
 
 	/*   LINKAGES PROPOSAL   */
@@ -189,6 +188,18 @@
     .box.person-details{
       box-shadow: none;
     }
+
+    .overlay-card-donation{
+		  background-color:#ecad00;
+		  background-image: url("https://sponsorship.worldvision.org.ph/sites/default/files/D310-0932-54_473452.jpg");
+		  height:400px;
+		  padding-top:25px;
+		  background-position: center; /* Center the image */
+		  background-repeat: no-repeat; /* Do not repeat the image */
+		  background-size: cover;
+		  margin-bottom: -25px;
+	}
+	/*     END     */
 
     /*     EVENTS     */
 	.notification.event{
