@@ -1,7 +1,83 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
+<style type="text/css">
+    
+.padding{
+    padding: 5%;
+}
 
+.card1:hover{ 
+     box-shadow: 1px 8px 10px grey;
+    -webkit-transition:  box-shadow .2s ease-in;
+  }
+ 
+.hidden{
+    display: none;  
+}
+/* Lazy Load Styles */
+
+.card1-image {
+    display: block;
+    background: #fff center center no-repeat;
+    background-size: cover; 
+    padding-top: 20%;
+    padding-bottom: 15%;  
+}
+/* Layout Styles */
+
+
+.card1-list {
+    display: block;
+    margin: 1rem auto;
+    padding: 0;
+    font-size: 0;
+    text-align: center;
+    list-style: none;
+}
+
+.card1 {
+    display: inline-block;
+    width: 90%;
+    max-width: 20rem;
+    margin: 1rem;
+    font-size: 1rem;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+}
+
+.card1:hover {
+    transform: translateY(-0.5rem) scale(1.0125);
+    box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
+}
+
+.card1-description {
+    display: block;
+    padding: 1em 0.5em;
+    color: #515151;
+    text-decoration: none;
+}
+
+.card1-description > h2 {
+    margin: 0 0 0.5em;
+}
+
+.card1-description > p {
+    margin: 0;
+}
+
+.color{
+    color: #072000;
+    }
+.color:hover{
+    color:#072000;
+    opacity: 0.9;
+}
+
+
+</style>
 <br>
 
 <div class="container">
@@ -42,7 +118,7 @@
  
 </ul>
 
-</div>	
+</div>  
 
     <div class="columns is-centered">
         <div class="column is-10 hidden" id="signup">
@@ -55,26 +131,26 @@
                             <br>
                             <h1 class="title is-3 has-text-centered">SIGN UP</h1>
 
-                	       <div class="steps">
+                           <div class="steps">
                               <div class="step-item is-active is-success">
-                          	    <div class="step-marker">1</div>
-                              	    <div class="step-details">
-                                	      <p class="step-title" id="variant">Personal</p>
-                              	    </div>
-                            	  </div>
-                        	  
+                                <div class="step-marker">1</div>
+                                    <div class="step-details">
+                                          <p class="step-title" id="variant">Personal</p>
+                                    </div>
+                                  </div>
+                              
                               <div class="step-item">
-                          	    <div class="step-marker">2</div>
-                              	    <div class="step-details">
-                                	      <p class="step-title">Contact</p>
-                              	    </div>
+                                <div class="step-marker">2</div>
+                                    <div class="step-details">
+                                          <p class="step-title">Contact</p>
+                                    </div>
                               </div>
-                        	  
+                              
                               <div class="step-item">
-                          	    <div class="step-marker">3</div>
-                              	    <div class="step-details">
-                                	      <p class="step-title">Account</p>
-                              	    </div>
+                                <div class="step-marker">3</div>
+                                    <div class="step-details">
+                                          <p class="step-title">Account</p>
+                                    </div>
                                 </div>
                                    
                             <!-- Steps-Content -->
