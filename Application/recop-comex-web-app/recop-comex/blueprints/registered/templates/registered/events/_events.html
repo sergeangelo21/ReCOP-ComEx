@@ -1,216 +1,190 @@
 {% extends "registered-base.html" %}
 
 {% block content %}
-		<div class="notification gold">
-			<div class="columns">
-				<div class="column is-2">
-					<a href="{{url_for('registered.events_create')}}" class="button add has-text-weight-bold">
-						<span class="icon">
-							<i class="fa fa-plus"></i>
-						</span>
-						<span>Create</span>
-					</a>
 
-					<a href="" class="button eventbtn is-active">
-						<span class="icon">
-							<i class="fa fa-list"></i>
-						</span>
-					</a>
+    <div class="notification gold">
+      <div class="columns">
+        <div class="column is-2">
+          <a href="{{url_for('registered.events_create')}}" class="button add has-text-weight-bold">
+            <span class="icon">
+              <i class="fa fa-plus"></i>
+            </span>
+            <span>Create</span>
+          </a>
+        </div>
 
-					<a href="" class="button eventbtn">
-						<span class="icon">
-							<i class="fa fa-calendar-alt"></i>
-						</span>
-					</a>
-				</div>
+        <div class="column is-7"></div>
 
-				<div class="column">
-					<article class="media">
-						<figure class="media-left">
-						   	<p class="has-text-black has-text-weight-bold">Filter by:</p>
-						</figure>
-						<div class="media-content">
-						    <div class="content">
-							    <div class="field-body">
-									<div class="field is-narrow">
-									    <div class="control">
-									        <div class="select is-fullwidth">
-									          <select>
-									          	<option>Select Category</option>
-									            <option>Spiritual</option>
-									            <option>Education</option>
-									            <option>Health</option>
-									            <option>Livelihood</option>
-									            <option>Environmental</option>
-									            <option>Socio-Political Concerns</option>
-									          </select>
-									        </div>
-									    </div>
-									</div>
-								</div>
-						    </div>    
-						</div>
-					</article>
-				</div>
+        <div class="column">
+          <div class="field has-addons has-addons-centered">
+            <p class="control">
+                <input class="input" type="text" placeholder="Search">
+            </p>
+            <p class="control">
+                <a class="button search">
+                  Search
+                </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-				<div class="column is-2">
-					<div class="field has-addons has-addons-centered">
-						<p class="control">
-						    <input class="input" type="text" placeholder="Search">
-						</p>
-						<p class="control">
-						    <a class="button search">
-						      Search
-						    </a>
-						</p>
+    <div class="columns is-gapless">
+		<div class="column is-2">
+    		<div class="notification filter">
+    			<p class="title is-size-5">View</p>
+    			<div class="columns">
+    				<div class="column has-text-centered">
+						<a href="" class="button eventbtn is-active">
+							<span class="icon">
+								<i class="fa fa-list"></i>
+							</span>
+						</a>
+
+						<a href="" class="button eventbtn">
+							<span class="icon">
+								<i class="fa fa-calendar-alt"></i>
+							</span>
+						</a>
 					</div>
+    			</div>
+
+    			<p class="title is-size-5">Filter</p>
+    			<div class="columns">
+    				<div class="column">
+    					<div class="select is-fullwidth">
+						    <select>
+						      <option>Please choose</option>
+						      <option>All</option>
+						      <option>Organizations</option>
+						      <option>Departmental</option>
+						      <option>Partners</option>
+						    </select>
+					 	</div>
+    				</div>
+    			</div>
+
+    			<div class="columns">
+    				<div class="column">
+    					<div class="select is-fullwidth">
+						    <select>
+						      <option>Please choose</option>
+						      <option>All</option>
+						      <option>Organizations</option>
+						      <option>Departmental</option>
+						      <option>Partners</option>
+						    </select>
+					 	</div>
+    				</div>
+    			</div>
+
+    			<div class="columns">
+    				<div class="column">
+    					<div class="select is-fullwidth">
+						    <select>
+						      <option>Please choose</option>
+						      <option>All</option>
+						      <option>Organizations</option>
+						      <option>Departmental</option>
+						      <option>Partners</option>
+						    </select>
+					 	</div>
+    				</div>
+    			</div>
+    		</div>
+    	</div>
+
+		<div class="column">
+			<div class="card box">
+				<div class="card-header">
+					<p class="card-header-title">
+						Events
+					</p>
+				</div>
+				<div class="card-content">
+					<div class="tabs is-toggle">
+						<ul>
+						    <li class="is-active">
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
+						        <span>Upcoming Events</span>
+						      </a>
+						    </li>
+						    <li>
+						      <a>
+						        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+						        <span>Past Events</span>
+						      </a>
+						    </li>
+					  	</ul>
+					</div>
+			      	<div class="columns is-centered">
+			        	<div class="column is-8">
+			          		<div class="notification event">
+			                  	<div class="columns is-gapless">
+			                    	<div class="column is-2">
+			                     		<div class="notification date is-danger">
+			                        		<p class="title has-text-centered">06 <br> JUL</p>
+				                      	</div>
+				                    </div>
+				                    <div class="column">
+				                        <article class="media">
+				                          	<figure class="media-left">
+					                            <p class="image is-128x128">
+					                                <img class="event" src="https://www.projectpearls.org/wp-content/uploads/2013/06/12841195_10153962703412905_7874811344446667017_o-300x300.jpg">
+					                            </p>
+				                          	</figure>
+				                          	<div class="media-content">
+					                            <div class="content-event">
+					                                <p>
+					                                  <strong class="is-size-5 has-text-weight-bold">Feeding Progam</strong>
+					                                <br>   
+					                                  Location: Cavite City <br>
+					                                  Date: January 22, 2019
+					                                </p>
+					                            </div>
+				                          	</div>
+				                      	</article>
+				                    </div>
+			                	</div>
+			              	</div>
+
+			              	<div class="notification event">
+			                  	<div class="columns is-gapless">
+			                    	<div class="column is-2">
+			                     		<div class="notification date is-danger">
+			                        		<p class="title has-text-centered">06 <br> JUL</p>
+				                      	</div>
+				                    </div>
+				                    <div class="column">
+				                        <article class="media">
+				                          	<figure class="media-left">
+					                            <p class="image is-128x128">
+					                                <img class="event" src="https://www.projectpearls.org/wp-content/uploads/2013/06/12841195_10153962703412905_7874811344446667017_o-300x300.jpg">
+					                            </p>
+				                          	</figure>
+				                          	<div class="media-content">
+					                            <div class="content-event">
+					                                <p>
+					                                  <strong class="is-size-5 has-text-weight-bold">Feeding Progam</strong>
+					                                <br>   
+					                                  Location: Cavite City <br>
+					                                  Date: January 22, 2019
+					                                </p>
+					                            </div>
+				                          	</div>
+				                      	</article>
+				                    </div>
+			                	</div>
+			              	</div>
+
+			        	</div>
+			    	</div>
 				</div>
 			</div>
-		</div>
+		</div>	
+	</div>
 
-		<div class="container">
-			<div class="columns is-centered">
-				<div class="column is-8">
-					<div class="card select-list">
-						<div class="card-content">
-							<article class="media">
-  								<figure class="media-left">
-    								<p class="image is-128x128">
-      									<img class="event" src="https://www.projectpearls.org/wp-content/uploads/2013/06/12841195_10153962703412905_7874811344446667017_o-300x300.jpg">
-    								</p>
-  								</figure>
-	  							<div class="media-content">
-	    							<div class="content">
-	      								<p>
-	        								<a class="title is-6">Feeding Progam</a>
-	        							<br>   
-	        								Location: Cavite City <br>
-	        								Date: January 22, 2019
-	      								</p>
-	    							</div>
-			    				<!-- icons -->
-				 				   <nav class="level is-mobile">
-				      					<div class="level-left">
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-reply"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-retweet"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-heart"></i></span>
-			        						</a>
-			      						</div>
-			    					</nav>
-	  							</div>
-							</article>
-						</div>
-					</div>
-					<div class="card select-list">
-						<div class="card-content">
-							<article class="media">
-  								<figure class="media-left">
-    								<p class="image is-128x128">
-      									<img class="event" src="https://www.projectpearls.org/wp-content/uploads/2013/06/12841195_10153962703412905_7874811344446667017_o-300x300.jpg">
-    								</p>
-  								</figure>
-	  							<div class="media-content">
-	    							<div class="content">
-	      								<p>
-	        								<a class="title is-6">Feeding Program</a>
-	        							<br>   
-	        								Location: Cavite City <br>
-	        								Date: January 22, 2019
-	      								</p>
-	    							</div>
-			    				<!-- icons -->
-				 				   <nav class="level is-mobile">
-				      					<div class="level-left">
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-reply"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-retweet"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-heart"></i></span>
-			        						</a>
-			      						</div>
-			    					</nav>
-	  							</div>
-							</article>
-						</div>
-					</div>
-
-				</div>
-				<div class="column has-text-centered">
-					<div class="card">
-					    <div class="card-content">  
-						    <div class="tabs is-boxed">
-								<ul>
-								    <li class="is-active">
-								      <a>
-								        <span class="icon is-small"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
-								        <span>Upcoming Events</span>
-								      </a>
-								    </li>
-								    <li>
-								      <a>
-								        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
-								        <span>Past Events</span>
-								      </a>
-								    </li>
-							  	</ul>
-							</div>
-
-							<a>
-								<div class="upcoming-event">
-									<article class="media side">
-									  	<figure class="media-left">
-										    <p class="is-size-5 has-text-weight-bold has-text-centered">
-										      20<br> Jan
-										    </p>
-										</figure>
-									 	<div class="media-content">
-										    <div class="content">
-										      <p>
-										        <strong class="has-text-danger">Blood Letting</strong>
-										        <br>
-										        <small>Category: Health</small>
-										        <br>
-										        <small>Location: San Sebastian College Recoletos de Cavite</small>
-										      </p>
-										    </div>
-										</div>
-									</article>
-								</div>
-							</a>
-
-							<a>
-								<div class="upcoming-event">
-									<article class="media side">
-									  	<figure class="media-left">
-										    <p class="is-size-5 has-text-weight-bold has-text-centered">
-										      20<br> Jan
-										    </p>
-										</figure>
-									 	<div class="media-content">
-										    <div class="content">
-										      <p>
-										        <strong class="has-text-danger">Blood Letting</strong>
-										        <br>
-										        <small>Category: Health</small>
-										        <br>
-										        <small>Location: San Sebastian College Recoletos de Cavite</small>
-										      </p>
-										    </div>
-										</div>
-									</article>
-								</div>
-							</a>
-					    </div>  
-				  	</div>
-				</div>
-			</div>
-		</div>
+    
 {% endblock %}
