@@ -203,24 +203,24 @@
 
     /*     EVENTS     */
 	.notification.event{
-	background-color: white;
-	padding: 0px;
-	border-radius: 0px;
-	border-top: 1px #e0e0e0;
-	position: static;
-	box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-	}
-	.notification.date{
-	border-radius: 0px;
-	padding: 25px;
-	width: auto;
-	height: auto;
-	}
+        background-color: white;
+        padding: 0px;
+        border-radius: 0px;
+        border-top: 1px #e0e0e0;
+        position: static;
+        box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
+      }
+      .notification.date{
+        border-radius: 0px;
+        padding: 25px;
+        height: 100%;
+      }
 
-	.content-event{
-	padding: 10px;
-	}
+      .content.event{
+        padding: 10px;
+      }
     /*   END  */
+
 
     /* SIGN UP */
  .padding{
