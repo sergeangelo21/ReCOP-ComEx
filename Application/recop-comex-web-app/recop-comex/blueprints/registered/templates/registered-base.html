@@ -13,15 +13,7 @@
         <link rel="stylesheet" type="text/css" href="../../../static/css/bulma-0.7.2/css/bulma.css">
         <link rel="stylesheet" href="../../../static/css/fontawesome-5.5.0/css/all.css">
         <link rel="stylesheet" href="../../../static/css/recop-comex-style/css/style.css">
-        <script type="text/javascript" src = "../../../static/scripts/base.js" ></script>
-      
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <script>alert("{{message}}")</script>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}       
+        <script type="text/javascript" src = "../../../static/scripts/base.js" ></script>  
 
     </head>
 
@@ -81,7 +73,7 @@
                         </a>
 
                         <div class="navbar-dropdown is-right">
-                            <a class="navbar-item" href="{{url_for('registered.profile', registered=current_user.username)}}">
+                            <a class="navbar-item" href="{{url_for('registered.profile',user=current_user.username)}}">
                                 My Profile
                             </a>
                             <hr class="navbar-divider">
@@ -95,6 +87,28 @@
 		</nav>
 
 		{% block content %} {% endblock %}
+
 	</body>
+
+    <script type = "text/javascript" src="../../../static/scripts/sweetalert2.all.min.js"></script>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+             <script>
+                Swal.fire({
+                    title: "{{message}}", 
+                    type: "{{category}}",
+                    customClass: "modal",
+                    buttonsStyling: false,
+                    allowOutsideClick: false,
+                    heightAuto: false,
+                    confirmButtonClass: 'button is-medium submit'
+                })
+            </script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %} 
 
 </html>

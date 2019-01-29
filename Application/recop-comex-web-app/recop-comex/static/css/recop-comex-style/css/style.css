@@ -51,7 +51,6 @@
 		border-color: #072000;
 	}
 	
-
 	a.button.eventbtn{
 		background-color: #ecad00;
 		color: #072000;
@@ -88,18 +87,6 @@
 		  padding-top:25px;
 	}
 
-	.overlay-card-donation{
-		  background-color:#ecad00;
-		  background-image: url("https://sponsorship.worldvision.org.ph/sites/default/files/D310-0932-54_473452.jpg");
-		  height:400px;
-		  padding-top:25px;
-		  background-position: center; /* Center the image */
-		  background-repeat: no-repeat; /* Do not repeat the image */
-		  background-size: cover;
-		  margin-bottom: -25px;
-	}
-
-
 	.circular{
 		  width: 200px;
 		  height: 200px;
@@ -126,12 +113,24 @@
 		  transform: translate(-50%, -50%);
 	}
 
-	.panelbox{
-		background-color: white;
-	}
-
 	.card-content.profile{
 		padding: 0rem;
+	}
+
+	.prof-icon{
+		color: #072000;  
+	}
+
+	.backbtnprof{
+		background-color: #072000; 
+		color: #ffb901;
+		border-color: #072000;
+	}
+
+	.backbtnprof:hover{
+		background-color: #ffb901;
+		color: #072000; 
+		border-color: #072000;
 	}
 	/*		END		*/
 
@@ -142,7 +141,7 @@
 	/*		END		*/
 
 
-	/* EVENT */
+	/*      EVENT     */
 
 	.upcoming-event{
 		margin-bottom: 5px;
@@ -158,7 +157,7 @@
 	cursor: pointer;
 	}
 
-	/* END */
+	/*       END        */
 
 
 	/*   LINKAGES PROPOSAL   */
@@ -190,6 +189,18 @@
       box-shadow: none;
     }
 
+    .overlay-card-donation{
+		  background-color:#ecad00;
+		  background-image: url("https://sponsorship.worldvision.org.ph/sites/default/files/D310-0932-54_473452.jpg");
+		  height:400px;
+		  padding-top:25px;
+		  background-position: center; /* Center the image */
+		  background-repeat: no-repeat; /* Do not repeat the image */
+		  background-size: cover;
+		  margin-bottom: -25px;
+	}
+	/*     END     */
+
     /*     EVENTS     */
 	.notification.event{
 	background-color: white;
@@ -206,7 +217,82 @@
 	height: auto;
 	}
 
-	.content{
+	.content-event{
 	padding: 10px;
 	}
     /*   END  */
+
+    /* SIGN UP */
+ .padding{
+    padding: 5%;
+}
+
+.card1:hover{ 
+     box-shadow: 1px 8px 10px grey;
+    -webkit-transition:  box-shadow .2s ease-in;
+  }
+ 
+.hidden{
+    display: none;  
+}
+/* Lazy Load Styles */
+
+.card1-image {
+    display: block;
+    background: #fff center center no-repeat;
+    background-size: cover; 
+    padding-top: 20%;
+    padding-bottom: 15%;  
+}
+/* Layout Styles */
+
+
+.card1-list {
+    display: block;
+    margin: 1rem auto;
+    padding: 0;
+    font-size: 0;
+    text-align: center;
+    list-style: none;
+}
+
+.card1 {
+    display: inline-block;
+    width: 90%;
+    max-width: 20rem;
+    margin: 1rem;
+    font-size: 1rem;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: 0 0 3rem -1rem rgba(0,0,0,0.5);
+    transition: transform 0.1s ease-in-out, box-shadow 0.1s;
+}
+
+.card1:hover {
+    transform: translateY(-0.5rem) scale(1.0125);
+    box-shadow: 0 0.5em 3rem -1rem rgba(0,0,0,0.5);
+}
+
+.card1-description {
+    display: block;
+    padding: 1em 0.5em;
+    color: #515151;
+    text-decoration: none;
+}
+
+.card1-description > h2 {
+    margin: 0 0 0.5em;
+}
+
+.card1-description > p {
+    margin: 0;
+}
+
+.color{
+    color: #072000;
+    }
+.color:hover{
+    color:#072000;
+    opacity: 0.9;
+}
+/* END SIGN UP */

@@ -36,7 +36,18 @@ def index():
 @login_required
 def events(status, search):
 
-	events = event_views.show_all()
+	if status=='scheduled':
+		value='S'
+	elif status=='new':
+		value='N'
+	elif status=='pending':
+		value='P'
+	elif status=='finished':
+		value='F'
+	else:
+		value=status
+
+	events = event_views.show_list(value, search)
 
 	form = SearchForm()
 
@@ -44,7 +55,7 @@ def events(status, search):
 
 		return redirect(url_for('admin.events', status=status, search=form.search.data))
 
-	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, search=search)
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,search=search)
 
 @admin.route('/admin/events/show/id=<id>')
 @login_required
@@ -104,7 +115,7 @@ def partner_action(id):
 
 	if user.status == "A":
 		status = "D"
-		flash("Partner was disabled!")
+		flash("Partner was disabled!","success")
 	else:
 
 		if user.status=='N':
@@ -131,7 +142,7 @@ def partner_action(id):
 			new = ''
 			status = "A"
 
-		flash("Partner was activated! " + new)
+		flash("Partner was activated! " + new, "success")
 
 	user_account.update_status(id, status)
 

@@ -2,9 +2,17 @@
 
 {% block content %}
 			<div class="notification gold">
-				<div class="columns">
-					<div class="column">
-						<div class="tabs proposal is-toggle has-text-weight-bold">
+				<div class="columns is-centered">
+					<div class="column is-3">
+						<article class="media">
+						  	<figure class="media-left"> 
+						  		<a class="button add" href="{{url_for('admin.partners_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+						  	</figure>
+						</article>
+					</div>
+
+					<div class="column is-6">
+						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.partners', status='all', search=search)}}">
@@ -14,13 +22,13 @@
 						    </li>
 						    <li {% if status=='new' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.partners', status='new', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-plus" aria-hidden="true"></i></span>
+						        <span class="icon is-small"><i class="fas fa-user-plus" aria-hidden="true"></i></span>
 						        <span class="proposal">New</span>
 						      </a>
 						    </li>
 						    <li {% if status=='pending' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.partners', status='pending', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
+						        <span class="icon is-small"><i class="fas fa-user-clock" aria-hidden="true"></i></span>
 						        <span class="proposal">Pending</span>
 						      </a>
 						    </li>
@@ -32,7 +40,7 @@
 						    </li>
 						    <li {% if status=='disabled' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.partners', status='disabled', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-user-slash" aria-hidden="true"></i></span>
+						        <span class="icon is-small"><i class="fas fa-user-times" aria-hidden="true"></i></span>
 						        <span>Disabled</span>
 						      </a>
 						    </li>
@@ -40,18 +48,8 @@
 						</div>
 					</div>
 
-					<div class="column">
-						<article class="media">
-						  	<figure class="media-left"> 
-						  		<button class="button add">
-						  		<a href="{{url_for('admin.partners_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</button>
-						  		</a>
-						  	</figure>
-						</article>
-					</div>
-
 					<div class="column is-3">
-						<div class="field is-horizontal has-addons has-addons-centered">
+						<div class="field is-horizontal is-pulled-right has-addons has-addons-centered">
 							<form action="" method="POST">
 								{{form.hidden_tag()}}
 							<div class="field-body">
@@ -121,17 +119,19 @@
 					<div class="card box">
 						<div class="card-header">
 							<p class="card-header-title">
-							Showing results for
+							Showing 
 							{% if search!=' ' %}
-							'{{search}}'
+							Results for '{{search}}'
 							<a href="{{url_for('admin.partners', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
 							&nbsp; in
 							{% endif %}
-							{{status}} partners
+							{{status | title }} Partners
 							</p>
-							<p class="card-header-title">
-							Total: {{partners|length}}
-							</p>
+							<div class="is-pulled-right">
+								<p class="card-header-title">
+									Total: {{partners | length}}
+								</p>
+							</div>
 						</div>
 						<div class="card-content">
 							<table class="table is-fullwidth">
@@ -142,7 +142,7 @@
 									    <th class="newlist">Company Name</th>
 									    <th class="newlist">Coordinator</th>
 									    <th class="newlist">Address</th>
-									   	<th class="newlist">Status</th>
+									   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
 									    <th class="newlist hidedesktop">Actions</th>
 									 </tr>
 									

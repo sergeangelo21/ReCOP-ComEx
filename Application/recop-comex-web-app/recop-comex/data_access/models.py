@@ -1,4 +1,4 @@
-#Table specifications and simple queries goes here
+#Table specifications and basic CRUD queries goes here
 from extensions import login, db, bcrypt
 from flask_login import UserMixin, current_user
 
@@ -119,13 +119,6 @@ class event_resource(db.Model):
 	event_id = db.Column(db.INT)
 	name = db.Column(db.VARCHAR(30), nullable=False)
 	type = db.Column(db.INT, nullable=False)
-
-class event_signatory(db.Model):
-
-	id = db.Column(db.INT, primary_key=True)
-	signatory_id = db.Column(db.INT)
-	description = db.Column(db.VARCHAR(20),nullable=False)
-	order = db.Column(db.INT, nullable=False)
 
 class proposal_tracker(db.Model):
 

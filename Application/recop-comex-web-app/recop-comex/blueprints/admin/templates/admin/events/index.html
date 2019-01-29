@@ -2,39 +2,8 @@
 
 {% block content %}
 			<div class="notification gold">
-				<div class="columns">
-					<div class="column">
-						<div class="tabs proposal is-toggle has-text-weight-bold">
-						  <ul>
-						    <li {% if status=='all' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='all', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
-						        <span class="proposal">All</span>
-						      </a>
-						    </li>
-						    <li {% if status=='pending' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='pending', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
-						        <span class="prop">Pending</span>
-						      </a>
-						    </li>
-						    <li {% if status=='ongoing' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='ongoing', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-ellipsis-h" aria-hidden="true"></i></span>
-						        <span class="prop">Ongoing</span>
-						      </a>
-						    </li>
-						    <li {% if status=='finished' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='finished', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-check" aria-hidden="true"></i></span>
-						        <span>Finished</span>
-						      </a>
-						    </li>
-						  </ul>
-						</div>
-					</div>
-
-					<div class="column">
+				<div class="columns is-centered">
+					<div class="column is-3">
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<button class="button add">
@@ -43,20 +12,57 @@
 						</article>
 					</div>
 
-					<div class="column is-3">
-						<div class="field is-horizontal has-addons has-addons-centered">
-							<form action="" method="POST">
-								{{form.hidden_tag()}}
-							<div class="field-body">
-								<p class="control">
-							    	{{form.search(class_='input', placeholder='Search')}}
-								</p>
-								<p class="control">
-							     	{{form.submit(class_='button search')}}
-								</p>
-							</div>
-							</form>
+					<div class="column is-6">
+						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
+						  <ul>
+						    <li {% if status=='all' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='all', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
+						        <span class="proposal">All</span>
+						      </a>
+						    </li>
+						    <li {% if status=='new' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='new', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
+						        <span class="prop">New</span>
+						      </a>
+						    </li>
+						    <li {% if status=='pending' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='pending', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
+						        <span class="prop">Pending</span>
+						      </a>
+						    </li>
+						    <li {% if status=='scheduled' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='scheduled', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
+						        <span class="prop">Scheduled</span>
+						      </a>
+						    </li>
+						    <li {% if status=='finished' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='finished', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+						        <span>Finished</span>
+						      </a>
+						    </li>
+						  </ul>
 						</div>
+					</div>
+
+					<div class="column is-3">
+							<div class="field is-horizontal is-pulled-right has-addons has-addons-centered">
+								<form action="" method="POST">
+									{{form.hidden_tag()}}
+								<div class="field-body">
+									<p class="control">
+								    	{{form.search(class_='input', placeholder='Search')}}
+									</p>
+									<p class="control">
+								     	{{form.submit(class_='button search')}}
+									</p>
+								</div>
+								</form>
+							</div>
 					</div>
 				</div>
 			</div>
@@ -130,7 +136,20 @@
 				<div class="column">
 					<div class="card box">
 						<div class="card-header">
-							<p class="card-header-title">Events</p>
+							<p class="card-header-title">
+							Showing 
+							{% if search!=' ' %}
+							Results for '{{search}}'
+							<a href="{{url_for('admin.events', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
+							&nbsp; in
+							{% endif %}
+							{{status | title}} Events
+							</p>
+							<div class="is-pulled-right">
+								<p class="card-header-title">
+									Total: {{events|length}}
+								</p>
+							</div>
 						</div>
 						<div class="card-content">
 							<table class="table is-fullwidth">
@@ -141,7 +160,7 @@
 									    <th class="newlist">Event Name</th>
 									    <th class="newlist">Organizer</th>
 									    <th class="newlist">Target Date</th>
-									   	<th class="newlist">Status</th>
+									   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
 									    <th class="newlist hidedesktop">Actions</th>
 									 </tr>
 									

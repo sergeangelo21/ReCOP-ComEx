@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2019 at 10:25 AM
+-- Generation Time: Jan 29, 2019 at 07:15 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -32,7 +32,7 @@ CREATE TABLE `audit_trail` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `affected_id` int(11) NOT NULL,
-  `target_table` varchar(25) NOT NULL,
+  `target` varchar(20) NOT NULL,
   `date_created` datetime NOT NULL,
   `type` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -93,13 +93,6 @@ CREATE TABLE `event_category` (
   `description` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `event_category`
---
-
-INSERT INTO `event_category` (`id`, `name`, `description`) VALUES
-(1, 'Educational', 'Promotes academic well-being');
-
 -- --------------------------------------------------------
 
 --
@@ -109,24 +102,16 @@ INSERT INTO `event_category` (`id`, `name`, `description`) VALUES
 CREATE TABLE `event_information` (
   `id` int(11) NOT NULL,
   `organizer_id` int(11) DEFAULT NULL,
-  `category_id` int(11) DEFAULT NULL,
   `name` varchar(30) NOT NULL,
   `description` varchar(140) NOT NULL,
   `objective` varchar(140) NOT NULL,
   `budget` decimal(10,2) NOT NULL,
   `location` varchar(50) NOT NULL,
   `event_date` datetime NOT NULL,
+  `thrust` int(11) NOT NULL,
   `type` int(1) NOT NULL,
-  `status` char(1) NOT NULL
+  `event_status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `event_information`
---
-
-INSERT INTO `event_information` (`id`, `organizer_id`, `category_id`, `name`, `description`, `objective`, `budget`, `location`, `event_date`, `type`, `status`) VALUES
-(1, 1, 1, 'Sapakan sa Baste', 'event ko to', 'Silver Lining', '1000.50', 'SSCRdC', '2019-01-18 00:00:00', 1, 'N'),
-(2, 1, 1, 'Catriona Elisa Magnayon Gray', 'event ko to', 'a', '1000.50', 'a', '2019-01-10 00:00:00', 1, 'N');
 
 -- --------------------------------------------------------
 
@@ -160,19 +145,6 @@ CREATE TABLE `event_resource` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `event_signatory`
---
-
-CREATE TABLE `event_signatory` (
-  `id` int(11) NOT NULL,
-  `signatory_id` int(11) DEFAULT NULL,
-  `description` varchar(20) NOT NULL,
-  `order` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `proposal_tracker`
 --
 
@@ -187,14 +159,6 @@ CREATE TABLE `proposal_tracker` (
   `comment` varchar(20) DEFAULT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `proposal_tracker`
---
-
-INSERT INTO `proposal_tracker` (`id`, `event_id`, `proposed_on`, `recop_accepted`, `fmi_signed`, `acad_signed`, `approved_on`, `comment`, `status`) VALUES
-(1, 1, '2019-01-09 11:20:45', NULL, NULL, NULL, NULL, NULL, 'N'),
-(2, 2, '2019-01-09 12:03:05', NULL, NULL, NULL, NULL, NULL, 'N');
 
 -- --------------------------------------------------------
 
@@ -233,11 +197,10 @@ CREATE TABLE `user_account` (
 --
 
 INSERT INTO `user_account` (`id`, `info_id`, `username`, `password`, `email_address`, `type`, `last_active`, `status`) VALUES
-(1, 1, 'sergeangelo21', '$2b$12$aLUMJqDekK/DY8nU5c4y3O2lWmP4.af.YCWeol5Cc.nAgw6Wau7ia', 'sergeangelomajillo@gmail.com', 2, '2019-01-12 01:43:53', 'D'),
-(2, 2, 'aa', '$2b$12$l0KXxXB4oQHH2KxSTtAE1.mngJiAlCCTKBeou.Lgyiz7lkynpL8w.', 'a', 2, '2019-01-11 00:40:07', 'D'),
-(3, 3, 'bb', '$2b$12$e8cHonSTCvGoQmD/zvolbepe/THyHyXMxHbErjAYXiZbnKao8xile', 'e', 2, '2019-01-11 00:45:57', 'D'),
-(4, 4, 'asd', '$2b$12$B.OYLD3ABe8x7wM8.3xSfOTHKgcczkIb9KtOeHr7HvP3SA7hXdZ2S', 'a', 2, '2019-01-11 01:00:50', 'D'),
-(5, 5, 'a', '$2b$12$p4gCYqX8do2GdY6h.MLBJuHaoZ3nuydDnSm0rohN2cNVeUjpVsf8C', 'a', 2019, '2019-01-12 01:44:17', 'A');
+(1, 1, 'admin-recop', '$2b$12$aLUMJqDekK/DY8nU5c4y3O2lWmP4.af.YCWeol5Cc.nAgw6Wau7ia', 'recop.baste@gmail.com', 1, '2019-01-29 13:43:00', 'A'),
+(2, 2, 'pres.baste', '$2b$12$9kebxlvRAnR/L3Jx9GIcQeDEMuIDrOMlfoIbFNv0lkhpte7RI29WC', 'pres.baste@gmail.com', 5, '2019-01-29 13:34:26', 'A'),
+(3, 3, 'acad.baste', '$2b$12$9DeJoAw7WoF6GMq9d70Tnec2ALPZEuEOa1qSWEL7S.MmJEnrZJrem', 'acad.baste@gmail.com', 5, '2019-01-29 14:05:13', 'A'),
+(4, 4, 'fmi.baste', '$2b$12$UtE8pwqmZK3Et9ioHkSoSODiCzNT1cRgsyQcYkhTDxlwBlgOTDs6.', 'fmi.baste@gmail.com', 5, '2019-01-29 14:07:02', 'A');
 
 -- --------------------------------------------------------
 
@@ -251,23 +214,24 @@ CREATE TABLE `user_information` (
   `middle_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `company_name` varchar(50) NOT NULL,
+  `bio` varchar(160) DEFAULT NULL,
   `gender` char(1) NOT NULL,
   `birthday` date NOT NULL,
-  `address` varchar(50) NOT NULL,
+  `address` varchar(100) NOT NULL,
   `telephone` varchar(15) DEFAULT NULL,
-  `mobile_number` varchar(15) DEFAULT NULL
+  `mobile_number` varchar(15) DEFAULT NULL,
+  `partner_thrust` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_information`
 --
 
-INSERT INTO `user_information` (`id`, `first_name`, `middle_name`, `last_name`, `company_name`, `gender`, `birthday`, `address`, `telephone`, `mobile_number`) VALUES
-(1, 'Serge Angelo', 'Isanan', 'Majillo', 'TaskUs Inc.', 'M', '1998-01-21', '33 Marulas, Kawit, Cavite', '---', '---'),
-(2, 'a', 'a', 'a', 'a', 'M', '1998-01-21', 'a', 'a', 'a'),
-(3, 'e', 'e', 'e', 'e', 'F', '1998-01-21', 'e', 'e', 'e'),
-(4, 'a', 'a', 'a', 'a', 'M', '1998-01-21', 'a', 'a', 'a'),
-(5, 'a', 'a', 'a', 'a', 'M', '2019-01-21', 'a', 'a', 'a');
+INSERT INTO `user_information` (`id`, `first_name`, `middle_name`, `last_name`, `company_name`, `bio`, `gender`, `birthday`, `address`, `telephone`, `mobile_number`, `partner_thrust`) VALUES
+(1, 'Ana', 'Dula', 'Manzano', 'San Sebastian College Recoletos de Cavite', 'I am the ReCOP Director.', 'F', '1998-01-21', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
+(2, 'Rafael', 'Something', 'Pecson', 'San Sebastian College Recoletos de Cavite', 'I am the President.', 'M', '2019-01-01', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
+(3, 'James', 'Dexter', 'Tanquis', 'San Sebastian College Recoletos de Cavite', 'I am the VP for Academics.', 'M', '2019-01-01', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
+(4, 'Cristituto', 'Somebody', 'Palomar', 'San Sebastian College Recoletos de Cavite', 'I am the VP for Finance.', 'M', '2019-01-29', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -322,12 +286,6 @@ ALTER TABLE `event_resource`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `event_signatory`
---
-ALTER TABLE `event_signatory`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `proposal_tracker`
 --
 ALTER TABLE `proposal_tracker`
@@ -359,7 +317,7 @@ ALTER TABLE `user_information`
 -- AUTO_INCREMENT for table `audit_trail`
 --
 ALTER TABLE `audit_trail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `beneficiary`
@@ -383,18 +341,12 @@ ALTER TABLE `event_category`
 -- AUTO_INCREMENT for table `event_information`
 --
 ALTER TABLE `event_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `event_participation`
 --
 ALTER TABLE `event_participation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `event_signatory`
---
-ALTER TABLE `event_signatory`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -413,7 +365,7 @@ ALTER TABLE `user_account`
 -- AUTO_INCREMENT for table `user_information`
 --
 ALTER TABLE `user_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
-from data_access.models import user_account, user_information, audit_trail, event_information
-from data_access.queries import user_views
+from data_access.models import user_account, user_information
+from data_access.queries import user_views, event_views, partner_views
 from datetime import datetime
 
 from static.token import confirm
@@ -21,14 +21,14 @@ def index():
 @unregistered.route('/events')
 def events():
 
-		events = event_information.query.all()
+	events = event_views.show_list('all', ' ')
 
-		return render_template('/unregistered/events/index.html', events=events)
+	return render_template('/unregistered/events/index.html', events=events)
 
 @unregistered.route('/partners')
 def partners():
 
-	partners = user_information.query.filter(user_information.partner_thrust!=0).all()
+	partners = partner_views.show_list('A', ' ')
 
 	return render_template('/unregistered/partners/index.html', partners=partners)
 
@@ -58,20 +58,20 @@ def signup():
 			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
 			]
 
-		user_information.add(value_information)
-
 		if form.type.data == '2':
 			status = "A"
-			flash('Your account was successfully created!')
+			flash('Your account was successfully created!', 'success')
 		else:
 			status = "N"
-			flash('Your account has been created! Please wait for admin to activate it.')
+			flash('Your account has been created! Please wait for MOA.', 'success')
 
 		value_account = [
 			id_account,id_information,form.username.data,
 			form.password.data,form.email.data,form.type.data,datetime.now(),status
 			]
+
 		user_account.add(value_account)
+		user_information.add(value_information)	
 
 		return redirect(url_for('unregistered.login'))
 
@@ -87,16 +87,16 @@ def login():
         
 		user = user_account.login([form.username.data, form.password.data])
 
-		if user is None:
-			flash('Invalid username or password')
+		if user is None or user.type==5:
+			flash('Invalid username or password', 'error')
 			return redirect(url_for('unregistered.login'))
 
 		if user.status != "A":
 
 			if user.status=="P":
-				flash('MOA not yet acknowledged. Please check your email.')
+				flash('MOA not yet acknowledged. Please check your email.', 'info')
 			else:
-				flash('Inactive account. Please contact Re-COP Director.')
+				flash('Inactive account. Please contact the Re-COP Director.', 'error')
 			
 			return redirect(url_for('unregistered.login'))
 
@@ -109,7 +109,7 @@ def login():
 		else:
 			name = name.first_name
 			
-		flash('Welcome ' + name + '!')
+		flash('Welcome ' + name + '!', 'success')
 
 		if current_user.type == 2:
 			return redirect(url_for('registered.index'))
@@ -129,7 +129,7 @@ def logout():
 
 	logout_user()
 
-	flash('You are logged out.')
+	flash('You are logged out.', 'success')
 
 	return redirect('/')
 
@@ -139,7 +139,7 @@ def confirm_partner(token, expiration = 3600):
 	id = confirm(token)
 
 	if id=='bad':
-		flash('Link already expired. Please contact the ReCOP Administrator.')
+		flash('Link already expired. Please contact the ReCOP Administrator.', 'error')
 		return redirect(url_for('unregistered.index'))
 
 	status = 'A'
@@ -154,9 +154,9 @@ def confirm_partner(token, expiration = 3600):
 		value = [audit_id,id,'partner',2]
 		audit_trail.add(value)
 
-		flash("MOA acknowledged! Your account is now active.")
+		flash("MOA acknowledged! Your account is now active.", 'success')
 
 	else:
-		flash("MOA already acknowledged. Please login.")
+		flash("MOA already acknowledged. Please login.", 'info')
 	
 	return redirect(url_for('unregistered.login'))
