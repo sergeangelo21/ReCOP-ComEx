@@ -63,7 +63,7 @@ def signup():
 			flash('Your account was successfully created!', 'success')
 		else:
 			status = "N"
-			flash('Your account has been created! Please wait for admin to activate it.', 'success')
+			flash('Your account has been created! Please wait for MOA.', 'success')
 
 		value_account = [
 			id_account,id_information,form.username.data,
@@ -87,7 +87,7 @@ def login():
         
 		user = user_account.login([form.username.data, form.password.data])
 
-		if user is None:
+		if user is None or user.type==5:
 			flash('Invalid username or password', 'error')
 			return redirect(url_for('unregistered.login'))
 
@@ -96,7 +96,7 @@ def login():
 			if user.status=="P":
 				flash('MOA not yet acknowledged. Please check your email.', 'info')
 			else:
-				flash('Inactive account. Please contact Re-COP Director.', 'error')
+				flash('Inactive account. Please contact the Re-COP Director.', 'error')
 			
 			return redirect(url_for('unregistered.login'))
 

@@ -120,13 +120,6 @@ class event_resource(db.Model):
 	name = db.Column(db.VARCHAR(30), nullable=False)
 	type = db.Column(db.INT, nullable=False)
 
-class event_signatory(db.Model):
-
-	id = db.Column(db.INT, primary_key=True)
-	signatory_id = db.Column(db.INT)
-	description = db.Column(db.VARCHAR(20),nullable=False)
-	order = db.Column(db.INT, nullable=False)
-
 class proposal_tracker(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
