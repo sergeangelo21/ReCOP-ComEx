@@ -11,13 +11,13 @@
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		width: 70%
+		color: #072000;
 	}
 
 	@media only screen and (max-width: 768px) {
 	  /* For mobile phones: */
 	  .track-icon{
-			width: 30%;
+			width: 40%;
 		}
 	}
 
@@ -26,13 +26,10 @@
 		padding-bottom: 20px;
 	}
 
-	.fa-circle{
+	.mark{
 		color: #ffb901;
 	}
 
-	.mark{
-		color: #072000;
-	}
 </style>
 
 	
@@ -214,15 +211,17 @@
 								</article>
 							</div>
 							{% endif %}
-						    <div class="panel-block">
-							    <article class="media">
-								  	<figure class="media-left">
-								  		<p>Status</p>
-								  	</figure>
-								  	<div class="media-content">
-								    	<div class="content">
-								      		<p>
-								        		<strong>
+						</div>
+					</div>
+			    </div>
+
+			    <br>
+			    <div class="container">
+			      	<div class="card">
+			    <div class="card">
+				  	<header class="card-header has-background-light">
+					    <p class="card-header-title">
+					      Proposal Status: 
 								        		{% if event.status=='N' %}
 								        			For ReCOP Approval
 								        		{% elif event.status=='O' %}
@@ -236,22 +235,6 @@
 								        		{% elif event.status=="A" %}
 								        			Approved
 								        		{% endif %}
-								        		</strong>
-								      		</p>
-								    	</div>
-								  	</div>
-								</article>
-							</div>
-						</div>
-					</div>
-			    </div>
-
-			    <br>
-
-			    <div class="card">
-				  	<header class="card-header has-background-light">
-					    <p class="card-header-title">
-					      Event Status
 					    </p>
 					</header>
 				  	<div class="card-content tracker">
@@ -259,93 +242,81 @@
 					        <div class="columns is-centered">
 					          	<div class="column">
 					          		<div class="has-text-centered">
-					          			<picture><img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon"></picture>
-					          			<label class="label">Proposed On</label>
-					          			<p>January 29, 2019</p>
-					          			<p>4:00PM</p>
+					          			<i class="fas fa-file-contract fa-5x track-icon {% if event.recop_accepted %} mark {% endif %}"></i>
+					          			<label class="label">Accepted</label>
+					          			{% if event.recop_accepted %} 
+					          			{{event.recop_accepted.strftime('%B %e, %Y')}}<br>
+					          			{{event.recop_accepted.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
 					          		</div>
 					          	</div>
 					          	<div class="column has-text-centered">
-					          		<div class="circles">
-					          			<p>2 Day(s)</p>
-					          			<span class="icon is-small"><i class="fas fa-circle mark" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle mark" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+					          		<div class="circles {% if event.recop_accepted %} mark {% endif %}">
+					          			<br>					          			
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-5x" aria-hidden="true"></i></span>
 					          		</div>
 					          	</div>
 					          	<div class="column">
 					          		<div class="has-text-centered">
-					          			<img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon">
-					          			<label class="label">Recop Accepted</label>
-					          			<p>January 29, 2019</p>
-					          			<p>4:00PM</p>
+					          			<i class="fas fa-coins fa-5x track-icon {% if event.fmi_signed %} mark {% endif %}"></i>
+					          			<label class="label">Finance</label>
+					          			{% if event.fmi_signed %} 
+					          			{{event.fmi_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.fmi_signed.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
 					          		</div>
 					          	</div>
 					          	<div class="column has-text-centered">
-					          		<div class="circles">
-					          			<p>2 Day(s)</p>
-					          			<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+					          		<div class="circles {% if event.fmi_signed %} mark {% endif %}">
+					          			<br>
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-5x" aria-hidden="true"></i></span>
 					          		</div>
 					          	</div>
 					          	<div class="column">
 					          		<div class="has-text-centered">
-					          			<img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon">
-					          			<label class="label">FMI Signed</label>
-					          			<p>January 29, 2019</p>
-					          			<p>4:00PM</p>
+					          			<i class="fas fa-user-graduate fa-5x track-icon {% if event.acad_signed %} mark {% endif %}"></i>
+					          			<label class="label">Academics</label>
+					          			{% if event.acad_signed %} 
+					          			{{event.acad_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.acad_signed.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
 					          		</div>
 					          	</div>
 					          	<div class="column has-text-centered">
-					          		<div class="circles">
-					          			<p>2 Day(s)</p>
-					          			<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+					          		<div class="circles {% if event.acad_signed %} mark {% endif %}">
+					          			<br>
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-5x" aria-hidden="true"></i></span>
 					          		</div>
 					          	</div>
 					          	<div class="column">
 					          		<div class="has-text-centered">
-					          			<img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon">
-					          			<label class="label">Acad Signed</label>
-					          			<p>January 29, 2019</p>
-					          			<p>4:00PM</p>
-					          		</div>
-					          	</div>
-					          	<div class="column has-text-centered">
-					          		<div class="circles">
-					          			<p>2 Day(s)</p>
-					          			<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
-					          		</div>
-					          	</div>
-					          	<div class="column">
-					          		<div class="has-text-centered">
-					          			<img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon">
-					          			<label class="label">Approved On</label>
-					          			<p>January 29, 2019</p>
-					          			<p>4:00PM</p>
+					          			<i class="fas fa-check fa-5x track-icon {% if event.approved_on %} mark {% endif %}"></i>
+					          			<label class="label">Approved</label>
+					          			{% if event.fmi_signed %} 
+					          			{{event.approved_on.strftime('%B %e, %Y')}}<br>
+					          			{{event.approved_on.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
 					          		</div>
 					          	</div>
 					        </div>
 					        <div class="columns">
 					        	<div class="column">
-					        		<p class="subtitle has-text-centered has-text-black">Total Days: 30</p>
+					        		<div class="has-text-centered has-text-black">Total Days: 0</div>
 					        	</div>
 					        </div>
 					    </div>
 				  	</div>
 				</div>
+			</div>
+		</div>
 				
 			</div>
 		</section>

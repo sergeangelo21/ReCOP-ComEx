@@ -78,7 +78,8 @@ def events_create():
 def event_action(id, action):
 
 	event = event_information.retrieve_event(id)
-	organizer = user_information.partner_name(event.organizer_id)
+	organizer = user_information.partner_info(event.organizer_id)
+	email = user_account.retrieve_user(organizer.id)
 
 	if action=='approve':
 
@@ -94,7 +95,7 @@ def event_action(id, action):
 		token = generate(event.id)
 		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
 		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
-		html = render_template('admin/email/event.html', event=event , organizer=organizer, user=user, link = [approve, decline])
+		html = render_template('admin/email/event.html', event=event , organizer=organizer.company_name, user=user, link = [approve, decline])
 		subject = "NEW EVENT: " + event.name
 
 		email_parts = [html, subject, recipient]
@@ -153,12 +154,12 @@ def partner_show(id):
 def partner_action(id):
 
 	user = user_account.retrieve_user(id)
-	name = user_information.partner_name(user.info_id)
+	partner = user_information.partner_info(user.info_id)
 
 	if user.status == "A":
 	
 		status = "D"
-		flash(name + " was disabled!","success")
+		flash(partner.company_name + " was disabled!","success")
 
 		audit_id = audit_trail.count()
 		value = [audit_id,current_user.id,id,'partner', 4]
@@ -167,7 +168,7 @@ def partner_action(id):
 	elif user.status== "D":
 		
 		status = "A"
-		flash(name + " was activated! ", "success")
+		flash(partner.company_name + " was activated! ", "success")
 
 		audit_id = audit_trail.count()
 		value = [audit_id,current_user.id,id,'partner', 3]
@@ -186,7 +187,7 @@ def partner_action(id):
 
 		mail.send(msg)
 			
-		flash('MOA was sent to ' + name, 'success')
+		flash('MOA was sent to ' + partner.company_name, 'success')
 
 		status = "P"
 			
@@ -234,7 +235,7 @@ def compose_email(parts):
 
 	msg = Message(html=parts[0],
 		subject=parts[1],
-		sender = ("ReCOP Director", "recop.baste@gmail.com"),
+		sender = ("ReCOP Director", current_user.email_address),
 		recipients=[parts[2]])
 
 	return msg
