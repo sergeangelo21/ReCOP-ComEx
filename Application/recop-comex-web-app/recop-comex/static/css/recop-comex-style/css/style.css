@@ -190,14 +190,14 @@
     }
 
     .overlay-card-donation{
-		  background-color:#ecad00;
-		  background-image: url("https://sponsorship.worldvision.org.ph/sites/default/files/D310-0932-54_473452.jpg");
-		  height:400px;
-		  padding-top:25px;
-		  background-position: center; /* Center the image */
-		  background-repeat: no-repeat; /* Do not repeat the image */
-		  background-size: cover;
-		  margin-bottom: -25px;
+	  background-color:#ecad00;
+	  background-image: url("https://sponsorship.worldvision.org.ph/sites/default/files/D310-0932-54_473452.jpg");
+	  height:400px;
+	  padding-top:25px;
+	  background-position: center; /* Center the image */
+	  background-repeat: no-repeat; /* Do not repeat the image */
+	  background-size: cover;
+	  margin-bottom: -25px;
 	}
 	/*     END     */
 

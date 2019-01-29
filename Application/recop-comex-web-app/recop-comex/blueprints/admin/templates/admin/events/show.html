@@ -2,20 +2,54 @@
 
 {% block content %}
 
+<style type="text/css">
+	.tracker{
+	  	color: black;
+	}
+
+	.track-icon{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		width: 70%
+	}
+
+	@media only screen and (max-width: 768px) {
+	  /* For mobile phones: */
+	  .track-icon{
+			width: 30%;
+		}
+	}
+
+	.circles{
+		padding-top: 20px;
+		padding-bottom: 20px;
+	}
+
+	.fa-circle{
+		color: #ffb901;
+	}
+
+	.mark{
+		color: #072000;
+	}
+</style>
+
+	
 		<section class="hero">
 			<div class="hero-body">
 			    <div class="container">
 			      	<div class="card">
-						<header class="card-header is-active">
+						<header class="card-header has-background-light">
 						    <p class="card-header-title">
 						    Event Information
 						    </p>
 					  	</header>
 					  	<div class="card-content profile">
-						    <a class="panel-block">
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Name:</p>
+								    	<p>Name</p>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -25,11 +59,11 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
-						    <a class="panel-block">
+							</div>
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Organizer:</p>
+								    	<p>Organizer</p>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -39,11 +73,11 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
-						    <a class="panel-block">
+							</div>
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Description:</p>
+								    	<p>Description</p>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -53,11 +87,11 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
-						    <a class="panel-block">
+							</div>
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Objective:</p>
+								    	<p>Objective</p>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -67,12 +101,12 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
-						    <a class="panel-block">
+							</div>
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
 								  		<p>{% if event.status!='A' %}
-								    	Proposed Budget:
+								    	Proposed Budget
 								    	{% else %}
 								    	Budget:
 								  		{% endif %}</p>
@@ -85,11 +119,11 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
-						    <a class="panel-block">
+							</div>
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Location:</p>
+								    	<p>Location</p>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -99,12 +133,12 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
-						    <a class="panel-block">
+							</div>
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
 								  		<p>{% if event.status!='A' %}
-								    	Target Date:
+								    	Target Date
 								    	{% else %}
 								    	Date
 								  		{% endif %}</p>
@@ -117,8 +151,8 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
-						    <a class="panel-block">
+							</div>
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
 								  		<p>Thrust</p>
@@ -145,11 +179,11 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
-						    <a class="panel-block">
+							</div>
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								  		<p>Proposed On:</p>
+								  		<p>Proposed On</p>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -161,12 +195,12 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
+							</div>
 							{% if event.status=='A' %}
-						    <a class="panel-block">
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								  		<p>Approved On:</p>
+								  		<p>Approved On</p>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -178,12 +212,12 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
+							</div>
 							{% endif %}
-						    <a class="panel-block">
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								  		<p>Status:</p>
+								  		<p>Status</p>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -207,10 +241,112 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
+							</div>
 						</div>
 					</div>
 			    </div>
+
+			    <br>
+
+			    <div class="card">
+				  	<header class="card-header has-background-light">
+					    <p class="card-header-title">
+					      Event Status
+					    </p>
+					</header>
+				  	<div class="card-content tracker">
+					    <div class="content">
+					        <div class="columns is-centered">
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<picture><img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon"></picture>
+					          			<label class="label">Proposed On</label>
+					          			<p>January 29, 2019</p>
+					          			<p>4:00PM</p>
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles">
+					          			<p>2 Day(s)</p>
+					          			<span class="icon is-small"><i class="fas fa-circle mark" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle mark" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon">
+					          			<label class="label">Recop Accepted</label>
+					          			<p>January 29, 2019</p>
+					          			<p>4:00PM</p>
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles">
+					          			<p>2 Day(s)</p>
+					          			<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon">
+					          			<label class="label">FMI Signed</label>
+					          			<p>January 29, 2019</p>
+					          			<p>4:00PM</p>
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles">
+					          			<p>2 Day(s)</p>
+					          			<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon">
+					          			<label class="label">Acad Signed</label>
+					          			<p>January 29, 2019</p>
+					          			<p>4:00PM</p>
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles">
+					          			<p>2 Day(s)</p>
+					          			<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+						          		<span class="icon is-small"><i class="fas fa-circle" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<img src="https://cdn4.iconfinder.com/data/icons/document-26/64/document-512.png" class="track-icon">
+					          			<label class="label">Approved On</label>
+					          			<p>January 29, 2019</p>
+					          			<p>4:00PM</p>
+					          		</div>
+					          	</div>
+					        </div>
+					        <div class="columns">
+					        	<div class="column">
+					        		<p class="subtitle has-text-centered has-text-black">Total Days: 30</p>
+					        	</div>
+					        </div>
+					    </div>
+				  	</div>
+				</div>
+				
 			</div>
 		</section>
 {% endblock %}
