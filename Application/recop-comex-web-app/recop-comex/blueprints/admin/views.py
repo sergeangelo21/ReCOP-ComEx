@@ -115,7 +115,7 @@ def partner_action(id):
 
 	if user.status == "A":
 		status = "D"
-		flash("Partner was disabled!")
+		flash("Partner was disabled!","success")
 	else:
 
 		if user.status=='N':
@@ -142,7 +142,7 @@ def partner_action(id):
 			new = ''
 			status = "A"
 
-		flash("Partner was activated! " + new)
+		flash("Partner was activated! " + new, "success")
 
 	user_account.update_status(id, status)
 

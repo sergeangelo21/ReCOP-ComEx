@@ -63,7 +63,7 @@ def events_create():
 		value_tracker = [id, value_event[0]]
 		proposal_tracker.add(value_tracker)
 
-		flash('Event proposal submitted! Please standby for the approval.')
+		flash('Event proposal submitted! Please standby for the approval.', 'success')
 
 		return redirect(url_for('linkages.events'))
 

@@ -129,7 +129,7 @@ def profile_update(registered):
 
 		else:
 
-			flash('Wrong password.')
+			flash('Wrong password.', 'error')
 
 	else:
 
