@@ -1,119 +1,18 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
+
 <style type="text/css">
-	.image{
-		background-image:url("../../../static/images/pic1.jpg"); 
-		background-size: cover;
-		opacity: 0.9;
 
+.padding{
+		padding: 10px;
 	}
-	.cover
-	{
-
-	}
-
-	/* -------------------------------- 
-
-Primary style
-
--------------------------------- */
-.cover-text {
-  font-size: 100%;
-  font-family: "Roboto", sans-serif;
-  color: #3d3536;
-}
-
-body, html {
-  /* important */
-  height: 100%;
-}
-a {
-  color: #a6989a;
-}
-/* -------------------------------- 
-
-Modules - reusable parts of our design
-
--------------------------------- */
-
-
-.cd-fixed-bg {
-  position: relative;
-  min-height: 75%;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  z-index: 1;
-}
-.cd-fixed-bg h1, .cd-fixed-bg h2 {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  bottom: auto;
-  right: auto;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  -moz-transform: translateX(-50%) translateY(-50%);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  -o-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  width: 90%;
-  max-width: 1170px;
-  text-align: center;
-  font-size: 30px;
-  font-size: 1.875rem;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-  color: white;
-}
-.cd-fixed-bg.cd-bg-1 {
-  background-image: url("../../../static/images/pic1.jpg");
-}
-.cd-fixed-bg.cd-bg-2 {
-  background-image: url("../../../static/images/pic1.jpg");
-}
-
-@media only screen and (min-width: 320px) {
-  .cd-fixed-bg h1, .cd-fixed-bg h2 {
-    font-size: 36px;
-  }
-}
-@media only screen and (min-width: 480px) {
-  .cd-fixed-bg {
-    background-attachment: fixed;
-  }
-  .cd-fixed-bg h1, .cd-fixed-bg h2 {
-    font-size: 48px;
-    font-weight: 300;
-  }
-}
-
-.cd-scrolling-bg {
-  position: relative;
-  min-height: 50%;
-  padding: 4em 0;
-  line-height: 1.6;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
-  z-index: 2;
-}
-.cd-scrolling-bg.cd-color-1 {
-  background-color: #3d3536;
-  color: #a6989a;
-}
-.cd-scrolling-bg.cd-color-2 {
-  background-color:#262626;
-  color: #a6989a;
-}
-.hidden{
-  visibility: : hidden;
-}
-
-/*content overlay start*/
-
+/*content overlay*/
 .content {
   position: relative;
-  width: 90%;
-  max-width: 400px;
-  margin: auto;
+  width: 100%;
+  max-width: auto;
+  padding: 0;
   overflow: hidden;
 }
 
@@ -177,198 +76,258 @@ Modules - reusable parts of our design
 }
 
 .fadeIn-bottom{
-  top: 80%;
+  bottom:30%;
+}
+/**/
+
+/*cover image*/
+.cd-fixed-bg.cd-bg-1 {
+  background-image: url("../../../static/images/pic1.jpg");
+}
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.hidden{
-  visibility: hidden;
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
-/*content overlay ends*/
+body {
+  font-size: 100%;
+  font-family: "Roboto", sans-serif;
+  color: #3d3536;
+  background-color: white;
+}
+
+body, html {
+  /* important */
+  height: 100%;
+}
+a {
+  color: #a6989a;
+}
+/* -------------------------------- 
+
+Modules - reusable parts of our design
+
+-------------------------------- */
+.cd-fixed-bg {
+  position: relative;
+  min-height: 75%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 1;
+}
+.cd-fixed-bg h1, .cd-fixed-bg h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+  max-width: 1170px;
+  text-align: center;
+  font-size: 30px;
+  font-size: 1.875rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+.cd-fixed-bg.cd-bg-1 {
+  background-image: url("../../../static/images/pic1.jpg");
+}
+@media only screen and (min-width: 320px) {
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 36px;
+  }
+}
+@media only screen and (min-width: 480px) {
+  .cd-fixed-bg {
+    background-attachment: fixed;
+  }
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 48px;
+    font-weight: 300;
+  }
+}
+
+.cd-scrolling-bg {
+  position: relative;
+  min-height: 50%;
+  padding: 4em 0;
+  line-height: 1.6;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+
+
+
+
+/**/
 
 
 </style>
 
-		<div class="cd-fixed-bg cd-bg-1">
-			<h1 class="cover-text">Lorem ipsum dolor sit amet</h1>
-		</div> <!-- cd-fixed-bg -->
-<br>
-<!-- Start Content -->
-		<div class="container">
-			<div class="card">
-				<div class="card-content">
-					<div class="columns">
-						<div class="column is-5">
-							<div class='carousel carousel-animated carousel-animate-slide' data-autoplay="true">
-  								<div class='carousel-container'>
-    					<!-- CAROUSEL ITEMS -->
-    		<div class='carousel-item has-background is-active'>
-      			<img class="is-background" src="../../../static/images/partners.jpg" alt="" width="640" height="310" />
-         	</div>
-    
-    		<div class='carousel-item has-background'>
-      			<div class='carousel-item has-background is-active'>
-      				<img class="is-background" src="../../../static/images/volunteer.jpg" alt="" width="640" height="310" />
-    			</div>
-			</div>
-        <div class='carousel-item has-background'>
-            <div class='carousel-item has-background is-active'>
-              <img class="is-background" src="../../../static/images/beneficiary.jpg" alt="" width="640" height="310" />
-          </div>
-      </div>
-								</div>
-							</div>
-					</div>
+  <div class="cd-fixed-bg cd-bg-1">
+      <h1 class="cover-text">Lorem ipsum dolor sit amet</h1>
+   </div>
 
-						<!--END CAROUSEL  -->
-<!-- DETAILS -->
-		<div class="column">
-			<a class="title is-2" href="../">Re-COP ComEx</a>
-        		<br><br>
-        		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-        		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.		
-        		</p>				
-		</div>
-					</div>		
+<!-- CAROUSEL AUTOPLAY START -->
+<div class="container padding">
+	<div class="card">
+		<div class="card-content">
+			<div class="columns">
+				<div class="column is-5">
+					<div class='carousel carousel-animated carousel-animate-slide' data-autoplay="true">
+  						<div class='carousel-container'>
+    					<!-- CAROUSEL ITEMS -->
+    						<div class='carousel-item has-background'>
+      							<img class="is-background" src="../../../static/images/beneficiary.jpg" alt="" width="640" height="310" />
+         					</div>
+
+      						<div class='carousel-item has-background'>
+      							<img class="is-background" src="../../../static/images/volunteer.jpg" alt="" width="640" height="310" />
+    						</div>
+
+    						<div class='carousel-item has-background'>
+      							<img class="is-background" src="../../../static/images/pic4.jpg" alt="" width="640" height="310" />
+    						</div>
+        					
+        					<div class='carousel-item has-background'>
+         						<img class="is-background" src="../../../static/images/beneficiary.jpg" alt="" width="640" height="310" />
+          					</div>
+      					</div>
+					</div>
+				</div>
+<br>
+<!--CAROUSEL AUTOPLAY ENDS  -->
+
+<!-- RECOPCOMEX DETAILS START -->
+				<div class="column">
+					<a class="title is-2" href="../">Re-COP ComEx</a>
+        			<br><br>
+        			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+       				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+       				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+       				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+       				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.		
+    				</p>				
 				</div>
 			</div>
+		</div>
+	</div>
 </div>
-		<!-- END CARD -->
-
-<br>
+<BR>
 
 
+<!-- EVENTS AND SERVICES START -->
 
-<br>
-
-<!-- EVENTS AND SERVICES -->
 <div class="container">
-  
-      <div class="card-content">
-      
-          <h1 class="title is-4">EVENTS AND SERVICES</h1>
-      
-        <div class="columns">
+	<div class="card-container padding">
+	<h1 class="title is-4">EVENTS AND SERVICES</h1>
+	<div class="columns is-centered">
+		<div class="column is-4">
+			<div class="card">
+				<div class="content">
+          <a href="../">
+					<div class="content-overlay"></div>
+						<img class="content-image" src="../../../static/images/beneficiary.jpg">
+					<div class="content-details fadeIn-bottom">
+              			<h3 class="content-title">Youth Activities</h3>
+              			<p class="content-text">This is a short description</p>
+            		</div>
+                </a>	
+				</div>
+				<div class="card-content">	
+			        <span>
+			          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			          consequat. 
+			        </span>
+			         &nbsp;
+			       <br>
+			        <a class="button is-pulled-right is-rounded">Learn more</a>
+				</div>
+			</div>
+		</div>
+		<div class="column is-4">
+			<div class="card">
+				<div class="content">
+          <a href="../">
+					<div class="content-overlay"></div>
+						<img class="content-image" src="../../../static/images/volunteer.jpg">
+					<div class="content-details fadeIn-bottom">
+              			<h3 class="content-title">outreach and Services</h3>
+              			<p class="content-text">This is a short description</p>
+            		</div>	
+            </a> 
+				</div>
+				<div class="card-content">	
+			        <span>
+			          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			          consequat. 
+			        </span>
+			         &nbsp;
+			       <br>
+			        <a class="button is-pulled-right is-rounded">Learn more</a>
+				</div>
+			</div>
+		</div>
+		<div class="column is-4">
+			<div class="card">
+				<div class="content">
+          <a href="../">
+					<div class="content-overlay"></div>
+						<img class="content-image" src="../../../static/images/pic4.jpg">
+					<div class="content-details fadeIn-bottom">
+              <h3 class="content-title">Helping the Community</h3>
+              	<p class="content-text">This is a short description</p>
+          </div>	
+          </a>   
+				</div>
 
-    <div class="column is-4"> 
-      <div class="card"> 
-        <div class="content">
-            <a href="../" target="_blank">
-              <div class="content-overlay"></div>
-            <img class="content-image" src="../../../static/images/beneficiary.jpg">
-            <div class="content-details fadeIn-bottom">
-              <h3 class="content-title">Outreach Activities</h3>
-              <p class="content-text">This is a short description</p>
-            </div>
-            </a>
-          </div>
-            <div class="card-content">
-        <span>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. 
-        </span>
+				<div class="card-content">	
+
+			        <span>
+			          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+			          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+			          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+			          consequat. 
+			        </span>
+			         &nbsp;
+			       <br>
+			        <a class="button is-pulled-right is-rounded">Learn more</a>
+				</div>
+			</div>
+		</div>
+
+		
+		</div>
+	</div>
 </div>
-  </div>
-  
-    </div>
-    
-    <div class="column is-4"> 
-  <div class="card" >
-          <div class="content">
-            <a href="../" target="_blank">
-              <div class="content-overlay"></div>
-            <img class="content-image" src="../../../static/images/pic4.jpg">
-            <div class="content-details fadeIn-bottom">
-              <h3 class="content-title">TREE PLANTING</h3>
-              <p class="content-text">This is a short description</p>
-            </div>
-            </a>
-          </div>
-            <div class="card-content">
-        <span>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. 
-        </span>
-</div>
-      </div>
-    </div>
-
-    <div class="column is-4"> 
-      <div class="card">
-         <div class="content">
-
-            <a href="../" target="_blank">
-              <div class="content-overlay"></div>
-            <img class="content-image" src="../../../static/images/volunteer.jpg">
-            <div class="content-details fadeIn-bottom">
-              <h3 class="content-title">FEEDING PROGRAM</h3>
-              <p class="content-text">This is a short description</p>
-            </div>
-          
-            </a>
-          </div>
-          <div class="card-content">
-        <span>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-          tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-          consequat. 
-        </span>
-</div>
-          </div>
-    </div>
-
-
-
-    <!-- 
-          <div class="content">
-
-            <a href="../" target="_blank">
-              <div class="content-overlay"></div>
-            <img class="content-image" src="../../../static/images/volunteer.jpg">
-            <div class="content-details fadeIn-bottom">
-              <h3 class="content-title">FEEDING PROGRAM</h3>
-              <p class="content-text">This is a short description</p>
-            </div>
-          
-            </a>
-          </div>
- -->
-  
-
-    </div>
-
-
-
-  
-    <!-- <div class="columns">
-      <div class="column is-half">
-        <div class="card">
-        <div class="card-content">
-        <h1 class="title is-6"> NEWS AND CURRENT EVENTS</h1>
-
-      </div>
-      </div>
-      </div>
-    </div> -->
-  
-  </div>
- 
-
-        </div>
-  
+<br>
 <br>
 
+<!-- EVENTS AND SERVICES ENDS -->
 
+
+<!-- WHO WE ARE START -->
 <div class="card notification is-dark">
   <div class="card-content">
     <div class="columns is-centered"> 
         <div class="column is-3">
-          
             <h1 class="title is-3">Who we are</h1>
           <span>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -380,11 +339,9 @@ Modules - reusable parts of our design
            <br>
             <br>
             <a class="button is-primary is-rounded" href="../">Learn more</a>
-        
-          
         </div>
-        <div class="column is-3">
         
+        <div class="column is-3">
             <h1 class="title is-3">Be a volunteer</h1>
             <span>
               Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
@@ -394,66 +351,23 @@ Modules - reusable parts of our design
               consequat. 
             </span>
            <br>
-            <br>
-            <a class="button is-primary is-rounded" href="../">Learn more</a>
-        
-          
+           <br>
+            <a class="button is-primary is-rounded" href="../">Learn more</a> 
         </div>
-                <div class="column is-3">
-          
-            <h1 class="title is-3">Get Information</h1>
+        
+        <div class="column is-3">
+          <h1 class="title is-3">Get Information</h1>
           <span>
           It’s better when more people know about the great things happening at RECOP COMEX. If you’d like to get a monthly message about our activities, &nbsp;<a class="title is-6 primary">Sign up here</a>
           </span>
           <br>
           <br>
           <a class="button is-primary is-rounded" href="../">Learn more</a>
-          
         </div>        
     </div>
   </div>
 </div>
 
-
-
-
-
-
-
-
-
-
-<!-- <div class="container">
-				<div class="columns is-centered">
-					<div class="column is-3"> 
-						<div class="card">
-							<div class="card-content">
-								<figure class="avatar">
-									<img src="../../../static/images/about-us.png">
-								</figure>
-								<h4 class="title is-6 has-text-centered">WHO WE ARE</h4>
-							</div>
-						</div>
-
-					</div>
-					<div class="column is-3"> 
-						<div class="card">
-							<div class="card-content">
-								<h4 class="title is-6 has-text-centered">WHAT WE DO</h4>
-							</div>
-						</div>
-
-					</div>
-					<div class="column is-3"> 
-						<div class="card">
-							<div class="card-content">
-								<h4 class="title is-6 has-text-centered">NEWS AND CURRENT EVENTS</h4>
-							</div>
-						</div>
-
-					</div>
-	
-				</div>
-			</div> -->
+<!-- WHO WE ARE ENDS -->
 
 {% endblock %}
