@@ -47,10 +47,10 @@ function choose(sender){
 
         hide.value = 'San Sebastian College Recoletos de Cavite'
         field.style.display = "none"
-        lbl.innerHTML = "Organization"
-        active.placeholder = "Organization"
 
         if (user!=2){
+        lbl.innerHTML = "Organization"
+        active.placeholder = "Organization"
         document.getElementById('thrust_field').style.display="none"
         document.getElementById('thrust').value=0
         }
@@ -60,9 +60,9 @@ function choose(sender){
     else{
         hide.value = ''
         field.style.display = ""
+        if (user!=2){
         lbl.innerHTML = revert
         active.placeholder = revert
-        if (user!=2){
         document.getElementById('thrust_field').style.display=""
         }
     }

@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
-from data_access.models import user_account, user_information, audit_trail, event_information
-from data_access.queries import user_views
+from data_access.models import user_account, user_information
+from data_access.queries import user_views, event_views, partner_views
 from datetime import datetime
 
 from static.token import confirm
@@ -21,14 +21,14 @@ def index():
 @unregistered.route('/events')
 def events():
 
-		events = event_information.query.all()
+	events = event_views.show_list('all', ' ')
 
-		return render_template('/unregistered/events/index.html', events=events)
+	return render_template('/unregistered/events/index.html', events=events)
 
 @unregistered.route('/partners')
 def partners():
 
-	partners = user_information.query.filter(user_information.partner_thrust!=0).all()
+	partners = partner_views.show_list('A', ' ')
 
 	return render_template('/unregistered/partners/index.html', partners=partners)
 

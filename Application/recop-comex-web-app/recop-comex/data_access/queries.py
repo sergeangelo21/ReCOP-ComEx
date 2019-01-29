@@ -16,6 +16,29 @@ class user_views():
 
 		return record
 
+	def profile_info(value):
+
+		record = user_information.query.join(
+				user_account
+				).add_columns(
+				user_information.first_name,
+				user_information.middle_name,
+				user_information.last_name,
+				user_information.company_name,
+				user_information.bio,
+				user_information.gender,
+				user_information.birthday,
+				user_information.address,
+				user_information.address,
+				user_information.telephone,
+				user_information.mobile_number,
+				user_account.username,
+				user_account.password,
+				user_account.email_address
+				).filter(user_information.id==value).first()
+
+		return record
+
 class partner_views():
 
 	def show_list(value, search):
@@ -79,6 +102,7 @@ class partner_views():
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name).label('coordinator'),
+				user_information.bio,
 				user_information.address,
 				user_account.status,
 				).filter(and_(user_account.type==3, 

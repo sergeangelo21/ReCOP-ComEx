@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
 from blueprints.registered.forms import *
 from data_access.models import *
+from data_access.queries import user_views
 
 from extensions import db, bcrypt
 import os
@@ -64,34 +65,17 @@ def termsandconditions():
 
 	return render_template('/registered/termsandconditions.html')
 
-@registered.route('/registered/profile/<registered>')
+@registered.route('/registered/profile/<user>')
 @login_required
-def profile(registered):
+def profile(user):
 
-	registered = user_information.query.join(
-		user_account
-		).add_columns(
-		user_information.first_name,
-		user_information.middle_name,
-		user_information.last_name,
-		user_information.company_name,
-		user_information.bio,
-		user_information.gender,
-		user_information.birthday,
-		user_information.address,
-		user_information.address,
-		user_information.telephone,
-		user_information.mobile_number,
-		user_account.username,
-		user_account.password,
-		user_account.email_address
-		).filter_by(id=current_user.id).first()
+	registered = user_views.profile_info(current_user.info_id)
 
 	return render_template('/registered/profile/profile.html', registered=registered)
 
-@registered.route('/registered/profile/update/<registered>', methods=['GET', 'POST'])
+@registered.route('/registered/profile/update/<user>', methods=['GET', 'POST'])
 @login_required
-def profile_update(registered):
+def profile_update(user):
 
 	user_information_update = user_information.query.filter_by(id=current_user.id).first()
 	user_account_update = user_account.query.filter_by(id=current_user.id).first()
@@ -125,7 +109,9 @@ def profile_update(registered):
 
 			db.session.commit()
 
-			return redirect(url_for('registered.profile', registered=current_user.username))
+			flash('Profile was successfully updated!', 'success')
+
+			return redirect(url_for('registered.profile', user=current_user.username))
 
 		else:
 

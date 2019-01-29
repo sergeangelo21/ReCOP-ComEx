@@ -1,4 +1,4 @@
-#Table specifications and simple queries goes here
+#Table specifications and basic CRUD queries goes here
 from extensions import login, db, bcrypt
 from flask_login import UserMixin, current_user
 
