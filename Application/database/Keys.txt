@@ -1,22 +1,37 @@
 audit_trail.type
 
 1 - Approval and Moa
-2 - Partner Accepted Moa
+2 - Partner Acknowledged Moa
+3 - Activate Account
+4 - Disable Account
+
+++++++++++++++++++++++++++++++++++++++=
 
 event_information.type
 
-1 = Institutional Annual
-2 = Institutional One Time
-3 = Outside Annual
-4 = Outside One Time
+1 = Institutional
+2 = Outside
 
 ++++++++++++++++++++++++++++++++++++++++
 
 event_information.status
 
 N = New
-O = Ongoing
+P = Pending
+S = Scheduled
+F = Finished
+X = Declined
+
+++++++++++++++++++++++++++++++++++++++++
+
+proposal_tracker.status
+
+N = New
+B = Budget Approval
+A = Academics Approval
+P = President Approval
 A = Approved
+X = Declined
 
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -26,6 +41,7 @@ user_account.type
 2 = participant
 3 = partner
 4 = community
+5 = signatory
 
 ++++++++++++++++++++++++++++++++++++++++
 
@@ -38,3 +54,5 @@ user_information.partner_thrust
 4 = livelihood
 5 = sociopolitical
 6 = spiritual
+
+++++++++++++++++++++++++++++++++++++++++

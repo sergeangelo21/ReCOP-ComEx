@@ -31,8 +31,10 @@
 												<div class="dropdown-menu">
 													<div class="dropdown-content">
 														<a class="dropdown-item" href="{{url_for('admin.event_show', id=event.id)}}"><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
-														<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-edit"></i></span>&nbsp Approve</a>
-														<a class="dropdown-item" href=""><span class="icon is-small"><i class="fa fa-archive"></i></span>&nbsp Decline</a>
+														{% if event.event_status=='N' %}
+														<a class="dropdown-item" href="{{url_for('admin.event_action', id=event.id, action='approve')}}"><span class="icon is-small"><i class="fas fa-check-circle"></i></span>&nbsp Approve</a>
+														<a class="dropdown-item" href="{{url_for('admin.event_action', id=event.id, action='decline')}}"><span class="icon is-small"><i class="fas fa-times-circle"></i></span>&nbsp Decline</a>
+														{% endif %}
 													</div>
 												</div>
 											</div>

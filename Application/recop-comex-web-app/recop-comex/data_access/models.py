@@ -27,11 +27,11 @@ class audit_trail(db.Model):
 
 		record = audit_trail(
 			id = value[0],
-			user_id	= current_user.id,
-			affected_id = value[1],
-			target = value[2],
+			user_id	= value[1],
+			affected_id = value[2],
+			target = value[3],
 			date_created = datetime.now(),
-			type = value[3])
+			type = value[4])
 
 		db.session.add(record)
 		db.session.commit()
@@ -102,6 +102,12 @@ class event_information(db.Model):
 			 
 		db.session.add(record)
 		db.session.commit()
+
+	def retrieve_event(value):
+
+		record = event_information.query.filter(event_information.id==value).first()
+
+		return record
 
 class event_participation(db.Model):
 
@@ -200,9 +206,9 @@ class user_account(db.Model, UserMixin):
 
 	def retrieve_user(value):
 
-		user = user_account.query.filter(user_account.id==value).first()
+		record = user_account.query.filter(user_account.id==value).first()
 
-		return user
+		return record
 
 	def update_status(id, status):
 
@@ -258,6 +264,12 @@ class user_information(db.Model):
 		rows = db.session.query(user_information).count()
 		rows+=1
 		return rows
+
+	def partner_name(value):
+
+		record = user_information.query.filter(user_information.id==value).first()
+
+		return record.company_name
 
 	def add(value):
 
