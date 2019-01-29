@@ -3,7 +3,7 @@
 {% block content %}
 		<div class="panel panel-default">
 			<div style ="position:absolute; margin: 1%">
-				<a href="{{ url_for('admin.partners', status='all', search=' ') }}" class = "button">
+				<a href="{{ url_for('admin.partners', status='all', search=' ') }}" class = "button backbtnprof">
 					<span class="icon is-small">
                 		<i class="fas fa-arrow-alt-circle-left"></i>
 					</span>
@@ -27,20 +27,20 @@
 		<nav class="level is-mobile">
 			<div class="level-item has-text-centered">
 			    <div>
-			      	<a class="menu">
+			      	<a class="prof-icon">
 			      		<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-user fa-2x"></i>
+					      		<i class="fas fa-user fa-2x prof"></i>
 					      	</span>
 					    </p>
-			     	 	<p class="is-size-6 has-text-weight-bold">About</p>
+			     	 	<p class="is-size-6 has-text-weight-bold ">About</p>
 			  	  	</a>
 			    </div>
 			</div>
 
 			<div class="level-item has-text-centered">
 			    <div>
-			    	<a class="menu">
+			    	<a class="prof-icon">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-calendar-alt icon fa-2x""></i>
@@ -53,13 +53,13 @@
 
 			<div class="level-item has-text-centered">
 			    <div>
-			    	<a class="menu">
+			    	<a class="prof-icon">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-cog icon fa-2x"></i>
 					      	</span>
 					    </p>
-				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
+				      	<p class="is-size-6 has-text-weight-bold">&nbsp&nbspSettings</p>
 				    </a>
 			    </div>
 			</div>
@@ -69,24 +69,19 @@
 			<div class="hero-body">
 			    <div class="container">
 			      	<div class="card">
-						<header class="card-header is-active">
+						<header class="card-header has-background-light">
 						    <p class="card-header-title">
 						     {% if partner.address == 'San Sebastian College Recoletos de Cavite' %} Organizational Information
 						     {% else %}
 						     Company Information
 						     {% endif %}
 						    </p>
-						    <a href="#" class="card-header-icon" aria-label="more options">
-						      <span class="icon">
-						        <i class="fas fa-edit" aria-hidden="true"></i>
-						      </span>
-						    </a>
 					  	</header>
 					  	<div class="card-content profile">
-						    <a class="panel-block">
+						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Name:</p>
+								    	<p>Name</p>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -96,12 +91,12 @@
 								    	</div>
 								  	</div>
 								</article>
-							</a>
+							</div>
 							{% if partner.address != 'San Sebastian College Recoletos de Cavite' %}
-							<a class="panel-block">
+							<div class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
-							    		<p>Address:</p>
+							    		<p>Address</p>
 							  		</figure>
 							  		<div class="media-content">
 							   			<div class="content">
@@ -111,13 +106,13 @@
 							    		</div>
 							  		</div>
 								</article>
-						  	</a>
+						  	</div>
 						  	{% endif %}
 
-							<a class="panel-block">
+							<div class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
-							    		<p>Outreach Coordinator:</p>
+							    		<p>Outreach Coordinator</p>
 							  		</figure>
 							  		<div class="media-content">
 							   			<div class="content">
@@ -127,12 +122,12 @@
 							    		</div>
 							  		</div>
 								</article>
-						  	</a>
+						  	</div>
 
-						  	<a class="panel-block">
+						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
-							    		<p>Telephone:</p>
+							    		<p>Telephone</p>
 							  		</figure>
 							  		<div class="media-content">
 							    		<div class="content">
@@ -142,12 +137,12 @@
 							    		</div>
 							  		</div>
 								</article>
-						  	</a>
+						  	</div>
 
-						  	<a class="panel-block">
+						  	<div class="panel-block">
 						     	<article class="media">
 							  		<figure class="media-left">
-							    		<p>Mobile:</p>
+							    		<p>Mobile</p>
 							    	</figure>
 							  		<div class="media-content">
 							    		<div class="content">
@@ -157,12 +152,12 @@
 							    		</div>
 							  		</div>
 								</article>
-						  	</a>
+						  	</div>
 						  	{% if mem_since %}
-						  	<a class="panel-block">
+						  	<div class="panel-block">
 						     	<article class="media">
 							  		<figure class="media-left">
-							    		<p>Member Since:</p>
+							    		<p>Member Since</p>
 							    	</figure>
 							  		<div class="media-content">
 							    		<div class="content">
@@ -172,12 +167,12 @@
 							    		</div>
 							  		</div>
 								</article>
-						  	</a>
+						  	</div>
 						  	{% endif %}
-						  	<a class="panel-block">
+						  	<div class="panel-block">
 						     	<article class="media">
 							  		<figure class="media-left">
-							    		<p>Status:</p>
+							    		<p>Status</p>
 							    	</figure>
 							  		<div class="media-content">
 							    		<div class="content">
@@ -187,7 +182,7 @@
 							    		</div>
 							  		</div>
 								</article>
-						  	</a>
+						  	</div>
 						</div>
 					</div>
 			    </div>
