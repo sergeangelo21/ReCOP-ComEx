@@ -39,6 +39,19 @@ class user_views():
 
 		return record
 
+	def profile_info_update(value):
+
+		record = user_information.query.filter_by(id=current_user.id).first()
+
+		return record
+
+	def profile_acc_update(value):
+
+		record = user_account.query.filter_by(id=current_user.id).first()
+
+		return record
+
+
 class partner_views():
 
 	def show_list(value, search):

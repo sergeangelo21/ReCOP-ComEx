@@ -213,6 +213,12 @@ def beneficiaries():
 
 	return render_template('/admin/beneficiaries.html', title="Beneficiaries | Admin")
 
+@admin.route('/admin/donations')
+@login_required
+def donations():
+
+	return render_template('/admin/donations.html', title="Donations | Admin")
+
 @admin.route('/admin/reports')
 @login_required
 def reports():
