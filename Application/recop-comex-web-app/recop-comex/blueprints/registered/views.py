@@ -65,26 +65,24 @@ def termsandconditions():
 
 	return render_template('/registered/termsandconditions.html')
 
-@registered.route('/registered/profile/<user>')
+@registered.route('/registered/profile/about/<user>')
 @login_required
-def profile(user):
+def profile_about(user):
 
 	registered = user_views.profile_info(current_user.info_id)
 
-	return render_template('/registered/profile/profile.html', registered=registered)
+	return render_template('/registered/profile/about.html', registered=registered)
 
 @registered.route('/registered/profile/update/<user>', methods=['GET', 'POST'])
 @login_required
 def profile_update(user):
 
-	user_information_update = user_information.query.filter_by(id=current_user.id).first()
-	user_account_update = user_account.query.filter_by(id=current_user.id).first()
+	user_information_update = user_views.profile_info_update(current_user.info_id)
+	user_account_update = user_views.profile_acc_update(current_user.info_id)
 
 	form = ProfileUpdateForm()
 
 	if form.validate_on_submit():
-
-		user = user_account.login([current_user.username, form.oldpassword.data])
 
 		if user:
 
@@ -105,13 +103,12 @@ def profile_update(user):
 			user_account_update.email_address = form.email.data
 
 			user_account_update.username = form.username.data
-			user_account_update.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 
 			db.session.commit()
 
 			flash('Profile was successfully updated!', 'success')
 
-			return redirect(url_for('registered.profile', user=current_user.username))
+			return redirect(url_for('registered.profile_about', user=current_user.username))
 
 		else:
 
@@ -133,6 +130,36 @@ def profile_update(user):
 		form.email.data = user_account_update.email_address
 
 		form.username.data = user_account_update.username
-		form.password.data = user_account_update.password
 
-	return render_template('/registered/profile/profile_update.html', form=form, user_account=registered)
+	return render_template('/registered/profile/update.html', form=form)
+
+@registered.route('/registered/profile/updatepassword/<user>', methods=['GET', 'POST'])
+@login_required
+def profile_update_password(user):
+
+	user_account_update = user_views.profile_acc_update(current_user.info_id)
+	
+	form = PasswordUpdateForm()
+
+	if form.validate_on_submit():
+
+		user = user_account.login([current_user.username, form.oldpassword.data])
+
+		if user:
+
+			user_account_update.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+
+			db.session.commit()
+
+			flash('Password was successfully updated!', 'success')
+
+			return redirect(url_for('registered.profile_about', user=current_user.username))
+
+		else:
+
+			flash('Wrong password.', 'error')
+
+
+	return render_template('/registered/profile/update_password.html', form=form)
+
+	

@@ -70,7 +70,7 @@
                         </a>
 
                         <div class="navbar-dropdown is-right">
-                            <a class="navbar-item" href="{{url_for('linkages.profile_about')}}">
+                            <a class="navbar-item" href="{{url_for('linkages.profile_about', user=current_user.username)}}">
                                 My Profile
                             </a>
                             <hr class="navbar-divider">
