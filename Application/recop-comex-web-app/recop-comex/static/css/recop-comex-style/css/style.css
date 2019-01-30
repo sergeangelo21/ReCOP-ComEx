@@ -222,6 +222,18 @@
     /*   END  */
 
 
+    /*   ADMIN - TABLES  */
+    .table-wrapper {
+	  overflow-x: auto;
+	}
+	
+	.admin-table {
+	    width: 100%;
+	    overflow-x: auto;
+	}
+    /*   END  */
+
+
     /* SIGN UP */
  .padding{
     padding: 5%;

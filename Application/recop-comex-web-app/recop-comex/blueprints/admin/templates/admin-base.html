@@ -13,6 +13,7 @@
         <link rel="stylesheet" type="text/css" href="../../../static/css/bulma-0.7.2/css/bulma.css">
         <link rel="stylesheet" href="../../../static/css/fontawesome-5.5.0/css/all.css">
         <link rel="stylesheet" href="../../../static/css/recop-comex-style/css/style.css">
+        <link rel="stylesheet" type="text/css" href="../../../static/css/Bulma-extensions/bulma-checkradio/bulma-checkradio.min.css">
         <script type="text/javascript" src = "../../../static/scripts/base.js" ></script>
           
     </head>
@@ -41,19 +42,24 @@
                         <strong>Events</strong>
                     </a>
                     <a class="navbar-item" href="{{url_for('admin.partners', status='all', search=' ')}}">
-                        <strong>Partners</strong>
+                        <strong>Linkages</strong>
                     </a>
                     <a class="navbar-item" href="{{url_for('admin.beneficiaries')}}">
-                        <strong>Beneficiaries</strong>
+                        <strong>Community</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('admin.reports')}}">
-                        <strong>Reports</strong>
+                    <a class="navbar-item" href="">
+                        <strong>Donations</strong>
                     </a>
                     <a class="navbar-item" href="{{url_for('admin.feedbacks')}}">
                         <strong>Feedbacks</strong>
                     </a>
                 </div>
                 <div class="navbar-end">
+                    <a href="#" class="navbar-item">
+                        <span class="icon is-small has-text-white">
+                            <i class="fas fa-history "></i>
+                        </span>
+                    </a>
                     <a href="#" class="navbar-item">
                         <span class="icon is-small has-text-white">
                             <i class="fas fa-bell"></i>
