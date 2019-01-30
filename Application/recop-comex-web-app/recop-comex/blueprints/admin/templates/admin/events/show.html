@@ -2,36 +2,60 @@
 
 {% block content %}
 
-<style type="text/css">
-	.tracker{
-	  	color: black;
-	}
+		<div class="panel panel-default">
+		    <div class="overlay-card-event has-text-centered">
+		    	<div class="circular-event">
+		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
+		    	</div>
+		        
+		        <div class="row has-text-centered">
+		            <p class="has-text-white is-size-4 has-text-weight-bold">(Event Name)</p>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">(Date)</a>
+		        </div>
+		    </div>
+		   	
+		</div>
 
-	.track-icon{
-		display: block;
-		margin-left: auto;
-		margin-right: auto;
-		color: #072000;
-	}
+		<nav class="level is-mobile">
+			<div class="level-item has-text-centered">
+			    <div>
+			      	<a class="menu">
+			      		<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-info fa-2x"></i>
+					      	</span>
+					    </p>
+			     	 	<p class="is-size-6 has-text-weight-bold">Event Information</p>
+			  	  	</a>
+			    </div>
+			</div>
 
-	@media only screen and (max-width: 768px) {
-	  /* For mobile phones: */
-	  .track-icon{
-			width: 40%;
-		}
-	}
+			<div class="level-item has-text-centered">
+			    <div>
+			    	<a class="menu">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-map-marker-alt icon fa-2x""></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Tracker</p>
+				    </a>
+			    </div>
+			</div>
 
-	.circles{
-		padding-top: 20px;
-		padding-bottom: 20px;
-	}
-
-	.mark{
-		color: #ffb901;
-	}
-
-</style>
-
+			<div class="level-item has-text-centered">
+			    <div>
+			    	<a class="menu">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-users icon fa-2x"></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Participants</p>
+				    </a>
+			    </div>
+			</div>
+		</nav>
 	
 		<section class="hero">
 			<div class="hero-body">
