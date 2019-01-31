@@ -71,9 +71,25 @@
 		<div class="container">
 			<div class="columns is-centered">
 				<div class="column is-8">
-					{% for events in events %}
-						{% include 'linkages/events/_events.html' %}
-					{% endfor %}
+
+					{% if events %}
+
+						{% for events in events %}
+							{% include 'linkages/events/_events.html' %}
+						{% endfor %}
+
+					{% else %}
+					<table class="table is-fullwidth">
+						<thead></thead>
+					<tbody>
+
+						<tr class = "table-row">
+							<td class = "has-text-centered">---Nothing to show---</td>
+					 	</tr>
+						
+					</tbody>
+
+					{% endif %}		
 
 				<div class="column has-text-centered">
 					<div class="card">
