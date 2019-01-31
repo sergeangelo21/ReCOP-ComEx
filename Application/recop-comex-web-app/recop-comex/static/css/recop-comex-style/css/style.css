@@ -27,6 +27,11 @@
 		background-color: #e6e6e6;
 	}
 
+	.list{
+		border:0px;
+		margin:1%;
+	}
+
 	.box.white{
 		transform: translateX(6%);
 		width: 90%;
@@ -49,6 +54,11 @@
 		background-color: #072000; 
 		color: #ffb901;
 		border-color: #072000;
+	}
+
+	.button-back{
+		position:absolute;
+		margin: 1%;
 	}
 	
 	a.button.eventbtn{

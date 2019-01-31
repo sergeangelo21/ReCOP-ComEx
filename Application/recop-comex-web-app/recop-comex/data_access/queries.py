@@ -52,7 +52,7 @@ class user_views():
 		return record
 
 
-class partner_views():
+class linkage_views():
 
 	def show_list(value, search):
 
@@ -220,6 +220,7 @@ class event_views():
 			user_information, proposal_tracker
 			).add_columns(
 			event_information.id,
+			event_information.organizer_id,
 			user_information.company_name,
 			event_information.name,
 			event_information.description,

@@ -2,8 +2,8 @@
 
 {% block content %}
 		<div class="panel panel-default">
-			<div style ="position:absolute; margin: 1%">
-				<a href="{{ url_for('admin.partners', status='all', search=' ') }}" class = "button backbtnprof">
+			<div class="button-back">
+				<a href="{{ url_for('admin.linkages', status='all', search=' ') }}" class = "button backbtnprof">
 					<span class="icon is-small">
                 		<i class="fas fa-arrow-alt-circle-left"></i>
 					</span>
@@ -17,9 +17,9 @@
 		    	</div>
 		        
 		        <div class="row has-text-centered">
-		            <p class="has-text-white is-size-3 has-text-weight-bold">{{partner.company_name}}</p>
-		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{partner.email_address}}</a>
-		            <p class="has-text-white is-size-6"> Last active on {{partner.last_active.strftime('%b %e, %Y at %I:%M %p')}} </p>
+		            <p class="has-text-white is-size-4 has-text-weight-bold">{{linkage.company_name}}</p>
+		            <a class="btn btn-follow is-size-6 btn-sm text-center has-text-white" href="#" role="button">{{linkage.email_address}}</a>
+		            <p class="has-text-white is-size-6"> Last active on {{linkage.last_active.strftime('%b %e, %Y at %I:%M %p')}} </p>
 		        </div>
 		    </div>
 		</div>
@@ -71,7 +71,7 @@
 			      	<div class="card">
 						<header class="card-header has-background-light">
 						    <p class="card-header-title">
-						     {% if partner.address == 'San Sebastian College Recoletos de Cavite' %} Organizational Information
+						     {% if linkage.address == 'San Sebastian College Recoletos de Cavite' %} Organizational Information
 						     {% else %}
 						     Company Information
 						     {% endif %}
@@ -86,13 +86,13 @@
 								  	<div class="media-content">
 								    	<div class="content">
 								      		<p>
-								        		<strong>{{partner.company_name}}</strong>
+								        		<strong>{{linkage.company_name}}</strong>
 								      		</p>
 								    	</div>
 								  	</div>
 								</article>
 							</div>
-							{% if partner.address != 'San Sebastian College Recoletos de Cavite' %}
+							{% if linkage.address != 'San Sebastian College Recoletos de Cavite' %}
 							<div class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
@@ -101,7 +101,7 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{partner.address}}</strong>
+							        			<strong>{{linkage.address}}</strong>
 							      			</p>
 							    		</div>
 							  		</div>
@@ -117,7 +117,7 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{partner.first_name}} {{partner.middle_name}} {{partner.last_name}}</strong>
+							        			<strong>{{linkage.first_name}} {{linkage.middle_name}} {{linkage.last_name}}</strong>
 							      			</p>
 							    		</div>
 							  		</div>
@@ -132,7 +132,7 @@
 							  		<div class="media-content">
 							    		<div class="content">
 							      			<p>
-							        			<strong>{{partner.telephone}}</strong>
+							        			<strong>{{linkage.telephone}}</strong>
 							      			</p>
 							    		</div>
 							  		</div>
@@ -147,7 +147,7 @@
 							  		<div class="media-content">
 							    		<div class="content">
 							      			<p>
-							        			<strong>{{partner.mobile_number}}</strong>
+							        			<strong>{{linkage.mobile_number}}</strong>
 							      			</p>
 							    		</div>
 							  		</div>
@@ -177,7 +177,7 @@
 							  		<div class="media-content">
 							    		<div class="content">
 							      			<p>
-							        			<strong>{{partner.status}}</strong>
+							        			<strong>{{linkage.status}}</strong>
 							      			</p>
 							    		</div>
 							  		</div>

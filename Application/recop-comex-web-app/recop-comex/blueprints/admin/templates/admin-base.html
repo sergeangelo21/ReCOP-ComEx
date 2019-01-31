@@ -3,7 +3,7 @@
 
     <head>
         {% if title %}
-        <title>{{ title }} | ReCOP-ComEx</title>
+        <title>{{ title }}</title>
         {% else %}
         <title>ReCOP-ComEx</title>
         {% endif %}
@@ -41,11 +41,11 @@
                     <a class="navbar-item" href="{{url_for('admin.events', status='all', search=' ')}}">
                         <strong>Events</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('admin.partners', status='all', search=' ')}}">
+                    <a class="navbar-item" href="{{url_for('admin.linkages', status='all', search=' ')}}">
                         <strong>Linkages</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('admin.beneficiaries')}}">
-                        <strong>Community</strong>
+                    <a class="navbar-item" href="{{url_for('admin.communities')}}">
+                        <strong>Communities</strong>
                     </a>
                     <a class="navbar-item" href="{{url_for('admin.donations')}}">
                         <strong>Donations</strong>
