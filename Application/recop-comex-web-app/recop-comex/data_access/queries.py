@@ -39,6 +39,18 @@ class user_views():
 
 		return record
 
+	def signatory_info(value):
+
+		record = user_information.query.join(
+				user_account
+				).add_columns(
+				user_account.id,
+				user_account.email_address,
+				user_information.last_name
+				).filter(user_account.id==value).first()
+
+		return record
+
 	def profile_info_update(value):
 
 		record = user_information.query.filter_by(id=current_user.id).first()

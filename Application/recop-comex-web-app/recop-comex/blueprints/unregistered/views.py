@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
-from data_access.models import user_account, user_information, audit_trail
+from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information
 from data_access.queries import user_views, event_views, linkage_views
 from datetime import datetime
 
-from static.email import confirm
+from static.email import confirm, generate, send_email
 
 import os, json
 
@@ -134,7 +134,7 @@ def logout():
 	return redirect('/')
 
 @unregistered.route('/linkages/<token>')
-def confirm_linkage(token, expiration = 3600):
+def confirm_linkage(token):
 
 	id = confirm(token)
 
@@ -161,10 +161,76 @@ def confirm_linkage(token, expiration = 3600):
 	
 	return redirect(url_for('unregistered.login'))
 
-@unregistered.route('/signing/<action>/<token>')
-def event_signing(token, action, expiration = 3600):
+@unregistered.route('/signing/<action>/<token>', methods=['GET', 'POST'])
+def event_signing(token, action):
 
-	flash('Event was ' + action, 'warning')
+	id = confirm(token)
 
-	return redirect(url_for('unregistered.login'))
+	if id=='bad':
+		flash('Link already expired. Please contact the ReCOP Administrator.', 'error')
+		return redirect(url_for('unregistered.index'))
+
+	event = event_views.show_info(id)
+	organizer = user_information.linkage_info(event.organizer_id)
+
+	form = LoginForm()
+
+	if form.validate_on_submit():
+
+		user = user_account.login([form.username.data, form.password.data])
+
+		if user and user.type==5:
+
+			if action=='approve':
+
+				if event.status=='F':
+					if user.id==4:
+						signatory = user_views.signatory_info(3)
+						status='A'
+					else:
+						flash('Invalid credentials! Please try again.', 'error')	
+						return redirect(url_for('unregistered.event_signing', token=token, action=action))
+				elif event.status=='A':
+					if user.id==3:
+						signatory = user_views.signatory_info(2)
+						status='P'
+					else:
+						flash('Invalid credentials! Please try again.', 'error')	
+						return redirect(url_for('unregistered.event_signing', token=token, action=action))
+				elif event.status=='P':
+					if user.id==2:
+						status='S'
+						event_information.update_status(event.id, status)
+					else:
+						flash('Invalid credentials! Please try again.', 'error')
+						return redirect(url_for('unregistered.event_signing', token=token, action=action))	
+
+				proposal_tracker.update_status(event.id, status)
+
+				audit_id = audit_trail.count()
+				value = [audit_id,user.id,event.id,'event', 5]
+				audit_trail.add(value)
+
+				if status!='S':
+
+					recipient = signatory.email_address
+					name = 'Fr. ' + signatory.last_name
+					token = generate(event.id)
+					approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
+					decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
+					html = render_template('admin/email/event.html', event=event , organizer=organizer.company_name, user=name, link = [approve, decline])
+					subject = "NEW EVENT: " + event.name
+
+					email_parts = [html, subject, user.email_address, recipient]
+
+					send_email(email_parts)
+
+				flash(event.name.title() + ' was approved!', 'success')
+				return redirect('/')
+
+		else:
+
+			flash('Invalid credentials! Please try again.', 'error')
+
+	return render_template('/unregistered/events/signing.html', form=form, action=action, event=event)
 

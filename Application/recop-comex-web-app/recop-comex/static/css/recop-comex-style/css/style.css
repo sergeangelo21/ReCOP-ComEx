@@ -61,15 +61,15 @@
 		margin: 1%;
 	}
 	
-	a.button.eventbtn{
+	a.button.viewbtn{
 		background-color: #ecad00;
 		color: #072000;
-		border-color: #ecad00;
+		border-color: #072000;
 	}
 
-	a.button.eventbtn:hover, a.button.eventbtn.is-active{
-		background-color: #ffb901;
-		color: #072000;
+	a.button.viewbtn:hover, a.button.viewbtn.is-active{
+		background-color: #072000;
+		color: #ffb901;
 		border-color: #ffb901;
 	}
 	/*		END		*/
@@ -208,7 +208,7 @@
 		display: block;
 		margin-left: auto;
 		margin-right: auto;
-		color: #072000;
+		color: gray;
 	}
 
 	@media only screen and (max-width: 768px) {
@@ -224,7 +224,7 @@
 	}
 
 	.mark{
-		color: #ffb901;
+		color: #072000;
 	}
 
 	/*       END        */

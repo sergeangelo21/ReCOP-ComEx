@@ -7,13 +7,12 @@
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('admin.events_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  		<a href="" class="button eventbtn is-active">
+						  		<a href="" class="button viewbtn is-active">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
 								</a>
-
-								<a href="" class="button eventbtn">
+								<a href="" class="button viewbtn">
 									<span class="icon">
 										<i class="fa fa-calendar-alt"></i>
 									</span>
@@ -160,7 +159,7 @@
 									    <th class="newlist">Event Name</th>
 									    <th class="newlist">Organizer</th>
 									    <th class="newlist">Target Date</th>
-									   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
+									   	{% if status=='all' or status=='pending' %}<th class="newlist">Status</th>{% endif %}
 									    <th class="newlist hidedesktop">Actions</th>
 									 </tr>
 									

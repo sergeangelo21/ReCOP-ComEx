@@ -1,5 +1,7 @@
+from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, BadSignature	
 from config import Config
+from extensions import mail
 
 
 def generate(email):
@@ -8,12 +10,20 @@ def generate(email):
 
     return serializer.dumps(email, salt=Config.SECURITY_PASSWORD_SALT)
 
-def confirm(token, expiration=3600):
+def confirm(token):
 
     serializer = URLSafeTimedSerializer(Config.SECRET_KEY)
 
     email = serializer.loads(
-    	token, salt=Config.SECURITY_PASSWORD_SALT, max_age=expiration)
-
+    	token, salt=Config.SECURITY_PASSWORD_SALT)
         	
     return email
+
+def send_email(parts):
+
+	msg = Message(html=parts[0],
+		subject=parts[1],
+		sender = ("ReCOP Director", parts[2]),
+		recipients=[parts[3]])
+
+	mail.send(msg)

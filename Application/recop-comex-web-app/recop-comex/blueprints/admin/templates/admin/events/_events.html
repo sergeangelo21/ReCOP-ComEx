@@ -4,14 +4,20 @@
 									    <td>{{event.name}}</td>
 									    <td>{{event.company_name}}</td>
 									    <td>{{event.event_date.strftime('%B %e, %Y')}}</td>
-									    {% if status=='all' %}
+									    {% if status=='all' or status=='pending' %}
 									    <td>
 									    	{% if event.event_status=='N' %}
 									    		New
 									    	{% elif event.event_status=='S' %}
 									    		Scheduled
 									    	{% elif event.event_status=='P' %}
-									    		Pending
+									    		{% if event.status=='F' %}
+									    			For Academic's Approval
+									    		{% elif event.status=='A' %}
+									    			For President's Approval
+									    		{% else %}
+									    			For Finance's Approval
+									    		{% endif %}
 									    	{% else %}
 									    		Finished
 									    	{% endif %}

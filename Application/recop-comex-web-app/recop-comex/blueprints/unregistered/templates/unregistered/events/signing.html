@@ -1,0 +1,83 @@
+{% extends "unregistered-base.html" %}
+
+{% block content %}
+<style type="text/css">
+	
+	.green{
+		background-color:#0d3105;
+		color: #feb801;
+		}
+
+	.green:hover{
+		color:#feb801;
+		
+	}
+
+	.whitesmoke{
+		background-color: #f3f3f3;
+	}
+	.white{
+		background-color: #ffffff;
+	}
+	.image{
+		margin-top:150px;
+	}
+
+</style>
+<br>
+<br>
+		<div class="container">
+			<div class="columns is-centered">
+				<div class="column is-7">
+					<div class="card">
+						<div class="card-content">
+							<div class="columns">
+								<div class="column is-half">
+									<br>
+									<img src="../../../static/images/logo.png">
+								</div>
+								<div class="column">
+									<div class="field has-text-centered">
+										<label class="title is-3">Please login to {{action}} the event {{event.name}}</label><br>
+									</div>
+									<form action="" method="POST">
+										{{form.hidden_tag()}}
+										<div class="field">
+											{{form.username.label(class_='label')}}
+											<div class="control has-icons-left has-icons-right">
+												{{form.username(class_='input', placeholder='Username')}}
+                                                {% for error in form.username.errors %}
+                                                <span style="color: red;">[{{ error }}]</span>
+                                                {% endfor %}
+												<span class="icon is-small is-left">
+							      					<i class="fa fa-user"></i>
+							    				</span>
+											</div>
+										</div>
+
+										<div class="field">	
+											{{form.password.label(class_='label')}}
+											<div class="control has-icons-left has-icons-right">
+												{{form.password(class_='input', placeholder='Password')}}
+												{% for error in form.password.errors %}
+                                                <span style="color: red;">[{{ error }}]</span>
+                                                {% endfor %}
+												<span class="icon is-small is-left">
+							      					<i class="fa fa-key"></i>
+							    				</span>
+											</div>
+										</div>
+
+										<div class="field">
+											{{form.submit(class_='button submit')}}
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+{% endblock %}

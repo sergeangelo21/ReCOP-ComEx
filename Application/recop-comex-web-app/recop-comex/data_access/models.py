@@ -109,6 +109,12 @@ class event_information(db.Model):
 
 		return record
 
+	def update_status(id, status):
+
+		event = event_information.query.filter(event_information.id==id).first()
+		event.event_status = status
+		db.session.commit()		
+
 class event_participation(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -158,6 +164,25 @@ class proposal_tracker(db.Model):
 			status = 'N')
 
 		db.session.add(record)
+		db.session.commit()
+
+	def update_status(id, status):
+
+		proposal = proposal_tracker.query.filter(proposal_tracker.event_id==id).first()
+
+		proposal.status = status
+
+		if status=='F':
+			proposal.recop_accepted = datetime.now()
+		elif status=='A':
+			proposal.fmi_signed = datetime.now()
+		elif status=='P':
+			proposal.acad_signed = datetime.now()
+		elif status=='S':
+			proposal.approved_on = datetime.now()
+		else:
+			proposal.comment = 'Declined'
+
 		db.session.commit()
 
 class referral(db.Model):

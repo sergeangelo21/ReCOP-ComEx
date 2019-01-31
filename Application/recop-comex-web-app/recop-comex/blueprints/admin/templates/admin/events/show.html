@@ -225,7 +225,7 @@
 								  	</div>
 								</article>
 							</div>
-							{% if event.status=='A' %}
+							{% if event.status=='S' %}
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
@@ -254,9 +254,9 @@
 				  	<header class="card-header has-background-light">
 					    <p class="card-header-title">
 					      Proposal Status: 
-								        		{% if event.status=='N' %}
+								        		{% if event.event_status=='N' %}
 								        			For ReCOP Approval
-								        		{% elif event.status=='O' %}
+								        		{% elif event.event_status=='P' %}
 								        			{% if event.acad_signed %}
 								        				For President's Signing
 								        			{% elif event.fmi_signed %}
@@ -264,7 +264,7 @@
 								        			{% elif event.recop_accepted %}
 								        				For Finance's Signing
 								       				{% endif %}
-								        		{% elif event.status=="A" %}
+								        		{% elif event.event_status=="S" %}
 								        			Approved
 								        		{% endif %}
 					    </p>
@@ -285,7 +285,7 @@
 					          		</div>
 					          	</div>
 					          	<div class="column has-text-centered">
-					          		<div class="circles {% if event.recop_accepted %} mark {% endif %}">
+					          		<div class="circles {% if event.fmi_signed %} mark {% endif %}">
 					          			<br>					          			
 					          			<span class="icon"><i class="fas fa-ellipsis-h fa-5x" aria-hidden="true"></i></span>
 					          		</div>
@@ -303,7 +303,7 @@
 					          		</div>
 					          	</div>
 					          	<div class="column has-text-centered">
-					          		<div class="circles {% if event.fmi_signed %} mark {% endif %}">
+					          		<div class="circles {% if event.acad_signed %} mark {% endif %}">
 					          			<br>
 					          			<span class="icon"><i class="fas fa-ellipsis-h fa-5x" aria-hidden="true"></i></span>
 					          		</div>
@@ -321,7 +321,7 @@
 					          		</div>
 					          	</div>
 					          	<div class="column has-text-centered">
-					          		<div class="circles {% if event.acad_signed %} mark {% endif %}">
+					          		<div class="circles {% if event.approved_on %} mark {% endif %}">
 					          			<br>
 					          			<span class="icon"><i class="fas fa-ellipsis-h fa-5x" aria-hidden="true"></i></span>
 					          		</div>
@@ -330,7 +330,7 @@
 					          		<div class="has-text-centered">
 					          			<i class="fas fa-check fa-5x track-icon {% if event.approved_on %} mark {% endif %}"></i>
 					          			<label class="label">Approved</label>
-					          			{% if event.fmi_signed %} 
+					          			{% if event.approved_on %} 
 					          			{{event.approved_on.strftime('%B %e, %Y')}}<br>
 					          			{{event.approved_on.strftime('%I:%M %p')}}
 					          			{% else %}
@@ -338,11 +338,6 @@
 					          			{% endif %}
 					          		</div>
 					          	</div>
-					        </div>
-					        <div class="columns">
-					        	<div class="column">
-					        		<div class="has-text-centered has-text-black">Total Days: 0</div>
-					        	</div>
 					        </div>
 					    </div>
 				  	</div>

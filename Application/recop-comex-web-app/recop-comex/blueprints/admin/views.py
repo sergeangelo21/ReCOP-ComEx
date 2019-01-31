@@ -1,12 +1,9 @@
 from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
-from flask_mail import Message
 from blueprints.admin.forms import *
 from data_access.models import *
 from data_access.queries import *
-
-from extensions import db, mail
-from static.email import generate
+from static.email import generate, send_email
 
 import os
 
@@ -81,26 +78,33 @@ def event_action(id, action):
 
 	if action=='approve':
 
-		status = ['P','B']
-
 		if event.budget>0.00:
-			recipient = 'fmi.baste@gmail.com'
-			user = 'Fr. Somebody'
+			signatory = user_views.signatory_info(4)
+			status = ['P','F']
 		else:
-			recipient = 'acad.baste@gmail.com'
-			user = 'Fr. Tanquis'
+			signatory = user_views.signatory_info(3)
+			status = ['P','A']
 
+		recipient = signatory.email_address
+		user = 'Fr. ' + signatory.last_name
 		token = generate(event.id)
 		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
 		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
 		html = render_template('admin/email/event.html', event=event , organizer=organizer.company_name, user=user, link = [approve, decline])
 		subject = "NEW EVENT: " + event.name
 
-		email_parts = [html, subject, recipient]
+		email_parts = [html, subject, current_user.email_address, recipient]
 
-		msg = compose_email(email_parts)
+		send_email(email_parts)
 
-		mail.send(msg)
+		event_information.update_status(event.id,status[0])
+		proposal_tracker.update_status(event.id,status[1])
+
+		proposal = proposal_tracker.query.filter(proposal_tracker.event_id==event.id).first()
+
+		audit_id = audit_trail.count()
+		value = [audit_id,current_user.id,event.id,'event', 5]
+		audit_trail.add(value)
 
 		flash(event.name + ' was approved!', 'success')
 
@@ -157,7 +161,7 @@ def linkage_action(id):
 	if user.status == "A":
 	
 		status = "D"
-		flash(linkage.company_name + " was disabled!","success")
+		flash(linkage.company_name.title() + " was disabled!","success")
 
 		audit_id = audit_trail.count()
 		value = [audit_id,current_user.id,id,'linkage', 4]
@@ -166,7 +170,7 @@ def linkage_action(id):
 	elif user.status== "D":
 		
 		status = "A"
-		flash(linkage.company_name + " was activated! ", "success")
+		flash(linkage.company_name.title() + " was activated! ", "success")
 
 		audit_id = audit_trail.count()
 		value = [audit_id,current_user.id,id,'linkage', 3]
@@ -179,13 +183,11 @@ def linkage_action(id):
 		html = render_template('admin/email/moa.html', user = user.username, link = link)
 		subject = "MEMORANDUM OF AGREEMENT"
 
-		email_parts = [html, subject, user.email_address]
+		email_parts = [html, subject, current_user.email_address, user.email_address]
 
-		msg = compose_email(email_parts)
-
-		mail.send(msg)
+		send_email(email_parts)
 			
-		flash('MOA was sent to ' + linkage.company_name, 'success')
+		flash('MOA was sent to ' + linkage.company_name.title(), 'success')
 
 		status = "P"
 			
@@ -334,12 +336,3 @@ def profile_update_password(user):
 			flash('Wrong password.', 'error')
 
 	return render_template('/admin/profile/update_password.html', form=form)
-
-def compose_email(parts):
-
-	msg = Message(html=parts[0],
-		subject=parts[1],
-		sender = ("ReCOP Director", current_user.email_address),
-		recipients=[parts[2]])
-
-	return msg
