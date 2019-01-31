@@ -3,14 +3,22 @@
 {% block content %}
 
 		<div class="panel panel-default">
+			<div class="button-back">
+				<a href="{{ url_for('admin.events', status='all', search=' ') }}" class = "button backbtnprof">
+					<span class="icon is-small">
+                		<i class="fas fa-arrow-alt-circle-left"></i>
+					</span>
+					<span>Back</span>
+				</a>
+			</div>
 		    <div class="overlay-card-event has-text-centered">
 		    	<div class="circular-event">
 		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
 		    	</div>
 		        
 		        <div class="row has-text-centered">
-		            <p class="has-text-white is-size-4 has-text-weight-bold">(Event Name)</p>
-		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">(Date)</a>
+		            <p class="has-text-white is-size-4 has-text-weight-bold">{{event.name}}</p>
+		            <a class="btn btn-follow btn-sm is-size-6 text-center has-text-white" href="{{url_for('admin.linkage_show', id=event.organizer_id)}}" role="button">{{event.company_name}}</a>
 		        </div>
 		    </div>
 		   	

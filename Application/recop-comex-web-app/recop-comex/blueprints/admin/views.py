@@ -24,7 +24,7 @@ def before_request():
 		elif current_user.type == 3:
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
-			return redirect(url_for('beneficiaries.index'))
+			return redirect(url_for('communities.index'))
 
 @admin.route('/admin')
 @login_required
@@ -63,7 +63,7 @@ def event_show(id):
 
 	event = event_views.show_info(id)
 
-	return render_template('/admin/events/show.html', title="Events | Admin", event = event)
+	return render_template('/admin/events/show.html', title= event.name.title() + " | Admin", event = event)
 
 @admin.route('/admin/events/create')
 @login_required
@@ -78,7 +78,7 @@ def events_create():
 def event_action(id, action):
 
 	event = event_information.retrieve_event(id)
-	organizer = user_information.partner_info(event.organizer_id)
+	organizer = user_information.linkage_info(event.organizer_id)
 	email = user_account.retrieve_user(organizer.id)
 
 	if action=='approve':
@@ -116,9 +116,9 @@ def event_action(id, action):
 	return redirect(url_for('admin.events', status='all', search=' '))
 
 
-@admin.route('/admin/partners/<status>/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/linkages/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
-def partners(status, search):
+def linkages(status, search):
 
 	if status=='active':
 		value='A'
@@ -131,53 +131,53 @@ def partners(status, search):
 	else:
 		value=status
 
-	partners = partner_views.show_list(value, search=search)
+	linkages = linkage_views.show_list(value, search=search)
 
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('admin.partners', status=status, search=form.search.data))
+		return redirect(url_for('admin.linkages', status=status, search=form.search.data))
 
-	return render_template('/admin/partners/index.html', title="Partners | Admin", form=form, partners=partners, status=status, search=search)
+	return render_template('/admin/linkages/index.html', title="Linkages | Admin", form=form, linkages=linkages, status=status, search=search)
 
-@admin.route('/admin/partners/show/id=<id>')
+@admin.route('/admin/linkages/show/id=<id>')
 @login_required
-def partner_show(id):
+def linkage_show(id):
 
-	partner, mem_since = partner_views.show_info(id)
+	linkage, mem_since = linkage_views.show_info(id)
 
-	return render_template('/admin/partners/show.html', title="Partners | Admin", partner=partner, mem_since = mem_since)
+	return render_template('/admin/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage, mem_since = mem_since)
 
-@admin.route('/admin/partners/action/id=<id>')
+@admin.route('/admin/linkages/action/id=<id>')
 @login_required
-def partner_action(id):
+def linkage_action(id):
 
 	user = user_account.retrieve_user(id)
-	partner = user_information.partner_info(user.info_id)
+	linkage = user_information.linkage_info(user.info_id)
 
 	if user.status == "A":
 	
 		status = "D"
-		flash(partner.company_name + " was disabled!","success")
+		flash(linkage.company_name + " was disabled!","success")
 
 		audit_id = audit_trail.count()
-		value = [audit_id,current_user.id,id,'partner', 4]
+		value = [audit_id,current_user.id,id,'linkage', 4]
 		audit_trail.add(value)
 	
 	elif user.status== "D":
 		
 		status = "A"
-		flash(partner.company_name + " was activated! ", "success")
+		flash(linkage.company_name + " was activated! ", "success")
 
 		audit_id = audit_trail.count()
-		value = [audit_id,current_user.id,id,'partner', 3]
+		value = [audit_id,current_user.id,id,'linkage', 3]
 		audit_trail.add(value)
 
 	else:
 			
 		token = generate(user.id)
-		link = url_for('unregistered.confirm_partner', token=token , _external = True)	
+		link = url_for('unregistered.confirm_linkage', token=token , _external = True)	
 		html = render_template('admin/email/moa.html', user = user.username, link = link)
 		subject = "MEMORANDUM OF AGREEMENT"
 
@@ -187,29 +187,29 @@ def partner_action(id):
 
 		mail.send(msg)
 			
-		flash('MOA was sent to ' + partner.company_name, 'success')
+		flash('MOA was sent to ' + linkage.company_name, 'success')
 
 		status = "P"
 			
 		audit_id = audit_trail.count()
-		value = [audit_id,current_user.id,id,'partner', 1]
+		value = [audit_id,current_user.id,id,'linkage', 1]
 		audit_trail.add(value)
 
 	user_account.update_status(id, status)
 
-	return redirect(url_for('admin.partners', status='all', search=' '))
+	return redirect(url_for('admin.linkages', status='all', search=' '))
 
-@admin.route('/admin/partners/create')
+@admin.route('/admin/linkages/create')
 @login_required
-def partners_create():
+def linkages_create():
 
-	return render_template('/admin/partners/create.html')
+	return render_template('/admin/linkages/create.html')
 
-@admin.route('/admin/beneficiaries')
+@admin.route('/admin/communities')
 @login_required
-def beneficiaries():
+def communities():
 
-	return render_template('/admin/beneficiaries.html', title="Beneficiaries | Admin")
+	return render_template('/admin/communities.html', title="Communities | Admin")
 
 @admin.route('/admin/donations')
 @login_required

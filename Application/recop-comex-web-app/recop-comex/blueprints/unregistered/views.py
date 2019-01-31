@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm
 from data_access.models import user_account, user_information, audit_trail
-from data_access.queries import user_views, event_views, partner_views
+from data_access.queries import user_views, event_views, linkage_views
 from datetime import datetime
 
 from static.email import confirm
@@ -134,7 +134,7 @@ def logout():
 	return redirect('/')
 
 @unregistered.route('/linkages/<token>')
-def confirm_partner(token, expiration = 3600):
+def confirm_linkage(token, expiration = 3600):
 
 	id = confirm(token)
 

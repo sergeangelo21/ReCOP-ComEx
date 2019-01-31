@@ -6,11 +6,22 @@
 					<div class="column is-3">
 						<article class="media">
 						  	<figure class="media-left"> 
-						  		<button class="button add">
-						  		<a href="{{url_for('admin.events_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</button></a>
+						  		<a class="button add" href="{{url_for('admin.events_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+						  		<a href="" class="button eventbtn is-active">
+									<span class="icon">
+										<i class="fa fa-list"></i>
+									</span>
+								</a>
+
+								<a href="" class="button eventbtn">
+									<span class="icon">
+										<i class="fa fa-calendar-alt"></i>
+									</span>
+								</a>
 						  	</figure>
 						</article>
 					</div>
+
 
 					<div class="column is-6">
 						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
@@ -70,71 +81,61 @@
 			<div class="columns is-gapless">
 				<div class="column is-2">
 		    		<div class="notification filter">
-		    			<p class="title is-size-5">View</p>
-		    			<div class="columns">
-		    				<div class="column has-text-centered">
-								<a href="" class="button eventbtn is-active">
-									<span class="icon">
-										<i class="fa fa-list"></i>
-									</span>
-								</a>
-
-								<a href="" class="button eventbtn">
-									<span class="icon">
-										<i class="fa fa-calendar-alt"></i>
-									</span>
-								</a>
-							</div>
-		    			</div>
-
-		    			<p class="title is-size-5">Filter</p>
-		    			<div class="columns">
-		    				<div class="column">
-		    					<div class="select is-fullwidth">
-								    <select>
-								      <option>Please choose</option>
-								      <option>All</option>
-								      <option>Organizations</option>
-								      <option>Departmental</option>
-								      <option>Partners</option>
-								    </select>
-							 	</div>
-		    				</div>
-		    			</div>
 
 		    			<div class="columns">
-		    				<div class="column">
-		    					<div class="select is-fullwidth">
-								    <select>
-								      <option>Please choose</option>
-								      <option>All</option>
-								      <option>Organizations</option>
-								      <option>Departmental</option>
-								      <option>Partners</option>
-								    </select>
-							 	</div>
-		    				</div>
-		    			</div>
+			                <div class="column">
+			                	<p class="title is-size-5">Thrust</p>
+			                  	<div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="" type="checkbox" name="0" checked="checked">
+				                    <label for="">All</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="1" type="checkbox" name="1">
+				                    <label for="1">Educational</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="2" type="checkbox" name="2">
+				                    <label for="2">Environmental</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="3" type="checkbox" name="3">
+				                    <label for="3">Health</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="4" type="checkbox" name="4">
+				                    <label for="4">Livelihood</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="5" type="checkbox" name="5">
+				                    <label for="5">Socio-Political</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="6" type="checkbox" name="6">
+				                    <label for="6">Spiritual</label>
+				                </div>
+			                	
+			                	<p class="title is-size-5">Type</p>
 
-		    			<div class="columns">
-		    				<div class="column">
-		    					<div class="select is-fullwidth">
-								    <select>
-								      <option>Please choose</option>
-								      <option>All</option>
-								      <option>Organizations</option>
-								      <option>Departmental</option>
-								      <option>Partners</option>
-								    </select>
-							 	</div>
-		    				</div>
-		    			</div>
+			                  	<div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="7" type="checkbox" name="7" checked="checked">
+				                    <label for="7">All</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
+				                    <label for="8">Institutional</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
+				                    <label for="9">Outside</label>
+				                </div>
+			                </div>
+			            </div>
 					 	
 		    		</div>
 		    	</div>
 
 				<div class="column">
-					<div class="card box">
+					<div class="card list">
 						<div class="card-header">
 							<p class="card-header-title">
 							{% if search!=' ' %}

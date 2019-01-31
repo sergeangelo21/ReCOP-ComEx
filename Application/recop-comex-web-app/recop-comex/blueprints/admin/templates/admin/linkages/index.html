@@ -6,7 +6,7 @@
 					<div class="column is-3">
 						<article class="media">
 						  	<figure class="media-left"> 
-						  		<a class="button add" href="{{url_for('admin.partners_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+						  		<a class="button add" href="{{url_for('admin.linkages_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
 						  	</figure>
 						</article>
 					</div>
@@ -15,31 +15,31 @@
 						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.partners', status='all', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='all', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
 						        <span class="proposal">All</span>
 						      </a>
 						    </li>
 						    <li {% if status=='new' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.partners', status='new', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='new', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-plus" aria-hidden="true"></i></span>
 						        <span class="proposal">New</span>
 						      </a>
 						    </li>
 						    <li {% if status=='pending' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.partners', status='pending', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='pending', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-clock" aria-hidden="true"></i></span>
 						        <span class="proposal">Pending</span>
 						      </a>
 						    </li>
 						    <li {% if status=='active' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.partners', status='active', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='active', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-check" aria-hidden="true"></i></span>
 						        <span class="prop">Active</span>
 						      </a>
 						    </li>
 						    <li {% if status=='disabled' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.partners', status='disabled', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='disabled', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-times" aria-hidden="true"></i></span>
 						        <span>Disabled</span>
 						      </a>
@@ -66,40 +66,55 @@
 				</div>
 			</div>
 
-			<div class="columns is-gapless">
+			<div class="columns">
 				<div class="column is-2">
 					<div class="notification filter">
-						<p class="title is-size-5">Filter</p>
 
 		    			<div class="columns">
 			                <div class="column">
+			                	<p class="title is-size-5">Thrust</p>
 			                  	<div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="exampleCheckboxBackgroundColorWarning" type="checkbox" name="exampleCheckboxBackgroundColorWarning" checked="checked">
-				                    <label for="exampleCheckboxBackgroundColorWarning">All</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="" type="checkbox" name="0" checked="checked">
+				                    <label for="">All</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="exampleCheckboxBackgroundColorWarning1" type="checkbox" name="exampleCheckboxBackgroundColorWarning1">
-				                    <label for="exampleCheckboxBackgroundColorWarning1">Educational</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="1" type="checkbox" name="1">
+				                    <label for="1">Educational</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="exampleCheckboxBackgroundColorWarning2" type="checkbox" name="exampleCheckboxBackgroundColorWarning2">
-				                    <label for="exampleCheckboxBackgroundColorWarning2">Environmental</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="2" type="checkbox" name="2">
+				                    <label for="2">Environmental</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="exampleCheckboxBackgroundColorWarning3" type="checkbox" name="exampleCheckboxBackgroundColorWarning3">
-				                    <label for="exampleCheckboxBackgroundColorWarning3">Health</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="3" type="checkbox" name="3">
+				                    <label for="3">Health</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="exampleCheckboxBackgroundColorWarning4" type="checkbox" name="exampleCheckboxBackgroundColorWarning4">
-				                    <label for="exampleCheckboxBackgroundColorWarning4">Livelihood</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="4" type="checkbox" name="4">
+				                    <label for="4">Livelihood</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="exampleCheckboxBackgroundColorWarning5" type="checkbox" name="exampleCheckboxBackgroundColorWarning5">
-				                    <label for="exampleCheckboxBackgroundColorWarning5">Socio-Political</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="5" type="checkbox" name="5">
+				                    <label for="5">Socio-Political</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="exampleCheckboxBackgroundColorWarning6" type="checkbox" name="exampleCheckboxBackgroundColorWarning6">
-				                    <label for="exampleCheckboxBackgroundColorWarning6">Spiritual</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="6" type="checkbox" name="6">
+				                    <label for="6">Spiritual</label>
+				                </div>
+			                	
+			                	<p class="title is-size-5">Type</p>
+
+			                  	<div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="7" type="checkbox" name="7" checked="checked">
+				                    <label for="7">All</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
+				                    <label for="8">Institutional</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
+				                    <label for="9">Outside</label>
 				                </div>
 			                </div>
 			            </div>
@@ -107,26 +122,26 @@
 				</div>
 
 				<div class="column">
-					<div class="card box">
+					<div class="card list">
 						<div class="card-header">
 							<p class="card-header-title">
 							{% if search!=' ' %}
 							You searched for '{{search}}'
-							<a href="{{url_for('admin.partners', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
+							<a href="{{url_for('admin.linkages', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
 							&nbsp; in
 							{% endif %}
-							{{status | title }} Partners
+							{{status | title }} Linkages
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
-									Total: {{partners | length}}
+									Total: {{linkages | length}}
 								</p>
 							</div>
 						</div>
 						<div class="card-content">
-							<div class="table-wrapper">
-								<table class="table is-fullwidth">
-								{% if partners %}
+							<div class="table">
+								<table class="table is-striped is-fullwidth">
+								{% if linkages %}
 								<thead>
 									<tr>
 										<th class="newlist">ID</th>
@@ -139,8 +154,8 @@
 									
 								</thead>
 
-									{% for partner in partners %}
-										{% include 'admin/partners/_partners.html' %}
+									{% for linkage in linkages %}
+										{% include 'admin/linkages/_linkages.html' %}
 									{% endfor %}
 
 								{% else %}
@@ -157,7 +172,7 @@
 							</table>
 							</div>
 						</div>
-					</div>	
+					</div>
 				</div>
 			</div>
 {% endblock %}

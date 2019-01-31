@@ -265,7 +265,7 @@ class user_information(db.Model):
 		rows+=1
 		return rows
 
-	def partner_info(value):
+	def linkage_info(value):
 
 		record = user_information.query.filter(user_information.id==value).first()
 
