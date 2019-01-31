@@ -3,7 +3,7 @@ from config import Config
 
 from blueprints.admin import admin
 from blueprints.linkages import linkages
-from blueprints.beneficiaries import beneficiaries
+from blueprints.communities import communities
 from blueprints.registered import registered
 from blueprints.unregistered import unregistered
 
@@ -16,7 +16,7 @@ def create_app():
 
 	app.register_blueprint(admin)
 	app.register_blueprint(linkages)
-	app.register_blueprint(beneficiaries)
+	app.register_blueprint(communities)
 	app.register_blueprint(registered)
 	app.register_blueprint(unregistered)
 

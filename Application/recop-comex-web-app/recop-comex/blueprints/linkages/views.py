@@ -21,9 +21,9 @@ def before_request():
 		elif current_user.type == 2:
 			return redirect(url_for('registered.index'))
 		elif current_user.type == 4:
-			return redirect(url_for('beneficiaries.index'))
+			return redirect(url_for('communities.index'))
 
-@linkages.route('/linkages')
+@linkages.route('/linkages/index')
 @login_required
 def index():
 
@@ -71,23 +71,23 @@ def events_create():
 
 	return render_template('/linkages/events/create.html', form=form)
 
-@linkages.route('/linkages/beneficiaries')
+@linkages.route('/linkages/communities')
 @login_required
-def beneficiaries():
+def communities():
 
-	return render_template('/linkages/beneficiaries.html')
+	return render_template('/linkages/communities/index.html')
 
 @linkages.route('/linkages/reports')
 @login_required
 def reports():
 
-	return render_template('/linkages/reports.html')
+	return render_template('/linkages/reports/index.html')
 
 @linkages.route('/linkages/termsandconditions')
 @login_required
 def termsandconditions():
 
-	return render_template('/linkages/termsandconditions.html')
+	return render_template('/linkages/termsandconditions/index.html')
 
 @linkages.route('/linkages/profile/about/<user>')
 @login_required

@@ -1,0 +1,210 @@
+{% extends "communities-base.html" %}
+
+{% block content %}
+		<div class="panel panel-default">
+		    <div class="overlay-card has-text-centered">
+		    	<div class="circular">
+		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
+		    	</div>
+
+		        <div class="row has-text-centered">
+		            <p class="has-text-white is-size-3 has-text-weight-bold">{{ communities.company_name }}</p>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ communities.first_name }} {{ communities.middle_name }} {{ communities.last_name}} ({{ communities.username }})</a><br>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ communities.email_address }}</a>
+		        </div>
+		    </div>
+		   	
+		</div>
+
+		<nav class="level is-mobile">
+			<div class="level-item has-text-centered">
+			    <div>
+			      	<a class="menu">
+			      		<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-user fa-2x"></i>
+					      	</span>
+					    </p>
+			     	 	<p class="is-size-6 has-text-weight-bold">About</p>
+			  	  	</a>
+			    </div>
+			</div>
+
+			<div class="level-item has-text-centered">
+			    <div>
+			    	<a class="menu">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-calendar-alt icon fa-2x""></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Events Attended</p>
+				    </a>
+			    </div>
+			</div>
+
+			<div class="level-item has-text-centered">
+			    <div>
+			    	<a class="menu">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-cog icon fa-2x"></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
+				    </a>
+			    </div>
+			</div>
+		</nav>
+
+		<section class="hero">
+			<div class="hero-body">
+			    <div class="container">
+			      	<div class="card">
+						<header class="card-header is-active">
+						    <p class="card-header-title">
+						      Basic Information
+						    </p>
+						    <a href="{{url_for('communities.profile_update_password', user=current_user.username)}}" class="card-header-icon" aria-label="more options">
+						      <span class="icon">
+						        <i class="fas fa-key" aria-hidden="true"></i>
+						      </span>
+						    </a>
+						    <a href="{{url_for('communities.profile_update', user=current_user.username)}}" class="card-header-icon" aria-label="more options">
+						      <span class="icon">
+						        <i class="fas fa-edit" aria-hidden="true"></i>
+						      </span>
+						    </a>
+					  	</header>
+					  	<div class="card-content profile">
+
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Company Name</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{ communities.company_name }}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Name</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{ communities.first_name }} {{ communities.middle_name }} {{ communities.last_name }}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Bio</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{ communities.bio }}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+
+							<div class="panel-block">
+						    	<article class="media">
+									<figure class="media-left">
+							    		<p>Lives in</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{ communities.address }}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Birthday</p>
+							  		</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{ communities.birthday }}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Gender</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							      				{% if communities.gender == 'M' %}
+								        			<strong>Male</strong>
+								        		{% else %}
+								        			<strong>Female</strong>
+								        		{% endif %}
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Telephone Number</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{ communities.telephone }}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Phone Number</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{ communities.mobile_number }}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						</div>
+					</div>
+			    </div>
+			</div>
+		</section>
+{% endblock %}

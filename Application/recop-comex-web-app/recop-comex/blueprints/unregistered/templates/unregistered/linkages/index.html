@@ -1,0 +1,77 @@
+{% extends "unregistered-base.html" %}
+
+{% block content %}
+
+    <div class="notification gold">
+        <div class="columns">
+          <div class="column">
+              <article class="media">
+                <figure class="media-left">
+                    <p class="has-text-black has-text-weight-bold">Filter by:</p>
+                </figure>
+                <div class="media-content">
+                    <div class="content">
+                      <div class="field-body">
+                          <div class="field is-narrow">
+                              <div class="control">
+                                  <div class="select is-fullwidth">
+                                    <select>
+                                      <option>Select Category</option>
+                                      <option>Spiritual</option>
+                                      <option>Education</option>
+                                      <option>Health</option>
+                                      <option>Livelihood</option>
+                                      <option>Environmental</option>
+                                      <option>Socio-Political Concerns</option>
+                                    </select>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                    </div>    
+                </div>
+              </article>
+          </div>
+
+          <div class="column">
+            
+          </div>
+
+          <div class="column">
+              <div class="field has-addons has-addons-centered">
+                <p class="control">
+                    <input class="input" type="text" placeholder="Search">
+                </p>
+                <p class="control">
+                    <a class="button search">
+                      Search
+                    </a>
+                </p>
+              </div>
+          </div>
+        </div>
+    </div>
+
+                {% if linkages %}
+
+                  {% for linkages in linkages %}
+                    {% include 'unregistered/linkages/_linkages.html' %}
+                  {% endfor %}
+
+                {% else %}
+
+                <tbody>
+
+                  <tr class = "table-row">
+                    <td class = "has-text-centered">---Nothing to show---</td>
+                  </tr>
+                  
+                </tbody>
+
+                {% endif %}
+
+<script type="text/javascript" src="jquery-2.0.0.min.js"></script>
+<script type="text/javascript" src="owl.carousel.min.js"></script>
+<script type="text/javascript" src="jquer.js"></script>
+
+{% endblock %}

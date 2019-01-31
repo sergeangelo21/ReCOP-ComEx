@@ -33,37 +33,37 @@ def index():
 @login_required
 def events():
 
-	return render_template('/registered/events/_events.html')
+	return render_template('/registered/events/index.html')
 
 @registered.route('/registered/events/create')
 @login_required
 def events_create():
 
-	return render_template('/registered/events/create.html', )
+	return render_template('/registered/events/create.html')
 
-@registered.route('/registered/partners')
+@registered.route('/registered/linkages')
 @login_required
-def partners():
+def linkages():
 
-	return render_template('/registered/partners.html')
+	return render_template('/registered/linkages/index.html')
 
 @registered.route('/registered/donate')
 @login_required
 def donate():
 
-	return render_template('/registered/donate.html')
+	return render_template('/registered/donate/index.html')
 
 @registered.route('/registered/contactus')
 @login_required
 def contactus():
 
-	return render_template('/registered/contactus.html')
+	return render_template('/registered/contactus/index.html')
 
 @registered.route('/registered/termsandconditions')
 @login_required
 def termsandconditions():
 
-	return render_template('/registered/termsandconditions.html')
+	return render_template('/registered/termsandconditions/index.html')
 
 @registered.route('/registered/profile/about/<user>')
 @login_required

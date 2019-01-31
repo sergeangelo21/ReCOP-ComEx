@@ -69,8 +69,6 @@ def event_show(id):
 @login_required
 def events_create():
 
-
-
 	return render_template('/admin/events/create.html' )
 
 @admin.route('/admin/events/<action>/id=<id>')
@@ -209,25 +207,25 @@ def linkages_create():
 @login_required
 def communities():
 
-	return render_template('/admin/communities.html', title="Communities | Admin")
+	return render_template('/admin/communities/index.html', title="Communities | Admin")
 
 @admin.route('/admin/donations')
 @login_required
 def donations():
 
-	return render_template('/admin/donations.html', title="Donations | Admin")
+	return render_template('/admin/donations/index.html', title="Donations | Admin")
 
 @admin.route('/admin/reports')
 @login_required
 def reports():
 
-	return render_template('/admin/reports.html', title="Reports | Admin")
+	return render_template('/admin/reports/index.html', title="Reports | Admin")
 
 @admin.route('/admin/feedbacks')
 @login_required
 def feedbacks():
 
-	return render_template('/admin/feedbacks.html', title="Feedbacks | Admin")
+	return render_template('/admin/feedbacks/index.html', title="Feedbacks | Admin")
 
 @admin.route('/admin/profile/about/<user>')
 @login_required

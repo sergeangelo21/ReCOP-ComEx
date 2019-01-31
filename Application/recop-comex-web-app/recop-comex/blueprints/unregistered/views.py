@@ -25,22 +25,22 @@ def events():
 
 	return render_template('/unregistered/events/index.html', events=events)
 
-@unregistered.route('/partners')
-def partners():
+@unregistered.route('/linkages')
+def linkages():
 
-	partners = partner_views.show_list('A', ' ')
+	linkages = linkage_views.show_list('A', ' ')
 
-	return render_template('/unregistered/partners/index.html', partners=partners)
+	return render_template('/unregistered/linkages/index.html', linkages=linkages)
 
 @unregistered.route('/donate')
 def donate():
 
-	return render_template('/unregistered/donate.html')
+	return render_template('/unregistered/donate/index.html')
 
 @unregistered.route('/contactus')
 def contactus():
 
-	return render_template('/unregistered/contactus.html')
+	return render_template('/unregistered/contactus/index.html')
 
 @unregistered.route('/signup', methods=['GET', 'POST'])
 def signup():
@@ -76,7 +76,7 @@ def signup():
 		return redirect(url_for('unregistered.login'))
 
 
-	return render_template('/unregistered/signup.html', form=form)
+	return render_template('/unregistered/signup/index.html', form=form)
 
 @unregistered.route('/login', methods=['GET', 'POST'])
 def login():
@@ -116,11 +116,11 @@ def login():
 		elif current_user.type == 3:
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
-			return redirect(url_for('beneficiaries.index'))
+			return redirect(url_for('communities.index'))
 		elif current_user.type == 1:
 			return redirect(url_for('admin.index'))	
 	
-	return render_template('/unregistered/login.html', form=form)
+	return render_template('/unregistered/login/index.html', form=form)
 
 @unregistered.route('/logout')
 def logout():
