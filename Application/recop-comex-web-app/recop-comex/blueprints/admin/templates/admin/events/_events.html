@@ -11,9 +11,9 @@
 									    	{% elif event.event_status=='S' %}
 									    		Scheduled
 									    	{% elif event.event_status=='P' %}
-									    		{% if event.status=='F' %}
+									    		{% if event.status=='A' %}
 									    			For Academic's Approval
-									    		{% elif event.status=='A' %}
+									    		{% elif event.status=='P' %}
 									    			For President's Approval
 									    		{% else %}
 									    			For Finance's Approval

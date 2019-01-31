@@ -172,25 +172,27 @@ class event_views():
 
 		if value=='all' and search==' ':
 			record = event_information.query.join(
-				user_information
+				user_information, proposal_tracker
 				).add_columns(
 				user_information.company_name,
 				event_information.id,
 				event_information.name,
 				event_information.event_date,
-				event_information.event_status
+				event_information.event_status,
+				proposal_tracker.status
 				).order_by(event_information.id.asc()
 				).all()
 
 		elif value=='all' and search!=' ':
 			record = event_information.query.join(
-				user_information
+				user_information, proposal_tracker
 				).add_columns(
 				user_information.company_name,
 				event_information.id,
 				event_information.name,
 				event_information.event_date,
-				event_information.event_status
+				event_information.event_status,
+				proposal_tracker.status
 				).filter(or_(user_information.company_name.like('%'+search+'%'),
 				event_information.name.like('%'+search+'%'))
 				).order_by(event_information.id.asc()
@@ -198,13 +200,14 @@ class event_views():
 
 		elif search!=' ':
 			record = event_information.query.join(
-				user_information
+				user_information, proposal_tracker
 				).add_columns(
 				user_information.company_name,
 				event_information.id,
 				event_information.name,
 				event_information.event_date,
-				event_information.event_status
+				event_information.event_status,
+				proposal_tracker.status
 				).filter(and_(event_information.event_status==value,or_(
 				user_information.company_name.like('%'+search+'%'),
 				event_information.name.like('%'+search+'%')))
@@ -212,13 +215,14 @@ class event_views():
 				).all()
 		else:
 			record = event_information.query.join(
-				user_information
+				user_information, proposal_tracker
 				).add_columns(
 				user_information.company_name,
 				event_information.id,
 				event_information.name,
 				event_information.event_date,
-				event_information.event_status
+				event_information.event_status,
+				proposal_tracker.status
 				).filter(event_information.event_status==value
 				).order_by(event_information.id.asc()
 				).all()			
