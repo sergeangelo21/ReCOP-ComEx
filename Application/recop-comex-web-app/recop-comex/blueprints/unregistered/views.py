@@ -228,6 +228,32 @@ def event_signing(token, action):
 				flash(event.name.title() + ' was approved!', 'success')
 				return redirect('/')
 
+			else:
+
+				if event.status=='F':
+					if user.id!=4:
+						flash('Invalid credentials! Please try again.', 'error')	
+						return redirect(url_for('unregistered.event_signing', token=token, action=action))
+				elif event.status=='A':
+					if user.id!=3:
+						flash('Invalid credentials! Please try again.', 'error')	
+						return redirect(url_for('unregistered.event_signing', token=token, action=action))
+				elif event.status=='P':
+					if user.id!=2:
+						flash('Invalid credentials! Please try again.', 'error')
+						return redirect(url_for('unregistered.event_signing', token=token, action=action))
+
+				status='X'
+				proposal_tracker.update_status(event.id, status)
+				event_information.update_status(event.id, status)
+
+				audit_id = audit_trail.count()
+				value = [audit_id,user.id,event.id,'event', 6]
+				audit_trail.add(value)
+
+				flash(event.name.title() + ' was declined!', 'success')
+				return redirect('/')
+
 		else:
 
 			flash('Invalid credentials! Please try again.', 'error')

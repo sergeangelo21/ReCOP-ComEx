@@ -110,7 +110,13 @@ def event_action(id, action):
 
 	elif action=='decline':
 
-		status = 'X'
+		status='X'
+		proposal_tracker.update_status(event.id, status)
+		event_information.update_status(event.id, status)
+
+		audit_id = audit_trail.count()
+		value = [audit_id,user.id,event.id,'event', 6]
+		audit_trail.add(value)
 
 		flash(event.name + ' was declined.', 'info') 	
 

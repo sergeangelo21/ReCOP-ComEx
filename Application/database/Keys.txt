@@ -4,6 +4,8 @@ audit_trail.type
 2 - Partner Acknowledged Moa
 3 - Activate Account
 4 - Disable Account
+5 - Approved Event
+6 - Declined Event
 
 ++++++++++++++++++++++++++++++++++++++=
 
@@ -27,10 +29,10 @@ X = Declined
 proposal_tracker.status
 
 N = New
-B = Budget Approval
+F = Budget Approval
 A = Academics Approval
 P = President Approval
-A = Approved
+S = Approved
 X = Declined
 
 ++++++++++++++++++++++++++++++++++++++++
