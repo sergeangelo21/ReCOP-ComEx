@@ -12,7 +12,6 @@ class ProposalForm(FlaskForm):
 	event_date = StringField('Target Date', validators=[DataRequired()])
 	submit = SubmitField('Submit')
 
-
 class ProfileUpdateForm(FlaskForm):
     firstname = StringField('First Name')
     middlename = StringField('Middle Name')
