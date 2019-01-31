@@ -13,7 +13,7 @@
         font-weight: bold;
     }
 
-    a.navbar-item:hover, a.navbar-item.is-active{
+    a.navbar-item:hover, a.navbar-item.is-active, .nav-icons:hover, .navbar-dropdown a.navbar-item:hover, .navbar-item.has-dropdown.is-hoverable:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link{
         background-color: #092d01;
         color: #ffb901; 
     }
