@@ -203,8 +203,6 @@ def partner_action(id):
 @login_required
 def partners_create():
 
-
-
 	return render_template('/admin/partners/create.html')
 
 @admin.route('/admin/beneficiaries')
