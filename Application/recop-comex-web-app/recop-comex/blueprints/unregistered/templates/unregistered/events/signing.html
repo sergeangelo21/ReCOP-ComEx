@@ -1,83 +1,231 @@
-{% extends "unregistered-base.html" %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Profile | About</title>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
-{% block content %}
-<style type="text/css">
-	
-	.green{
-		background-color:#0d3105;
-		color: #feb801;
-		}
+		<style type="text/css">
+			.redirect{
+				background-color: #092d01;
+        		color: #ffb901; 
+        		height: 50px;
+        		padding: 5px;
+        		align-items: center;
+        		display: flex;
+        		justify-content: center;
+			}
 
-	.green:hover{
-		color:#feb801;
-		
-	}
+			.login-btn{
+				background-color:#0d3105;
+				color: #feb801;
+				}
 
-	.whitesmoke{
-		background-color: #f3f3f3;
-	}
-	.white{
-		background-color: #ffffff;
-	}
-	.image{
-		margin-top:150px;
-	}
+			.redirect-logo{
+				width: 250px;
+				height: auto;
+        		align-items: center;
+        		display: flex;
+        		justify-content: center;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="redirect">
+		    <a class="redirect-logo">
+		        <img src="../../../static/images/logo-menu.png">
+		    </a>
+		</nav>
+		<br>
+			<div class="container">
+			    <div class="columns">
+			    	<div class="column is-7">
+		    			<div class="card">
+						  	<div class="card-content">
+						    	<div class="media">
+						      		<div class="media-content has-text-centered">
+								        <p class="title is-5 has-text-weight-bold">Event Name</p>
+						      		</div>
+						    	</div>
 
-</style>
-<br>
-<br>
-		<div class="container">
-			<div class="columns is-centered">
-				<div class="column is-7">
-					<div class="card">
+							    <div class="media">
+								  	<figure class="media-left">
+								    	<p>Organizer</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>Company name</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</div>
+							
+							    <div class="media">
+								  	<figure class="media-left">
+								    	<p>Description</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>Description</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</div>
+							
+						    
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Objective</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>objective</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							
+						    
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<p>Proposed Budget</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>₱ 2,000</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							
+						    
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Location</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>Cavite City</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<p>Target Date</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>date</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							
+						    
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<p>Thrust</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>
+								        			Health
+								        		</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							
+						    
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<p>Proposed On</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>
+								        			date
+								        		</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							
+							    <article class="media ">
+								  	<figure class="media-left">
+								  		<p>Approved On</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>
+								        			date
+								        		</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							
+						  	</div>
+						</div>
+			    	</div>
+
+			    	<div class="column">
+			    		<div class="card">
 						<div class="card-content">
 							<div class="columns">
-								<div class="column is-half">
-									<br>
-									<img src="../../../static/images/logo.png">
-								</div>
 								<div class="column">
 									<div class="field has-text-centered">
-										<label class="title is-3">Please login to {{action}} the event {{event.name}}</label><br>
+										<label class="title is-3">LOGIN</label><br>
+										<label class="size is-size-7 has-text-grey">Please login to proceed</label>
 									</div>
+
+									<br>
 									<form action="" method="POST">
 										{{form.hidden_tag()}}
 										<div class="field">
-											{{form.username.label(class_='label')}}
+											<label class="label">Username</label>
 											<div class="control has-icons-left has-icons-right">
-												{{form.username(class_='input', placeholder='Username')}}
-                                                {% for error in form.username.errors %}
-                                                <span style="color: red;">[{{ error }}]</span>
-                                                {% endfor %}
-												<span class="icon is-small is-left">
-							      					<i class="fa fa-user"></i>
-							    				</span>
-											</div>
-										</div>
-
-										<div class="field">	
-											{{form.password.label(class_='label')}}
-											<div class="control has-icons-left has-icons-right">
-												{{form.password(class_='input', placeholder='Password')}}
-												{% for error in form.password.errors %}
-                                                <span style="color: red;">[{{ error }}]</span>
-                                                {% endfor %}
-												<span class="icon is-small is-left">
-							      					<i class="fa fa-key"></i>
-							    				</span>
+											    <input class="input" type="text" placeholder="Username">
+											    <span class="icon is-small is-left">
+											      <i class="fas fa-user"></i>
+											    </span>
 											</div>
 										</div>
 
 										<div class="field">
-											{{form.submit(class_='button submit')}}
+											<label class="label">Password</label>
+											<div class="control has-icons-left has-icons-right">
+											    <input class="input" type="password" placeholder="Password">
+											    <span class="icon is-small is-left">
+											      <i class="fas fa-key"></i>
+											    </span>
+											</div>
+										</div>
+										<hr>
+										<div class="field has-text-centered">
+											{{form.submit(class_='button login-btn', value=action.title())}}
 										</div>
 									</form>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+			    	</div>
+			    </div>
 			</div>
-		</div>
-
-{% endblock %}
+	</body>
+</html>
