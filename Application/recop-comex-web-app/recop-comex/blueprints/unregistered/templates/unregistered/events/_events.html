@@ -1,54 +1,17 @@
-					
-<br>
-
-<div class="container">
-	<div class="columns is-pulled-centered">
-		<div class="column is-10">
-			<div class="card select-list">
-				<div class="card-content">
-					<article class="media">
-							<figure class="media-left">
-							<p class="image is-128x128">
-									<img class="event" src="https://www.projectpearls.org/wp-content/uploads/2013/06/12841195_10153962703412905_7874811344446667017_o-300x300.jpg">
-							</p>
-							</figure>
-							<div class="media-content">
-							<div class="content">
-							<table>
-								<thead>
-									<tr>
-										<th class="newlist">Name</th>
-									    <th class="newlist">Location</th>
-									   	<th class="newlist">Date</th>
-									 </tr>
-								</thead>
-								<tbody>
-									<tr class="table-row">
-										<td>{{ events.name }}</td>
-									    <td>{{ events.location }}</td>
-									    <td>{{ events.event_date }}</td>
-									</tr>	
-								</tbody>
-  							</table>
-	    				<!-- icons -->
-		 				   <nav class="level is-mobile">
-		      					<div class="level-left">
-	        						<a class="level-item">
-	          							<span class="icon is-small"><i class="fas fa-reply"></i></span>
-	        						</a>
-	        						<a class="level-item">
-	          							<span class="icon is-small"><i class="fas fa-retweet"></i></span>
-	        						</a>
-	        						<a class="level-item">
-	          							<span class="icon is-small"><i class="fas fa-heart"></i></span>
-
-	        						</a>
-	      						</div>		
-	    					</nav>
-							</div>
-					</article>
+	
+	<div class="column is-one-quarter">
+		<div class="card select-list has-text-centered">
+			<div class="card-content">
+					<div class="level">
+						<div class="level-item">
+						<img class="image is-128x128" src="../../../static/images/gg.png">
+					</div>
 				</div>
+
+	      		<div class="title is-5">{{ events.name }}</div>
+	      		<p class="subtitle is-6">{{ events.event_date }}</p>
+
+	      		<div class="button">More Details</div>	
 			</div>
-				</div>
-			</div>
-			</div>
+		</div>
+	</div>

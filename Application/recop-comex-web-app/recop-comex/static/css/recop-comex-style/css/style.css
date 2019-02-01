@@ -131,6 +131,10 @@
 		color: #072000;  
 	}
 
+	.prof-icon:hover{
+		color: green;  
+	}
+
 	.backbtnprof{
 		background-color: #072000; 
 		color: #ffb901;
@@ -554,3 +558,18 @@ Modules - reusable parts of our design
 }
 /*LOGIN ENDS*/
 
+/*  ------  RESPONSIVE ------  */
+
+/* UNREGISTERED START  */
+
+	/* EVENTS */
+	@media only screen and (max-width: 408px) {
+		  /* For mobile phones: */
+		  .view-icons{
+				align-items: center;
+        		display: flex;
+        		justify-content: center;
+			}
+		}
+	/* END */
+/*   END  *   /

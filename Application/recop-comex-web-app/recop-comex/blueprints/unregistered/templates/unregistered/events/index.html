@@ -4,7 +4,7 @@
 
 	<div class="notification gold">
       	<div class="columns is-mobile is-multiline is-centered">
-        	<div class="column view-icons is-clearfix>
+        	<div class="column view-icons">
         		<article class="media">
 				  	<figure class="media-left"> 
 				  		<a href="" class="button viewbtn is-active">
@@ -36,7 +36,7 @@
       	</div>
     </div>
 
-    <div class="columns is-gapless">
+    <div class="columns">
 		<div class="column is-2">
     		<div class="notification filter">
     			<div class="columns">
@@ -91,13 +91,15 @@
     		</div>
     	</div>
 
-				<div class="column">
-					{% for events in events %}
-						{% include 'unregistered/events/_events.html' %}
-					{% endfor %}
+		<div class="column">
 
-				</div>	
+			<div class="columns is-multiline" style="padding: 20px;">
+				{% for events in events %}
+					{% include 'unregistered/events/_events.html' %}
+				{% endfor %}
 			</div>
+		</div>	
+	</div>
 
 
 					
