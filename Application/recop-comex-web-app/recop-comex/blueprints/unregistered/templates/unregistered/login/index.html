@@ -1,48 +1,29 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
-<style type="text/css">
-	
-	.green{
-		background-color:#0d3105;
-		color: #feb801;
-		}
 
-	.green:hover{
-		color:#feb801;
-		
-	}
-
-	.whitesmoke{
-		background-color: #f3f3f3;
-	}
-	.white{
-		background-color: #ffffff;
-	}
-	.image{
-		margin-top:150px;
-	}
-
-</style>
-<br>
-<br>
-		<div class="container">
+		<div class="container padding">
 			<div class="columns is-centered">
 				<div class="column is-7">
 					<div class="card">
 						<div class="card-content">
 							<div class="columns">
 								<div class="column is-half">
-									<br>
-									<img src="../../../static/images/logo.png">
+									
+									<div class="level">
+									<div class="level-item">
+										<figure class="image">
+									<img class="is-rounded" src="../../../static/images/logo.png">
+										</figure>
+									</div>
+									</div>
+							
 								</div>
 								<div class="column">
 									<div class="field has-text-centered">
 										<label class="title is-3">LOGIN</label><br>
 										<label class="size is-size-7 has-text-grey">Please login to proceed</label>
 									</div>
-
-									<br>
 									<form action="" method="POST">
 										{{form.hidden_tag()}}
 										<div class="field">
