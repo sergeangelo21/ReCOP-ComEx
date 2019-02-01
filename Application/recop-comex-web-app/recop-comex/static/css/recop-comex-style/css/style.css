@@ -306,8 +306,8 @@
 
 
     /* SIGN UP */
- .padding{
-    padding: 5%;
+ .padding_signup{
+    padding: 10px;
 }
 
 .card1:hover{ 
@@ -371,11 +371,186 @@
     margin: 0;
 }
 
-.color{
-    color: #072000;
-    }
-.color:hover{
-    color:#072000;
-    opacity: 0.9;
-}
+
 /* END SIGN UP */
+
+/*HOME START*/
+
+.padding{
+		padding: 5px;
+	}
+/*content overlay*/
+.content {
+  position: relative;
+  width: 100%;
+  max-width: auto;
+  padding: 0;
+  overflow: hidden;
+}
+
+.content .content-overlay {
+  background: rgba(0,0,0,0.7);
+  position: absolute;
+  height: 99%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.content:hover .content-overlay{
+  opacity: 1;
+}
+
+.content-image{
+  width: 100%;
+}
+
+.content-details {
+  position: absolute;
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 100%;
+  top: 30%;
+  left: 30%;
+  opacity: 0;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.content:hover .content-details{
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+}
+
+.content-details h3{
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.5em;
+  text-transform: uppercase;
+}
+
+.content-details p{
+  color: #fff;
+  font-size: 0.8em;
+}
+
+.fadeIn-bottom{
+  bottom:30%;
+}
+/**/
+
+/*cover image*/
+.cd-fixed-bg.cd-bg-1 {
+  background-image: url("../../../static/images/pic1.jpg");
+}
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *:after, *:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.cover-text {
+  font-size: 100%;
+  font-family: "Roboto", sans-serif;
+  color: #3d3536;
+}
+
+body, html {
+  /* important */
+  height: 100%;
+}
+a {
+  color: #a6989a;
+}
+/* -------------------------------- 
+
+Modules - reusable parts of our design
+
+-------------------------------- */
+.cd-fixed-bg {
+  position: relative;
+  min-height: 60%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  z-index: 1;
+}
+.cd-fixed-bg h1, .cd-fixed-bg h2 {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  right: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -o-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  width: 90%;
+  max-width: 1170px;
+  text-align: center;
+  font-size: 30px;
+  font-size: 1.875rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+@media only screen and (min-width: 320px) {
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 36px;
+  }
+}
+@media only screen and (min-width: 480px) {
+  .cd-fixed-bg {
+    background-attachment: fixed;
+  }
+  .cd-fixed-bg h1, .cd-fixed-bg h2 {
+    font-size: 48px;
+    font-weight: 300;
+  }
+}
+
+.cd-scrolling-bg {
+  position: relative;
+  min-height: 60%;
+  padding: 4em 0;
+  line-height: 1.6;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+
+/**/
+
+
+/*HOME ENDS*/
+
+
+
+/*LOGIN START*/
+
+.image {
+		width: 300px;
+		height: auto;
+		padding: auto;
+}
+/*LOGIN ENDS*/
+
