@@ -1,8 +1,9 @@
 from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
 from blueprints.registered.forms import *
-from data_access.models import *
+from data_access.models import donation, user_account
 from data_access.queries import user_views
+from datetime import datetime
 
 from extensions import db, bcrypt
 import os
@@ -47,15 +48,31 @@ def linkages():
 
 	return render_template('/registered/linkages/index.html')
 
-@registered.route('/registered/donate/<user>',methods=['GET', 'POST'])
+@registered.route('/registered/donate',methods=['GET', 'POST'])
 @login_required
-def donate(user):
+def donate():
 
-	
+	form = DonationForm()
 
+	if form.validate_on_submit():
 
+		id_donation = donation.count()
+		id_sponsee = user_account.query.filter_by(id=current_user.id).first()
 
-	return render_template('/registered/donate/index.html', user=current_user.username)
+		values = donation(
+			id=id_donation, 
+			sponsee_id=id_sponsee.info_id, 
+			sponsor_id=0, 
+			amount=form.amount.data, 
+			date_given=datetime.now(), 
+			transaction_slip="asdasdasd", 
+			is_event='a', 
+			status='N')
+
+		db.session.add(values)
+		db.session.commit()
+
+	return render_template('/registered/donate/index.html',form = form)
 
 @registered.route('/registered/contactus')
 @login_required

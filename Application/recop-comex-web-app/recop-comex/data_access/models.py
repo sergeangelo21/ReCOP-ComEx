@@ -55,6 +55,13 @@ class donation(db.Model):
 	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
+	def count():
+
+		rows = db.session.query(donation).count()
+		rows+=1
+		return rows
+
+
 class event_attachment(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)

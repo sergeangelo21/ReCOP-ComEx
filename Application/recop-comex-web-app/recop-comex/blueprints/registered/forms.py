@@ -23,9 +23,6 @@ class PasswordUpdateForm(FlaskForm):
     password = PasswordField('Password')
     submit = SubmitField('Update')
 
-class Donation(FlaskForm):
-    id = StringField('Id')
-    sponseeid = StringField('Sponsee Id')
-    sponsorid = StringField('Sponsor Id')
+class DonationForm(FlaskForm):
     amount = StringField('Amount')
     submit = SubmitField('Add')
