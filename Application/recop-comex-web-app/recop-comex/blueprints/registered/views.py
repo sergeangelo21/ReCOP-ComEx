@@ -47,11 +47,15 @@ def linkages():
 
 	return render_template('/registered/linkages/index.html')
 
-@registered.route('/registered/donate')
+@registered.route('/registered/donate/<user>',methods=['GET', 'POST'])
 @login_required
-def donate():
+def donate(user):
 
-	return render_template('/registered/donate/index.html')
+	
+
+
+
+	return render_template('/registered/donate/index.html', user=current_user.username)
 
 @registered.route('/registered/contactus')
 @login_required

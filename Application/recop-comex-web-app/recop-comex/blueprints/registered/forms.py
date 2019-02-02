@@ -22,3 +22,10 @@ class PasswordUpdateForm(FlaskForm):
     oldpassword = PasswordField('Old Password')
     password = PasswordField('Password')
     submit = SubmitField('Update')
+
+class Donation(FlaskForm):
+    id = StringField('Id')
+    sponseeid = StringField('Sponsee Id')
+    sponsorid = StringField('Sponsor Id')
+    amount = StringField('Amount')
+    submit = SubmitField('Add')

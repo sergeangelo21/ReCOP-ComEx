@@ -44,7 +44,7 @@
                     <a class="navbar-item" href="{{url_for('registered.linkages')}}">
                         <strong>Linkages</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('registered.donate')}}">
+                    <a class="navbar-item" href="{{url_for('registered.donate',user=current_user.username)}}">
                         <strong>Donate</strong>
                     </a>
                     <a class="navbar-item" href="{{url_for('registered.contactus')}}">
