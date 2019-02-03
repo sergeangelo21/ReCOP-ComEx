@@ -7,7 +7,7 @@
 		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
 		    	</div>
 
-		        <div class="row has-text-centered">
+		        <div class="row-profile has-text-centered">
 		            <p class="has-text-white is-size-3 has-text-weight-bold">{{ linkages.company_name }}</p>
 		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ linkages.first_name }} {{ linkages.middle_name }} {{ linkages.last_name}} ({{ linkages.username }})</a><br>
 		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ linkages.email_address }}</a>
@@ -18,7 +18,7 @@
 
 		<nav class="level is-mobile">
 			<div class="level-item has-text-centered">
-			    <div>
+			    <div class="active-prof-nav">
 			      	<a class="menu prof-icon">
 			      		<p class="icon">
 					      	<span class="icon">
@@ -31,11 +31,11 @@
 			</div>
 
 			<div class="level-item has-text-centered">
-			    <div>
+			    <div class="active-prof-nav">
 			    	<a class="menu prof-icon">
 				      	<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-calendar-alt icon fa-2x""></i>
+					      		<i class="fas fa-calendar-alt fa-2x""></i>
 					      	</span>
 					    </p>
 				      	<p class="is-size-6 has-text-weight-bold">Events Attended</p>
@@ -44,11 +44,11 @@
 			</div>
 
 			<div class="level-item has-text-centered">
-			    <div>
-			    	<a class="menu prof-icon">
+			    <div class="active-prof-nav">
+			    	<a class="menu prof-icon" href="{{url_for('linkages.profile_settings_personal')}}">
 				      	<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-cog icon fa-2x"></i>
+					      		<i class="fas fa-cog fa-2x"></i>
 					      	</span>
 					    </p>
 				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
@@ -61,21 +61,6 @@
 			<div class="hero-body">
 			    <div class="container">
 			      	<div class="card">
-						<header class="card-header is-active">
-						    <p class="card-header-title">
-						      Basic Information
-						    </p>
-						    <a href="{{url_for('linkages.profile_update_password', user=current_user.username)}}" class="card-header-icon" aria-label="more options">
-						      <span class="icon">
-						        <i class="fas fa-key" aria-hidden="true"></i>
-						      </span>
-						    </a>
-						    <a href="{{url_for('linkages.profile_update', user=current_user.username)}}" class="card-header-icon" aria-label="more options">
-						      <span class="icon">
-						        <i class="fas fa-edit" aria-hidden="true"></i>
-						      </span>
-						    </a>
-					  	</header>
 					  	<div class="card-content profile">
 
 						    <div class="panel-block">

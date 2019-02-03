@@ -28,10 +28,22 @@
                         {% for error in form.amount.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                         {% endfor %}
+
+                        <class action = "http://localhost:5000/uploader" method = "POST" 
+                            enctype = "multipart/form-data">
+                               <input type = "file" name = "file"> </input>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
+
+
+
+
+      
 
 <!--         <div class="columns is-centered">
           <div class="column is-6">
@@ -160,11 +172,15 @@
             </div>
           </div> -->
 
+
           <div class="columns">
             <div class="column">
               <div class="field is-grouped is-grouped-centered">
               <p class="control">
                    {{form.submit(class='button is-primary')}}
+
+
+
                  </form>
               </p>
             </div>

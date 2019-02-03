@@ -17,19 +17,25 @@ class ProposalForm(FlaskForm):
     select_link = SelectField('Select Linkages', choices=[("0", "Please Choose Here")])
     submit = SubmitField('Submit')
 
-class ProfileUpdateForm(FlaskForm):
+class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name')
     middlename = StringField('Middle Name')
     lastname = StringField('Last Name')
     gender = RadioField('Gender', choices=[("M","Male"),("F","Female")])
     birthday = DateField('Birthday')
     bio = StringField('Bio')
-    company = StringField('Company Name')    
+    submit = SubmitField('Update')
+
+class ProfileContactUpdateForm(FlaskForm):
     address = StringField('Address')
-    telephone = StringField('Telephone')
+    telephone = StringField('Telephone Number')
     mobile = StringField('Mobile Number')
     email = StringField('Email Address')
+    submit = SubmitField('Update')
+
+class ProfileUsernameUpdateForm(FlaskForm):
     username = StringField('Username')
+    oldpassword = PasswordField('Old Password')
     submit = SubmitField('Update')
 
 class PasswordUpdateForm(FlaskForm):

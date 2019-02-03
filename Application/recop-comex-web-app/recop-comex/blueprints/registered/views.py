@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
 from blueprints.registered.forms import *
-from data_access.models import donation, user_account
+from data_access.models import donation, user_account, user_information
 from data_access.queries import user_views
 from datetime import datetime
 
@@ -54,23 +54,15 @@ def donate():
 
 	form = DonationForm()
 
+
 	if form.validate_on_submit():
 
 		id_donation = donation.count()
 		id_sponsee = user_account.query.filter_by(id=current_user.id).first()
 
-		values = donation(
-			id=id_donation, 
-			sponsee_id=id_sponsee.info_id, 
-			sponsor_id=0, 
-			amount=form.amount.data, 
-			date_given=datetime.now(), 
-			transaction_slip="asdasdasd", 
-			is_event='a', 
-			status='N')
+		value = [id_donation,id_sponsee.info_id,'0',form.amount.data]
 
-		db.session.add(values)
-		db.session.commit()
+		donation.add(value)
 
 	return render_template('/registered/donate/index.html',form = form)
 
@@ -92,48 +84,36 @@ def profile_about(user):
 
 	registered = user_views.profile_info(current_user.info_id)
 
-	return render_template('/registered/profile/about.html', registered=registered)
+	return render_template('/registered/profile/about.html', title="registered", registered=registered)
 
-@registered.route('/registered/profile/update/<user>', methods=['GET', 'POST'])
+@registered.route('/registered/profile/eventsattended')
 @login_required
-def profile_update(user):
+def profile_eventsattended():
 
-	user_information_update = user_views.profile_info_update(current_user.info_id)
-	user_account_update = user_views.profile_acc_update(current_user.info_id)
+	return render_template('/registered/profile/eventsattended.html', title="registered")	
 
-	form = ProfileUpdateForm()
+@registered.route('/registered/profile/settings/personal', methods=['GET', 'POST'])
+@login_required
+def profile_settings_personal():
+
+	user_information_update = user_information.profile_info_update(current_user.info_id)
+
+	form = ProfilePersonalUpdateForm()
 
 	if form.validate_on_submit():
 
-		if user:
+		user_information_update.first_name = form.firstname.data
+		user_information_update.middle_name = form.middlename.data
+		user_information_update.last_name = form.lastname.data
+		user_information_update.gender = form.gender.data
+		user_information_update.birthday = form.birthday.data
+		user_information_update.bio = form.bio.data
 
-			user_information_update.first_name = form.firstname.data
-			user_information_update.middle_name = form.middlename.data
-			user_information_update.last_name = form.lastname.data
-			user_information_update.gender = form.gender.data
-			user_information_update.birthday = form.birthday.data
-			user_information_update.bio = form.bio.data
+		db.session.commit()
 
-			user_information_update.company_name = form.company.data
-			user_information_update.address = form.address.data
-			user_information_update.telephone = form.telephone.data
-			user_information_update.mobile_number = form.mobile.data
+		flash('Profile was successfully updated!', 'success')
 
-			db.session.commit()
-
-			user_account_update.email_address = form.email.data
-
-			user_account_update.username = form.username.data
-
-			db.session.commit()
-
-			flash('Profile was successfully updated!', 'success')
-
-			return redirect(url_for('registered.profile_about', user=current_user.username))
-
-		else:
-
-			flash('Wrong password.', 'error')
+		return redirect(url_for('registered.profile_settings_personal'))
 
 	else:
 
@@ -143,23 +123,81 @@ def profile_update(user):
 		form.gender.data = user_information_update.gender
 		form.birthday.data = user_information_update.birthday
 		form.bio.data = user_information_update.bio
-		
-		form.company.data = user_information_update.company_name
+
+	return render_template('/registered/profile/settings/personal.html', form=form)
+
+@registered.route('/registered/profile/settings/contact', methods=['GET', 'POST'])
+@login_required
+def profile_settings_contact():
+
+	user_information_update = user_information.profile_info_update(current_user.info_id)
+	user_account_update = user_account.profile_acc_update(current_user.info_id)
+
+	form = ProfileContactUpdateForm()
+
+	if form.validate_on_submit():
+
+		user_information_update.address = form.address.data
+		user_information_update.telephone = form.telephone.data
+		user_information_update.mobile_number = form.mobile.data
+
+		db.session.commit()
+
+		user_account_update.email_address = form.email.data
+
+		db.session.commit()
+
+		flash('Profile was successfully updated!', 'success')
+
+		return redirect(url_for('registered.profile_settings_contact'))
+
+	else:
+
 		form.address.data = user_information_update.address
 		form.telephone.data = user_information_update.telephone
 		form.mobile.data = user_information_update.mobile_number
 		form.email.data = user_account_update.email_address
 
+	return render_template('/registered/profile/settings/contact.html', form=form)	
+
+@registered.route('/registered/profile/settings/username', methods=['GET', 'POST'])
+@login_required
+def profile_settings_username():
+
+	user_account_update = user_account.profile_acc_update(current_user.info_id)
+
+	form = ProfileUsernameUpdateForm()
+
+	if form.validate_on_submit():
+
+		user = user_account.login([current_user.username, form.oldpassword.data])
+
+		if user:
+
+			user_account_update.username = form.username.data
+
+			db.session.commit()
+
+			flash('Username was successfully updated!', 'success')
+
+			return redirect(url_for('registered.profile_settings_username'))
+
+		else:
+
+			flash('Wrong password.', 'error')
+
+	else:
+
 		form.username.data = user_account_update.username
 
-	return render_template('/registered/profile/update.html', form=form)
+	return render_template('/registered/profile/settings/username.html', form=form)
 
-@registered.route('/registered/profile/updatepassword/<user>', methods=['GET', 'POST'])
+@registered.route('/registered/profile/update/password', methods=['GET', 'POST'])
 @login_required
-def profile_update_password(user):
+def profile_settings_password():
 
-	user_account_update = user_views.profile_acc_update(current_user.info_id)
-	
+	user_account_update = user_account.profile_acc_update(current_user.info_id)
+
 	form = PasswordUpdateForm()
 
 	if form.validate_on_submit():
@@ -174,13 +212,10 @@ def profile_update_password(user):
 
 			flash('Password was successfully updated!', 'success')
 
-			return redirect(url_for('registered.profile_about', user=current_user.username))
+			return redirect(url_for('registered.profile_settings_password'))
 
 		else:
 
 			flash('Wrong password.', 'error')
 
-
-	return render_template('/registered/profile/update_password.html', form=form)
-
-	
+	return render_template('/registered/profile/settings/password.html', form=form)

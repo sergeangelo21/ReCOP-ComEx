@@ -1,0 +1,93 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+
+    {% include 'admin/profile/settings/settings-base.html' %}
+
+            <div class="column">
+                <div class="columns padding">
+                    <div class="column">
+                        <div class="card box">
+                            <form action ="" method = "POST">
+                                {{form.hidden_tag()}}
+                                <div class="card-header">
+                                    <p class="card-header-title">Contact</p>
+                                </div>
+
+                                <div class="card-content">
+
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                            {{form.address.label(class_='label')}}
+                                        </div>
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                    {{form.address(class_='input', placeholder='Address')}}
+                                                    {% for error in form.address.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                            {{form.telephone.label(class_='label')}}
+                                        </div>
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                    {{form.telephone(class_='input', placeholder='Telephone Number')}}
+                                                    {% for error in form.telephone.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                            {{form.mobile.label(class_='label')}}
+                                        </div>
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                    {{form.mobile(class_='input', placeholder='Mobile Number')}}
+                                                    {% for error in form.mobile.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                            {{form.email.label(class_='label')}}
+                                        </div>
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                    {{form.email(class_='input', placeholder='E-mail Address')}}
+                                                    {% for error in form.email.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="has-text-centered">
+                                    {{form.submit(class='button is-primary')}}
+                                    </div>
+                                </div>
+                            </form>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

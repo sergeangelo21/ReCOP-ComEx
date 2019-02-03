@@ -93,8 +93,8 @@
     .overlay-card{
 		  background-color:#ecad00;
 		  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23fdfcff' fill-opacity='0.1'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4zm8-8h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
-		  height:350px;
 		  padding-top:25px;
+		  min-height: 350px;
 	}
 
 	.circular{
@@ -106,7 +106,7 @@
 		  transform: translateX(-50%);
 		  overflow: hidden;
 		  text-align: center;
-		  margin-bottom: 20px;
+		  margin-bottom: 10px;
 	}
 
 	.circular img{
@@ -123,29 +123,45 @@
 		  transform: translate(-50%, -50%);
 	}
 
+	.row-profile{
+		padding-bottom: 15px;
+	}
+
+	.level.is-mobile{
+		margin-bottom: 15px;
+	}
+
 	.card-content.profile{
 		padding: 0rem;
 	}
 
-	.prof-icon{
+	.prof-icon, .prof-icon:hover{
 		color: #072000;  
 	}
 
-	.prof-icon:hover{
-		color: green;  
+	.active-prof-nav{
+		padding-bottom: 4px;
+		border-bottom: 3px solid white;
 	}
 
-	.backbtnprof{
-		background-color: #072000; 
-		color: #ffb901;
-		border-color: #072000;
+	.active-prof-nav:hover{
+		border-bottom: 3px solid #ffb901;
 	}
 
-	.backbtnprof:hover{
-		background-color: #ffb901;
-		color: #072000; 
-		border-color: #072000;
-	}
+		/*	ADMIN - PARTNERS - PROFILE */
+		.backbtnprof{
+			background-color: #072000; 
+			color: #ffb901;
+			border-color: #072000;
+		}
+
+		.backbtnprof:hover{
+			background-color: #ffb901;
+			color: #072000; 
+			border-color: #072000;
+		}
+		/*	ADMIN - PARTNERS - PROFILE - END */
+
 	/*		END		*/
 
 	/*		STARS		*/
@@ -166,9 +182,21 @@
 		background-color: whitesmoke;
 	}
 
+	.select-list{
+		transition: transform .5s;
+		border-radius: 5px;
+	}
+
 	.select-list:hover{
-	background-color: whitesmoke;
-	cursor: pointer;
+		cursor: pointer;
+		transform: scale3d(1.05, 1.05, 1);
+		box-shadow: 0 2px 1px #072000, 0 0 0 1px #072000;
+	}
+
+	.event-btn:hover{
+		background-color: #072000;
+		color: #ffb901; 
+		border-color: #072000;
 	}
 
 	.overlay-card-event{
@@ -310,7 +338,7 @@
 
 
     /* SIGN UP */
- .padding_signup{
+ .padding{
     padding: 10px;
 }
 

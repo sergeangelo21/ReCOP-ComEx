@@ -1,0 +1,61 @@
+{% extends "linkages-base.html" %}
+
+{% block content %}
+
+    {% include 'linkages/profile/settings/settings-base.html' %}
+
+            <div class="column">
+                <div class="columns padding">
+                    <div class="column">
+                        <div class="card box">
+                            <form action ="" method = "POST">
+                                {{form.hidden_tag()}}
+                                <div class="card-header">
+                                    <p class="card-header-title">Account</p>
+                                </div>
+
+                                <div class="card-content">
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                            {{form.username.label(class_='label')}}
+                                        </div>
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                    {{form.username(class_='input', placeholder='Username')}}
+                                                    {% for error in form.username.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                            {{form.oldpassword.label(class_='label')}}
+                                        </div>
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                    {{form.oldpassword(class_='input', placeholder='Old Password')}}
+                                                    {% for error in form.oldpassword.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <hr>
+                                    <div class="has-text-centered">
+                                    {{form.submit(class='button is-primary')}}
+                                    </div>
+                                </div>
+                            </form>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

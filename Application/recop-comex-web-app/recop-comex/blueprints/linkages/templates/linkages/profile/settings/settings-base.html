@@ -1,0 +1,38 @@
+
+<div class="columns">
+	<div class="column is-2">
+		<div class="padding">
+			<aside class="menu">
+				<p class="menu-label">
+					<span class="icon">
+						<i class="fas fa-cogs"></i>
+					</span>
+					General
+				</p>
+				<ul class="menu-list">
+					<li>
+						<ul>
+							<li><a href="{{url_for('linkages.profile_settings_personal')}}">Personal</a></li>
+							<li><a href="{{url_for('linkages.profile_settings_contact')}}">Contact</a></li>
+						</ul>
+					</li>
+				</ul>
+
+				<p class="menu-label">
+					<span class="icon">
+						<i class="fas fa-lock"></i>
+					</span>
+					Security
+				</p>
+				<ul class="menu-list">
+					<li>
+						<ul>
+							<li><a href="{{url_for('linkages.profile_settings_username')}}">Username</a></li>
+							<li><a href="{{url_for('linkages.profile_settings_password')}}">Password</a></li>
+						</ul>
+					</li>
+				</ul>
+
+			</aside>
+		</div>
+	</div>
