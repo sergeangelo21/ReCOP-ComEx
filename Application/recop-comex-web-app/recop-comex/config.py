@@ -1,3 +1,4 @@
+import pdfkit
 
 class Config(object):
 	
@@ -13,3 +14,5 @@ class Config(object):
 	MAIL_USE_SSL=True
 	MAIL_USERNAME = "recop.baste@gmail.com"
 	MAIL_PASSWORD = "recopcomex"
+
+	PDF_CONFIG = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')

@@ -3,17 +3,17 @@ window.onload = function() {
 	if(window.location.pathname=='/linkages/events/create'){
 		document.getElementById('thrust').options.item(0).selected="True"
 		document.getElementById('thrust').options.item(0).hidden="True"
-		document.getElementById('select_comm').options.item(0).selected="True"
-		document.getElementById('select_comm').options.item(0).hidden="True"
-		document.getElementById('target_comm').value = ""
+		document.getElementById('select_link').options.item(0).selected="True"
+		document.getElementById('select_link').options.item(0).hidden="True"
+		document.getElementById('target_link').value = ""
 	}
 
 }
 
 function add_comm(){
-	div = document.getElementById('comm_div')
-	input = document.getElementById('select_comm');
-	comm = document.getElementById('target_comm')
+	div = document.getElementById('link_div')
+	input = document.getElementById('select_link');
+	comm = document.getElementById('target_link')
 	id = input.selectedIndex
 	selected = input.options.item(id).value
 	text = input.options[id].text
@@ -33,7 +33,7 @@ function add_comm(){
 function remove_comm(value){
 
 	document.getElementById(value).style.display = "none"
-	control =  document.getElementById('select_comm')
+	control =  document.getElementById('select_link')
 
 	for (id=0; id<=control.options.length-1; id++){
 		if (control.options.item(id).value==value){
@@ -44,10 +44,10 @@ function remove_comm(value){
 		}
 	}
 
-	selected = document.getElementById('target_comm').value
+	selected = document.getElementById('target_link').value
 	str = '|' + value.toString() + '|'
 	removed = selected.replace(str, '')
-	document.getElementById('target_comm').value = removed	
+	document.getElementById('target_link').value = removed	
 	control.selectedIndex=0
 
 }

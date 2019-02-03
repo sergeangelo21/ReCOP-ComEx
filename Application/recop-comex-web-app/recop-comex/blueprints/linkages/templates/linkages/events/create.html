@@ -106,24 +106,34 @@
 						</div>
 
 						<div class="columns">
+
 					      	<div class="column">
 					         	<div class="field">
-							        <label class="label">Target Partner/s</label>
+							        {{form.target_link.label(class_='label')}}{{form.target_link(hidden='True')}}
+						            <div class="control" id="link_div">
+						            	{{form.select_link(class_="input", onchange="add_comm()")}}
+						            </div>
+					          	</div>
+					        </div>
+
+							<div class="column">
+								<div class="field">
+							        {{form.participant_no.label(class_='label')}}
 						            <div class="control">
-						            	<input class="input" type="text" data-validate="require">
+						              	{{form.participant_no(class_='input')}}
 						            </div>
-					          	</div>
-					        </div>
+						        </div>
+							</div>
 
-					      	<div class="column">
-					         	<div class="field">
-							        {{form.target_comm.label(class_='label')}}{{form.target_comm(hidden='True')}}
-						            <div class="control" id="comm_div">
-						            	{{form.select_comm(class_="input", onchange="add_comm()")}}
-						            </div>
-					          	</div>
-					        </div>
-
+							<div class="column">
+								<div class="field">
+							        <label class="label">Age Bracket</label>
+						            <div class="control is-grouped">
+						              	{{form.min_age(class_='input is-horizontal')}} to
+										{{form.max_age(class_='input is-horizontal')}}
+									</div>
+						        </div>
+							</div>
 						</div>
 
 						<div class="columns">

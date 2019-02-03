@@ -73,6 +73,9 @@ class event_information(db.Model):
 	budget = db.Column(db.NUMERIC(10,2), nullable=False)
 	location = db.Column(db.VARCHAR(50),nullable=False)
 	event_date = db.Column(db.DATETIME, nullable=False)
+	participant_no = db.Column(db.INT, nullable=False)
+	min_age = db.Column(db.INT, nullable=False)
+	max_age = db.Column(db.INT, nullable=False)
 	thrust = db.Column(db.INT, nullable=False)
 	type = db.Column(db.INT, nullable=False)
 	event_status = db.Column(db.CHAR(1), nullable=False)
@@ -97,9 +100,12 @@ class event_information(db.Model):
 			budget = value[5],
 			location=value[6],
 			event_date=value[7],
-			thrust=value[8], 
-			type=value[9],
-			event_status=value[10]
+			participant_no=value[8],
+			min_age=value[9],
+			max_age=value[10],
+			thrust=value[11], 
+			type=value[12],
+			event_status=value[13]
 			)
 			 
 		db.session.add(record)

@@ -1,10 +1,11 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, send_from_directory
 from flask_login import current_user, login_required
 from blueprints.linkages.forms import *
 from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information
-from data_access.queries import user_views, community_views
-
+from data_access.queries import user_views, linkage_views
 from extensions import db, bcrypt
+from static.pdf import generate_pdf
+
 import os
 
 linkages = Blueprint('linkages', __name__, template_folder="templates")
@@ -43,9 +44,16 @@ def events_create():
 
 	form = ProposalForm()
 
-	communities = community_views.target_community()
+	linkages = linkage_views.target_linkages()
 
-	form.select_comm.choices.extend([(c.id,c.address) for c in communities])
+	for item in linkages:
+
+		if item.type==3:
+			name = item.company_name
+		else:
+			name = item.address
+
+		form.select_link.choices.extend([(item.id, name)])
 
 	if form.validate_on_submit():
 
@@ -61,14 +69,16 @@ def events_create():
 		value = [
 		event_id,current_user.info_id,form.title.data,
 		form.description.data,form.objective.data,form.budget.data,form.location.data,
-		form.event_date.data,form.thrust.data,event_type,'N'
+		form.event_date.data,form.participant_no.data, form.min_age.data, form.max_age.data,
+		form.thrust.data,event_type,'N'
 		]
 
+		
 		event_information.add(value)
 
-		if form.target_comm.data:
+		if form.target_link.data:
 
-			comm = form.target_comm.data.split('|',-1)
+			comm = form.target_link.data.split('|',-1)
 
 			for participant in comm:
 
@@ -81,11 +91,20 @@ def events_create():
 		value = [id, event_id]
 		proposal_tracker.add(value)
 
-		flash('Event proposal submitted! Please standby for the approval.', 'success')
+		flash('Event proposal submitted! Please download the request letter.', 'success')
 
 		return redirect(url_for('linkages.events'))
 
 	return render_template('/linkages/events/create.html', form=form)
+
+@linkages.route('/linkages/events/letter/<id>_<name>', methods=['GET', 'POST'])
+@login_required
+def event_letter(id,name):
+
+	filepath = 'static/output/events/letters/'
+	generate_pdf(name+'Request Letter is here!', filepath + str(id) + '.pdf')
+
+	return send_from_directory(filepath, str(id) +'.pdf')
 
 @linkages.route('/linkages/communities')
 @login_required

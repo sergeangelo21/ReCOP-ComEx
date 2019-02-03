@@ -166,6 +166,19 @@ class linkage_views():
 
 		return record, membership
 
+
+	def target_linkages():
+
+		record = user_information.query.join(
+				user_account).add_columns(
+				user_information.id, user_account.type, 
+				user_information.address, user_information.company_name).filter(or_(
+				user_account.type==4, user_account.type==3)).order_by(
+				user_information.address.asc()
+				).all()
+
+		return record
+
 class event_views():
 
 	def show_list(value,search):
@@ -254,19 +267,5 @@ class event_views():
 			proposal_tracker.status
 			).filter(event_information.id==value
 			).first()
-
-		return record
-
-class community_views():
-
-	def target_community():
-
-		record = user_information.query.join(
-				user_account).add_columns(
-				user_information.id, user_account.type, 
-				user_information.address).filter(
-				user_account.type==4).order_by(
-				user_information.address.asc()
-				).all()
 
 		return record
