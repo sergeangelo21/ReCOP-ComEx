@@ -193,7 +193,7 @@ class event_views():
 				event_information.event_date,
 				event_information.event_status,
 				proposal_tracker.status
-				).order_by(event_information.id.asc()
+				).order_by(proposal_tracker.proposed_on.desc()
 				).all()
 
 		elif value=='all' and search!=' ':
@@ -205,10 +205,11 @@ class event_views():
 				event_information.name,
 				event_information.event_date,
 				event_information.event_status,
+				proposal_tracker.proposed_on,
 				proposal_tracker.status
 				).filter(or_(user_information.company_name.like('%'+search+'%'),
 				event_information.name.like('%'+search+'%'))
-				).order_by(event_information.id.asc()
+				).order_by(proposal_tracker.proposed_on.desc()
 				).all()
 
 		elif search!=' ':
@@ -220,11 +221,12 @@ class event_views():
 				event_information.name,
 				event_information.event_date,
 				event_information.event_status,
+				proposal_tracker.proposed_on,
 				proposal_tracker.status
 				).filter(and_(event_information.event_status==value,or_(
 				user_information.company_name.like('%'+search+'%'),
 				event_information.name.like('%'+search+'%')))
-				).order_by(event_information.id.asc()
+				).order_by(proposal_tracker.proposed_on.desc()
 				).all()
 		else:
 			record = event_information.query.join(
@@ -235,9 +237,10 @@ class event_views():
 				event_information.name,
 				event_information.event_date,
 				event_information.event_status,
+				proposal_tracker.proposed_on,
 				proposal_tracker.status
 				).filter(event_information.event_status==value
-				).order_by(event_information.id.asc()
+				).order_by(proposal_tracker.proposed_on.desc()
 				).all()			
 
 

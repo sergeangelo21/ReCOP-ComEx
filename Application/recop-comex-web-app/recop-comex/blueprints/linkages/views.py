@@ -102,7 +102,7 @@ def events_create():
 def event_letter(id,name):
 
 	filepath = 'static/output/events/letters/'
-	generate_pdf(name+'Request Letter is here!', filepath + str(id) + '.pdf')
+	generate_pdf(name+' Request Letter is here!', filepath + str(id) + '.pdf')
 
 	return send_from_directory(filepath, str(id) +'.pdf')
 
