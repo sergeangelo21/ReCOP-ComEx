@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.linkages.forms import *
-from data_access.models import user_account, event_information, proposal_tracker, user_information
-from data_access.queries import user_views
+from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information
+from data_access.queries import user_views, community_views
 
 from extensions import db, bcrypt
 import os
@@ -43,27 +43,43 @@ def events_create():
 
 	form = ProposalForm()
 
+	communities = community_views.target_community()
+
+	form.select_comm.choices.extend([(c.id,c.address) for c in communities])
+
 	if form.validate_on_submit():
 
-		det = user_information.query.filter(user_information.id==current_user.info_id).first()
+		det = user_information.linkage_info(current_user.info_id)
 
 		if det.company_name=='San Sebastian College Recoletos de Cavite':
 			event_type=1
 		else:
 			event_type=2
 
-		id = event_information.count()
-		value_event = [
-		id,current_user.info_id,form.title.data,
+		event_id = event_information.count()
+		
+		value = [
+		event_id,current_user.info_id,form.title.data,
 		form.description.data,form.objective.data,form.budget.data,form.location.data,
 		form.event_date.data,form.thrust.data,event_type,'N'
 		]
 
-		event_information.add(value_event)
+		event_information.add(value)
+
+		if form.target_comm.data:
+
+			comm = form.target_comm.data.split('|',-1)
+
+			for participant in comm:
+
+				if participant!='':
+					id = event_participation.count()
+					value = [id, event_id, participant, 'Y']
+					event_participation.add(value)
 
 		id = proposal_tracker.count()
-		value_tracker = [id, value_event[0]]
-		proposal_tracker.add(value_tracker)
+		value = [id, event_id]
+		proposal_tracker.add(value)
 
 		flash('Event proposal submitted! Please standby for the approval.', 'success')
 

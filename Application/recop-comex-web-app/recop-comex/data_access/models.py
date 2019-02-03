@@ -1,6 +1,7 @@
 #Table specifications and basic CRUD queries goes here
 from extensions import login, db, bcrypt
 from flask_login import UserMixin, current_user
+from sqlalchemy import and_
 
 from datetime import datetime
 
@@ -55,13 +56,6 @@ class donation(db.Model):
 	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
-	def count():
-
-		rows = db.session.query(donation).count()
-		rows+=1
-		return rows
-
-
 class event_attachment(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -84,6 +78,7 @@ class event_information(db.Model):
 	event_status = db.Column(db.CHAR(1), nullable=False)
 
 	event_info_id = db.relationship('proposal_tracker', backref='event_information', lazy=True)
+	event_part_id = db.relationship('event_participation', backref='event_information', lazy=True)
 
 	def count():
 
@@ -125,12 +120,32 @@ class event_information(db.Model):
 class event_participation(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	event_id = db.Column(db.INT)
-	participant_id = db.Column(db.INT)
-	rating = db.Column(db.INT, nullable=False)
+	event_id = db.Column(db.INT, db.ForeignKey('event_information.id'), nullable=False)
+	participant_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
+	rating = db.Column(db.INT, nullable=True)
 	comment = db.Column(db.VARCHAR(140),nullable=False)
 	is_target = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
+
+	def count():
+
+		rows = db.session.query(event_participation).count()
+		rows+=1
+		return rows
+
+	def add(value):
+
+		record = event_participation(
+			id = value[0],
+			event_id = value[1],
+			participant_id = value[2],
+			rating = None,
+			comment = None,
+			is_target = value[3],
+			status = 'J')
+
+		db.session.add(record)
+		db.session.commit()
 
 class event_resource(db.Model):
 
@@ -302,6 +317,7 @@ class user_information(db.Model):
 		record = user_information.query.filter(user_information.id==value).first()
 
 		return record
+
 
 	def add(value):
 

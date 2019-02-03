@@ -117,9 +117,9 @@
 
 					      	<div class="column">
 					         	<div class="field">
-							        <label class="label">Target Beneficiaries</label>
-						            <div class="control">
-						            	<input class="input" type="text" data-validate="require">
+							        {{form.target_comm.label(class_='label')}}{{form.target_comm(hidden='True')}}
+						            <div class="control" id="comm_div">
+						            	{{form.select_comm(class_="input", onchange="add_comm()")}}
 						            </div>
 					          	</div>
 					        </div>
@@ -146,44 +146,7 @@
 							</div>
 						</div>
 
-						<hr>
-
-						<label class="label">Resources (Please fill up all items)</label>
-						<div class="columns">
-							<div class="column">
-								<div class="field">
-									<label class="label">Human Resource</label>
-						            <div class="control">
-						              	<textarea class="textarea"></textarea>
-						            </div>
-						        </div>
-							</div>
-
-							<div class="column">
-								<div class="field">
-									<label class="label">Materials</label>
-						            <div class="control is-expanded">
-						              <textarea class="textarea"></textarea>
-						            </div>
-						        </div>
-							</div>
-
-							<div class="column">
-								<div class="field">
-									<label class="label">Source of Fund</label>
-						            <div class="control is-expanded">
-						              <textarea class="textarea"></textarea>
-						            </div>
-						        </div>
-							</div>
-						</div>
-
 						<div class="field is-grouped is-grouped-centered">
-							<p class="control">
-							    <a class="button previous">
-							    	Cancel
-							    </a>
-							</p>
 							<p class="control">
 							  	{{form.submit(class_='button submit')}}
 							</p>
@@ -194,4 +157,5 @@
 				</div>
 			</div>
 		</section>
+
 {% endblock %}

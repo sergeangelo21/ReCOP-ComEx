@@ -58,3 +58,10 @@ user_information.partner_thrust
 6 = spiritual
 
 ++++++++++++++++++++++++++++++++++++++++
+
+event_participation.status
+
+J = joined
+P = present
+A = absent
+

@@ -78,12 +78,8 @@ def event_action(id, action):
 
 	if action=='approve':
 
-		if event.budget>0.00:
-			signatory = user_views.signatory_info(4)
-			status = ['P','F']
-		else:
-			signatory = user_views.signatory_info(3)
-			status = ['P','A']
+		signatory = user_views.signatory_info(4)
+		status = ['P','F']
 
 		recipient = signatory.email_address
 		user = 'Fr. ' + signatory.last_name
@@ -139,7 +135,7 @@ def linkages(status, search):
 	else:
 		value=status
 
-	linkages = linkage_views.show_list(value, search=search)
+	linkages = linkage_views.show_list(value, 3, search=search)
 
 	form = SearchForm()
 
@@ -211,11 +207,25 @@ def linkages_create():
 
 	return render_template('/admin/linkages/create.html')
 
-@admin.route('/admin/communities')
+@admin.route('/admin/communities/<status>/filter_<search>')
 @login_required
-def communities():
+def communities(status, search):
 
-	return render_template('/admin/communities/index.html', title="Communities | Admin")
+	if status=='active':
+		value='A'
+	elif status=='new':
+		value='N'
+	elif status=='pending':
+		value='P'
+	elif status=='disabled':
+		value='D'
+	else:
+		value=status
+
+	communities = linkage_views.show_list(value, 4, search)
+
+
+	return render_template('/admin/communities/index.html', title="Communities | Admin", communities=communities)
 
 @admin.route('/admin/donations')
 @login_required

@@ -66,7 +66,7 @@ class user_views():
 
 class linkage_views():
 
-	def show_list(value, search):
+	def show_list(value, type, search):
 
 		if value=='all' and search==' ' :
 			record = user_account.query.join(
@@ -79,7 +79,7 @@ class linkage_views():
 				user_information.last_name).label('coordinator'),
 				user_information.address,
 				user_account.status,
-				).filter(user_account.type==3
+				).filter(user_account.type==type
 				).order_by(user_information.id.asc()
 				).all()
 		elif value=='all' and search!=' ' :
@@ -93,7 +93,7 @@ class linkage_views():
 				user_information.last_name).label('coordinator'),
 				user_information.address,
 				user_account.status,
-				).filter(and_(user_account.type==3,
+				).filter(and_(user_account.type==type,
 				or_(user_information.company_name.like('%'+search+'%'),
 				user_information.address.like('%'+search+'%'),
 				user_information.first_name.like('%'+search+'%'),
@@ -111,7 +111,7 @@ class linkage_views():
 				user_information.last_name).label('coordinator'),
 				user_information.address,
 				user_account.status,
-				).filter(and_(user_account.type==3,user_account.status==value,
+				).filter(and_(user_account.type==type,user_account.status==value,
 				or_(user_information.company_name.like('%'+search+'%'),
 				user_information.address.like('%'+search+'%'),
 				user_information.first_name.like('%'+search+'%'),
@@ -130,7 +130,7 @@ class linkage_views():
 				user_information.bio,
 				user_information.address,
 				user_account.status,
-				).filter(and_(user_account.type==3, 
+				).filter(and_(user_account.type==type, 
 				user_account.status==value)
 				).all()			
 
@@ -254,5 +254,19 @@ class event_views():
 			proposal_tracker.status
 			).filter(event_information.id==value
 			).first()
+
+		return record
+
+class community_views():
+
+	def target_community():
+
+		record = user_information.query.join(
+				user_account).add_columns(
+				user_information.id, user_account.type, 
+				user_information.address).filter(
+				user_account.type==4).order_by(
+				user_information.address.asc()
+				).all()
 
 		return record

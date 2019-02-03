@@ -18,7 +18,7 @@ function check_pass(){
     confirm = document.getElementById('password_confirm')
 
     if (pass.value!=confirm.value){
-        alert('Passwords did not match.')
+        Swal.fire('Passwords did not match.', ' ', 'error')
         return false
     }
     else{
@@ -90,9 +90,15 @@ function show_form(sender){
 
     if (sender==4){
         document.getElementById('sscr_field').style.display = "none"
+        document.getElementById('company_field').style.display = "none"
+        document.getElementById('company').value="San Sebastian College Recoletos de Cavite" 
+        document.getElementById('sscr-0').checked=true  
     }
     else{
-        document.getElementById('sscr_field').style.display = ""       
+        document.getElementById('company_field').style.display = ""
+        document.getElementById('sscr_field').style.display = ""    
+        document.getElementById('company').value=""  
+        document.getElementById('sscr-0').checked=false  
     }
 
     page=1
@@ -109,7 +115,7 @@ function hide_form(){
    document.getElementById('address').placeholder = "Address"
    document.getElementById('company').placeholder = "Company Name"
    document.getElementById('com_label').innerHTML = "Company Name"
-    document.getElementById('signup_form').reset()
+   document.getElementById('signup_form').reset()
 
    document.getElementById('signup').style.display = "none"
    document.getElementById('illusion').style.display = "none"

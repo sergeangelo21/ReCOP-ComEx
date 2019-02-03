@@ -1,9 +1,54 @@
 window.onload = function() {
 
-if(window.location.pathname=='/linkages/events/create'){
-document.getElementById('thrust').options.item(0).selected="True"
-document.getElementById('thrust').options.item(0).hidden="True"
+	if(window.location.pathname=='/linkages/events/create'){
+		document.getElementById('thrust').options.item(0).selected="True"
+		document.getElementById('thrust').options.item(0).hidden="True"
+		document.getElementById('select_comm').options.item(0).selected="True"
+		document.getElementById('select_comm').options.item(0).hidden="True"
+		document.getElementById('target_comm').value = ""
+	}
+
 }
+
+function add_comm(){
+	div = document.getElementById('comm_div')
+	input = document.getElementById('select_comm');
+	comm = document.getElementById('target_comm')
+	id = input.selectedIndex
+	selected = input.options.item(id).value
+	text = input.options[id].text
+	input.options.item(id).hidden=true
+	
+	if (document.getElementById(selected)){
+		document.getElementById(selected).style.display=""
+	}
+	else{
+		div.innerHTML = div.innerHTML + "<span id="+ selected + " class='button' style='margin-top:1%; padding:1%'>"+ text + "&nbsp; <a class='button is-white is-small' name='"+selected+"'onclick='remove_comm(this.name)'><i class='fas fa-times'></i></a></span>"
+	}
+
+	comm.value = comm.value + selected + '|'
+	input.selectedIndex=0
+}
+
+function remove_comm(value){
+
+	document.getElementById(value).style.display = "none"
+	control =  document.getElementById('select_comm')
+
+	for (id=0; id<=control.options.length-1; id++){
+		if (control.options.item(id).value==value){
+			control.options.item(id).hidden=false
+		}
+		if (control.options.item(id).value=="Please Select Here"){
+			control.selectedIndex=id
+		}
+	}
+
+	selected = document.getElementById('target_comm').value
+	str = '|' + value.toString() + '|'
+	removed = selected.replace(str, '')
+	document.getElementById('target_comm').value = removed	
+	control.selectedIndex=0
 
 }
 

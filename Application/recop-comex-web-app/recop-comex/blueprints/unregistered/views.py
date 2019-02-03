@@ -28,7 +28,7 @@ def events():
 @unregistered.route('/linkages')
 def linkages():
 
-	linkages = linkage_views.show_list('A', ' ')
+	linkages = linkage_views.show_list('A', 3, ' ')
 
 	return render_template('/unregistered/linkages/index.html', linkages=linkages)
 
@@ -58,7 +58,7 @@ def signup():
 			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
 			]
 
-		if form.type.data == '2':
+		if form.type.data == '2' or form.type.data == '4': 
 			status = "A"
 			flash('Your account was successfully created!', 'success')
 		else:
