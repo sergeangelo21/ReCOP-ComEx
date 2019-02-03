@@ -1,20 +1,35 @@
-{% extends "registered-base.html" %}
+{% extends "admin-base.html" %}
 
 {% block content %}
+
+    {% include 'admin/profile/settings/settings-base.html' %}
+
             <div class="column">
-                <div class="columns">
+                <div class="columns padding">
                     <div class="column">
                         <div class="card box">
-                            <form action ="" method = "POST" onsubmit="return check_pass()">
+                            <form action ="" method = "POST">
                                 {{form.hidden_tag()}}
-
-                                <p class="title">Edit Account</p>
-
                                 <div class="card-header">
-                                    <p class="card-header-title">Change Password</p>
+                                    <p class="card-header-title">Account</p>
                                 </div>
 
                                 <div class="card-content">
+                                    <div class="field is-horizontal">
+                                        <div class="field-label is-normal">
+                                            {{form.username.label(class_='label')}}
+                                        </div>
+                                        <div class="field-body">
+                                            <div class="field">
+                                                <div class="control">
+                                                    {{form.username(class_='input', placeholder='Username')}}
+                                                    {% for error in form.username.errors %}
+                                                    <span style="color: red;">[{{ error }}]</span>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                                     <div class="field is-horizontal">
                                         <div class="field-label is-normal">
@@ -31,42 +46,16 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="field is-horizontal">
-                                        <div class="field-label is-normal">
-                                            {{form.password.label(class_='label')}}
-                                        </div>
-                                        <div class="field-body">
-                                            <div class="field">
-                                                <div class="control has-icon has-icon-right">
-                                                    {{form.password(class_='input', placeholder='Password')}}
-                                                    {% for error in form.password.errors %}
-                                                    <span style="color: red;">[{{ error }}]</span>
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="field is-horizontal">
-                                        <div class="field-label is-normal">
-                                            <label class="label">Confirm</label>
-                                        </div>
-                                        <div class="field-body">
-                                            <div class="field">
-                                                <div class="control has-icon has-icon-right">
-                                                    <input class="input" type="password" name="password_confirm" id="password_confirm" placeholder="Confirm password" data-validate="require">
-                                                </div>
-                                            </div>
-                                        </div>
+                                    
+                                    <hr>
+                                    <div class="has-text-centered">
+                                    {{form.submit(class='button is-primary')}}
                                     </div>
                                 </div>
-                                <hr>
-                                {{form.submit(class='button is-primary')}}
                             </form>      
                         </div>
                     </div>
                 </div>
             </div>
-
+        </div>
 {% endblock %}

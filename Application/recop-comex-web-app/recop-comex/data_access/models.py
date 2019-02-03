@@ -284,6 +284,13 @@ class user_account(db.Model, UserMixin):
 
 		db.session.commit()
 
+
+	def profile_acc_update(value):
+
+		record = user_account.query.filter_by(id=current_user.id).first()
+
+		return record
+
 class user_information(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -338,3 +345,9 @@ class user_information(db.Model):
 			 
 		db.session.add(record)
 		db.session.commit()
+
+	def profile_info_update(value):
+
+		record = user_information.query.filter_by(id=current_user.id).first()
+
+		return record

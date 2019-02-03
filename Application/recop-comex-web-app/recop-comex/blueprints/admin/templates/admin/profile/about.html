@@ -19,7 +19,7 @@
 		<nav class="level is-mobile">
 			<div class="level-item has-text-centered">
 			    <div>
-			      	<a class="menu prof-icon">
+			      	<a class="menu prof-icon" href="{{url_for('admin.profile_about', user=current_user.username)}}">
 			      		<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-user fa-2x"></i>
@@ -32,7 +32,7 @@
 
 			<div class="level-item has-text-centered">
 			    <div>
-			    	<a class="menu prof-icon">
+			    	<a class="menu prof-icon" href="{{url_for('admin.profile_eventsattended', user=current_user.username)}}">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-calendar-alt icon fa-2x""></i>
@@ -45,7 +45,7 @@
 
 			<div class="level-item has-text-centered">
 			    <div>
-			    	<a class="menu prof-icon">
+			    	<a class="menu prof-icon" href="{{url_for('admin.profile_settings_personal')}}">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-cog icon fa-2x"></i>
@@ -65,16 +65,6 @@
 						    <p class="card-header-title">
 						      Basic Information
 						    </p>
-						    <a href="{{url_for('admin.profile_update_password', user=current_user.username)}}" class="card-header-icon prof-icon" aria-label="more options">
-						      <span class="icon">
-						        <i class="fas fa-key" aria-hidden="true"></i>
-						      </span>
-						    </a>
-						    <a href="{{url_for('admin.profile_update', user=current_user.username)}}" class="card-header-icon prof-icon" aria-label="more options">
-						      <span class="icon">
-						        <i class="fas fa-edit" aria-hidden="true"></i>
-						      </span>
-						    </a>
 					  	</header>
 					  	<div class="card-content profile">
 
