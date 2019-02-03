@@ -7,6 +7,7 @@ class DonationForm(FlaskForm):
     amount = StringField('Amount')
     submit = SubmitField('Add')
 
+
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name')
     middlename = StringField('Middle Name')

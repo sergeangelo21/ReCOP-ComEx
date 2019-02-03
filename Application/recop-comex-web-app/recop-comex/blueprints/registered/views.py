@@ -54,23 +54,15 @@ def donate():
 
 	form = DonationForm()
 
+
 	if form.validate_on_submit():
 
 		id_donation = donation.count()
 		id_sponsee = user_account.query.filter_by(id=current_user.id).first()
 
-		values = donation(
-			id=id_donation, 
-			sponsee_id=id_sponsee.info_id, 
-			sponsor_id=0, 
-			amount=form.amount.data, 
-			date_given=datetime.now(), 
-			transaction_slip="asdasdasd", 
-			is_event='a', 
-			status='N')
+		value = [id_donation,id_sponsee.info_id,'0',form.amount.data]
 
-		db.session.add(values)
-		db.session.commit()
+		donation.add(value)
 
 	return render_template('/registered/donate/index.html',form = form)
 

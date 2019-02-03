@@ -56,6 +56,28 @@ class donation(db.Model):
 	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
+	def count():
+
+		rows = db.session.query(donation).count()
+		rows+=1
+		return rows
+
+	def add(value):
+
+		record = donation(
+			id=value[0],
+			sponsee_id=value[1],
+			sponsor_id=value[2],
+			amount=value[3],
+			date_given=datetime.now(),
+			transaction_slip="AAAAAA",
+			is_event='Y',
+			status='N')
+
+		db.session.add(record)
+		db.session.commit()
+
+
 class event_attachment(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
