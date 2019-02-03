@@ -17,7 +17,7 @@
 
 		<nav class="level is-mobile">
 			<div class="level-item has-text-centered">
-			    <div>
+			    <div class="active-prof-nav">
 			      	<a class="menu prof-icon" href="{{url_for('admin.profile_about', user=current_user.username)}}">
 			      		<p class="icon">
 					      	<span class="icon">
@@ -30,11 +30,11 @@
 			</div>
 
 			<div class="level-item has-text-centered">
-			    <div>
+			    <div class="active-prof-nav">
 			    	<a class="menu prof-icon" href="{{url_for('admin.profile_eventsattended', user=current_user.username)}}">
 				      	<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-calendar-alt icon fa-2x""></i>
+					      		<i class="fas fa-calendar-alt fa-2x""></i>
 					      	</span>
 					    </p>
 				      	<p class="is-size-6 has-text-weight-bold">Events Attended</p>
@@ -43,11 +43,11 @@
 			</div>
 
 			<div class="level-item has-text-centered">
-			    <div>
+			    <div class="active-prof-nav">
 			    	<a class="menu prof-icon" href="{{url_for('admin.profile_settings_personal', user=current_user.username)}}">
 				      	<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-cog icon fa-2x"></i>
+					      		<i class="fas fa-cog fa-2x"></i>
 					      	</span>
 					    </p>
 				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
