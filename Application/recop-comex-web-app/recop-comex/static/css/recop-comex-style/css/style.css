@@ -166,9 +166,21 @@
 		background-color: whitesmoke;
 	}
 
+	.select-list{
+		transition: transform .5s;
+		border-radius: 5px;
+	}
+
 	.select-list:hover{
-	background-color: whitesmoke;
-	cursor: pointer;
+		cursor: pointer;
+		transform: scale3d(1.05, 1.05, 1);
+		box-shadow: 0 2px 1px #072000, 0 0 0 1px #072000;
+	}
+
+	.event-btn:hover{
+		background-color: #072000;
+		color: #ffb901; 
+		border-color: #072000;
 	}
 
 	.overlay-card-event{
