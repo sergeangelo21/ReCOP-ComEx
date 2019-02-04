@@ -1,6 +1,7 @@
 {% extends "admin-base.html" %}
 
 {% block content %}
+
 		<div class="panel panel-default">
 			<div class="button-back">
 				<a href="{{ url_for('admin.linkages', status='all', search=' ') }}" class = "button backbtnprof">
@@ -11,7 +12,6 @@
 				</a>
 			</div>
 		    <div class="overlay-card has-text-centered">
-
 		    	<div class="circular">
 		    		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpor1YLOvnGDBQ_kPENgXeX8Nk0m_WQ9TCmQrFyFmHFqlZICVqIA">
 		    	</div>
@@ -26,7 +26,7 @@
 
 		<nav class="level is-mobile">
 			<div class="level-item has-text-centered">
-			    <div>
+			    <div class="active-prof-nav">
 			      	<a class="prof-icon">
 			      		<p class="icon">
 					      	<span class="icon">
@@ -39,11 +39,11 @@
 			</div>
 
 			<div class="level-item has-text-centered">
-			    <div>
+			    <div class="active-prof-nav">
 			    	<a class="prof-icon">
 				      	<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-calendar-alt icon fa-2x""></i>
+					      		<i class="fas fa-calendar-alt fa-2x""></i>
 					      	</span>
 					    </p>
 				      	<p class="is-size-6 has-text-weight-bold">Events Attended</p>
@@ -52,14 +52,14 @@
 			</div>
 
 			<div class="level-item has-text-centered">
-			    <div>
+			    <div class="active-prof-nav">
 			    	<a class="prof-icon">
 				      	<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-cog icon fa-2x"></i>
+					      		<i class="fas fa-cog fa-2x"></i>
 					      	</span>
 					    </p>
-				      	<p class="is-size-6 has-text-weight-bold">&nbsp&nbspSettings</p>
+				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
 				    </a>
 			    </div>
 			</div>
