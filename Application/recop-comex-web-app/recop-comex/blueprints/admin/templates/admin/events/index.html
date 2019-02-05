@@ -7,12 +7,12 @@
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('admin.events_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  		<a href="" class="button viewbtn is-active">
+						  		<a class="button viewbtn is-active">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
 								</a>
-								<a href="" class="button viewbtn">
+								<a class="button viewbtn" href="{{url_for('admin.events_calendar')}}">
 									<span class="icon">
 										<i class="fa fa-calendar-alt"></i>
 									</span>
@@ -151,8 +151,7 @@
 							</div>
 						</div>
 						<div class="card-content">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
+							<table class="table is-fullwidth">
 								{% if events %}
 								<thead>
 									<tr>
@@ -181,8 +180,7 @@
 								</tbody>
 
 								{% endif %}
-								</table>
-							</div>
+							</table>
 						</div>
 					</div>
 				</div>	

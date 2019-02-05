@@ -1,0 +1,51 @@
+								<tbody>
+									<tr class="table-row">
+										<td>{{ community.id }}</td>
+									    <td>{{ community.company_name }}</td>
+									    <td>{{ community.coordinator }}</td>
+									    <td>{{ community.address }}</td>
+									    {% if status=='all' %}
+									    <td>
+									    	{% if community.status=='A' %}
+									    		Active
+									    	{% elif community.status=='D' %}
+									    		Disabled
+									    	{% elif community.status=='P' %}
+									    		MOA sent
+									    	{% else %}
+									    		New
+									    	{% endif %}
+
+										</td>
+										{% endif %}
+										<td>
+											<div class="dropdown is-hoverable">
+												<div class="dropdown-trigger">
+													<button class="button">
+														<span>Actions</span>
+														<span class="icon">
+															<i class="fa fa-angle-down"></i>
+														</span>
+													</button>
+												</div>
+												<div class="dropdown-menu">
+													<div class="dropdown-content">
+														<a class="dropdown-item" href="{{url_for('admin.community_show', id=community.id)}}"><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
+														{% if community.status!='P'%}
+														<a class="dropdown-item" href="{{url_for('admin.community_action', id = community.id)}}")'><span class="icon is-small">
+														{% if community.status=='N' %}
+															<i class="fas fa-location-arrow"></i></span>&nbsp Send MOA
+														{% elif community.status=='A' %}
+															<i class="fas fa-user-times"></i></span>&nbsp Disable
+														{% else %}
+															<i class="fas fa-user-check"></i></span>&nbsp Activate
+														{% endif %}
+														</span>
+														</a>
+														{% endif %}
+													</div>
+												</div>
+											</div>
+										</td>
+									</tr>	
+								</tbody>

@@ -1,3 +1,7 @@
+
+
+var f = []
+
 function check_pass(){
 
     pass = document.getElementById('password')
@@ -10,4 +14,15 @@ function check_pass(){
     else{
         return true
     }
+}
+
+function filter(value){
+
+	alert(value)
+	f.push(value)
+	for(ctr=0;ctr<=f.size;ctr++)
+		{
+			alert(value)
+		}
+
 }

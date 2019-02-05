@@ -1,0 +1,14 @@
+ALTER TABLE `event_participation` CHANGE `rating` `rating` INT(11) NULL;
+
+drop table `event_category`;
+
+alter table `event_information` add `participant_no` INT NOT NULL after `event_date`;
+
+alter table `event_information` add `min_age` INT NOT NULL after `participant_no`;
+
+alter table `event_information` add `max_age` INT NOT NULL after `min_age`;
+
+
+
+
+C:/Program Files/wkhtmltopdf

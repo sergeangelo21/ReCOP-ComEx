@@ -1,18 +1,22 @@
 {% extends "admin-base.html" %}
 
 {% block content %}
-		Admin
-		<div class="columns">
-			<div class="column">
-				<div class="control has-icons-left has-icons-right">
-					<span class="icon is-small is-left">
-						<i class="fas fa-spinner fa-pulse"></i>
-					</span>1
+
+<div class="column">
+    <div class="card box">
+        <div class="card-header">
+            <p class="card-header-title">Dashboard</p>
+        </div><br>
+        <div class="tile is-ancestor">
+        	<div class="tile is-parent">
+				<div class="tile is-child is-6">
+					{{ events_chart.render().decode('utf-8')|safe }}
 				</div>
-		</div>
-			<div class="column">2</div>
-			<div class="column">3</div>
-			<div class="column">4</div>
-			<div class="column">5</div>
-		</div>
+				<div class="tile is-child is-6">
+					{{ events_chart.render().decode('utf-8')|safe }}
+				</div>
+        	</div>
+        </div>
+    </div>
+</div>
 {% endblock %}
