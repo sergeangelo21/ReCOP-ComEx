@@ -172,8 +172,8 @@ class linkage_views():
 		record = user_information.query.join(
 				user_account).add_columns(
 				user_information.id, user_account.type, 
-				user_information.address, user_information.company_name).filter(or_(
-				user_account.type==4, user_account.type==3)).order_by(
+				user_information.address, user_information.company_name).filter(and_(or_(
+				user_account.type==4, user_account.type==3), user_account.id!=current_user.id)).order_by(
 				user_information.address.asc()
 				).all()
 
@@ -192,6 +192,7 @@ class event_views():
 				event_information.name,
 				event_information.event_date,
 				event_information.event_status,
+				proposal_tracker.proposed_on,
 				proposal_tracker.status
 				).order_by(proposal_tracker.proposed_on.desc()
 				).all()
@@ -254,6 +255,8 @@ class event_views():
 			event_information.id,
 			event_information.organizer_id,
 			user_information.company_name,
+			user_information.first_name,
+			user_information.last_name,
 			event_information.name,
 			event_information.description,
 			event_information.objective,

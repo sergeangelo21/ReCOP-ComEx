@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>PDF</title>
+		<title>{{event.name|title}} Request</title>
 		<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -42,17 +42,19 @@
 			<div class="column">
 				<div class="columns">
 					<div class="column">
-						<p class="title has-text-centered">Request Letter</p>
 						<div class="container">
 							<p class="has-text-right has-text-weight-bold">{{date.strftime('%B %e, %Y')}}</p>
 						</div>
 
-						<div class="container greetings" style="marg ">
+						<div class="container greetings">
 							<p>To whom it may concern,</p>
 						</div>
 
 						<div class="container letter-body">
 							<p class="has-text-justified">We, the {{event.company_name}} would like to request for your approval for out event entitled "{{event.name}}" which we are planning to conduct on {{event.event_date.strftime('%B %e, %Y')}} at {{event.location}}.</p>
+						</div>
+						<div class="container letter-body">
+							<p class="has-text-justified">Below are the detailed information about the event.</p>
 						</div>
 					</div>
 				</div>
@@ -65,188 +67,49 @@
 									<thead class="has-background-light">
 									    <tr class="has-text-centered">
 									      <th>Event Name</th>
+									      <th>Description</th>									     
 									    </tr>
 									  </thead>
 									  <tbody>
 									    <tr>
-									      <td>[Event Name]</td>
+									      <td>{{event.name}}</td>
+									      <td>{{event.description}}</td>
 									    </tr>
 									  </tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="container">
-					<div class="columns">
-						<div class="column">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
-									<thead class="has-background-light">
-									    <tr class="has-text-centered">
-									      <th>Organizer</th>
-									    </tr>
-									  </thead>
-									  <tbody>
-									    <tr>
-									      <td>[Name]</td>
-									    </tr>
-									  </tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="container">
-					<div class="columns">
-						<div class="column">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
-									<thead class="has-background-light">
-									    <tr class="has-text-centered">
-									      <th>Description</th>
-									    </tr>
-									  </thead>
-									  <tbody>
-									    <tr>
-									      <td>[Description]</td>
-									    </tr>
-									  </tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="container">
-					<div class="columns">
-						<div class="column">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
 									<thead class="has-background-light">
 									    <tr class="has-text-centered">
 									      <th>Objective</th>
-									    </tr>
-									  </thead>
-									  <tbody>
-									    <tr>
-									      <td>[Objective]</td>
-									    </tr>
-									  </tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="container">
-					<div class="columns">
-						<div class="column">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
-									<thead class="has-background-light">
-									    <tr class="has-text-centered">
-									      <th>Proposed Budget</th>
-									    </tr>
-									  </thead>
-									  <tbody>
-									    <tr>
-									      <td>[Amount]</td>
-									    </tr>
-									  </tbody>
-								</table>
-							</div>
-						</div>
-
-						<div class="column">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
-									<thead class="has-background-light">
-									    <tr class="has-text-centered">
 									      <th>Location</th>
 									    </tr>
 									  </thead>
 									  <tbody>
 									    <tr>
-									      <td>[Location]</td>
+									      <td>{{event.objective}}</td>
+									      <td>{{event.location}}</td>
 									    </tr>
 									  </tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="container">
-					<div class="columns">
-						<div class="column">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
 									<thead class="has-background-light">
 									    <tr class="has-text-centered">
 									      <th>Target Date</th>
-									    </tr>
-									  </thead>
-									  <tbody>
-									    <tr>
-									      <td>[Date]</td>
-									    </tr>
-									  </tbody>
-								</table>
-							</div>
-						</div>
-
-						<div class="column">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
-									<thead class="has-background-light">
-									    <tr class="has-text-centered">
 									      <th>Thrust</th>
 									    </tr>
 									  </thead>
 									  <tbody>
 									    <tr>
-									      <td>[Thrust]</td>
+									      <td>{{event.event_date}}</td>
+									      <td>{{event.thrust}}</td>
 									    </tr>
 									  </tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="container">
-					<div class="columns">
-						<div class="column">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
-									<thead>
-									    <tr class="has-text-centered">
-									      <th>Proposed Budget</th>
-									    </tr>
-									  </thead>
-									  <tbody>
-									    <tr>
-									      <td>[Amount]</td>
-									    </tr>
-									  </tbody>
-								</table>
-							</div>
-						</div>
-
-						<div class="column">
-							<div class="table-responsive">
-								<table class="table is-fullwidth">
 									<thead class="has-background-light">
 									    <tr class="has-text-centered">
-									      <th>Approved On</th>
+									      <th>Proposed Budget</th>
+									      <th>Proposed On</th>
 									    </tr>
 									  </thead>
 									  <tbody>
 									    <tr>
-									      <td>[Date]</td>
+									      <td>P {{event.budget}}</td>
+									      <td>{{event.proposed_on.strftime('%B %e, %Y')}}</td>
 									    </tr>
 									  </tbody>
 								</table>
@@ -257,16 +120,8 @@
 
 				<div class="columns">
 					<div class="column">
-						<div class="container letter-body">
-							<p class="has-text-justified">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-							quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-							consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-							cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-							proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-						</div>
 						<div class="container closing">
-							<p>Many Thanks and God Bless.</p>
+							<p>We are hoping for your immediate response. Thank you and God bless us all.</p>
 						</div>
 					</div>
 				</div>
@@ -277,8 +132,8 @@
 							<p>Sincerely yours,</p>
 							<div class="container signature">
 								<hr class="signature-line">
-								<p class="has-text-weight-bold">[Name]</p>
-								<p>Outreach Coordinator</p>
+								<p class="has-text-weight-bold">{{event.first_name + ' ' + event.last_name}}</p>
+								<p>Outreach Coordinator - {{event.company_name}}</p>
 							</div>
 						</div>
 					</div>
@@ -288,13 +143,13 @@
 					<div class="columns has-text-centered">
 						<div class="column">
 							<hr class="sign-line">
-							<p class="has-text-weight-bold">[Name]</p>
-							<p>Department Head</p>
+							<p class="has-text-weight-bold">Department Head</p>
+							<p>Signature Over Printed Name</p>
 						</div>
 
 						<div class="column">
 							<hr class="sign-line">
-							<p class="has-text-weight-bold">[Name]</p>
+							<p class="has-text-weight-bold">Dean</p>
 							<p>Dean</p>
 						</div>
 					</div>

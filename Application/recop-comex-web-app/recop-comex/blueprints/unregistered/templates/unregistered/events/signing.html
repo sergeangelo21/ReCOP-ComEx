@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Profile | About</title>
+		<title>Event Approval | {{event.name}} </title>
 		<meta charset="utf-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../../../static/css/recop-comex-style/css/style.css">
 		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
 		<style type="text/css">
@@ -197,9 +198,9 @@
 									<form action="" method="POST">
 										{{form.hidden_tag()}}
 										<div class="field">
-											<label class="label">Username</label>
+											{{form.username.label(class_='label')}}
 											<div class="control has-icons-left has-icons-right">
-											    <input class="input" type="text" placeholder="Username">
+											    {{form.username(class_='input', placeholder='Username')}}
 											    <span class="icon is-small is-left">
 											      <i class="fas fa-user"></i>
 											    </span>
@@ -207,9 +208,9 @@
 										</div>
 
 										<div class="field">
-											<label class="label">Password</label>
+											{{form.password.label(class_='label')}}
 											<div class="control has-icons-left has-icons-right">
-											    <input class="input" type="password" placeholder="Password">
+											    {{form.password(class_='input', placeholder='Username')}}
 											    <span class="icon is-small is-left">
 											      <i class="fas fa-key"></i>
 											    </span>
@@ -228,4 +229,25 @@
 			    </div>
 			</div>
 	</body>
+
+    <script type="text/javascript" src = "../../../static/scripts/unregistered.js" ></script>
+    <script type = "text/javascript" src="../../../static/scripts/sweetalert2.all.min.js"></script>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+             <script>
+                Swal.fire({
+                    title: "{{message}}", 
+                    type: "{{category}}",
+                    customClass: "modal",
+                    buttonsStyling: false,
+                    allowOutsideClick: false,
+                    heightAuto: false,
+                    confirmButtonClass: 'button is-medium submit'
+                })
+            </script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %} 
 </html>

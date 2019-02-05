@@ -75,7 +75,7 @@ def events_create():
 		
 		event_information.add(value)
 
-		event_id = event_information.count()
+		event = event_information.last_added(current_user.id)
 
 		if form.target_link.data:
 
@@ -84,10 +84,10 @@ def events_create():
 			for participant in comm:
 
 				if participant!='':
-					value = [None, event_id, participant, 'Y']
+					value = [None, event.id, participant, 'Y']
 					event_participation.add(value)
 
-		value = [None, event_id]
+		value = [None, event.id]
 		proposal_tracker.add(value)
 
 		flash('Event proposal submitted! Please download the request letter.', 'success')
@@ -102,7 +102,7 @@ def event_letter(id,name):
 
 	filepath = 'static/output/events/letters/'
 
-	event = event_views.show_list('all', ' ')
+	event = event_views.show_info(id)
 
 	html = render_template('linkages/pdf/pdf.html', event = event, date = datetime.now())
 

@@ -262,7 +262,7 @@
 								        			{% elif event.fmi_signed %}
 								        				For Academic's Signing
 								        			{% elif event.recop_accepted %}
-								        				For Finance's Signing
+								        				For FMI's Signing
 								       				{% endif %}
 								        		{% elif event.event_status=="S" %}
 								        			Approved
@@ -292,8 +292,8 @@
 					          	</div>
 					          	<div class="column">
 					          		<div class="has-text-centered">
-					          			<i class="fas fa-coins fa-5x track-icon {% if event.fmi_signed %} mark {% endif %}"></i>
-					          			<label class="label">Finance</label>
+					          			<i class="fas fa-heart fa-5x track-icon {% if event.fmi_signed %} mark {% endif %}"></i>
+					          			<label class="label">FMI</label>
 					          			{% if event.fmi_signed %} 
 					          			{{event.fmi_signed.strftime('%B %e, %Y')}}<br>
 					          			{{event.fmi_signed.strftime('%I:%M %p')}}
