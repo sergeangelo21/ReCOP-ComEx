@@ -157,13 +157,6 @@ class event_participation(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
-class event_resource(db.Model):
-
-	id = db.Column(db.INT, primary_key=True)
-	event_id = db.Column(db.INT)
-	name = db.Column(db.VARCHAR(30), nullable=False)
-	type = db.Column(db.INT, nullable=False)
-
 class proposal_tracker(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)

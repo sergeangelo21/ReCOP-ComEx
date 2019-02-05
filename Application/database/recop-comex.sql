@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2019 at 11:51 AM
+-- Generation Time: Feb 05, 2019 at 02:43 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -119,19 +119,6 @@ CREATE TABLE `event_participation` (
   `comment` varchar(140) DEFAULT NULL,
   `is_target` char(1) NOT NULL,
   `status` char(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `event_resource`
---
-
-CREATE TABLE `event_resource` (
-  `id` int(11) NOT NULL,
-  `event_id` int(11) DEFAULT NULL,
-  `name` varchar(30) NOT NULL,
-  `type` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -289,12 +276,6 @@ ALTER TABLE `event_information`
 -- Indexes for table `event_participation`
 --
 ALTER TABLE `event_participation`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `event_resource`
---
-ALTER TABLE `event_resource`
   ADD PRIMARY KEY (`id`);
 
 --
