@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, send_fro
 from flask_login import current_user, login_required
 from blueprints.linkages.forms import *
 from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information
-from data_access.queries import user_views, linkage_views
+from data_access.queries import user_views, linkage_views, event_views
 from extensions import db, bcrypt
 from static.pdf import generate_pdf
 from datetime import datetime
@@ -102,7 +102,9 @@ def event_letter(id,name):
 
 	filepath = 'static/output/events/letters/'
 
-	html = render_template('linkages/pdf/pdf.html', date = datetime.now())
+	event = event_views.show_list('all', ' ')
+
+	html = render_template('linkages/pdf/pdf.html', event = event, date = datetime.now())
 
 	generate_pdf(html, filepath + str(id) + '.pdf')
 
