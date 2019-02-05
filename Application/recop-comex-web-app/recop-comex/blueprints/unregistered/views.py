@@ -49,11 +49,8 @@ def signup():
 
 	if form.validate_on_submit():
 
-		id_information = user_information.count()
-		id_account = user_account.count()
-
 		value_information = [
-			id_information,form.firstname.data,form.middlename.data,
+			None,form.firstname.data,form.middlename.data,
 			form.lastname.data,form.company.data,form.bio.data,form.gender.data,form.birthday.data,
 			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
 			]
@@ -66,7 +63,7 @@ def signup():
 			flash('Your account has been created! Please wait for MOA.', 'success')
 
 		value_account = [
-			id_account,id_information,form.username.data,
+			None,id_information,form.username.data,
 			form.password.data,form.email.data,form.type.data,datetime.now(),status
 			]
 
@@ -150,8 +147,7 @@ def confirm_linkage(token):
 		
 		user_account.update_status(id, status)
 
-		audit_id = audit_trail.count()
-		value = [audit_id,id,id,'partner',2]
+		value = [None,id,id,'partner',2]
 		audit_trail.add(value)
 
 		flash("MOA acknowledged! Your account is now active.", 'success')
@@ -207,8 +203,7 @@ def event_signing(token, action):
 
 				proposal_tracker.update_status(event.id, status)
 
-				audit_id = audit_trail.count()
-				value = [audit_id,user.id,event.id,'event', 5]
+				value = [None,user.id,event.id,'event', 5]
 				audit_trail.add(value)
 
 				if status!='S':
@@ -247,8 +242,7 @@ def event_signing(token, action):
 				proposal_tracker.update_status(event.id, status)
 				event_information.update_status(event.id, status)
 
-				audit_id = audit_trail.count()
-				value = [audit_id,user.id,event.id,'event', 6]
+				value = [None,user.id,event.id,'event', 6]
 				audit_trail.add(value)
 
 				flash(event.name.title() + ' was declined!', 'success')

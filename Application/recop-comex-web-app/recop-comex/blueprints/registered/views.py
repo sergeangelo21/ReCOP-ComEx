@@ -57,10 +57,9 @@ def donate():
 
 	if form.validate_on_submit():
 
-		id_donation = donation.count()
 		id_sponsee = user_account.query.filter_by(id=current_user.id).first()
 
-		value = [id_donation,id_sponsee.info_id,'0',form.amount.data]
+		value = [None,id_sponsee.info_id,'0',form.amount.data]
 
 		donation.add(value)
 

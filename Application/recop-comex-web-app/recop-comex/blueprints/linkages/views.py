@@ -64,10 +64,8 @@ def events_create():
 		else:
 			event_type=2
 
-		event_id = event_information.count()
-		
 		value = [
-		event_id,current_user.info_id,form.title.data,
+		None,current_user.info_id,form.title.data,
 		form.description.data,form.objective.data,form.budget.data,form.location.data,
 		form.event_date.data,form.participant_no.data, form.min_age.data, form.max_age.data,
 		form.thrust.data,event_type,'N'
@@ -83,12 +81,10 @@ def events_create():
 			for participant in comm:
 
 				if participant!='':
-					id = event_participation.count()
-					value = [id, event_id, participant, 'Y']
+					value = [None, event_id, participant, 'Y']
 					event_participation.add(value)
 
-		id = proposal_tracker.count()
-		value = [id, event_id]
+		value = [None, event_id]
 		proposal_tracker.add(value)
 
 		flash('Event proposal submitted! Please download the request letter.', 'success')
@@ -102,6 +98,7 @@ def events_create():
 def event_letter(id,name):
 
 	filepath = 'static/output/events/letters/'
+
 	generate_pdf(name+' Request Letter is here!', filepath + str(id) + '.pdf')
 
 	return send_from_directory(filepath, str(id) +'.pdf')

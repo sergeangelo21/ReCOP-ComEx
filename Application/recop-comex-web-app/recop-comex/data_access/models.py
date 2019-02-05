@@ -18,12 +18,6 @@ class audit_trail(db.Model):
 	date_created = db.Column(db.DATETIME, nullable=False)
 	type = db.Column(db.INT, nullable=False)
 
-	def count():
-
-		rows = db.session.query(audit_trail).count()
-		rows+=1
-		return rows
-
 	def add(value):
 
 		record = audit_trail(
@@ -55,12 +49,6 @@ class donation(db.Model):
 	transaction_slip = db.Column(db.VARCHAR(200), nullable=False)
 	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
-
-	def count():
-
-		rows = db.session.query(donation).count()
-		rows+=1
-		return rows
 
 	def add(value):
 
@@ -104,12 +92,6 @@ class event_information(db.Model):
 
 	event_info_id = db.relationship('proposal_tracker', backref='event_information', lazy=True)
 	event_part_id = db.relationship('event_participation', backref='event_information', lazy=True)
-
-	def count():
-
-		rows = db.session.query(event_information).count()
-		rows+=1
-		return rows
 
 	def add(value):
 
@@ -155,12 +137,6 @@ class event_participation(db.Model):
 	is_target = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
-	def count():
-
-		rows = db.session.query(event_participation).count()
-		rows+=1
-		return rows
-
 	def add(value):
 
 		record = event_participation(
@@ -193,12 +169,6 @@ class proposal_tracker(db.Model):
 	approved_on = db.Column(db.DATETIME)
 	comment = db.Column(db.VARCHAR(20))
 	status = db.Column(db.CHAR(1), nullable=False)	
-
-	def count():
-
-		rows = db.session.query(proposal_tracker).count()
-		rows+=1
-		return rows
 
 	def add(value):
 
@@ -256,12 +226,6 @@ class user_account(db.Model, UserMixin):
 	status = db.Column(db.CHAR(1), nullable=False)
 
 	audit_account_id = db.relationship('audit_trail', backref='user_account', lazy=True)
-
-	def count():
-
-		rows = db.session.query(user_account).count()
-		rows+=1
-		return rows
 
 	def add(value):
 
@@ -340,12 +304,6 @@ class user_information(db.Model):
 	donor_info_id = db.relationship('beneficiary', foreign_keys=[beneficiary.donor_id], backref='user_information_donor', lazy=True)
 	bene_info_id = db.relationship('beneficiary', foreign_keys=[beneficiary.beneficiary_id], backref='user_information_bene', lazy=True)
 	organizer_info_id = db.relationship('event_information', backref='user_information', lazy=True)
-
-	def count():
-
-		rows = db.session.query(user_information).count()
-		rows+=1
-		return rows
 
 	def linkage_info(value):
 

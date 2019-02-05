@@ -98,8 +98,7 @@ def event_action(id, action):
 
 		proposal = proposal_tracker.query.filter(proposal_tracker.event_id==event.id).first()
 
-		audit_id = audit_trail.count()
-		value = [audit_id,current_user.id,event.id,'event', 5]
+		value = [None,current_user.id,event.id,'event', 5]
 		audit_trail.add(value)
 
 		flash(event.name + ' was approved!', 'success')
@@ -110,8 +109,7 @@ def event_action(id, action):
 		proposal_tracker.update_status(event.id, status)
 		event_information.update_status(event.id, status)
 
-		audit_id = audit_trail.count()
-		value = [audit_id,user.id,event.id,'event', 6]
+		value = [None,user.id,event.id,'event', 6]
 		audit_trail.add(value)
 
 		flash(event.name + ' was declined.', 'info') 	
@@ -165,8 +163,7 @@ def linkage_action(id):
 		status = "D"
 		flash(linkage.company_name.title() + " was disabled!","success")
 
-		audit_id = audit_trail.count()
-		value = [audit_id,current_user.id,id,'linkage', 4]
+		value = [None,current_user.id,id,'linkage', 4]
 		audit_trail.add(value)
 	
 	elif user.status== "D":
@@ -174,8 +171,7 @@ def linkage_action(id):
 		status = "A"
 		flash(linkage.company_name.title() + " was activated! ", "success")
 
-		audit_id = audit_trail.count()
-		value = [audit_id,current_user.id,id,'linkage', 3]
+		value = [None,current_user.id,id,'linkage', 3]
 		audit_trail.add(value)
 
 	else:
@@ -193,8 +189,7 @@ def linkage_action(id):
 
 		status = "P"
 			
-		audit_id = audit_trail.count()
-		value = [audit_id,current_user.id,id,'linkage', 1]
+		value = [None,current_user.id,id,'linkage', 1]
 		audit_trail.add(value)
 
 	user_account.update_status(id, status)
@@ -223,7 +218,6 @@ def communities(status, search):
 		value=status
 
 	communities = linkage_views.show_list(value, 4, search)
-
 
 	return render_template('/admin/communities/index.html', title="Communities | Admin", communities=communities)
 
