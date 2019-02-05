@@ -115,6 +115,12 @@ class event_information(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
+	def count():
+
+		row = event_information.query.count()
+
+		return row
+
 	def retrieve_event(value):
 
 		record = event_information.query.filter(event_information.id==value).first()

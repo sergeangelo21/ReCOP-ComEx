@@ -44,22 +44,11 @@
 					<div class="column">
 						<p class="title has-text-centered">Request Letter</p>
 						<div class="container">
-							<p class="has-text-right">[ Date ]</p>
-						</div>
-						<div class="container inside-address">
-							<p class="has-text-weight-bold">[ Name ]</p>
-							<p>[ Position ] <br>
-								[ Company ] <br>
-								[ Address ]
-							</p>
-						</div>
-
-						<div class="container salutation">
-							<p class="has-text-weight-bold">[ Name ]:</p>
+							<p class="has-text-right has-text-weight-bold">{{date.strftime('%B %e, %Y')}}</p>
 						</div>
 
 						<div class="container greetings">
-							<p>Pleasant Greeting!</p>
+							<p>To whom it may concern,</p>
 						</div>
 
 						<div class="container letter-body">

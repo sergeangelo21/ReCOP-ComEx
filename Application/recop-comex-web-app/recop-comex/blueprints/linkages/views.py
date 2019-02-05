@@ -5,6 +5,7 @@ from data_access.models import user_account, event_information, event_participat
 from data_access.queries import user_views, linkage_views
 from extensions import db, bcrypt
 from static.pdf import generate_pdf
+from datetime import datetime
 
 import os
 
@@ -74,6 +75,8 @@ def events_create():
 		
 		event_information.add(value)
 
+		event_id = event_information.count()
+
 		if form.target_link.data:
 
 			comm = form.target_link.data.split('|',-1)
@@ -99,7 +102,9 @@ def event_letter(id,name):
 
 	filepath = 'static/output/events/letters/'
 
-	generate_pdf(name+' Request Letter is here!', filepath + str(id) + '.pdf')
+	html = render_template('linkages/pdf/pdf.html', date = datetime.now())
+
+	generate_pdf(html, filepath + str(id) + '.pdf')
 
 	return send_from_directory(filepath, str(id) +'.pdf')
 
