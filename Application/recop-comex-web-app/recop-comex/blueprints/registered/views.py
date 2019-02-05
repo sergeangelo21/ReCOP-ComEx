@@ -68,7 +68,7 @@ def donate():
 
 		value = [id_donation,id_sponsee.info_id,'0',form.amount.data]
 
-		#donation.add(value)
+		donation.add(value)
 		file = form.file.data
 		file.save('static/output/donate/'+file.filename)
 		flash('Done')

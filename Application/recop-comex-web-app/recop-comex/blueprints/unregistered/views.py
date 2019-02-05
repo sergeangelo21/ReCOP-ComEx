@@ -119,6 +119,13 @@ def login():
 	
 	return render_template('/unregistered/login/index.html', form=form)
 
+@unregistered.route('/login/forgot', methods=['GET', 'POST'])
+def forgot():
+
+
+	
+	return render_template('/unregistered/login/forgot.html')
+
 @unregistered.route('/logout')
 def logout():
 
