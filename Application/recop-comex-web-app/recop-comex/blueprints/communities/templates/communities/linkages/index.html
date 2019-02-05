@@ -1,0 +1,130 @@
+{% extends "communities-base.html" %}
+
+{% block content %}
+			<div style="padding: 10px;">
+				<div class="columns is-centered">
+					<div class="column is-right">
+						<div class="field is-horizontal is-pulled-right has-addons has-addons-centered">
+							<form action="" method="POST">
+								{{form.hidden_tag()}}
+							<div class="field-body">
+								<p class="control">
+							    	{{form.search(class_='input', placeholder='Search')}}
+								</p>
+								<p class="control">
+							     	{{form.submit(class_='button search')}}
+								</p>
+							</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="columns">
+				<div class="column is-2">
+					<div class="notification filter">
+
+		    			<div class="columns">
+			                <div class="column">
+			                	<p class="title is-size-5">Thrust</p>
+			                  	<div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="" type="checkbox" name="0" checked="checked">
+				                    <label for="">All</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="1" type="checkbox" name="1">
+				                    <label for="1">Educational</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="2" type="checkbox" name="2">
+				                    <label for="2">Environmental</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="3" type="checkbox" name="3">
+				                    <label for="3">Health</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="4" type="checkbox" name="4">
+				                    <label for="4">Livelihood</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="5" type="checkbox" name="5">
+				                    <label for="5">Socio-Political</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="6" type="checkbox" name="6">
+				                    <label for="6">Spiritual</label>
+				                </div>
+			                	
+			                	<p class="title is-size-5">Type</p>
+
+			                  	<div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="7" type="checkbox" name="7" checked="checked">
+				                    <label for="7">All</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
+				                    <label for="8">Institutional</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
+				                    <label for="9">Outside</label>
+				                </div>
+			                </div>
+			            </div>
+					</div>
+				</div>
+
+				<div class="column">
+					<div class="card list">
+						<div class="card-header">
+							<p class="card-header-title">
+							{% if search!=' ' %}
+							You searched for '{{search}}'&nbsp;
+							<a href="{{url_for('communities.linkages', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
+							&nbsp; in
+							{% endif %}Linkages
+							</p>
+							<div class="is-pulled-right">
+								<p class="card-header-title">
+									Total: {{linkages | length}}
+								</p>
+							</div>
+						</div>
+						<div class="card-content">
+							<div class="table">
+								<table class="table is-striped is-fullwidth">
+								{% if linkages %}
+								<thead>
+									<tr>
+									    <th class="newlist">Company Name</th>
+									    <th class="newlist">Coordinator</th>
+									    <th class="newlist">Address</th>
+									    <th class="newlist hidedesktop">Actions</th>
+									 </tr>
+									
+								</thead>
+
+									{% for linkage in linkages %}
+										{% include 'communities/linkages/_linkages.html' %}
+									{% endfor %}
+
+								{% else %}
+
+								<tbody>
+
+									<tr class = "table-row">
+										<td class = "has-text-centered">---Nothing to show---</td>
+								 	</tr>
+									
+								</tbody>
+
+								{% endif %}
+							</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+{% endblock %}

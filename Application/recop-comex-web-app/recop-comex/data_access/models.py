@@ -285,7 +285,7 @@ class user_account(db.Model, UserMixin):
 
 	def profile_acc_update(value):
 
-		record = user_account.query.filter_by(id=current_user.id).first()
+		record = user_account.query.filter_by(id=value).first()
 
 		return record
 
@@ -340,6 +340,6 @@ class user_information(db.Model):
 
 	def profile_info_update(value):
 
-		record = user_information.query.filter_by(id=current_user.id).first()
+		record = user_information.query.filter_by(id=value).first()
 
 		return record

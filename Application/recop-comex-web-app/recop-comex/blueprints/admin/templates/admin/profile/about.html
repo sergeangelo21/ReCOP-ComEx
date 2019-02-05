@@ -45,7 +45,7 @@
 
 			<div class="level-item has-text-centered">
 			    <div class="active-prof-nav" >
-			    	<a class="menu prof-icon" href="{{url_for('admin.profile_settings_personal')}}">
+			    	<a class="menu prof-icon" href="{{url_for('admin.profile_settings_personal', user=current_user.username)}}">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-cog fa-2x"></i>

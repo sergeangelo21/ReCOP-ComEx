@@ -20,7 +20,7 @@ def before_request():
 		if current_user.type == 3:
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
-			return redirect(url_for('beneficiaries.index'))
+			return redirect(url_for('communities.index'))
 		elif current_user.type == 1:
 			return redirect(url_for('admin.index'))
 

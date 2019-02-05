@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.communities.forms import *
 from data_access.models import user_account, user_information, proposal_tracker, event_information
-from data_access.queries import user_views
+from data_access.queries import user_views, linkage_views
 
 from extensions import db, bcrypt
 import os
@@ -36,6 +36,29 @@ def events():
 	events = event_information.query.all()
 
 	return render_template('/communities/events/index.html', title="Communities", events=events)
+
+@communities.route('/communities/linkages/filter_<search>', methods=['GET', 'POST'])
+@login_required
+def linkages(search):
+
+
+	linkages = linkage_views.show_list('A', 3, search=search)
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('communities.linkages', search=form.search.data))
+
+	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, search=search)
+
+@communities.route('/communities/linkages/show/id=<id>')
+@login_required
+def linkage_show(id):
+
+	linkage, mem_since = linkage_views.show_info(id)
+
+	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
 
 @communities.route('/communities/reports')
 @login_required

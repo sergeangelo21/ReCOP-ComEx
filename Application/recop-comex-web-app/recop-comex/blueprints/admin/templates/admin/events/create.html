@@ -1,5 +1,171 @@
 {% extends "admin-base.html" %}
 
 {% block content %}
-sdasd
+		<style>
+			.hero{
+				background-color: #e6e6e6;
+			}
+
+			.box.white{
+				transform: translateX(6%);
+				width: 90%;
+			}
+
+			.fa-arrow-circle-left{
+				color: #072000; 
+			}
+
+			.button.submit{
+				background-color: #072000; 
+				color: #ffb901;
+				border-color: #072000;
+			}
+		</style>
+
+	</head>
+	<body>
+
+		<section class="hero is-fullheight">
+			<div class="hero-body">
+			    <div class="box white is-white">
+			    	<form action="" method="POST">
+			    		{{form.hidden_tag()}}
+					    <div class="columns">
+					      	<div class="column">
+					      		<article class="media">
+									<figure class="media-left">
+									    <a class="btn btn-follow btn-sm text-center" href="{{url_for('admin.events')}}" role="button">
+											<span class="back-icon">
+									  			<i class="fas fa-arrow-circle-left icon is-medium"></i>
+									  		</span>
+									  	</a>
+									</figure>
+								  
+								  	<div class="media-right has-text-weight-bold">
+								   		<p class="subtitle has-text-weight-bold">Propose</p>
+								 	</div>
+								</article>
+					      	</div>
+					    </div>
+
+				        <div class="columns">
+					      	<div class="column">
+					      		<p class="title has-text-centered">Outreach Activity Proposal Form</p>
+					      	</div>
+				     	</div>
+
+				     	<div class="columns">
+							<div class="column">
+								 <div class="field">
+							        {{form.title.label(class_='label')}}
+						            <div class="control">
+						            	{{form.title(class_='input')}}
+						            </div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								 <div class="field">
+							        {{form.event_date.label(class_='label')}}
+						            <div class="control">
+						            	{{form.event_date(class_='input', type='date')}}
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								 <div class="field">
+							        {{form.location.label(class_='label')}}
+						            <div class="control">
+						            	{{form.location(class_='input')}}
+						            </div>
+						        </div>
+							</div>
+
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								 <div class="field">
+							        {{form.description.label(class_='label')}}
+						            <div class="control">
+						            	{{form.description(class_='input')}}
+						            </div>
+						        </div>
+							</div>
+							<div class="column">
+								<div class="field">
+									{{form.objective.label(class_='label')}}
+						            <div class="control">
+										{{form.objective(class_='input')}}
+									</div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+
+					      	<div class="column">
+					         	<div class="field">
+							        {{form.target_link.label(class_='label')}}{{form.target_link(hidden='True')}}
+						            <div class="control" id="link_div">
+						            	{{form.select_link(class_="input", onchange="add_comm()")}}
+						            </div>
+					          	</div>
+					        </div>
+
+							<div class="column">
+								<div class="field">
+							        {{form.participant_no.label(class_='label')}}
+						            <div class="control">
+						              	{{form.participant_no(class_='input')}}
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+							        <label class="label">Age Bracket</label>
+						            <div class="control is-grouped">
+						              	{{form.min_age(class_='input is-horizontal')}} to
+										{{form.max_age(class_='input is-horizontal')}}
+									</div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+							        {{form.thrust.label(class_='label')}}
+						            <div class="control">
+						              	{{form.thrust(class_='input')}}
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									{{form.budget.label(class_='label')}}
+						            <div class="control">
+										{{form.budget(class_='input')}}
+									</div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="field is-grouped is-grouped-centered">
+							<p class="control">
+							  	{{form.submit(class_='button submit')}}
+							</p>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</section>
+
 {% endblock %}

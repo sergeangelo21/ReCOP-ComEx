@@ -54,6 +54,17 @@ def events(status, search):
 
 	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,search=search)
 
+@admin.route('/admin/events/calendar', methods=['GET', 'POST'])
+@login_required
+def events_calendar():
+
+	value = 'all'
+	search = ' '
+
+	events = event_views.show_list(value, search)
+
+	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events)
+	
 @admin.route('/admin/events/show/id=<id>')
 @login_required
 def event_show(id):
@@ -253,11 +264,20 @@ def profile_eventsattended():
 
 	return render_template('/admin/profile/eventsattended.html', title="Admin")	
 
-@admin.route('/admin/profile/settings/personal', methods=['GET', 'POST'])
+@admin.route('/admin/profile/settings/personal_<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_personal():
+def profile_settings_personal(user):
 
-	user_information_update = user_information.profile_info_update(current_user.info_id)
+	if user == 'academicservices':
+		value = 4
+	elif user == 'formationmissionidentity':
+		value = 3
+	elif user == 'president':
+		value = 2
+	else:
+		value = 1
+
+	user_information_update = user_information.profile_info_update(value)
 
 	form = ProfilePersonalUpdateForm()
 
@@ -287,12 +307,21 @@ def profile_settings_personal():
 
 	return render_template('/admin/profile/settings/personal.html', title="Admin", form=form)
 
-@admin.route('/admin/profile/settings/contact', methods=['GET', 'POST'])
+@admin.route('/admin/profile/settings/contact_<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_contact():
+def profile_settings_contact(user):
 
-	user_information_update = user_information.profile_info_update(current_user.info_id)
-	user_account_update = user_account.profile_acc_update(current_user.info_id)
+	if user == 'academicservices':
+		value = 4
+	elif user == 'formationmissionidentity':
+		value = 3
+	elif user == 'president':
+		value = 2
+	else:
+		value = 1
+
+	user_information_update = user_information.profile_info_update(value)
+	user_account_update = user_account.profile_acc_update(value)
 
 	form = ProfileContactUpdateForm()
 
@@ -321,11 +350,20 @@ def profile_settings_contact():
 
 	return render_template('/admin/profile/settings/contact.html', title="Admin", form=form)	
 
-@admin.route('/admin/profile/settings/username', methods=['GET', 'POST'])
+@admin.route('/admin/profile/settings/username_<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_username():
+def profile_settings_username(user):
 
-	user_account_update = user_account.profile_acc_update(current_user.info_id)
+	if user == 'academicservices':
+		value = 4
+	elif user == 'formationmissionidentity':
+		value = 3
+	elif user == 'president':
+		value = 2
+	else:
+		value = 1
+
+	user_account_update = user_account.profile_acc_update(value)
 
 	form = ProfileUsernameUpdateForm()
 
@@ -353,11 +391,20 @@ def profile_settings_username():
 
 	return render_template('/admin/profile/settings/username.html', title="Admin", form=form)
 
-@admin.route('/admin/profile/update/password', methods=['GET', 'POST'])
+@admin.route('/admin/profile/update/password_<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_password():
+def profile_settings_password(user):
 
-	user_account_update = user_account.profile_acc_update(current_user.info_id)
+	if user == 'academicservices':
+		value = 4
+	elif user == 'formationmissionidentity':
+		value = 3
+	elif user == 'president':
+		value = 2
+	else:
+		value = 1
+
+	user_account_update = user_account.profile_acc_update(value)
 
 	form = PasswordUpdateForm()
 
