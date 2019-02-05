@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
 
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField, FileField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class DonationForm(FlaskForm):
     amount = StringField('Amount')
     submit = SubmitField('Add')
+    file   = FileField('file')
 
 
 class ProfilePersonalUpdateForm(FlaskForm):

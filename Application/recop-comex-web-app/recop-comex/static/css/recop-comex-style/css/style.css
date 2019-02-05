@@ -327,14 +327,22 @@
 
 
     /*   ADMIN - TABLES  */
-    .table-wrapper {
-	  overflow-x: auto;
+    .table-resonsive {
+	  overflow-y: auto;
 	}
 
-	.admin-table {
-	    width: 100%;
-	    overflow-x: auto;
-	}
+	@media (max-width: 767px) {
+    .table-responsive{
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+}
+@media (min-width: 767px) {
+    .table-responsive{
+        overflow: inherit !important; /* Sometimes needs !important */
+    }
+}
+	
     /*   END  */
 
 
@@ -592,7 +600,7 @@ Modules - reusable parts of our design
 /* UNREGISTERED START  */
 
 	/* EVENTS */
-	@media only screen and (max-width: 408px) {
+	@media only screen and (max-width: 415px) {
 		  /* For mobile phones: */
 		  .view-icons{
 				align-items: center;
@@ -602,3 +610,4 @@ Modules - reusable parts of our design
 		}
 	/* END */
 /*   END  *   /
+

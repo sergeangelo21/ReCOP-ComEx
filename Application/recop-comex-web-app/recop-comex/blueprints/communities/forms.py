@@ -2,6 +2,11 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
+class SearchForm(FlaskForm):
+
+    search = StringField("Search", validators=[DataRequired()])
+    submit = SubmitField("Search")
+
 class ProposalForm(FlaskForm):
 	category = SelectField('Category', coerce = int, validators=[DataRequired()])
 	title = StringField('Title of the Activity', validators=[DataRequired()])

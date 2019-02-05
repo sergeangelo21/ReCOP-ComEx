@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, flash
+from flask import Flask, Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
 from blueprints.registered.forms import *
 from data_access.models import donation, user_account, user_information
@@ -7,6 +7,12 @@ from datetime import datetime
 
 from extensions import db, bcrypt
 import os
+
+UPLOAD_FOLDER = 'C:/ReCOP-ComEx/Application/recop-comex-web-app/recop-comex/static/output/donate'
+ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+
+app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 registered = Blueprint('registered', __name__, template_folder="templates")
 
@@ -20,7 +26,7 @@ def before_request():
 		if current_user.type == 3:
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
-			return redirect(url_for('beneficiaries.index'))
+			return redirect(url_for('communities.index'))
 		elif current_user.type == 1:
 			return redirect(url_for('admin.index'))
 
@@ -57,13 +63,19 @@ def donate():
 
 	if form.validate_on_submit():
 
+		id_donation = donation.count()
 		id_sponsee = user_account.query.filter_by(id=current_user.id).first()
 
-		value = [None,id_sponsee.info_id,'0',form.amount.data]
+		value = [id_donation,id_sponsee.info_id,'0',form.amount.data]
 
 		donation.add(value)
-
+		file = form.file.data
+		file.save('static/output/donate/'+file.filename)
+		flash('Done')
 	return render_template('/registered/donate/index.html',form = form)
+
+
+
 
 @registered.route('/registered/contactus')
 @login_required
