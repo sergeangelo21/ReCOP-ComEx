@@ -8,11 +8,6 @@ from datetime import datetime
 from extensions import db, bcrypt
 import os
 
-UPLOAD_FOLDER = 'C:/ReCOP-ComEx/Application/recop-comex-web-app/recop-comex/static/output/donate'
-ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-
-app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 registered = Blueprint('registered', __name__, template_folder="templates")
 
@@ -63,19 +58,14 @@ def donate():
 
 	if form.validate_on_submit():
 
-		id_donation = donation.count()
-		id_sponsee = user_account.query.filter_by(id=current_user.id).first()
-
-		value = [id_donation,id_sponsee.info_id,'0',form.amount.data]
+		value = [None,current_user.info_id,'0',form.amount.data]
 
 		donation.add(value)
 		file = form.file.data
 		file.save('static/output/donate/'+file.filename)
 		flash('Done')
+
 	return render_template('/registered/donate/index.html',form = form)
-
-
-
 
 @registered.route('/registered/contactus')
 @login_required

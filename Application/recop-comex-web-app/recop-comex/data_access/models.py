@@ -36,7 +36,8 @@ class beneficiary(db.Model):
 	id = db.Column(db.INT, primary_key=True)
 	donor_id = db.Column(db.INT,db.ForeignKey('user_information.id'), nullable=False)
 	beneficiary_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
-	budget = db.Column(db.NUMERIC(10,2))
+	is_employed = db.Column(db.CHAR(1), nullable=False)
+	income = db.Column(db.NUMERIC(10,2), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
 class donation(db.Model):
@@ -115,11 +116,14 @@ class event_information(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
-	def count():
+	def last_added(value):
 
-		row = event_information.query.count()
+		record = event_information.query.filter(
+			event_information.organizer_id==value
+			).order_by(event_information.id.desc()
+			).first()
 
-		return row
+		return record
 
 	def retrieve_event(value):
 
@@ -156,6 +160,20 @@ class event_participation(db.Model):
 
 		db.session.add(record)
 		db.session.commit()
+
+class inventory(db.Model):
+
+	id = db.Column(db.INT, primary_key=True)
+	donation_id = db.Column(db.INT)
+	type_id = db.Column	(db.INT)
+	in_stock = db.Column (db.INT, nullable=False)
+	given = db.Column (db.INT, nullable=False)
+	expired = db.Column (db.INT, nullable=False)
+
+class inventory_type(db.Model):
+
+	id = db.Column(db.INT, primary_key=True)
+	donation_id = db.Column(db.VARCHAR(20), nullable=False)	
 
 class proposal_tracker(db.Model):
 
@@ -304,13 +322,6 @@ class user_information(db.Model):
 	bene_info_id = db.relationship('beneficiary', foreign_keys=[beneficiary.beneficiary_id], backref='user_information_bene', lazy=True)
 	organizer_info_id = db.relationship('event_information', backref='user_information', lazy=True)
 
-	def linkage_info(value):
-
-		record = user_information.query.filter(user_information.id==value).first()
-
-		return record
-
-
 	def add(value):
 
 		record = user_information(
@@ -330,6 +341,21 @@ class user_information(db.Model):
 			 
 		db.session.add(record)
 		db.session.commit()
+
+	def reserve_id():
+
+		record = user_information.query.count()
+		
+		record+=1
+
+		return record
+
+
+	def linkage_info(value):
+
+		record = user_information.query.filter(user_information.id==value).first()
+
+		return record
 
 	def profile_info_update(value):
 

@@ -49,11 +49,14 @@ def signup():
 
 	if form.validate_on_submit():
 
-		value_information = [
+		value = [
 			None,form.firstname.data,form.middlename.data,
 			form.lastname.data,form.company.data,form.bio.data,form.gender.data,form.birthday.data,
 			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
 			]
+
+		user_information.add(value)	
+		user_id = user_information.reserve_id()
 
 		if form.type.data == '2' or form.type.data == '4': 
 			status = "A"
@@ -62,13 +65,12 @@ def signup():
 			status = "N"
 			flash('Your account has been created! Please wait for MOA.', 'success')
 
-		value_account = [
-			None,id_information,form.username.data,
+		value = [
+			None,user_id,form.username.data,
 			form.password.data,form.email.data,form.type.data,datetime.now(),status
 			]
 
-		user_account.add(value_account)
-		user_information.add(value_information)	
+		user_account.add(value)
 
 		return redirect(url_for('unregistered.login'))
 
@@ -160,6 +162,7 @@ def confirm_linkage(token):
 		flash("MOA acknowledged! Your account is now active.", 'success')
 
 	else:
+		
 		flash("MOA already acknowledged. Please login.", 'info')
 	
 	return redirect(url_for('unregistered.login'))
