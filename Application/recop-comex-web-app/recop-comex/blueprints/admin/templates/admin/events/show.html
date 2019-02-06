@@ -27,20 +27,20 @@
 		<nav class="level is-mobile">
 			<div class="level-item has-text-centered">
 			    <div class="active-prof-nav">
-			      	<a class="menu prof-icon">
+			      	<a class="menu prof-icon" id = "info" onclick = "event_pages(this.id)">
 			      		<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-info fa-2x"></i>
 					      	</span>
 					    </p>
-			     	 	<p class="is-size-6 has-text-weight-bold">Event Information</p>
+			     	 	<p class="is-size-6 has-text-weight-bold">Information</p>
 			  	  	</a>
 			    </div>
 			</div>
 
 			<div class="level-item has-text-centered">
 			    <div class="active-prof-nav">
-			    	<a class="menu prof-icon">
+			    	<a class="menu prof-icon" id = "tracker" onclick = "event_pages(this.id)">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-map-marker-alt fa-2x""></i>
@@ -53,7 +53,7 @@
 
 			<div class="level-item has-text-centered">
 			    <div class="active-prof-nav">
-			    	<a class="menu prof-icon">
+			    	<a class="menu prof-icon" id = "participants" onclick = "event_pages(this.id)">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-users fa-2x"></i>
@@ -67,11 +67,11 @@
 	
 		<section class="hero">
 			<div class="hero-body">
-			    <div class="container">
+			    <div class="container" id="info_div">
 			      	<div class="card">
 						<header class="card-header has-background-light">
 						    <p class="card-header-title">
-						    Event Information
+						    Information
 						    </p>
 					  	</header>
 					  	<div class="card-content profile">
@@ -247,9 +247,7 @@
 					</div>
 			    </div>
 
-			    <br>
-			    <div class="container">
-			      	<div class="card">
+			    <div class="container hidden" id="tracker_div">
 			    <div class="card">
 				  	<header class="card-header has-background-light">
 					    <p class="card-header-title">
@@ -341,10 +339,63 @@
 					        </div>
 					    </div>
 				  	</div>
+				  </div>
+				 </div>
+
+			 <div class="container hidden" id="participant_div">
+			    <div class="card">
+				  	<header class="card-header has-background-light">
+					    <p class="card-header-title">
+					      Participants
+					    </p>
+					</header>
+					<div class="card-content profile">
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Name</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{event.name}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Name</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{event.name}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Name</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{event.name}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+					</div>				  	
 				</div>
 			</div>
 		</div>
-				
-			</div>
+	</div>
 		</section>
 {% endblock %}

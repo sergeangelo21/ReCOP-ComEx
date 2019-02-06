@@ -11,3 +11,33 @@ function check_pass(){
         return true
     }
 }
+
+function event_pages(value) {
+
+	info = document.getElementById('info_div')
+	tracker = document.getElementById('tracker_div')
+	participant = document.getElementById('participant_div')
+
+	if (value=='info'){
+
+		info.className='container'
+		tracker.className='container hidden'
+		participant.className='container hidden'
+
+	}
+	else if (value=='tracker'){
+
+		tracker.className='container'
+		info.className='container hidden'
+		participant.className='container hidden'
+
+	}
+	else{
+
+		participant.className='container'
+		info.className='container hidden'
+		tracker.className='container hidden'
+
+	}
+
+}
