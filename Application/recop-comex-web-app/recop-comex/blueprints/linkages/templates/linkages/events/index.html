@@ -1,59 +1,39 @@
 {% extends "linkages-base.html" %}	
 
 {% block content %}
+
 		<div class="notification gold">
-			<div class="columns">
-				<div class="column is-2">
-					<a href="{{url_for('linkages.events_create')}}" class="button add has-text-weight-bold">
-						<span class="icon">
-							<i class="fa fa-plus"></i>
-						</span>
-						<span>Create</span>
-					</a>
-
-					<a href="" class="button eventbtn is-active">
-						<span class="icon">
-							<i class="fa fa-list"></i>
-						</span>
-					</a>
-
-					<a href="" class="button eventbtn">
-						<span class="icon">
-							<i class="fa fa-calendar-alt"></i>
-						</span>
-					</a>
-				</div>
-
-				<div class="column">
+			<div class="columns is-mobile is-multiline is-centered">
+				<div class="column view-icons">
 					<article class="media">
-						<figure class="media-left">
-						   	<p class="has-text-black has-text-weight-bold">Filter by:</p>
-						</figure>
-						<div class="media-content">
-						    <div class="content">
-							    <div class="field-body">
-									<div class="field is-narrow">
-									    <div class="control">
-									        <div class="select is-fullwidth">
-									          <select>
-									          	<option>Select Category</option>
-									            <option>Spiritual</option>
-									            <option>Education</option>
-									            <option>Health</option>
-									            <option>Livelihood</option>
-									            <option>Environmental</option>
-									            <option>Socio-Political Concerns</option>
-									          </select>
-									        </div>
-									    </div>
-									</div>
-								</div>
-						    </div>    
-						</div>
+					  	<figure class="media-left"> 
+					  		<a href="{{url_for('linkages.events_create')}}" class="button add has-text-weight-bold">
+								<span class="icon">
+									<i class="fa fa-plus"></i>
+								</span>
+								<span>Create</span>
+							</a>
+					  	</figure>
+					  	<div class="media-content">
+					  		<div class="content">
+					  			<a href="" class="button viewbtn is-active">
+									<span class="icon">
+										<i class="fa fa-list"></i>
+									</span>
+								</a>
+
+								<a href="" class="button viewbtn">
+									<span class="icon">
+										<i class="fa fa-calendar-alt"></i>
+									</span>
+								</a>
+					  		</div>
+					  	</div>
 					</article>
+					
 				</div>
 
-				<div class="column is-2">
+				<div class="column is-narrow">
 					<div class="field has-addons has-addons-centered">
 						<p class="control">
 						    <input class="input" type="text" placeholder="Search">
@@ -68,11 +48,65 @@
 			</div>
 		</div>
 
-		<div class="container">
-			<div class="columns is-centered">
-				<div class="column is-12">
+		<div class="columns">
+		<div class="column is-2">
+    		<div class="notification filter">
+    			<div class="columns">
+	                <div class="column">
+	                	<p class="title is-size-5">Thrust</p>
+	                  	<div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="" type="checkbox" name="0" checked="checked">
+		                    <label for="">All</label>
+		                </div>
+		                <div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="1" type="checkbox" name="1">
+		                    <label for="1">Educational</label>
+		                </div>
+		                <div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="2" type="checkbox" name="2">
+		                    <label for="2">Environmental</label>
+		                </div>
+		                <div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="3" type="checkbox" name="3">
+		                    <label for="3">Health</label>
+		                </div>
+		                <div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="4" type="checkbox" name="4">
+		                    <label for="4">Livelihood</label>
+		                </div>
+		                <div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="5" type="checkbox" name="5">
+		                    <label for="5">Socio-Political</label>
+		                </div>
+		                <div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="6" type="checkbox" name="6">
+		                    <label for="6">Spiritual</label>
+		                </div>
+	                	
+	                	<p class="title is-size-5">Type</p>
 
-					{% if events %}
+	                  	<div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="7" type="checkbox" name="7" checked="checked">
+		                    <label for="7">All</label>
+		                </div>
+		                <div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
+		                    <label for="8">Institutional</label>
+		                </div>
+		                <div class="field">
+		                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
+		                    <label for="9">Outside</label>
+		                </div>
+	                </div>
+	            </div>
+			 	
+    		</div>
+    	</div>
+
+		<div class="column">
+
+			<div class="columns is-multiline" style="padding: 20px;">
+				{% if events %}
 
 						{% for events in events %}
 							{% include 'linkages/events/_events.html' %}
@@ -89,78 +123,9 @@
 						
 					</tbody>
 
-					{% endif %}		
-
-				<div class="column has-text-centered">
-					<div class="card">
-					    <div class="card-content">  
-						    <div class="tabs is-boxed">
-								<ul>
-								    <li class="is-active">
-								      <a>
-								        <span class="icon is-small"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
-								        <span>Upcoming Events</span>
-								      </a>
-								    </li>
-								    <li>
-								      <a>
-								        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
-								        <span>Past Events</span>
-								      </a>
-								    </li>
-							  	</ul>
-							</div>
-
-							<a>
-								<div class="upcoming-event">
-									<article class="media side">
-									  	<figure class="media-left">
-										    <p class="is-size-5 has-text-weight-bold has-text-centered">
-										      20<br> Jan
-										    </p>
-										</figure>
-									 	<div class="media-content">
-										    <div class="content">
-										      <p>
-										        <strong class="has-text-danger">Blood Letting</strong>
-										        <br>
-										        <small>Category: Health</small>
-										        <br>
-										        <small>Location: San Sebastian College Recoletos de Cavite</small>
-										      </p>
-										    </div>
-										</div>
-									</article>
-								</div>
-							</a>
-
-							<a>
-								<div class="upcoming-event">
-									<article class="media side">
-									  	<figure class="media-left">
-										    <p class="is-size-5 has-text-weight-bold has-text-centered">
-										      20<br> Jan
-										    </p>
-										</figure>
-									 	<div class="media-content">
-										    <div class="content">
-										      <p>
-										        <strong class="has-text-danger">Blood Letting</strong>
-										        <br>
-										        <small>Category: Health</small>
-										        <br>
-										        <small>Location: San Sebastian College Recoletos de Cavite</small>
-										      </p>
-
-
-										    </div>
-										</div>
-									</article>
-								</div>
-							</a>
-					    </div>  
-				  	</div>
-				</div>
+				{% endif %}	
 			</div>
-		</div>
+		</div>	
+	</div>
+
 {% endblock %}
