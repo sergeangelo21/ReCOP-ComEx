@@ -56,7 +56,7 @@ def events(status, search):
 	else:
 		value=status
 
-	event = event_views.show_list(value, search)
+	events = event_views.show_list(value, search)
 
 	form = SearchForm()
 
@@ -64,7 +64,7 @@ def events(status, search):
 
 		return redirect(url_for('admin.events', status=status, search=form.search.data))
 
-	return render_template('/admin/events/index.html', title="Events | Admin", form=form, event=events, status=status,search=search)
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,search=search)
 
 @admin.route('/admin/events/calendar', methods=['GET', 'POST'])
 @login_required
