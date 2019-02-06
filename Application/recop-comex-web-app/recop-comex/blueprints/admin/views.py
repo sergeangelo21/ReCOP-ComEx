@@ -70,10 +70,7 @@ def events(status, search):
 @login_required
 def events_calendar():
 
-	value = 'all'
-	search = ' '
-
-	events = event_views.show_list(value, search)
+	events = event_views.show_list('S', ' ')
 
 	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events)
 	
