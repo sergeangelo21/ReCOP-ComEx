@@ -31,6 +31,7 @@
 					<div class="card-content">
 						<table class="table is-hoverable is-fullwidth" id = "event">
 
+							{% if event %}
 							<tbody>
 
 								<tr class = "table">
@@ -154,10 +155,10 @@
 
 											name = ''
 
-											{% for e in events %}
+											{% for event in events %}
 
-												if ({{e.event_date.strftime('%e')}}==day && {{e.event_date.strftime('%m')}} ==month && {{e.event_date.strftime('%Y')}} ==year){
-													name = name + '{{e.name}}<br>'
+												if ({{event.event_date.strftime('%e')}}==day && {{event.event_date.strftime('%m')}} ==month && {{event.event_date.strftime('%Y')}} ==year){
+													name = name + '{{event.name}}<br>'
 													td.className = "is-selected"
 												}
 												else{
@@ -208,8 +209,23 @@
 
 
 						</script>
+
+							{% else %}
+
+							<tbody>
+
+								<tr class = "table-row">
+									<td class = "has-text-centered">---Nothing to show---</td>
+							 	</tr>
+								
+							</tbody>
+
+							{% endif %}
 					</div>
 				</div>
 			</div>
+
+
+
 
 {% endblock %}

@@ -5,7 +5,7 @@ from data_access.models import *
 from data_access.queries import *
 from static.email import generate, send_email
 
-import os
+import os, pygal
 
 admin = Blueprint('admin', __name__, template_folder="templates")
 
@@ -27,7 +27,19 @@ def before_request():
 @login_required
 def index():
 
-	return render_template('/admin/index.html', title="Home | Admin")
+	events_chart = pygal.Bar()
+	events_chart.title = 'Events'
+
+	events_chart.add('Education', [100])
+	events_chart.add('Environmental', [100])
+	events_chart.add('Health', [100])
+	events_chart.add('Livelihood', [100])
+	events_chart.add('Socio-political', [100])
+	events_chart.add('Spiritual', [100])
+
+	events_chart.render_response()
+
+	return render_template('/admin/index.html', title="Home | Admin", events_chart=events_chart)
 
 @admin.route('/admin/events/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
@@ -44,7 +56,7 @@ def events(status, search):
 	else:
 		value=status
 
-	events = event_views.show_list(value, search)
+	event = event_views.show_list(value, search)
 
 	form = SearchForm()
 
@@ -52,7 +64,7 @@ def events(status, search):
 
 		return redirect(url_for('admin.events', status=status, search=form.search.data))
 
-	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,search=search)
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, event=events, status=status,search=search)
 
 @admin.route('/admin/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -154,13 +166,19 @@ def linkages(status, search):
 
 	return render_template('/admin/linkages/index.html', title="Linkages | Admin", form=form, linkages=linkages, status=status, search=search)
 
+@admin.route('/admin/linkages/create')
+@login_required
+def linkages_create():
+
+	return render_template('/admin/linkages/create.html')
+
 @admin.route('/admin/linkages/show/id=<id>')
 @login_required
 def linkage_show(id):
 
 	linkage, mem_since = linkage_views.show_info(id)
 
-	return render_template('/admin/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage, mem_since = mem_since)
+	return render_template('/admin/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage, mem_since=mem_since)
 
 @admin.route('/admin/linkages/action/id=<id>')
 @login_required
@@ -207,13 +225,7 @@ def linkage_action(id):
 
 	return redirect(url_for('admin.linkages', status='all', search=' '))
 
-@admin.route('/admin/linkages/create')
-@login_required
-def linkages_create():
-
-	return render_template('/admin/linkages/create.html')
-
-@admin.route('/admin/communities/<status>/filter_<search>')
+@admin.route('/admin/communities/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def communities(status, search):
 
@@ -228,9 +240,74 @@ def communities(status, search):
 	else:
 		value=status
 
-	communities = linkage_views.show_list(value, 4, search)
+	communities = linkage_views.show_list(value, 4, search=search)
 
-	return render_template('/admin/communities/index.html', title="Communities | Admin", communities=communities)
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('admin.communities', status=status, search=form.search.data))
+
+	return render_template('/admin/communities/index.html', title="Communities | Admin", form=form, communities=communities, status=status, search=search)
+
+@admin.route('/admin/communities/create')
+@login_required
+def communities_create():
+
+	return render_template('/admin/communities/create.html')
+
+@admin.route('/admin/communities/show/id=<id>')
+@login_required
+def community_show(id):
+
+	community, mem_since = linkage_views.show_info(id)
+
+	return render_template('/admin/communities/show.html', title= community.company_name.title() + " | Admin", community=community, mem_since=mem_since)
+
+@admin.route('/admin/communities/action/id=<id>')
+@login_required
+def community_action(id):
+
+	user = user_account.retrieve_user(id)
+	community = user_information.linkage_info(user.info_id)
+
+	if user.status == "A":
+	
+		status = "D"
+		flash(community.company_name.title() + " was disabled!","success")
+
+		value = [None,current_user.id,id,'community', 4]
+		audit_trail.add(value)
+	
+	elif user.status== "D":
+		
+		status = "A"
+		flash(community.company_name.title() + " was activated! ", "success")
+
+		value = [None,current_user.id,id,'community', 3]
+		audit_trail.add(value)
+
+	else:
+			
+		token = generate(user.id)
+		link = url_for('unregistered.confirm_linkage', token=token , _external = True)	
+		html = render_template('admin/email/moa.html', user = user.username, link = link)
+		subject = "MEMORANDUM OF AGREEMENT"
+
+		email_parts = [html, subject, current_user.email_address, user.email_address]
+
+		send_email(email_parts)
+			
+		flash('MOA was sent to ' + community.company_name.title(), 'success')
+
+		status = "P"
+			
+		value = [None,current_user.id,id,'community', 1]
+		audit_trail.add(value)
+
+	user_account.update_status(id, status)
+
+	return redirect(url_for('admin.communities', status='all', search=' '))
 
 @admin.route('/admin/donations')
 @login_required

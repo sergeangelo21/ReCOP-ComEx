@@ -1,3 +1,7 @@
+
+
+var f = []
+
 function check_pass(){
 
     pass = document.getElementById('password')
@@ -39,5 +43,16 @@ function event_pages(value) {
 		tracker.className='container hidden'
 
 	}
+
+}
+
+function filter(value){
+
+	alert(value)
+	f.push(value)
+	for(ctr=0;ctr<=f.size;ctr++)
+		{
+			alert(value)
+		}
 
 }
