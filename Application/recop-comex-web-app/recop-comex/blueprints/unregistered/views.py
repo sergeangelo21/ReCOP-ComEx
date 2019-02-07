@@ -62,9 +62,12 @@ def signup():
 		if form.type.data == '2' or form.type.data == '4': 
 			status = "A"
 			flash('Your account was successfully created!', 'success')
-		else:
+		elif form.type.data == '3':
 			status = "N"
-			flash('Your account has been created! Please wait for MOA.', 'success')
+			if form.address.data == 'San Sebastian College Recoletos de Cavite':
+				flash('Your account has been created! Please wait for the Re-COP Director to confirm your account.', 'success')
+			else:
+				flash('Your account has been created! Please wait for MOA at your email.', 'success')
 
 		value = [
 			None,user_id,form.username.data,
@@ -158,7 +161,7 @@ def forgot_password():
 @unregistered.route('/logout')
 def logout():
 
-	user_account.logout()
+	user_account.last_active()
 
 	logout_user()
 

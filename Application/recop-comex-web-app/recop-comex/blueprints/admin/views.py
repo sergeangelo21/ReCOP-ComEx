@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, flash
+from flask import Blueprint, render_template, url_for, redirect, flash, jsonify
 from flask_login import current_user, login_required
 from blueprints.admin.forms import *
 from data_access.models import *
@@ -15,13 +15,14 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 def before_request():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
-
 		if current_user.type == 2:
 			return redirect(url_for('registered.index'))
 		elif current_user.type == 3:
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
+
+		user_account.last_active()
 
 @admin.route('/admin')
 @login_required
@@ -194,6 +195,14 @@ def linkage_action(id):
 	
 	elif user.status== "D":
 		
+		status = "A"
+		flash(linkage.company_name.title() + " was activated! ", "success")
+
+		value = [None,current_user.id,id,'linkage', 3]
+		audit_trail.add(value)
+
+	elif linkage.address == "San Sebastian College Recoletos de Cavite":
+
 		status = "A"
 		flash(linkage.company_name.title() + " was activated! ", "success")
 

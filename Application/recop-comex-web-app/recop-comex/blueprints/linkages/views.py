@@ -25,6 +25,8 @@ def before_request():
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
 
+		user_account.last_active()
+
 @linkages.route('/linkages/index')
 @login_required
 def index():
