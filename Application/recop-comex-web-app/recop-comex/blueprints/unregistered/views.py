@@ -1,13 +1,14 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from blueprints.unregistered.forms import LoginForm, SignupForm
+from blueprints.unregistered.forms import LoginForm, SignupForm, ForgotPasswordForm
 from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information
 from data_access.queries import user_views, event_views, linkage_views
 from datetime import datetime
 
-from static.email import confirm, generate, send_email
+from static.email import confirm, generate, send_email, send_email_resetpassword
+from extensions import db, bcrypt
 
-import os, json
+import os, json, random, string
 
 unregistered = Blueprint('unregistered', __name__, template_folder="templates")
 
@@ -121,12 +122,38 @@ def login():
 	
 	return render_template('/unregistered/login/index.html', form=form)
 
-@unregistered.route('/login/forgot', methods=['GET', 'POST'])
-def forgot():
+@unregistered.route('/login/forgotpassword', methods=['GET', 'POST'])
+def forgot_password():
 
+	form = ForgotPasswordForm()
 
-	
-	return render_template('/unregistered/login/forgot.html')
+	if form.validate_on_submit():
+
+		email = form.email.data
+		value = user_account.query.filter_by(email_address=email).first()
+		
+		if value:
+			token = ''.join(random.choice(string.ascii_uppercase + string.digits)for _ in range(6))
+
+			value.password = bcrypt.generate_password_hash(token).decode('utf-8')
+
+			db.session.commit()
+
+			html = 'asdf'
+			subject = 'RESET PASSWORD: '
+			admin = user_account.query.filter_by(id=1).first()
+
+			email_parts = [token, subject, admin.email_address, email]
+			send_email_resetpassword(email_parts)
+
+			flash('Password has been reset. Please check your email.', 'success')
+			return redirect(url_for('unregistered.forgot_password'))
+
+		else:
+
+			flash('Email not existing.', 'error')
+
+	return render_template('/unregistered/login/forgot_password.html', form=form)
 
 @unregistered.route('/logout')
 def logout():

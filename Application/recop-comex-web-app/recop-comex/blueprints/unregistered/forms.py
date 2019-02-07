@@ -27,3 +27,7 @@ class SignupForm(FlaskForm):
     email = StringField('Email Address', validators=[DataRequired()])
     thrust = SelectField('Thrust', choices = [("0","Please Choose One"),("1","Educational"),("2","Environmental"),("3","Health"),("4","Livelihood"),("5","Socio-Political"),("6","Spiritual")])
     submit = SubmitField('Submit')
+
+class ForgotPasswordForm(FlaskForm):
+    email = StringField('Email Address', validators=[DataRequired()])
+    submit = SubmitField('Submit')

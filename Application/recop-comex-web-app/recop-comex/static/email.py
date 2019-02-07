@@ -27,3 +27,13 @@ def send_email(parts):
 		recipients=[parts[3]])
 
 	mail.send(msg)
+
+
+def send_email_resetpassword(parts):
+
+    msg = Message(html=parts[0],
+        subject=parts[1],
+        sender = ("ReCOP Director", parts[2]),
+        recipients=[parts[3]])
+
+    mail.send(msg)

@@ -250,7 +250,7 @@ class user_account(db.Model, UserMixin):
 			id=value[0], 
 			info_id=value[1],
 			username=value[2],
-			password= bcrypt.generate_password_hash(value[3]).decode('utf-8'),
+			password=bcrypt.generate_password_hash(value[3]).decode('utf-8'),
 			email_address=value[4],
 			type=value[5],
 			last_active=value[6],
