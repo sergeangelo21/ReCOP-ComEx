@@ -345,8 +345,6 @@ class user_information(db.Model):
 	def reserve_id():
 
 		record = user_information.query.count()
-		
-		record+=1
 
 		return record
 
