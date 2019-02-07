@@ -4,10 +4,14 @@ from wtforms import StringField, TextAreaField, PasswordField, SubmitField, Sele
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class DonationForm(FlaskForm):
-    amount = StringField('Amount')
-    submit = SubmitField('Add')
-    file   = FileField('file')
 
+    give_to = RadioField('Give To', choices=[(1,'Community'), (2,'Event')])
+    sponsee = SelectField('Communities', choices=[(1,'ReCOP')], coerce=int,validators=[DataRequired()])
+    event = SelectField('Events', choices=[(0, 'Please Choose One')], coerce=int,validators=[DataRequired()])
+    type = RadioField('Donation Type', choices=[(1,'Money'), (2,'In kind')])
+    amount = StringField('Amount', validators=[DataRequired()])
+    trans_slip   = FileField('Deposit Slip', validators=[DataRequired()])
+    submit = SubmitField('Donate')
 
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name')

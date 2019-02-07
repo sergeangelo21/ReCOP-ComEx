@@ -59,8 +59,8 @@ class donation(db.Model):
 			sponsor_id=value[2],
 			amount=value[3],
 			date_given=datetime.now(),
-			transaction_slip="AAAAAA",
-			is_event='Y',
+			transaction_slip=value[4],
+			is_event=value[5],
 			status='N')
 
 		db.session.add(record)

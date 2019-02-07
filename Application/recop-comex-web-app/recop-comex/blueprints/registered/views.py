@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
 from blueprints.registered.forms import *
 from data_access.models import donation, user_account, user_information
-from data_access.queries import user_views
+from data_access.queries import user_views, linkage_views, event_views
 from datetime import datetime
 
 from extensions import db, bcrypt
@@ -55,17 +55,34 @@ def donate():
 
 	form = DonationForm()
 
+	communities = linkage_views.target_linkages()
+
+	for c in communities:
+
+		if c.type==4:
+			form.sponsee.choices.extend([(c.id, c.address)])
+
+	events = event_views.show_list('S', ' ')
+
+	if events:
+		form.event.choices.extend(([e.id, e.name] for e in events))
+		no_event = 0
+	else: 
+		no_event = 1
 
 	if form.validate_on_submit():
 
-		value = [None,current_user.info_id,'0',form.amount.data]
+		return('hey')
+		flash('fuck')
+		value = [None,sponsee,current_user.info_id,form.amount.data,'N']
 
-		donation.add(value)
-		file = form.file.data
-		file.save('static/output/donate/'+file.filename)
-		flash('Done')
+		#donation.add(value)
+		file = form.trans_slip.data
+		trans_path = 'static/output/donate/'+file.filename
+		#file.save(trans_path)
+		flash('Done', 'success')
 
-	return render_template('/registered/donate/index.html',form = form)
+	return render_template('/registered/donate/index.html', form=form, no_event=no_event)
 
 @registered.route('/registered/contactus')
 @login_required
