@@ -32,11 +32,6 @@
 		margin:1%;
 	}
 
-	.box.white{
-		transform: translateX(6%);
-		width: 90%;
-	}
-
 	.notification.gold{
 		background-color:#ecad00;
 		text-decoration: none;
@@ -263,15 +258,14 @@
 	/*       END        */
 
 
-	/*   LINKAGES PROPOSAL   */
-	.fa-arrow-circle-left{
-		color: #072000; 
+	/*   LINKAGES PROPOSAL & ADD MEMBERS   */
+	.box.white{
+		transform: translateX(6%);
+		width: 90%;
 	}
 
-	.button.submit{
-		background-color: #072000; 
-		color: #ffb901;
-		border-color: #072000;
+	.fa-arrow-circle-left{
+		color: #072000; 
 	}
 	/*   END   */
 

@@ -60,6 +60,18 @@ def linkage_show(id):
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
 
+@communities.route('/communities/members')
+@login_required
+def members():
+
+	return render_template('/communities/members/index.html', title="Communities")
+
+@communities.route('/communities/members/add')
+@login_required
+def members_add():
+
+	return render_template('/communities/members/add.html', title="Communities")
+
 @communities.route('/communities/reports')
 @login_required
 def reports():
