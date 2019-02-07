@@ -1,6 +1,7 @@
 {% extends "linkages-base.html" %}
 
 {% block content %}
+
 		<div class="notification gold">
 			<div class="columns">
 				<div class="column">
@@ -51,92 +52,74 @@
 			</div>
 		</div>
 
-		<div class="container">
-			<div class="columns is-centered">
-				<div class="column is-8">
-					<div class="card select-list">
-						<div class="card-content">
-							<article class="media">
-  								<figure class="media-left">
-    								<p class="image is-128x128">
-      									<img class="event" src="https://www.projectpearls.org/wp-content/uploads/2013/06/12841195_10153962703412905_7874811344446667017_o-300x300.jpg">
-    								</p>
-  								</figure>
-	  							<div class="media-content">
-	    							<div class="content">
-	      								<p>
-	        								<a class="title is-6">Barangay 11 Lawin</a>
-	        							<br>   
-	        								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-	      								</p>
-	    							</div>
-			    				<!-- icons -->
-				 				   <nav class="level is-mobile">
-				      					<div class="level-left">
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-reply"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-retweet"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-heart"></i></span>
-			        						</a>
-			      						</div>
-			    					</nav>
-	  							</div>
-							</article>
-						</div>
-					</div>
-					<div class="card select-list">
-						<div class="card-content">
-							<article class="media">
-  								<figure class="media-left">
-    								<p class="image is-128x128">
-      									<img class="event" src="https://www.projectpearls.org/wp-content/uploads/2013/06/12841195_10153962703412905_7874811344446667017_o-300x300.jpg">
-    								</p>
-  								</figure>
-	  							<div class="media-content">
-	    							<div class="content">
-	      								<p>
-	        								<a class="title is-6">Barangay 11 Lawin</a>
-	        							<br>   
-	        								Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-	      								</p>
-	    							</div>
-			    				<!-- icons -->
-				 				   <nav class="level is-mobile">
-				      					<div class="level-left">
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-reply"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-retweet"></i></span>
-			        						</a>
-			        						<a class="level-item">
-			          							<span class="icon is-small"><i class="fas fa-heart"></i></span>
-			        						</a>
-			      						</div>
-			    					</nav>
-	  							</div>
-							</article>
-						</div>
-					</div>
+<!--  -->
+<br>
+<div class="container">
+    <div class="columns is-centered">
+        
+            <div class="column is-4">
+                <div class="post-module">
+            <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img class = "images" src="../../static/images/beneficiary.jpg" />
+                    </div>
+            <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Adopted Barangay</div>
+                                <h1 class="title">Barangay 11 Lawin</h1>
+                                    <p class="description">LOCATION:</p>
+                                    <p class="description">CONTACT:</p> 
+                        </div>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="post-module">
+            <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img class = "images" src="../../static/images/pic1.jpg" />
+                    </div>
+            <!-- Post Content-->
+                        <div class="post-content">
+                           <div class="category">Adopted Barangay</div>
+                                <h1 class="title">Barangay 11 Lawin</h1>
+                                    <p class="description">LOCATION:</p>
+                                    <p class="description">CONTACT:</p> 
 
-				</div>
-				<div class="column  has-text-centered">
-					<div class="card">
-					    <div class="card-content">  
-					      <h1 class="title is-5">RECENT BENEFICIARIES</h1>
-			          		<div>
-			            		<a>Barangay 11 Lawin Cavite City</a>
-			          		</div>
-			          		<div>
-			            		<a>Barangay 11 Lawin Cavite City</a>
-			          		</div>
-					    </div>  
-				  </div>
-				</div>
-			</div>
-		</div>
+                        </div>
+                </div>
+            </div>
+            <div class="column is-4">
+                <div class="post-module">
+            <!-- Thumbnail-->
+                    <div class="thumbnail">
+                        <img class = "images" src="../../static/images/pic1.jpg" />
+                    </div>
+            <!-- Post Content-->
+                        <div class="post-content">
+                            <div class="category">Adopted Barangay</div>
+                                <h1 class="title">Barangay 11 Lawin</h1>
+                                    <p class="description">LOCATION:</p>
+                                    <p class="description">CONTACT:</p> 
+                        </div>
+                </div>
+            </div>
+       
+
+    </div>
+</div>
+
+<script type = "text/javascript" src="../../../static/scripts/jquery11_2.min.js"></script>
+</body>
+<script type="text/javascript">
+	$(window).load(function() {
+  $('.post-module').hover(function() {
+    $(this).find('.description').stop().animate({
+      height: "toggle",
+      opacity: "toggle"
+    }, 300);
+  });
+});
+</script>
+
+		
 {% endblock %}
