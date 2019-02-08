@@ -59,41 +59,43 @@ function filter(value)
 	if (sender.checked==true)
 	{
 		f.push(value)
+
+		// when 'all' is selected, remove value from array
+		if (f == 0 || f == 7)
+		{
+			f.splice(f.indexOf(value), 1);
+		}
 	}
 	else
 	{
-		f.splice( f.indexOf(value), 1 );
+		f.splice(f.indexOf(value), 1);
 	}
 
 	var tbody = document.getElementsByTagName('tbody')
 
 	if (f.length!=0)
+	{
+		for (ctr=0; ctr<=f.length-1; ctr++)
 		{
-			for (ctr=0; ctr<=f.length-1; ctr++)
+			for (ctr2=0; ctr2<=tbody.length-1; ctr2++)
 			{
-				for (ctr2=0; ctr2<=tbody.length-1; ctr2++)
-				{
-						if(tbody[ctr2].id.indexOf(f[ctr].toString()+'_') && tbody[ctr2].name!="Y")
-						{
-							tbody[ctr2].style.display="none"
-							tbody[ctr2].name="Y"
-						}
-						else
-						{ 
-							tbody[ctr2].style.display=""
-						}
-				}
-				for (ctr2=0; ctr2<=tbody.length-1; ctr2++)
-				{
-					tbody.name=""
-				}
-			}
-		}
-		else
-		{
-			for (ctr2=0; ctr2<=tbody.length; ctr2++)
-			{
-				tbody[ctr2].style.display=""
+					// get tbodies then compare to f.length
+					if (tbody[ctr2].id.indexOf(f[ctr].toString()+'_'))
+					{
+						tbody[ctr2].style.display="none"
+					}
+					else
+					{ 
+						tbody[ctr2].style.display=""
+					}
 			}
 		}
 	}
+	else
+	{
+		for (ctr2=0; ctr2<=tbody.length-1; ctr2++)
+		{
+			tbody[ctr2].style.display=""
+		}
+	}
+}
