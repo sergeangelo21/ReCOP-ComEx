@@ -77,6 +77,7 @@ class linkage_views():
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name).label('coordinator'),
+				user_information.partner_thrust,
 				user_information.address,
 				user_account.status,
 				).filter(user_account.type==type
@@ -91,6 +92,7 @@ class linkage_views():
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name).label('coordinator'),
+				user_information.partner_thrust,
 				user_information.address,
 				user_account.status,
 				).filter(and_(user_account.type==type,
@@ -109,6 +111,7 @@ class linkage_views():
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name).label('coordinator'),
+				user_information.partner_thrust,
 				user_information.address,
 				user_account.status,
 				).filter(and_(user_account.type==type,user_account.status==value,
@@ -127,6 +130,7 @@ class linkage_views():
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name).label('coordinator'),
+				user_information.partner_thrust,
 				user_information.bio,
 				user_information.address,
 				user_account.status,

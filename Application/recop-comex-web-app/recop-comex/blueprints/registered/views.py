@@ -25,6 +25,8 @@ def before_request():
 		elif current_user.type == 1:
 			return redirect(url_for('admin.index'))
 
+		user_account.last_active()
+
 @registered.route('/registered')
 @login_required
 def index():
