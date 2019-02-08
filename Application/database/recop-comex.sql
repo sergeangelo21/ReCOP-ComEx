@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2019 at 02:58 PM
+-- Generation Time: Feb 08, 2019 at 03:57 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -202,10 +202,13 @@ CREATE TABLE `user_account` (
 --
 
 INSERT INTO `user_account` (`id`, `info_id`, `username`, `password`, `email_address`, `type`, `last_active`, `status`) VALUES
-(1, 1, 'admin-recop', '$2b$12$aLUMJqDekK/DY8nU5c4y3O2lWmP4.af.YCWeol5Cc.nAgw6Wau7ia', 'recop.baste@gmail.com', 1, '2019-01-29 13:43:00', 'A'),
+(1, 1, 'admin-recop', '$2b$12$aLUMJqDekK/DY8nU5c4y3O2lWmP4.af.YCWeol5Cc.nAgw6Wau7ia', 'recop.baste@gmail.com', 1, '2019-02-07 21:49:20', 'A'),
 (2, 2, 'pres.baste', '$2b$12$9kebxlvRAnR/L3Jx9GIcQeDEMuIDrOMlfoIbFNv0lkhpte7RI29WC', 'pres.baste@gmail.com', 5, '2019-01-29 13:34:26', 'A'),
 (3, 3, 'acad.baste', '$2b$12$9DeJoAw7WoF6GMq9d70Tnec2ALPZEuEOa1qSWEL7S.MmJEnrZJrem', 'acad.baste@gmail.com', 5, '2019-01-29 14:05:13', 'A'),
-(4, 4, 'fmi.baste', '$2b$12$UtE8pwqmZK3Et9ioHkSoSODiCzNT1cRgsyQcYkhTDxlwBlgOTDs6.', 'fmi.baste@gmail.com', 5, '2019-01-29 14:07:02', 'A');
+(4, 4, 'fmi.baste', '$2b$12$UtE8pwqmZK3Et9ioHkSoSODiCzNT1cRgsyQcYkhTDxlwBlgOTDs6.', 'fmi.baste@gmail.com', 5, '2019-01-29 14:07:02', 'A'),
+(5, 5, 'jpcs.baste', '$2b$12$D9bEG7MoOiz2iaYDYez2a.LF3DhqhNXqtqgB/r/UkIHBfXmkuWj8y', 'sergeangelomajillo@gmail.com', 3, '2019-02-07 19:12:40', 'A'),
+(6, 6, 'marulas', '$2b$12$DuUPMxNFzakvFc09wxEY2ONePp8T16Svj1MuiXGPVpVkodek.UICK', 'sergeangelomajillo@gmail.com', 4, '2019-02-07 19:14:56', 'A'),
+(7, 7, 'salve.majillo', '$2b$12$SVLkqpUJ406lZM.eEOLXpO5BKpKU7AnfEzVOxDey5.uNbAUa7p1c.', 'sergeangelomajillo@gmail.com', 2, '2019-02-07 21:47:55', 'A');
 
 -- --------------------------------------------------------
 
@@ -236,7 +239,10 @@ INSERT INTO `user_information` (`id`, `first_name`, `middle_name`, `last_name`, 
 (1, 'Ana', 'Dula', 'Manzano', 'San Sebastian College Recoletos de Cavite', 'I am the ReCOP Director.', 'F', '1998-01-21', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
 (2, 'Rafael', 'Something', 'Pecson', 'San Sebastian College Recoletos de Cavite', 'I am the President.', 'M', '2019-01-01', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
 (3, 'James', 'Dexter', 'Tanquis', 'San Sebastian College Recoletos de Cavite', 'I am the VP for Academics.', 'M', '2019-01-01', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
-(4, 'Cristituto', 'Somebody', 'Palomar', 'San Sebastian College Recoletos de Cavite', 'I am the VP for Finance.', 'M', '2019-01-29', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0);
+(4, 'Cristituto', 'Somebody', 'Palomar', 'San Sebastian College Recoletos de Cavite', 'I am the VP for Finance.', 'M', '2019-01-29', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
+(5, 'Antonio', 'Ching', 'Co', 'Junior Philippine Computer Society', 'I am checkered', 'M', '1998-01-21', 'San Sebastian College Recoletos de Cavite', '', '', 0),
+(6, 'Serge Angelo', 'Isanan', 'Majillo', 'San Sebastian College Recoletos de Cavite', 'Please help!', 'M', '1998-01-21', 'Barangay Marulas', '', '', 0),
+(7, 'Pauline Salve', 'Isanan', 'Majillo', 'WalterMart', 'I am pimps.', 'F', '1994-07-15', 'Centennial Rd, Kawit, Cavite', '', '', 0);
 
 --
 -- Indexes for dumped tables
@@ -322,7 +328,7 @@ ALTER TABLE `user_information`
 -- AUTO_INCREMENT for table `audit_trail`
 --
 ALTER TABLE `audit_trail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `beneficiary`
@@ -340,13 +346,13 @@ ALTER TABLE `donation`
 -- AUTO_INCREMENT for table `event_information`
 --
 ALTER TABLE `event_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `event_participation`
 --
 ALTER TABLE `event_participation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -364,7 +370,7 @@ ALTER TABLE `inventory_type`
 -- AUTO_INCREMENT for table `proposal_tracker`
 --
 ALTER TABLE `proposal_tracker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `referral`
@@ -376,13 +382,13 @@ ALTER TABLE `referral`
 -- AUTO_INCREMENT for table `user_account`
 --
 ALTER TABLE `user_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_information`
 --
 ALTER TABLE `user_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
