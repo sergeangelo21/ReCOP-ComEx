@@ -25,25 +25,23 @@
 										</td>
 										{% endif %}
 										<td>
-											<div class="dropdown is-hoverable">
-												<div class="dropdown-trigger">
-													<button class="button">
-														<span>Actions</span>
-														<span class="icon">
-															<i class="fa fa-angle-down"></i>
-														</span>
-													</button>
-												</div>
-												<div class="dropdown-menu">
-													<div class="dropdown-content">
-														<a class="dropdown-item" href="{{url_for('admin.event_show', id=event.id)}}"><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a>
-														{% if event.event_status=='N' %}
-														<a class="dropdown-item" href="{{url_for('admin.event_action', id=event.id, action='approve')}}"><span class="icon is-small"><i class="fas fa-check-circle"></i></span>&nbsp Approve</a>
-														<a class="dropdown-item" href="{{url_for('admin.event_action', id=event.id, action='decline')}}"><span class="icon is-small"><i class="fas fa-times-circle"></i></span>&nbsp Decline</a>
-														{% endif %}
-													</div>
-												</div>
-											</div>
+											<a class="button is-warning tooltip" data-tooltip="View" href="{{url_for('admin.event_show', id=event.id)}}">
+												<span class="icon">
+													<i class="fa fa-eye"></i>
+												</span>
+											</a>
+											{% if event.event_status=='N' %}
+											<a class="button is-success tooltip" data-tooltip="Approve" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
+												<span class="icon">
+													<i class="fas fa-check-circle"></i>
+												</span>
+											</a>
+											<a class="button is-danger tooltip" data-tooltip="Decline" href="{{url_for('admin.event_action', id=event.id, action='decline')}}">
+												<span class="icon">
+													<i class="fas fa-times-circle"></i>
+												</span>
+											</a>
+											{% endif %}
 										</td>
 									</tr>	
 								</tbody>

@@ -320,22 +320,9 @@
 
 
     /*   ADMIN - TABLES  */
-    .table-resonsive {
-	  overflow-y: auto;
-	}
-
-	@media (max-width: 767px) {
-    .table-responsive{
-        overflow-x: auto;
-        overflow-y: auto;
-    }
-}
-@media (min-width: 767px) {
-    .table-responsive{
-        overflow: inherit !important; /* Sometimes needs !important */
-    }
-}
-	
+    .table-responsive {
+	  overflow-x: auto;
+	}	
     /*   END  */
 
 

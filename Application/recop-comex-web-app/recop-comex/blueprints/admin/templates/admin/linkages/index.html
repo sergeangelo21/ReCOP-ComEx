@@ -149,37 +149,37 @@
 							</div>
 						</div>
 						<div class="card-content">
-							<div class="table">
+							<div class="table-responsive">
 								<table class="table is-striped is-fullwidth">
-								{% if linkages %}
-								<thead>
-									<tr>
-										<th class="newlist">ID</th>
-									    <th class="newlist">Company Name</th>
-									    <th class="newlist">Coordinator</th>
-									    <th class="newlist">Address</th>
-									   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
-									    <th class="newlist hidedesktop">Actions</th>
-									 </tr>
-									
-								</thead>
+									{% if linkages %}
+									<thead>
+										<tr>
+											<th class="newlist">ID</th>
+										    <th class="newlist">Company Name</th>
+										    <th class="newlist">Coordinator</th>
+										    <th class="newlist">Address</th>
+										   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
+										    <th class="newlist hidedesktop">Actions</th>
+										 </tr>
+										
+									</thead>
 
-									{% for linkage in linkages %}
-										{% include 'admin/linkages/_linkages.html' %}
-									{% endfor %}
+										{% for linkage in linkages %}
+											{% include 'admin/linkages/_linkages.html' %}
+										{% endfor %}
 
-								{% else %}
+									{% else %}
 
-								<tbody>
+									<tbody>
 
-									<tr class = "table-row">
-										<td class = "has-text-centered">---Nothing to show---</td>
-								 	</tr>
-									
-								</tbody>
+										<tr class = "table-row">
+											<td class = "has-text-centered">---Nothing to show---</td>
+									 	</tr>
+										
+									</tbody>
 
-								{% endif %}
-							</table>
+									{% endif %}
+								</table>
 							</div>
 						</div>
 					</div>
