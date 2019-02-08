@@ -53,28 +53,47 @@ function event_pages(value)
 
 function filter(value)
 {
-	all = document.getElementById('0')
-	educational = document.getElementById('1')
-	environmental = document.getElementById('2')
-	health = document.getElementById('3')
-	livelihood = document.getElementById('4')
-	sociopolitical = document.getElementById('5')
-	spiritual = document.getElementById('6')
 
-	xhttp = new XMLHttpRequest();
-	xhttp.onreadystatechange = function()
+	sender = document.getElementById(value)
+
+	if (sender.checked==true)
 	{
-	    if (this.readyState == 4 && this.status == 200) 
-	    {
-	    document.getElementById("txtHint").innerHTML = this.responseText;
+		f.push(value)
+	}
+	else
+	{
+		f.splice( f.indexOf(value), 1 );
+	}
+
+	var tbody = document.getElementsByTagName('tbody')
+
+	if (f.length!=0)
+		{
+			for (ctr=0; ctr<=f.length-1; ctr++)
+			{
+				for (ctr2=0; ctr2<=tbody.length-1; ctr2++)
+				{
+						if(tbody[ctr2].id.indexOf(f[ctr].toString()+'_') && tbody[ctr2].name!="Y")
+						{
+							tbody[ctr2].style.display="none"
+							tbody[ctr2].name="Y"
+						}
+						else
+						{ 
+							tbody[ctr2].style.display=""
+						}
+				}
+				for (ctr2=0; ctr2<=tbody.length-1; ctr2++)
+				{
+					tbody.name=""
+				}
+			}
 		}
-	};
-
-	xhttp.open("GET", "getcustomer.php?q="+str, true);
-	xhttp.send();
-
-	alert(partner_thrust)
-	f.push(value)
-
-
-}
+		else
+		{
+			for (ctr2=0; ctr2<=tbody.length; ctr2++)
+			{
+				tbody[ctr2].style.display=""
+			}
+		}
+	}
