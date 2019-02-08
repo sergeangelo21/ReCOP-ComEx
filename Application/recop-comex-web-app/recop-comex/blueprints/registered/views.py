@@ -73,7 +73,6 @@ def donate():
 	if form.validate_on_submit():
 
 		return('hey')
-		flash('fuck')
 		value = [None,sponsee,current_user.info_id,form.amount.data,'N']
 
 		#donation.add(value)

@@ -31,12 +31,10 @@ function choose(value){
 	if (value==1){
 		comm.className="field is-horizontal"
 		events.className="hidden"
-		sel_event.value=0
 	}
 	else{
 		comm.className="hidden"
 		events.className="field is-horizontal"
-		sel_comm.value=1
 	}
 
 }

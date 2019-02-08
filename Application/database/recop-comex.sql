@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2019 at 02:43 PM
+-- Generation Time: Feb 05, 2019 at 02:58 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -48,7 +48,7 @@ CREATE TABLE `beneficiary` (
   `donor_id` int(11) DEFAULT NULL,
   `beneficiary_id` int(11) DEFAULT NULL,
   `is_employed` char(1) NOT NULL,
-  `income` decimal(10,2) DEFAULT NULL,
+  `income` decimal(10,2) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -144,7 +144,7 @@ CREATE TABLE `inventory` (
 
 CREATE TABLE `inventory_type` (
   `id` int(11) NOT NULL,
-  `name` varchar(20) DEFAULT NULL
+  `name` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -358,6 +358,12 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `inventory_type`
 --
 ALTER TABLE `inventory_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `proposal_tracker`
+--
+ALTER TABLE `proposal_tracker`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
