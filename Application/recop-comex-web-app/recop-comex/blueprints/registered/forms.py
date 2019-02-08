@@ -6,8 +6,8 @@ from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRan
 class DonationForm(FlaskForm):
 
     give_to = RadioField('Give To', choices=[(1,'Community'), (2,'Event')])
-    sponsee = SelectField('Communities', choices=[(1,'ReCOP')])
-    event = SelectField('Events', choices=[('0', 'Please Choose One')])
+    sponsee = SelectField('Communities', choices=[('1','ReCOP')], coerce=int)
+    event = SelectField('Events', choices=[('0', 'Please Choose One')], coerce=int)
     type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')])
     amount = StringField('Amount', validators=[DataRequired()])
     trans_slip   = FileField('Deposit Slip', validators=[DataRequired()])

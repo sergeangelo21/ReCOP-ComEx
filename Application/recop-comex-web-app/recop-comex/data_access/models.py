@@ -285,7 +285,7 @@ class user_account(db.Model, UserMixin):
 
 		return user
 
-	def last_active():
+	def logout():
 
 		user = user_account.query.filter(user_account.id==current_user.id).first()
 

@@ -70,6 +70,7 @@ def donate():
 		form.event.choices.extend(([e.id, e.name] for e in events))
 		no_event = 0
 	else: 
+		form.event.data=0
 		no_event = 1
 
 	if form.validate_on_submit():

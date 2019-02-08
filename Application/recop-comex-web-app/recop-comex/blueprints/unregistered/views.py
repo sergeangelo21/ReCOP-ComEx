@@ -56,7 +56,7 @@ def signup():
 			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
 			]
 
-		user_information.add(value)	
+		#user_information.add(value)	
 		user_id = user_information.reserve_id()
 
 		if form.type.data == '2' or form.type.data == '4': 
@@ -74,7 +74,8 @@ def signup():
 			form.password.data,form.email.data,form.type.data,datetime.now(),status
 			]
 
-		user_account.add(value)
+		return value[6]
+		#user_account.add(value)
 
 		return redirect(url_for('unregistered.login'))
 
@@ -161,7 +162,7 @@ def forgot_password():
 @unregistered.route('/logout')
 def logout():
 
-	user_account.last_active()
+	user_account.logout()
 
 	logout_user()
 

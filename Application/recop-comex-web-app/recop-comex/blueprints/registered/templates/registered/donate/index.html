@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class="hidden" id='comm'>
+        <div class=" " id='comm'>
             <div class="field-label is-normal">
                 {{form.sponsee.label(class_='label')}}
             </div>
@@ -37,14 +37,14 @@
                 <div class="field">
                     <div class="control has-icon has-icon-right">
                         {{form.sponsee(class_='input', placeholder='Amount')}}
-                        {% for error in form.amount.errors %}
+                        {% for error in form.sponsee.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                         {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="hidden" id='events'>
+        <div class=" " id='events'>
             {% if no_event==0 %}
             <div class="field-label is-normal">
                 {{form.event.label(class_='label')}}
@@ -53,7 +53,7 @@
                 <div class="field">
                     <div class="control has-icon has-icon-right">
                         {{form.event(class_='input', placeholder='Amount')}}
-                        {% for error in form.amount.errors %}
+                        {% for error in form.event.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                         {% endfor %}
                     </div>
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class="hidden" id = "amount_div">
+        <div class=" " id = "amount_div">
             <div class="field-label is-normal">
                 {{form.amount.label(class_='label')}}
             </div>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="hidden" id = "trans_div">
+        <div class=" " id = "trans_div">
             <div class="field-label is-normal">
                 {{form.trans_slip.label(class_='label')}}
             </div>
@@ -103,7 +103,7 @@
                 <div class="field">
                     <div class="control has-icon has-icon-right">
                         {{form.trans_slip(class_='input', placeholder='Amount')}}
-                        {% for error in form.amount.errors %}
+                        {% for error in form.trans_slip.errors %}
                         <span style="color: red;">[{{ error }}]</span>
                         {% endfor %}
                     </div>
