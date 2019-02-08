@@ -23,7 +23,7 @@ def before_request():
 		elif current_user.type == 3:
 			return redirect(url_for('linkages.index'))
 
-		user_account.last_active()
+		user_account.logout()
 
 @communities.route('/communities')
 @login_required
