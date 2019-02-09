@@ -66,6 +66,14 @@ class donation(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
+	def last_added():
+
+		record = donation.query.count()
+
+		record+=1
+
+		return record
+
 
 class event_attachment(db.Model):
 

@@ -29,7 +29,7 @@
                 </div>
             </div>
         </div>
-        <div class=" " id='comm'>
+        <div class="hidden" id='comm'>
             <div class="field-label is-normal">
                 {{form.sponsee.label(class_='label')}}
             </div>
@@ -44,7 +44,7 @@
                 </div>
             </div>
         </div>
-        <div class=" " id='events'>
+        <div class="hidden" id='events'>
             {% if no_event==0 %}
             <div class="field-label is-normal">
                 {{form.event.label(class_='label')}}
@@ -80,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <div class=" " id = "amount_div">
+        <div class="hidden" id = "amount_div">
             <div class="field-label is-normal">
                 {{form.amount.label(class_='label')}}
             </div>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class=" " id = "trans_div">
+        <div class="hidden" id = "trans_div">
             <div class="field-label is-normal">
                 {{form.trans_slip.label(class_='label')}}
             </div>

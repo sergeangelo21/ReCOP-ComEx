@@ -62,27 +62,45 @@ def donate():
 	for c in communities:
 
 		if c.type==4:
-			form.sponsee.choices.extend([(c.id, c.address)])
+			form.sponsee.choices.extend([(str(c.id), c.address)])
 
 	events = event_views.show_list('S', ' ')
 
 	if events:
-		form.event.choices.extend(([e.id, e.name] for e in events))
+		form.event.choices.extend(([str(e.id), e.name] for e in events))
 		no_event = 0
 	else: 
-		form.event.data=0
+		form.event.data=''
 		no_event = 1
 
 	if form.validate_on_submit():
 
-		return('hey')
-		value = [None,sponsee,current_user.info_id,form.amount.data,'N']
+		if form.give_to.data=='1':
+			if form.sponsee.data:
+				sponsee = form.sponsee.data
+			else:
+				sponsee = 1
 
-		#donation.add(value)
+			is_event='N'
+		else:
+			sponsee = form.event.data
+			is_event='Y'
+
 		file = form.trans_slip.data
-		trans_path = 'static/output/donate/'+file.filename
-		#file.save(trans_path)
-		flash('Done', 'success')
+		old, extension = os.path.splitext(file.filename)
+
+		new = donation.last_added()
+		filename = str(new)+extension
+
+		trans_path = 'static/output/donate/' + filename
+
+		value = [None,sponsee,current_user.info_id,form.amount.data,trans_path,is_event]
+
+		donation.add(value)
+		file.save(trans_path)
+
+		flash('Donation given!', 'success')
+		return redirect(url_for('registered.donate'))
 
 	return render_template('/registered/donate/index.html', form=form, no_event=no_event)
 

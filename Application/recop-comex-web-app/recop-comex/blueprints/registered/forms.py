@@ -1,16 +1,16 @@
 from flask_wtf import FlaskForm
-
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField, FileField
+from flask_wtf.file import FileField, FileRequired, FileAllowed
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class DonationForm(FlaskForm):
 
-    give_to = RadioField('Give To', choices=[(1,'Community'), (2,'Event')])
-    sponsee = SelectField('Communities', choices=[('1','ReCOP')], coerce=int)
-    event = SelectField('Events', choices=[('0', 'Please Choose One')], coerce=int)
-    type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')])
+    give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
+    sponsee = SelectField('Communities', choices=[('','ReCOP')])
+    event = SelectField('Events', choices=[('', 'Please Choose One')])
+    type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
     amount = StringField('Amount', validators=[DataRequired()])
-    trans_slip   = FileField('Deposit Slip', validators=[DataRequired()])
+    trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     submit = SubmitField('Donate')
 
 class ProfilePersonalUpdateForm(FlaskForm):
