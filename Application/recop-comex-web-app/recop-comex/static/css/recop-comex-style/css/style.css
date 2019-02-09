@@ -710,3 +710,54 @@ Modules - reusable parts of our design
     width: auto;
     
 }
+/*  END  */
+
+/*  ERROR PAGE  */
+  .error-page{
+      padding: 20px;
+      margin-top: 14%;
+  }
+
+  .margin-error{
+      margin-left: 13%;
+  }
+
+  .image-error{
+      width: 50%;
+      height: auto;
+  }
+
+  .image-robot{
+      width: 70%;
+      height: auto;
+  }
+
+  .left{
+    margin-left: -20%; 
+  }
+
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .error-page{
+      padding: 20px;
+      margin-top: 14%;
+      text-align: center;
+    }
+
+    .margin-error{
+      margin-left: 0;
+  }
+
+    .image-error{
+        width: 70%;
+        height: auto;
+    }
+
+    .image-robot{
+        width: 50%;
+        height: auto;
+        margin-left: auto; 
+      }  
+    }
+  }
+/*  END  */
