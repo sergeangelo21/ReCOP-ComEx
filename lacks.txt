@@ -8,7 +8,7 @@ Admin
 
 Dashboard
 JS events :P
-Participants for events query and show
+Participants for events query and show - Done (Serge)
 Event reports
 events organized/attended	
 settings
