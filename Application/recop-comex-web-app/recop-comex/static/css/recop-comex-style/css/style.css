@@ -1,27 +1,31 @@
-	/*		NAVIGATION BAR		*/
-	.navbar, .navbar-dropdown, .navbar-menu{
-        background-color: #072000; 
-    }
+  body{
+    font-family: Century Gothic;
+  }
 
-    .nav-text{
-        color: #ffb901;
-        font-size: 25px;
-    }
+/*		NAVIGATION BAR		*/
+  .navbar, .navbar-dropdown, .navbar-menu{
+      background-color: #072000; 
+  }
 
-    .navbar-item, a.navbar-link, .navbar-end{
-        color: white;
-        font-weight: bold;
-    }
+  .nav-text{
+      color: #ffb901;
+      font-size: 25px;
+  }
 
-    a.navbar-item:hover, a.navbar-item.is-active, .nav-icons:hover, .navbar-dropdown a.navbar-item:hover, .navbar-item.has-dropdown.is-hoverable:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link{
-        background-color: #092d01;
-        color: #ffb901; 
-    }
+  .navbar-item, a.navbar-link, .navbar-end{
+      color: white;
+      font-weight: bold;
+  }
 
-    .burger{
-        color: white;
-    }
-    /*		END		*/
+  a.navbar-item:hover, a.navbar-item.is-active, .nav-icons:hover, .navbar-dropdown a.navbar-item:hover, .navbar-item.has-dropdown.is-hoverable:hover .navbar-link, .navbar-item.has-dropdown.is-active .navbar-link{
+      background-color: #092d01;
+      color: #ffb901; 
+  }
+
+  .burger{
+      color: white;
+  }
+  /*		END		*/
 
 	.hero{
 		background-color: #e6e6e6;
@@ -55,6 +59,10 @@
 		position:absolute;
 		margin: 1%;
 	}
+
+  .button.search{
+    font-family: monospace;
+  }
 	
 	a.button.viewbtn{
 		background-color: #ecad00;
@@ -288,9 +296,10 @@
 
     .overlay-card-donation{
 	  background-color:#ecad00;
-	  background-image: url("https://sponsorship.worldvision.org.ph/sites/default/files/D310-0932-54_473452.jpg");
-	  height:400px;
+	  background-image: url("https://klimesmeralda.files.wordpress.com/2014/02/2054366421_3fbc5c7481.jpg");
+	  height:320px;
 	  padding-top:25px;
+    background-attachment: fixed;
 	  background-position: center; /* Center the image */
 	  background-repeat: no-repeat; /* Do not repeat the image */
 	  background-size: cover;
@@ -325,6 +334,22 @@
 	}	
     /*   END  */
 
+
+    /*   CONTACT US    */
+    .hero-contact {
+      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), url("https://www.sscr.edu/wpimages/wp714b4bc0_05_06.jpg");
+      min-height: 330px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      position: relative;
+    }
+
+    .container-contact{
+      margin-top: 70px;
+    }
+
+    /*    END   */
 
     /* SIGN UP */
  .padding{
@@ -582,7 +607,12 @@ Modules - reusable parts of our design
 /*LOGIN ENDS*/
 
 /*  ------  RESPONSIVE ------  */
-
+  @media only screen and (min-width: 600px) {
+      /* For mobile phones: */
+      .filter-btn{
+        display: none;
+      }
+    }
 /* UNREGISTERED START  */
 
 	/* EVENTS */
@@ -595,6 +625,39 @@ Modules - reusable parts of our design
 			}
 		}
 	/* END */
+
+
+  /* FILTER */
+  @media screen and (max-width: 768px) {
+      /* For mobile phones: */
+      .filter-btn{
+        display: block;
+        background-color: #072000;
+        padding: 10px;
+        text-align: center;
+        font-weight: bold;
+        color: white;
+      }
+
+      .filter{
+        display: none;
+        position: absolute;
+        z-index: 1;
+        column-width: 100%;
+        min-width: 1000px;
+        max-width: 1500px;
+      }
+
+      #filterDIV{
+        background-color: whitesmoke;
+      }
+
+      .select-list{
+        position: relative;
+      }
+    }
+  /* END */
+
 /*   END  *   /
 
 /*communities*/
