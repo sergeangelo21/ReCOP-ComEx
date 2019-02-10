@@ -1,6 +1,6 @@
 {% extends "unregistered-base.html" %}
 
-{% block content %}	
+{% block content %}
 
 	<div class="notification gold">
       	<div class="columns is-mobile is-multiline is-centered">
@@ -96,7 +96,7 @@
 
 		<div class="column">
 
-			<div class="columns is-multiline" style="padding: 20px;">
+			<div class="columns padding-el is-multiline">
 				{% for events in events %}
 					{% include 'unregistered/events/_events.html' %}
 				{% endfor %}

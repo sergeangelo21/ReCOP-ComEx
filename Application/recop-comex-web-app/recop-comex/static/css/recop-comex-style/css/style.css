@@ -1,5 +1,6 @@
   body{
     font-family: Century Gothic;
+    color: black;
   }
 
 /*		NAVIGATION BAR		*/
@@ -28,7 +29,7 @@
   /*		END		*/
 
 	.hero{
-		background-color: #e6e6e6;
+		background-color: #efeeee;
 	}
 
 	.list{
@@ -175,6 +176,10 @@
 
 
 	/*     ADMIN -  EVENTS     */
+
+  .padding-el{
+    padding: 20px;
+  }
 
 	.upcoming-event{
 		margin-bottom: 5px;
