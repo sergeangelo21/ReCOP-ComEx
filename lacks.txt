@@ -1,0 +1,50 @@
+Unregistered
+
+Modal for events, linkages (join)
+Donate form to be appended
+Contact Us revision
+
+Admin
+
+Dashboard
+JS events :P
+Participants for events query and show
+Event reports
+events organized/attended	
+settings
+Donations verification and view
+feedbacks
+
+
+Linkages
+Dashboard
+Attach letters
+Proposal attach files (budget plan etc.)
+Calendar view event
+Communities query (pagisahin na lang ng format with linkages para di na jquery)
+Donation button na lang for comm and event na di sila nagorganize
+Reports(All finished events/proposals nakatab)
+
+Communities
+Dashboard
+events query | add members to events
+linkages (bat nawala css? ung hoverable na lang din)
+Members (view saka add. nakalist na lang this :) )
+reports
+
+Registered
+Dashboard
+events
+linkages
+ung donate and laki nung banner tapos walang image! :D
+
+
+General (Maybe kaartehan)
+
+Admin (activity logs)
+Notifications 
+Help
+
+
+
+
