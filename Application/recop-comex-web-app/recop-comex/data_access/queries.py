@@ -279,3 +279,20 @@ class event_views():
 			).first()
 
 		return record
+
+	def show_participants(value):
+
+		record = event_participation.query.join(
+			 user_information
+			).add_columns(
+			event_participation.event_id,
+			(user_information.last_name + ', ' +
+			user_information.first_name + ' '+ 
+			func.left(user_information.middle_name,1) + '. '
+			).label('name'),
+			event_participation.is_target
+			).filter(
+			event_participation.event_id==value
+			).order_by(user_information.last_name.asc()).all()
+
+		return record

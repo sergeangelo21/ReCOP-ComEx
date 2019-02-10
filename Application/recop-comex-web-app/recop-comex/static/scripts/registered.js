@@ -1,10 +1,6 @@
-window.onload = function() {
-
-	if(window.location.pathname=='/registered/donate'){
-		document.getElementById('event').options.item(0).hidden=true
-		document.getElementById('event').options.item(0).selected=true
-	}
-
+if(window.location.pathname=='/registered/donate'){
+	document.getElementById('event').options.item(0).hidden=true
+	document.getElementById('event').options.item(0).selected=true
 }
 
 function check_pass(){

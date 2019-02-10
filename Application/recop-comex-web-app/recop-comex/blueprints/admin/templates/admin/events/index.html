@@ -7,7 +7,7 @@
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('admin.events_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  		<a class="button viewbtn is-active">
+						  		<a class="button viewbtn is-active" href="{{url_for('admin.events', status='all', search=' ')}}">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>

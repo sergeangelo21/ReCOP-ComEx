@@ -1,13 +1,9 @@
-window.onload = function() {
-
-	if(window.location.pathname=='/linkages/events/create'){
-		document.getElementById('thrust').options.item(0).selected="True"
-		document.getElementById('thrust').options.item(0).hidden="True"
-		document.getElementById('select_link').options.item(0).selected="True"
-		document.getElementById('select_link').options.item(0).hidden="True"
-		document.getElementById('target_link').value = ""
-	}
-
+if(window.location.pathname=='/linkages/events/create'){
+	document.getElementById('thrust').options.item(0).selected="True"
+	document.getElementById('thrust').options.item(0).hidden="True"
+	document.getElementById('select_link').options.item(0).selected="True"
+	document.getElementById('select_link').options.item(0).hidden="True"
+	document.getElementById('target_link').value = ""
 }
 
 function add_comm(){
