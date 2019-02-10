@@ -61,3 +61,16 @@ function check_pass(){
         return true
     }
 }
+
+function show_event(value){
+
+	a = document.getElementById(value+'_modal')
+	a.style.display='block'
+
+}
+
+function close_event(value){
+	a = document.getElementById(value+'_modal')
+	a.style.display='none'
+
+}

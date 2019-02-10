@@ -9,19 +9,31 @@
 				</div>
 
 	      		<div class="title is-5">{{ events.name }}</div>
-	      		<p class="subtitle is-6">{{ events.location }} <br>
-	      			{{ events.event_date }}
-	      		</p>
-
-	      		<nav class="level is-mobile">
-  					<div class="level-item has-text-centered">
-						<a href="{{url_for('linkages.event_letter', id = events.id, name = events.name)}}" target='_blank' class="level-item">
-  							<span class="icon is-small"><i class="fas fa-download"></i></span>&nbsp;Request Letter
-						</a>
-						</div>		
-				</nav>
-
-	      		<div class="button event-btn">More Details</div>	
+	      		<p class="subtitle is-6">
+	      			<i class="fas fa-calendar"></i>&nbsp; {{events.event_date.strftime('%B %e, %Y')}}</br>
+					<i class="fas fa-map-marker-alt"></i>&nbsp; {{ events.location }}
+				</p>
+	      		
+	      		<div class="button event-btn" onclick="show_event('{{events.id}}')">More Details</div>	
 			</div>
 		</div>
+	</div>
+
+	<div id={{events.id}}_modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title">{{events.name}}</p>
+      				<button class="delete" onclick="close_event('{{events.id}}')"></button>
+    		</header>
+    		<section class="modal-card-body">
+
+      		</section>
+    	
+    		<footer class="modal-card-foot">
+   				<a href="{{url_for('linkages.event_letter', id = events.id, name = events.name)}}" target='_blank' class="level-item">
+  					<button class="button"><span class="icon is-small"><i class="fas fa-download"></i></span>&nbsp;Request Letter</button>
+				</a>
+    		</footer>
+  		</div>
 	</div>
