@@ -637,6 +637,7 @@ Modules - reusable parts of our design
         text-align: center;
         font-weight: bold;
         color: white;
+        cursor: pointer;
       }
 
       .filter{

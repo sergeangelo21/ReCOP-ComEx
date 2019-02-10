@@ -1,65 +1,17 @@
-<style type="text/css">
-	.notification.event{
-        background-color: white;
-        padding: 0px;
-        border-radius: 0px;
-        border-top: 1px #e0e0e0;
-        position: static;
-        box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1), 0 0 0 1px rgba(10, 10, 10, 0.1);
-      }
-      .notification.date{
-        border-radius: 0px;
-        padding: 25px;
-        height: 100%;
-      }
 
-      .content{
-        padding: 10px;
-      }
-</style>
-			<div class="columns is-centered">
-				<div class="column">
-					<div class="notification event">
-			          	<div class="columns is-gapless">
-				            <div class="column is-2">
-				              <div class="notification date is-danger">
-				                <p class="title has-text-centered">06 <br> JUL</p>
-				              </div>
-				            </div>
-				            <div class="column">
-				                <article class="media">
-				                  <figure class="media-left">
-				                    <p class="image is-128x128">
-				                        <img class="event" src="https://www.projectpearls.org/wp-content/uploads/2013/06/12841195_10153962703412905_7874811344446667017_o-300x300.jpg">
-				                    </p>
-				                  </figure>
-				                  <div class="media-content">
-				                    <div class="content">
-				                        <p>
-				                          <a class="title is-6">Feeding Progam</a>
-				                        <br>   
-				                          Location: Cavite City <br>
-				                          Date: January 22, 2019
-				                        </p>
-				                    </div>
-				                  <!-- icons -->
-				                   <nav class="level is-mobile">
-				                        <div class="level-left">
-				                          <a class="level-item">
-				                              <span class="icon is-small"><i class="fas fa-reply"></i></span>
-				                          </a>
-				                          <a class="level-item">
-				                              <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-				                          </a>
-				                          <a class="level-item">
-				                              <span class="icon is-small"><i class="fas fa-heart"></i></span>
-				                          </a>
-				                        </div>
-				                    </nav>
-				                  </div>
-				              </article>
-				            </div>
-				        </div>
-			        </div>
+	<div class="column is-one-quarter">
+		<div class="card select-list has-text-centered">
+			<div class="card-content">
+					<div class="level">
+						<div class="level-item">
+						<img class="image is-128x128" src="../../../static/images/gg.png">
+					</div>
 				</div>
+
+	      		<div class="title is-5">{{ events.name }}</div>
+	      		<p class="subtitle is-6">{{ events.event_date }}</p>
+
+	      		<div class="button event-btn">More Details</div>	
 			</div>
+		</div>
+	</div>
