@@ -3,33 +3,36 @@
 {% block content %}
 
     <div class="notification gold">
-        <div class="columns">
-          <div class="column">
-              
-          </div>
-
-          <div class="column">
+      <div class="columns">
+        <div class="column">
             
-          </div>
-
-          <div class="column">
-              <div class="field has-addons has-addons-centered">
-                <p class="control">
-                    <input class="input" type="text" placeholder="Search">
-                </p>
-                <p class="control">
-                    <a class="button search">
-                      Search
-                    </a>
-                </p>
-              </div>
-          </div>
         </div>
+
+        <div class="column">
+          
+        </div>
+
+        <div class="column">
+            <div class="field has-addons has-addons-centered">
+              <p class="control">
+                  <input class="input" type="text" placeholder="Search">
+              </p>
+              <p class="control">
+                  <a class="button search">
+                    Search
+                  </a>
+              </p>
+            </div>
+        </div>
+      </div>
     </div>
 
     <div class="columns">
       <div class="column is-2">
-        <div class="notification filter">
+        <div class="filter-btn is-size-5" onclick="filtershrink()">
+          <i class="fas fa-filter"></i>&nbspFilter
+        </div>
+        <div class="notification filter" id="filterDIV">
           <div class="columns">
             <div class="column">
               <p class="title is-size-5">Thrust</p>
@@ -78,11 +81,12 @@
               </div>
             </div>
           </div>
+          
         </div>
       </div>
 
       <div class="column">
-        <div class="columns is-multiline" style="padding: 20px;">
+        <div class="columns padding-el is-multiline">
           {% for linkages in linkages %}
             {% include 'unregistered/linkages/_linkages.html' %}
           {% endfor %}

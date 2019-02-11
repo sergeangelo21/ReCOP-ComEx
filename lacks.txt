@@ -29,7 +29,7 @@ Communities
 Dashboard
 events query | add members to events
 linkages (bat nawala css? ung hoverable na lang din)
-Members (view saka add. nakalist na lang this :) )
+Members (view saka add. nakalist na lang this :) )          (DONE)
 reports
 
 Registered

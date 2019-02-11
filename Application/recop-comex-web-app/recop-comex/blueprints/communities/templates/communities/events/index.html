@@ -1,122 +1,136 @@
 {% extends "communities-base.html" %}
 
 {% block content %}
-			<div class="notification gold">
-				<div class="columns">
-					<div class="column is-9">
-						<p class="has-text-weight-bold title">
-							Events
-						</p>
-					</div>
-					<div class="column is-3">
-						<div class="field has-addons has-addons-centered">
-							<p class="control">
-							    <input class="input" type="text" placeholder="Search">
-							</p>
-							<p class="control">
-							    <a class="button search">
-							      Search
-							    </a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
+	<div class="notification gold">
+		<div class="columns is-mobile is-multiline is-centered">
+        	<div class="column view-icons">
+        		<article class="media">
+				  	<figure class="media-left"> 
+				  		<a href="" class="button viewbtn is-active">
+							<span class="icon">
+								<i class="fa fa-list"></i>
+							</span>
+						</a>
+						<a href="" class="button viewbtn">
+							<span class="icon">
+								<i class="fa fa-calendar-alt"></i>
+							</span>
+						</a>
+				  	</figure>
+				</article>
+       		</div>
+
+	        <div class="column is-narrow">
+	          	<div class="field has-addons has-addons-centered is-pulled-right">
+		            <p class="control">
+		                <input class="input" type="text" placeholder="Search">
+		            </p>
+		            <p class="control">
+		                <a class="button search">
+		                  Search
+		                </a>
+		            </p>
+	          	</div>
+	        </div>
+      	</div>
+	</div>
 
 			<div class="columns is-gapless">
 				<div class="column is-2">
-		    		<div class="notification filter">
-		    			<p class="title is-size-5">View</p>
-		    			<div class="columns">
-		    				<div class="column has-text-centered">
-								<a href="" class="button eventbtn is-active">
-									<span class="icon">
-										<i class="fa fa-list"></i>
-									</span>
-								</a>
+					<div class="notification filter">
+						<div class="columns">
+			                <div class="column">
+			                	<p class="title is-size-5">Thrust</p>
+			                  	<div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="" type="checkbox" name="0" checked="checked">
+				                    <label for="">All</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="1" type="checkbox" name="1">
+				                    <label for="1">Educational</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="2" type="checkbox" name="2">
+				                    <label for="2">Environmental</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="3" type="checkbox" name="3">
+				                    <label for="3">Health</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="4" type="checkbox" name="4">
+				                    <label for="4">Livelihood</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="5" type="checkbox" name="5">
+				                    <label for="5">Socio-Political</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="6" type="checkbox" name="6">
+				                    <label for="6">Spiritual</label>
+				                </div>
+			                	
+			                	<p class="title is-size-5">Type</p>
 
-								<a href="" class="button eventbtn">
-									<span class="icon">
-										<i class="fa fa-calendar-alt"></i>
-									</span>
-								</a>
-							</div>
-		    			</div>
-
-		    			<p class="title is-size-5">Filter</p>
-		    			<div class="columns">
-		    				<div class="column">
-		    					<div class="select is-fullwidth">
-								    <select>
-								      <option>Please choose</option>
-								      <option>All</option>
-								      <option>Organizations</option>
-								      <option>Departmental</option>
-								      <option>Partners</option>
-								    </select>
-							 	</div>
-		    				</div>
-		    			</div>
-
-		    			<div class="columns">
-		    				<div class="column">
-		    					<div class="select is-fullwidth">
-								    <select>
-								      <option>Please choose</option>
-								      <option>All</option>
-								      <option>Organizations</option>
-								      <option>Departmental</option>
-								      <option>Partners</option>
-								    </select>
-							 	</div>
-		    				</div>
-		    			</div>
-
-		    			<div class="columns">
-		    				<div class="column">
-		    					<div class="select is-fullwidth">
-								    <select>
-								      <option>Please choose</option>
-								      <option>All</option>
-								      <option>Organizations</option>
-								      <option>Departmental</option>
-								      <option>Partners</option>
-								    </select>
-							 	</div>
-		    				</div>
-		    			</div>
-					 	
-		    		</div>
-		    	</div>
+			                  	<div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="7" type="checkbox" name="7" checked="checked">
+				                    <label for="7">All</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
+				                    <label for="8">Institutional</label>
+				                </div>
+				                <div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
+				                    <label for="9">Outside</label>
+				                </div>
+			                </div>
+			            </div>
+					</div>
+				</div>
 
 				<div class="column">
-					<div class="card box">
+					<div class="card list">
 						<div class="card-header">
-							<p class="card-header-title">Events</p>
+							<p class="card-header-title">Donations</p>
 						</div>
 						<div class="card-content">
-							<table class="table is-fullwidth">
-								{% if events %}
-
-									{% for events in events %}
-										{% include 'communities/events/_events.html' %}
-									{% endfor %}
-
-								{% else %}
-
-								<tbody>
-
-									<tr class = "table-row">
-										<td class = "has-text-centered">---Nothing to show---</td>
-								 	</tr>
-									
-								</tbody>
-
-								{% endif %}									
-								</tbody>
-							</table>
+							<div class="table-responsive">
+								<table class="table is-fullwidth">
+									<thead>
+										<tr>
+											<th class="newlist">ID</th>
+										    <th class="newlist">Name</th>
+										    <th class="newlist">Date Given</th>
+										    <th class="newlist">Location</th>
+										    <th class="newlist hidedesktop">Actions</th>
+										 </tr>
+										
+									</thead>
+									<tbody>
+										<tr class="table-row">
+											<td>1</td>
+										    <td>Marie Leen Sotto</td>
+										    <td>January 30, 2019</td>
+										    <td>Cavite City</td>
+											<td>
+												<a class="button is-warning tooltip" data-tooltip="View" href="">
+													<span class="icon">
+														<i class="fa fa-eye"></i>
+													</span>
+												</a>
+												<a class="button is-danger tooltip" data-tooltip="Archive" href="">
+													<span class="icon">
+														<i class="fa fa-archive"></i>
+													</span>
+												</a>
+											</td>
+										</tr>	
+									</tbody>
+								</table>
+							</div>
 						</div>
-					</div>
-				</div>	
+					</div>	
+				</div>
 			</div>
 {% endblock %}

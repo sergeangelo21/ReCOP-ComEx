@@ -2,55 +2,58 @@
 
 {% block content %}
 
-		<div class="notification gold">
-			<div class="columns is-mobile is-multiline is-centered">
-				<div class="column view-icons">
-					<article class="media">
-					  	<figure class="media-left"> 
-					  		<a href="{{url_for('linkages.events_create')}}" class="button add has-text-weight-bold">
+	<div class="notification gold">
+		<div class="columns is-mobile is-multiline is-centered">
+			<div class="column view-icons">
+				<article class="media">
+				  	<figure class="media-left"> 
+				  		<a href="{{url_for('linkages.events_create')}}" class="button add has-text-weight-bold">
+							<span class="icon">
+								<i class="fa fa-plus"></i>
+							</span>
+							<span>Create</span>
+						</a>
+				  	</figure>
+				  	<div class="media-content">
+				  		<div class="content">
+				  			<a href="" class="button viewbtn is-active">
 								<span class="icon">
-									<i class="fa fa-plus"></i>
+									<i class="fa fa-list"></i>
 								</span>
-								<span>Create</span>
 							</a>
-					  	</figure>
-					  	<div class="media-content">
-					  		<div class="content">
-					  			<a href="" class="button viewbtn is-active">
-									<span class="icon">
-										<i class="fa fa-list"></i>
-									</span>
-								</a>
 
-								<a href="" class="button viewbtn">
-									<span class="icon">
-										<i class="fa fa-calendar-alt"></i>
-									</span>
-								</a>
-					  		</div>
-					  	</div>
-					</article>
-					
-				</div>
+							<a href="" class="button viewbtn">
+								<span class="icon">
+									<i class="fa fa-calendar-alt"></i>
+								</span>
+							</a>
+				  		</div>
+				  	</div>
+				</article>
+				
+			</div>
 
-				<div class="column is-narrow">
-					<div class="field has-addons has-addons-centered">
-						<p class="control">
-						    <input class="input" type="text" placeholder="Search">
-						</p>
-						<p class="control">
-						    <a class="button search">
-						      Search
-						    </a>
-						</p>
-					</div>
+			<div class="column is-narrow">
+				<div class="field has-addons has-addons-centered">
+					<p class="control">
+					    <input class="input" type="text" placeholder="Search">
+					</p>
+					<p class="control">
+					    <a class="button search">
+					      Search
+					    </a>
+					</p>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div class="columns">
+	<div class="columns">
 		<div class="column is-2">
-    		<div class="notification filter">
+			<div class="filter-btn is-size-5" onclick="filtershrink()">
+				<i class="fas fa-filter"></i>&nbspFilter
+			</div>
+    		<div class="notification filter" id="filterDIV">
     			<div class="columns">
 	                <div class="column">
 	                	<p class="title is-size-5">Thrust</p>
@@ -105,7 +108,7 @@
 
 		<div class="column">
 
-			<div class="columns is-multiline" style="padding: 20px;">
+			<div class="columns padding-el is-multiline">
 				{% if events %}
 
 						{% for events in events %}

@@ -11,3 +11,12 @@ function check_pass(){
         return true
     }
 }
+
+function filtershrink() {
+    var div = document.getElementById("filterDIV");
+    if (div.style.display === "none") {
+        div.style.display = "block";
+    } else {
+        div.style.display = "none";
+    }
+}

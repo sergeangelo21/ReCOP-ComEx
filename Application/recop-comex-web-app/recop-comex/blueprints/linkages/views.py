@@ -124,6 +124,12 @@ def reports():
 
 	return render_template('/linkages/reports/index.html')
 
+@linkages.route('/linkages/contactus')
+@login_required
+def contactus():
+
+	return render_template('/linkages/contactus/index.html')
+
 @linkages.route('/linkages/termsandconditions')
 @login_required
 def termsandconditions():
