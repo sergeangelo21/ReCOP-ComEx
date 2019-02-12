@@ -138,6 +138,59 @@ def communities():
 
 	return render_template('/linkages/communities/index.html')
 
+@linkages.route('/linkages/donate')
+@login_required
+def donate():
+
+	form = DonationForm()
+
+	linkages = linkage_views.target_linkages()
+
+	for c in linkages:
+
+		if c.type==4:
+			form.sponsee.choices.extend([(str(c.id), c.address)])
+
+	events = event_views.show_list('S', ' ')
+
+	if events:
+		form.event.choices.extend(([str(e.id), e.name] for e in events))
+		no_event = 0
+	else:
+		form.event.data=''
+		no_event = 1
+
+	if form.validate_on_submit():
+
+		if form.give_to.data=='1':
+			if form.sponsee.data:
+				sponsee = form.sponsee.data
+			else:
+				sponsee = 1
+
+			is_event = 'N'
+		else:
+			sponsee = form.event.data
+			is_event = 'Y'
+
+		file = form.trans_slip.data
+		old, extension = os.path.splitext(file.name)
+
+		new = donation.last_added()
+		filename = str(new)+extension
+
+		trans_path = 'static/output/donate' + filename
+
+		value = [None,sponsee,current_user.info_id,form.amount.data,trans_path,is_event]
+
+		donation.add(value)
+		file.save(trans_path)
+
+		flash('Donation given!', 'success')
+		return redirect(url_for('linkages.donate'))
+
+	return render_template('/linkages/donate/index.html', form=form)
+
 @linkages.route('/linkages/reports')
 @login_required
 def reports():

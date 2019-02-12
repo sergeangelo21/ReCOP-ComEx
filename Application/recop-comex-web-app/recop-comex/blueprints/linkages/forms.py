@@ -45,3 +45,13 @@ class PasswordUpdateForm(FlaskForm):
     oldpassword = PasswordField('Old Password')
     password = PasswordField('Password')
     submit = SubmitField('Update')
+
+class DonationForm(FlaskForm):
+
+    give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
+    sponsee = SelectField('Communities', choices=[('','ReCOP')])
+    event = SelectField('Events', choices=[('', 'Please Choose One')])
+    type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
+    amount = StringField('Amount', validators=[DataRequired()])
+    trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField('Donate')

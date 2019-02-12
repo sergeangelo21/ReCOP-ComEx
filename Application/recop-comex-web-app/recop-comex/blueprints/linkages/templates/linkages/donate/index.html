@@ -1,0 +1,138 @@
+{% extends "linkages-base.html" %}
+
+{% block content %}
+
+    <div class="panel panel-default">
+        <div class="overlay-card-donation has-text-centered">
+        </div>
+    </div>
+
+    <form action ="" method = "POST" enctype="multipart/form-data">
+        {{form.hidden_tag()}}
+        <section class="hero">
+            <div class="columns">
+                <div class="column">
+                    <div class="nav-gold">
+                        <strong>Help Someone Today!</strong>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-body">
+                <div class="columns is-centered">
+                    <div class="column is-8">
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                {{form.give_to.label(class_='label')}}
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control has-icon has-icon-right">
+                                        {% for subfield in form.give_to %}
+                                            <label class = "radio">
+                                                {{subfield(onclick='choose(this.value)')}}
+                                                {{subfield.label}}
+                                            </label>
+                                            {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden" id='comm'>
+                            <div class="field-label">
+                                {{form.sponsee.label(class_='label')}}
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control has-icon has-icon-right">
+                                        {{form.sponsee(class_='input', placeholder='Amount')}}
+                                        {% for error in form.sponsee.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden" id='events'>
+                            {% if no_event==0 %}
+                            <div class="field-label">
+                                {{form.event.label(class_='label')}}
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control has-icon has-icon-right">
+                                        {{form.event(class_='input', placeholder='Amount')}}
+                                        {% for error in form.event.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            Sorry there are no scheduled events as of the moment
+                            {% endif %}
+                        </div>
+                        <div class="field is-horizontal">
+                            <div class="field-label">
+                                {{form.type.label(class_='label')}}
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control has-icon has-icon-right">
+                                        {% for subfield in form.type %}
+                                            <label class = "radio">
+                                                {{subfield(onclick='donate_type(this.value)')}}
+                                                {{subfield.label}}
+                                            </label>
+                                            {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden" id = "amount_div">
+                            <div class="field-label">
+                                {{form.amount.label(class_='label')}}
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control has-icon has-icon-right">
+                                        {{form.amount(class_='input', placeholder='Amount')}}
+                                        {% for error in form.amount.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hidden" id = "trans_div">
+                            <div class="field-label">
+                                {{form.trans_slip.label(class_='label')}}
+                            </div>
+                            <div class="field-body">
+                                <div class="field">
+                                    <div class="control has-icon has-icon-right">
+                                        {{form.trans_slip(class_='input', placeholder='Amount')}}
+                                        {% for error in form.trans_slip.errors %}
+                                        <span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <div class="field is-grouped is-grouped-centered">
+                            <p class="control">
+                                {{form.submit(class='button is-primary')}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </form>
+
+		
+{% endblock %}
