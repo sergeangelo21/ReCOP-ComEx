@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
@@ -19,6 +20,8 @@ class ProposalForm(FlaskForm):
     thrust = SelectField('Thrust', choices = [("0","Please Choose One"),("1","Educational"),("2","Environmental"),("3","Health"),("4","Livelihood"),("5","Socio-Political"),("6","Spiritual")], validators=[DataRequired()])
     target_link = StringField('Target Linkages')
     select_link = SelectField('Select Linkages', choices=[("0", "Please Choose Here")])
+    budget_plan = FileField('Budget Plan', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
+    programme = FileField('Programme', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
     submit = SubmitField('Submit')
 
 class ProfilePersonalUpdateForm(FlaskForm):

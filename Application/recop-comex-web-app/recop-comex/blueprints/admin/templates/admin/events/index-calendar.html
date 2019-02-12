@@ -154,15 +154,17 @@
 											td.style.width= "14%"
 
 											name = ''
+											id = ''
 
 											{% for event in events %}
 
 												if ({{event.event_date.strftime('%e')}}==day && {{event.event_date.strftime('%m')}} ==month && {{event.event_date.strftime('%Y')}} ==year){
 													name = name + '{{event.name}}<br>'
-													td.className = "is-selected"
+													id = id + '{{event.id}}'
 												}
 												else{
 													name = 	name + ''
+													id = id + ''
 												}
 
 											{% endfor %}
@@ -171,8 +173,8 @@
 											if (sw==0 && day<=last){
 
 												if (col>=start_day){
-
-													td.innerHTML=day+'<br><a href = "{{url_for('admin.event_show', id=id)}}">'+name+'</a>'
+													td.innerHTML=day+'<br><a href = "{{url_for('admin.event_show', id='+id+')}}">'+name+'</a>'
+													td.className = "is-selected"
 													tr.appendChild(td)
 													sw=1
 													day++
@@ -186,7 +188,8 @@
 
 											}
 											else if (sw==1 && day<=last){
-													td.innerHTML=day+'<br><a href = "{{url_for('admin.event_show', id=id)}}">'+name+'</a>'
+													td.innerHTML=day+'<br><a href = "{{url_for('admin.event_show', id='+id+')}}">'+name+'</a>'
+													td.className = "is-selected"
 													tr.appendChild(td)
 													sw=1
 													day++						

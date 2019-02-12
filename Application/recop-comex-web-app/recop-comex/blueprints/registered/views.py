@@ -92,7 +92,7 @@ def donate():
 		new = donation.last_added()
 		filename = str(new)+extension
 
-		trans_path = 'static/output/donate/' + filename
+		trans_path = 'static/output/donate/trans_slip/' + filename
 
 		value = [None,sponsee,current_user.info_id,form.amount.data,trans_path,is_event]
 

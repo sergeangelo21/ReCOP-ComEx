@@ -28,7 +28,7 @@
 		<section class="hero is-fullheight">
 			<div class="hero-body">
 			    <div class="box white is-white">
-			    	<form action="" method="POST">
+			    	<form action="" method="POST" enctype="multipart/form-data">
 			    		{{form.hidden_tag()}}
 					    <div class="columns">
 					      	<div class="column">
@@ -151,6 +151,26 @@
 									{{form.budget.label(class_='label')}}
 						            <div class="control">
 										{{form.budget(class_='input')}}
+									</div>
+						        </div>
+							</div>
+						</div>
+
+						<div class="columns">
+							<div class="column">
+								<div class="field">
+							        {{form.budget_plan.label(class_='label')}}
+						            <div class="control">
+						              	{{form.budget_plan(class_='input')}}
+						            </div>
+						        </div>
+							</div>
+
+							<div class="column">
+								<div class="field">
+									{{form.programme.label(class_='label')}}
+						            <div class="control">
+										{{form.programme(class_='input')}}
 									</div>
 						        </div>
 							</div>

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, send_from_directory
 from flask_login import current_user, login_required
 from blueprints.linkages.forms import *
-from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information
+from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment
 from data_access.queries import user_views, linkage_views, event_views
 from extensions import db, bcrypt
 from static.pdf import generate_pdf
@@ -88,6 +88,26 @@ def events_create():
 				if participant!='':
 					value = [None, event.id, participant, 'Y']
 					event_participation.add(value)
+
+		budget_plan = form.budget_plan.data
+		old, extension = os.path.splitext(budget_plan.filename)
+		filename = str(event.id)+extension
+		file_path = 'static/attachment/budget_plan/' + filename
+
+		value = [None,event.id,file_path,1]
+
+		event_attachment.add(value)
+		budget_plan.save(file_path)
+
+		programme = form.programme.data
+		old, extension = os.path.splitext(programme.filename)
+		filename = str(event.id)+extension
+		file_path = 'static/attachment/programme/' + filename
+
+		value = [None,event.id,file_path,2]
+
+		event_attachment.add(value)
+		programme.save(file_path)
 
 		value = [None, event.id]
 		proposal_tracker.add(value)

@@ -78,9 +78,22 @@ class donation(db.Model):
 class event_attachment(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	event_id = db.Column(db.INT)
+	event_id = db.Column(db.INT,  db.ForeignKey('event_information.id'), nullable=False)
 	path = db.Column(db.VARCHAR(200), nullable=False)
 	type = db.Column(db.INT, nullable=False)
+
+	def add(value):
+
+		record = event_attachment(
+				id = value[0],
+				event_id = value[1],
+				path = value[2],
+				type = value[3]
+				)
+
+		db.session.add(record)
+		db.session.commit()
+
 
 class event_information(db.Model):
 
@@ -101,6 +114,7 @@ class event_information(db.Model):
 
 	event_info_id = db.relationship('proposal_tracker', backref='event_information', lazy=True)
 	event_part_id = db.relationship('event_participation', backref='event_information', lazy=True)
+	event_att_id = db.relationship('event_attachment', backref='event_information', lazy=True)
 
 	def add(value):
 
