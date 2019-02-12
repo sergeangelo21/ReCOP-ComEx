@@ -300,16 +300,16 @@
     }
 
     .overlay-card-donation{
-	  background-color:#ecad00;
-	  background-image: url("https://klimesmeralda.files.wordpress.com/2014/02/2054366421_3fbc5c7481.jpg");
-	  height:320px;
-	  padding-top:25px;
-    background-attachment: fixed;
-	  background-position: center; /* Center the image */
-	  background-repeat: no-repeat; /* Do not repeat the image */
-	  background-size: cover;
-	  margin-bottom: -25px;
-	}
+  	  background-color:#ecad00;
+  	  background-image: url("/static/images/donate.jpg");
+  	  height:320px;
+  	  padding-top:25px;
+      background-attachment: fixed;
+  	  background-position: center; /* Center the image */
+  	  background-repeat: no-repeat; /* Do not repeat the image */
+  	  background-size: cover;
+  	  margin-bottom: -25px;
+  	}
 	/*     END     */
 
     /*     EVENTS     */
@@ -342,7 +342,7 @@
 
     /*   CONTACT US    */
     .hero-contact {
-      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), url("https://www.sscr.edu/wpimages/wp714b4bc0_05_06.jpg");
+      background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.3)), url("/static/images/sscrdc.jpg");
       min-height: 330px;
       background-position: center;
       background-repeat: no-repeat;
@@ -505,7 +505,7 @@
 
 /*cover image*/
 .cd-fixed-bg.cd-bg-1 {
-  background-image: url("../../../static/images/pic1.jpg");
+  background-image: url("/static/images/pic1.jpg");
 }
 html * {
   -webkit-font-smoothing: antialiased;
