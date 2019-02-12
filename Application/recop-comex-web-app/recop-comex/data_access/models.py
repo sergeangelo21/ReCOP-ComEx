@@ -31,13 +31,14 @@ class audit_trail(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
-class beneficiary(db.Model):
+class community(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	donor_id = db.Column(db.INT,db.ForeignKey('user_information.id'), nullable=False)
-	beneficiary_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
-	is_employed = db.Column(db.CHAR(1), nullable=False)
+	member_id = db.Column(db.INT,db.ForeignKey('user_information.id'), nullable=False)
+	community_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
+	occupation = db.Column(db.VARCHAR(30), nullable=True)
 	income = db.Column(db.NUMERIC(10,2), nullable=False)
+	religion = db.Column(db.VARCHAR(20), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
 class donation(db.Model):
@@ -340,8 +341,8 @@ class user_information(db.Model):
 	account_info_id = db.relationship('user_account', backref = 'user_information', lazy = True)
 	sponsee_info_id = db.relationship('donation', foreign_keys=[donation.sponsee_id], backref='user_information_sponsee', lazy=True)
 	sponsor_info_id = db.relationship('donation', foreign_keys=[donation.sponsor_id], backref='user_information_sponsor', lazy=True)
-	donor_info_id = db.relationship('beneficiary', foreign_keys=[beneficiary.donor_id], backref='user_information_donor', lazy=True)
-	bene_info_id = db.relationship('beneficiary', foreign_keys=[beneficiary.beneficiary_id], backref='user_information_bene', lazy=True)
+	comm_info_id = db.relationship('community', foreign_keys=[community.community_id], backref='user_information_community', lazy=True)
+	mem_info_id = db.relationship('community', foreign_keys=[community.member_id], backref='user_information_member', lazy=True)
 	organizer_info_id = db.relationship('event_information', backref='user_information', lazy=True)
 
 	def add(value):

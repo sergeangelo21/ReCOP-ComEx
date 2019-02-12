@@ -1,1 +1,11 @@
 ALTER TABLE `event_attachment` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `beneficiary` CHANGE `is_employed` `occupation` VARCHAR(30) CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL;
+
+ALTER TABLE `beneficiary` CHANGE `donor_id` `member_id` INT(11) NULL DEFAULT NULL;
+
+ALTER TABLE `beneficiary` CHANGE `beneficiary_id` `community_id` INT(11) NULL DEFAULT NULL;
+
+ALTER TABLE `beneficiary` RENAME to `community`;
+
+ALTER TABLE `community` ADD `religion` INT(20) NOT NULL AFTER `income`;
