@@ -58,12 +58,12 @@ class community(db.Model):
 class donation(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	sponsee_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
+	sponsee_id = db.Column(db.INT, db.ForeignKey('user_information.id'))
+	event_id = db.Column(db.INT, db.ForeignKey('event_information.id'))
 	sponsor_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
 	amount = db.Column(db.NUMERIC(10,2), nullable=False)
 	date_given = db.Column(db.DATETIME, nullable=False)
 	transaction_slip = db.Column(db.VARCHAR(200), nullable=False)
-	is_event = db.Column(db.CHAR(1), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
 	def add(value):
@@ -71,11 +71,11 @@ class donation(db.Model):
 		record = donation(
 			id=value[0],
 			sponsee_id=value[1],
-			sponsor_id=value[2],
-			amount=value[3],
+			event_id=value[2],
+			sponsor_id=value[3],
+			amount=value[4],
 			date_given=datetime.now(),
-			transaction_slip=value[4],
-			is_event=value[5],
+			transaction_slip=value[5],
 			status='N')
 
 		db.session.add(record)
@@ -109,6 +109,11 @@ class event_attachment(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
+	def retrieve_files(value):
+
+		record = event_attachment.query.filter(event_attachment.event_id==value).all()
+
+		return record
 
 class event_information(db.Model):
 
@@ -130,6 +135,7 @@ class event_information(db.Model):
 	event_info_id = db.relationship('proposal_tracker', backref='event_information', lazy=True)
 	event_part_id = db.relationship('event_participation', backref='event_information', lazy=True)
 	event_att_id = db.relationship('event_attachment', backref='event_information', lazy=True)
+	event_donate_id = db.relationship('donation', backref='event_information', lazy=True)
 
 	def add(value):
 

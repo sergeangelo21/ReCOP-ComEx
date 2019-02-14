@@ -81,10 +81,10 @@ def donate():
 			else:
 				sponsee = 1
 
-			is_event='N'
+			event = None
 		else:
-			sponsee = form.event.data
-			is_event='Y'
+			event = form.event.data
+			sponsee= None
 
 		file = form.trans_slip.data
 		old, extension = os.path.splitext(file.filename)
@@ -94,7 +94,7 @@ def donate():
 
 		trans_path = 'static/output/donate/trans_slip/' + filename
 
-		value = [None,sponsee,current_user.info_id,form.amount.data,trans_path,is_event]
+		value = [None,sponsee,event,current_user.info_id,form.amount.data,trans_path]
 
 		donation.add(value)
 		file.save(trans_path)

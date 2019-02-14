@@ -346,3 +346,51 @@ class community_views():
 				).all()			
 
 		return record
+
+class donation_views():
+
+	def show_list():
+
+		sub1 = donation.query.join(
+			user_information, 
+			or_(
+			donation.sponsee_id==user_information.id,
+			donation.sponsor_id==user_information.id)
+			).add_columns(
+			donation.id,
+			func.IF(donation.sponsor_id==user_information.id,
+			(user_information.first_name + ' ' + func.left(user_information.middle_name,1)
+			+ '. ' + user_information.last_name), None).label('sponsor'),
+			func.IF(donation.sponsee_id==user_information.id,
+			(user_information.first_name + ' ' + func.left(user_information.middle_name,1)
+			+ '. ' + user_information.last_name), None).label('sponsee'),
+			user_information.address,
+			user_information.company_name,
+			donation.event_id,
+			donation.sponsee_id,
+			donation.status,
+			donation.date_given,
+			func.IF(donation.amount==0.00,'N/A',donation.amount).label('amount')
+			).filter(donation.sponsee_id!=None)
+
+		sub2 = donation.query.join(
+			event_information).join(
+			user_information, 
+			donation.sponsor_id==user_information.id).add_columns(
+			donation.id,
+			func.IF(donation.sponsor_id==user_information.id,
+			(user_information.first_name + ' ' + func.left(user_information.middle_name,1)
+			+ '. ' + user_information.last_name), None).label('sponsor'),
+			event_information.name.label('sponsee'),
+			user_information.address,
+			user_information.company_name,
+			donation.event_id,
+			donation.sponsee_id,
+			donation.status,
+			donation.date_given,
+			func.IF(donation.amount==0.00,'N/A',donation.amount).label('amount')
+			).filter(donation.event_id!=None)
+
+		record = sub1.union(sub2).order_by(donation.id.asc()).all()	
+
+		return record

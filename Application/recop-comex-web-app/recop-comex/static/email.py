@@ -1,8 +1,9 @@
+from flask import current_app
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, BadSignature	
+from mimetypes import MimeTypes
 from config import Config
 from extensions import mail
-
 
 def generate(email):
 
@@ -21,12 +22,26 @@ def confirm(token):
 
 def send_email(parts):
 
-	msg = Message(html=parts[0],
-		subject=parts[1],
-		sender = ("ReCOP Director", parts[2]),
-		recipients=[parts[3]])
+    msg = Message(html=parts[0], subject=parts[1], sender = ("ReCOP Director", parts[2]), recipients=[parts[3]])
 
-	mail.send(msg)
+    mimes = MimeTypes()
+
+    if parts[4]:
+
+        for attachment in parts[4]:
+
+            with current_app.open_resource(attachment.path) as file:
+
+                mime = mimes.guess_type(file.name)
+                
+                if attachment.type==1:
+                    name='Budget Plan'
+                elif attachment.type==2:
+                    name='Programme'
+
+                msg.attach(name, mime[0], file.read())
+
+    mail.send(msg)
 
 
 def send_email_resetpassword(parts):

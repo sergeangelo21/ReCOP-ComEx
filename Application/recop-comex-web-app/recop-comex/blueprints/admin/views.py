@@ -109,9 +109,10 @@ def event_action(id, action):
 		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
 		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
 		html = render_template('admin/email/event.html', event=event , organizer=organizer.company_name, user=user, link = [approve, decline])
-		subject = "NEW EVENT: " + event.name
+		attachments = event_attachment.retrieve_files(id)
+		subject = "NEW EVENT PROPOSAL: " + event.name
 
-		email_parts = [html, subject, current_user.email_address, recipient]
+		email_parts = [html, subject, current_user.email_address, recipient, attachments]
 
 		send_email(email_parts)
 
@@ -217,7 +218,7 @@ def linkage_action(id):
 		html = render_template('admin/email/moa.html', user = user.username, link = link)
 		subject = "MEMORANDUM OF AGREEMENT"
 
-		email_parts = [html, subject, current_user.email_address, user.email_address]
+		email_parts = [html, subject, current_user.email_address, user.email_address, None]
 
 		send_email(email_parts)
 			
@@ -301,7 +302,7 @@ def community_action(id):
 		html = render_template('admin/email/moa.html', user = user.username, link = link)
 		subject = "MEMORANDUM OF AGREEMENT"
 
-		email_parts = [html, subject, current_user.email_address, user.email_address]
+		email_parts = [html, subject, current_user.email_address, user.email_address, None]
 
 		send_email(email_parts)
 			
@@ -320,7 +321,33 @@ def community_action(id):
 @login_required
 def donations():	
 
-	return render_template('/admin/donations/index.html', title="Donations | Admin")
+
+	donation_raw=donation_views.show_list()
+
+	donations=[]
+
+	for d in donation_raw:
+
+		if d.sponsee:
+
+			if d.event_id:
+				sponsee=d.sponsee	
+			else:
+				if d.sponsee_id==1:
+					sponsee='ReCOP Office'
+				else:
+					sponsee=d.address
+
+			if d.amount=='N/A':
+				type='In kind'
+			else:
+				type='Cash'
+
+		if d.sponsor:
+			sponsor= d.company_name		
+			donations.append([d.id,sponsee,sponsor,d.amount,type, d.date_given])
+
+	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations)
 
 @admin.route('/admin/reports')
 @login_required

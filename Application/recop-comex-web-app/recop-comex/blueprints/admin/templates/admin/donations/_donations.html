@@ -1,0 +1,21 @@
+<tr class="table-row">
+											<td>{{donation[0]}}</td>
+										    <td>{{donation[1]}}</td>
+										    <td>{{donation[2]}}</td>
+										    <td>{% if donation[3]!='N/A' %}P {% endif %}{{donation[3]}}</td>
+										    <td>{{donation[4]}}</td>
+										    <td>{{donation[5].strftime('%B %e, %Y')}}</td>
+										    <td>
+												<a class="button is-warning tooltip" data-tooltip="View" href="">
+													<span class="icon">
+														<i class="fa fa-eye"></i>
+													</span>
+												</a>
+												<a class="button is-danger tooltip" data-tooltip="Archive" href="">
+													<span class="icon">
+														<i class="fa fa-archive"></i>
+													</span>
+												</a>
+											</td>
+										</tr>
+										

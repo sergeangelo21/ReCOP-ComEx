@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.unregistered.forms import LoginForm, SignupForm, ForgotPasswordForm
-from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information
+from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment
 from data_access.queries import user_views, event_views, linkage_views
 from datetime import datetime
 
@@ -255,8 +255,9 @@ def event_signing(token, action):
 					decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
 					html = render_template('admin/email/event.html', event=event , organizer=organizer.company_name, user=name, link = [approve, decline])
 					subject = "NEW EVENT: " + event.name
+					attachments = event_attachment.retrieve_files(id)
 
-					email_parts = [html, subject, user.email_address, recipient]
+					email_parts = [html, subject, user.email_address, recipient, attachments]
 
 					send_email(email_parts)
 
