@@ -4,7 +4,7 @@ from blueprints.admin.forms import *
 from data_access.models import *
 from data_access.queries import *
 from static.email import generate, send_email
-
+from sqlalchemy import or_
 import os, pygal
 
 admin = Blueprint('admin', __name__, template_folder="templates")
@@ -318,7 +318,7 @@ def community_action(id):
 
 @admin.route('/admin/donations')
 @login_required
-def donations():
+def donations():	
 
 	return render_template('/admin/donations/index.html', title="Donations | Admin")
 
