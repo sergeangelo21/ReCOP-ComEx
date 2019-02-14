@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.communities.forms import *
-from data_access.models import user_account, user_information, proposal_tracker, event_information
-from data_access.queries import user_views, linkage_views
+from data_access.models import user_account, user_information, proposal_tracker, event_information, community
+from data_access.queries import user_views, linkage_views, community_views
 
 from extensions import db, bcrypt
 import os
@@ -62,17 +62,50 @@ def linkage_show(id):
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
 
-@communities.route('/communities/members')
+@communities.route('/communities/members/filter_<search>')
 @login_required
-def members():
+def members(search):
 
-	return render_template('/communities/members/index.html', title="Communities")
+	members = community_views.members_list(search=search)
 
-@communities.route('/communities/members/add')
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('communities.members', search=form.search.data))
+
+	return render_template('/communities/members/index.html', title="Communities", members=members, search=search)
+
+@communities.route('/communities/members/add', methods=['GET', 'POST'])
 @login_required
 def members_add():
 
-	return render_template('/communities/members/add.html', title="Communities")
+	form = AddMemberForm()
+
+	if form.validate_on_submit():
+
+		user_id = user_information.reserve_id()
+
+		value = [
+			None, user_id, current_user.id, form.occupation.data, form.income.data, form.religion.data, "A"
+			]
+
+		community.add(value)
+
+		for_company = user_views.profile_info(current_user.info_id)
+
+		value = [
+			None,form.firstname.data, form.middlename.data, form.lastname.data, 
+			for_company.company_name, None, form.gender.data, form.birthday.data,
+			form.address.data, form.telephone.data, form.mobile.data, 0
+			]
+
+		user_information.add(value)
+
+		flash('Member added!', 'success')
+		return redirect(url_for('communities.members'))
+
+	return render_template('/communities/members/add.html', title="Communities", form=form)
 
 @communities.route('/communities/reports')
 @login_required

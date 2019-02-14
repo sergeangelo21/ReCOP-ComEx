@@ -3,9 +3,23 @@ from wtforms import StringField, TextAreaField, PasswordField, SubmitField, Sele
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class SearchForm(FlaskForm):
-
     search = StringField("Search", validators=[DataRequired()])
     submit = SubmitField("Search")
+
+class AddMemberForm(FlaskForm):
+    firstname = StringField('First Name', validators=[DataRequired()])
+    middlename = StringField('Middle Name', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
+    gender = RadioField('Gender', choices=[("M","Male"),("F","Female")], validators=[DataRequired()])
+    birthday = DateField('Birthday', validators=[DataRequired()])
+    is_employed = RadioField(choices=[("Y","Yes"),("N","No")], validators=[DataRequired()])
+    occupation = StringField('Occupation')
+    income = StringField('Income')
+    religion = StringField('Religion', validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired()])
+    telephone = StringField('Telephone')
+    mobile = StringField('Mobile Number')
+    submit = SubmitField('Add')
 
 class ProposalForm(FlaskForm):
 	category = SelectField('Category', coerce = int, validators=[DataRequired()])

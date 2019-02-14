@@ -6,11 +6,12 @@
 		<div class="hero-body">
 			<div class="box white">
 				<form action="" method="POST">
+					{{form.hidden_tag()}}
 					<div class="columns">
 				      	<div class="column">
 				      		<article class="media">
 								<figure class="media-left">
-								    <a class="btn btn-follow btn-sm text-center" href="{{url_for('communities.members')}}" role="button">
+								    <a class="btn btn-follow btn-sm text-center" href="{{url_for('communities.members', search=' ')}}" role="button">
 										<span class="back-icon">
 								  			<i class="fas fa-arrow-circle-left fa-2x"></i>
 								  		</span>
@@ -32,25 +33,127 @@
 					<div class="columns">
 						<div class="column">
 							<div class="field">
-								<label class="label">First Name</label>
+								{{form.firstname.label(class_='label')}}
 							  	<div class="control">
-							    	<input class="input" type="text" placeholder="First Name">
+							    	{{form.firstname(class_='input', placeholder='First Name')}}
+	                                {% for error in form.firstname.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
 							  	</div>
 							</div>
 						</div>
 						<div class="column">
 							<div class="field">
-								<label class="label">Middle Name</label>
+								{{form.middlename.label(class_='label')}}
 							  	<div class="control">
-							    	<input class="input" type="text" placeholder="Middle Name">
+							    	{{form.middlename(class_='input', placeholder='Middle Name')}}
+	                                {% for error in form.middlename.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
 							  	</div>
 							</div>
 						</div>
 						<div class="column">
 							<div class="field">
-								<label class="label">Last Name</label>
+								{{form.lastname.label(class_='label')}}
 							  	<div class="control">
-							    	<input class="input" type="text" placeholder="Last Name">
+							    	{{form.lastname(class_='input', placeholder='Last Name')}}
+	                                {% for error in form.lastname.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+						</div>
+					</div>
+					<div class="columns">
+						<div class="column">
+							<div class="field">
+								{{form.gender.label(class_='label')}}
+							  	<div class="control">
+							    	{% for subfield in form.gender %}
+                                    <label class = "radio">
+                                    {{subfield}}
+                                    {{subfield.label}}
+                                     </label>
+
+	                                {% endfor %}
+
+	                                {% for error in form.gender.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+						</div>
+						<div class="column">
+							<div class="field">
+								{{form.birthday.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.birthday(class_='input', type='date')}}
+                                    {% for error in form.birthday.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+							  	</div>
+							</div>
+						</div>
+<script type="text/javascript">
+	
+function employed_or_not(value)
+{
+    if (value=='N')
+    {
+        document.getElementById('occupation_field').style.display="none"
+        document.getElementById('income_field').style.display="none"
+    }
+
+    else
+    {
+        document.getElementById('occupation_field').style.display="block"
+        document.getElementById('income_field').style.display="block"
+    }
+}
+</script>
+						<div class="column">
+							<div class="field">
+								<label class="label">Employed?</label>
+							  	<div class="control">
+
+							    	{% for subfield in form.is_employed %}
+	                                <label class = "radio">
+	                                {{subfield(onclick='employed_or_not(this.value)')}}
+	                                {{subfield.label}}
+	                                 </label>
+
+		                            {% endfor %}
+
+		                            {% for error in form.is_employed.errors %}
+		                            <span style="color: red;">[{{ error }}]</span>
+		                            {% endfor %}
+							  	</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="columns">
+						<div class="column hidden" id="occupation_field">
+							<div class="field">
+								{{form.occupation.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.occupation(class_='input', placeholder='Occupation')}}
+                                    {% for error in form.occupation.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
+							  	</div>
+							</div>
+						</div>
+
+						<div class="column hidden" id="income_field">
+							<div class="field">
+								{{form.income.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.income(class_='input', placeholder='Income')}}
+                                    {% for error in form.income.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
 							  	</div>
 							</div>
 						</div>
@@ -59,24 +162,12 @@
 					<div class="columns">
 						<div class="column">
 							<div class="field">
-								<label class="label">Gender</label>
+								{{form.religion.label(class_='label')}}
 							  	<div class="control">
-							    	<label class="radio">
-							        	<input type="radio" name="gender">
-							          		Male
-							        </label>
-							        <label class="radio">
-							          	<input type="radio" name="gender">
-							          		Female
-							        </label>
-							  	</div>
-							</div>
-						</div>
-						<div class="column">
-							<div class="field">
-								<label class="label">Birthday</label>
-							  	<div class="control">
-							    	<input class="input" type="date">
+							    	{{form.religion(class_='input', placeholder='Religion')}}
+                                    {% for error in form.religion.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
 							  	</div>
 							</div>
 						</div>
@@ -85,18 +176,12 @@
 					<div class="columns">
 						<div class="column">
 							<div class="field">
-								<label class="label">Occupation</label>
+								{{form.address.label(class_='label')}}
 							  	<div class="control">
-							    	<input class="input" type="text" placeholder="Occupation">
-							  	</div>
-							</div>
-						</div>
-
-						<div class="column">
-							<div class="field">
-								<label class="label">Income</label>
-							  	<div class="control">
-							    	<input class="input" type="text" placeholder="Income">
+							    	{{form.address(class_='input', placeholder='Address')}}
+                                    {% for error in form.address.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
 							  	</div>
 							</div>
 						</div>
@@ -105,28 +190,23 @@
 					<div class="columns">
 						<div class="column">
 							<div class="field">
-								<label class="label">Address</label>
+								{{form.telephone.label(class_='label')}}
 							  	<div class="control">
-							    	<input class="input" type="text" placeholder="Address">
-							  	</div>
-							</div>
-						</div>
-					</div>
-
-					<div class="columns">
-						<div class="column">
-							<div class="field">
-								<label class="label">Telephone</label>
-							  	<div class="control">
-							    	<input class="input" type="date" placeholder="Telephone">
+							    	{{form.telephone(class_='input', placeholder='Telephone')}}
+                                    {% for error in form.telephone.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
 							  	</div>
 							</div>
 						</div>
 						<div class="column">
 							<div class="field">
-								<label class="label">Mobile Number</label>
+								{{form.mobile.label(class_='label')}}
 							  	<div class="control">
-							    	<input class="input" type="text" placeholder="Mobile Number">
+							    	{{form.mobile(class_='input', placeholder='Mobile Number')}}
+                                    {% for error in form.mobile.errors %}
+                                    <span style="color: red;">[{{ error }}]</span>
+                                    {% endfor %}
 							  	</div>
 							</div>
 						</div>
@@ -134,7 +214,7 @@
 
 					<div class="field is-grouped is-grouped-centered">
 						<p class="control">
-						  	<a href="" class="button add">Add</a>
+						  	{{form.submit(class_='button is-success')}}
 						</p>
 					</div>
 

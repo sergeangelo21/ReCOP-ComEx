@@ -44,7 +44,7 @@
                     <a class="navbar-item" href="{{url_for('communities.linkages', search=' ')}}">
                         <strong>Linkages</strong>
                     </a>
-                     <a class="navbar-item" href="{{url_for('communities.members')}}">
+                     <a class="navbar-item" href="{{url_for('communities.members', search=' ')}}">
                         <strong>Members</strong>
                     </a>
                     <a class="navbar-item" href="{{url_for('communities.reports')}}">
@@ -114,5 +114,13 @@
             {% endfor %}
         {% endif %}
     {% endwith %}
+
+    <footer class="footer green">
+        <div class="content has-text-centered">
+            <h4 class="subtitle is-6">
+                Copyright 2019 ReCOP-ComEx 
+            </h4>
+        </div>
+    </footer>
 
 </html>
