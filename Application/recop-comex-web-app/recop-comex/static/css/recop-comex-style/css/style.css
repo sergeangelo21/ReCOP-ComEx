@@ -621,20 +621,21 @@ Modules - reusable parts of our design
 /* UNREGISTERED START  */
 
 	/* EVENTS */
-	@media only screen and (max-width: 415px) {
+	@media only screen and (max-width: 562px) {
 		  /* For mobile phones: */
 		  .view-icons{
 				align-items: center;
-        		display: flex;
-        		justify-content: center;
+        display: flex;
+        justify-content: center;
 			}
 		}
 	/* END */
 
 
-  /* FILTER */
+  
   @media screen and (max-width: 768px) {
-      /* For mobile phones: */
+  /* For mobile phones: */
+    /* FILTER */
       .filter-btn{
         display: block;
         background-color: #072000;
@@ -661,9 +662,16 @@ Modules - reusable parts of our design
       .select-list{
         position: relative;
       }
-    }
-  /* END */
+    /* FILTER END */
 
+    /* SERCH BOX  */
+    .search-box{
+        align-items: center;
+        display: flex;
+        justify-content: center;
+      }
+      /* SEARCH BAR END  */
+    }
 /*   END  *   /
 
 /*communities*/
