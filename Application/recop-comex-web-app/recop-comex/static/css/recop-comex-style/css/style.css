@@ -442,17 +442,14 @@
 		top: 0;
 	}
 	.green{
-	background-color: #072000;
-		color: white; 
+	  background-color: #072000;
+    padding-top: 20px;
+    padding-bottom: 10px;
 			
 	}
-	.green h4{
+	.green h4, .green h1{
 		color: #ffb901;  
 	}
-	.green h1{
-		color: #ffb901;  
-	}
-
 	
 .padding{
 		padding: 5px;
