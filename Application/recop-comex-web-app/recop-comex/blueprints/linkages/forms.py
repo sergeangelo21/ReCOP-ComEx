@@ -47,7 +47,6 @@ class PasswordUpdateForm(FlaskForm):
     submit = SubmitField('Update')
 
 class DonationForm(FlaskForm):
-
     give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
     sponsee = SelectField('Communities', choices=[('','ReCOP')])
     event = SelectField('Events', choices=[('', 'Please Choose One')])

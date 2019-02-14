@@ -296,3 +296,53 @@ class event_views():
 			).order_by(user_information.last_name.asc()).all()
 
 		return record
+
+class community_views():
+
+	def members_list(search):
+
+		if search==' ' :
+			record = community.query.join(
+				user_information
+				).add_columns(
+				user_information.company_name,
+				(user_information.first_name + ' ' +
+				func.left(user_information.middle_name,1) + '. ' +
+				user_information.last_name).label('coordinator'),
+				user_information.partner_thrust,
+				user_information.address,
+				).filter(current_user.id
+				).order_by(user_information.id.asc()
+				).all()
+		elif search!=' ':
+			record = community.query.join(
+				user_information
+				).add_columns(
+				user_information.company_name,
+				(user_information.first_name + ' ' +
+				func.left(user_information.middle_name,1) + '. ' +
+				user_information.last_name).label('coordinator'),
+				user_information.partner_thrust,
+				user_information.address,
+				user_account.status,
+				).filter(and_(current_user.id,
+				or_(user_information.address.like('%'+search+'%'),
+				user_information.first_name.like('%'+search+'%'),
+				user_information.last_name.like('%'+search+'%')))
+				).order_by(user_information.id.asc()
+				).all()	
+		else:
+			record = community.query.join(
+				user_information
+				).add_columns(
+				user_information.company_name,
+				(user_information.first_name + ' ' +
+				func.left(user_information.middle_name,1) + '. ' +
+				user_information.last_name).label('coordinator'),
+				user_information.partner_thrust,
+				user_information.bio,
+				user_information.address,
+				).filter(current_user.id
+				).all()			
+
+		return record

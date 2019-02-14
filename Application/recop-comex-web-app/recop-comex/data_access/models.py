@@ -41,6 +41,20 @@ class community(db.Model):
 	religion = db.Column(db.VARCHAR(20), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
+	def add(value):
+
+		record = community(
+			id = value[0],
+			member_id = value[1],
+			community_id = value[2],
+			occupation = value[3],
+			income = value[4],
+			religion = value[5],
+			status = value[6])
+
+		db.session.add(record)
+		db.session.commit()
+
 class donation(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
