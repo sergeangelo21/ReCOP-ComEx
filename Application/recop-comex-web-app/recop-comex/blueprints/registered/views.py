@@ -67,9 +67,13 @@ def donate():
 	events = event_views.show_list('S', ' ')
 
 	if events:
-		form.event.choices.extend(([str(e.id), e.name] for e in events))
-		no_event = 0
+
+		for e in events:
+			form.event.choices.append((str(e.id), e.name))
+			no_event = 0
+
 	else: 
+		
 		form.event.data=''
 		no_event = 1
 

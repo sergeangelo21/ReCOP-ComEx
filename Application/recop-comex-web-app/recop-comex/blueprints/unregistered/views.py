@@ -43,13 +43,16 @@ def donate():
 	for c in communities:
 
 		if c.type==4:
-			form.sponsee.choices.extend([(str(c.id), c.address)])
+			form.sponsee.choices.append((str(c.id), c.address))
 
 	events = event_views.show_list('S', ' ')
 
 	if events:
-		form.event.choices.extend(([str(e.id), e.name] for e in events))
-		no_event = 0
+
+		for e in events:
+			form.event.choices.append((str(e.id), e.name))
+			no_event = 0
+			
 	else: 
 		form.event.data=''
 		no_event = 1
