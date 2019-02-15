@@ -84,14 +84,6 @@ def members_add():
 
 	if form.validate_on_submit():
 
-		user_id = user_information.reserve_id()
-
-		value = [
-			None, user_id, current_user.id, form.occupation.data, form.income.data, form.religion.data, "A"
-			]
-
-		community.add(value)
-
 		for_company = user_views.profile_info(current_user.info_id)
 
 		value = [
@@ -101,6 +93,14 @@ def members_add():
 			]
 
 		user_information.add(value)
+
+		user_id = user_information.reserve_id()
+
+		value = [
+			None, user_id, current_user.info_id, form.occupation.data, form.income.data, form.religion.data, "A"
+			]
+
+		community.add(value)
 
 		flash('Member added!', 'success')
 		return redirect(url_for('communities.members_add'))

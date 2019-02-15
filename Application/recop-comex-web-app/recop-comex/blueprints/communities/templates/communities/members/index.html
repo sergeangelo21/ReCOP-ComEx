@@ -116,7 +116,9 @@
 								</thead>
 
 									{% for member in members %}
-										{% include 'communities/members/_members.html' %}
+										{% if member.member %}
+											{% include 'communities/members/_members.html' %}
+										{% endif %}
 									{% endfor %}
 
 								{% else %}
