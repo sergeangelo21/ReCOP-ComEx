@@ -166,6 +166,15 @@
 		}
 		/*	ADMIN - PARTNERS - PROFILE - END */
 
+    .menu-label.settings:hover{
+      background-color: whitesmoke;
+      cursor: pointer;
+    }
+
+    .settings-dropdown{
+      display: none;
+    }
+
 	/*		END		*/
 
 	/*		STARS		*/
