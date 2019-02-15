@@ -2,26 +2,24 @@ Unregistered
 
 Modal for events, linkages (join)
 Donate form to be appended
-Contact Us revision
 
 Admin
 
 Dashboard
 JS events :P
-Participants for events query and show - Done (Serge)
 Event reports
 events organized/attended	
-settings
-Donations verification and view
+Donations verification
 feedbacks
+inventory
 
 
 Linkages
 Dashboard
 Attach letters
-Proposal attach files (budget plan etc.)
-Calendar view event
-Communities query (pagisahin na lang ng format with linkages para di na jquery)
+Calendar view event/redesign
+LINKAGES MENU
+Communities query
 Donation button na lang for comm and event na di sila nagorganize
 Reports(All finished events/proposals nakatab)
 
@@ -44,7 +42,9 @@ General (Maybe kaartehan)
 Admin (activity logs)
 Notifications 
 Help
-
+change dp
+validations
+error traps
 
 
 
