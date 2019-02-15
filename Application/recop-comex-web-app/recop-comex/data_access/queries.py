@@ -79,7 +79,9 @@ class linkage_views():
 				user_information.last_name).label('coordinator'),
 				user_information.partner_thrust,
 				user_information.address,
-				user_account.status,
+				user_information.telephone,
+				user_information.mobile_number,
+				user_account.status
 				).filter(user_account.type==type
 				).order_by(user_information.id.asc()
 				).all()
@@ -94,6 +96,8 @@ class linkage_views():
 				user_information.last_name).label('coordinator'),
 				user_information.partner_thrust,
 				user_information.address,
+				user_information.telephone,
+				user_information.mobile_number,
 				user_account.status,
 				).filter(and_(user_account.type==type,
 				or_(user_information.company_name.like('%'+search+'%'),
@@ -113,6 +117,8 @@ class linkage_views():
 				user_information.last_name).label('coordinator'),
 				user_information.partner_thrust,
 				user_information.address,
+				user_information.telephone,
+				user_information.mobile_number,
 				user_account.status,
 				).filter(and_(user_account.type==type,user_account.status==value,
 				or_(user_information.company_name.like('%'+search+'%'),
@@ -133,6 +139,8 @@ class linkage_views():
 				user_information.partner_thrust,
 				user_information.bio,
 				user_information.address,
+				user_information.telephone,
+				user_information.mobile_number,
 				user_account.status,
 				).filter(and_(user_account.type==type, 
 				user_account.status==value)
