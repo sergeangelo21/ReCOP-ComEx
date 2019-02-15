@@ -56,7 +56,7 @@ def events_create():
 		else:
 			name = item.address
 
-		form.select_link.choices.extend([(item.id, name)])
+		form.select_link.choices.append((item.id, name))
 
 	if form.validate_on_submit():
 

@@ -95,23 +95,6 @@
 							  	</div>
 							</div>
 						</div>
-<script type="text/javascript">
-	
-function employed_or_not(value)
-{
-    if (value=='N')
-    {
-        document.getElementById('occupation_field').style.display="none"
-        document.getElementById('income_field').style.display="none"
-    }
-
-    else
-    {
-        document.getElementById('occupation_field').style.display="block"
-        document.getElementById('income_field').style.display="block"
-    }
-}
-</script>
 						<div class="column">
 							<div class="field">
 								<label class="label">Employed?</label>
@@ -119,7 +102,7 @@ function employed_or_not(value)
 
 							    	{% for subfield in form.is_employed %}
 	                                <label class = "radio">
-	                                {{subfield(onclick='employed_or_not(this.value)')}}
+	                                {{subfield(onclick="employed(this.value)")}}
 	                                {{subfield.label}}
 	                                 </label>
 
