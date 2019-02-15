@@ -176,6 +176,19 @@ function btn(sender){
 }
 
 
+function show_event(value){
+
+    a = document.getElementById(value+'_modal')
+    a.style.display='block'
+
+}
+
+function close_event(value){
+    a = document.getElementById(value+'_modal')
+    a.style.display='none'
+
+}
+
 function filtershrink() {
     var div = document.getElementById("filterDIV");
     if (div.style.display === "none") {
