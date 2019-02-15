@@ -1,0 +1,69 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+
+	<section class="hero is-fullheight">
+		<div class="hero-body">
+			<div class="box white">
+				<form action="" method="POST">
+					{{form.hidden_tag()}}
+					<div class="columns">
+				      	<div class="column">
+				      		<article class="media">
+								<figure class="media-left">
+								    <a class="btn btn-follow btn-sm text-center" href="{{url_for('admin.inventory', search=' ')}}" role="button">
+										<span class="back-icon">
+								  			<i class="fas fa-arrow-circle-left fa-2x"></i>
+								  		</span>
+								  	</a>
+								</figure>
+							  
+							  	<div class="media-right has-text-weight-bold">
+							   		<p class="subtitle has-text-weight-bold">Add Inventory</p>
+							 	</div>
+							</article>
+				      	</div>
+				    </div>
+				    <div class="columns">
+				      	<div class="column">
+				      		<p class="title has-text-centered">Add Item to Inventory</p>
+				      	</div>
+			     	</div>
+
+					<div class="columns">
+						<div class="column">
+							<div class="field">
+								{{form.firstname.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.firstname(class_='input', placeholder='First Name')}}
+	                                {% for error in form.firstname.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+						</div>
+						<div class="column">
+							<div class="field">
+								{{form.middlename.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.middlename(class_='input', placeholder='Middle Name')}}
+	                                {% for error in form.middlename.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="field is-grouped is-grouped-centered">
+						<p class="control">
+						  	{{form.submit(class_='button is-success')}}
+						</p>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

@@ -216,7 +216,16 @@ class inventory(db.Model):
 class inventory_type(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	donation_id = db.Column(db.VARCHAR(20), nullable=False)	
+	name = db.Column(db.VARCHAR(20), nullable=False)	
+
+	def add(value):
+
+		record = inventory_type(
+			id = value[0],
+			name = value[1])
+
+		db.session.add(record)
+		db.session.commit()
 
 class proposal_tracker(db.Model):
 

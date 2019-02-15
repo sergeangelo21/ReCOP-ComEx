@@ -24,6 +24,10 @@ class ProposalForm(FlaskForm):
     programme = FileField('Programme', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
     submit = SubmitField('Submit')
 
+class AddTypeInventoryForm(FlaskForm):
+    name = StringField('Type', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name')
     middlename = StringField('Middle Name')

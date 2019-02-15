@@ -357,11 +357,38 @@ def donations():
 
 	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations)
 
-@admin.route('/admin/reports')
+@admin.route('/admin/inventory/filter_<search>')
 @login_required
-def reports():
+def inventory(search):
 
-	return render_template('/admin/reports/index.html', title="Reports | Admin")
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('admin.communities', search=form.search.data))
+
+	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, search=search)
+
+@admin.route('/admin/inventory/add')
+@login_required
+def inventory_add():
+
+	return render_template('/admin/inventory/add.html', title="Inventory | Admin")
+
+@admin.route('/admin/inventory/add_type', methods=['GET', 'POST'])
+@login_required
+def inventory_add_type():
+
+	form = AddTypeInventoryForm()
+
+	if form.validate_on_submit():
+
+		value = [None, form.name.data]
+
+		inventory_type.add(value)
+
+		flash('Inventory type added!', 'success')
+		return redirect(url_for('admin.inventory', search=' '))
 
 @admin.route('/admin/feedbacks')
 @login_required
