@@ -325,6 +325,8 @@ def donations():
 	donation_raw=donation_views.show_list()
 
 	donations=[]
+	sponsee=''
+	sponsor=''
 
 	for d in donation_raw:
 
@@ -344,7 +346,9 @@ def donations():
 				type='Cash'
 
 		if d.sponsor:
-			sponsor= d.company_name		
+			sponsor= d.company_name	
+
+		if sponsor and sponsee:	
 			donations.append([d.id,sponsee,sponsor,d.amount,type, d.date_given])
 
 	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations)
