@@ -405,7 +405,7 @@ def profile_settings_personal(user):
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('admin.profile_settings_personal'))
+		return redirect(url_for('admin.profile_settings_personal', user=user))
 
 	else:
 
@@ -450,7 +450,7 @@ def profile_settings_contact(user):
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('admin.profile_settings_contact'))
+		return redirect(url_for('admin.profile_settings_contact', user=user))
 
 	else:
 
@@ -480,9 +480,9 @@ def profile_settings_username(user):
 
 	if form.validate_on_submit():
 
-		user = user_account.login([current_user.username, form.oldpassword.data])
+		user_val = user_account.login([current_user.username, form.oldpassword.data])
 
-		if user:
+		if user_val:
 
 			user_account_update.username = form.username.data
 
@@ -490,7 +490,7 @@ def profile_settings_username(user):
 
 			flash('Username was successfully updated!', 'success')
 
-			return redirect(url_for('admin.profile_settings_username'))
+			return redirect(url_for('admin.profile_settings_username', user=user))
 
 		else:
 
@@ -521,9 +521,9 @@ def profile_settings_password(user):
 
 	if form.validate_on_submit():
 
-		user = user_account.login([current_user.username, form.oldpassword.data])
+		user_val = user_account.login([current_user.username, form.oldpassword.data])
 
-		if user:
+		if user_val:
 
 			user_account_update.password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
 
@@ -531,7 +531,7 @@ def profile_settings_password(user):
 
 			flash('Password was successfully updated!', 'success')
 
-			return redirect(url_for('admin.profile_settings_password'))
+			return redirect(url_for('admin.profile_settings_password', user=user))
 
 		else:
 
