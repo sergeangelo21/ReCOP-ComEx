@@ -1,0 +1,116 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+			<div class="notification gold">
+				<div class="columns is-centered">
+					<div class="column is-3">
+						<article class="media">
+						  	<figure class="media-left"> 
+						  		<a class="button add" href="{{url_for('admin.inventory_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+						  		<a class="button viewbtn is-active" href="{{url_for('admin.inventory', status='all', search=' ')}}">
+									<span class="icon">
+										<i class="fa fa-list"></i>
+									</span>
+								</a>
+								<a href="" class="button viewbtn">
+									<span class="icon">
+										<i class="fa fa-chart-pie"></i>
+									</span>
+								</a>
+						  	</figure>
+						</article>
+					</div>
+
+					<div class="column is-right">
+							<div class="field is-horizontal is-pulled-right has-addons has-addons-centered">
+								<form action="" method="POST">
+									{{form.hidden_tag()}}
+								<div class="field-body">
+									<p class="control">
+								    	{{form.search(class_='input', placeholder='Search')}}
+									</p>
+									<p class="control">
+								     	{{form.submit(class_='button search')}}
+									</p>
+								</div>
+								</form>
+							</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="columns is-gapless">
+				<div class="column is-2">
+		    		<div class="notification filter">
+
+		    			<div class="columns">
+			                <div class="column">
+			                	<p class="title is-size-5">Type</p>
+			                	{% for type in types %}
+				                  	<div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="0" type="checkbox" name="0" checked="checked">
+				                    <label for="">All</label>
+					                </div>
+			                	{% endfor %}
+			                	<a class="button add" href="{{url_for('admin.inventory_add_type')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+			                </div>
+			            </div>
+					 	
+		    		</div>
+		    	</div>
+
+				<div class="column">
+					<div class="card list">
+						<div class="card-header">
+							<p class="card-header-title">
+							{% if search!=' ' %}
+							You searched for '{{search}}'
+							<a href="{{url_for('admin.events', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
+							&nbsp; in
+							{% endif %}
+							{{status | title}} Inventory
+							</p>
+							<div class="is-pulled-right">
+								<p class="card-header-title">
+									Total: {{events|length}}
+								</p>
+							</div>
+						</div>
+						<div class="card-content">
+							<div class="table-responsive">
+								<table class="table is-fullwidth">
+									{% if events %}
+									<thead>
+										<tr>
+											<th class="newlist">ID</th>
+										    <th class="newlist">Event Name</th>
+										    <th class="newlist">Organizer</th>
+										    <th class="newlist">Target Date</th>
+										   	{% if status=='all' or status=='pending' %}<th class="newlist">Status</th>{% endif %}
+										    <th class="newlist hidedesktop">Actions</th>
+										 </tr>
+										
+									</thead>
+
+										{% for event in events %}
+											{% include 'admin/events/_events.html' %}
+										{% endfor %}
+
+									{% else %}
+
+									<tbody>
+
+										<tr class = "table-row">
+											<td class = "has-text-centered">---Nothing to show---</td>
+									 	</tr>
+										
+									</tbody>
+
+									{% endif %}
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div>
+{% endblock %}
