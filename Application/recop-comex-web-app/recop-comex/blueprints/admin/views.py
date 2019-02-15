@@ -101,7 +101,7 @@ def event_action(id, action):
 	if action=='approve':
 
 		signatory = user_views.signatory_info(4)
-		status = ['P','F']
+		status = ['P','A']
 
 		recipient = signatory.email_address
 		user = 'Fr. ' + signatory.last_name

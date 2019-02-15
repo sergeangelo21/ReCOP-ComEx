@@ -59,10 +59,10 @@ def signup():
 		user_information.add(value)	
 		user_id = user_information.reserve_id()
 
-		if form.type.data == '2' or form.type.data == '4': 
+		if form.type.data == '2': 
 			status = "A"
 			flash('Your account was successfully created!', 'success')
-		elif form.type.data == '3':
+		elif form.type.data == '3' or form.type.data == '4':
 			status = "N"
 			if form.address.data == 'San Sebastian College Recoletos de Cavite':
 				flash('Your account has been created! Please wait for the Re-COP Director to confirm your account.', 'success')
@@ -219,14 +219,14 @@ def event_signing(token, action):
 
 			if action=='approve':
 
-				if event.status=='F':
+				if event.status=='A':
 					if user.id==4:
 						signatory = user_views.signatory_info(3)
-						status='A'
+						status='F'
 					else:
 						flash('Invalid credentials! Please try again.', 'error')	
 						return redirect(url_for('unregistered.event_signing', token=token, action=action))
-				elif event.status=='A':
+				elif event.status=='F':
 					if user.id==3:
 						signatory = user_views.signatory_info(2)
 						status='P'
@@ -249,7 +249,7 @@ def event_signing(token, action):
 				if status!='S':
 
 					recipient = signatory.email_address
-					name = 'Fr. ' + signatory.last_name
+					name = 'Fr. ' + signatory.last_name + ', OAR'
 					token = generate(event.id)
 					approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
 					decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
@@ -266,11 +266,11 @@ def event_signing(token, action):
 
 			else:
 
-				if event.status=='F':
+				if event.status=='A':
 					if user.id!=4:
 						flash('Invalid credentials! Please try again.', 'error')	
 						return redirect(url_for('unregistered.event_signing', token=token, action=action))
-				elif event.status=='A':
+				elif event.status=='F':
 					if user.id!=3:
 						flash('Invalid credentials! Please try again.', 'error')	
 						return redirect(url_for('unregistered.event_signing', token=token, action=action))

@@ -11,3 +11,5 @@ ALTER TABLE `beneficiary` RENAME to `community`;
 ALTER TABLE `community` ADD `religion` INT(20) NOT NULL AFTER `income`;
 
 ALTER TABLE `donation` CHANGE `is_event` `event_id` INT AFTER `sponsee_id`;
+
+ALTER TABLE `proposal_tracker` CHANGE `acad_signed` `acad_signed` DATETIME NULL DEFAULT NULL AFTER `recop_accepted`;

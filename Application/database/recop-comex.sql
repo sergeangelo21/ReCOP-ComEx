@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2019 at 03:57 PM
+-- Generation Time: Feb 15, 2019 at 08:46 AM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -40,15 +40,16 @@ CREATE TABLE `audit_trail` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `beneficiary`
+-- Table structure for table `community`
 --
 
-CREATE TABLE `beneficiary` (
+CREATE TABLE `community` (
   `id` int(11) NOT NULL,
-  `donor_id` int(11) DEFAULT NULL,
-  `beneficiary_id` int(11) DEFAULT NULL,
-  `is_employed` char(1) NOT NULL,
+  `member_id` int(11) DEFAULT NULL,
+  `community_id` int(11) DEFAULT NULL,
+  `occupation` varchar(30) DEFAULT NULL,
   `income` decimal(10,2) NOT NULL,
+  `religion` int(20) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -61,11 +62,11 @@ CREATE TABLE `beneficiary` (
 CREATE TABLE `donation` (
   `id` int(11) NOT NULL,
   `sponsee_id` int(11) DEFAULT NULL,
+  `event_id` int(11) DEFAULT NULL,
   `sponsor_id` int(11) DEFAULT NULL,
   `amount` decimal(10,2) NOT NULL,
   `date_given` datetime NOT NULL,
   `transaction_slip` varchar(200) NOT NULL,
-  `is_event` char(1) NOT NULL,
   `status` char(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -202,10 +203,10 @@ CREATE TABLE `user_account` (
 --
 
 INSERT INTO `user_account` (`id`, `info_id`, `username`, `password`, `email_address`, `type`, `last_active`, `status`) VALUES
-(1, 1, 'admin-recop', '$2b$12$aLUMJqDekK/DY8nU5c4y3O2lWmP4.af.YCWeol5Cc.nAgw6Wau7ia', 'recop.baste@gmail.com', 1, '2019-02-07 21:49:20', 'A'),
+(1, 1, 'admin-recop', '$2b$12$aLUMJqDekK/DY8nU5c4y3O2lWmP4.af.YCWeol5Cc.nAgw6Wau7ia', 'recop.baste@gmail.com', 1, '2019-02-15 15:29:33', 'A'),
 (2, 2, 'pres.baste', '$2b$12$9kebxlvRAnR/L3Jx9GIcQeDEMuIDrOMlfoIbFNv0lkhpte7RI29WC', 'pres.baste@gmail.com', 5, '2019-01-29 13:34:26', 'A'),
-(3, 3, 'acad.baste', '$2b$12$9DeJoAw7WoF6GMq9d70Tnec2ALPZEuEOa1qSWEL7S.MmJEnrZJrem', 'acad.baste@gmail.com', 5, '2019-01-29 14:05:13', 'A'),
-(4, 4, 'fmi.baste', '$2b$12$UtE8pwqmZK3Et9ioHkSoSODiCzNT1cRgsyQcYkhTDxlwBlgOTDs6.', 'fmi.baste@gmail.com', 5, '2019-01-29 14:07:02', 'A');
+(3, 3, 'fmi.baste', '$2b$12$9DeJoAw7WoF6GMq9d70Tnec2ALPZEuEOa1qSWEL7S.MmJEnrZJrem', 'fmi.baste@gmail.com', 5, '2019-01-29 14:05:13', 'A'),
+(4, 4, 'acad.baste', '$2b$12$UtE8pwqmZK3Et9ioHkSoSODiCzNT1cRgsyQcYkhTDxlwBlgOTDs6.', 'acad.baste@gmail.com', 5, '2019-01-29 14:07:02', 'A');
 
 -- --------------------------------------------------------
 
@@ -234,9 +235,9 @@ CREATE TABLE `user_information` (
 
 INSERT INTO `user_information` (`id`, `first_name`, `middle_name`, `last_name`, `company_name`, `bio`, `gender`, `birthday`, `address`, `telephone`, `mobile_number`, `partner_thrust`) VALUES
 (1, 'Ana', 'Dula', 'Manzano', 'San Sebastian College Recoletos de Cavite', 'I am the ReCOP Director.', 'F', '1998-01-21', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
-(2, 'Rafael', 'Something', 'Pecson', 'San Sebastian College Recoletos de Cavite', 'I am the President.', 'M', '2019-01-01', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
-(3, 'James', 'Dexter', 'Tanquis', 'San Sebastian College Recoletos de Cavite', 'I am the VP for Academics.', 'M', '2019-01-01', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
-(4, 'Cristituto', 'Somebody', 'Palomar', 'San Sebastian College Recoletos de Cavite', 'I am the VP for Finance.', 'M', '2019-01-29', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0);
+(2, 'Rafael', 'B', 'Pecson', 'San Sebastian College Recoletos de Cavite', 'I am the President.', 'M', '2019-01-01', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
+(3, 'James Dexter', 'D', 'Palagtiosa', 'San Sebastian College Recoletos de Cavite', 'I am the VP for FMI.', 'M', '2019-01-01', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0),
+(4, 'James', 'T', 'Bumangabang', 'San Sebastian College Recoletos de Cavite', 'I am the VP for Academic Services.', 'M', '2019-01-29', 'Manila Boulevard, Brgy. 11 (Lawin) , J.Felipe Blvd, Santa Cruz, Cavite City, Cavite', NULL, NULL, 0);
 
 --
 -- Indexes for dumped tables
@@ -249,9 +250,9 @@ ALTER TABLE `audit_trail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `beneficiary`
+-- Indexes for table `community`
 --
-ALTER TABLE `beneficiary`
+ALTER TABLE `community`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -322,18 +323,24 @@ ALTER TABLE `user_information`
 -- AUTO_INCREMENT for table `audit_trail`
 --
 ALTER TABLE `audit_trail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `beneficiary`
+-- AUTO_INCREMENT for table `community`
 --
-ALTER TABLE `beneficiary`
+ALTER TABLE `community`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `donation`
 --
 ALTER TABLE `donation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `event_attachment`
+--
+ALTER TABLE `event_attachment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --

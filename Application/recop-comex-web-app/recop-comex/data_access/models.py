@@ -224,8 +224,8 @@ class proposal_tracker(db.Model):
 	event_id = db.Column(db.INT, db.ForeignKey('event_information.id'), nullable=False)
 	proposed_on = db.Column	(db.DATETIME, nullable=False)
 	recop_accepted = db.Column(db.DATETIME)
-	fmi_signed = db.Column(db.DATETIME)
 	acad_signed = db.Column(db.DATETIME)
+	fmi_signed = db.Column(db.DATETIME)
 	approved_on = db.Column(db.DATETIME)
 	comment = db.Column(db.VARCHAR(20))
 	status = db.Column(db.CHAR(1), nullable=False)	
@@ -237,8 +237,8 @@ class proposal_tracker(db.Model):
 			event_id = value[1],
 			proposed_on = datetime.now(),
 			recop_accepted = None,
-			fmi_signed = None,
 			acad_signed = None,
+			fmi_signed = None,
 			approved_on = None,
 			comment = None,
 			status = 'N')
@@ -252,12 +252,12 @@ class proposal_tracker(db.Model):
 
 		proposal.status = status
 
-		if status=='F':
+		if status=='A':
 			proposal.recop_accepted = datetime.now()
-		elif status=='A':
-			proposal.fmi_signed = datetime.now()
-		elif status=='P':
+		elif status=='F':
 			proposal.acad_signed = datetime.now()
+		elif status=='P':
+			proposal.fmi_signed = datetime.now()
 		elif status=='S':
 			proposal.approved_on = datetime.now()
 		else:
