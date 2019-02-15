@@ -346,7 +346,11 @@ def donations():
 				type='Cash'
 
 		if d.sponsor:
-			sponsor= d.company_name	
+			
+			if d.sponsor_id==1:
+				sponsor='Anonymous'
+			else:
+				sponsor=d.company_name	
 
 		if sponsor and sponsee:	
 			donations.append([d.id,sponsee,sponsor,d.amount,type, d.date_given])

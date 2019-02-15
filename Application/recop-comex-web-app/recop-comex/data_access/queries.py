@@ -176,8 +176,8 @@ class linkage_views():
 		record = user_information.query.join(
 				user_account).add_columns(
 				user_information.id, user_account.type, 
-				user_information.address, user_information.company_name).filter(and_(or_(
-				user_account.type==4, user_account.type==3), user_account.id!=current_user.id)).order_by(
+				user_information.address, user_information.company_name).filter(or_(
+				user_account.type==4, user_account.type==3)).order_by(
 				user_information.address.asc()
 				).all()
 
@@ -396,6 +396,7 @@ class donation_views():
 			user_information.company_name,
 			donation.event_id,
 			donation.sponsee_id,
+			donation.sponsor_id,
 			donation.status,
 			donation.date_given,
 			func.IF(donation.amount==0.00,'N/A',donation.amount).label('amount')
@@ -414,6 +415,7 @@ class donation_views():
 			user_information.company_name,
 			donation.event_id,
 			donation.sponsee_id,
+			donation.sponsor_id,
 			donation.status,
 			donation.date_given,
 			func.IF(donation.amount==0.00,'N/A',donation.amount).label('amount')

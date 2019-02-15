@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
-from blueprints.unregistered.forms import LoginForm, SignupForm, ForgotPasswordForm
-from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment
+from blueprints.unregistered.forms import *
+from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment, donation
 from data_access.queries import user_views, event_views, linkage_views
 from datetime import datetime
 
@@ -33,10 +33,57 @@ def linkages():
 
 	return render_template('/unregistered/linkages/index.html', linkages=linkages)
 
-@unregistered.route('/donate')
+@unregistered.route('/donate', methods=['GET', 'POST'])
 def donate():
 
-	return render_template('/unregistered/donate/index.html')
+	form=DonationForm()
+
+	communities = linkage_views.target_linkages()
+
+	for c in communities:
+
+		if c.type==4:
+			form.sponsee.choices.extend([(str(c.id), c.address)])
+
+	events = event_views.show_list('S', ' ')
+
+	if events:
+		form.event.choices.extend(([str(e.id), e.name] for e in events))
+		no_event = 0
+	else: 
+		form.event.data=''
+		no_event = 1
+
+	if form.validate_on_submit():
+
+		if form.give_to.data=='1':
+			if form.sponsee.data:
+				sponsee = form.sponsee.data
+			else:
+				sponsee = 1
+
+			event = None
+		else:
+			event = form.event.data
+			sponsee= None
+
+		file = form.trans_slip.data
+		old, extension = os.path.splitext(file.filename)
+
+		new = donation.last_added()
+		filename = str(new)+extension
+
+		trans_path = 'static/output/donate/trans_slip/' + filename
+
+		value = [None,sponsee,event,1,form.amount.data,trans_path]
+
+		donation.add(value)
+		file.save(trans_path)
+
+		flash('Donation given!', 'success')
+		return redirect('/')
+
+	return render_template('/unregistered/donate/index.html', form=form, no_event=no_event)
 
 @unregistered.route('/contactus')
 def contactus():

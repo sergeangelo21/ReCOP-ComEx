@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
@@ -31,3 +31,13 @@ class SignupForm(FlaskForm):
 class ForgotPasswordForm(FlaskForm):
     email = StringField('Email Address', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+class DonationForm(FlaskForm):
+
+    give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
+    sponsee = SelectField('Communities', choices=[('','ReCOP')])
+    event = SelectField('Events', choices=[('', 'Please Choose One')])
+    type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
+    amount = StringField('Amount', validators=[DataRequired()])
+    trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField('Donate')
