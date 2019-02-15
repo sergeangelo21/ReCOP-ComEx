@@ -3,6 +3,12 @@
 									    <td>{{ linkage.company_name }}</td>
 									    <td>{{ linkage.coordinator }}</td>
 									    <td>{{ linkage.address }}</td>
-										<td><a class="dropdown-item" href="{{url_for('communities.linkage_show', id=linkage.id)}}"><span class="icon is-small"><i class="fa fa-eye"></i></span>&nbsp View</a></td>
+									    <td>
+											<a class="button is-warning tooltip" data-tooltip="View" href="{{url_for('communities.linkage_show', id=linkage.id)}}">
+												<span class="icon">
+													<i class="fa fa-eye"></i>
+												</span>
+											</a>
+									    </td>
 									</tr>	
 								</tbody>

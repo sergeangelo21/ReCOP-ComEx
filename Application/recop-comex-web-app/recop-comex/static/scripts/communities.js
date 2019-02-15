@@ -15,6 +15,30 @@ function check_pass()
     }
 }
 
+function employed(value)
+{
+
+    occupation = document.getElementById('occupation_field')
+    income = document.getElementById('income_field')
+
+    if (value=='N')
+    {
+        document.getElementById('occupation_field').style.display="none"
+        document.getElementById('income_field').style.display="none"
+        occupation.value = null
+        income.value = 0
+
+    }
+
+    else
+    {
+        document.getElementById('occupation_field').style.display="block"
+        document.getElementById('income_field').style.display="block"
+        occupation.value = ''
+        income.value = ''
+    }
+}
+
 function filtershrink()
 {
     var div = document.getElementById("filterDIV");
@@ -26,4 +50,17 @@ function filtershrink()
     {
         div.style.display = "none";
     }
+}
+
+function show_event(value){
+
+    a = document.getElementById(value+'_modal')
+    a.style.display='block'
+
+}
+
+function close_event(value){
+    a = document.getElementById(value+'_modal')
+    a.style.display='none'
+
 }

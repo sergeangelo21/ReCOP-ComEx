@@ -62,11 +62,11 @@ def linkage_show(id):
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
 
-@communities.route('/communities/members/filter_<search>')
+@communities.route('/communities/members/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def members(search):
 
-	members = community_views.members_list(search=search)
+	members = community_views.members_list(search)
 
 	form = SearchForm()
 
@@ -74,7 +74,7 @@ def members(search):
 
 		return redirect(url_for('communities.members', search=form.search.data))
 
-	return render_template('/communities/members/index.html', title="Communities", members=members, search=search)
+	return render_template('/communities/members/index.html', title="Communities", members=members, form=form, search=search)
 
 @communities.route('/communities/members/add', methods=['GET', 'POST'])
 @login_required
@@ -103,7 +103,7 @@ def members_add():
 		user_information.add(value)
 
 		flash('Member added!', 'success')
-		return redirect(url_for('communities.members'))
+		return redirect(url_for('communities.members_add'))
 
 	return render_template('/communities/members/add.html', title="Communities", form=form)
 

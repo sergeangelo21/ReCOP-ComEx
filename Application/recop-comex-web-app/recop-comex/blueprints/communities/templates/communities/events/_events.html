@@ -11,7 +11,25 @@
 	      		<div class="title is-5">{{ events.name }}</div>
 	      		<p class="subtitle is-6">{{ events.event_date }}</p>
 
-	      		<a class="button event-btn" href="">More Details</a>	
+	      		<a class="button event-btn" onclick="show_event('{{events.id}}')">More Details</a>	
+
 			</div>
 		</div>
+	</div>
+
+	<div id={{events.id}}_modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title">{{events.name}}</p>
+      				<button class="delete" onclick="close_event('{{events.id}}')"></button>
+				</header>
+    		<section class="modal-card-body">
+    			
+	  		</section>
+    	
+    		<footer class="modal-card-foot">
+
+    		</footer>
+  		</div>
 	</div>
