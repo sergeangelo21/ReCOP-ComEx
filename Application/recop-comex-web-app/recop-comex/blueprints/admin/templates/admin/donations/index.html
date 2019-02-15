@@ -3,6 +3,53 @@
 {% block content %}
 			<div class="notification gold">
 				<div class="columns">
+					<div class="column is-3">
+						<article class="media">
+						  	<figure class="media-left"> 
+						  		<a href="" class="button viewbtn is-active">
+									<span class="icon">
+										<i class="fa fa-list"></i>
+									</span>
+								</a>
+								<a href="" class="button viewbtn">
+									<span class="icon">
+										<i class="fa fa-chart-pie"></i>
+									</span>
+								</a>
+						  	</figure>
+						</article>
+					</div>
+					<div class="column is-6">
+						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
+						  <ul>
+						    <li {% if status=='all' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.communities', status='all', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
+						        <span class="proposal">All</span>
+						      </a>
+						    </li>
+						    <li {% if status=='new' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.communities', status='new', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-plus" aria-hidden="true"></i></span>
+						        <span class="proposal">New</span>
+						      </a>
+						    </li>
+						    <li {% if status=='pending' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.communities', status='pending', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-check" aria-hidden="true"></i></span>
+						        <span class="proposal">Verified</span>
+						      </a>
+						    </li>
+						    <li {% if status=='active' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.communities', status='active', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-times" aria-hidden="true"></i></span>
+						        <span class="prop">Rejected</span>
+						      </a>
+						    </li>
+						  </ul>
+						</div>
+					</div>
+
 					<div class="column">
 						<div class="field has-addons is-pulled-right has-addons-centered">
 							<p class="control">
@@ -18,41 +65,27 @@
 				</div>
 			</div>
 
+
 			<div class="columns is-gapless">
 				<div class="column is-2">
 					<div class="notification filter">
 						<div class="columns">
 			                <div class="column">
-			                	<p class="title is-size-5">Thrust</p>
+			                	<p class="title is-size-5">Sponsee</p>
+
 			                  	<div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="" type="checkbox" name="0" checked="checked">
-				                    <label for="">All</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="7" type="checkbox" name="7" checked="checked">
+				                    <label for="7">All</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="1" type="checkbox" name="1">
-				                    <label for="1">Educational</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
+				                    <label for="8">Community</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="2" type="checkbox" name="2">
-				                    <label for="2">Environmental</label>
+				                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
+				                    <label for="9">Event</label>
 				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="3" type="checkbox" name="3">
-				                    <label for="3">Health</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="4" type="checkbox" name="4">
-				                    <label for="4">Livelihood</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="5" type="checkbox" name="5">
-				                    <label for="5">Socio-Political</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="6" type="checkbox" name="6">
-				                    <label for="6">Spiritual</label>
-				                </div>
-			                	
+
 			                	<p class="title is-size-5">Type</p>
 
 			                  	<div class="field">
@@ -61,11 +94,11 @@
 				                </div>
 				                <div class="field">
 				                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
-				                    <label for="8">Institutional</label>
+				                    <label for="8">Cash</label>
 				                </div>
 				                <div class="field">
 				                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
-				                    <label for="9">Outside</label>
+				                    <label for="9">In-kind</label>
 				                </div>
 			                </div>
 			            </div>
