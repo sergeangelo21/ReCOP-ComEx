@@ -42,69 +42,74 @@
 				<ul class="menu-list">
 					<li>
 						<ul>
-							<p class="menu-label">
+							<p class="menu-label settings" onclick="settingsVPACAD()">
 								Vice President for Academic Services
 							</p>
-							<p class="menu-label">
-								<span class="icon">
-									<i class="fas fa-cogs"></i>
-								</span>
-								General
-							</p>
-							<ul class="menu-list">
-								<li>
-									<li><a href="{{url_for('admin.profile_settings_personal', user='academicservices')}}">Personal</a></li>
-									<li><a href="{{url_for('admin.profile_settings_contact', user='academicservices')}}">Contact</a></li>
-								</li>
-							</ul>
+							<div class="settings-dropdown"  id="settingsACAD">
+								<p class="menu-label">
+									<span class="icon">
+										<i class="fas fa-cogs"></i>
+									</span>
+									General
+								</p>
+								<ul class="menu-list">
+									<li>
+										<li><a href="{{url_for('admin.profile_settings_personal', user='academicservices')}}">Personal</a></li>
+										<li><a href="{{url_for('admin.profile_settings_contact', user='academicservices')}}">Contact</a></li>
+									</li>
+								</ul>
 
-							<p class="menu-label">
-								<span class="icon">
-									<i class="fas fa-lock"></i>
-								</span>
-								Security
-							</p>
-							<ul class="menu-list">
-								<li>
-									<li><a href="{{url_for('admin.profile_settings_username', user='academicservices')}}">Username</a></li>
-									<li><a href="{{url_for('admin.profile_settings_password', user='academicservices')}}">Password</a></li>
-								</li>
-							</ul>
+								<p class="menu-label">
+									<span class="icon">
+										<i class="fas fa-lock"></i>
+									</span>
+									Security
+								</p>
+								<ul class="menu-list">
+									<li>
+										<li><a href="{{url_for('admin.profile_settings_username', user='academicservices')}}">Username</a></li>
+										<li><a href="{{url_for('admin.profile_settings_password', user='academicservices')}}">Password</a></li>
+									</li>
+								</ul>
+							</div>
 						</ul>
 					</li>
 				</ul>
+			
 
 				<ul class="menu-list">
 					<li>
 						<ul>
-							<p class="menu-label">
+							<p class="menu-label settings" onclick="settingsVPFMI()">
 								Vice President for Formation, Mission and Identity
 							</p>
-							<p class="menu-label">
-								<span class="icon">
-									<i class="fas fa-cogs"></i>
-								</span>
-								General
-							</p>
-							<ul class="menu-list">
-								<li>
-									<li><a href="{{url_for('admin.profile_settings_personal', user='formationmissionidentity')}}">Personal</a></li>
-									<li><a href="{{url_for('admin.profile_settings_contact', user='formationmissionidentity')}}">Contact</a></li>
-								</li>
-							</ul>
+							<div class="settings-dropdown"  id="settingsFMI">
+								<p class="menu-label">
+									<span class="icon">
+										<i class="fas fa-cogs"></i>
+									</span>
+									General
+								</p>
+								<ul class="menu-list">
+									<li>
+										<li><a href="{{url_for('admin.profile_settings_personal', user='formationmissionidentity')}}">Personal</a></li>
+										<li><a href="{{url_for('admin.profile_settings_contact', user='formationmissionidentity')}}">Contact</a></li>
+									</li>
+								</ul>
 
-							<p class="menu-label">
-								<span class="icon">
-									<i class="fas fa-lock"></i>
-								</span>
-								Security
-							</p>
-							<ul class="menu-list">
-								<li>
-									<li><a href="{{url_for('admin.profile_settings_username', user='formationmissionidentity')}}">Username</a></li>
-									<li><a href="{{url_for('admin.profile_settings_password', user='formationmissionidentity')}}">Password</a></li>
-								</li>
-							</ul>
+								<p class="menu-label">
+									<span class="icon">
+										<i class="fas fa-lock"></i>
+									</span>
+									Security
+								</p>
+								<ul class="menu-list">
+									<li>
+										<li><a href="{{url_for('admin.profile_settings_username', user='formationmissionidentity')}}">Username</a></li>
+										<li><a href="{{url_for('admin.profile_settings_password', user='formationmissionidentity')}}">Password</a></li>
+									</li>
+								</ul>
+							</div>
 						</ul>
 					</li>
 				</ul>
@@ -112,38 +117,39 @@
 				<ul class="menu-list">
 					<li>
 						<ul>
-							<p class="menu-label">
+							<p class="menu-label settings" onclick="settingsPRES()">
 								School President
 							</p>
-							<p class="menu-label">
-								<span class="icon">
-									<i class="fas fa-cogs"></i>
-								</span>
-								General
-							</p>
-							<ul class="menu-list">
-								<li>
-									<li><a href="{{url_for('admin.profile_settings_personal', user='president')}}">Personal</a></li>
-									<li><a href="{{url_for('admin.profile_settings_contact', user='president')}}">Contact</a></li>
-								</li>
-							</ul>
+							<div class="settings-dropdown"  id="settingsSPRES">
+								<p class="menu-label">
+									<span class="icon">
+										<i class="fas fa-cogs"></i>
+									</span>
+									General
+								</p>
+								<ul class="menu-list">
+									<li>
+										<li><a href="{{url_for('admin.profile_settings_personal', user='president')}}">Personal</a></li>
+										<li><a href="{{url_for('admin.profile_settings_contact', user='president')}}">Contact</a></li>
+									</li>
+								</ul>
 
-							<p class="menu-label">
-								<span class="icon">
-									<i class="fas fa-lock"></i>
-								</span>
-								Security
-							</p>
-							<ul class="menu-list">
-								<li>
-									<li><a href="{{url_for('admin.profile_settings_username', user='president')}}">Username</a></li>
-									<li><a href="{{url_for('admin.profile_settings_password', user='president')}}">Password</a></li>
-								</li>
-							</ul>
+								<p class="menu-label">
+									<span class="icon">
+										<i class="fas fa-lock"></i>
+									</span>
+									Security
+								</p>
+								<ul class="menu-list">
+									<li>
+										<li><a href="{{url_for('admin.profile_settings_username', user='president')}}">Username</a></li>
+										<li><a href="{{url_for('admin.profile_settings_password', user='president')}}">Password</a></li>
+									</li>
+								</ul>
+							</div>
 						</ul>
 					</li>
 				</ul>
-
 			</aside>
 		</div>
 	</div>
