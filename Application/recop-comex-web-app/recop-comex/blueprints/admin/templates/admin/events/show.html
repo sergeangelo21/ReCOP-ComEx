@@ -290,11 +290,11 @@
 					          	</div>
 					          	<div class="column">
 					          		<div class="has-text-centered">
-					          			<i class="fas fa-heart fa-5x track-icon {% if event.fmi_signed %} mark {% endif %}"></i>
-					          			<label class="label">FMI</label>
-					          			{% if event.fmi_signed %} 
-					          			{{event.fmi_signed.strftime('%B %e, %Y')}}<br>
-					          			{{event.fmi_signed.strftime('%I:%M %p')}}
+					          			<i class="fas fa-user-graduate fa-5x track-icon {% if event.acad_signed %} mark {% endif %}"></i>
+					          			<label class="label">Academics</label>
+					          			{% if event.acad_signed %} 
+					          			{{event.acad_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.acad_signed.strftime('%I:%M %p')}}
 					          			{% else %}
 					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
 					          			{% endif %}
@@ -308,11 +308,11 @@
 					          	</div>
 					          	<div class="column">
 					          		<div class="has-text-centered">
-					          			<i class="fas fa-user-graduate fa-5x track-icon {% if event.acad_signed %} mark {% endif %}"></i>
-					          			<label class="label">Academics</label>
-					          			{% if event.acad_signed %} 
-					          			{{event.acad_signed.strftime('%B %e, %Y')}}<br>
-					          			{{event.acad_signed.strftime('%I:%M %p')}}
+					          			<i class="fas fa-heart fa-5x track-icon {% if event.fmi_signed %} mark {% endif %}"></i>
+					          			<label class="label">FMI</label>
+					          			{% if event.fmi_signed %} 
+					          			{{event.fmi_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.fmi_signed.strftime('%I:%M %p')}}
 					          			{% else %}
 					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
 					          			{% endif %}
