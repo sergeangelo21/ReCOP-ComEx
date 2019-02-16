@@ -90,13 +90,74 @@ def events_create():
 
 	form = ProposalForm()
 
+	linkages = linkage_views.target_linkages()
+
+	for item in linkages:
+
+		if item.type==3:
+			name = item.company_name
+		else:
+			name = item.address
+
+		form.select_link.choices.append((item.id, name))
 
 	if form.validate_on_submit():
-		if form.event_date:
-			event_date < datetime.now()
 
-		flash('asd')
+		det = user_information.linkage_info(current_user.info_id)
 
+		if det.company_name=='San Sebastian College Recoletos de Cavite':
+			event_type=1
+		else:
+			event_type=2
+
+		value = [
+		None,current_user.info_id,form.title.data,
+		form.description.data,form.objective.data,form.budget.data,form.location.data,
+		form.event_date.data,form.participant_no.data, form.min_age.data, form.max_age.data,
+		form.thrust.data,event_type,'N'
+		]
+
+		
+		event_information.add(value)
+
+		event = event_information.last_added(current_user.id)
+
+		if form.target_link.data:
+
+			comm = form.target_link.data.split('|',-1)
+
+			for participant in comm:
+
+				if participant!='':
+					value = [None, event.id, participant, 'Y']
+					event_participation.add(value)
+
+		budget_plan = form.budget_plan.data
+		old, extension = os.path.splitext(budget_plan.filename)
+		filename = str(event.id)+extension
+		file_path = 'static/attachment/budget_plan/' + filename
+
+		value = [None,event.id,file_path,1]
+
+		event_attachment.add(value)
+		budget_plan.save(file_path)
+
+		programme = form.programme.data
+		old, extension = os.path.splitext(programme.filename)
+		filename = str(event.id)+extension
+		file_path = 'static/attachment/programme/' + filename
+
+		value = [None,event.id,file_path,2]
+
+		event_attachment.add(value)
+		programme.save(file_path)
+
+		value = [None, event.id]
+		proposal_tracker.add(value)
+
+		flash('Event proposal submitted! Please download the request letter.', 'success')
+
+		return redirect(url_for('admin.events'))
 
 
 	return render_template('/admin/events/create.html', form=form)
