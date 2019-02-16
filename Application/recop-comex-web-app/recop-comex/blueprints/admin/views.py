@@ -88,7 +88,18 @@ def event_show(id):
 @login_required
 def events_create():
 
-	return render_template('/admin/events/create.html' )
+	form = ProposalForm()
+
+
+	if form.validate_on_submit():
+		if form.event_date:
+			event_date < datetime.now()
+
+		flash('asd')
+
+
+
+	return render_template('/admin/events/create.html', form=form)
 
 @admin.route('/admin/events/<action>/id=<id>')
 @login_required
