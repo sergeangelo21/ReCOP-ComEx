@@ -3,7 +3,7 @@
 {% block content %}
 			<div class="notification gold">
 				<div class="columns is-centered">
-					<div class="column is-3">
+					<div class="column view-icons">
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('admin.linkages_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
@@ -21,7 +21,7 @@
 						</article>
 					</div>
 
-					<div class="column is-6">
+					<div class="column">
 						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
@@ -58,7 +58,7 @@
 						</div>
 					</div>
 
-					<div class="column is-3">
+					<div class="column search-box">
 						<div class="field is-horizontal is-pulled-right has-addons has-addons-centered">
 							<form action="" method="POST">
 								{{form.hidden_tag()}}
@@ -78,8 +78,10 @@
 
 			<div class="columns is-gapless">
 				<div class="column is-2">
-					<div class="notification filter">
-
+					<div class="filter-btn is-size-5" onclick="filtershrink()">
+						<i class="fas fa-filter"></i>&nbspFilter
+					</div>
+		    		<div class="notification filter" id="filterDIV">
 		    			<div class="columns">
 			                <div class="column">
 			                	<p class="title is-size-5">Thrust</p>

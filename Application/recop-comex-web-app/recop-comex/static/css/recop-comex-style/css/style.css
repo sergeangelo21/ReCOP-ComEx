@@ -644,7 +644,7 @@ Modules - reusable parts of our design
 /* UNREGISTERED START  */
 
 	/* EVENTS */
-	@media only screen and (max-width: 562px) {
+	@media only screen and (max-width: 768px) {
 		  /* For mobile phones: */
 		  .view-icons{
 				align-items: center;
@@ -732,7 +732,7 @@ Modules - reusable parts of our design
 
     .margin-error{
       margin-left: 0;
-  }
+    }
 
     .image-error{
         width: 70%;
@@ -745,6 +745,5 @@ Modules - reusable parts of our design
         margin-left: auto; 
       }  
     }
-  }
 /*  END  */
 

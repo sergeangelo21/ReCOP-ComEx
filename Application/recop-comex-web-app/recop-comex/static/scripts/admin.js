@@ -126,3 +126,12 @@ function settingsPRES() {
         div.style.display = "none";
     }
 }
+
+function filtershrink() {
+    var div = document.getElementById("filterDIV");
+    if (div.style.display === "none") {
+        div.style.display = "block";
+    } else {
+        div.style.display = "none";
+    }
+}
