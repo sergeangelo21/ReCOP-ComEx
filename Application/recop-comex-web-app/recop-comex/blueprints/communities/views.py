@@ -1,7 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.communities.forms import *
+<<<<<<< HEAD
 from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation
+=======
+from data_access.models import user_account, user_information, proposal_tracker, event_information, community
+>>>>>>> a2a19d93101048325852302ba8179177e01b5280
 from data_access.queries import user_views, linkage_views, community_views, event_views
 
 from extensions import db, bcrypt
@@ -37,7 +41,11 @@ def index():
 @login_required
 def events():
 
+<<<<<<< HEAD
 	events = event_views.community_events(current_user.info_id)
+=======
+	events = event_views.show_list('all', ' ')
+>>>>>>> a2a19d93101048325852302ba8179177e01b5280
 
 	return render_template('/communities/events/index.html', title="Communities", events=events)
 
@@ -97,6 +105,8 @@ def linkages(search):
 
 	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, search=search)
 
+
+
 @communities.route('/communities/linkages/show/id=<id>')
 @login_required
 def linkage_show(id):
@@ -104,6 +114,17 @@ def linkage_show(id):
 	linkage, mem_since = linkage_views.show_info(id)
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
+
+@communities.route('/communities/linkages/referral_<search>', methods=['GET', 'POST'])
+@login_required
+def linkages_referral(search):
+
+
+	form = ReferralForm()
+
+	
+
+	return render_template('/communities/linkages/referral.html', title="Referral", form=form, linkages=linkages, search=search)
 
 @communities.route('/communities/members/filter_<search>', methods=['GET', 'POST'])
 @login_required

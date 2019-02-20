@@ -16,7 +16,7 @@ inventory
 
 Linkages
 Dashboard
-Attach letters
+Attach letters				(DONE but not yet)
 Calendar view event/redesign
 LINKAGES MENU
 Communities query
@@ -45,6 +45,6 @@ Help
 change dp
 validations
 error traps
-	
+
 
 

@@ -1,4 +1,26 @@
 
+<style type="text/css">
+	.modal-card-head{
+	  background-color: #072000;
+	}
+
+	.card-content.show-modal{
+	    padding: 0rem;
+	    margin: 0;
+	}
+
+	  .modal-show{
+	  	width: 100%;
+	  }
+
+  .overlay-card-modal{
+		  background-color:#ecad00;
+		  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%23fdfcff' fill-opacity='0.1'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4zm8-8h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
+		  height: 200px;
+		  padding-top:25px;
+	}
+</style>
+
 	<div class="column is-one-quarter">
 		<div class="card select-list has-text-centered">
 			<div class="card-content">
@@ -8,32 +30,152 @@
 					</div>
 				</div>
 
-	      		<div class="title is-5">{{ events.name }}</div>
-	      		<p class="subtitle is-6">{{ events.event_date }}</p>
+	      		<div class="title is-5">{{ event.name }}</div>
+	      		<p class="subtitle is-6">{{ event.event_date }}</p>
 
-	      		<a class="button event-btn" onclick="show_event('{{events.id}}')">More Details</a>	
+	      		<a class="button event-btn" onclick="show_event('{{event.id}}')">More Details</a>	
 
 			</div>
 		</div>
 	</div>
 
-	<div id={{events.id}}_modal class="modal">
+	<div id={{event.id}}_modal class="modal">
   		<div class="modal-background"></div>
   			<div class="modal-card">
     			<header class="modal-card-head">
-      				<p class="modal-card-title">{{events.name}}</p>
-      				<button class="delete" onclick="close_event('{{events.id}}')"></button>
+      				<p class="modal-card-title has-text-white">{{event.name}}</p>
+      				<button class="delete" onclick="close_event('{{event.id}}')"></button>
 				</header>
-    		<section class="modal-card-body">
-    			
-	  		</section>
-    	
+				<div class="overlay-card-modal has-text-centered">
+			    	<div class="circular-event">
+			    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
+			    	</div>
+			    </div>
+    			<section class="modal-card-body">
+	    			<div class="container modal-show" id="info_div">
+				      	<div class="card">
+							<header class="card-header has-background-light">
+							    <p class="card-header-title">
+							    Information
+							    </p>
+						  	</header>
+						  	<div class="card-content show-modal">
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									    	<p>Organizer</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.company_name}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									    	<p>Description</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.description}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									    	<p>Objective</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.objective}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									    	<p>Location</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.location}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<p>{% if event.status!='A' %}
+									    	Target Date
+									    	{% else %}
+									    	Date
+									  		{% endif %}</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.event_date.strftime('%B %e, %Y')}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<p>Thrust</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>
+									        			{% if event.thrust==1 %}
+									        				Educational
+									        			{% elif event.thrust==2 %}
+									        				Environmental
+									        			{% elif event.thrust==3 %}
+									        				Health
+									        			{% elif event.thrust==4 %}
+									        				Livelihood
+									        			{% elif event.thrust==5 %}
+									        				Socio-Political
+									        			{% elif event.thrust==6 %}
+									        				Spiritual   
+									        			{% endif %}
+									        		</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							</div>
+						</div>
+				    </div>
+		  		</section>
+	    	
     		<footer class="modal-card-foot">
 
+<<<<<<< HEAD
     			<a href="{{url_for('communities.event_participants', id = events.id )}}">
     				<button class="button"><i class="fas fa-users"></i> &nbsp; Participants</button>
     			</a>
 
+=======
+>>>>>>> a2a19d93101048325852302ba8179177e01b5280
     		</footer>
   		</div>
 	</div>

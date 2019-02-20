@@ -20,6 +20,11 @@ class ProposalForm(FlaskForm):
     programme = FileField('Programme', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
     submit = SubmitField('Submit')
 
+class AttachLetterForm(FlaskForm):
+    attach_letter = FileField('Attach Letter', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
+    event_id = StringField('Event ID', validators=[DataRequired()])
+    submit = SubmitField('Attach Letter')
+
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name')
     middlename = StringField('Middle Name')
@@ -54,3 +59,9 @@ class DonationForm(FlaskForm):
     amount = StringField('Amount', validators=[DataRequired()])
     trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     submit = SubmitField('Donate')
+
+class ReferralForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email_address = StringField('Email Address', validators=[DataRequired()])
+    type = StringField('Type', validators=[DataRequired()])
+    submit = SubmitField('Submit')

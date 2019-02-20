@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
 from blueprints.registered.forms import *
-from data_access.models import donation, user_account, user_information
+from data_access.models import donation, user_account, user_information, event_information, event_attachment, donation
 from data_access.queries import user_views, linkage_views, event_views
 from datetime import datetime
 
@@ -37,7 +37,9 @@ def index():
 @login_required
 def events():
 
-	return render_template('/registered/events/index.html')
+	events = event_views.show_list('all', ' ')
+	
+	return render_template('/registered/events/index.html', events=events) 
 
 @registered.route('/registered/events/create')
 @login_required
@@ -49,7 +51,9 @@ def events_create():
 @login_required
 def linkages():
 
-	return render_template('/registered/linkages/index.html')
+	linkages = linkage_views.show_list('A', 3, ' ')
+
+	return render_template('/registered/linkages/index.html', linkages=linkages)
 
 @registered.route('/registered/donate',methods=['GET', 'POST'])
 @login_required
