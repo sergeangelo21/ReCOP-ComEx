@@ -97,8 +97,10 @@
 
 		<div class="column">
 
-			<div class="columns is-multiline">
-				
+			<div class="columns padding-el is-multiline">
+				{% for event in events %}
+					{% include 'registered/events/_events.html' %}
+				{% endfor %}
 			</div>
 		</div>	
 	</div>
