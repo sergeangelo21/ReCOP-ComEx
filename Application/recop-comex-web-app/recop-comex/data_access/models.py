@@ -216,16 +216,26 @@ class inventory(db.Model):
 class inventory_type(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	name = db.Column(db.VARCHAR(20), nullable=False)	
+	name = db.Column(db.VARCHAR(20), nullable=False)
+	status = db.Column(db.CHAR(1), nullable=False)	
 
 	def add(value):
 
 		record = inventory_type(
 			id = value[0],
-			name = value[1])
+			name = value[1],
+			status = value[2])
 
 		db.session.add(record)
 		db.session.commit()
+
+	def duplicate(value):
+
+		record = inventory_type.query.filter(
+				inventory_type.name.like('%'+value+'%')
+				).first()
+
+		return record
 
 class proposal_tracker(db.Model):
 
