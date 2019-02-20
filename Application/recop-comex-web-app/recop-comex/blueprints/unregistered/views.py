@@ -33,6 +33,15 @@ def linkages():
 
 	return render_template('/unregistered/linkages/index.html', linkages=linkages)
 
+@unregistered.route('/linkages/referral')
+def referral():
+
+	form = Referral()
+
+	
+
+	return render_template('/unregistered/linkages/referral.html', linkages=linkages, form=form)
+
 @unregistered.route('/donate', methods=['GET', 'POST'])
 def donate():
 
