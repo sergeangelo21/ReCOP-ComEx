@@ -468,6 +468,12 @@ def feedbacks():
 
 	return render_template('/admin/feedbacks/index.html', title="Feedbacks | Admin")
 
+@admin.route('/admin/referral')
+@login_required
+def referral():
+
+	return render_template('/admin/referral/index.html', title="referral | Admin")
+
 @admin.route('/admin/profile/about/<user>')
 @login_required
 def profile_about(user):
