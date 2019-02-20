@@ -39,7 +39,7 @@ def events():
 
 	events = event_views.show_list('all', ' ')
 	
-	return render_template('/registered/events/index.html')
+	return render_template('/registered/events/index.html', events=events) 
 
 @registered.route('/registered/events/create')
 @login_required
@@ -53,7 +53,7 @@ def linkages():
 
 	linkages = linkage_views.show_list('A', 3, ' ')
 
-	return render_template('/registered/linkages/index.html')
+	return render_template('/registered/linkages/index.html', linkages=linkages)
 
 @registered.route('/registered/donate',methods=['GET', 'POST'])
 @login_required
