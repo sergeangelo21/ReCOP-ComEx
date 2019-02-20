@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.communities.forms import *
 from data_access.models import user_account, user_information, proposal_tracker, event_information, community
-from data_access.queries import user_views, linkage_views, community_views
+from data_access.queries import user_views, linkage_views, community_views, event_views
 
 from extensions import db, bcrypt
 import os
@@ -35,7 +35,7 @@ def index():
 @login_required
 def events():
 
-	events = event_information.query.all()
+	events = event_views.show_list('all', ' ')
 
 	return render_template('/communities/events/index.html', title="Communities", events=events)
 

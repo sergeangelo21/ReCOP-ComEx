@@ -37,7 +37,7 @@ def index():
 @login_required
 def events():
 
-	events = event_information.query.all()
+	events = event_views.show_list('all', ' ')
 
 	return render_template('/linkages/events/index.html', events=events)
 
