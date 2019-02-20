@@ -217,7 +217,7 @@ class event_participation(db.Model):
 
 		record = event_participation.query.filter(
 			and_(event_participation.event_id==value,
-			event_participation.participant_id!=current_user.info_id,
+			event_participation.is_target!='Y',
 			event_participation.status=='J')
 			).count()
 

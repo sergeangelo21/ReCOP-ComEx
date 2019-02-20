@@ -128,10 +128,21 @@
 							<div class="column">
 								<div class="field">
 							        <label class="label">Age Bracket</label>
-						            <div class="control is-grouped">
-						              	{{form.min_age(class_='input is-horizontal')}} to
-										{{form.max_age(class_='input is-horizontal')}}
-									</div>
+						            <div class="field is-horizontal">
+						            	<div class="field-body">
+						            		<div class="field">
+						            			<div class="control">
+									              	{{form.min_age(class_='input is-horizontal')}}
+												</div>
+						            		</div>
+						            		<label class="label">to &nbsp&nbsp</label>
+						            		<div class="field">
+						            			<div class="control">
+													{{form.max_age(class_='input is-horizontal')}}
+												</div>
+						            		</div>
+						            	</div>
+						            </div>
 						        </div>
 							</div>
 						</div>

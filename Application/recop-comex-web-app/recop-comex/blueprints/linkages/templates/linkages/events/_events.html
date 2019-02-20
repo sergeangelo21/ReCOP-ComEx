@@ -186,9 +186,6 @@
       		</section>
     	
     		<footer class="modal-card-foot buttons is-right">
-
-		    	<form action="" method="POST" enctype="multipart/form-data">
-		    		{{form.hidden_tag()}}
 	    			<div class="columns">
 	    				<div class="column">
 	    					<a href="{{url_for('linkages.event_letter', id = event.id, name = event.name)}}" target='_blank' class="level-item">
@@ -196,6 +193,8 @@
 							</a>
 	    				</div>
 	    				<div class="column">
+		    		<form action="" method="POST" enctype="multipart/form-data">
+		    		{{form.hidden_tag()}}
 						   <div class="control">
 								{{form.attach_letter(class_='input')}}
 

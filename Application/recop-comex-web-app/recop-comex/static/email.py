@@ -38,6 +38,8 @@ def send_email(parts):
                     name='Budget Plan'
                 elif attachment.type==2:
                     name='Programme'
+                elif attachment.type==3:
+                    name='Signed Request Letter'
 
                 msg.attach(name, mime[0], file.read())
 

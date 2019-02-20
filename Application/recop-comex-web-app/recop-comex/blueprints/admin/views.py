@@ -72,7 +72,7 @@ def events(status, search):
 def events_calendar():
 
 	events = event_views.show_list('S', ' ')
-
+	
 	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events)
 	
 @admin.route('/admin/events/show/id=<id>')

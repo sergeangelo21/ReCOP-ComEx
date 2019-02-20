@@ -339,7 +339,7 @@ class event_views():
 	def community_events(value):
 
 		record = event_participation.query.join(
-			event_information
+			event_information, user_information
 			).add_columns(
 			event_information.id,
 			event_information.organizer_id,
@@ -351,7 +351,8 @@ class event_views():
 			event_information.event_date,
 			event_information.thrust,
 			event_information.event_status,
-			event_participation.participant_id
+			event_participation.participant_id,
+			user_information.company_name
 			).filter(event_participation.participant_id==value, event_information.event_status=='S'
 			).all()
 

@@ -19,7 +19,7 @@ function add_comm(){
 		document.getElementById(selected).style.display=""
 	}
 	else{
-		div.innerHTML = div.innerHTML + "<span id="+ selected + " class='button' style='margin-top:1%; padding:1%'>"+ text + "&nbsp; <a class='button is-white is-small' name='"+selected+"'onclick='remove_comm(this.name)'><i class='fas fa-times'></i></a></span>"
+		div.innerHTML = div.innerHTML + "<span class='tag is-dark is-small' id="+ selected + ">"+ text + "&nbsp; <a name='"+selected+"'onclick='remove_comm(this.name)'><i class='fas fa-times'></i></a></span>"
 	}
 
 	comm.value = comm.value + selected + '|'

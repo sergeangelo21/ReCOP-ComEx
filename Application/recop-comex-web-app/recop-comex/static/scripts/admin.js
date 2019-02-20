@@ -1,3 +1,23 @@
+if(window.location.pathname=='/admin/events/calendar'){
+	var today = new Date()
+	var month = today.getMonth() + 1
+	var year = today.getFullYear()
+	var first_day = new Date(year + '-' + month + '-1')
+	var last_day = new Date(year, month , 0)
+	var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+	document.getElementById('month_year').innerHTML=months[month-1] + ' ' + year
+	var calendar = Calendar(first_day, last_day, month, year)
+	document.getElementById('calendar').appendChild(calendar)
+}
+
+if(window.location.pathname=='/admin/events/create'){
+	document.getElementById('thrust').options.item(0).selected="True"
+	document.getElementById('thrust').options.item(0).hidden="True"
+	document.getElementById('select_link').options.item(0).selected="True"
+	document.getElementById('select_link').options.item(0).hidden="True"
+	document.getElementById('target_link').value = ""
+}
+
 var f = []
 
 function check_pass()
@@ -51,6 +71,35 @@ function event_pages(value)
 
 }
 
+function prev_next(sender){
+
+	document.getElementById('calendar').innerHTML=""
+
+	if (sender=="prev") {
+		month = month - 1
+		if (month<1){
+			month = 12
+			year = year - 1
+		}
+	}
+
+	if (sender=="next"){
+		month = month + 1
+
+		if (month>12){
+		month = 1
+		year = year + 1
+		}
+	}
+
+	document.getElementById('month_year').innerHTML=months[month-1] + ' ' + year
+
+	var calendar = Calendar(first_day, last_day, month, year)
+
+	document.getElementById('calendar').appendChild(calendar)
+
+}
+
 function filter(value)
 {
 
@@ -98,6 +147,48 @@ function filter(value)
 			tbody[ctr2].style.display=""
 		}
 	}
+}
+
+function add_comm(){
+	div = document.getElementById('link_div')
+	input = document.getElementById('select_link');
+	comm = document.getElementById('target_link')
+	id = input.selectedIndex
+	selected = input.options.item(id).value
+	text = input.options[id].text
+	input.options.item(id).hidden=true
+	
+	if (document.getElementById(selected)){
+		document.getElementById(selected).style.display=""
+	}
+	else{
+		div.innerHTML = div.innerHTML + "<span class='tag is-dark is-small' id="+ selected + ">"+ text + "&nbsp; <a name='"+selected+"'onclick='remove_comm(this.name)'><i class='fas fa-times'></i></a></span>"
+	}
+
+	comm.value = comm.value + selected + '|'
+	input.selectedIndex=0
+}
+
+function remove_comm(value){
+
+	document.getElementById(value).style.display = "none"
+	control =  document.getElementById('select_link')
+
+	for (id=0; id<=control.options.length-1; id++){
+		if (control.options.item(id).value==value){
+			control.options.item(id).hidden=false
+		}
+		if (control.options.item(id).value=="Please Select Here"){
+			control.selectedIndex=id
+		}
+	}
+
+	selected = document.getElementById('target_link').value
+	str = '|' + value.toString() + '|'
+	removed = selected.replace(str, '')
+	document.getElementById('target_link').value = removed	
+	control.selectedIndex=0
+
 }
 
 function settingsVPACAD() {

@@ -21,7 +21,7 @@ class ProposalForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class AttachLetterForm(FlaskForm):
-    attach_letter = FileField('Attach Letter', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
+    attach_letter = FileField('Attach Letter', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     event_id = StringField('Event ID', validators=[DataRequired()])
     submit = SubmitField('Attach Letter')
 
