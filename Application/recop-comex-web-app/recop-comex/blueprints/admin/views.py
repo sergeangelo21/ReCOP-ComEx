@@ -393,7 +393,6 @@ def community_action(id):
 @login_required
 def donations():	
 
-
 	donation_raw=donation_views.show_list()
 
 	donations=[]
@@ -428,6 +427,12 @@ def donations():
 			donations.append([d.id,sponsee,sponsor,d.amount,type, d.date_given])
 
 	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations)
+
+@admin.route('/admin/donations/action/id=<id>')
+@login_required
+def donation_action(id):
+
+	return None
 
 @admin.route('/admin/inventory/filter_<search>')
 @login_required

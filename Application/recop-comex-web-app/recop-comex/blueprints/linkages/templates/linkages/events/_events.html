@@ -186,9 +186,27 @@
       		</section>
     	
     		<footer class="modal-card-foot buttons is-right">
-   				<a href="{{url_for('linkages.event_letter', id = event.id, name = event.name)}}" target='_blank' class="level-item">
-  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-download"></i></span>&nbsp Request Letter</button>
-				</a>
+
+		    	<form action="" method="POST" enctype="multipart/form-data">
+		    		{{form.hidden_tag()}}
+	    			<div class="columns">
+	    				<div class="column">
+	    					<a href="{{url_for('linkages.event_letter', id = event.id, name = event.name)}}" target='_blank' class="level-item">
+			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-download"></i></span>&nbsp Request Letter</button>
+							</a>
+	    				</div>
+	    				<div class="column">
+						   <div class="control">
+								{{form.attach_letter(class_='input')}}
+
+								{{form.event_id(hidden='True', value = event.id)}}
+							</div>
+	    				</div>
+	    				<div class="column">
+							  	{{form.submit(class_='button is-success')}}
+	    				</div>
+	    			</div>
+	    		</form>
     		</footer>
   		</div>
 	</div>

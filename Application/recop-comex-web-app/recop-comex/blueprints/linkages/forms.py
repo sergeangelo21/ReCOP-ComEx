@@ -20,6 +20,11 @@ class ProposalForm(FlaskForm):
     programme = FileField('Programme', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
     submit = SubmitField('Submit')
 
+class AttachLetterForm(FlaskForm):
+    attach_letter = FileField('Attach Letter', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
+    event_id = StringField('Event ID', validators=[DataRequired()])
+    submit = SubmitField('Attach Letter')
+
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name')
     middlename = StringField('Middle Name')

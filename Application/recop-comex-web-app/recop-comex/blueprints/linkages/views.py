@@ -33,13 +33,31 @@ def index():
 
 	return render_template('/linkages/index.html')
 
-@linkages.route('/linkages/events')
+@linkages.route('/linkages/events', methods=['GET','POST'])
 @login_required
 def events():
 
 	events = event_views.show_list('all', ' ')
 
-	return render_template('/linkages/events/index.html', events=events)
+	form = AttachLetterForm()
+
+	if form.validate_on_submit():
+
+		attach_letter = form.attach_letter.data
+		old, extension = os.path.splitext(attach_letter.filename)
+		filename = str(form.event_id.data)+extension
+		file_path = 'static/attachment/signed_letter/' + filename
+
+		value = [None,form.event_id.data,file_path,3]
+
+		event_attachment.add(value)
+		attach_letter.save(file_path)
+
+		flash('Letter successfully attached!', 'success')
+
+		return redirect(url_for('linkages.events'))
+
+	return render_template('/linkages/events/index.html', events=events, form=form)
 
 @linkages.route('/linkages/events/create', methods=['GET','POST'])
 @login_required
