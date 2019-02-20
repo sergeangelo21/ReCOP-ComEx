@@ -138,6 +138,14 @@ def communities():
 
 	return render_template('/linkages/communities/index.html')
 
+@linkages.route('/linkages/communities/referral')
+@login_required
+def referral():
+
+	form = ReferralForm()
+
+	return render_template('/linkages/communities/referral.html', form=form)
+
 @linkages.route('/linkages/donate')
 @login_required
 def donate():

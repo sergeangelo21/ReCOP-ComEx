@@ -455,18 +455,26 @@ def inventory_add_type():
 
 	if form.validate_on_submit():
 
-		value = [None, form.name.data]
+		value = [None, form.name.data, 'A']
 
 		inventory_type.add(value)
 
 		flash('Inventory type added!', 'success')
 		return redirect(url_for('admin.inventory', search=' '))
 
+	return render_template('/admin/inventory/add_type.html', title="Inventory | Admin", form=form)
+
 @admin.route('/admin/feedbacks')
 @login_required
 def feedbacks():
 
 	return render_template('/admin/feedbacks/index.html', title="Feedbacks | Admin")
+
+@admin.route('/admin/referral')
+@login_required
+def referral():
+
+	return render_template('/admin/referral/index.html', title="referral | Admin")
 
 @admin.route('/admin/profile/about/<user>')
 @login_required

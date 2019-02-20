@@ -39,6 +39,15 @@ def events():
 
 	return render_template('/communities/events/index.html', title="Communities", events=events)
 
+@communities.route('/communities/event/<id>/participants')
+@login_required
+def event_participants(id):
+
+	events = event_information.query.all()
+
+	return render_template('/communities/events/index.html', title="Communities", events=events)
+
+
 @communities.route('/communities/linkages/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def linkages(search):
@@ -97,7 +106,7 @@ def members_add():
 		user_id = user_information.reserve_id()
 
 		value = [
-			None, user_id, current_user.info_id, form.occupation.data, form.income.data, form.religion.data, "A"
+			None, user_id, current_user.info_==id, form.occupation.data, form.income.data, form.religion.data, "A"
 			]
 
 		community.add(value)
