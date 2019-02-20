@@ -1,11 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.communities.forms import *
-<<<<<<< HEAD
 from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation
-=======
-from data_access.models import user_account, user_information, proposal_tracker, event_information, community
->>>>>>> a2a19d93101048325852302ba8179177e01b5280
 from data_access.queries import user_views, linkage_views, community_views, event_views
 
 from extensions import db, bcrypt
@@ -41,11 +37,7 @@ def index():
 @login_required
 def events():
 
-<<<<<<< HEAD
 	events = event_views.community_events(current_user.info_id)
-=======
-	events = event_views.show_list('all', ' ')
->>>>>>> a2a19d93101048325852302ba8179177e01b5280
 
 	return render_template('/communities/events/index.html', title="Communities", events=events)
 

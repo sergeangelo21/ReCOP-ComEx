@@ -31,10 +31,12 @@
 				</div>
 
 	      		<div class="title is-5">{{ event.name }}</div>
-	      		<p class="subtitle is-6">{{ event.event_date }}</p>
-
-	      		<a class="button event-btn" onclick="show_event('{{event.id}}')">More Details</a>	
-
+	      		<p class="subtitle is-6">
+	      			<i class="fas fa-calendar"></i>&nbsp; {{event.event_date.strftime('%B %e, %Y')}}</br>
+					<i class="fas fa-map-marker-alt"></i>&nbsp; {{ event.location }}
+				</p>
+	      		
+	      		<div class="button event-btn" onclick="show_event('{{event.id}}')">More Details</div>
 			</div>
 		</div>
 	</div>
@@ -169,13 +171,10 @@
 	    	
     		<footer class="modal-card-foot">
 
-<<<<<<< HEAD
-    			<a href="{{url_for('communities.event_participants', id = events.id )}}">
+    			<a href="{{url_for('communities.event_participants', id = event.id )}}">
     				<button class="button"><i class="fas fa-users"></i> &nbsp; Participants</button>
     			</a>
 
-=======
->>>>>>> a2a19d93101048325852302ba8179177e01b5280
     		</footer>
   		</div>
 	</div>
