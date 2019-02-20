@@ -56,3 +56,9 @@ class PasswordUpdateForm(FlaskForm):
     oldpassword = PasswordField('Old Password')
     password = PasswordField('Password')
     submit = SubmitField('Update')
+
+class ReferralForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email_address = StringField('Email Address', validators=[DataRequired()])
+    type = StringField('Type', validators=[DataRequired()])
+    submit = SubmitField('Submit')

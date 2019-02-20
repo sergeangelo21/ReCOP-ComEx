@@ -63,6 +63,8 @@ def linkages(search):
 
 	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, search=search)
 
+
+
 @communities.route('/communities/linkages/show/id=<id>')
 @login_required
 def linkage_show(id):
@@ -70,6 +72,17 @@ def linkage_show(id):
 	linkage, mem_since = linkage_views.show_info(id)
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
+
+@communities.route('/communities/linkages/referral_<search>', methods=['GET', 'POST'])
+@login_required
+def linkages_referral(search):
+
+
+	form = ReferralForm()
+
+	
+
+	return render_template('/communities/linkages/referral.html', title="Referral", form=form, linkages=linkages, search=search)
 
 @communities.route('/communities/members/filter_<search>', methods=['GET', 'POST'])
 @login_required
