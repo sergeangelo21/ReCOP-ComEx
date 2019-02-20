@@ -204,6 +204,36 @@ class event_participation(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
+	def show_status(value):
+
+		record = event_participation.query.filter(
+			and_(event_participation.event_id==value[0],
+			event_participation.participant_id==value[1])
+			).first()
+
+		return record
+
+	def show_joined(value):
+
+		record = event_participation.query.filter(
+			and_(event_participation.event_id==value,
+			event_participation.participant_id!=current_user.info_id,
+			event_participation.status=='J')
+			).count()
+
+		return record
+
+	def update(value):
+
+		record = event_participation.query.filter(
+			event_participation.event_id==value[0], 
+			event_participation.participant_id==value[1]
+			).first()
+
+		record.status=value[2]
+
+		db.session.commit()
+
 class inventory(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -292,6 +322,21 @@ class referral(db.Model):
 	email_address = db.Column(db.VARCHAR(30),nullable=False)
 	type = db.Column(db.INT, nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
+
+	def add(value):
+
+		record = user_account(
+			id=value[0], 
+			referrer_id=value[1],
+			name=value[2],
+			email_address=value[3],
+			type=value[4],
+			status=value[5],
+			)
+			 
+		db.session.add(record)
+		db.session.commit()
+
 
 class user_account(db.Model, UserMixin):
 

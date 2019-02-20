@@ -1,10 +1,12 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.communities.forms import *
-from data_access.models import user_account, user_information, proposal_tracker, event_information, community
-from data_access.queries import user_views, linkage_views, community_views
+from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation
+from data_access.queries import user_views, linkage_views, community_views, event_views
 
 from extensions import db, bcrypt
+from datetime import datetime
+
 import os
 
 communities = Blueprint('communities', __name__, template_folder="templates")
@@ -35,18 +37,50 @@ def index():
 @login_required
 def events():
 
-	events = event_information.query.all()
+	events = event_views.community_events(current_user.info_id)
 
 	return render_template('/communities/events/index.html', title="Communities", events=events)
 
-@communities.route('/communities/event/<id>/participants')
+@communities.route('/communities/event_<id>/participants')
 @login_required
 def event_participants(id):
 
-	events = event_information.query.all()
+	event = event_views.show_info(id)
+	joined = event_participation.show_joined(id)
+	participants = community_views.event_participants(id)
 
-	return render_template('/communities/events/index.html', title="Communities", events=events)
+	form = SearchForm()
 
+	if form.validate_on_submit():
+
+		return redirect(url_for('communities.event_participants', id=id))
+
+	return render_template('/communities/events/add_participants.html', title="Communities", participants=participants, event=event, joined=joined, form=form)
+
+@communities.route('/communities/event_<id>/<action>/<participant>')
+@login_required
+def participant_action(id, action, participant):
+
+	if action=='add':
+
+		record = event_participation.show_status([id, participant])
+
+		if record is None:
+			value = [None, id, participant, 'N']
+			event_participation.add(value)
+		else:
+			value = [id, participant, 'J']
+			event_participation.update(value)
+
+		flash('Member added to event!', 'success')
+
+	elif action=='remove':
+
+		value = [id, participant, 'R']
+		event_participation.update(value)
+		flash('Member removed from event!', 'success')
+
+	return redirect(url_for('communities.event_participants',id=id))
 
 @communities.route('/communities/linkages/filter_<search>', methods=['GET', 'POST'])
 @login_required
@@ -106,13 +140,13 @@ def members_add():
 		user_id = user_information.reserve_id()
 
 		value = [
-			None, user_id, current_user.info_==id, form.occupation.data, form.income.data, form.religion.data, "A"
+			None, user_id, current_user.info_id, form.occupation.data, form.income.data, form.religion.data, "A"
 			]
 
 		community.add(value)
 
 		flash('Member added!', 'success')
-		return redirect(url_for('communities.members_add'))
+		return redirect(url_for('communities.members', search=' '))
 
 	return render_template('/communities/members/add.html', title="Communities", form=form)
 

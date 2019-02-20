@@ -1,0 +1,38 @@
+								<tbody>
+									<tr class="table-row">
+									    <td>{{ participant.name }}</td>
+									    <td>{{ participant.birthday.strftime('%B %e, %Y') }}</td>
+									    <td>{{ participant.occupation }}</td>
+									    <td>{{ participant.religion }}</td>
+										<td>
+											<a class="button is-warning tooltip" data-tooltip="View" href="">
+												<span class="icon">
+													<i class="fa fa-eye"></i>
+												</span>
+											</a>
+											{% if joined < event.participant_no %}
+												{% if participant.status=='A' or participant.status=='R' %}
+													<a class="button is-success tooltip" href="{{url_for('communities.participant_action', id = event.id, action='add', participant=participant.id)}}" data-tooltip="Add" href="">
+														<span class="icon">
+															<i class="fa fa-plus"></i>
+														</span>
+													</a>
+													{% elif participant.status=='J' %}
+													<a class="button is-danger tooltip" href="{{url_for('communities.participant_action', id = event.id, action='remove', participant=participant.id)}}" data-tooltip="Remove" href="">
+														<span class="icon">
+															<i class="fa fa-times"></i>
+														</span>
+													</a>
+													{% endif %}
+											{% else %}
+											 		{% if participant.status=='J' %}
+													<a class="button is-danger tooltip" href="{{url_for('communities.participant_action', id = event.id, action='remove', participant=participant.id)}}" data-tooltip="Remove" href="">
+														<span class="icon">
+															<i class="fa fa-times"></i>
+														</span>
+													</a>
+											 		{% endif %}
+											{% endif %}
+										</td>
+									</tr>	
+								</tbody>

@@ -305,6 +305,9 @@ class event_views():
 			event_information.event_date,
 			event_information.thrust,
 			event_information.event_status,
+			event_information.participant_no,
+			event_information.max_age,
+			event_information.min_age,
 			proposal_tracker.proposed_on,
 			proposal_tracker.recop_accepted,
 			proposal_tracker.fmi_signed,
@@ -333,6 +336,27 @@ class event_views():
 
 		return record
 
+	def community_events(value):
+
+		record = event_participation.query.join(
+			event_information
+			).add_columns(
+			event_information.id,
+			event_information.organizer_id,
+			event_information.name,
+			event_information.description,
+			event_information.objective,
+			event_information.budget,
+			event_information.location,
+			event_information.event_date,
+			event_information.thrust,
+			event_information.event_status,
+			event_participation.participant_id
+			).filter(event_participation.participant_id==value, event_information.event_status=='S'
+			).all()
+
+		return record
+
 class community_views():
 
 	def members_list(search):
@@ -349,6 +373,7 @@ class community_views():
 				user_information.last_name),'').label('member'),
 				user_information.address,
 				community.status,
+				user_information.id
 				).filter(community.community_id==current_user.info_id
 				).order_by(user_information.id.asc()
 				).all()
@@ -364,8 +389,45 @@ class community_views():
 				user_information.last_name),'').label('member'),
 				user_information.address,
 				community.status,
+				user_information.id
 				).filter(community.community_id==current_user.info_id
 				).all()			
+
+		return record
+
+	def event_participants(value):
+
+		sub1 = community.query.join(
+				user_information,
+				community.member_id==user_information.id
+				).join(event_participation
+				).add_columns(
+				(user_information.first_name + ' ' +
+				func.left(user_information.middle_name,1) + '. ' +
+				user_information.last_name).label('name'),
+				user_information.id,
+				event_participation.status.label('status'),
+				func.IF(community.occupation==None,"Unemployed",community.occupation).label('occupation'),
+				community.religion,
+				user_information.birthday
+				).filter(community.community_id==current_user.info_id, event_participation.event_id==value
+				)
+
+		sub2 = community.query.join(
+				user_information,
+				community.member_id==user_information.id
+				).add_columns(
+				(user_information.first_name + ' ' +
+				func.left(user_information.middle_name,1) + '. ' +
+				user_information.last_name).label('name'),
+				user_information.id,
+				community.status.label('status'),
+				func.IF(community.occupation==None,"Unemployed",community.occupation).label('occupation'),
+				community.religion,
+				user_information.birthday
+				).filter(community.community_id==current_user.info_id, community.status=='A')
+
+		record = sub1.union(sub2).group_by(user_information.id).all()
 
 		return record
 

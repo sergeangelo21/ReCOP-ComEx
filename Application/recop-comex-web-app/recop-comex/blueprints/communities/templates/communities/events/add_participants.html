@@ -7,7 +7,8 @@
 					<div class="column is-3">
 						<article class="media">
 						  	<figure class="media-left"> 
-						  		<a class="button add" href="{{url_for('communities.members_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+						  		<p>{{event.name}}</p>
+						  		<p>Slots: {{joined}}/{{event.participant_no}}</p>
 						  	</figure>
 						</article>
 					</div>
@@ -35,36 +36,31 @@
 					<div class="card list">
 						<div class="card-header">
 							<p class="card-header-title">
-							{% if search!=' ' %}
-							You searched for '{{search}}'&nbsp; 
-							<a href="{{url_for('communities.members', search=' ')}}"><span class="fas fa-times"></span></a>&nbsp;in
-							{% endif %}
-							Members
+							Qualified Members
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
-									Total: {{((members|length)/2)|int}}
+									Total: {{participants|length}}
 								</p>
 							</div>
 						</div>
 						<div class="card-content">
 							<div class="table">
 								<table class="table is-striped is-fullwidth">
-								{% if members %}
+								{% if participants %}
 								<thead>
 									<tr>
 									    <th class="newlist">Name</th>
-									    <th class="newlist">Address</th>
-									    <th class="newlist">Status</th>
+									    <th class="newlist">Birthday</th>
+									    <th class="newlist">Occupation</th>
+									    <th class="newlist">Religion</th>
 									    <th class="newlist hidedesktop">Actions</th>
 									 </tr>
 									
 								</thead>
 
-									{% for member in members %}
-										{% if member.member %}
-											{% include 'communities/members/_members.html' %}
-										{% endif %}
+									{% for participant in participants %}
+											{% include 'communities/events/_participants.html' %}
 									{% endfor %}
 
 								{% else %}
