@@ -2,6 +2,7 @@ import pdfkit
 
 class Config(object):
 	
+	CSRF_ENABLED = True
 	SECRET_KEY = 'together_we_can'
 	SECURITY_PASSWORD_SALT = "yes_we_can"
 

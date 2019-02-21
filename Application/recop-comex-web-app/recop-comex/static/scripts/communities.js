@@ -26,7 +26,7 @@ function employed(value)
         document.getElementById('occupation_field').style.display="none"
         document.getElementById('income_field').style.display="none"
         occupation.value = null
-        income.value = 0
+        income.value = 0.00
 
     }
 
@@ -34,8 +34,8 @@ function employed(value)
     {
         document.getElementById('occupation_field').style.display="block"
         document.getElementById('income_field').style.display="block"
-        occupation.value = ''
-        income.value = ''
+        occupation.value = null
+        income.value = 0.00
     }
 }
 

@@ -152,8 +152,13 @@ def members_add():
 
 		user_id = user_information.reserve_id()
 
+		if form.occupation.data=='':
+			occupation=None
+		else:
+			occupation=form.occupation.data
+
 		value = [
-			None, user_id, current_user.info_id, form.occupation.data, form.income.data, form.religion.data, "A"
+			None, user_id, current_user.info_id, occupation, form.income.data, form.religion.data, "A"
 			]
 
 		community.add(value)
