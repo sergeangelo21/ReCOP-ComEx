@@ -6,6 +6,7 @@ audit_trail.type
 4 - Disable Account
 5 - Approved Event
 6 - Declined Event
+7 - Added inventory type
 
 ++++++++++++++++++++++++++++++++++++++=
 

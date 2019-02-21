@@ -72,7 +72,8 @@ class linkage_views():
 			record = user_account.query.join(
 				user_information
 				).add_columns(
-				user_information.id,
+				user_account.id,
+				user_account.info_id,
 				user_information.company_name,
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
@@ -83,13 +84,14 @@ class linkage_views():
 				user_information.mobile_number,
 				user_account.status
 				).filter(user_account.type==type
-				).order_by(user_information.id.asc()
+				).order_by(user_account.info_id.asc()
 				).all()
 		elif value=='all' and search!=' ' :
 			record = user_account.query.join(
 				user_information
 				).add_columns(
-				user_information.id,
+				user_account.id,
+				user_account.info_id,
 				user_information.company_name,
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
@@ -98,19 +100,20 @@ class linkage_views():
 				user_information.address,
 				user_information.telephone,
 				user_information.mobile_number,
-				user_account.status,
+				user_account.status
 				).filter(and_(user_account.type==type,
 				or_(user_information.company_name.like('%'+search+'%'),
 				user_information.address.like('%'+search+'%'),
 				user_information.first_name.like('%'+search+'%'),
 				user_information.last_name.like('%'+search+'%')))
-				).order_by(user_information.id.asc()
+				).order_by(user_account.info_id.asc()
 				).all()
 		elif search!=' ':
 			record = user_account.query.join(
 				user_information
 				).add_columns(
-				user_information.id,
+				user_account.id,
+				user_account.info_id,
 				user_information.company_name,
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
@@ -125,13 +128,14 @@ class linkage_views():
 				user_information.address.like('%'+search+'%'),
 				user_information.first_name.like('%'+search+'%'),
 				user_information.last_name.like('%'+search+'%')))
-				).order_by(user_information.id.asc()
+				).order_by(user_account.info_id.asc()
 				).all()	
 		else:
 			record = user_account.query.join(
 				user_information
 				).add_columns(
-				user_information.id,
+				user_account.id,
+				user_account.info_id,
 				user_information.company_name,
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
@@ -144,6 +148,7 @@ class linkage_views():
 				user_account.status,
 				).filter(and_(user_account.type==type, 
 				user_account.status==value)
+				).order_by(user_account.info_id.asc()
 				).all()			
 
 		return record
@@ -153,7 +158,7 @@ class linkage_views():
 		record = user_account.query.join(
 			user_information
 			).add_columns(
-			user_information.id,
+			user_account.id,
 			user_information.first_name,
 			user_information.middle_name,
 			user_information.last_name,
@@ -167,12 +172,12 @@ class linkage_views():
 			user_account.email_address,
 			user_account.last_active,
 			user_account.status,
-			).filter(user_account.id==value
+			).filter(user_account.info_id==value[0]
 			).first()
 
 		membership = audit_trail.query.filter(
-			and_(audit_trail.affected_id==value, 
-				audit_trail.target=='partner', 
+			and_(audit_trail.affected_id==record.id, 
+				audit_trail.target==value[1], 
 				audit_trail.type==2)).first()
 
 

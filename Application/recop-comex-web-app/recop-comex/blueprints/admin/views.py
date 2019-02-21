@@ -248,7 +248,7 @@ def linkages_create():
 @login_required
 def linkage_show(id):
 
-	linkage, mem_since = linkage_views.show_info(id)
+	linkage, mem_since = linkage_views.show_info([id,'linkage'])
 
 	return render_template('/admin/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage, mem_since=mem_since)
 
@@ -264,7 +264,7 @@ def linkage_action(id):
 		status = "D"
 		flash(linkage.company_name.title() + " was disabled!","success")
 
-		value = [None,current_user.id,id,'linkage', 4]
+		value = [None,current_user.id,user.id,'linkage', 4]
 		audit_trail.add(value)
 	
 	elif user.status== "D":
@@ -272,36 +272,36 @@ def linkage_action(id):
 		status = "A"
 		flash(linkage.company_name.title() + " was activated! ", "success")
 
-		value = [None,current_user.id,id,'linkage', 3]
-		audit_trail.add(value)
-
-	elif linkage.address == "San Sebastian College Recoletos de Cavite":
-
-		status = "A"
-		flash(linkage.company_name.title() + " was activated! ", "success")
-
-		value = [None,current_user.id,id,'linkage', 3]
+		value = [None,current_user.id,user.id,'linkage', 3]
 		audit_trail.add(value)
 
 	else:
+
+		if linkage.address == "San Sebastian College Recoletos de Cavite":
+
+			status = "A"
+			flash(linkage.company_name.title() + " was activated! ", "success")
+
+		else:
+			value = [None,current_user.id,user.id,'linkage', 2]
+			audit_trail.add(value)	
+			token = generate(user.info_id)
+			link = url_for('unregistered.confirm_linkage', token=token , _external = True)	
+			html = render_template('admin/email/moa.html', user = user.username, link = link)
+			subject = "MEMORANDUM OF AGREEMENT"
+
+			email_parts = [html, subject, current_user.email_address, user.email_address, None]
+
+			send_email(email_parts)
 			
-		token = generate(user.id)
-		link = url_for('unregistered.confirm_linkage', token=token , _external = True)	
-		html = render_template('admin/email/moa.html', user = user.username, link = link)
-		subject = "MEMORANDUM OF AGREEMENT"
+			flash('MOA was sent to ' + linkage.company_name.title(), 'success')
 
-		email_parts = [html, subject, current_user.email_address, user.email_address, None]
-
-		send_email(email_parts)
+			status = "P"
 			
-		flash('MOA was sent to ' + linkage.company_name.title(), 'success')
+			value = [None,current_user.id,user.id,'linkage', 1]
+			audit_trail.add(value)
 
-		status = "P"
-			
-		value = [None,current_user.id,id,'linkage', 1]
-		audit_trail.add(value)
-
-	user_account.update_status(id, status)
+	user_account.update_status(user.id, status)
 
 	return redirect(url_for('admin.linkages', status='all', search=' '))
 
@@ -340,7 +340,7 @@ def communities_create():
 @login_required
 def community_show(id):
 
-	community, mem_since = linkage_views.show_info(id)
+	community, mem_since = linkage_views.show_info([id,'community'])
 
 	return render_template('/admin/communities/show.html', title= community.company_name.title() + " | Admin", community=community, mem_since=mem_since)
 
@@ -356,7 +356,7 @@ def community_action(id):
 		status = "D"
 		flash(community.company_name.title() + " was disabled!","success")
 
-		value = [None,current_user.id,id,'community', 4]
+		value = [None,current_user.id,user.id,'community', 4]
 		audit_trail.add(value)
 	
 	elif user.status== "D":
@@ -364,12 +364,12 @@ def community_action(id):
 		status = "A"
 		flash(community.company_name.title() + " was activated! ", "success")
 
-		value = [None,current_user.id,id,'community', 3]
+		value = [None,current_user.id,user.id,'community', 3]
 		audit_trail.add(value)
 
 	else:
 			
-		token = generate(user.id)
+		token = generate(user.info_id)
 		link = url_for('unregistered.confirm_linkage', token=token , _external = True)	
 		html = render_template('admin/email/moa.html', user = user.username, link = link)
 		subject = "MEMORANDUM OF AGREEMENT"
@@ -382,10 +382,10 @@ def community_action(id):
 
 		status = "P"
 			
-		value = [None,current_user.id,id,'community', 1]
+		value = [None,current_user.id,user.id,'community', 1]
 		audit_trail.add(value)
 
-	user_account.update_status(id, status)
+	user_account.update_status(user.id, status)
 
 	return redirect(url_for('admin.communities', status='all', search=' '))
 
@@ -463,6 +463,10 @@ def inventory_add_type():
 		value = [None, form.name.data, 'A']
 
 		inventory_type.add(value)
+		id = inventory_type.last_added()
+
+		value = [None,current_user.id,id,'inventory', 1]
+		audit_trail.add(value)
 
 		flash('Inventory type added!', 'success')
 		return redirect(url_for('admin.inventory', search=' '))

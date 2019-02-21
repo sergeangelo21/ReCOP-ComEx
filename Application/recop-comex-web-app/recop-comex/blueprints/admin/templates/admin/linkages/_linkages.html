@@ -19,26 +19,26 @@
 										</td>
 										{% endif %}
 										<td>
-											<a class="button is-warning tooltip" data-tooltip="View" href="{{url_for('admin.linkage_show', id=linkage.id)}}">
+											<a class="button is-warning tooltip" data-tooltip="View" href="{{url_for('admin.linkage_show', id=linkage.info_id)}}">
 												<span class="icon">
 													<i class="fa fa-eye"></i>
 												</span>
 											</a>
 											{% if linkage.status!='P'%}
 												{% if linkage.status=='N' and linkage.address=='San Sebastian College Recoletos de Cavite'%}
-												<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('admin.linkage_action', id = linkage.id)}}")'>
+												<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('admin.linkage_action', id = linkage.info_id)}}")'>
 													<span class="icon">
 														<i class="fas fa-user-check"></i>
 													</span>
 												</a>
 												{% elif linkage.status=='N' %}
-												<a class="button is-info tooltip" data-tooltip="Send MOA" href="{{url_for('admin.linkage_action', id = linkage.id)}}")'>
+												<a class="button is-info tooltip" data-tooltip="Send MOA" href="{{url_for('admin.linkage_action', id = linkage.info_id)}}")'>
 													<span class="icon">
 														<i class="fas fa-location-arrow"></i>
 													</span>
 												</a>
 												{% elif linkage.status=='A' %}
-												<a class="button is-danger tooltip" data-tooltip="Disable" href="{{url_for('admin.linkage_action', id = linkage.id)}}")'>
+												<a class="button is-danger tooltip" data-tooltip="Disable" href="{{url_for('admin.linkage_action', id = linkage.info_id)}}")'>
 													<span class="icon">
 														<i class="fas fa-user-times"></i>
 													</span>

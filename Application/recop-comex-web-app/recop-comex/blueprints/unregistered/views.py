@@ -243,11 +243,16 @@ def confirm_linkage(token):
 
 	user = user_account.retrieve_user(id)
 
+	if user.type==3:
+		target='linkage'
+	elif user.type==4:
+		target='community'
+
 	if id and user.status=='P':
 		
-		user_account.update_status(id, status)
+		user_account.update_status(user.id, status)
 
-		value = [None,id,id,'partner',2]
+		value = [None,user.id,user.id,target,2]
 		audit_trail.add(value)
 
 		flash("MOA acknowledged! Your account is now active.", 'success')

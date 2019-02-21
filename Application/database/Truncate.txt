@@ -1,0 +1,18 @@
+TRUNCATE table `audit_trail`;
+TRUNCATE table `community`;
+TRUNCATE table `donation`;
+TRUNCATE table `event_attachment`;
+TRUNCATE table `event_information`;
+TRUNCATE table `event_participation`;
+TRUNCATE table `inventory`;
+TRUNCATE table `inventory_type`;
+TRUNCATE table `proposal_tracker`;
+TRUNCATE table `referral`;
+
+DELETE from `user_information` where id>4;
+
+alter table `user_information` AUTO_INCREMENT=5;
+
+DELETE from `user_account` where id>4;
+
+alter table `user_account` AUTO_INCREMENT=5;

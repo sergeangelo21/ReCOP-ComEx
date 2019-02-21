@@ -178,7 +178,7 @@ def members_add():
 		community.add(value)
 
 		flash('Member added!', 'success')
-		return redirect(url_for('communities.members_add'))
+		return redirect(url_for('communities.members', search=' '))
 
 	return render_template('/communities/members/add.html', title="Communities", form=form)
 

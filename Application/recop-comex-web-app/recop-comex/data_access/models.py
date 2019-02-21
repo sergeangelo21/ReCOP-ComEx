@@ -85,8 +85,6 @@ class donation(db.Model):
 
 		record = donation.query.count()
 
-		record+=1
-
 		return record
 
 
@@ -259,6 +257,14 @@ class inventory_type(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
+	def last_added():
+
+		record = inventory_type.query.count()
+
+		record+=1
+
+		return record
+
 	def duplicate(value):
 
 		record = inventory_type.query.filter(
@@ -369,7 +375,7 @@ class user_account(db.Model, UserMixin):
 
 	def retrieve_user(value):
 
-		record = user_account.query.filter(user_account.id==value).first()
+		record = user_account.query.filter(user_account.info_id==value).first()
 
 		return record
 

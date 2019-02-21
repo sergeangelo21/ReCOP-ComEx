@@ -19,26 +19,26 @@
 										</td>
 										{% endif %}
 										<td>
-											<a class="button is-warning tooltip" data-tooltip="View" href="{{url_for('admin.community_show', id=community.id)}}">
+											<a class="button is-warning tooltip" data-tooltip="View" href="{{url_for('admin.community_show', id=community.info_id)}}">
 												<span class="icon">
 													<i class="fa fa-eye"></i>
 												</span>
 											</a>
 											{% if community.status!='P'%}
 												{% if community.status=='N' %}
-												<a class="button is-info tooltip" data-tooltip="Send MOA" href="{{url_for('admin.community_action', id = community.id)}}")'>
+												<a class="button is-info tooltip" data-tooltip="Send MOA" href="{{url_for('admin.community_action', id = community.info_id)}}")'>
 													<span class="icon">
 														<i class="fas fa-location-arrow"></i>
 													</span>
 												</a>
 												{% elif community.status=='A' %}
-												<a class="button is-danger tooltip" data-tooltip="Disable" href="{{url_for('admin.community_action', id = community.id)}}")'>
+												<a class="button is-danger tooltip" data-tooltip="Disable" href="{{url_for('admin.community_action', id = community.info_id)}}")'>
 													<span class="icon">
 														<i class="fas fa-user-times"></i>
 													</span>
 												</a>
 												{% else %}
-												<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('admin.community_action', id = community.id)}}")'>
+												<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('admin.community_action', id = community.info_id)}}")'>
 													<span class="icon">
 														<i class="fas fa-user-check"></i>
 													</span>
