@@ -2,13 +2,12 @@
 
 {% block content %}
 	<div class="notification gold">
-			<figure class="media-left"> 
-                <a href="{{url_for('communities.linkage_referral')}}">
-              </span>
-                <span>Do you know someone can help us?</span>
-                </a>
-            </figure>
 		<div class="columns is-centered">
+			<div class="column">
+	        	<a href="{{url_for('unregistered.referral')}}" class="">
+	            	<span>Do you know someone can help us?</span>
+	          	</a>
+        	</div>
 			<div class="column search-box">
 				<div class="field is-horizontal is-pulled-right has-addons has-addons-centered">
 					<form action="" method="POST">
@@ -85,9 +84,9 @@
     		</div>
     	</div>
 
-		<div class="column">
-			<div class="card list">
-				<div class="card-header">
+		
+    	<div class="column">
+    		<div class="card-header">
 					<p class="card-header-title">
 					{% if search!=' ' %}
 					You searched for '{{search}}'&nbsp;
@@ -101,39 +100,24 @@
 						</p>
 					</div>
 				</div>
-				<div class="card-content">
-					<div class="table">
-						<table class="table is-striped is-fullwidth">
-						{% if linkages %}
-						<thead>
-							<tr>
-							    <th class="newlist">Company Name</th>
-							    <th class="newlist">Coordinator</th>
-							    <th class="newlist">Address</th>
-							    <th class="newlist hidedesktop">Actions</th>
-							 </tr>
-							
-						</thead>
+	        <div class="columns padding-el is-multiline">
+	          {% if linkages %}
+					{% for linkage in linkages %}
+						{% include 'communities/linkages/_linkages.html' %}
+					{% endfor %}
 
-							{% for linkage in linkages %}
-								{% include 'communities/linkages/_linkages.html' %}
-							{% endfor %}
+				{% else %}
 
-						{% else %}
+				<tbody>
 
-						<tbody>
+					<tr class = "table-row">
+						<td class = "has-text-centered">---Nothing to show---</td>
+				 	</tr>
+					
+				</tbody>
 
-							<tr class = "table-row">
-								<td class = "has-text-centered">---Nothing to show---</td>
-						 	</tr>
-							
-						</tbody>
-
-						{% endif %}
-					</table>
-					</div>
-				</div>
-			</div>
-		</div>
+				{% endif %}
+	        </div>
+	      </div> 
 	</div>
 {% endblock %}
