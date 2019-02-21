@@ -42,7 +42,7 @@ class DonationForm(FlaskForm):
     trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     submit = SubmitField('Donate')
 
-class Referral(FlaskForm):
+class ReferralForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     email_address = StringField('Email Address', validators=[DataRequired()])
     type = StringField('Type', validators=[DataRequired()])

@@ -1,12 +1,11 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.communities.forms import *
-from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation
-from data_access.queries import user_views, linkage_views, community_views, event_views
+from data_access.models import user_account, user_information, proposal_tracker, event_information, community
+from data_access.queries import user_views, linkage_views, community_views
 
+from static.email import send_referral
 from extensions import db, bcrypt
-from datetime import datetime
-
 import os
 
 communities = Blueprint('communities', __name__, template_folder="templates")
@@ -37,50 +36,18 @@ def index():
 @login_required
 def events():
 
-	events = event_views.community_events(current_user.info_id)
+	events = event_information.query.all()
 
 	return render_template('/communities/events/index.html', title="Communities", events=events)
 
-@communities.route('/communities/event_<id>/participants')
+@communities.route('/communities/event/<id>/participants')
 @login_required
 def event_participants(id):
 
-	event = event_views.show_info(id)
-	joined = event_participation.show_joined(id)
-	participants = community_views.event_participants(id)
+	events = event_information.query.all()
 
-	form = SearchForm()
+	return render_template('/communities/events/index.html', title="Communities", events=events)
 
-	if form.validate_on_submit():
-
-		return redirect(url_for('communities.event_participants', id=id))
-
-	return render_template('/communities/events/add_participants.html', title="Communities", participants=participants, event=event, joined=joined, form=form)
-
-@communities.route('/communities/event_<id>/<action>/<participant>')
-@login_required
-def participant_action(id, action, participant):
-
-	if action=='add':
-
-		record = event_participation.show_status([id, participant])
-
-		if record is None:
-			value = [None, id, participant, 'N']
-			event_participation.add(value)
-		else:
-			value = [id, participant, 'J']
-			event_participation.update(value)
-
-		flash('Member added to event!', 'success')
-
-	elif action=='remove':
-
-		value = [id, participant, 'R']
-		event_participation.update(value)
-		flash('Member removed from event!', 'success')
-
-	return redirect(url_for('communities.event_participants',id=id))
 
 @communities.route('/communities/linkages/filter_<search>', methods=['GET', 'POST'])
 @login_required
@@ -107,16 +74,32 @@ def linkage_show(id):
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
 
-@communities.route('/communities/linkages/referral_<search>', methods=['GET', 'POST'])
-@login_required
-def linkages_referral(search):
 
+
+@communities.route('/communities/linkages/referral', methods=['GET', 'POST'])
+@login_required
+def linkage_referral():
 
 	form = ReferralForm()
 
-	
+	if form.validate_on_submit():
 
-	return render_template('/communities/linkages/referral.html', title="Referral", form=form, linkages=linkages, search=search)
+		html = 'asdlkfjasfd'
+		subject = 'REFFERAL: '
+		admin = user_account.query.filter_by(id=1).first()
+
+		send_referral()
+
+		value = [None, current_user.id, form.name.data, form.email.data, 'L', 'N']
+
+		#add db.session
+
+		flash('Referral has been sent!', 'success')
+		return redirect(url_for('communities.linkages'))	
+
+	return render_template('/communities/linkages/referral.html', title="Referral", form=form, linkages=linkages)
+
+
 
 @communities.route('/communities/members/filter_<search>', methods=['GET', 'POST'])
 @login_required
@@ -157,14 +140,12 @@ def members_add():
 		else:
 			occupation=form.occupation.data
 
-		value = [
-			None, user_id, current_user.info_id, occupation, form.income.data, form.religion.data, "A"
-			]
+		value = [None, user_id, current_user.info_id, occupation, form.income.data, form.religion.data, "A"]
 
 		community.add(value)
 
 		flash('Member added!', 'success')
-		return redirect(url_for('communities.members', search=' '))
+		return redirect(url_for('communities.members_add'))
 
 	return render_template('/communities/members/add.html', title="Communities", form=form)
 
