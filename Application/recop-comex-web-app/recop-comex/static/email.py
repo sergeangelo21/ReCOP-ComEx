@@ -38,8 +38,6 @@ def send_email(parts):
                     name='Budget Plan'
                 elif attachment.type==2:
                     name='Programme'
-                elif attachment.type==3:
-                    name='Signed Request Letter'
 
                 msg.attach(name, mime[0], file.read())
 
@@ -48,9 +46,22 @@ def send_email(parts):
 
 def send_email_resetpassword(parts):
 
-    msg = Message(html=parts[0],
+    msg = Message(
+        html=parts[0],
         subject=parts[1],
         sender = ("ReCOP Director", parts[2]),
-        recipients=[parts[3]])
+        recipients=parts[3]
+        )
+
+    mail.send(msg)
+
+def send_referral(parts):
+
+    msg = Message(
+        html=parts[0],
+        subject=parts[1],
+        sender = ("ReCOP Director", parts[2]),
+        recipients=parts[3]
+        )
 
     mail.send(msg)

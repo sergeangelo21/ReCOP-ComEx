@@ -5,7 +5,7 @@
 		<section class="hero is-fullheight">
 			<div class="hero-body">
 			    <div class="box white is-white">
-			    	<form action="" method="POST" enctype="multipart/form-data">
+			    	<form action="" method="POST">
 			    		{{form.hidden_tag()}}
 					    <div class="columns">
 					      	<div class="column">
@@ -27,7 +27,7 @@
 
 				        <div class="columns">
 					      	<div class="column">
-					      		<p class="title has-text-centered">Outreach Activity Referral Form</p>
+					      		<p class="title has-text-centered">Referral Form</p>
 					      	</div>
 				     	</div>
 
@@ -35,25 +35,32 @@
 							<div class="column">
 								 <div class="field">
 							        {{form.name.label(class_='label')}}
-						            <div class="control">
-						            	{{form.name(class_='input')}}
+						            <div class="control has-icons-left">
+						            	{{form.name(class_='input', placeholder='Name')}}
+						            	{% for error in form.name.errors %}
+		                                <span style="color: red;">[{{ error }}]</span>
+		                                {% endfor %}
+		                                <span class="icon is-small is-left">
+		                                    <i class="fas fa-user"></i>
+		                                </span>
 						            </div>
 						        </div>
+
+		                        <div class="field">
+		                            {{form.email.label(class_='label')}}
+		                            <div class="control has-icons-left">
+		                                {{form.email(class_='input', placeholder='Email Address')}}
+		                                {% for error in form.email.errors %}
+		                                <span style="color: red;">[{{ error }}]</span>
+		                                {% endfor %}
+		                                <span class="icon is-small is-left">
+		                                    <i class="fas fa-envelope"></i>
+		                                </span>
+		                            </div>
+		                        </div>
+		                        
 							</div>
 						</div>
-
-						<div class="columns">
-							<div class="column">
-								 <div class="field">
-							        {{form.email_address.label(class_='label')}}
-						            <div class="control">
-						            	{{form.email_address(class_='input')}}
-						            </div>
-						        </div>
-							</div>
-						</div>
-
-
 						<div class="field is-grouped is-grouped-centered">
 							<p class="control">
 							  	{{form.submit(class_='button submit')}}
