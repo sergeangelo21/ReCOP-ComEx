@@ -281,13 +281,14 @@ def linkage_action(id):
 
 			status = "A"
 			flash(linkage.company_name.title() + " was activated! ", "success")
+			value =	 [None,current_user.id,user.id,'linkage', 2]
+			audit_trail.add(value)	
 
 		else:
-			value = [None,current_user.id,user.id,'linkage', 2]
-			audit_trail.add(value)	
+
 			token = generate(user.info_id)
 			link = url_for('unregistered.confirm_linkage', token=token , _external = True)	
-			html = render_template('admin/email/moa.html', user = user.username, link = link)
+			html = render_template('admin/email/moa.html', user = user.username+', OAR', link = link)
 			subject = "MEMORANDUM OF AGREEMENT"
 
 			email_parts = [html, subject, current_user.email_address, user.email_address, None]
