@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField, IntegerField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class SearchForm(FlaskForm):
@@ -14,11 +14,11 @@ class AddMemberForm(FlaskForm):
     birthday = DateField('Birthday', validators=[DataRequired()])
     is_employed = RadioField(choices=[("Y","Yes"),("N","No")], validators=[DataRequired()])
     occupation = StringField('Occupation')
-    income = StringField('Income')
+    income = IntegerField('Income')
     religion = StringField('Religion', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
-    telephone = StringField('Telephone')
-    mobile = StringField('Mobile Number')
+    telephone = IntegerField('Telephone')
+    mobile = IntegerField('Mobile Number')
     submit = SubmitField('Add')
 
 class ProposalForm(FlaskForm):
@@ -26,9 +26,9 @@ class ProposalForm(FlaskForm):
 	title = StringField('Title of the Activity', validators=[DataRequired()])
 	description = StringField('Description', validators=[DataRequired()])
 	objective = StringField('Objective', validators=[DataRequired()])
-	budget = StringField('Proposed Budget', validators=[DataRequired()])
+	budget = IntegerField('Proposed Budget', validators=[DataRequired()])
 	location = StringField('Venue', validators=[DataRequired()])
-	event_date = StringField('Target Date', validators=[DataRequired()])
+	event_date = DateField('Target Date', validators=[DataRequired()])
 	submit = SubmitField('Submit')
 
 class ProfilePersonalUpdateForm(FlaskForm):
@@ -42,8 +42,8 @@ class ProfilePersonalUpdateForm(FlaskForm):
 
 class ProfileContactUpdateForm(FlaskForm):
     address = StringField('Address')
-    telephone = StringField('Telephone Number')
-    mobile = StringField('Mobile Number')
+    telephone = IntegerField('Telephone Number')
+    mobile = IntegerField('Mobile Number')
     email = StringField('Email Address')
     submit = SubmitField('Update')
 

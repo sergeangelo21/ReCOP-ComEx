@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField, IntegerField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class LoginForm(FlaskForm):
@@ -20,8 +20,8 @@ class SignupForm(FlaskForm):
     bio = StringField('Bio')
     birthday = DateField('Birthday', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
-    telephone = StringField('Telephone')
-    mobile = StringField('Mobile Number')
+    telephone = IntegerField('Telephone')
+    mobile = IntegerField('Mobile Number')
     sscr = RadioField('SSCR Member?', choices=[("Y","Yes"),("F","No")])
     type = StringField('Type', validators=[DataRequired()])
     email = StringField('Email Address', validators=[DataRequired()])
@@ -38,7 +38,7 @@ class DonationForm(FlaskForm):
     sponsee = SelectField('Communities', choices=[('','ReCOP')])
     event = SelectField('Events', choices=[('', 'Please Choose One')])
     type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
-    amount = StringField('Amount', validators=[DataRequired()])
+    amount = IntegerField('Amount', validators=[DataRequired()])
     trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     submit = SubmitField('Donate')
 

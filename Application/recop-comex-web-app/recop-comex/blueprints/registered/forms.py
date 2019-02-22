@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField, IntegerField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class DonationForm(FlaskForm):
@@ -24,8 +24,8 @@ class ProfilePersonalUpdateForm(FlaskForm):
 
 class ProfileContactUpdateForm(FlaskForm):
     address = StringField('Address')
-    telephone = StringField('Telephone Number')
-    mobile = StringField('Mobile Number')
+    telephone = IntegerField('Telephone Number')
+    mobile = IntegerField('Mobile Number')
     email = StringField('Email Address')
     submit = SubmitField('Update')
 

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField, IntegerField
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class ProposalForm(FlaskForm):
@@ -9,10 +9,10 @@ class ProposalForm(FlaskForm):
     objective = StringField('Objective', validators=[DataRequired()])
     budget = StringField('Estimated Budget', validators=[DataRequired()])
     location = StringField('Venue', validators=[DataRequired()])
-    event_date = StringField('Target Date', validators=[DataRequired()])
-    participant_no = StringField('No. of Participants', validators=[DataRequired()])
-    min_age = StringField('Min Age', validators=[DataRequired()])
-    max_age = StringField('Max Age', validators=[DataRequired()])
+    event_date = DateField('Target Date', validators=[DataRequired()])
+    participant_no = IntegerField('No. of Participants', validators=[DataRequired()])
+    min_age = IntegerField('Min Age', validators=[DataRequired()])
+    max_age = IntegerField('Max Age', validators=[DataRequired()])
     thrust = SelectField('Thrust', choices = [("0","Please Choose One"),("1","Educational"),("2","Environmental"),("3","Health"),("4","Livelihood"),("5","Socio-Political"),("6","Spiritual")], validators=[DataRequired()])
     target_link = StringField('Target Linkages')
     select_link = SelectField('Select Linkages', choices=[("0", "Please Choose Here")])
@@ -36,8 +36,8 @@ class ProfilePersonalUpdateForm(FlaskForm):
 
 class ProfileContactUpdateForm(FlaskForm):
     address = StringField('Address')
-    telephone = StringField('Telephone Number')
-    mobile = StringField('Mobile Number')
+    telephone = IntegerField('Telephone Number')
+    mobile = IntegerField('Mobile Number')
     email = StringField('Email Address')
     submit = SubmitField('Update')
 
@@ -56,7 +56,7 @@ class DonationForm(FlaskForm):
     sponsee = SelectField('Communities', choices=[('','ReCOP')])
     event = SelectField('Events', choices=[('', 'Please Choose One')])
     type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
-    amount = StringField('Amount', validators=[DataRequired()])
+    amount = IntegerField('Amount', validators=[DataRequired()])
     trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     submit = SubmitField('Donate')
 
