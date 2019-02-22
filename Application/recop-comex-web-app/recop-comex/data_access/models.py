@@ -85,6 +85,8 @@ class donation(db.Model):
 
 		record = donation.query.count()
 
+		record+=1
+
 		return record
 
 
@@ -110,6 +112,12 @@ class event_attachment(db.Model):
 	def retrieve_files(value):
 
 		record = event_attachment.query.filter(event_attachment.event_id==value).all()
+
+		return record
+
+	def letter_attached():
+
+		record = event_attachment.query.filter(event_attachment.type==3).all()
 
 		return record
 

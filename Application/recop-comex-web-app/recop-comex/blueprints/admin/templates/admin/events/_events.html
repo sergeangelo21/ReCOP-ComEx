@@ -1,7 +1,13 @@
 								<tbody>
 									<tr class="table-row">
 										<td>{{event.id}}</td>
-									    <td>{{event.name}}</td>
+									    <td>{{event.name}}
+									   		{% for attach in letters %}
+									    		{% if attach.event_id==event.id %}
+									    			<a class="tooltip" data-tooltip="Letter Attached"><i class="fas fa-paperclip"></i></a>
+									    		{% endif %}
+									    	{% endfor %}
+									    </td>
 									    <td>{{event.company_name}}</td>
 									    <td>{{event.event_date.strftime('%B %e, %Y')}}</td>
 									    {% if status=='all' or status=='pending' %}
@@ -10,6 +16,8 @@
 									    		New
 									    	{% elif event.event_status=='S' %}
 									    		Scheduled
+									    	{% elif event.event_status=='X' %}
+									    		Declined
 									    	{% elif event.event_status=='P' %}
 									    		{% if event.status=='A' %}
 									    			For Academic's Signing
@@ -39,6 +47,17 @@
 											<a class="button is-danger tooltip" data-tooltip="Decline" href="{{url_for('admin.event_action', id=event.id, action='decline')}}">
 												<span class="icon">
 													<i class="fas fa-times-circle"></i>
+												</span>
+											</a>
+											{% elif event.event_status=='S' %}
+											<a class="button is-link tooltip" data-tooltip="Reschedule" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
+												<span class="icon">
+													<i class="fas fa-clock"></i>
+												</span>
+											</a>
+											<a class="button is-danger tooltip" data-tooltip="Cancel" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
+												<span class="icon">
+													<i class="fas fa-calendar-times"></i>
 												</span>
 											</a>
 											{% endif %}

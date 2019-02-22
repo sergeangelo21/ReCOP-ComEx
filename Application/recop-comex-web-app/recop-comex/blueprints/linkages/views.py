@@ -37,7 +37,9 @@ def index():
 @login_required
 def events():
 
-	events = event_views.show_list('all', ' ')
+	events = event_views.events_organized(current_user.info_id)
+
+	letters = event_attachment.letter_attached()
 
 	form = AttachLetterForm()
 
@@ -57,7 +59,7 @@ def events():
 
 		return redirect(url_for('linkages.events'))
 
-	return render_template('/linkages/events/index.html', events=events, form=form)
+	return render_template('/linkages/events/index.html', events=events, letters=letters, form=form)
 
 @linkages.route('/linkages/events/create', methods=['GET','POST'])
 @login_required
@@ -82,8 +84,10 @@ def events_create():
 
 		if det.company_name=='San Sebastian College Recoletos de Cavite':
 			event_type=1
+			msg='Please download the request letter.'
 		else:
 			event_type=2
+			msg='Please wait for the approval.'
 
 		value = [
 		None,current_user.info_id,form.title.data,
@@ -95,7 +99,7 @@ def events_create():
 		
 		event_information.add(value)
 
-		event = event_information.last_added(current_user.id)
+		event = event_information.last_added(current_user.info_id)
 
 		if form.target_link.data:
 
@@ -130,7 +134,7 @@ def events_create():
 		value = [None, event.id]
 		proposal_tracker.add(value)
 
-		flash('Event proposal submitted! Please download the request letter.', 'success')
+		flash('Event proposal submitted! ' + msg, 'success')
 
 		return redirect(url_for('linkages.events'))
 

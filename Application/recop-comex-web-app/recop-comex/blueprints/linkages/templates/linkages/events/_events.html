@@ -186,7 +186,8 @@
       		</section>
     	
     		<footer class="modal-card-foot buttons is-right">
-	    			<div class="columns">
+	    			{% if event.address=='San Sebastian College Recoletos de Cavite' %}
+	    			<div class="columns"{% for attach in letters %}{% if attach.event_id==event.id %}style="display:none"{% endif %}{% endfor %}">
 	    				<div class="column">
 	    					<a href="{{url_for('linkages.event_letter', id = event.id, name = event.name)}}" target='_blank' class="level-item">
 			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-download"></i></span>&nbsp Request Letter</button>
@@ -204,8 +205,9 @@
 	    				<div class="column">
 							  	{{form.submit(class_='button is-success')}}
 	    				</div>
+	    			  </form>
 	    			</div>
-	    		</form>
+	    			{% endif %}
     		</footer>
   		</div>
 	</div>

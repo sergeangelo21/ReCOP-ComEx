@@ -52,6 +52,8 @@ def events(status, search):
 		value='N'
 	elif status=='pending':
 		value='P'
+	elif status=='declined':
+		value='X'
 	elif status=='finished':
 		value='F'
 	else:
@@ -59,13 +61,15 @@ def events(status, search):
 
 	events = event_views.show_list(value, search)
 
+	letters = event_attachment.letter_attached()
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('admin.events', status=status, search=form.search.data))
 
-	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,search=search)
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,letters=letters,search=search)
 
 @admin.route('/admin/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -204,7 +208,7 @@ def event_action(id, action):
 		proposal_tracker.update_status(event.id, status)
 		event_information.update_status(event.id, status)
 
-		value = [None,user.id,event.id,'event', 6]
+		value = [None,current_user.id,event.id,'event', 6]
 		audit_trail.add(value)
 
 		flash(event.name + ' was declined.', 'info') 	

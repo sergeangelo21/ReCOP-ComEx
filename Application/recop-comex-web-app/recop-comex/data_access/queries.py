@@ -205,6 +205,7 @@ class event_views():
 				user_information, proposal_tracker
 				).add_columns(
 				user_information.company_name,
+				user_information.address,
 				event_information.id,
 				event_information.name,
 				event_information.description,
@@ -359,6 +360,32 @@ class event_views():
 			event_participation.participant_id,
 			user_information.company_name
 			).filter(event_participation.participant_id==value, event_information.event_status=='S'
+			).all()
+
+		return record
+
+	def events_organized(value):
+
+		record = event_information.query.join(
+			user_information, proposal_tracker
+			).add_columns(
+			user_information.company_name,
+			user_information.address,
+			event_information.id,
+			event_information.name,
+			event_information.description,
+			event_information.objective,
+			event_information.location,
+			event_information.event_date,
+			event_information.min_age,
+			event_information.max_age,
+			event_information.thrust,
+			event_information.type,
+			event_information.event_status,
+			proposal_tracker.proposed_on,
+			proposal_tracker.status
+			).filter(event_information.organizer_id==value
+			).order_by(proposal_tracker.proposed_on.desc()
 			).all()
 
 		return record

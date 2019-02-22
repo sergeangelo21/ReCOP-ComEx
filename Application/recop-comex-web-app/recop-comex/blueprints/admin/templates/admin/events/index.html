@@ -48,6 +48,12 @@
 						        <span class="prop">Scheduled</span>
 						      </a>
 						    </li>
+						    <li {% if status=='declined' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.events', status='declined', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-calendar-times" aria-hidden="true"></i></span>
+						        <span>Declined</span>
+						      </a>
+						    </li>
 						    <li {% if status=='finished' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.events', status='finished', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>

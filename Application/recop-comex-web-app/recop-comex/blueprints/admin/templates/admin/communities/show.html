@@ -17,7 +17,7 @@
 		    	</div>
 		        
 		        <div class="row has-text-centered">
-		            <p class="has-text-white is-size-4 has-text-weight-bold">{{community.company_name}}</p>
+		            <p class="has-text-white is-size-4 has-text-weight-bold">{{community.address}}</p>
 		            <a class="btn btn-follow is-size-6 btn-sm text-center has-text-white" href="#" role="button">{{community.email_address}}</a>
 		            <p class="has-text-white is-size-6"> Last active on {{community.last_active.strftime('%b %e, %Y at %I:%M %p')}} </p>
 		        </div>
@@ -71,28 +71,10 @@
 			      	<div class="card">
 						<header class="card-header has-background-light">
 						    <p class="card-header-title">
-						     {% if community.address == 'San Sebastian College Recoletos de Cavite' %} Organizational Information
-						     {% else %}
-						     Company Information
-						     {% endif %}
+						    	Community Information
 						    </p>
 					  	</header>
 					  	<div class="card-content profile">
-						    <div class="panel-block">
-							    <article class="media">
-								  	<figure class="media-left">
-								    	<p>Name</p>
-								  	</figure>
-								  	<div class="media-content">
-								    	<div class="content">
-								      		<p>
-								        		<strong>{{community.company_name}}</strong>
-								      		</p>
-								    	</div>
-								  	</div>
-								</article>
-							</div>
-							{% if community.address != 'San Sebastian College Recoletos de Cavite' %}
 							<div class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
@@ -107,7 +89,6 @@
 							  		</div>
 								</article>
 						  	</div>
-						  	{% endif %}
 
 							<div class="panel-block">
 						    	<article class="media">
