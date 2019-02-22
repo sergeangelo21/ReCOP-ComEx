@@ -746,3 +746,40 @@ Modules - reusable parts of our design
     }
 /*  END  */
 
+/*DONATE*/
+.donation-container{
+  height:655px;
+  background-color:whitesmoke; 
+}
+.donation-bottom{
+  margin-bottom: 0;
+}
+
+.donate-image{
+  background-image: url("/static/images/donate.jpg");
+  height: 655px;
+  width: auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.donate{
+  width: 525px;
+  height: auto; 
+
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 75px;
+  color: whitesmoke;
+}
+.container-donate {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+
+/*END*/

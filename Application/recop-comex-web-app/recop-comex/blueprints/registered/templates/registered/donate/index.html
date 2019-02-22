@@ -1,19 +1,23 @@
 {% extends "registered-base.html" %}
 
 {% block content %}
-    <div class="panel panel-default">
-        <div class="overlay-card-donation has-text-centered">
-        </div>
+   
+ <div class="columns is-gapless">
+    <div class="column">
+        <figure class="donate-image">
+            
+        </figure>
     </div>
-
-    <form action ="" method = "POST" enctype="multipart/form-data">
+    <div class="column is-5">
+        <form action ="" method = "POST" enctype="multipart/form-data">
         {{form.hidden_tag()}}
-        <section class="hero">
+        <section class="hero donation-container">
             <div class="columns">
                 <div class="column">
-                    <div class="nav-gold">
-                        <strong>Help Someone Today!</strong>
-                    </div>
+                
+                    <h1 class="has-text-centered title is-3 notification gold">
+                        Help someone Today
+                    </h1>
                 </div>
             </div>
             
@@ -29,7 +33,7 @@
                                     <div class="control has-icon has-icon-right">
                                         {% for subfield in form.give_to %}
                                             <label class = "radio">
-                                                {{subfield(onclick='choose(this.value)')}}
+                                                {{subfield(onclick='donate_choose(this.value)')}}
                                                 {{subfield.label}}
                                             </label>
                                             {% endfor %}
@@ -122,6 +126,10 @@
                 </div>
                 <div class="columns">
                     <div class="column">
+                            <p class="control has-text-centered">
+                                Note: Your donation will be sent as anonymous. If you want to be recognized, kindly click here.
+                            </p>
+                            <br>
                         <div class="field is-grouped is-grouped-centered">
                             <p class="control">
                                 {{form.submit(class='button is-primary')}}
@@ -132,6 +140,7 @@
             </div>
         </section>
     </form>
-
+    </div>
+</div>
 
 {% endblock %}
