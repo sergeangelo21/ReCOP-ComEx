@@ -472,29 +472,21 @@ class community_views():
 
 class donation_views():
 
-	def show_list():
+	def show_list(value, search):
 
 		sub1 = donation.query.join(
 			user_information, 
-			or_(
-			donation.sponsee_id==user_information.id,
-			donation.sponsor_id==user_information.id)
+			donation.sponsee_id==user_information.id
 			).add_columns(
 			donation.id,
-			func.IF(donation.sponsor_id==user_information.id,
-			(user_information.first_name + ' ' + func.left(user_information.middle_name,1)
-			+ '. ' + user_information.last_name), None).label('sponsor'),
-			func.IF(donation.sponsee_id==user_information.id,
-			(user_information.first_name + ' ' + func.left(user_information.middle_name,1)
-			+ '. ' + user_information.last_name), None).label('sponsee'),
-			user_information.address,
+			user_information.address.label('sponsee'),
 			user_information.company_name,
 			donation.event_id,
 			donation.sponsee_id,
 			donation.sponsor_id,
 			donation.status,
 			donation.date_given,
-			func.IF(donation.amount==0.00,'N/A',donation.amount).label('amount')
+			func.IF(donation.amount==0.00,'In kind',donation.amount).label('amount')
 			).filter(donation.sponsee_id!=None)
 
 		sub2 = donation.query.join(
@@ -502,20 +494,57 @@ class donation_views():
 			user_information, 
 			donation.sponsor_id==user_information.id).add_columns(
 			donation.id,
-			func.IF(donation.sponsor_id==user_information.id,
-			(user_information.first_name + ' ' + func.left(user_information.middle_name,1)
-			+ '. ' + user_information.last_name), None).label('sponsor'),
 			event_information.name.label('sponsee'),
-			user_information.address,
 			user_information.company_name,
 			donation.event_id,
 			donation.sponsee_id,
 			donation.sponsor_id,
 			donation.status,
 			donation.date_given,
-			func.IF(donation.amount==0.00,'N/A',donation.amount).label('amount')
+			func.IF(donation.amount==0.00,'In kind',donation.amount).label('amount')
 			).filter(donation.event_id!=None)
 
-		record = sub1.union(sub2).order_by(donation.id.asc()).all()	
+		if value=='all' and search==' ' :
+
+			record = sub1.union(sub2).order_by(donation.id.asc()).all()	
+
+		elif value=='all' and search!=' ' :
+
+			record = sub1.union(sub2).filter(or_(
+				event_information.name.like('%'+search+'%'),
+				user_information.address.like('%'+search+'%'))
+				).group_by(donation.id
+				).order_by(donation.id.asc()).all()		
+
+		elif search!=' ':
+
+			record = sub1.union(sub2).filter(and_(
+				donation.status==value,or_(
+				event_information.name.like('%'+search+'%'),
+				user_information.address.like('%'+search+'%')))
+				).group_by(donation.id
+				).order_by(donation.id.asc()).all()	
+
+		else:
+
+			record = sub1.union(sub2).filter(donation.status==value).order_by(donation.id.asc()).all()	
 
 		return record
+
+	def show_sponsors():
+
+		record = donation.query.join(
+			user_information, 
+			donation.sponsor_id==user_information.id
+			).add_columns(
+			donation.id.label('did'),
+			user_information.id.label('id'),
+			donation.sponsor_id==user_information.id).add_columns(
+			donation.id,
+			(user_information.first_name + ' ' +
+			func.left(user_information.middle_name,1) + '. ' +
+			user_information.last_name).label('name'),
+			user_information.company_name).all()
+
+		return record
+

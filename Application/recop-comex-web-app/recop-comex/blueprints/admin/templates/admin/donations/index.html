@@ -23,27 +23,27 @@
 						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.communities', status='all', search=search)}}">
+						      <a href="{{url_for('admin.donations', status='all', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
 						        <span class="proposal">All</span>
 						      </a>
 						    </li>
 						    <li {% if status=='new' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.communities', status='new', search=search)}}">
+						      <a href="{{url_for('admin.donations', status='new', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-plus" aria-hidden="true"></i></span>
 						        <span class="proposal">New</span>
 						      </a>
 						    </li>
-						    <li {% if status=='pending' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.communities', status='pending', search=search)}}">
+						    <li {% if status=='received' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.donations', status='received', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-check" aria-hidden="true"></i></span>
-						        <span class="proposal">Verified</span>
+						        <span class="proposal">Received</span>
 						      </a>
 						    </li>
-						    <li {% if status=='active' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.communities', status='active', search=search)}}">
+						    <li {% if status=='declined' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.donations', status='declined', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-times" aria-hidden="true"></i></span>
-						        <span class="prop">Rejected</span>
+						        <span class="prop">Declined</span>
 						      </a>
 						    </li>
 						  </ul>
@@ -52,14 +52,17 @@
 
 					<div class="column">
 						<div class="field has-addons is-pulled-right has-addons-centered">
-							<p class="control">
-							    <input class="input" type="text" placeholder="Search">
-							</p>
-							<p class="control">
-							    <a class="button search">
-							      Search
-							    </a>
-							</p>
+							<form action="" method="POST">
+								{{form.hidden_tag()}}
+							<div class="field-body">
+								<p class="control">
+							    	{{form.search(class_='input', placeholder='Search')}}
+								</p>
+								<p class="control">
+							     	{{form.submit(class_='button search')}}
+								</p>
+							</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -107,7 +110,18 @@
 				<div class="column">
 					<div class="card list">
 						<div class="card-header">
-							<p class="card-header-title">Donations</p>
+							<p class="card-header-title">
+							{% if search!=' ' %}
+							You searched for '{{search}}'
+							<a href="{{url_for('admin.donations', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
+							&nbsp; in
+							{% endif %}
+							{{status | title }} Donations</p>
+							<div class="is-pulled-right">
+								<p class="card-header-title">
+									Total: {{donations | length}}
+								</p>
+							</div>
 						</div>
 						<div class="card-content">
 							<div class="table-responsive">
@@ -116,10 +130,10 @@
 									<thead>
 										<tr>
 											<th class="newlist">ID</th>
-										    <th class="newlist">Given to</th>
-										    <th class="newlist">Donor</th>
+										    <th class="newlist">Sponsee</th>
+										    <th class="newlist">Sponsor</th>
 										    <th class="newlist">Amount</th>
-										    <th class="newlist">Type</th>
+										    {% if status=='all' %}<th class="newlist">Status</th>{% endif %}
 										    <th class="newlist">Date Given</th>
 										    <th class="newlist hidedesktop">Actions</th>
 										 </tr>

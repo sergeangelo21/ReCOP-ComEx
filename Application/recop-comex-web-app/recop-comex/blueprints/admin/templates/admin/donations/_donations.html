@@ -1,10 +1,26 @@
 										<tr class="table-row">
-											<td>{{donation[0]}}</td>
-										    <td>{{donation[1]}}</td>
-										    <td>{{donation[2]}}</td>
-										    <td>{% if donation[3]!='N/A' %}P {% endif %}{{donation[3]}}</td>
-										    <td>{{donation[4]}}</td>
-										    <td>{{donation[5].strftime('%B %e, %Y')}}</td>
+											<td>{{donation.id}}</td>
+										    <td>
+										    	{% if donation.sponsee_id==1 %}
+										    	ReCOP Office
+										    	{% else %}
+										    	{{donation.sponsee}}
+										    	{% endif %}
+										    </td>
+										    <td>
+										    	{% for sponsor in sponsors %}
+										    		{% if sponsor.did==donation.id %}
+										    			{% if donation.sponsor_id==1 %}
+										    				Anonymous
+										    			{% else %}
+										    				{{sponsor.name}}<br>({{sponsor.company_name}})
+										    			{% endif %}
+										    		{% endif %}
+										    	{% endfor %}
+										    </td>
+										    <td>{% if donation.amount!='In kind' %}P {% endif %}{{donation.amount}}</td>
+										    {% if status=='all' %}<td>{{donation.status}}</td>{% endif %}
+										    <td>{{donation.date_given.strftime('%B %e, %Y')}}</td>
 										    <td>
 												<a class="button is-warning tooltip" data-tooltip="View" href="">
 													<span class="icon">

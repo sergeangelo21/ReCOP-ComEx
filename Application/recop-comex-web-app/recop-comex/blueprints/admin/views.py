@@ -232,7 +232,7 @@ def linkages(status, search):
 	else:
 		value=status
 
-	linkages = linkage_views.show_list(value, 3, search=search)
+	linkages = linkage_views.show_list(value, 3, search)
 
 	form = SearchForm()
 
@@ -394,44 +394,30 @@ def community_action(id):
 
 	return redirect(url_for('admin.communities', status='all', search=' '))
 
-@admin.route('/admin/donations')
+@admin.route('/admin/donations/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
-def donations():	
+def donations(status, search):	
 
-	donation_raw=donation_views.show_list()
+	if status=='new':
+		value='N'
+	elif status=='received':
+		value='R'
+	elif status=='declined':
+		value='D'
+	else:
+		value=status
 
-	donations=[]
-	sponsee=''
-	sponsor=''
+	donations=donation_views.show_list(value, search)
 
-	for d in donation_raw:
+	sponsors = donation_views.show_sponsors()
 
-		if d.sponsee:
+	form = SearchForm()
 
-			if d.event_id:
-				sponsee=d.sponsee	
-			else:
-				if d.sponsee_id==1:
-					sponsee='ReCOP Office'
-				else:
-					sponsee=d.address
+	if form.validate_on_submit():
 
-			if d.amount=='N/A':
-				type='In kind'
-			else:
-				type='Cash'
+		return redirect(url_for('admin.donations', status=status, search=form.search.data))	
 
-		if d.sponsor:
-			
-			if d.sponsor_id==1:
-				sponsor='Anonymous'
-			else:
-				sponsor=d.company_name	
-
-		if sponsor and sponsee:	
-			donations.append([d.id,sponsee,sponsor,d.amount,type, d.date_given])
-
-	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations)
+	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations, sponsors=sponsors, status=status, search=search, form=form)
 
 @admin.route('/admin/donations/action/id=<id>')
 @login_required
