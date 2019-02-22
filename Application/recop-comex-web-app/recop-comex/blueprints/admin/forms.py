@@ -9,11 +9,11 @@ class SearchForm(FlaskForm):
 	submit = SubmitField("Search")
 
 class ProposalForm(FlaskForm):
-    title = StringField('Title of the Activity', validators=[DataRequired()], [validators.Length(min=0, max=30)])
-    description = StringField('Description', validators=[DataRequired()], [validators.Length(min=0, max=140)])
-    objective = StringField('Objective', validators=[DataRequired()], [validators.Length(min=0, max=140)])
+    title = StringField('Title of the Activity', validators=[DataRequired()])
+    description = StringField('Description', validators=[DataRequired()])
+    objective = StringField('Objective', validators=[DataRequired()])
     budget = IntegerField('Estimated Budget', validators=[DataRequired()])
-    location = StringField('Venue', validators=[DataRequired()], [validators.Length(min=0, max=50)])
+    location = StringField('Venue', validators=[DataRequired()])
     event_date = DateField('Target Date', validators=[DataRequired()])
     participant_no = IntegerField('No. of Participants', validators=[DataRequired()])
     min_age = IntegerField('Min Age', validators=[DataRequired()])
@@ -26,33 +26,33 @@ class ProposalForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class AddTypeInventoryForm(FlaskForm):
-    name = StringField('Type', validators=[DataRequired()], [validators.Length(min=0, max=20)])
+    name = StringField('Type', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 class ProfilePersonalUpdateForm(FlaskForm):
-    firstname = StringField('First Name', [validators.Length(min=0, max=30)])
-    middlename = StringField('Middle Name', [validators.Length(min=0, max=20)])
-    lastname = StringField('Last Name', [validators.Length(min=0, max=20)])
+    firstname = StringField('First Name')
+    middlename = StringField('Middle Name')
+    lastname = StringField('Last Name')
     gender = RadioField('Gender', choices=[("M","Male"),("F","Female")])
     birthday = DateField('Birthday')
-    bio = StringField('Bio', [validators.Length(min=10, max=160)])
+    bio = StringField('Bio')
     submit = SubmitField('Update')
 
 class ProfileContactUpdateForm(FlaskForm):
     address = StringField('Address', [validators.Length(min=10, max=100)])
     telephone = StringField('Telephone Number', [validators.Length(min=7, max=15)])
     mobile = StringField('Mobile Number', [validators.Length(min=11, max=25)])
-    email = StringField('Email Address', [validators.Length(min=0, max=30)])
+    email = StringField('Email Address')
     submit = SubmitField('Update')
 
 class ProfileUsernameUpdateForm(FlaskForm):
-    username = StringField('Username',[validators.Length(min=0, max=20)])
+    username = StringField('Username')
     oldpassword = PasswordField('Old Password')
     submit = SubmitField('Update')
 
 class PasswordUpdateForm(FlaskForm):
     oldpassword = PasswordField('Old Password')
-    password = PasswordField('Password', [validators.Length(min=0, max=60)])
+    password = PasswordField('Password')
     submit = SubmitField('Update')
 
 
