@@ -227,6 +227,7 @@ class event_views():
 				user_information, proposal_tracker
 				).add_columns(
 				user_information.company_name,
+				user_information.address,
 				event_information.id,
 				event_information.name,
 				event_information.description,
@@ -250,6 +251,7 @@ class event_views():
 				user_information, proposal_tracker
 				).add_columns(
 				user_information.company_name,
+				user_information.address,
 				event_information.id,
 				event_information.name,
 				event_information.description,
@@ -273,6 +275,7 @@ class event_views():
 				user_information, proposal_tracker
 				).add_columns(
 				user_information.company_name,
+				user_information.address,
 				event_information.id,
 				event_information.name,
 				event_information.description,
