@@ -191,6 +191,19 @@ function remove_comm(value){
 
 }
 
+function show_slip(value){
+
+	a = document.getElementById(value+'_modal')
+	a.style.display='block'
+
+}
+
+function close_slip(value){
+	a = document.getElementById(value+'_modal')
+	a.style.display='none'
+
+}
+
 function settingsVPACAD() {
     var div = document.getElementById("settingsACAD");
     if (div.style.display === "none") {

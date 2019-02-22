@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, flash, jsonify
+from flask import Blueprint, render_template, url_for, redirect, flash, send_from_directory
 from flask_login import current_user, login_required
 from blueprints.admin.forms import *
 from data_access.models import *
@@ -419,11 +419,35 @@ def donations(status, search):
 
 	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations, sponsors=sponsors, status=status, search=search, form=form)
 
-@admin.route('/admin/donations/action/id=<id>')
+@admin.route('/admin/donations/<action>/id=<id>')
 @login_required
-def donation_action(id):
+def donation_action(id,action):
 
-	return None
+	if action=='trans_slip':
+		
+		filepath = donation.trans_slip(id)
+		name = filepath.rsplit('/',1)[1]
+		path = filepath.rsplit('/',1)[0]
+		return send_from_directory(path, name)	
+
+	elif action=='receive':
+
+		info = donation.retrieve_donation(id)
+
+		if info.amount==0.00:
+
+			flash('eshing', 'warning')
+
+		else:
+			donation.update_status([id,'R'])
+			flash('Donation was received', 'success')
+
+		return redirect(url_for('admin.donations', status='all', search=' '))
+
+	else:
+		donation.update_status([id,'D'])
+		flash('Donation was declined.', 'success')
+		return redirect(url_for('admin.donations', status='all', search=' '))
 
 @admin.route('/admin/inventory/filter_<search>')
 @login_required

@@ -31,7 +31,48 @@
 				  	</div>
 				</article>
 			</div>
-
+					<div class="column">
+						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
+						  <ul>
+						    <li {% if status=='all' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('linkages.events', status='all', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
+						        <span class="proposal">All</span>
+						      </a>
+						    </li>
+						    <li {% if status=='new' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('linkages.events', status='new', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
+						        <span class="prop">New</span>
+						      </a>
+						    </li>
+						    <li {% if status=='pending' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('linkages.events', status='pending', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
+						        <span class="prop">Pending</span>
+						      </a>
+						    </li>
+						    <li {% if status=='scheduled' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('linkages.events', status='scheduled', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
+						        <span class="prop">Scheduled</span>
+						      </a>
+						    </li>
+						    <li {% if status=='declined' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('linkages.events', status='declined', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-calendar-times" aria-hidden="true"></i></span>
+						        <span class="prop">Declined</span>
+						      </a>
+						    </li>
+						    <li {% if status=='finished' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('linkages.events', status='finished', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+						        <span>Finished</span>
+						      </a>
+						    </li>
+						  </ul>
+						</div>
+					</div>	
 			<div class="column is-narrow">
 				<div class="field has-addons has-addons-centered">
 					<p class="control">

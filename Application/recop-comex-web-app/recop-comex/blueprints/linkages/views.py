@@ -33,11 +33,24 @@ def index():
 
 	return render_template('/linkages/index.html')
 
-@linkages.route('/linkages/events', methods=['GET','POST'])
+@linkages.route('/linkages/events/<status>/filter_<search>', methods=['GET','POST'])
 @login_required
-def events():
+def events(status, search):
 
-	events = event_views.events_organized(current_user.info_id)
+	if status=='scheduled':
+		value='S'
+	elif status=='new':
+		value='N'
+	elif status=='pending':
+		value='P'
+	elif status=='declined':
+		value='X'
+	elif status=='finished':
+		value='F'
+	else:
+		value=status
+		
+	events = event_views.events_organized(status, search)
 
 	letters = event_attachment.letter_attached()
 
@@ -59,7 +72,7 @@ def events():
 
 		return redirect(url_for('linkages.events'))
 
-	return render_template('/linkages/events/index.html', events=events, letters=letters, form=form)
+	return render_template('/linkages/events/index.html', events=events, letters=letters,status=status, search=search, date = datetime.now() ,form=form)
 
 @linkages.route('/linkages/events/create', methods=['GET','POST'])
 @login_required
@@ -82,12 +95,12 @@ def events_create():
 
 		det = user_information.linkage_info(current_user.info_id)
 
-		if det.company_name=='San Sebastian College Recoletos de Cavite':
+		if det.address=='San Sebastian College Recoletos de Cavite':
 			event_type=1
-			msg='Please download the request letter.'
+			msg='Please wait for the approval.'
 		else:
 			event_type=2
-			msg='Please wait for the approval.'
+			msg='Please download and attach the request letter once signed.'
 
 		value = [
 		None,current_user.info_id,form.title.data,

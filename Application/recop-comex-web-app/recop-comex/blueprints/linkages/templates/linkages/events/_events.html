@@ -163,7 +163,7 @@
 			    </div>
       		</section>
     	
-    		<footer class="modal-card-foot buttons is-right">
+    		<footer class="modal-card-foot buttons is-centered">
 	    			{% if event.address=='San Sebastian College Recoletos de Cavite' %}
 	    			<div class="columns"{% for attach in letters %}{% if attach.event_id==event.id %}style="display:none"{% endif %}{% endfor %}">
 	    				<div class="column">
@@ -174,16 +174,44 @@
 	    				<div class="column">
 		    		<form action="" method="POST" enctype="multipart/form-data">
 		    		{{form.hidden_tag()}}
-						   <div class="control">
-								{{form.attach_letter(class_='input')}}
-
+							<div class="file">
+							  <label class="file-label">
+								{{form.attach_letter(class_='file-input')}}
+							    <span class="file-cta">
+							      <span class="file-icon">
+							        <i class="fas fa-paperclip"></i>
+							      </span>
+							      <span class="file-label">
+ 							       Signed Letter
+							      </span>
+							    </span>
+							  </label>
 								{{form.event_id(hidden='True', value = event.id)}}
-							</div>
+								{{form.submit(class_='button is-success')}}
+							</div>						
+	    			  </form>
+	    			</div>
+	    		</div>
+	    			{% endif %}	
+	    			{% if event.status=='S' %}
+	    			<div class="columns">
+	    				<div class="column">
+	    					<a href="" class="level-item">
+			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Reschedule</button>
+							</a>
 	    				</div>
 	    				<div class="column">
-							  	{{form.submit(class_='button is-success')}}
+	    					<a href="" class="level-item">
+			  					<button class="button is-danger"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Cancel</button>
+							</a>
 	    				</div>
-	    			  </form>
+	    			  {% if event.event_date.strftime('%B %e, %Y')==date.strftime('%B %e, %Y') %}
+	    				<div class="column">
+	    					<a href="" class="level-item">
+			  					<button class="button is-success"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Conduct Event</button>
+							</a>
+	    				</div>
+	    			  {% endif %}
 	    			</div>
 	    			{% endif %}
     		</footer>

@@ -23,7 +23,7 @@ class ProposalForm(FlaskForm):
 class AttachLetterForm(FlaskForm):
     attach_letter = FileField('Attach Letter', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     event_id = StringField('Event ID', validators=[DataRequired()])
-    submit = SubmitField('Attach Letter')
+    submit = SubmitField('Submit')
 
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name')

@@ -370,29 +370,103 @@ class event_views():
 
 		return record
 
-	def events_organized(value):
+	def events_organized(value, search):
 
-		record = event_information.query.join(
-			user_information, proposal_tracker
-			).add_columns(
-			user_information.company_name,
-			user_information.address,
-			event_information.id,
-			event_information.name,
-			event_information.description,
-			event_information.objective,
-			event_information.location,
-			event_information.event_date,
-			event_information.min_age,
-			event_information.max_age,
-			event_information.thrust,
-			event_information.type,
-			event_information.event_status,
-			proposal_tracker.proposed_on,
-			proposal_tracker.status
-			).filter(event_information.organizer_id==value
-			).order_by(proposal_tracker.proposed_on.desc()
-			).all()
+		if value=='all' and search==' ':
+			record = event_information.query.join(
+				user_information, proposal_tracker
+				).add_columns(
+				user_information.company_name,
+				user_information.address,
+				event_information.id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.location,
+				event_information.event_date,
+				event_information.min_age,
+				event_information.max_age,
+				event_information.thrust,
+				event_information.type,
+				event_information.event_status,
+				proposal_tracker.proposed_on,
+				proposal_tracker.status
+				).filter(event_information.organizer_id==current_user.info_id
+				).order_by(proposal_tracker.proposed_on.desc()
+				).all()
+
+		elif value=='all' and search!=' ':
+			record = event_information.query.join(
+				user_information, proposal_tracker
+				).add_columns(
+				user_information.company_name,
+				user_information.address,
+				event_information.id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.location,
+				event_information.event_date,
+				event_information.min_age,
+				event_information.max_age,
+				event_information.thrust,
+				event_information.type,
+				event_information.event_status,
+				proposal_tracker.proposed_on,
+				proposal_tracker.status
+				).filter(and_(event_information.organizer_id==current_user.info_id,
+				or_(user_information.company_name.like('%'+search+'%'),
+				event_information.name.like('%'+search+'%')))
+				).order_by(proposal_tracker.proposed_on.desc()
+				).all()
+
+		elif search!=' ':
+			record = event_information.query.join(
+				user_information, proposal_tracker
+				).add_columns(
+				user_information.company_name,
+				user_information.address,
+				event_information.id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.location,
+				event_information.event_date,
+				event_information.min_age,
+				event_information.max_age,
+				event_information.thrust,
+				event_information.type,
+				event_information.event_status,
+				proposal_tracker.proposed_on,
+				proposal_tracker.status
+				).filter(and_(event_information.organizer_id==current_user.info_id,
+				event_information.event_status==value,or_(
+				user_information.company_name.like('%'+search+'%'),
+				event_information.name.like('%'+search+'%')))
+				).order_by(proposal_tracker.proposed_on.desc()
+				).all()
+		else:
+			record = event_information.query.join(
+				user_information, proposal_tracker
+				).add_columns(
+				user_information.company_name,
+				user_information.address,
+				event_information.id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.location,
+				event_information.event_date,
+				event_information.min_age,
+				event_information.max_age,
+				event_information.thrust,
+				event_information.type,
+				event_information.event_status,
+				proposal_tracker.proposed_on,
+				proposal_tracker.status
+				).filter(event_information.organizer_id==current_user.info_id
+				).order_by(proposal_tracker.proposed_on.desc()
+				).all()
 
 		return record
 
@@ -486,6 +560,7 @@ class donation_views():
 			donation.sponsor_id,
 			donation.status,
 			donation.date_given,
+			donation.transaction_slip,
 			func.IF(donation.amount==0.00,'In kind',donation.amount).label('amount')
 			).filter(donation.sponsee_id!=None)
 
@@ -501,6 +576,7 @@ class donation_views():
 			donation.sponsor_id,
 			donation.status,
 			donation.date_given,
+			donation.transaction_slip,
 			func.IF(donation.amount==0.00,'In kind',donation.amount).label('amount')
 			).filter(donation.event_id!=None)
 

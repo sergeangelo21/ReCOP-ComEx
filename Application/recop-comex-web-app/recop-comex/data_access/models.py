@@ -89,6 +89,19 @@ class donation(db.Model):
 
 		return record
 
+	def retrieve_donation(id):
+
+		record = donation.query.filter_by(id=id).first()
+
+		return record
+
+	def update_status(value):
+
+		record = donation.query.filter_by(id=value[0]).first()
+
+		record.status=value[1]
+
+		db.session.commit()
 
 class event_attachment(db.Model):
 
