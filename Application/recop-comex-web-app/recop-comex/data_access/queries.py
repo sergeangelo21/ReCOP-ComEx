@@ -11,7 +11,9 @@ class user_views():
 		record = user_information.query.join(
 			user_account).add_columns(
 			user_information.first_name, 
-			user_information.company_name, user_account.id).filter(
+			user_information.company_name,
+			user_information.address, 
+			user_account.id).filter(
 			user_account.id==value).first()
 
 		return record
@@ -362,7 +364,8 @@ class event_views():
 			event_information.event_status,
 			event_participation.participant_id,
 			user_information.company_name
-			).filter(event_participation.participant_id==value, event_information.event_status=='S'
+			).filter(and_(event_participation.participant_id==value, 
+			event_information.event_status=='S')
 			).all()
 
 		return record

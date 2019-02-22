@@ -42,6 +42,8 @@
 												</span>
 											</a>
 											{% if event.event_status=='N' %}
+											{% for attach in letters %}
+									    	{% if attach.event_id==event.id %}
 											<a class="button is-success tooltip" data-tooltip="Approve" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
 												<span class="icon">
 													<i class="fas fa-check-circle"></i>
@@ -52,6 +54,8 @@
 													<i class="fas fa-times-circle"></i>
 												</span>
 											</a>
+											{% endif %}
+											{% endfor %}
 											{% elif event.event_status=='S' %}
 											<a class="button is-link tooltip" data-tooltip="Reschedule" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
 												<span class="icon">

@@ -38,7 +38,7 @@ def index():
 @login_required
 def events():
 
-	events = event_views.show_list('all', ' ')
+	events = event_views.community_events(current_user.info_id)
 	
 	return render_template('/communities/events/index.html', title="Communities", events=events)
 

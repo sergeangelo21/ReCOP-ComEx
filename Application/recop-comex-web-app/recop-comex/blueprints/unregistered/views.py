@@ -168,8 +168,10 @@ def login():
 
 		name = user_views.login_info(current_user.id)
 
-		if current_user.type == 3:
+		if current_user.type==3:
 			name = name.company_name
+		elif current_user.type==4:
+			name = name.address			
 		else:
 			name = name.first_name
 			
