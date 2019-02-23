@@ -18,6 +18,13 @@ if(window.location.pathname=='/admin/events/create'){
 	document.getElementById('target_link').value = ""
 }
 
+if(window.location.pathname.startsWith('/admin/donations/inkind')){
+	var divs=1
+	var ids=2
+	document.getElementById('1_select').options.item(0).selected="True"
+	document.getElementById('1_select').options.item(0).hidden="True"
+}
+
 var f = []
 
 function check_pass()
@@ -201,6 +208,137 @@ function show_slip(value){
 function close_slip(value){
 	a = document.getElementById(value+'_modal')
 	a.style.display='none'
+
+}
+
+function item_field(value){
+
+	if (value[0]=='add'){
+
+		orig_type = document.getElementById(value[1].toString()+'_select')
+		orig_quantity = document.getElementById(value[1].toString()+'_input')
+		orig_btn = document.getElementById(value[1])
+		length=orig_type.length-1
+
+		if (divs==length){
+
+            Swal.fire({
+                title: "Maximum number of item types exceeded! (Types="+length.toString()+")", 
+                type: "error",
+                customClass: "modal",
+                buttonsStyling: false,
+                allowOutsideClick: false,
+                heightAuto: false,
+                confirmButtonClass: 'button is-medium submit'
+            })
+
+		}
+
+		else if (orig_quantity.value=='' || orig_type.selectedIndex==0){
+           
+            Swal.fire({
+                title: "One or more fields are invalid", 
+                type: "error",
+                customClass: "modal",
+                buttonsStyling: false,
+                allowOutsideClick: false,
+                heightAuto: false,
+                confirmButtonClass: 'button is-medium submit'
+            })
+
+		}
+
+		else{
+
+			clone_type = orig_type.cloneNode(true)
+			clone_quantity = orig_quantity.cloneNode(true)
+			clone_btn = orig_btn.cloneNode(true)
+
+			columns = document.createElement('div')
+			columns.className='columns'
+
+			for (ctr=0; ctr<=2; ctr++){
+
+				column = document.createElement('div')
+
+				field = document.createElement('div')
+
+				control = document.createElement('div')
+				control.className='control'
+
+				if (ctr<2){
+					column.className='column' 
+					if (ctr==0){
+						element = clone_type
+						element.id = ids.toString()+'_select'
+						field.className='field'
+					}
+					else{
+						element = clone_quantity
+						element.id=ids.toString()+'_input'
+						element.value=''
+					}
+				}
+				else{
+					column.className='column is-2'
+					field.className='field is-grouped is-grouped-centered'
+					clone_btn.id = ids.toString()
+					divs++
+					element = clone_btn
+				}
+
+				control.appendChild(element)
+				field.appendChild(control)
+				column.appendChild(field)
+				columns.appendChild(column)
+
+			}
+			orig_btn.className='button is-danger'
+			orig_btn.innerHTML='<i class="fas fa-times-circle"></i>'
+			orig_btn.name='remove'
+			columns.id=ids.toString()+'_col'
+			ids++
+			document.getElementById('fields').appendChild(columns)
+		}
+	}
+	else{
+		columns=document.getElementById(value[1].toString()+'_col')
+		columns.remove()
+		divs--
+	}
+}
+
+function change_types(){
+
+	select_fields = document.getElementsByTagName('select')
+	lock=[]
+	unlock=[]
+
+	for (select=0; select<=select_fields.length-1; select++){
+
+		lock.push(select_fields[select].selectedIndex)
+
+	}
+
+	for (select=0; select<=select_fields.length-1; select++){
+
+		for (ctr=1; ctr<=select_fields[select].length-1; ctr++){
+
+			select_fields[select].item(ctr).hidden=false
+
+		}
+
+	}
+
+
+	for (select=0; select<=select_fields.length-1; select++){
+
+		for (ctr=0; ctr<=lock.length-1;ctr++){
+
+			select_fields[select].item(lock[ctr]).hidden=true
+
+		}
+	}
 
 }
 

@@ -1,0 +1,95 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+
+	<section class="hero is-fullheight">
+		<div class="hero-body">
+			<div class="box white">
+				<div style="padding-bottom: 1%" id="fields">
+					<div class="columns">
+				      	<div class="column">
+				      		<article class="media">
+								<figure class="media-left">
+								    <a class="btn btn-follow btn-sm text-center" href="{{url_for('admin.donations', status='all', search=' ')}}" role="button">
+										<span class="back-icon">
+								  			<i class="fas fa-arrow-circle-left fa-2x"></i>
+								  		</span>
+								  	</a>
+								</figure>
+							  
+							  	<div class="media-right has-text-weight-bold">
+							   		<p class="subtitle has-text-weight-bold">Back</p>
+							 	</div>
+							</article>
+				      	</div>
+				    </div>
+				    <div class="columns">
+				      	<div class="column">
+				      		<p class="title has-text-centered">Add Donations to Inventory</p>
+				      		<p class="subtitle has-text-centered">ID: {{donation.id}}</p>
+				      	</div>
+			     	</div>
+
+					<div class="columns">
+						<div class="column">
+							<div class="field">
+								{{form.type.label(class_='label')}}
+							</div>
+						</div>
+						<div class="column">
+							<div class="field">
+								{{form.quantity.label(class_='label')}}
+							</div>
+						</div>
+						<div class="column is-2">
+							<div class="field is-grouped is-grouped-centered">
+								<label class='label'>Add/Remove</label>
+							</div>
+						</div>
+					</div>
+					<div class="columns" id="1_col">
+						<div class="column">
+							<div class="field">
+							  	<div class="control">
+							    	{{form.type(class_='input', onchange='change_types()', id = '1_select')}}
+	                                {% for error in form.type.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+						</div>
+						<div class="column">
+							<div class="field">
+							  	<div class="control">
+							    	{{form.quantity(class_='input', placeholder='Quantity', type="number",	 id='1_input')}}
+	                                {% for error in form.quantity.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+						</div>
+						<div class="column is-2">
+							<div class="field is-grouped is-grouped-centered">
+							  	<div class="control">
+									<button class="button is-success" href="" name='add' id='1' onclick="item_field([this.name,this.id])"><i class="fas fa-plus-circle"> </i></buttoon>
+							  	</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<form action="" method="POST">
+					{{form.hidden_tag()}}					
+					<div class="field is-grouped is-grouped-centered">
+						<p class="control">
+							{{form.types(hidden='True')}}
+							{{form.quantities(hidden='True')}}
+						  	{{form.submit(class_='button submit')}}
+						</p>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}

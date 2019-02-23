@@ -29,6 +29,13 @@ class AddTypeInventoryForm(FlaskForm):
     name = StringField('Type', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+class AddInventoryForm(FlaskForm):
+    type = SelectField('Select Type', choices=[("0", "Please Choose Here")])
+    quantity = IntegerField('Quantity')
+    types = StringField('Types', validators=[DataRequired()])
+    quantities = StringField('Quantities', validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name', [validators.Length(min=0, max=30)])
     middlename = StringField('Middle Name', [validators.Length(min=0, max=20)])

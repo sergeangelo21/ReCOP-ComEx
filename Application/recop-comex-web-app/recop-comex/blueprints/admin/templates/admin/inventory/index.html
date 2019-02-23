@@ -42,17 +42,21 @@
 			<div class="columns is-gapless">
 				<div class="column is-2">
 		    		<div class="notification filter">
-
 		    			<div class="columns">
 			                <div class="column">
-			                	<p class="title is-size-5">Type</p>
-			                	{% for type in types %}
+			                	<p class="title is-size-5">Type <a class="button add is-small" href="{{url_for('admin.inventory_add_type')}}" ><i class="fas fa-plus-circle"> </i></a></p>
+			                	{% if types %}
 				                  	<div class="field">
 				                  	<input class="is-checkradio has-background-color is-warning" id="0" type="checkbox" name="0" checked="checked">
 				                    <label for="">All</label>
 					                </div>
+			                	{% endif %}
+			                	{% for type in types %}
+				                  	<div class="field">
+				                  	<input class="is-checkradio has-background-color is-warning" id="{{type.id}}" type="checkbox" name="{{type.id}}">
+				                    <label for="">{{type.name|title}}</label>
+					                </div>
 			                	{% endfor %}
-			                	<a class="button add" href="{{url_for('admin.inventory_add_type')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
 			                </div>
 			            </div>
 					 	

@@ -103,7 +103,7 @@ def events_create():
 		else:
 			name = item.address
 
-		form.select_link.choices.append((item.id, name))
+		form.select_link.choices.extend([(item.id, name)])
 
 	if form.validate_on_submit():
 
@@ -425,10 +425,11 @@ def donation_action(id,action):
 
 	if action=='trans_slip':
 		
-		filepath = donation.trans_slip(id)
+		info = donation.retrieve_donation(id)
+		filepath = info.transaction_slip
 		name = filepath.rsplit('/',1)[1]
 		path = filepath.rsplit('/',1)[0]
-		return send_from_directory(path, name)	
+		return send_from_directory(path, name, title='asd')	
 
 	elif action=='receive':
 
@@ -436,7 +437,7 @@ def donation_action(id,action):
 
 		if info.amount==0.00:
 
-			flash('eshing', 'warning')
+			return redirect(url_for('admin.donation_inkind', id=id))
 
 		else:
 			donation.update_status([id,'R'])
@@ -449,17 +450,37 @@ def donation_action(id,action):
 		flash('Donation was declined.', 'success')
 		return redirect(url_for('admin.donations', status='all', search=' '))
 
+@admin.route('/admin/donations/inkind/<id>', methods=['GET', 'POST'])
+@login_required
+def donation_inkind(id):	
+
+	info = donation.retrieve_donation(id)
+
+	types = inventory_type.show_list()
+
+	form = AddInventoryForm()
+
+	form.type.choices.extend([(t.id, t.name) for t in types])
+
+	if form.validate_on_submit():
+
+		return form.types.data
+
+	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, donation=info)
+
 @admin.route('/admin/inventory/filter_<search>')
 @login_required
 def inventory(search):
 
 	form = SearchForm()
 
+	types = inventory_type.show_list()
+
 	if form.validate_on_submit():
 
 		return redirect(url_for('admin.communities', search=form.search.data))
 
-	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, search=search)
+	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, types=types, search=search)
 
 @admin.route('/admin/inventory/add')
 @login_required

@@ -278,6 +278,12 @@ class inventory_type(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
+	def show_list():
+
+		record = inventory_type.query.filter(inventory_type.status=='A').order_by(inventory_type.name.asc()).all()
+
+		return record
+
 	def last_added():
 
 		record = inventory_type.query.count()
