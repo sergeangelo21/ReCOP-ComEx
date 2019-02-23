@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField, IntegerField
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField, IntegerField, validators
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class LoginForm(FlaskForm):
@@ -17,11 +17,11 @@ class SignupForm(FlaskForm):
     lastname = StringField('Last Name', validators=[DataRequired()])
     gender = RadioField('Gender', choices=[("M","Male"),("F","Female")], validators=[DataRequired()])
     company = StringField('Company Name', validators=[DataRequired()])
-    bio = StringField('Bio')
+    bio = StringField('Bio', [validators.Length(min=0, max=160)])
     birthday = DateField('Birthday', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
-    telephone = IntegerField('Telephone')
-    mobile = IntegerField('Mobile Number')
+    telephone = StringField('Telephone Number', [validators.Length(min=7, max=15)])
+    mobile = StringField('Mobile Number', [validators.Length(min=11, max=25)])
     sscr = RadioField('SSCR Member?', choices=[("Y","Yes"),("F","No")])
     type = StringField('Type', validators=[DataRequired()])
     email = StringField('Email Address', validators=[DataRequired()])

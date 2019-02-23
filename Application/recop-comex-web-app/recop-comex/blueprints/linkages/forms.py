@@ -1,13 +1,13 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField, IntegerField
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField, IntegerField, validators
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class ProposalForm(FlaskForm):
     title = StringField('Title of the Activity', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])
     objective = StringField('Objective', validators=[DataRequired()])
-    budget = StringField('Estimated Budget', validators=[DataRequired()])
+    budget = IntegerField('Estimated Budget', validators=[DataRequired()])
     location = StringField('Venue', validators=[DataRequired()])
     event_date = DateField('Target Date', validators=[DataRequired()])
     participant_no = IntegerField('No. of Participants', validators=[DataRequired()])
@@ -26,19 +26,19 @@ class AttachLetterForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class ProfilePersonalUpdateForm(FlaskForm):
-    firstname = StringField('First Name')
-    middlename = StringField('Middle Name')
-    lastname = StringField('Last Name')
+    firstname = StringField('First Name', [validators.Length(min=0, max=30)])
+    middlename = StringField('Middle Name', [validators.Length(min=0, max=20)])
+    lastname = StringField('Last Name', [validators.Length(min=0, max=20)])
     gender = RadioField('Gender', choices=[("M","Male"),("F","Female")])
     birthday = DateField('Birthday')
-    bio = StringField('Bio')
+    bio = StringField('Bio', [validators.Length(min=0, max=160)])
     submit = SubmitField('Update')
 
 class ProfileContactUpdateForm(FlaskForm):
-    address = StringField('Address')
-    telephone = IntegerField('Telephone Number')
-    mobile = IntegerField('Mobile Number')
-    email = StringField('Email Address')
+    address = StringField('Address', [validators.Length(min=10, max=100)])
+    telephone = StringField('Telephone Number', [validators.Length(min=7, max=15)])
+    mobile = StringField('Mobile Number', [validators.Length(min=11, max=25)])
+    email = StringField('Email Address', [validators.Length(min=0, max=30)] )
     submit = SubmitField('Update')
 
 class ProfileUsernameUpdateForm(FlaskForm):
@@ -48,7 +48,7 @@ class ProfileUsernameUpdateForm(FlaskForm):
 
 class PasswordUpdateForm(FlaskForm):
     oldpassword = PasswordField('Old Password')
-    password = PasswordField('Password')
+    password = PasswordField('Password', [validators.Length(min=0, max=60)] )
     submit = SubmitField('Update')
 
 class DonationForm(FlaskForm):
