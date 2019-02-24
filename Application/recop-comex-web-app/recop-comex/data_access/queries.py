@@ -624,3 +624,18 @@ class donation_views():
 
 		return record
 
+class inventory_views():
+
+	def show_list():
+
+		record = inventory.query.join(
+			inventory_type
+			).add_columns(
+			inventory_type.name,
+			func.SUM(inventory.in_stock).label('in_stock'),
+			func.SUM(inventory.given).label('given'),
+			func.SUM(inventory.expired).label('expired')
+			).group_by(inventory.type_id
+			).all()
+
+		return record

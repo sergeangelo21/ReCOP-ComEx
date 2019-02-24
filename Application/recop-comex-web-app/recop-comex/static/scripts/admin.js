@@ -19,10 +19,9 @@ if(window.location.pathname=='/admin/events/create'){
 }
 
 if(window.location.pathname.startsWith('/admin/donations/inkind')){
-	var divs=1
-	var ids=2
-	document.getElementById('1_select').options.item(0).selected="True"
-	document.getElementById('1_select').options.item(0).hidden="True"
+	var divs=0
+	document.getElementById('type_select').options.item(0).selected="True"
+	document.getElementById('type_select').options.item(0).hidden="True"
 }
 
 var f = []
@@ -213,12 +212,17 @@ function close_slip(value){
 
 function item_field(value){
 
+	types = document.getElementById('types')
+	quantities = document.getElementById('quantities')
+
 	if (value[0]=='add'){
 
-		orig_type = document.getElementById(value[1].toString()+'_select')
-		orig_quantity = document.getElementById(value[1].toString()+'_input')
+		type_select = document.getElementById('type_select')
+		type = type_select.options[type_select.selectedIndex].text
+		index = type_select.selectedIndex
+		quantity = document.getElementById('quantity').value
 		orig_btn = document.getElementById(value[1])
-		length=orig_type.length-1
+		length=type_select.length-1
 
 		if (divs==length){
 
@@ -234,7 +238,7 @@ function item_field(value){
 
 		}
 
-		else if (orig_quantity.value=='' || orig_type.selectedIndex==0){
+		else if (quantity=='' || type_select.selectedIndex==0 || quantity<=0){
            
             Swal.fire({
                 title: "One or more fields are invalid", 
@@ -250,8 +254,6 @@ function item_field(value){
 
 		else{
 
-			clone_type = orig_type.cloneNode(true)
-			clone_quantity = orig_quantity.cloneNode(true)
 			clone_btn = orig_btn.cloneNode(true)
 
 			columns = document.createElement('div')
@@ -262,84 +264,78 @@ function item_field(value){
 				column = document.createElement('div')
 
 				field = document.createElement('div')
+				field.className='field'
 
 				control = document.createElement('div')
 				control.className='control'
 
 				if (ctr<2){
 					column.className='column' 
+					element=document.createElement('input')
 					if (ctr==0){
-						element = clone_type
-						element.id = ids.toString()+'_select'
-						field.className='field'
+						element.value = type
+						element.className= 'input'
+						element.setAttribute('readonly', true)
 					}
 					else{
-						element = clone_quantity
-						element.id=ids.toString()+'_input'
-						element.value=''
+						element.value = quantity
+						element.className= 'input'
+						element.id = index.toString() + '_qty'
+						element.setAttribute('readonly', true)
 					}
 				}
 				else{
-					column.className='column is-2'
-					field.className='field is-grouped is-grouped-centered'
-					clone_btn.id = ids.toString()
-					divs++
+					column.className='column is-1'
+					clone_btn.id = index.toString()
+					clone_btn.className='button is-danger tooltip'
+					clone_btn.setAttribute('data-tooltip','Remove')
+					clone_btn.innerHTML='<i class="fas fa-times-circle"></i>'
+					clone_btn.name='remove'
 					element = clone_btn
 				}
-
 				control.appendChild(element)
 				field.appendChild(control)
 				column.appendChild(field)
 				columns.appendChild(column)
-
 			}
-			orig_btn.className='button is-danger'
-			orig_btn.innerHTML='<i class="fas fa-times-circle"></i>'
-			orig_btn.name='remove'
-			columns.id=ids.toString()+'_col'
-			ids++
+			divs++
+			columns.id=index.toString()+'_col'
 			document.getElementById('fields').appendChild(columns)
+			type_select.options.item(index).hidden=true
+			type_select.options.item(0).selected=true
+			document.getElementById('quantity').value=''
+			types.value = types.value + index + '|'
+			quantities.value = quantities.value + quantity + '|'
 		}
 	}
 	else{
+		type_select.options.item(value[1]).hidden=false
+		
+		types = document.getElementById('types')
+		str = value[1].toString() + '|'
+		removed = types.value.replace(str, '')
+		types.value = removed
+		alert(removed)
+
+		qty = document.getElementById(value[1]+'_qty')
+		quantities= document.getElementById('quantities')
+		str = qty.value.toString() + '|'
+		removed = quantities.value.replace(str, '')
+		quantities.value = removed
+		alert(removed)
+
 		columns=document.getElementById(value[1].toString()+'_col')
 		columns.remove()
 		divs--
-	}
-}
-
-function change_types(){
-
-	select_fields = document.getElementsByTagName('select')
-	lock=[]
-	unlock=[]
-
-	for (select=0; select<=select_fields.length-1; select++){
-
-		lock.push(select_fields[select].selectedIndex)
 
 	}
 
-	for (select=0; select<=select_fields.length-1; select++){
-
-		for (ctr=1; ctr<=select_fields[select].length-1; ctr++){
-
-			select_fields[select].item(ctr).hidden=false
-
-		}
-
+	if(divs>=1){
+		document.getElementById('header').style.display='block'
 	}
-
-
-	for (select=0; select<=select_fields.length-1; select++){
-
-		for (ctr=0; ctr<=lock.length-1;ctr++){
-
-			select_fields[select].item(lock[ctr]).hidden=true
-
-		}
+	else{
+		document.getElementById('header').style.display='none'
 	}
-
 }
 
 function settingsVPACAD() {

@@ -460,19 +460,35 @@ def donation_inkind(id):
 
 	form = AddInventoryForm()
 
-	form.type.choices.extend([(t.id, t.name) for t in types])
+	form.type_select.choices.extend([(str(t.id), t.name) for t in types])
 
 	if form.validate_on_submit():
 
-		return form.types.data
+		inv_type = form.types.data.split('|',-1)
+		in_stock = form.quantities.data.split('|',-1)
+		index=0
+
+		for type in inv_type:
+
+			if type!='':
+				value=[None, info.id, type, in_stock[index], 0,0]
+				inventory.add(value)
+				index+=1
+
+		donation.update_status([info.id,'R'])
+
+		flash('Items were successfully added!', 'success')
+		return redirect(url_for('admin.donations', status='all', search=' '))
 
 	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, donation=info)
 
 @admin.route('/admin/inventory/filter_<search>')
 @login_required
-def inventory(search):
+def inventory_show(search):
 
 	form = SearchForm()
+
+	items = inventory_views.show_list()
 
 	types = inventory_type.show_list()
 
@@ -480,7 +496,7 @@ def inventory(search):
 
 		return redirect(url_for('admin.communities', search=form.search.data))
 
-	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, types=types, search=search)
+	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items,types=types, search=search)
 
 @admin.route('/admin/inventory/add')
 @login_required
@@ -505,7 +521,7 @@ def inventory_add_type():
 		audit_trail.add(value)
 
 		flash('Inventory type added!', 'success')
-		return redirect(url_for('admin.inventory', search=' '))
+		return redirect(url_for('admin.inventory_show', search=' '))
 
 	return render_template('/admin/inventory/add_type.html', title="Inventory | Admin", form=form)
 

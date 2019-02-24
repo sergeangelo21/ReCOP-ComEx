@@ -1,41 +1,33 @@
 Unregistered
 
-Modal for events, linkages (join)
-Donate form to be appended
 
 Admin
 
 Dashboard
-JS events :P
 Event reports
 events organized/attended	
-Donations verification
+Donations Add for admin
 feedbacks
 inventory
 
 
 Linkages
 Dashboard
-Attach letters				(DONE but not yet)
 Calendar view event/redesign
 LINKAGES MENU
 Communities query
+Conduct event (attendance->evaluation of participant->photos/description)
 Donation button na lang for comm and event na di sila nagorganize
 Reports(All finished events/proposals nakatab)
 
 Communities
 Dashboard
-events query | add members to events
-linkages (bat nawala css? ung hoverable na lang din)
-Members (view saka add. nakalist na lang this :) )          (DONE)
 reports
 
 Registered
 Dashboard
 events
 linkages
-ung donate and laki nung banner tapos walang image! :D
-
 
 General (Maybe kaartehan)
 
@@ -43,6 +35,7 @@ Admin (activity logs)
 Notifications 
 Help
 change dp
+filters dropdown
 validations
 error traps
 

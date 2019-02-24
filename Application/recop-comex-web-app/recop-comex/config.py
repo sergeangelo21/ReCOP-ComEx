@@ -8,7 +8,7 @@ class Config(object):
 
 	SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@localhost/recop-comex'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
-	#SQLALCHEMY_ECHO = True
+	SQLALCHEMY_ECHO = True
 
 	MAIL_SERVER='smtp.gmail.com'
 	MAIL_PORT= 465

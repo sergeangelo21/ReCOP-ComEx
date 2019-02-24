@@ -149,7 +149,7 @@ def events_create():
 
 		flash('Event proposal submitted! ' + msg, 'success')
 
-		return redirect(url_for('linkages.events'))
+		return redirect(url_for('linkages.events', status='all', search=' '))
 
 	return render_template('/linkages/events/create.html', form=form)
 

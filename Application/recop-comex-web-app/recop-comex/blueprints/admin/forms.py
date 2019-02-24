@@ -30,8 +30,8 @@ class AddTypeInventoryForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class AddInventoryForm(FlaskForm):
-    type = SelectField('Select Type', choices=[("0", "Please Choose Here")])
-    quantity = IntegerField('Quantity')
+    type_select = SelectField('Select Type', choices=[('', 'Please Choose Here')])
+    quantity = StringField('Quantity')
     types = StringField('Types', validators=[DataRequired()])
     quantities = StringField('Quantities', validators=[DataRequired()])
     submit = SubmitField('Submit')

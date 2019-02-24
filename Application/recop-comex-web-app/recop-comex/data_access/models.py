@@ -66,6 +66,8 @@ class donation(db.Model):
 	transaction_slip = db.Column(db.VARCHAR(200), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)
 
+	inventory_donation_id = db.relationship('inventory', backref='donation', lazy=True)
+
 	def add(value):
 
 		record = donation(
@@ -256,17 +258,32 @@ class event_participation(db.Model):
 class inventory(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	donation_id = db.Column(db.INT)
-	type_id = db.Column	(db.INT)
+	donation_id = db.Column(db.INT, db.ForeignKey('donation.id'), nullable=False)
+	type_id = db.Column	(db.INT, db.ForeignKey('inventory_type.id'), nullable=False)
 	in_stock = db.Column (db.INT, nullable=False)
 	given = db.Column (db.INT, nullable=False)
 	expired = db.Column (db.INT, nullable=False)
+
+	def add(value):
+
+		record = inventory(
+			id = value[0],
+			donation_id	=value[1],
+			type_id=value[2],
+			in_stock=value[3],
+			given=value[4],
+			expired=value[5])
+
+		db.session.add(record)
+		db.session.commit()
 
 class inventory_type(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
 	name = db.Column(db.VARCHAR(20), nullable=False)
 	status = db.Column(db.CHAR(1), nullable=False)	
+
+	inventory_type_id = db.relationship('inventory', backref='inventory_type', lazy=True)
 
 	def add(value):
 

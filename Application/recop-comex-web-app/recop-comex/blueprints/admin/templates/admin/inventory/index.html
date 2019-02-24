@@ -7,7 +7,7 @@
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('admin.inventory_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  		<a class="button viewbtn is-active" href="{{url_for('admin.inventory', status='all', search=' ')}}">
+						  		<a class="button viewbtn is-active" href="{{url_for('admin.inventory_show', status='all', search=' ')}}">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
@@ -76,28 +76,27 @@
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
-									Total: {{events|length}}
+									Total: {{items|length}}
 								</p>
 							</div>
 						</div>
 						<div class="card-content">
 							<div class="table-responsive">
 								<table class="table is-fullwidth">
-									{% if events %}
+									{% if items %}
 									<thead>
 										<tr>
-											<th class="newlist">ID</th>
-										    <th class="newlist">Event Name</th>
-										    <th class="newlist">Organizer</th>
-										    <th class="newlist">Target Date</th>
-										   	{% if status=='all' or status=='pending' %}<th class="newlist">Status</th>{% endif %}
+										    <th class="newlist">Item</th>
+										    <th class="newlist">In Stock</th>
+										    <th class="newlist">Given</th>
+										    <th class="newlist">Expired</th>
 										    <th class="newlist hidedesktop">Actions</th>
 										 </tr>
 										
 									</thead>
 
-										{% for event in events %}
-											{% include 'admin/events/_events.html' %}
+										{% for item in items %}
+											{% include 'admin/inventory/_inventory.html' %}
 										{% endfor %}
 
 									{% else %}

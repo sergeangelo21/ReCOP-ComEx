@@ -61,7 +61,7 @@ def donate():
 	if events:
 
 		for e in events:
-			form.event.choices.append((str(e.id), e.name))
+			form.event.choices.extend((str(e.id), e.name))
 			no_event = 0
 			
 	else: 

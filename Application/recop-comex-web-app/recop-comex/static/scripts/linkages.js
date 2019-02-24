@@ -41,7 +41,7 @@ function remove_comm(value){
 	}
 
 	selected = document.getElementById('target_link').value
-	str = '|' + value.toString() + '|'
+	str = value.toString() + '|'
 	removed = selected.replace(str, '')
 	document.getElementById('target_link').value = removed	
 	control.selectedIndex=0

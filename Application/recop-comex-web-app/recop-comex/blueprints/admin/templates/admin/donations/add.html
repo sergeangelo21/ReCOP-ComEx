@@ -29,56 +29,40 @@
 				      		<p class="subtitle has-text-centered">ID: {{donation.id}}</p>
 				      	</div>
 			     	</div>
-
-					<div class="columns">
+				<form action="" method="POST">
+					{{form.hidden_tag()}}
+					<div class="columns" id="0_col">
 						<div class="column">
 							<div class="field">
-								{{form.type.label(class_='label')}}
+								{{form.type_select.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.type_select(class_='input')}}
+							  	</div>
 							</div>
 						</div>
 						<div class="column">
 							<div class="field">
 								{{form.quantity.label(class_='label')}}
-							</div>
-						</div>
-						<div class="column is-2">
-							<div class="field is-grouped is-grouped-centered">
-								<label class='label'>Add/Remove</label>
-							</div>
-						</div>
-					</div>
-					<div class="columns" id="1_col">
-						<div class="column">
-							<div class="field">
 							  	<div class="control">
-							    	{{form.type(class_='input', onchange='change_types()', id = '1_select')}}
-	                                {% for error in form.type.errors %}
-	                                <span style="color: red;">[{{ error }}]</span>
-	                                {% endfor %}
+							    	{{form.quantity(class_='input', placeholder='Quantity', type="number")}}
 							  	</div>
 							</div>
 						</div>
-						<div class="column">
+						<div class="column is-1">
 							<div class="field">
+								<label class='label'>Actions</label>
 							  	<div class="control">
-							    	{{form.quantity(class_='input', placeholder='Quantity', type="number",	 id='1_input')}}
-	                                {% for error in form.quantity.errors %}
-	                                <span style="color: red;">[{{ error }}]</span>
-	                                {% endfor %}
-							  	</div>
-							</div>
-						</div>
-						<div class="column is-2">
-							<div class="field is-grouped is-grouped-centered">
-							  	<div class="control">
-									<button class="button is-success" href="" name='add' id='1' onclick="item_field([this.name,this.id])"><i class="fas fa-plus-circle"> </i></buttoon>
+									<button class="button is-success tooltip" data-tooltip='Add' type='button' name='add' id='0'onclick="item_field([this.name, this.id])"><i class="fas fa-plus-circle"> </i></button>
 							  	</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<form action="" method="POST">
-					{{form.hidden_tag()}}					
+				    <div class="columns" id ='header' style="display:none">
+				      	<div class="column">
+				      		<label class="label">Donation Items</label>
+				      	</div>
+			     	</div>	
+				</div>			
 					<div class="field is-grouped is-grouped-centered">
 						<p class="control">
 							{{form.types(hidden='True')}}
