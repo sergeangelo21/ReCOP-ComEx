@@ -19,35 +19,38 @@
 								</figure>
 							  
 							  	<div class="media-right has-text-weight-bold">
-							   		<p class="subtitle has-text-weight-bold">Add Inventory</p>
+							   		<p class="subtitle has-text-weight-bold">Back</p>
 							 	</div>
 							</article>
 				      	</div>
 				    </div>
 				    <div class="columns">
 				      	<div class="column">
-				      		<p class="title has-text-centered">Add Item to Inventory</p>
+				      		<p class="title has-text-centered">Add Type to Inventory</p>
 				      	</div>
 			     	</div>
 
 					<div class="columns">
 						<div class="column">
 							<div class="field">
-								{{form.firstname.label(class_='label')}}
+								{{form.name.label(class_='label')}}
 							  	<div class="control">
-							    	{{form.firstname(class_='input', placeholder='First Name')}}
-	                                {% for error in form.firstname.errors %}
+							    	{{form.name(class_='input', placeholder='Type')}}
+	                                {% for error in form.name.errors %}
 	                                <span style="color: red;">[{{ error }}]</span>
 	                                {% endfor %}
 							  	</div>
 							</div>
 						</div>
+					</div>
+
+					<div class="columns">
 						<div class="column">
 							<div class="field">
-								{{form.middlename.label(class_='label')}}
+								{{form.quantity.label(class_='label')}}
 							  	<div class="control">
-							    	{{form.middlename(class_='input', placeholder='Middle Name')}}
-	                                {% for error in form.middlename.errors %}
+							    	{{form.quantity(class_='input', placeholder='Quantity', type='number')}}
+	                                {% for error in form.quantity.errors %}
 	                                <span style="color: red;">[{{ error }}]</span>
 	                                {% endfor %}
 							  	</div>

@@ -97,7 +97,7 @@
 						</div>
 						<div class="card-content">
 							<div class="table-responsive">
-								<table class="table is-striped is-fullwidth">
+								<table class="table is-fullwidth is-striped is-hoverable">
 								{% if communities %}
 								<thead>
 									<tr>
@@ -110,11 +110,11 @@
 									 </tr>
 									
 								</thead>
-
+								<tbody>
 									{% for community in communities %}
 										{% include 'admin/communities/_communities.html' %}
 									{% endfor %}
-
+								</tbody>
 								{% else %}
 
 								<tbody>

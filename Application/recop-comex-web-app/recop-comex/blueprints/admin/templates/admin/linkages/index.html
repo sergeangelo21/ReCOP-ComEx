@@ -86,46 +86,46 @@
 			                <div class="column">
 			                	<p class="title is-size-5">Thrust</p>
 			                  	<div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="0" onchange="filter(this.id)" type="checkbox" name="0" checked = "checked">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox" checked = "checked">
 				                    <label for="0">All</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="1" onchange="filter(this.id)" type="checkbox" name="1">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox" >
 				                    <label for="1">Educational</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="2" onchange="filter(this.id)" type="checkbox" name="2">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
 				                    <label for="2">Environmental</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="3" onchange="filter(this.id)" type="checkbox" name="3">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
 				                    <label for="3">Health</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="4" onchange="filter(this.id)" type="checkbox" name="4">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
 				                    <label for="4">Livelihood</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="5" onchange="filter(this.id)" type="checkbox" name="5">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox" >
 				                    <label for="5">Socio-Political</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="6" onchange="filter(this.id)" type="checkbox" name="6">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
 				                    <label for="6">Spiritual</label>
 				                </div>
 			                	
 			                	<p class="title is-size-5">Type</p>
 
 			                  	<div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="7" onchange="filter(this.id)" type="checkbox" name="7" checked="checked">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox"checked="checked">
 				                    <label for="7">All</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="8" onchange="filter(this.id)" type="checkbox" name="8">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
 				                    <label for="8">Inside</label>
 				                </div>
 				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="9" onchange="filter(this.id)" type="checkbox" name="9">
+				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
 				                    <label for="9">Outside</label>
 				                </div>
 			                </div>
@@ -152,7 +152,7 @@
 						</div>
 						<div class="card-content">
 							<div class="table-responsive">
-								<table class="table is-striped is-fullwidth">
+								<table class="table is-fullwidth is-striped is-hoverable">
 									{% if linkages %}
 									<thead>
 										<tr>
@@ -166,10 +166,13 @@
 										
 									</thead>
 
+									<tbody>
+
 										{% for linkage in linkages %}
 											{% include 'admin/linkages/_linkages.html' %}
 										{% endfor %}
-
+									</tbody>
+									
 									{% else %}
 
 									<tbody>

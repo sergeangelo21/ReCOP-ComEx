@@ -498,17 +498,11 @@ def inventory_show(search):
 
 	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items,types=types, search=search)
 
-@admin.route('/admin/inventory/add')
+@admin.route('/admin/inventory/add', methods=['GET', 'POST'])
 @login_required
 def inventory_add():
 
-	return render_template('/admin/inventory/add.html', title="Inventory | Admin")
-
-@admin.route('/admin/inventory/add_type', methods=['GET', 'POST'])
-@login_required
-def inventory_add_type():
-
-	form = AddTypeInventoryForm()
+	form = NewInventoryForm()
 
 	if form.validate_on_submit():
 
@@ -520,10 +514,13 @@ def inventory_add_type():
 		value = [None,current_user.id,id,'inventory', 1]
 		audit_trail.add(value)
 
+		value=[None, None, id, form.quantity.data , 0,0]
+		inventory.add(value)
+
 		flash('Inventory type added!', 'success')
 		return redirect(url_for('admin.inventory_show', search=' '))
 
-	return render_template('/admin/inventory/add_type.html', title="Inventory | Admin", form=form)
+	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form)
 
 @admin.route('/admin/feedbacks')
 @login_required

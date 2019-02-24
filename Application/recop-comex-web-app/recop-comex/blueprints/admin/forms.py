@@ -25,8 +25,9 @@ class ProposalForm(FlaskForm):
     programme = FileField('Programme', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
     submit = SubmitField('Submit')
 
-class AddTypeInventoryForm(FlaskForm):
+class NewInventoryForm(FlaskForm):
     name = StringField('Type', validators=[DataRequired()])
+    quantity = IntegerField('Quantity', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 class AddInventoryForm(FlaskForm):

@@ -19,7 +19,17 @@
 										    	{% endfor %}
 										    </td>
 										    <td>{% if donation.amount!='In kind' %}P {% endif %}{{donation.amount}}</td>
-										    {% if status=='all' %}<td>{{donation.status}}</td>{% endif %}
+										    {% if status=='all' %}
+										    <td>
+										    	{% if donation.status=='R' %}
+										    		Received
+										    	{% elif donation.status=='N' %}
+										    		New
+										    	{% else %}
+										    		Declined
+										    	{% endif %}
+											</td>
+											{% endif %}
 										    <td>{{donation.date_given.strftime('%B %e, %Y')}}</td>
 										    <td>
 												<a class="button is-warning tooltip" data-tooltip="Transaction Slip" onclick="show_slip('{{donation.id}}')">
@@ -27,12 +37,14 @@
 														<i class="fa fa-sticky-note"></i>
 													</span>
 												</a>
-												{% if donation.status!='R' %}
+												{% if donation.status=='N' or donation.status=='D' %}
 												<a class="button is-success tooltip" data-tooltip="Receive" href="{{url_for('admin.donation_action', action='receive', id=donation.id)}}">
 													<span class="icon">
 														<i class="fas fa-check-circle"></i>
 													</span>
 												</a>
+												{% endif %}
+												{% if donation.status=='N' %}
 												<a class="button is-danger tooltip" data-tooltip="Decline" href="{{url_for('admin.donation_action', action='decline', id=donation.id)}}">
 													<span class="icon">
 														<i class="fas fa-times-circle"></i>

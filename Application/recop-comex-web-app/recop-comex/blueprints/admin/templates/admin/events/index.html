@@ -159,7 +159,7 @@
 						</div>
 						<div class="card-content">
 							<div class="table-responsive">
-								<table class="table is-fullwidth">
+								<table class="table is-fullwidth is-striped is-hoverable">
 									{% if events %}
 									<thead>
 										<tr>
@@ -172,11 +172,12 @@
 										 </tr>
 										
 									</thead>
+									<tbody>
 
 										{% for event in events %}
 											{% include 'admin/events/_events.html' %}
 										{% endfor %}
-
+									</tbody>
 									{% else %}
 
 									<tbody>

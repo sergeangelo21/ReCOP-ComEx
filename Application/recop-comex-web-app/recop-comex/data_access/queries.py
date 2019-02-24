@@ -588,7 +588,8 @@ class donation_views():
 
 			record = sub1.union(sub2).filter(or_(
 				event_information.name.like('%'+search+'%'),
-				user_information.address.like('%'+search+'%'))
+				user_information.address.like('%'+search+'%'),
+				donation.amount.like('%'+search+'%'))
 				).group_by(donation.id
 				).order_by(donation.id.asc()).all()		
 
@@ -597,7 +598,8 @@ class donation_views():
 			record = sub1.union(sub2).filter(and_(
 				donation.status==value,or_(
 				event_information.name.like('%'+search+'%'),
-				user_information.address.like('%'+search+'%')))
+				user_information.address.like('%'+search+'%'),
+				donation.amount.like('%'+search+'%')))
 				).group_by(donation.id
 				).order_by(donation.id.asc()).all()	
 

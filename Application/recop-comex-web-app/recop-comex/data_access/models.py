@@ -258,7 +258,7 @@ class event_participation(db.Model):
 class inventory(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
-	donation_id = db.Column(db.INT, db.ForeignKey('donation.id'), nullable=False)
+	donation_id = db.Column(db.INT, db.ForeignKey('donation.id'))
 	type_id = db.Column	(db.INT, db.ForeignKey('inventory_type.id'), nullable=False)
 	in_stock = db.Column (db.INT, nullable=False)
 	given = db.Column (db.INT, nullable=False)
@@ -304,8 +304,6 @@ class inventory_type(db.Model):
 	def last_added():
 
 		record = inventory_type.query.count()
-
-		record+=1
 
 		return record
 
