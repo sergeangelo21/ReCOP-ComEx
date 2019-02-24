@@ -65,17 +65,15 @@
 					</div>
 
 					<div class="column search-box">
-						<div class="field is-horizontal is-pulled-right has-addons has-addons-centered">
-							<form action="" method="POST">
+						<div class="field is-pulled-right has-addons has-addons-centered">
+							<div class="control">
+								<form action="" method="POST">
 								{{form.hidden_tag()}}
-								<div class="field-body">
-									<p class="control">
-								    	{{form.search(class_='input', placeholder='Search')}}
-									</p>
-									<p class="control">
-								     	{{form.submit(class_='button search')}}
-									</p>
-								</div>
+						    		{{form.search(class_='input', placeholder='Search')}}
+							</div>
+							<p class="control">
+						     	{{form.submit(class_='button search')}}
+							</p>
 							</form>
 						</div>
 					</div>

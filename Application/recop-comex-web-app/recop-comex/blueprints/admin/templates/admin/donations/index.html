@@ -2,8 +2,8 @@
 
 {% block content %}
 			<div class="notification gold">
-				<div class="columns">
-					<div class="column is-3">
+				<div class="columns is-centered">
+					<div class="column view-icons">
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a href="" class="button viewbtn is-active">
@@ -19,7 +19,7 @@
 						  	</figure>
 						</article>
 					</div>
-					<div class="column is-6">
+					<div class="column">
 						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
@@ -50,18 +50,16 @@
 						</div>
 					</div>
 
-					<div class="column">
-						<div class="field has-addons is-pulled-right has-addons-centered">
-							<form action="" method="POST">
+					<div class="column search-box">
+						<div class="field is-pulled-right has-addons has-addons-centered">
+							<div class="control">
+								<form action="" method="POST">
 								{{form.hidden_tag()}}
-							<div class="field-body">
-								<p class="control">
-							    	{{form.search(class_='input', placeholder='Search')}}
-								</p>
-								<p class="control">
-							     	{{form.submit(class_='button search')}}
-								</p>
+						    		{{form.search(class_='input', placeholder='Search')}}
 							</div>
+							<p class="control">
+						     	{{form.submit(class_='button search')}}
+							</p>
 							</form>
 						</div>
 					</div>
