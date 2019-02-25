@@ -4,39 +4,31 @@
 
 	<div class="notification gold">
 		<div class="columns is-centered">
-			<div class="column view-icons">
-				<article class="media">
-				  	<figure class="media-left"> 
-				  		<a href="{{url_for('linkages.events_create')}}" class="button add has-text-weight-bold">
-							<span class="icon">
-								<i class="fa fa-plus"></i>
-							</span>
-							<span>Create</span>
-						</a>
-				  	</figure>
-				  	<div class="media-content">
-				  		<div class="content">
-				  			<a href="" class="button viewbtn is-active">
-								<span class="icon">
-									<i class="fa fa-list"></i>
-								</span>
-							</a>
+			<div class="column search-box">
+		  		<a href="{{url_for('linkages.events_create')}}" class="button add has-text-weight-bold">
+					<span class="icon">
+						<i class="fa fa-plus-circle"></i>
+					</span>
+					<span>Create</span>
+				</a>
+	  			<a href="" class="button viewbtn is-active">
+					<span class="icon">
+						<i class="fa fa-list"></i>
+					</span>
+				</a>
 
-							<a href="{{url_for('linkages.events_calendar')}}" class="button viewbtn">
-								<span class="icon">
-									<i class="fa fa-calendar-alt"></i>
-								</span>
-							</a>
-				  		</div>
-				  	</div>
-				</article>
-			</div>
+				<a href="{{url_for('linkages.events_calendar')}}" class="button viewbtn">
+					<span class="icon">
+						<i class="fa fa-calendar-alt"></i>
+					</span>
+				</a>
 
-			<div class="column is-narrow">
-				<div class="field has-addons has-addons-centered">
-					<p class="control">
+				&nbsp&nbsp&nbsp
+
+				<div class="field has-addons has-addons-centered is-pulled-right">
+					<div class="control">
 					    <input class="input" type="text" placeholder="Search">
-					</p>
+					</div>
 					<p class="control">
 					    <a class="button search">
 					      Search
