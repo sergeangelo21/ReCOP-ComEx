@@ -48,7 +48,6 @@
 		background-color: white;
 	}
 
-
 	/*		BUTTONS		*/
 	.button.submit, .button.send, .button.search, .button.add{
 		background-color: #072000; 
@@ -366,16 +365,8 @@
 
 
     /* SIGN UP */
-
  .padding{
     padding: 10px;
-}
-.padding-signup
-{
-padding: 15px;
-}
-.color{
-  color: #072000;
 }
 
 .card1:hover{ 
