@@ -6,8 +6,10 @@
 									    		<a class="tooltip" data-tooltip="Letter Attached"><i class="fas fa-paperclip"></i></a>
 									    		{% endif %}
 									    	{% endfor %}
-									    	{% if event.address!='San Sebastian College Recoletos de Cavite' %}
+									    	{% if event.address!='San Sebastian College Recoletos de Cavite' and event.organizer_id!=1 %}
 									    		<a class="tooltip" data-tooltip="Non-Institutional"><i class="fas fa-asterisk"></i></a>
+									    	{% else %}
+									    		<a class="tooltip" data-tooltip="ReCOP Event"><i class="fas fa-star"></i></a>
 									    	{% endif %}
 									    </td>
 									    <td>{{event.company_name}}</td>

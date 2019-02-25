@@ -26,14 +26,16 @@ class ProposalForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class NewInventoryForm(FlaskForm):
+    item_type = RadioField('Item to be added', choices=[('1','New'), ('2','Existing')], validators=[DataRequired()])
     name = StringField('Item Name', validators=[DataRequired()])
-    quantity = IntegerField('Quantity', validators=[DataRequired()])
+    quantity = StringField('Quantity', validators=[DataRequired()])
     is_donation = RadioField('From Donation?', choices=[('1','Yes'), ('2','No')], validators=[DataRequired()])
-    give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')])
+    give_to = RadioField('Given To', choices=[('1','Community'), ('2','Event')])
     sponsee = SelectField('Communities', choices=[('','ReCOP')])
-    sponsor = SelectField('Sponsors', choices=[('1','Anonymous')])
+    sponsor = SelectField('Sponsor', choices=[('1','Anonymous')])
     event = SelectField('Events', choices=[('', 'Please Choose One')])
-    trans_slip   = FileField('Transaction Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])   
+    items = SelectField('Item Name', choices=[('', 'Please Choose One')])
+    trans_slip   = FileField('Transaction Slip', validators=[FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])   
     submit = SubmitField('Submit')
 
 class AddInventoryForm(FlaskForm):

@@ -214,7 +214,7 @@ function donate_type(value){
     else{
         amount.className="hidden"
         trans.className="field is-horizontal"
-        money.value = 0
+        money.value = 0.00
     }
 
 }   

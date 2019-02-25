@@ -88,7 +88,7 @@ def event_show(id):
 
 	return render_template('/admin/events/show.html', title= event.name.title() + " | Admin", event = event, participants=participants)
 
-@admin.route('/admin/events/create')
+@admin.route('/admin/events/create', methods=['GET', 'POST'])
 @login_required
 def events_create():
 
@@ -118,7 +118,7 @@ def events_create():
 		None,current_user.info_id,form.title.data,
 		form.description.data,form.objective.data,form.budget.data,form.location.data,
 		form.event_date.data,form.participant_no.data, form.min_age.data, form.max_age.data,
-		form.thrust.data,event_type,'N'
+		form.thrust.data,event_type,'P'
 		]
 
 		
@@ -156,12 +156,28 @@ def events_create():
 		event_attachment.add(value)
 		programme.save(file_path)
 
-		value = [None, event.id]
+		signatory = user_views.signatory_info(4)
+
+		recipient = signatory.email_address
+		user = 'Fr. ' + signatory.last_name + ', OAR'
+		token = generate(event.id)
+		organizer='Recoletos Community Outreach Program Office'
+		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
+		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
+		html = render_template('admin/email/event.html', event=event , organizer=organizer, user=user, link = [approve, decline])
+		attachments = event_attachment.retrieve_files(event.id)
+		subject = "NEW EVENT PROPOSAL: " + event.name
+
+		email_parts = [html, subject, current_user.email_address, recipient, attachments]
+
+		send_email(email_parts)
+
+		value = [None, event.id, 'A']
 		proposal_tracker.add(value)
 
-		flash('Event proposal submitted! Please download the request letter.', 'success')
+		flash('Event proposal submitted! Please wait for the approval.', 'success')
 
-		return redirect(url_for('admin.events'))
+		return redirect(url_for('admin.events', status='all', search=' '))
 
 
 	return render_template('/admin/events/create.html', form=form)
@@ -180,7 +196,7 @@ def event_action(id, action):
 		status = ['P','A']
 
 		recipient = signatory.email_address
-		user = 'Fr. ' + signatory.last_name
+		user = 'Fr. ' + signatory.last_name + ', OAR'
 		token = generate(event.id)
 		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
 		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
@@ -383,7 +399,7 @@ def community_action(id):
 
 		send_email(email_parts)
 			
-		flash('MOA was sent to ' + community.company_name.title(), 'success')
+		flash('MOA was sent to ' + community.address.title(), 'success')
 
 		status = "P"
 			
@@ -524,6 +540,17 @@ def inventory_add():
 		form.event.data=''
 		no_event = 1
 
+	items = inventory_type.show_list()
+
+	if items:
+		for i in items:
+			form.items.choices.extend([(str(i.id), i.name)])
+			no_item = 0
+			
+	else: 
+		form.items.data=''
+		no_item = 1		
+
 	if form.validate_on_submit():
 
 		if form.is_donation.data=='1':
@@ -557,13 +584,18 @@ def inventory_add():
 		else:
 			donation_id=None
 
-		value = [None, form.name.data, 'A']
+		if form.item_type.data=='1':
+			value = [None, form.name.data, 'A']
 
-		inventory_type.add(value)
-		id = inventory_type.last_added()
+			inventory_type.add(value)
+			id = inventory_type.last_added()
 
-		value = [None,current_user.id,id,'inventory', 1]
-		audit_trail.add(value)
+			value = [None,current_user.id,id,'inventory', 1]
+			audit_trail.add(value)
+
+		else:
+
+			id=form.items.data
 
 		value=[None, donation_id, id, form.quantity.data , 0,0]
 		inventory.add(value)
@@ -571,7 +603,7 @@ def inventory_add():
 		flash('Inventory type added!', 'success')
 		return redirect(url_for('admin.inventory_show', search=' '))
 
-	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form, no_event=no_event)
+	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form, no_event=no_event, no_item=no_item)
 
 @admin.route('/admin/feedbacks')
 @login_required

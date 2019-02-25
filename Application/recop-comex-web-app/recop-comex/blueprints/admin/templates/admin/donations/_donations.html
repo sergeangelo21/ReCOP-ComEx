@@ -32,6 +32,13 @@
 											{% endif %}
 										    <td>{{donation.date_given.strftime('%B %e, %Y')}}</td>
 										    <td>
+												{% if donation.status=='R' and donation.amount=='In kind' %}
+												<a class="button is-warning tooltip" data-tooltip="Items">
+													<span class="icon">
+														<i class="fas fa-box-open"></i>
+													</span>
+												</a>
+												{% endif %}
 												<a class="button is-warning tooltip" data-tooltip="Transaction Slip" onclick="show_slip('{{donation.id}}')">
 													<span class="icon">
 														<i class="fa fa-sticky-note"></i>

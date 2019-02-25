@@ -97,10 +97,10 @@ def events_create():
 
 		if det.address=='San Sebastian College Recoletos de Cavite':
 			event_type=1
-			msg='Please wait for the approval.'
+			msg='Please download and attach the request letter once signed.'
 		else:
 			event_type=2
-			msg='Please download and attach the request letter once signed.'
+			msg='Please wait for the approval.'
 
 		value = [
 		None,current_user.info_id,form.title.data,
@@ -144,7 +144,7 @@ def events_create():
 		event_attachment.add(value)
 		programme.save(file_path)
 
-		value = [None, event.id]
+		value = [None, event.id,'N']
 		proposal_tracker.add(value)
 
 		flash('Event proposal submitted! ' + msg, 'success')

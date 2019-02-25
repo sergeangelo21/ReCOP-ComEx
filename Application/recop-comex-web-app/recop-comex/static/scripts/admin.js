@@ -25,10 +25,17 @@ if(window.location.pathname.startsWith('/admin/donations/inkind')){
 }
 
 if(window.location.pathname=='/admin/inventory/add'){
-    document.getElementById('event').options.item(0).hidden=true
-    document.getElementById('event').options.item(0).selected=true
+	if (document.getElementById('event')){
+    	document.getElementById('event').options.item(0).hidden=true
+    	document.getElementById('event').options.item(0).selected=true
+    	sel_event = document.getElementById('event')
+	}
+	if (document.getElementById('items')){
+    	document.getElementById('items').options.item(0).hidden=true
+    	document.getElementById('items').options.item(0).selected=true
+    	exist_ctrl = document.getElementById('items')
+	}
 }
-var f = []
 
 function check_pass()
 {
@@ -349,14 +356,17 @@ function donate_choose(value){
     sponsor = document.getElementById('sponsor')
     trans_slip = document.getElementById('trans_slip')
     sel_comm = document.getElementById('sponsee')
-    sel_event = document.getElementById('event')
 
     if (value==1){
         comm.className="column"
         events.className="hidden"
         sponsor.className="column"
         trans_slip.className="columns"
-        sel_event.value=''
+
+        if (sel_event){
+    		sel_event.value=''
+		}
+        
     }
     else{
         comm.className="hidden"
@@ -375,6 +385,7 @@ function donation(value){
     sponsor = document.getElementById('sponsor')
     trans_slip = document.getElementById('trans_slip')
     give_to = document.getElementById('give_to')
+    sel_give = document.getElementById('give_to-0')
     sel_comm = document.getElementById('sponsee')
     sel_event = document.getElementById('event')
     sel_sponsor = document.getElementById('sponsor')
@@ -389,8 +400,36 @@ function donation(value){
         sponsor.className="hidden"
         trans_slip.className="hidden"
         sel_comm.value=''
-        sel_event.value=''
-        sel_sponsor.value=''
+        sel_sponsor.value='1'
+        sel_give.checked=true
+        if (document.getElementById('event')){
+    		sel_event.value=''
+		}
+    }
+
+}
+
+function item_add(value){
+
+	item_div = document.getElementById('item_div')
+    new_item = document.getElementById('new_item')
+    new_ctrl = document.getElementById('name')
+    existing = document.getElementById('existing_item')
+    
+    if (value==1){
+    	item_div.className="columns"
+    	new_item.className="column"
+    	existing.className="hidden"
+    	new_ctrl.value=''
+    	if (document.getElementById('items')){
+    		exist_ctrl.value=''
+    	}
+    }
+    else{
+    	item_div.className="columns"
+    	new_item.className="hidden"
+    	existing.className="column"
+    	new_ctrl.value='-'
     }
 
 }

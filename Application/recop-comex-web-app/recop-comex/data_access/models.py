@@ -338,7 +338,7 @@ class proposal_tracker(db.Model):
 			fmi_signed = None,
 			approved_on = None,
 			comment = None,
-			status = 'N')
+			status = value[2])
 
 		db.session.add(record)
 		db.session.commit()
