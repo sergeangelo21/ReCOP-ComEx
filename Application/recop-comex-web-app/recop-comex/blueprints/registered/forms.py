@@ -43,3 +43,7 @@ class PasswordUpdateForm(FlaskForm):
     oldpassword = PasswordField('Old Password')
     password = PasswordField('Password', [validators.Length(min=0, max=60)])
     submit = SubmitField('Update')
+
+class SearchForm(FlaskForm):
+    search = StringField("Search", validators=[DataRequired()])
+    submit = SubmitField("Search")
