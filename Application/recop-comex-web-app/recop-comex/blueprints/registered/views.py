@@ -221,7 +221,7 @@ def referral_users():
 		flash('Referral has been sent!', 'success')
 		return redirect(url_for('registered.referral_users'))	
 
-	return render_template('/linkages/referral/index.html', form=form)
+	return render_template('/registered/referral/index.html', form=form)
 
 @registered.route('/registered/contactus')
 @login_required

@@ -2,68 +2,47 @@
 
 {% block content %}
 
-		<div class="notification gold">
-		    <figure class="media-left"> 
-                <a href="{{url_for('linkages.referral')}}" class="">
-              </span>
-                <span>Do you know someone can help us?</span>
-                </a>
-            </figure>
-			<div class="columns is-centered">
-				<div class="column search-box">
-					<div class="field has-addons has-addons-centered is-pulled-right">
-						<p class="control">
-						    <input class="input" type="text" placeholder="Search">
-						</p>
-						<p class="control">
-						    <a class="button search">
-						      Search
-						    </a>
-						</p>
-					</div>
+	<div class="notification gold">
+		<div class="columns is-centered">
+			<div class="column">
+				<a href="{{url_for('communities.referral_users')}}" class="button is-warning">
+	            	<span>Do you know someone can help us?</span>
+	            </a>
+			</div>
+			<div class="column search-box">
+				<div class="field has-addons has-addons-centered is-pulled-right">
+					<p class="control">
+					    <input class="input" type="text" placeholder="Search">
+					</p>
+					<p class="control">
+					    <a class="button search">
+					      Search
+					    </a>
+					</p>
 				</div>
 			</div>
 		</div>
+	</div>
 
-<!--  -->
-<div class="container">
- 	<div class="columns padding">
- 		<div class="column is-one-quarter">
- 			<div class="card select-list has-text-centered">
- 				<div class="card-image">
- 					<div class="level">
- 						<div class="level-item">
- 							<img class="picture" src="../../../static/images/beneficiary.jpg">					
- 						</div>
- 					</div>
- 				</div>
- 				<div class="card-content">
- 					<div class="title is-5">Barangay 11 Lawin</div>
-        			<p class="subtitle is-7 has-text-grey">San Roque Cavite City</p>
- 					<div class="button event-btn">More Details</div> 
- 				</div>
- 			</div>
- 		</div>
- 		<div class="column is-one-quarter">
- 			<div class="card select-list has-text-centered">
- 				<div class="card-image">
- 					<div class="level">
- 						<div class="level-item">
- 							<img class="picture" src="../../../static/images/beneficiary.jpg">					
- 						</div>
- 					</div>
- 				</div>
- 				<div class="card-content">
- 					<div class="title is-5">Barangay 11 Lawin</div>
-        			<p class="subtitle is-7 has-text-grey">San Roque Cavite City</p>
- 					<div class="button event-btn">More Details</div> 
- 				</div>
- 			</div>
+	<!--  -->
+	<div class="columns">
+		<div class="column">
+			<div class="columns padding-el is-multiline">
+				<table class="table is-fullwidth">
+					<tbody>
 
- 		</div>
+						<tr class = "table-row">
+							<td class = "has-text-centered">---Nothing to show---</td>
+					 	</tr>
+						
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 
-	 </div>
- </div>
+		
+
 
 
 

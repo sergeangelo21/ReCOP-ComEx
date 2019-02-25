@@ -48,6 +48,10 @@
 		background-color: white;
 	}
 
+  .filter-dropdown{
+    width: 150px;
+  }
+
 	/*		BUTTONS		*/
 	.button.submit, .button.send, .button.search, .button.add{
 		background-color: #072000; 
