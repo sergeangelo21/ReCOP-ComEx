@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.communities.forms import *
-from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation
+from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation, referral
 from data_access.queries import user_views, linkage_views, community_views, event_views
 
-from static.email import send_referral
+from static.email import send_email
 from extensions import db, bcrypt
 from datetime import datetime
 
@@ -99,8 +99,6 @@ def linkages(search):
 
 	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, search=search)
 
-
-
 @communities.route('/communities/linkages/show/id=<id>')
 @login_required
 def linkage_show(id):
@@ -108,31 +106,6 @@ def linkage_show(id):
 	linkage, mem_since = linkage_views.show_info(id)
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
-
-
-
-@communities.route('/communities/linkages/referral', methods=['GET', 'POST'])
-@login_required
-def linkage_referral():
-
-	form = ReferralForm()
-
-	if form.validate_on_submit():
-
-		html = 'asdlkfjasfd'
-		subject = 'REFFERAL: '
-		admin = user_account.query.filter_by(id=1).first()
-
-		send_referral()
-
-		value = [None, current_user.id, form.name.data, form.email.data, 'L', 'N']
-
-		flash('Referral has been sent!', 'success')
-		return redirect(url_for('communities.linkages'))	
-
-	return render_template('/communities/linkages/referral.html', title="Referral", form=form, linkages=linkages)
-
-
 
 @communities.route('/communities/members/filter_<search>', methods=['GET', 'POST'])
 @login_required
@@ -187,6 +160,30 @@ def members_add():
 def reports():
 
 	return render_template('/communities/reports/index.html', title="Communities")
+
+@communities.route('/communities/referral', methods=['GET', 'POST'])
+@login_required
+def referral_users():
+
+	form = ReferralForm()
+
+	if form.validate_on_submit():
+
+		html = 'asdlkfjasfd'
+		subject = 'REFFERAL: '
+		admin = user_account.query.filter_by(id=1).first()
+
+		email_parts = [html, subject, admin.email_address, form.email.data, None]
+		send_email(email_parts)
+
+		value = [None, current_user.id, form.name.data, form.email.data, form.type.data, 'N']
+
+		referral.add(value)
+
+		flash('Referral has been sent!', 'success')
+		return redirect(url_for('communities.referral_users'))	
+
+	return render_template('/communities/referral/index.html', title="Communities", form=form)
 
 @communities.route('/communities/contactus')
 @login_required

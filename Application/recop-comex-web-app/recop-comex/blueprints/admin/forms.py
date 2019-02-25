@@ -72,3 +72,6 @@ class PasswordUpdateForm(FlaskForm):
     submit = SubmitField('Update')
 
 
+class PaginationForm(FlaskForm):
+    page = TextAreaField('Say something', validators=[DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Submit')

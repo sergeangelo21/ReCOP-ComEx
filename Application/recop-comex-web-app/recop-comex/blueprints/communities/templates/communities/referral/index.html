@@ -11,7 +11,7 @@
 					      	<div class="column">
 					      		<article class="media">
 									<figure class="media-left">
-									    <a class="btn btn-follow btn-sm text-center" href="{{url_for('communities.linkages', search=' ')}}" role="button">
+									    <a class="btn btn-follow btn-sm text-center" href="{{url_for('communities.index')}}" role="button">
 											<span class="back-icon">
 									  			<i class="fas fa-arrow-circle-left fa-2x"></i>
 									  		</span>
@@ -55,6 +55,19 @@
 		                                {% endfor %}
 		                                <span class="icon is-small is-left">
 		                                    <i class="fas fa-envelope"></i>
+		                                </span>
+		                            </div>
+		                        </div>
+
+		                        <div class="field">
+		                            {{form.type.label(class_='label')}}
+		                            <div class="control has-icons-left">
+		                                {{form.type(class_='input')}}
+		                                {% for error in form.type.errors %}
+		                                <span style="color: red;">[{{ error }}]</span>
+		                                {% endfor %}
+		                                <span class="icon is-small is-left">
+		                                    <i class="fas fa-users"></i>
 		                                </span>
 		                            </div>
 		                        </div>

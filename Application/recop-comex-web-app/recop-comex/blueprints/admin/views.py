@@ -65,7 +65,10 @@ def events(status, search):
 
 	form = SearchForm()
 
+
 	if form.validate_on_submit():
+
+
 
 		return redirect(url_for('admin.events', status=status, search=form.search.data))
 
