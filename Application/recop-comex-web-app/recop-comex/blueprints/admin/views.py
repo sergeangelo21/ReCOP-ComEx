@@ -182,8 +182,33 @@ def events_create():
 
 		return redirect(url_for('admin.events', status='all', search=' '))
 
-
 	return render_template('/admin/events/create.html', form=form)
+
+@admin.route('/admin/events/reschedule/id=<id>', methods=['GET', 'POST'])
+@login_required
+def event_reschedule(id):
+
+	form = RescheduleEventForm()
+
+	resched_event = event_information.reschedule(current_user.id)
+
+	if form.validate_on_submit():
+
+		resched_event.location = form.location.data
+		resched_event.event_date = form.event_date.data
+
+		db.session.commit()
+
+		flash('Event rescheduled!', 'success')
+
+		return redirect(url_for('admin.events', status='all', search=' '))
+
+	else:
+
+		form.location.data = resched_event.location
+		form.event_date.data = resched_event.event_date
+
+	return render_template('/admin/events/reschedule.html', form=form, event=resched_event)
 
 @admin.route('/admin/events/<action>/id=<id>')
 @login_required

@@ -201,6 +201,12 @@ class event_information(db.Model):
 		event.event_status = status
 		db.session.commit()		
 
+	def reschedule(value):
+
+		record = event_information.query.filter_by(id=value).first()
+
+		return record
+
 class event_participation(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -453,7 +459,6 @@ class user_account(db.Model, UserMixin):
 		user.last_active = datetime.now()
 
 		db.session.commit()
-
 
 	def profile_acc_update(value):
 

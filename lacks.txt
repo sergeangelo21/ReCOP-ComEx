@@ -53,7 +53,7 @@ validations
 error traps
 footer update-terms|referral|contact us (leen)
 filter (marian)
-event reschedule and cancellation(alexx)
+event reschedule (OK 02-25) and cancellation(alexx)
 event show -status button under the blahblah (marian)
 finish reports (serge)
 linkages create(alex)
