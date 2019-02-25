@@ -36,7 +36,7 @@ class DonationForm(FlaskForm):
 
 class ReferralForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
-    email_address = StringField('Email Address', validators=[DataRequired()])
+    email = StringField('Email Address', validators=[DataRequired()])
     type = SelectField('Type', choices=[('', 'Please Choose One'), ('1', 'Volunteer'), ('2', 'Linkage'), ('3', 'Community')])
     submit = SubmitField('Submit')
 
