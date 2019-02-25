@@ -1,5 +1,5 @@
 Unregistered
-events calendar
+events calendar (ivan)
 home text overlay(leen)
 communities tab 
 donate layout(leen)
@@ -12,25 +12,35 @@ events organized/attended
 feedbacks
 inventory give and dispose
 
-
 Linkages
-events calendar
+events calendar (ivan)
 Dashboard
 LINKAGES MENU
 Communities query
 Conduct event (attendance->evaluation of participant->photos/description)
 Donation button na lang for comm and event na di sila nagorganize
 Reports(All finished events/proposals nakatab)
+Search events
+Volunteers(serge)
+Remove reports|contact us
 
 Communities
-event calendar
+event calendar (ivan)
 Dashboard
 reports
+communities menu
+remove contact us report 
+members view info
 
 Registered
 Dashboard
 events
 linkages
+join event
+calendar (ivan)
+Search
+remove contact us | terms and condition
+
 
 General (Maybe kaartehan)
 
@@ -55,10 +65,8 @@ Donation (give)
 Inventory (give)
 removed feedbacks
 referral (alex)
-
-
-
-
+normalized 
+pdf css static
 
 Serge: Create Celery Instance for email and pdf generation
        Change pdf plugin to xhtmltopdf
