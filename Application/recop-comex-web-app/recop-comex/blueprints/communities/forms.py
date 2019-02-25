@@ -14,7 +14,7 @@ class AddMemberForm(FlaskForm):
     birthday = DateField('Birthday', validators=[DataRequired()])
     is_employed = RadioField(choices=[("Y","Yes"),("N","No")], validators=[DataRequired()])
     occupation = StringField('Occupation')
-    income = IntegerField('Income')
+    income = StringField('Income')
     religion = StringField('Religion', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
     telephone = StringField('Telephone Number', [validators.Length(min=7, max=15)])

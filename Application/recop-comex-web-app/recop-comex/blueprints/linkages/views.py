@@ -70,7 +70,7 @@ def events(status, search):
 
 		flash('Letter successfully attached!', 'success')
 
-		return redirect(url_for('linkages.events'))
+		return redirect(url_for('linkages.events', status='all', search=' '))
 
 	return render_template('/linkages/events/index.html', events=events, letters=letters,status=status, search=search, date = datetime.now() ,form=form)
 
