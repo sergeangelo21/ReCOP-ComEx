@@ -23,6 +23,8 @@
 									    		Scheduled
 									    	{% elif event.event_status=='X' %}
 									    		Declined
+									    	{% elif event.event_status=='C' %}
+									    		Cancelled
 									    	{% elif event.event_status=='P' %}
 									    		{% if event.status=='A' %}
 									    			For Academic's Signing
