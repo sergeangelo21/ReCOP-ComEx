@@ -48,8 +48,13 @@
 		background-color: white;
 	}
 
+  .select.is-warning select{
+    border-color: #ecad00;
+  }
+
   .filter-dropdown{
     width: 150px;
+    border-color: black;
   }
 
 	/*		BUTTONS		*/
@@ -66,6 +71,12 @@
 
   .button.search{
     font-family: monospace;
+  }
+
+  .search-show{
+    padding-left: 10px;
+    padding-right: 10px;
+    box-shadow: none;
   }
 	
 	a.button.viewbtn{
@@ -287,6 +298,10 @@
 		transform: translateX(6%);
 		width: 90%;
 	}
+
+  .referral{
+    margin-top: -160px;
+  }
 
 	.fa-arrow-circle-left{
 		color: #072000; 
@@ -522,7 +537,30 @@
   padding: 5px;
   height: 180px;
   display: flex;
+}
 
+.refer{
+  cursor: pointer;
+  display: inline-block;
+  transition: 0.5s;
+}
+
+.refer:after {
+  content: '»';
+  font-weight: bold;
+  opacity: 0; 
+  right: -20px;
+  transition: 0.5s;
+}
+
+.refer:hover{
+  padding-right: 15px;
+  padding-left:8px;
+}
+
+.refer:hover:after {
+  opacity: 1;
+  right: 10px;
 }
   
 
@@ -649,7 +687,7 @@ Modules - reusable parts of our design
 	/* EVENTS */
 	@media only screen and (max-width: 768px) {
 		  /* For mobile phones: */
-		  .view-icons{
+		  .view-icons, .search-box, .refer-center, .send{
 				align-items: center;
         display: flex;
         justify-content: center;
@@ -689,15 +727,7 @@ Modules - reusable parts of our design
         position: relative;
       }
     /* FILTER END */
-
-    /* SERCH BOX  */
-    .search-box{
-        align-items: center;
-        display: flex;
-        justify-content: center;
-      }
-      /* SEARCH BAR END  */
-    }
+  }
 /*   END  *   /
 
 
@@ -747,7 +777,7 @@ Modules - reusable parts of our design
         height: auto;
         margin-left: auto; 
       }  
-    }
+  }
 /*  END  */
 
 /*DONATE*/
