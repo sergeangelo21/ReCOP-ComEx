@@ -58,7 +58,7 @@
 											{% endif %}
 											{% endfor %}
 											{% elif event.event_status=='S' %}
-											<a class="button is-link tooltip" data-tooltip="Reschedule" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
+											<a class="button is-link tooltip" data-tooltip="Reschedule" href="{{url_for('admin.event_reschedule', id=event.id)}}">
 												<span class="icon">
 													<i class="fas fa-clock"></i>
 												</span>

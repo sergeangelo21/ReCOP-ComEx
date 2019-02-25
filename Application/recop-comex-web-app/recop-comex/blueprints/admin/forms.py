@@ -25,6 +25,11 @@ class ProposalForm(FlaskForm):
     programme = FileField('Programme', validators=[FileRequired(), FileAllowed(['doc', 'docx'], 'Invalid file!')])
     submit = SubmitField('Submit')
 
+class RescheduleEventForm(FlaskForm):
+    location = StringField('Venue')
+    event_date = DateField('New Date')
+    submit = SubmitField('Update')
+
 class NewInventoryForm(FlaskForm):
     item_type = RadioField('Item to be added', choices=[('1','New'), ('2','Existing')], validators=[DataRequired()])
     name = StringField('Item Name', validators=[DataRequired()])
