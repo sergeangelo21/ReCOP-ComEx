@@ -7,13 +7,12 @@
 						<img class="image is-128x128" src="../../../static/images/gg.png">
 					</div>
 				</div>
-
 	      		<div class="title is-5">{{ event.name }}</div>
 	      		<p class="subtitle is-6">
 	      			<i class="fas fa-calendar"></i>&nbsp; {{event.event_date.strftime('%B %e, %Y')}}</br>
 					<i class="fas fa-map-marker-alt"></i>&nbsp; {{ event.location }}
 				</p>
-	      		
+
 	      		<div class="button event-btn" onclick="show_event('{{event.id}}')">More Details</div>	
 			</div>
 		</div>
@@ -23,9 +22,9 @@
   		<div class="modal-background"></div>
   			<div class="modal-card">
     			<header class="modal-card-head">
-      				<p class="modal-card-title has-text-white">{{event.name}}</p>
+    				<p class="modal-card-title has-text-white">{{event.name}}</p>
       				<button class="delete" onclick="close_event('{{event.id}}')"></button>
-    		</header>
+				</header>
     		<div class="overlay-card-modal has-text-centered">
 		    	<div class="circular-event">
 		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
@@ -39,7 +38,7 @@
 						    Information
 						    </p>
 					  	</header>
-					  	<div class="card-content show-modal">
+					  	<div class="card-content event-modal">
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
@@ -161,59 +160,11 @@
 						</div>
 					</div>
 			    </div>
-      		</section>
+
+	  		</section>
     	
-    		<footer class="modal-card-foot buttons is-centered">
-	    			{% if event.address=='San Sebastian College Recoletos de Cavite' %}
-	    			<div class="columns"{% for attach in letters %}{% if attach.event_id==event.id %}style="display:none"{% endif %}{% endfor %}">
-	    				<div class="column">
-	    					<a href="{{url_for('linkages.event_letter', id = event.id, name = event.name)}}" target='_blank' class="level-item">
-			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-download"></i></span>&nbsp Request Letter</button>
-							</a>
-	    				</div>
-	    				<div class="column">
-		    		<form action="" method="POST" enctype="multipart/form-data">
-		    		{{form.hidden_tag()}}
-							<div class="file">
-							  <label class="file-label">
-								{{form.attach_letter(class_='file-input')}}
-							    <span class="file-cta">
-							      <span class="file-icon">
-							        <i class="fas fa-paperclip"></i>
-							      </span>
-							      <span class="file-label">
- 							       Signed Letter
-							      </span>
-							    </span>
-							  </label>
-								{{form.event_id(hidden='True', value = event.id)}}
-								{{form.submit(class_='button is-success')}}
-							</div>						
-	    			  </form>
-	    			</div>
-	    		</div>
-	    			{% endif %}	
-	    			{% if event.status=='S' %}
-	    			<div class="columns">
-	    				<div class="column">
-	    					<a href="" class="level-item">
-			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Reschedule</button>
-							</a>
-	    				</div>
-	    				<div class="column">
-	    					<a href="" class="level-item">
-			  					<button class="button is-danger"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Cancel</button>
-							</a>
-	    				</div>
-	    			  {% if event.event_date.strftime('%B %e, %Y')==date.strftime('%B %e, %Y') %}
-	    				<div class="column">
-	    					<a href="" class="level-item">
-			  					<button class="button is-success"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Conduct Event</button>
-							</a>
-	    				</div>
-	    			  {% endif %}
-	    			</div>
-	    			{% endif %}
+			<footer class="modal-card-foot buttons is-right">
+    			<button class="button is-info">Join Event</button>
     		</footer>
   		</div>
 	</div>
