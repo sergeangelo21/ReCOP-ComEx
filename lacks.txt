@@ -53,18 +53,18 @@ validations
 error traps
 footer update-terms|referral|contact us (leen)
 filter (marian)
-event reschedule (OK 02-25) and cancellation(alexx)
+event reschedule (OK 02-25) and cancellation(alexx) (OK 02-25)
 event show -status button under the blahblah (marian)
 finish reports (serge)
 linkages create(alex)
 graphs(alex)
-communities add (alex)
+communities add (ADMIN) (alex)
 linkage show(serge)
 communities (palitan ng members ung settings)
 Donation (give)
 Inventory (give)
 removed feedbacks
-referral (alex)
+referral (alex) (OK 02-25)
 normalized 
 pdf css static
 

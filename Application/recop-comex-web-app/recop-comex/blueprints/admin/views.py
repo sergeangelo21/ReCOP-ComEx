@@ -54,6 +54,8 @@ def events(status, search):
 		value='P'
 	elif status=='declined':
 		value='X'
+	elif status=='cancelled':
+		value='C'
 	elif status=='finished':
 		value='F'
 	else:

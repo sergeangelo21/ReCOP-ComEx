@@ -286,12 +286,6 @@ def donate():
 
 	return render_template('/linkages/donate/index.html', form=form, no_event=no_event)
 
-@linkages.route('/linkages/reports')
-@login_required
-def reports():
-
-	return render_template('/linkages/reports/index.html')
-
 @linkages.route('/linkages/referral', methods=['GET', 'POST'])
 @login_required
 def referral_users():
