@@ -5,7 +5,7 @@ from data_access.models import user_account, user_information, audit_trail, prop
 from data_access.queries import user_views, event_views, linkage_views
 from datetime import datetime
 
-from static.email import confirm, generate, send_email, send_email_resetpassword
+from static.email import confirm, generate, send_email
 from extensions import db, bcrypt
 
 import os, json, random, string
@@ -32,18 +32,7 @@ def linkages():
 	linkages = linkage_views.show_list('A', 3, ' ')
 
 	return render_template('/unregistered/linkages/index.html', linkages=linkages)
-
-@unregistered.route('/linkages/referral')
-def referral():
-
-	form = ReferralForm()
-
 	
-
-	
-
-	return render_template('/unregistered/linkages/referral.html', linkages=linkages, form=form)
-
 @unregistered.route('/donate', methods=['GET', 'POST'])
 def donate():
 
@@ -208,8 +197,8 @@ def forgot_password():
 			subject = 'RESET PASSWORD: '
 			admin = user_account.query.filter_by(id=1).first()
 
-			email_parts = [token, subject, admin.email_address, email]
-			send_email_resetpassword(email_parts)
+			email_parts = [token, subject, admin.email_address, email, None]
+			send_email(email_parts)
 
 			flash('Password has been reset. Please check your email.', 'success')
 			return redirect(url_for('unregistered.forgot_password'))

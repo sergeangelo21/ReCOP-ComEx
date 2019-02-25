@@ -1,33 +1,46 @@
 Unregistered
-events calendar
+events calendar (ivan)
+home text overlay(leen)
+communities tab 
+donate layout(leen)
+refer someone(leen) 
 
 Admin
-
 Dashboard
 Event reports
 events organized/attended	
 feedbacks
 inventory give and dispose
 
-
 Linkages
-events calendar
+events calendar (ivan)
 Dashboard
 LINKAGES MENU
 Communities query
 Conduct event (attendance->evaluation of participant->photos/description)
 Donation button na lang for comm and event na di sila nagorganize
 Reports(All finished events/proposals nakatab)
+Search events
+Volunteers(serge)
+Remove reports|contact us
 
 Communities
-event calendar
+event calendar (ivan)
 Dashboard
 reports
+communities menu
+remove contact us report 
+members view info
 
 Registered
 Dashboard
 events
 linkages
+join event
+calendar (ivan)
+Search
+remove contact us | terms and condition
+
 
 General (Maybe kaartehan)
 
@@ -38,7 +51,22 @@ change dp
 filters dropdown
 validations
 error traps
-
+footer update-terms|referral|contact us (leen)
+filter (marian)
+event reschedule and cancellation(alexx)
+event show -status button under the blahblah (marian)
+finish reports (serge)
+linkages create(alex)
+graphs(alex)
+communities add (alex)
+linkage show(serge)
+communities (palitan ng members ung settings)
+Donation (give)
+Inventory (give)
+removed feedbacks
+referral (alex)
+normalized 
+pdf css static
 
 Serge: Create Celery Instance for email and pdf generation
        Change pdf plugin to xhtmltopdf

@@ -448,7 +448,7 @@ def donation_action(id,action):
 		filepath = info.transaction_slip
 		name = filepath.rsplit('/',1)[1]
 		path = filepath.rsplit('/',1)[0]
-		return send_from_directory(path, name, title='asd')	
+		return send_from_directory(path, name)	
 
 	elif action=='receive':
 

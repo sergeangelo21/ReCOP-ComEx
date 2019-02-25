@@ -373,13 +373,13 @@ class referral(db.Model):
 
 	def add(value):
 
-		record = user_account(
+		record = referral(
 			id=value[0], 
 			referrer_id=value[1],
 			name=value[2],
 			email_address=value[3],
 			type=value[4],
-			status=value[5],
+			status=value[5]
 			)
 			 
 		db.session.add(record)

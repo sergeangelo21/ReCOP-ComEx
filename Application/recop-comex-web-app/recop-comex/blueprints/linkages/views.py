@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, send_from_directory
 from flask_login import current_user, login_required
 from blueprints.linkages.forms import *
-from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, donation
+from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, donation, referral
 from data_access.queries import user_views, linkage_views, event_views
 from extensions import db, bcrypt
+from static.email import send_email
 from static.pdf import generate_pdf
 from datetime import datetime
 
@@ -70,7 +71,7 @@ def events(status, search):
 
 		flash('Letter successfully attached!', 'success')
 
-		return redirect(url_for('linkages.events'))
+		return redirect(url_for('linkages.events', status='all', search=' '))
 
 	return render_template('/linkages/events/index.html', events=events, letters=letters,status=status, search=search, date = datetime.now() ,form=form)
 
@@ -173,14 +174,6 @@ def communities():
 
 	return render_template('/linkages/communities/index.html')
 
-@linkages.route('/linkages/communities/referral')
-@login_required
-def referral():
-
-	form = ReferralForm()
-
-	return render_template('/linkages/communities/referral.html', form=form)
-
 @linkages.route('/linkages/donate', methods=['GET', 'POST'])
 @login_required
 def donate():
@@ -239,6 +232,30 @@ def donate():
 def reports():
 
 	return render_template('/linkages/reports/index.html')
+
+@linkages.route('/linkages/referral', methods=['GET', 'POST'])
+@login_required
+def referral_users():
+
+	form = ReferralForm()
+
+	if form.validate_on_submit():
+
+		html = 'asdlkfjasfd'
+		subject = 'REFFERAL: '
+		admin = user_account.query.filter_by(id=1).first()
+
+		email_parts = [html, subject, admin.email_address, form.email.data, None]
+		send_email(email_parts)
+
+		value = [None, current_user.id, form.name.data, form.email.data, form.type.data, 'N']
+
+		referral.add(value)
+
+		flash('Referral has been sent!', 'success')
+		return redirect(url_for('linkages.referral_users'))	
+
+	return render_template('/linkages/referral/index.html', form=form)
 
 @linkages.route('/linkages/contactus')
 @login_required

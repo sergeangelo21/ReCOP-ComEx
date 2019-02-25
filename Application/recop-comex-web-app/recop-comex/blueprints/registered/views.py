@@ -199,6 +199,30 @@ def donate():
 
 	return render_template('/registered/donate/index.html', form=form, no_event=no_event)
 
+@registered.route('/registered/referral', methods=['GET', 'POST'])
+@login_required
+def referral_users():
+
+	form = ReferralForm()
+
+	if form.validate_on_submit():
+
+		html = 'asdlkfjasfd'
+		subject = 'REFFERAL: '
+		admin = user_account.query.filter_by(id=1).first()
+
+		email_parts = [html, subject, admin.email_address, form.email.data, None]
+		send_email(email_parts)
+
+		value = [None, current_user.id, form.name.data, form.email.data, form.type.data, 'N']
+
+		referral.add(value)
+
+		flash('Referral has been sent!', 'success')
+		return redirect(url_for('registered.referral_users'))	
+
+	return render_template('/linkages/referral/index.html', form=form)
+
 @registered.route('/registered/contactus')
 @login_required
 def contactus():
