@@ -277,6 +277,12 @@ class inventory(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
+	def item_breakdown():
+
+		record = inventory.query.all()
+
+		return record
+
 class inventory_type(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)

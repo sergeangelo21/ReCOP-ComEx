@@ -637,6 +637,7 @@ class inventory_views():
 		record = inventory.query.join(
 			inventory_type
 			).add_columns(
+			inventory.type_id,
 			inventory_type.name,
 			func.SUM(inventory.in_stock).label('in_stock'),
 			func.SUM(inventory.given).label('given'),

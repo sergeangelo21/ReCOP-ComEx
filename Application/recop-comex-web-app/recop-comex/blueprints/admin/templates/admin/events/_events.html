@@ -8,7 +8,8 @@
 									    	{% endfor %}
 									    	{% if event.address!='San Sebastian College Recoletos de Cavite' and event.organizer_id!=1 %}
 									    		<a class="tooltip" data-tooltip="Non-Institutional"><i class="fas fa-asterisk"></i></a>
-									    	{% else %}
+									    	{% endif %}
+									    	{% if event.organizer_id==1 %}
 									    		<a class="tooltip" data-tooltip="ReCOP Event"><i class="fas fa-star"></i></a>
 									    	{% endif %}
 									    </td>

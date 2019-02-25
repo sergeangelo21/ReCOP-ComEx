@@ -509,13 +509,13 @@ def inventory_show(search):
 
 	items = inventory_views.show_list()
 
-	types = inventory_type.show_list()
+	breakdown = inventory.item_breakdown()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('admin.communities', search=form.search.data))
 
-	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items,types=types, search=search)
+	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items, breakdown=breakdown, search=search)
 
 @admin.route('/admin/inventory/add', methods=['GET', 'POST'])
 @login_required
