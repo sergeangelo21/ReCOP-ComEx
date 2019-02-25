@@ -34,7 +34,7 @@ def index():
 
 	return render_template('/linkages/index.html')
 
-@linkages.route('/linkages/events/<status>/filter_<search>', methods=['GET','POST'])
+@linkages.route('/linkages/events/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def events(status, search):
 
@@ -50,32 +50,40 @@ def events(status, search):
 		value='F'
 	else:
 		value=status
-		
-	events = event_views.events_organized(status, search)
+
+	events = event_views.show_list(value, search)
 
 	letters = event_attachment.letter_attached()
 
-	form = AttachLetterForm()
+	form = SearchForm()
+
 
 	if form.validate_on_submit():
 
-		attach_letter = form.attach_letter.data
-		old, extension = os.path.splitext(attach_letter.filename)
-		filename = str(form.event_id.data)+extension
-		file_path = 'static/attachment/signed_letter/' + filename
 
-		value = [None,form.event_id.data,file_path,3]
 
-		event_attachment.add(value)
-		attach_letter.save(file_path)
+		return redirect(url_for('linkages.events', status=status, search=form.search.data))
 
-		flash('Letter successfully attached!', 'success')
+	return render_template('/linkages/events/index.html', title="Events | linkages", form=form, events=events, status=status,letters=letters,search=search)
 
-		return redirect(url_for('linkages.events', status='all', search=' '))
+@linkages.route('/linkages/events/calendar', methods=['GET', 'POST'])
+@login_required
+def events_calendar():
 
-	return render_template('/linkages/events/index.html', events=events, letters=letters,status=status, search=search, date = datetime.now() ,form=form)
+	events = event_views.show_list('S', ' ')
+	
+	return render_template('/linkages/events/index-calendar.html', title="Events | linkages", events=events)
+	
+@linkages.route('/linkages/events/show/id=<id>')
+@login_required
+def event_show(id):
 
-@linkages.route('/linkages/events/create', methods=['GET','POST'])
+	event = event_views.show_info(id)
+	participants = event_views.show_participants(id)
+
+	return render_template('/linkages/events/show.html', title= event.name.title() + " | linkages", event = event, participants=participants)
+
+@linkages.route('/linkages/events/create', methods=['GET', 'POST'])
 @login_required
 def events_create():
 
@@ -96,24 +104,22 @@ def events_create():
 
 		det = user_information.linkage_info(current_user.info_id)
 
-		if det.address=='San Sebastian College Recoletos de Cavite':
+		if det.company_name=='San Sebastian College Recoletos de Cavite':
 			event_type=1
-			msg='Please download and attach the request letter once signed.'
 		else:
 			event_type=2
-			msg='Please wait for the approval.'
 
 		value = [
 		None,current_user.info_id,form.title.data,
 		form.description.data,form.objective.data,form.budget.data,form.location.data,
 		form.event_date.data,form.participant_no.data, form.min_age.data, form.max_age.data,
-		form.thrust.data,event_type,'N'
+		form.thrust.data,event_type,'P'
 		]
 
 		
 		event_information.add(value)
 
-		event = event_information.last_added(current_user.info_id)
+		event = event_information.last_added(current_user.id)
 
 		if form.target_link.data:
 
@@ -145,28 +151,81 @@ def events_create():
 		event_attachment.add(value)
 		programme.save(file_path)
 
-		value = [None, event.id,'N']
+		signatory = user_views.signatory_info(4)
+
+		recipient = signatory.email_address
+		user = 'Fr. ' + signatory.last_name + ', OAR'
+		token = generate(event.id)
+		organizer='Recoletos Community Outreach Program Office'
+		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
+		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
+		html = render_template('linkages/email/event.html', event=event , organizer=organizer, user=user, link = [approve, decline])
+		attachments = event_attachment.retrieve_files(event.id)
+		subject = "NEW EVENT PROPOSAL: " + event.name
+
+		email_parts = [html, subject, current_user.email_address, recipient, attachments]
+
+		send_email(email_parts)
+
+		value = [None, event.id, 'A']
 		proposal_tracker.add(value)
 
-		flash('Event proposal submitted! ' + msg, 'success')
+		flash('Event proposal submitted! Please wait for the approval.', 'success')
 
 		return redirect(url_for('linkages.events', status='all', search=' '))
 
+
 	return render_template('/linkages/events/create.html', form=form)
 
-@linkages.route('/linkages/events/letter/<id>_<name>', methods=['GET', 'POST'])
+@linkages.route('/linkages/events/<action>/id=<id>')
 @login_required
-def event_letter(id,name):
+def event_action(id, action):
 
-	filepath = 'static/output/events/letters/'
+	event = event_information.retrieve_event(id)
+	organizer = user_information.linkage_info(event.organizer_id)
+	email = user_account.retrieve_user(organizer.id)
 
-	event = event_views.show_info(id)
+	if action=='approve':
 
-	html = render_template('linkages/pdf/pdf.html', event = event, date = datetime.now())
+		signatory = user_views.signatory_info(4)
+		status = ['P','A']
 
-	generate_pdf(html, filepath + str(id) + '.pdf')
+		recipient = signatory.email_address
+		user = 'Fr. ' + signatory.last_name + ', OAR'
+		token = generate(event.id)
+		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
+		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
+		html = render_template('linkages/email/event.html', event=event , organizer=organizer.company_name, user=user, link = [approve, decline])
+		attachments = event_attachment.retrieve_files(id)
+		subject = "NEW EVENT PROPOSAL: " + event.name
 
-	return send_from_directory(filepath, str(id) +'.pdf')
+		email_parts = [html, subject, current_user.email_address, recipient, attachments]
+
+		send_email(email_parts)
+
+		event_information.update_status(event.id,status[0])
+		proposal_tracker.update_status(event.id,status[1])
+
+		proposal = proposal_tracker.query.filter(proposal_tracker.event_id==event.id).first()
+
+		value = [None,current_user.id,event.id,'event', 5]
+		audit_trail.add(value)
+
+		flash(event.name + ' was approved!', 'success')
+
+	elif action=='decline':
+
+		status='X'
+		proposal_tracker.update_status(event.id, status)
+		event_information.update_status(event.id, status)
+
+		value = [None,current_user.id,event.id,'event', 6]
+		audit_trail.add(value)
+
+		flash(event.name + ' was declined.', 'info') 	
+
+
+	return redirect(url_for('linkages.events', status='all', search=' '))
 
 @linkages.route('/linkages/communities')
 @login_required
