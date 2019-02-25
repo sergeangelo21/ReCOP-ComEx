@@ -10,7 +10,7 @@ class DonationForm(FlaskForm):
     event = SelectField('Events', choices=[('', 'Please Choose One')])
     type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
     amount = StringField('Amount', validators=[DataRequired()])
-    trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    trans_slip   = FileField('Transaction Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     submit = SubmitField('Donate')
 
 class ProfilePersonalUpdateForm(FlaskForm):

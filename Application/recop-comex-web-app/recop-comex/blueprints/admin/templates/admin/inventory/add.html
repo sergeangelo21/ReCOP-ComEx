@@ -5,7 +5,7 @@
 	<section class="hero is-fullheight">
 		<div class="hero-body">
 			<div class="box white">
-				<form action="" method="POST">
+				<form action="" method="POST" enctype="multipart/form-data">
 					{{form.hidden_tag()}}
 					<div class="columns">
 				      	<div class="column">
@@ -26,7 +26,7 @@
 				    </div>
 				    <div class="columns">
 				      	<div class="column">
-				      		<p class="title has-text-centered">Add Type to Inventory</p>
+				      		<p class="title has-text-centered">Add Item to Inventory</p>
 				      	</div>
 			     	</div>
 
@@ -42,9 +42,6 @@
 							  	</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="columns">
 						<div class="column">
 							<div class="field">
 								{{form.quantity.label(class_='label')}}
@@ -56,8 +53,90 @@
 							  	</div>
 							</div>
 						</div>
+						<div class="column">
+							<div class="field">
+								{{form.is_donation.label(class_='label')}}
+							  	<div class="control">
+                                    {% for subfield in form.is_donation %}
+                                        <label class = "radio">
+                                          {{subfield(onclick='donation(this.value)')}}
+                                          {{subfield.label}}
+                                        </label>
+                                    {% endfor %}
+							  	</div>
+							</div>
+						</div>
 					</div>
-					
+
+					<div class="hidden" id="give_to">
+						<div class="column">
+							<div class="field">
+								{{form.give_to.label(class_='label')}}
+							  	<div class="control">
+                                    {% for subfield in form.give_to %}
+                                        <label class = "radio">
+                                          {{subfield(onclick='donate_choose(this.value)')}}
+                                          {{subfield.label}}
+                                        </label>
+                                    {% endfor %}
+							  	</div>
+							</div>
+						</div>
+						<div class="hidden" id="comm">
+							<div class="field">
+								{{form.sponsee.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.sponsee(class_='input', placeholder='Quantity', type='number')}}
+	                                {% for error in form.sponsee.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+						</div>
+						<div class="hidden" id="events">
+                        {% if no_event==0 %}
+							<div class="field">
+								{{form.event.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.event(class_='input', placeholder='Quantity', type='number')}}
+	                                {% for error in form.event.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+                        {% else %}
+                            <div class="field">
+                                <div class="control">
+                                    Sorry there are no scheduled events as of the moment
+                                </div>
+                            </div>
+                        {% endif %}
+						</div>
+						<div class="hidden" id="sponsor">
+							<div class="field">
+								{{form.sponsor.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.sponsor(class_='input', placeholder='Quantity', type='number')}}
+	                                {% for error in form.event.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+						</div>
+					</div>
+					<div class="hidden" id="trans_slip">
+						<div class="column">
+							<div class="field">
+								{{form.trans_slip.label(class_='label')}}
+							  	<div class="control">
+                              		{{form.trans_slip(class_='input')}}
+	                                {% for error in form.trans_slip.errors %}
+	                                <span style="color: red;">[{{ error }}]</span>
+	                                {% endfor %}
+							  	</div>
+							</div>
+						</div>
+					</div>
 					<div class="field is-grouped is-grouped-centered">
 						<p class="control">
 						  	{{form.submit(class_='button is-success')}}

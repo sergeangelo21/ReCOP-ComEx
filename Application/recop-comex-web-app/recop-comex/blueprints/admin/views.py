@@ -504,7 +504,58 @@ def inventory_add():
 
 	form = NewInventoryForm()
 
+	organizations = linkage_views.target_linkages()
+
+	for o in organizations:
+
+		if o.type==4:
+			form.sponsee.choices.extend([(str(o.id), o.address)])
+		else:
+			form.sponsor.choices.extend([(str(o.id), o.company_name)])
+
+	events = event_views.show_list('S', ' ')
+
+	if events:
+		for e in events:
+			form.event.choices.extend([(str(e.id), e.name)])
+			no_event = 0
+			
+	else: 
+		form.event.data=''
+		no_event = 1
+
 	if form.validate_on_submit():
+
+		if form.is_donation.data=='1':
+			
+			if form.give_to.data=='1':
+
+				if form.sponsee.data:
+					sponsee = form.sponsee.data
+				else:
+					sponsee = 1
+
+				event = None
+
+			else:
+				event = form.event.data
+				sponsee= None
+
+			file = form.trans_slip.data
+			old, extension = os.path.splitext(file.filename)
+
+			donation_id = donation.last_added()
+			filename = str(donation_id)+extension
+
+			trans_path = 'static/output/donate/trans_slip/' + filename
+
+			value = [None,sponsee,event,form.sponsor.data,0,trans_path,'R']
+
+			donation.add(value)
+			file.save(trans_path)
+
+		else:
+			donation_id=None
 
 		value = [None, form.name.data, 'A']
 
@@ -514,13 +565,13 @@ def inventory_add():
 		value = [None,current_user.id,id,'inventory', 1]
 		audit_trail.add(value)
 
-		value=[None, None, id, form.quantity.data , 0,0]
+		value=[None, donation_id, id, form.quantity.data , 0,0]
 		inventory.add(value)
 
 		flash('Inventory type added!', 'success')
 		return redirect(url_for('admin.inventory_show', search=' '))
 
-	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form)
+	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form, no_event=no_event)
 
 @admin.route('/admin/feedbacks')
 @login_required

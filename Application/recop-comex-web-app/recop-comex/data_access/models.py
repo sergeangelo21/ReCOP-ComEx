@@ -78,7 +78,7 @@ class donation(db.Model):
 			amount=value[4],
 			date_given=datetime.now(),
 			transaction_slip=value[5],
-			status='N')
+			status=value[6])
 
 		db.session.add(record)
 		db.session.commit()

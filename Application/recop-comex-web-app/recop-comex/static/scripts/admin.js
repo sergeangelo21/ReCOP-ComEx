@@ -24,6 +24,10 @@ if(window.location.pathname.startsWith('/admin/donations/inkind')){
 	document.getElementById('type_select').options.item(0).hidden="True"
 }
 
+if(window.location.pathname=='/admin/inventory/add'){
+    document.getElementById('event').options.item(0).hidden=true
+    document.getElementById('event').options.item(0).selected=true
+}
 var f = []
 
 function check_pass()
@@ -336,6 +340,59 @@ function item_field(value){
 	else{
 		document.getElementById('header').style.display='none'
 	}
+}
+
+function donate_choose(value){
+
+    comm = document.getElementById('comm')
+    event = document.getElementById('events')
+    sponsor = document.getElementById('sponsor')
+    trans_slip = document.getElementById('trans_slip')
+    sel_comm = document.getElementById('sponsee')
+    sel_event = document.getElementById('event')
+
+    if (value==1){
+        comm.className="column"
+        events.className="hidden"
+        sponsor.className="column"
+        trans_slip.className="columns"
+        sel_event.value=''
+    }
+    else{
+        comm.className="hidden"
+        events.className="column"
+        sponsor.className="column"
+        trans_slip.className="columns"
+        sel_comm.value=''
+    }
+
+}
+
+function donation(value){
+
+    comm = document.getElementById('comm')
+    event = document.getElementById('events')
+    sponsor = document.getElementById('sponsor')
+    trans_slip = document.getElementById('trans_slip')
+    give_to = document.getElementById('give_to')
+    sel_comm = document.getElementById('sponsee')
+    sel_event = document.getElementById('event')
+    sel_sponsor = document.getElementById('sponsor')
+
+    if (value==1){
+    	give_to.className="columns"
+    }
+    else{
+    	give_to.className="hidden"
+        comm.className="hidden"
+        events.className="hidden"
+        sponsor.className="hidden"
+        trans_slip.className="hidden"
+        sel_comm.value=''
+        sel_event.value=''
+        sel_sponsor.value=''
+    }
+
 }
 
 function settingsVPACAD() {

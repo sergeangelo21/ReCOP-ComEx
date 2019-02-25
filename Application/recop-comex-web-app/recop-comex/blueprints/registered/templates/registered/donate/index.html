@@ -1,7 +1,7 @@
 {% extends "registered-base.html" %}
 
 {% block content %}
-   
+  
  <div class="columns is-gapless">
     <div class="column">
         <figure class="donate-image">
@@ -64,7 +64,7 @@
                             <div class="field-body">
                                 <div class="field">
                                     <div class="control has-icon has-icon-right">
-                                        {{form.event(class_='input', placeholder='Amount')}}
+                                        {{form.event(class_='input')}}
                                         {% for error in form.event.errors %}
                                         <span style="color: red;">[{{ error }}]</span>
                                         {% endfor %}
@@ -72,7 +72,11 @@
                                 </div>
                             </div>
                             {% else %}
-                            Sorry there are no scheduled events as of the moment
+                            <div class="field-body">
+                                <div class="field">
+                                    Sorry there are no scheduled events as of the moment
+                                </div>
+                            </div>
                             {% endif %}
                         </div>
                         <div class="field is-horizontal">
@@ -126,10 +130,6 @@
                 </div>
                 <div class="columns">
                     <div class="column">
-                            <p class="control has-text-centered">
-                                Note: Your donation will be sent as anonymous. If you want to be recognized, kindly click here.
-                            </p>
-                            <br>
                         <div class="field is-grouped is-grouped-centered">
                             <p class="control">
                                 {{form.submit(class='button is-primary')}}
@@ -142,5 +142,6 @@
     </form>
     </div>
 </div>
+
 
 {% endblock %}

@@ -26,8 +26,14 @@ class ProposalForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class NewInventoryForm(FlaskForm):
-    name = StringField('Type', validators=[DataRequired()])
+    name = StringField('Item Name', validators=[DataRequired()])
     quantity = IntegerField('Quantity', validators=[DataRequired()])
+    is_donation = RadioField('From Donation?', choices=[('1','Yes'), ('2','No')], validators=[DataRequired()])
+    give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')])
+    sponsee = SelectField('Communities', choices=[('','ReCOP')])
+    sponsor = SelectField('Sponsors', choices=[('1','Anonymous')])
+    event = SelectField('Events', choices=[('', 'Please Choose One')])
+    trans_slip   = FileField('Transaction Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])   
     submit = SubmitField('Submit')
 
 class AddInventoryForm(FlaskForm):

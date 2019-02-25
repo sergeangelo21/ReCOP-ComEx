@@ -1,19 +1,18 @@
 Unregistered
-
+events calendar
 
 Admin
 
 Dashboard
 Event reports
 events organized/attended	
-Donations Add for admin
 feedbacks
-inventory
+inventory give and dispose
 
 
 Linkages
+events calendar
 Dashboard
-Calendar view event/redesign
 LINKAGES MENU
 Communities query
 Conduct event (attendance->evaluation of participant->photos/description)
@@ -21,6 +20,7 @@ Donation button na lang for comm and event na di sila nagorganize
 Reports(All finished events/proposals nakatab)
 
 Communities
+event calendar
 Dashboard
 reports
 
@@ -40,4 +40,5 @@ validations
 error traps
 
 
-
+Serge: Create Celery Instance for email and pdf generation
+       Change pdf plugin to xhtmltopdf

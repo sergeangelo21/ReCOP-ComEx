@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, send_from_directory
 from flask_login import current_user, login_required
 from blueprints.linkages.forms import *
-from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment
+from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, donation
 from data_access.queries import user_views, linkage_views, event_views
 from extensions import db, bcrypt
 from static.pdf import generate_pdf
@@ -181,7 +181,7 @@ def referral():
 
 	return render_template('/linkages/communities/referral.html', form=form)
 
-@linkages.route('/linkages/donate')
+@linkages.route('/linkages/donate', methods=['GET', 'POST'])
 @login_required
 def donate():
 
@@ -211,10 +211,10 @@ def donate():
 			else:
 				sponsee = 1
 
-			is_event = 'N'
+			event = None
 		else:
-			sponsee = form.event.data
-			is_event = 'Y'
+			event = form.event.data
+			sponsee= None
 
 		file = form.trans_slip.data
 		old, extension = os.path.splitext(file.name)
@@ -224,7 +224,7 @@ def donate():
 
 		trans_path = 'static/output/donate' + filename
 
-		value = [None,sponsee,current_user.info_id,form.amount.data,trans_path,is_event]
+		value = [None,sponsee,event,current_user.info_id,form.amount.data,trans_path,'N']
 
 		donation.add(value)
 		file.save(trans_path)
@@ -232,7 +232,7 @@ def donate():
 		flash('Donation given!', 'success')
 		return redirect(url_for('linkages.donate'))
 
-	return render_template('/linkages/donate/index.html', form=form)
+	return render_template('/linkages/donate/index.html', form=form, no_event=no_event)
 
 @linkages.route('/linkages/reports')
 @login_required

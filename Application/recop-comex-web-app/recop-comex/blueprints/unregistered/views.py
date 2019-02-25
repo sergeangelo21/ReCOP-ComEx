@@ -88,7 +88,7 @@ def donate():
 
 		trans_path = 'static/output/donate/trans_slip/' + filename
 
-		value = [None,sponsee,event,1,form.amount.data,trans_path]
+		value = [None,sponsee,event,1,form.amount.data,trans_path,'N']
 
 		donation.add(value)
 		file.save(trans_path)
