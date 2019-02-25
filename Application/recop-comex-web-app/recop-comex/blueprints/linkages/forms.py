@@ -25,6 +25,21 @@ class AttachLetterForm(FlaskForm):
     event_id = StringField('Event ID', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+class DonationForm(FlaskForm):
+    give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
+    sponsee = SelectField('Communities', choices=[('','ReCOP')])
+    event = SelectField('Events', choices=[('', 'Please Choose One')])
+    type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
+    amount = IntegerField('Amount', validators=[DataRequired()])
+    trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField('Donate')
+
+class ReferralForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email_address = StringField('Email Address', validators=[DataRequired()])
+    type = SelectField('Type', choices=[('', 'Please Choose One'), ('1', 'Volunteer'), ('2', 'Linkage'), ('3', 'Community')])
+    submit = SubmitField('Submit')
+
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name', [validators.Length(min=0, max=30)])
     middlename = StringField('Middle Name', [validators.Length(min=0, max=20)])
@@ -50,18 +65,3 @@ class PasswordUpdateForm(FlaskForm):
     oldpassword = PasswordField('Old Password')
     password = PasswordField('Password', [validators.Length(min=0, max=60)] )
     submit = SubmitField('Update')
-
-class DonationForm(FlaskForm):
-    give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
-    sponsee = SelectField('Communities', choices=[('','ReCOP')])
-    event = SelectField('Events', choices=[('', 'Please Choose One')])
-    type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
-    amount = IntegerField('Amount', validators=[DataRequired()])
-    trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
-    submit = SubmitField('Donate')
-
-class ReferralForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    email_address = StringField('Email Address', validators=[DataRequired()])
-    type = StringField('Type', validators=[DataRequired()])
-    submit = SubmitField('Submit')

@@ -21,15 +21,11 @@ class AddMemberForm(FlaskForm):
     mobile = StringField('Mobile Number', [validators.Length(min=11, max=25)])
     submit = SubmitField('Add')
 
-class ProposalForm(FlaskForm):
-	category = SelectField('Category', coerce = int, validators=[DataRequired()])
-	title = StringField('Title of the Activity', validators=[DataRequired()])
-	description = StringField('Description', validators=[DataRequired()])
-	objective = StringField('Objective', validators=[DataRequired()])
-	budget = IntegerField('Proposed Budget', validators=[DataRequired()])
-	location = StringField('Venue', validators=[DataRequired()])
-	event_date = DateField('Target Date', validators=[DataRequired()])
-	submit = SubmitField('Submit')
+class ReferralForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email Address', validators=[DataRequired()])
+    type = SelectField('Type', choices=[('', 'Please Choose One'), ('1', 'Volunteer'), ('2', 'Linkage'), ('3', 'Community')])
+    submit = SubmitField('Submit')
 
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name', [validators.Length(min=0, max=30)])
@@ -56,8 +52,3 @@ class PasswordUpdateForm(FlaskForm):
     oldpassword = PasswordField('Old Password')
     password = PasswordField('Password', [validators.Length(min=0, max=60)])
     submit = SubmitField('Update')
-
-class ReferralForm(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    email = StringField('Email Address', validators=[DataRequired()])
-    submit = SubmitField('Submit')
