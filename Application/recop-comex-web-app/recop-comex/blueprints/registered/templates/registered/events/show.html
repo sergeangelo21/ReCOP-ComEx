@@ -1,0 +1,391 @@
+{% extends "registered-base.html" %}
+
+{% block content %}
+
+		<div class="panel panel-default">
+			<div class="button-back">
+				<a href="{{ url_for('registered.events', status='all', search=' ') }}" class = "button backbtnprof">
+					<span class="icon is-small">
+                		<i class="fas fa-arrow-alt-circle-left"></i>
+					</span>
+					<span>Back</span>
+				</a>
+			</div>
+		    <div class="overlay-card-event has-text-centered">
+		    	<div class="circular-event">
+		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
+		    	</div>
+		        
+		        <div class="row-profile has-text-centered">
+		            <p class="has-text-white is-size-4 has-text-weight-bold">{{event.name}}</p>
+		            <a class="btn btn-follow btn-sm is-size-6 text-center has-text-white" href="{{url_for('registered.linkage_show', id=event.organizer_id)}}" role="button">{{event.company_name}}</a>
+		        </div>
+		    </div>
+		   	
+		</div>
+
+		<nav class="level is-mobile">
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			      	<a class="menu prof-icon" id = "info" onclick = "event_pages(this.id)">
+			      		<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-info fa-2x"></i>
+					      	</span>
+					    </p>
+			     	 	<p class="is-size-6 has-text-weight-bold">Information</p>
+			  	  	</a>
+			    </div>
+			</div>
+
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			    	<a class="menu prof-icon" id = "tracker" onclick = "event_pages(this.id)">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-map-marker-alt fa-2x""></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Tracker</p>
+				    </a>
+			    </div>
+			</div>
+
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			    	<a class="menu prof-icon" id = "participants" onclick = "event_pages(this.id)">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-users fa-2x"></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Participants</p>
+				    </a>
+			    </div>
+			</div>
+		</nav>
+	
+		<section class="hero">
+			<div class="hero-body">
+			    <div class="container" id="info_div">
+			      	<div class="card">
+						<header class="card-header has-background-light">
+						    <p class="card-header-title">
+						    Information
+						    </p>
+					  	</header>
+					  	<div class="card-content profile">
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Name</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{event.name}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Organizer</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{event.company_name}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Description</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{event.description}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Objective</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{event.objective}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<p>{% if event.status!='A' %}
+								    	Proposed Budget
+								    	{% else %}
+								    	Budget:
+								  		{% endif %}</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>₱ {{event.budget}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Location</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{event.location}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<p>{% if event.status!='A' %}
+								    	Target Date
+								    	{% else %}
+								    	Date
+								  		{% endif %}</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{event.event_date.strftime('%B %e, %Y')}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<p>Thrust</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>
+								        			{% if event.thrust==1 %}
+								        				Educational
+								        			{% elif event.thrust==2 %}
+								        				Environmental
+								        			{% elif event.thrust==3 %}
+								        				Health
+								        			{% elif event.thrust==4 %}
+								        				Livelihood
+								        			{% elif event.thrust==5 %}
+								        				Socio-Political
+								        			{% elif event.thrust==6 %}
+								        				Spiritual   
+								        			{% endif %}
+								        		</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<p>Proposed On</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>
+								        			{{event.proposed_on.strftime('%B %e, %Y')}}
+								        		</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+							{% if event.status=='S' %}
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<p>Approved On</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>
+								        			{{event.approved_on.strftime('%B %e, %Y')}}
+								        		</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+							{% endif %}
+						</div>
+					</div>
+			    </div>
+
+			    <div class="container hidden" id="tracker_div">
+			    <div class="card">
+				  	<header class="card-header has-background-light">
+					    <p class="card-header-title">
+					      Proposal Status: 
+								        		{% if event.event_status=='N' %}
+								        			For ReCOP Signing
+								        		{% elif event.event_status=='P' %}
+								        			{% if event.acad_signed %}
+								        				For President's Signing
+								        			{% elif event.fmi_signed %}
+								        				For Academic's Signing
+								        			{% elif event.recop_accepted %}
+								        				For FMI's Signing
+								       				{% endif %}
+								        		{% elif event.event_status=="S" %}
+								        			Approved
+								        		{% endif %}
+					    </p>
+					</header>
+				  	<div class="card-content tracker">
+					    <div class="content">
+					        <div class="columns is-centered">
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-file-contract fa-5x track-icon {% if event.recop_accepted %} mark {% endif %}"></i>
+					          			<label class="label">Accepted</label>
+					          			{% if event.recop_accepted %} 
+					          			{{event.recop_accepted.strftime('%B %e, %Y')}}<br>
+					          			{{event.recop_accepted.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles {% if event.fmi_signed %} mark {% endif %}">
+					          			<br>					          			
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-5x" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-user-graduate fa-5x track-icon {% if event.acad_signed %} mark {% endif %}"></i>
+					          			<label class="label">Academics</label>
+					          			{% if event.acad_signed %} 
+					          			{{event.acad_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.acad_signed.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles {% if event.acad_signed %} mark {% endif %}">
+					          			<br>
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-5x" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-heart fa-5x track-icon {% if event.fmi_signed %} mark {% endif %}"></i>
+					          			<label class="label">FMI</label>
+					          			{% if event.fmi_signed %} 
+					          			{{event.fmi_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.fmi_signed.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles {% if event.approved_on %} mark {% endif %}">
+					          			<br>
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-5x" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-check fa-5x track-icon {% if event.approved_on %} mark {% endif %}"></i>
+					          			<label class="label">Approved</label>
+					          			{% if event.approved_on %} 
+					          			{{event.approved_on.strftime('%B %e, %Y')}}<br>
+					          			{{event.approved_on.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					        </div>
+					    </div>
+				  	</div>
+				  </div>
+				 </div>
+
+			 <div class="container hidden" id="participant_div">
+			    <div class="card">
+				  	<header class="card-header has-background-light">
+					    <p class="card-header-title">
+					      Participants
+					    </p>
+					</header>
+					<div class="card-content profile">
+					{% if participants %}
+						{% for participant in participants %}
+						    <div class="panel-block">
+							    <article class="media">
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{participant.name}}</strong>
+								      		{% if participant.is_target=='Y' %}
+								        		<strong>(Community Coordinator)</strong>					
+								        	{% endif %}
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+						{% endfor %}
+					{% else %}
+
+						    <div class="panel-block">
+							    <article class="media">
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		--Nothing to show--
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+
+					{% endif %}
+					</div>				  	
+				</div>
+			</div>
+		</div>
+	</div>
+		</section>
+{% endblock %}
