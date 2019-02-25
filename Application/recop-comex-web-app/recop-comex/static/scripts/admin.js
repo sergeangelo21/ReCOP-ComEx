@@ -430,3 +430,16 @@ function filtershrink() {
         div.style.display = "none";
     }
 }
+
+function show_item(value){
+
+    a = document.getElementById(value+'_modal')
+    a.style.display='block'
+
+}
+
+function close_item(value){
+    a = document.getElementById(value+'_modal')
+    a.style.display='none'
+
+}
