@@ -150,7 +150,7 @@
 							<p class="card-header-title">
 							{% if search!=' ' %}
 							You searched for '{{search}}'
-							<a href="{{url_for('admin.events', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
+							<a href="{{url_for('admin.events', status=status, page='1',search=' ')}}"><span class="fas fa-times"></span></a>
 							&nbsp; in
 							{% endif %}
 							{{status | title}} Events

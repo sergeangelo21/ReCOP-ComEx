@@ -42,7 +42,7 @@ def index():
 
 	return render_template('/admin/index.html', title="Home | Admin", events_chart=events_chart)
 
-@admin.route('/admin/events/<status>/<page><search>', methods=['GET', 'POST'])
+@admin.route('/admin/events/<status>/<page>/<search>', methods=['GET', 'POST'])
 @login_required
 def events(status, search, page):
 
@@ -554,7 +554,7 @@ def donation_add():
 		else:
 			form.sponsor.choices.extend([(str(o.id), o.company_name)])
 
-	events = event_views.show_list('S', ' ')
+	events = event_views.select_list()
 
 	if events:
 		for e in events:
@@ -627,7 +627,7 @@ def inventory_add():
 		else:
 			form.sponsor.choices.extend([(str(o.id), o.company_name)])
 
-	events = event_views.show_list('S', ' ')
+	events = event_views.select_list()
 
 	if events:
 		for e in events:

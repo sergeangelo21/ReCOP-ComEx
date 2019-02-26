@@ -268,19 +268,23 @@ def donate():
 
 	form = DonationForm()
 
-	linkages = linkage_views.target_linkages()
+	communities = linkage_views.target_linkages()
 
-	for c in linkages:
+	for c in communities:
 
 		if c.type==4:
 			form.sponsee.choices.extend([(str(c.id), c.address)])
 
-	events = event_views.show_list('S', ' ')
+	events = event_views.select_list()
 
 	if events:
-		form.event.choices.extend(([str(e.id), e.name] for e in events))
-		no_event = 0
-	else:
+
+		for e in events:
+			form.event.choices.append((str(e.id), e.name))
+			no_event = 0
+
+	else: 
+		
 		form.event.data=''
 		no_event = 1
 
@@ -298,12 +302,12 @@ def donate():
 			sponsee= None
 
 		file = form.trans_slip.data
-		old, extension = os.path.splitext(file.name)
+		old, extension = os.path.splitext(file.filename)
 
 		new = donation.last_added()
 		filename = str(new)+extension
 
-		trans_path = 'static/output/donate' + filename
+		trans_path = 'static/output/donate/trans_slip/' + filename
 
 		value = [None,sponsee,event,current_user.info_id,form.amount.data,trans_path,'N']
 

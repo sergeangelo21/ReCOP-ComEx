@@ -34,7 +34,7 @@ class DonationForm(FlaskForm):
     sponsee = SelectField('Communities', choices=[('','ReCOP')])
     event = SelectField('Events', choices=[('', 'Please Choose One')])
     type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
-    amount = IntegerField('Amount', validators=[DataRequired()])
+    amount = IntegerField('Amount')
     trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     submit = SubmitField('Donate')
 

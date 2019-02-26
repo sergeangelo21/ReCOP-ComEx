@@ -10,7 +10,12 @@ if(window.location.pathname=='/linkages/events/calendar'){
     document.getElementById('calendar').appendChild(calendar)
 }
 
-
+if(window.location.pathname=='/linkages/donate'){
+    if (document.getElementById('event')){
+        document.getElementById('event').options.item(0).hidden=true
+        document.getElementById('event').options.item(0).selected=true
+    }
+}
 
 if(window.location.pathname=='/linkages/events/create'){
 	document.getElementById('thrust').options.item(0).selected="True"
@@ -99,7 +104,9 @@ function donate_choose(value){
     if (value==1){
         comm.className="field is-horizontal"
         events.className="hidden"
-        sel_event.value=''
+        if (sel_event){
+            sel_event.value=''
+        }
     }
     else{
         comm.className="hidden"
