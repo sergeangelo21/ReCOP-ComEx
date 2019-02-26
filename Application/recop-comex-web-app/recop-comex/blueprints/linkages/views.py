@@ -79,7 +79,7 @@ def events(status, search):
 
 		return redirect(url_for('linkages.events', status=status, search=form_search.search.data))
 
-	return render_template('/linkages/events/index.html', title="Events | linkages", form_search=form_search, form=form, events=events, status=status,letters=letters,search=search)
+	return render_template('/linkages/events/index.html', title="Events", form_search=form_search, form=form, events=events, status=status,letters=letters,search=search)
 
 @linkages.route('/linkages/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -87,7 +87,7 @@ def events_calendar():
 
 	events = event_views.show_list('S', ' ')
 	
-	return render_template('/linkages/events/index-calendar.html', title="Events | linkages", events=events)
+	return render_template('/linkages/events/index-calendar.html', title="Events", events=events)
 	
 @linkages.route('/linkages/events/show/id=<id>')
 @login_required
