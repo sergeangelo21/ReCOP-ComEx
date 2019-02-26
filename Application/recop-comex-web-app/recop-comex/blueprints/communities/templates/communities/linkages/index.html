@@ -78,8 +78,12 @@
 				<p class="card-header-title">
 					<span class="fas fa-poll-h"></span>&nbsp
 					{% if search!=' ' %}
-					You searched for '{{search}}'&nbsp;
-					<a href="{{url_for('communities.linkages', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
+					You searched for &nbsp;
+						<span class="search-highlight">
+						&nbsp; '{{search}}'
+						<a href="{{url_for('communities.linkages', search=' ')}}"><span class="fas fa-times-circle"></span></a>
+						&nbsp; 
+					</span>
 					&nbsp; in
 					{% endif %}Linkages
 					</p>

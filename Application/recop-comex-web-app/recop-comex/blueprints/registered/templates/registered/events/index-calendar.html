@@ -7,7 +7,7 @@
 					<div class="column">
 						<article class="media">
 						  	<figure class="media-left"> 
-						  		<a class="button viewbtn" href="{{url_for('registered.events', status='all', search=' ')}}">
+						  		<a class="button viewbtn" href="{{url_for('registered.events', search=' ')}}">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
@@ -23,14 +23,12 @@
 				</div>
 			</div>
 
+			{% if events %}
 			<div class="column">
 				<div class="card box">
-
 					<hr class="is-marginless">
 					<div class="card-content">
 						<table class="table is-hoverable is-fullwidth" id = "event">
-
-							{% if events %}
 							<tbody>
 
 								<tr class = "table">
@@ -156,21 +154,20 @@
 							}
 
 						</script>
-
-							{% else %}
-
-							<tbody>
-
-								<tr class = "table-row">
-									<td class = "has-text-centered">---Nothing to show---</td>
-							 	</tr>
-								
-							</tbody>
-
-							{% endif %}
 					</div>
 				</div>
 			</div>
+			{% else %}
+			<div class="padding has-text-centered">
+				<span class="fas fa-ellipsis-h"></span>
+				<span class="fas fa-ellipsis-h"></span>
+				<span class="fas fa-ellipsis-h"></span>
+				<span class="has-text-weight-bold"> NOTHING TO SHOW </span>
+				<span class="fas fa-ellipsis-h"></span>
+				<span class="fas fa-ellipsis-h"></span>
+				<span class="fas fa-ellipsis-h"></span>
+			</div>
+			{% endif %}
 
 
 

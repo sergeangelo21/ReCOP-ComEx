@@ -26,24 +26,48 @@
 
 		    		{% if i.type_id==item.type_id %}
 
-	    				<div class="card-content profile">
-	    					<div class="panel-block">
-			                    <article class="media">
-				                    <div class="media-content">
-				                        <div class="content">
-					                        <table class="content">
-					                        	<thead>
-
-					                        		<th>id</th>
-
-					                        	</thead>
-
-					                        </table>  
-				                        </div>
-				                    </div>
-			                  	</article>
-			                </div>
-	    				</div>
+	    			<div class="card">
+		              	<header class="card-header has-background-light">
+			                
+			                 <div class="columns card-header-title">
+			                	<div class="column">
+			                		Id
+			                	</div>
+			                	<div class="column">
+			                		Stock
+			                	</div>
+			                	<div class="column">
+			                		Given
+			                	</div>
+			                	<div class="column">
+			                		Expired
+			                	</div>
+			                	<div class="column">
+			                		Actions
+			                	</div>
+		                	</div>
+			               
+		              	</header>
+		              	<div class="card-content profile">
+             				<div class="columns card-header-title has-text-weight-normal">
+			                	<div class="column">
+			                		{{item.type_id}}
+			                	</div>
+			                	<div class="column">
+			                		{{item.in_stock}}
+			                	</div>
+			                	<div class="column">
+			                		{{item.given}}
+			                	</div>
+			                	<div class="column">
+			                		{{item.expired}}
+			                	</div>
+			                	<div class="column">
+			                		
+			                	</div>
+		                	</div>
+			            </div>
+			        </div>
 
 		    		{% endif %}
 

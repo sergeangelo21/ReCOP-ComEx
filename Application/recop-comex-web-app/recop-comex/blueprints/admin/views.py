@@ -537,7 +537,64 @@ def donation_inkind(id):
 		flash('Items were successfully added!', 'success')
 		return redirect(url_for('admin.donations', status='all', search=' '))
 
-	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, donation=info)
+	return render_template('/admin/donations/inventory.html', title="Donation | Admin", form=form, donation=info)
+
+@admin.route('/admin/donations/add', methods=['GET', 'POST'])
+@login_required
+def donation_add():	
+
+	form=DonationForm()
+
+	organizations = linkage_views.target_linkages()
+
+	for o in organizations:
+
+		if o.type==4:
+			form.sponsee.choices.extend([(str(o.id), o.address)])
+		else:
+			form.sponsor.choices.extend([(str(o.id), o.company_name)])
+
+	events = event_views.show_list('S', ' ')
+
+	if events:
+		for e in events:
+			form.event.choices.extend([(str(e.id), e.name)])
+			no_event = 0
+			
+	else: 
+		form.event.data=''
+		no_event = 1
+
+	if form.validate_on_submit():
+
+		if form.give_to.data=='1':
+			if form.sponsee.data:
+				sponsee = form.sponsee.data
+			else:
+				sponsee = 1
+
+			event = None
+		else:
+			event = form.event.data
+			sponsee= None
+
+		file = form.trans_slip.data
+		old, extension = os.path.splitext(file.filename)
+
+		new = donation.last_added()
+		filename = str(new)+extension
+
+		trans_path = 'static/output/donate/trans_slip/' + filename
+
+		value = [None,sponsee,event,1,form.amount.data,trans_path,'N']
+
+		donation.add(value)
+		file.save(trans_path)
+
+		flash('Donation given!', 'success')
+		return redirect(url_for('admin.donations', status='all', search=' '))
+
+	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, no_event=no_event)
 
 @admin.route('/admin/inventory/filter_<search>')
 @login_required

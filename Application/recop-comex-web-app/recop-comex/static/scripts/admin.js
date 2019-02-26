@@ -24,7 +24,7 @@ if(window.location.pathname.startsWith('/admin/donations/inkind')){
 	document.getElementById('type_select').options.item(0).hidden="True"
 }
 
-if(window.location.pathname=='/admin/inventory/add'){
+if(window.location.pathname=='/admin/inventory/add' || window.location.pathname=='/admin/donations/add'){
 	if (document.getElementById('event')){
     	document.getElementById('event').options.item(0).hidden=true
     	document.getElementById('event').options.item(0).selected=true
@@ -355,7 +355,7 @@ function item_field(value){
 function donate_choose(value){
 
     comm = document.getElementById('comm')
-    event = document.getElementById('events')
+    events = document.getElementById('events')
     sponsor = document.getElementById('sponsor')
     trans_slip = document.getElementById('trans_slip')
     sel_comm = document.getElementById('sponsee')
@@ -384,7 +384,7 @@ function donate_choose(value){
 function donation(value){
 
     comm = document.getElementById('comm')
-    event = document.getElementById('events')
+    events = document.getElementById('events')
     sponsor = document.getElementById('sponsor')
     trans_slip = document.getElementById('trans_slip')
     give_to = document.getElementById('give_to')
@@ -395,6 +395,7 @@ function donation(value){
 
     if (value==1){
     	give_to.className="columns"
+    	sel_give.checked=false
     }
     else{
     	give_to.className="hidden"
@@ -408,6 +409,25 @@ function donation(value){
         if (document.getElementById('event')){
     		sel_event.value=''
 		}
+    }
+
+}
+
+function donate_type(value){
+
+    amount = document.getElementById('amount_div')
+    trans = document.getElementById('trans_div')
+    money = document.getElementById('amount')
+
+    if (value==1){
+        amount.className="field is-horizontal"
+        trans.className="field is-horizontal"
+        money.value=''
+    }
+    else{
+        amount.className="hidden"
+        trans.className="field is-horizontal"
+        money.value = 0.00
     }
 
 }

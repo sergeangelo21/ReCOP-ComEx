@@ -10,10 +10,11 @@
 
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        <link rel="stylesheet" type="text/css" href="../../../static/css/bulma-0.7.2/css/bulma.css">
+        <link rel="stylesheet" href="../../../static/css/bulma-0.7.2/css/bulma.css">
         <link rel="stylesheet" href="../../../static/css/fontawesome-5.5.0/css/all.css">
         <link rel="stylesheet" href="../../../static/css/recop-comex-style/css/style.css"> 
         <link rel="stylesheet" href="../../../static/css/recop-comex-style/css/modal.css"> 
+        <link rel="stylesheet" href="../../../static/css/Bulma-extensions/bulma-tooltip/bulma-tooltip.min.css">
         <script type="text/javascript" src = "../../../static/scripts/base.js"></script>  
 
     </head>
@@ -38,7 +39,7 @@
                     <a class="navbar-item" href="{{url_for('registered.index')}}">
                         <strong>Home</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('registered.events', status='all', search=' ')}}">
+                    <a class="navbar-item" href="{{url_for('registered.events', search=' ')}}">
                         <strong>Events</strong>
                     </a>
                     <a class="navbar-item" href="{{url_for('registered.linkages')}}">

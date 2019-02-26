@@ -55,6 +55,17 @@ class AddInventoryForm(FlaskForm):
     quantities = StringField('Quantities', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
+class DonationForm(FlaskForm):
+
+    give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
+    sponsee = SelectField('Communities', choices=[('','ReCOP')])
+    sponsor = SelectField('Sponsor', choices=[('1','Anonymous')])
+    event = SelectField('Events', choices=[('', 'Please Choose One')])
+    type = RadioField('Donation Type', choices=[('1','Money'), ('2','In kind')], validators=[DataRequired()])
+    amount = StringField('Amount', validators=[DataRequired()])
+    trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField('Donate')
+
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name', [validators.Length(min=0, max=30)])
     middlename = StringField('Middle Name', [validators.Length(min=0, max=20)])

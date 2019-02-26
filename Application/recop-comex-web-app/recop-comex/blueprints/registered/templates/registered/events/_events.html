@@ -2,8 +2,8 @@
 	<div class="column is-one-quarter">
 		<div class="card select-list has-text-centered">
 			<div class="card-content">
-					<div class="level">
-						<div class="level-item">
+				<div class="level">
+					<div class="level-item">
 						<img class="image is-128x128" src="../../../static/images/gg.png">
 					</div>
 				</div>
@@ -38,11 +38,13 @@
 						    Information
 						    </p>
 					  	</header>
-					  	<div class="card-content event-modal">
+					  	<div class="card-content profile">
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Organizer</p>
+										<span class="icon is-info tooltip" data-tooltip="Organizer">
+											<i class="fas fa-user"></i>
+										</span>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -56,7 +58,9 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Description</p>
+										<span class="icon is-info tooltip" data-tooltip="Description">
+											<i class="fas fa-newspaper"></i>
+										</span>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -70,7 +74,9 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Objective</p>
+										<span class="icon is-info tooltip" data-tooltip="Objective">
+											<i class="fas fa-exclamation"></i>
+										</span>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -84,7 +90,9 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<p>Location</p>
+										<span class="icon is-info tooltip" data-tooltip="Location">
+											<i class="fas fa-map-marker-alt"></i>
+										</span>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -98,11 +106,9 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								  		<p>{% if event.status!='A' %}
-								    	Target Date
-								    	{% else %}
-								    	Date
-								  		{% endif %}</p>
+										<span class="icon is-info tooltip" data-tooltip="Date">
+											<i class="fas fa-newspaper"></i>
+										</span>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -116,7 +122,9 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								  		<p>Thrust</p>
+										<span class="icon is-info tooltip" data-tooltip="Thrust">
+											<i class="fas fa-cubes"></i>
+										</span>
 								  	</figure>
 								  	<div class="media-content">
 								    	<div class="content">
@@ -135,22 +143,6 @@
 								        			{% elif event.thrust==6 %}
 								        				Spiritual   
 								        			{% endif %}
-								        		</strong>
-								      		</p>
-								    	</div>
-								  	</div>
-								</article>
-							</div>
-						    <div class="panel-block">
-							    <article class="media">
-								  	<figure class="media-left">
-								  		<p>Proposed On</p>
-								  	</figure>
-								  	<div class="media-content">
-								    	<div class="content">
-								      		<p>
-								        		<strong>
-								        			{{event.proposed_on.strftime('%B %e, %Y')}}
 								        		</strong>
 								      		</p>
 								    	</div>

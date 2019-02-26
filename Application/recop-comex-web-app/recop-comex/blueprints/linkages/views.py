@@ -4,7 +4,7 @@ from blueprints.linkages.forms import *
 from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, donation, referral
 from data_access.queries import user_views, linkage_views, event_views
 from extensions import db, bcrypt
-from static.email import send_email
+from static.email import generate, send_email
 from static.pdf import generate_pdf
 from datetime import datetime
 
@@ -55,16 +55,31 @@ def events(status, search):
 
 	letters = event_attachment.letter_attached()
 
-	form = SearchForm()
-
+	form = AttachLetterForm()
 
 	if form.validate_on_submit():
 
+		attach_letter = form.attach_letter.data
+		old, extension = os.path.splitext(attach_letter.filename)
+		filename = str(form.event_id.data)+extension
+		file_path = 'static/attachment/signed_letter/' + filename
 
+		value = [None,form.event_id.data,file_path,3]
 
-		return redirect(url_for('linkages.events', status=status, search=form.search.data))
+		event_attachment.add(value)
+		attach_letter.save(file_path)
 
-	return render_template('/linkages/events/index.html', title="Events | linkages", form=form, events=events, status=status,letters=letters,search=search)
+		flash('Letter successfully attached!', 'success')
+
+		return redirect(url_for('linkages.events', status=status, search=' '))
+
+	form_search = SearchForm()
+
+	if form_search.validate_on_submit():
+
+		return redirect(url_for('linkages.events', status=status, search=form_search.search.data))
+
+	return render_template('/linkages/events/index.html', title="Events | linkages", form_search=form_search, form=form, events=events, status=status,letters=letters,search=search)
 
 @linkages.route('/linkages/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -226,6 +241,20 @@ def event_action(id, action):
 
 
 	return redirect(url_for('linkages.events', status='all', search=' '))
+
+@linkages.route('/linkages/events/letter/<id>_<name>', methods=['GET', 'POST'])
+@login_required
+def event_letter(id, name):
+
+	filepath = 'static/output/events/letters/'
+
+	event = event_views.show_info(id)
+
+	html = render_template('linkages/pdf/pdf.html', event = event, date = datetime.now())
+
+	generate_pdf(html, filepath + str(id) + '.pdf')
+
+	return send_from_directory(filepath, str(id) +'.pdf')
 
 @linkages.route('/linkages/communities')
 @login_required
