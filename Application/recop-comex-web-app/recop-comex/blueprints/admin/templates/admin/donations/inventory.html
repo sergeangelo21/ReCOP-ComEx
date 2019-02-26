@@ -1,0 +1,79 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+
+	<section class="hero is-fullheight">
+		<div class="hero-body">
+			<div class="box white">
+				<div style="padding-bottom: 1%" id="fields">
+					<div class="columns">
+				      	<div class="column">
+				      		<article class="media">
+								<figure class="media-left">
+								    <a class="btn btn-follow btn-sm text-center" href="{{url_for('admin.donations', status='all', search=' ')}}" role="button">
+										<span class="back-icon">
+								  			<i class="fas fa-arrow-circle-left fa-2x"></i>
+								  		</span>
+								  	</a>
+								</figure>
+							  
+							  	<div class="media-right has-text-weight-bold">
+							   		<p class="subtitle has-text-weight-bold">Back</p>
+							 	</div>
+							</article>
+				      	</div>
+				    </div>
+				    <div class="columns">
+				      	<div class="column">
+				      		<p class="title has-text-centered">Add Donations to Inventory</p>
+				      		<p class="subtitle has-text-centered">ID: {{donation.id}}</p>
+				      	</div>
+			     	</div>
+				<form action="" method="POST">
+					{{form.hidden_tag()}}
+					<div class="columns" id="0_col">
+						<div class="column">
+							<div class="field">
+								{{form.type_select.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.type_select(class_='input')}}
+							  	</div>
+							</div>
+						</div>
+						<div class="column">
+							<div class="field">
+								{{form.quantity.label(class_='label')}}
+							  	<div class="control">
+							    	{{form.quantity(class_='input', placeholder='Quantity', type="number")}}
+							  	</div>
+							</div>
+						</div>
+						<div class="column is-1">
+							<div class="field">
+								<label class='label'>Actions</label>
+							  	<div class="control">
+									<button class="button is-success tooltip" data-tooltip='Add' type='button' name='add' id='0'onclick="item_field([this.name, this.id])"><i class="fas fa-plus-circle"> </i></button>
+							  	</div>
+							</div>
+						</div>
+					</div>
+				    <div class="columns" id ='header' style="display:none">
+				      	<div class="column">
+				      		<label class="label">Donation Items</label>
+				      	</div>
+			     	</div>	
+				</div>			
+					<div class="field is-grouped is-grouped-centered">
+						<p class="control">
+							{{form.types(hidden='True')}}
+							{{form.quantities(hidden='True')}}
+						  	{{form.submit(class_='button submit')}}
+						</p>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
