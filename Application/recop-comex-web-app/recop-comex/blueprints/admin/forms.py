@@ -4,6 +4,11 @@ from wtforms import StringField, TextAreaField, PasswordField, SubmitField, Sele
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email, Length
 from datetime import date
 
+
+class PostForm(FlaskForm):
+    post = TextAreaField('Say something', validators=[ DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField('Submit')
+
 class SearchForm(FlaskForm):
 	search = StringField("Search", validators=[DataRequired()])
 	submit = SubmitField("Search")

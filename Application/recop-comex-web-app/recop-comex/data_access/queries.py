@@ -1,5 +1,6 @@
 #Queries involving multiple tables goes here
 from extensions import db
+from config import Config
 from sqlalchemy import and_, or_, func
 from data_access.models import *
 
@@ -203,7 +204,7 @@ class linkage_views():
 
 class event_views():
 
-	def show_list(value,search):
+	def show_list(value,search, page):
 
 		if value=='all' and search==' ':
 			record = event_information.query.join(
@@ -225,8 +226,7 @@ class event_views():
 				event_information.event_status,
 				proposal_tracker.proposed_on,
 				proposal_tracker.status
-				).order_by(proposal_tracker.proposed_on.desc()
-				).all()
+				).paginate(int(page), Config.POSTS_PER_PAGE, False)
 
 		elif value=='all' and search!=' ':
 			record = event_information.query.join(
@@ -250,8 +250,7 @@ class event_views():
 				proposal_tracker.status
 				).filter(or_(user_information.company_name.like('%'+search+'%'),
 				event_information.name.like('%'+search+'%'))
-				).order_by(proposal_tracker.proposed_on.desc()
-				).all()
+				).paginate(int(page), Config.POSTS_PER_PAGE, False)
 
 		elif search!=' ':
 			record = event_information.query.join(
@@ -276,8 +275,7 @@ class event_views():
 				).filter(and_(event_information.event_status==value,or_(
 				user_information.company_name.like('%'+search+'%'),
 				event_information.name.like('%'+search+'%')))
-				).order_by(proposal_tracker.proposed_on.desc()
-				).all()
+				).paginate(int(page), Config.POSTS_PER_PAGE, False)
 		else:
 			record = event_information.query.join(
 				user_information, proposal_tracker
@@ -299,8 +297,7 @@ class event_views():
 				proposal_tracker.proposed_on,
 				proposal_tracker.status
 				).filter(event_information.event_status==value
-				).order_by(proposal_tracker.proposed_on.desc()
-				).all()			
+				).paginate(int(page), Config.POSTS_PER_PAGE, False)			
 
 
 		return record
