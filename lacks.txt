@@ -22,7 +22,7 @@ Donation button na lang for comm and event na di sila nagorganize
 Reports(All finished events/proposals nakatab)
 Search events
 Volunteers(serge)
-Remove reports|contact us
+Remove reports|contact uss
 
 Communities
 event calendar (ivan)
