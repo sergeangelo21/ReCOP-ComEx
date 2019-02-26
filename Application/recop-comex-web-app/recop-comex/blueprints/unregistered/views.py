@@ -184,7 +184,7 @@ def forgot_password():
 	if form.validate_on_submit():
 
 		email = form.email.data
-		value = user_account.query.filter_by(email_address=email).first()
+		value = user_account.query.by(email_address=email).first()
 		
 		if value:
 			token = ''.join(random.choice(string.ascii_uppercase + string.digits)for _ in range(6))
@@ -195,7 +195,7 @@ def forgot_password():
 
 			html = 'asdf'
 			subject = 'RESET PASSWORD: '
-			admin = user_account.query.filter_by(id=1).first()
+			admin = user_account.query.by(id=1).first()
 
 			email_parts = [token, subject, admin.email_address, email, None]
 			send_email(email_parts)

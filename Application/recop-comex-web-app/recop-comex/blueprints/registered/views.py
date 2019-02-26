@@ -33,7 +33,7 @@ def index():
 
 	return render_template('/registered/index.html')
 
-@registered.route('/registered/events/filter_<search>', methods=['GET', 'POST'])
+@registered.route('/registered/events/<search>', methods=['GET', 'POST'])
 @login_required
 def events(search):
 
@@ -53,7 +53,7 @@ def events(search):
 @login_required
 def events_calendar():
 
-	events = event_views.show_list('S', ' ')
+	events = event_views.select_list()
 	
 	return render_template('/registered/events/index-calendar.html', title="Events", events=events)
 
@@ -142,7 +142,7 @@ def referral_users():
 
 		html = 'asdlkfjasfd'
 		subject = 'REFFERAL: '
-		admin = user_account.query.filter_by(id=1).first()
+		admin = user_account.query.by(id=1).first()
 
 		email_parts = [html, subject, admin.email_address, form.email.data, None]
 		send_email(email_parts)

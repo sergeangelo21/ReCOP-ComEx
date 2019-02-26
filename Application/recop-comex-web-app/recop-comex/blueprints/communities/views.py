@@ -34,7 +34,7 @@ def index():
 
 	return render_template('/communities/index.html', title="Communities")
 
-@communities.route('/communities/events/<status>/filter_<search>', methods=['GET', 'POST'])
+@communities.route('/communities/events/<status>/<search>', methods=['GET', 'POST'])
 @login_required
 def events(status, search):
 
@@ -53,7 +53,7 @@ def events(status, search):
 	else:
 		value=status
 
-	events = event_views.show_list(value, search)
+	events = event_views.community_events(current_user.info_id)
 
 	letters = event_attachment.letter_attached()
 
@@ -72,7 +72,7 @@ def events(status, search):
 @login_required
 def events_calendar():
 
-	events = event_views.show_list('S', ' ')
+	events = event_views.select_list()
 	
 	return render_template('/communities/events/index-calendar.html', title="Events | communities", events=events)
 	
@@ -187,7 +187,7 @@ def participant_action(id, action, participant):
 	return redirect(url_for('communities.event_participants',id=id))
 
 
-@communities.route('/communities/linkages/filter_<search>', methods=['GET', 'POST'])
+@communities.route('/communities/linkages/<search>', methods=['GET', 'POST'])
 @login_required
 def linkages(search):
 
@@ -210,7 +210,7 @@ def linkage_show(id):
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
 
-@communities.route('/communities/members/filter_<search>', methods=['GET', 'POST'])
+@communities.route('/communities/members/<search>', methods=['GET', 'POST'])
 @login_required
 def members(search):
 
@@ -274,7 +274,7 @@ def referral_users():
 
 		html = 'asdlkfjasfd'
 		subject = 'REFFERAL: '
-		admin = user_account.query.filter_by(id=1).first()
+		admin = user_account.query.by(id=1).first()
 
 		email_parts = [html, subject, admin.email_address, form.email.data, None]
 		send_email(email_parts)

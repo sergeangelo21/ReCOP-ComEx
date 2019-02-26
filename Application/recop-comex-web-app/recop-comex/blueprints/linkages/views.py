@@ -34,7 +34,7 @@ def index():
 
 	return render_template('/linkages/index.html')
 
-@linkages.route('/linkages/events/<status>/filter_<search>', methods=['GET', 'POST'])
+@linkages.route('/linkages/events/<status>/<search>', methods=['GET', 'POST'])
 @login_required
 def events(status, search):
 
@@ -85,7 +85,7 @@ def events(status, search):
 @login_required
 def events_calendar():
 
-	events = event_views.show_list('S', ' ')
+	events = event_views.select_list()
 	
 	return render_template('/linkages/events/index-calendar.html', title="Events", events=events)
 	
@@ -329,7 +329,7 @@ def referral_users():
 
 		html = 'asdlkfjasfd'
 		subject = 'REFFERAL: '
-		admin = user_account.query.filter_by(id=1).first()
+		admin = user_account.query.by(id=1).first()
 
 		email_parts = [html, subject, admin.email_address, form.email.data, None]
 		send_email(email_parts)

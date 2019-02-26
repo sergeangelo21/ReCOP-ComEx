@@ -274,7 +274,7 @@ def event_action(id, action):
 	return redirect(url_for('admin.events', status='all', search=' '))
 
 
-@admin.route('/admin/linkages/<status>/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/linkages/<status>/<search>', methods=['GET', 'POST'])
 @login_required
 def linkages(status, search):
 
@@ -367,7 +367,7 @@ def linkage_action(id):
 
 	return redirect(url_for('admin.linkages', status='all', search=' '))
 
-@admin.route('/admin/communities/<status>/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/communities/<status>/<search>', methods=['GET', 'POST'])
 @login_required
 def communities(status, search):
 
@@ -451,7 +451,7 @@ def community_action(id):
 
 	return redirect(url_for('admin.communities', status='all', search=' '))
 
-@admin.route('/admin/donations/<status>/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/donations/<status>/<search>', methods=['GET', 'POST'])
 @login_required
 def donations(status, search):	
 
@@ -596,13 +596,13 @@ def donation_add():
 
 	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, no_event=no_event)
 
-@admin.route('/admin/inventory/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/inventory/<search>', methods=['GET', 'POST'])
 @login_required
 def inventory_show(search):
 
 	form = SearchForm()
 
-	items = inventory_views.show_list()
+	items = inventory_views.show_list(search)
 
 	breakdown = inventory.item_breakdown()
 

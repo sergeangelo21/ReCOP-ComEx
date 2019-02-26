@@ -639,17 +639,30 @@ class donation_views():
 
 class inventory_views():
 
-	def show_list():
+	def show_list(search):
 
-		record = inventory.query.join(
-			inventory_type
-			).add_columns(
-			inventory.type_id,
-			inventory_type.name,
-			func.SUM(inventory.in_stock).label('in_stock'),
-			func.SUM(inventory.given).label('given'),
-			func.SUM(inventory.expired).label('expired')
-			).group_by(inventory.type_id
-			).all()
+		if search==' ':
+			record = inventory.query.join(
+				inventory_type
+				).add_columns(
+				inventory.type_id,
+				inventory_type.name,
+				func.SUM(inventory.in_stock).label('in_stock'),
+				func.SUM(inventory.given).label('given'),
+				func.SUM(inventory.expired).label('expired')
+				).group_by(inventory.type_id
+				).all()
+		else:
+			record = inventory.query.join(
+				inventory_type
+				).add_columns(
+				inventory.type_id,
+				inventory_type.name,
+				func.SUM(inventory.in_stock).label('in_stock'),
+				func.SUM(inventory.given).label('given'),
+				func.SUM(inventory.expired).label('expired')
+				).filter(inventory_type.name.like('%'+search+'%')
+				).group_by(inventory.type_id
+				).all()
 
 		return record
