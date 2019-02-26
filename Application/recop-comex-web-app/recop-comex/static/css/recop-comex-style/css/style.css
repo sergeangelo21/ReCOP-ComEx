@@ -73,11 +73,24 @@
     font-family: monospace;
   }
 
+  /* Search result  */
   .search-show{
+    padding-top: 10px;
     padding-left: 10px;
     padding-right: 10px;
     box-shadow: none;
   }
+
+  .search-highlight, .fa-times-circle{
+    color: white;
+    border-radius: 7px; 
+    background-color: #072000;
+  }
+
+  .search-highlight:hover, .fa-times-circle:hover{
+    color: #ffb901;
+  }
+/* end search result */
 	
 	a.button.viewbtn{
 		background-color: #ecad00;
