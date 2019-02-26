@@ -7,7 +7,7 @@
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('admin.events_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  		<a class="button viewbtn is-active" href="{{url_for('admin.events', status='all', search=' ')}}">
+						  		<a class="button viewbtn is-active" href="{{url_for('admin.events', status='all', page='1', search=' ')}}">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
@@ -25,43 +25,43 @@
 						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='all', search=search)}}">
+						      <a href="{{url_for('admin.events', status='all', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
 						        <span class="proposal">All</span>
 						      </a>
 						    </li>
 						    <li {% if status=='new' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='new', search=search)}}">
+						      <a href="{{url_for('admin.events', status='new', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
 						        <span class="prop">New</span>
 						      </a>
 						    </li>
 						    <li {% if status=='pending' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='pending', search=search)}}">
+						      <a href="{{url_for('admin.events', status='pending', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
 						        <span class="prop">Pending</span>
 						      </a>
 						    </li>
 						    <li {% if status=='scheduled' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='scheduled', search=search)}}">
+						      <a href="{{url_for('admin.events', status='scheduled', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
 						        <span class="prop">Scheduled</span>
 						      </a>
 						    </li>
 						    <li {% if status=='declined' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='declined', search=search)}}">
+						      <a href="{{url_for('admin.events', status='declined', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-times" aria-hidden="true"></i></span>
 						        <span class="prop">Declined</span>
 						      </a>
 						    </li>
 						    <li {% if status=='cancelled' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='cancelled', search=search)}}">
+						      <a href="{{url_for('admin.events', status='cancelled', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-times" aria-hidden="true"></i></span>
 						        <span class="prop">Cancelled</span>
 						      </a>
 						    </li>
 						    <li {% if status=='finished' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.events', status='finished', search=search)}}">
+						      <a href="{{url_for('admin.events', status='finished', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
 						        <span>Finished</span>
 						      </a>
@@ -157,7 +157,10 @@
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
-									Total: {{events|length}}
+									Showing record(s) 
+									   {{events.page}} - 
+									   {{(events.per_page+events.total-events.per_page) }}  
+									of {{events.total}}
 								</p>
 							</div>
 						</div>
@@ -178,7 +181,7 @@
 									</thead>
 									<tbody>
 
-										{% for event in events %}
+										{% for event in events.items %}
 											{% include 'admin/events/_events.html' %}
 										{% endfor %}
 									</tbody>
@@ -199,18 +202,14 @@
 							</div>
 							<br>
 							<nav class="pagination" role="navigation" aria-label="pagination">
-  								<a class="pagination-previous" title="This is the first page" disabled>Previous</a>
-  								<a class="pagination-next">Next page</a>
+  								<a class="pagination-previous" href="{{url_for('admin.events', status=status, search=search, page=events.prev_num|string)}}" {% if not events.has_prev %} disabled {% endif %}>Previous</a>
+  								<a class="pagination-next" href="{{url_for('admin.events', status=status, search=search, page=events.next_num|string)}}" {% if not events.has_next %} disabled {% endif %}>Next page</a>
   								<ul class="pagination-list">
+  									{% for no in page_nos %}
 									<li>
-  										<a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
+  										<a class="pagination-link {% if page==no %}is-current{% endif %}" >{{no}}</a>
 									</li>
-    								<li>
-      									<a class="pagination-link" aria-label="Goto page 2">2</a>
-    								</li>
-									<li>
-  										<a class="pagination-link" aria-label="Goto page 3">3</a>
-									</li>
+									{% endfor %}
 								</ul>
 							</nav>
 						</div>
