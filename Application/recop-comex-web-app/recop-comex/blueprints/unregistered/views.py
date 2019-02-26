@@ -22,7 +22,7 @@ def index():
 @unregistered.route('/events')
 def events():
 
-	events = event_views.show_list('S', ' ')
+	events = event_views.select_list()
 
 	return render_template('/unregistered/events/index.html', events=events)
 

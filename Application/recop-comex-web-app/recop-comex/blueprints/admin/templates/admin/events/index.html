@@ -134,25 +134,16 @@
 					<div class="card list">
 						<div class="card-header">
 							<p class="card-header-title">
-<<<<<<< HEAD
-							{% if search!=' ' %}
-							You searched for '{{search}}'
-							<a href="{{url_for('admin.events', status=status, page='1',search=' ')}}"><span class="fas fa-times"></span></a>
-							&nbsp; in
-							{% endif %}
-							{{status | title}} Events
-=======
 								<span class="fas fa-poll-h"></span>&nbsp;
 								{% if search!=' ' %}
 								You searched for &nbsp;
 								<span class="search-highlight">
 									&nbsp;'{{search}}'
-									<a href="{{url_for('admin.events', status=status, search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+									<a href="{{url_for('admin.events', status=status, page='1',search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
 								</span>
 								&nbsp; in
 								{% endif %}
 								{{status | title}} Events
->>>>>>> 43e9e12c1c33d7f9669ffa7f00656cc6b4d0d8a9
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
