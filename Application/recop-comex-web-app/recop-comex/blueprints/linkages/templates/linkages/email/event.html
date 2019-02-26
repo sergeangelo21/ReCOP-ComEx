@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Event Proposal</title>
+    <meta charset="utf-8 name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+	<style>
+		.columns.is-centered {
+  			justify-content: center;
+		}
+
+		.nav-title{
+			background-color: #072000;
+		    padding: 15px;
+		    color: gold;
+		    font-weight: bold;
+		    font-size: 30px;
+		}
+  		.column.is-6 {
+    		flex: none;
+    		width: 50%;
+  		}
+  		.card-header {
+  			align-items: stretch;
+  			box-shadow: 0 1px 2px rgba(10, 10, 10, 0.1);
+  			display: flex;
+		}
+		.card-content {
+  			background-color: transparent;
+  			padding: 1.5rem;
+		}
+		.is-size-5 {
+  			font-size: 1.25rem !important;
+		}
+		.has-text-weight-bold {
+  			font-weight: bold;
+		}
+		.content {
+  			margin-top: 0.25em;
+  			color: black;
+		}
+		.terms {
+  			background-color: whitesmoke;
+  			border-radius: 4px;
+ 			padding: 1.25rem 2.5rem 1.25rem 1.5rem;
+  			position: relative;
+		}
+		.button{
+	  		-moz-appearance: none;
+  			-webkit-appearance: none;
+  			align-items: center;
+  			border: 1px solid transparent;
+  			border-radius: 4px;
+  			box-shadow: none;
+ 			display: inline-flex;
+  			font-size: 1rem;
+  			height: 2.25em;
+  			justify-content: flex-start;
+  			line-height: 1.5;
+  			padding-bottom: calc(0.375em - 1px);
+  			padding-left: calc(0.625em - 1px);
+  			padding-right: calc(0.625em - 1px);
+  			padding-top: calc(0.375em - 1px);
+  			position: relative;
+  			vertical-align: top;
+  	 		margin: 0;
+   			text-decoration: underline;
+  			font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+		}
+		.is-primary{
+  			background-color: #00d1b2;
+  			border-color: transparent;
+  			color: #fff;
+  			text-decoration: none;
+		}
+		.is-primary:hover{
+	  		background-color: #00c4a7;
+  			border-color: transparent;
+  			color: #fff;
+		}
+		.has-text-centered {
+  			text-align: center !important;
+		}
+		body{
+	  		font-family: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+	   		margin: 0;
+  			padding: 0;
+  			color: #4a4a4a;
+  			font-size: 1rem;
+  			font-weight: 400;
+  			line-height: 1.5;
+		}
+		header{
+	  		display: block;
+		}
+		html {
+  			background-color: white;
+ 			font-size: 16px;
+  			-moz-osx-font-smoothing: grayscale;
+  			-webkit-font-smoothing: antialiased;
+  			min-width: 300px;
+  			overflow-x: hidden;
+  			overflow-y: scroll;
+  			text-rendering: optimizeLegibility;
+  			-webkit-text-size-adjust: 100%;
+     		-moz-text-size-adjust: 100%;
+      		-ms-text-size-adjust: 100%;
+          	text-size-adjust: 100%;
+  			box-sizing: border-box;
+    		margin: 0;
+  			padding: 0;
+  		}
+		p{
+	    	margin: 0;
+  			padding: 0;
+		}
+		a {
+  			color: #3273dc;
+  			cursor: pointer;
+  			text-decoration: none;
+		}
+		a:hover {
+  			color: #363636;
+		}
+
+	</style>
+
+</head>
+
+<body>
+
+	    <div class="columns is-centered">
+	    	<div class="column is-6">
+	    		<div class="card">
+				  <header class="card-header nav-title">
+				    <p class="card-header">
+				      	ReCOP-ComEx
+				    </p>
+				  </header>
+				  <div class="card-content">
+				    <div class="content">
+				      <p class="is-size-5 has-text-weight-bold">Dear {{user}},</p><br>
+				
+				      {{organizer}} just proposed a new event entitled {{event.name}}. Please read the details below and kindly click one of the buttons below to approve or decline the proposal.<br>
+				      Attached herewith are the documents.
+				      <br><br>
+
+				      <div class="terms">
+				      	<p class = "has-text-weight-bold">Event Name</p>
+				      	{{event.name}}<br>
+				      	<p class = "has-text-weight-bold">Description</p>
+				      	{{event.description}}<br>
+				      	<p class = "has-text-weight-bold">Objective</p>
+				      	{{event.objective}}<br>
+				      	<p class = "has-text-weight-bold">Location</p>
+				      	{{event.location}}<br>
+				      	<p class = "has-text-weight-bold">Target Date</p>
+				      	{{event.event_date}}<br>
+				      	<p class = "has-text-weight-bold">Proposed Budget</p>
+				      	{{event.budget}}<br>
+				      </div>
+
+				      <div class = "has-text-centered" >
+				      	 <br>
+				     	 <a href="{{link[0]}}"><button class = "button is-primary">Approve</button></a>
+				     	 &nbsp; &nbsp;
+				     	 <a href="{{link[1]}}"><button class = "button is-primary">Decline</button></a>
+				     </div>
+
+				    </div>
+				  </div>
+				</div>
+	    	</div>
+	    </div>
+
+</body>
+</html>
