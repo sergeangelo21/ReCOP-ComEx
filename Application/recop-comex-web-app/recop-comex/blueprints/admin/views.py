@@ -54,6 +54,8 @@ def events(status, search):
 		value='P'
 	elif status=='declined':
 		value='X'
+	elif status=='cancelled':
+		value='C'
 	elif status=='finished':
 		value='F'
 	else:
@@ -182,8 +184,33 @@ def events_create():
 
 		return redirect(url_for('admin.events', status='all', search=' '))
 
-
 	return render_template('/admin/events/create.html', form=form)
+
+@admin.route('/admin/events/reschedule/id=<id>', methods=['GET', 'POST'])
+@login_required
+def event_reschedule(id):
+
+	form = RescheduleEventForm()
+
+	resched_event = event_information.reschedule(current_user.id)
+
+	if form.validate_on_submit():
+
+		resched_event.location = form.location.data
+		resched_event.event_date = form.event_date.data
+
+		db.session.commit()
+
+		flash('Event rescheduled!', 'success')
+
+		return redirect(url_for('admin.events', status='all', search=' '))
+
+	else:
+
+		form.location.data = resched_event.location
+		form.event_date.data = resched_event.event_date
+
+	return render_template('/admin/events/reschedule.html', form=form, event=resched_event)
 
 @admin.route('/admin/events/<action>/id=<id>')
 @login_required
@@ -499,7 +526,64 @@ def donation_inkind(id):
 		flash('Items were successfully added!', 'success')
 		return redirect(url_for('admin.donations', status='all', search=' '))
 
-	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, donation=info)
+	return render_template('/admin/donations/inventory.html', title="Donation | Admin", form=form, donation=info)
+
+@admin.route('/admin/donations/add', methods=['GET', 'POST'])
+@login_required
+def donation_add():	
+
+	form=DonationForm()
+
+	organizations = linkage_views.target_linkages()
+
+	for o in organizations:
+
+		if o.type==4:
+			form.sponsee.choices.extend([(str(o.id), o.address)])
+		else:
+			form.sponsor.choices.extend([(str(o.id), o.company_name)])
+
+	events = event_views.show_list('S', ' ')
+
+	if events:
+		for e in events:
+			form.event.choices.extend([(str(e.id), e.name)])
+			no_event = 0
+			
+	else: 
+		form.event.data=''
+		no_event = 1
+
+	if form.validate_on_submit():
+
+		if form.give_to.data=='1':
+			if form.sponsee.data:
+				sponsee = form.sponsee.data
+			else:
+				sponsee = 1
+
+			event = None
+		else:
+			event = form.event.data
+			sponsee= None
+
+		file = form.trans_slip.data
+		old, extension = os.path.splitext(file.filename)
+
+		new = donation.last_added()
+		filename = str(new)+extension
+
+		trans_path = 'static/output/donate/trans_slip/' + filename
+
+		value = [None,sponsee,event,1,form.amount.data,trans_path,'N']
+
+		donation.add(value)
+		file.save(trans_path)
+
+		flash('Donation given!', 'success')
+		return redirect(url_for('admin.donations', status='all', search=' '))
+
+	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, no_event=no_event)
 
 @admin.route('/admin/inventory/filter_<search>')
 @login_required
@@ -509,13 +593,13 @@ def inventory_show(search):
 
 	items = inventory_views.show_list()
 
-	types = inventory_type.show_list()
+	breakdown = inventory.item_breakdown()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('admin.communities', search=form.search.data))
 
-	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items,types=types, search=search)
+	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items, breakdown=breakdown, search=search)
 
 @admin.route('/admin/inventory/add', methods=['GET', 'POST'])
 @login_required

@@ -1,3 +1,17 @@
+if(window.location.pathname=='/linkages/events/calendar'){
+    var today = new Date()
+    var month = today.getMonth() + 1
+    var year = today.getFullYear()
+    var first_day = new Date(year + '-' + month + '-1')
+    var last_day = new Date(year, month , 0)
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    document.getElementById('month_year').innerHTML=months[month-1] + ' ' + year
+    var calendar = Calendar(first_day, last_day, month, year)
+    document.getElementById('calendar').appendChild(calendar)
+}
+
+
+
 if(window.location.pathname=='/linkages/events/create'){
 	document.getElementById('thrust').options.item(0).selected="True"
 	document.getElementById('thrust').options.item(0).hidden="True"
@@ -121,4 +135,37 @@ function filtershrink() {
     } else {
         div.style.display = "none";
     }
+}
+
+
+function prev_next(sender){
+
+    document.getElementById('calendar').innerHTML=""
+
+    if (sender=="prev") {
+        month = month - 1
+        if (month<1){
+            month = 12
+            year = year - 1
+        }
+    }
+
+    if (sender=="next"){
+        month = month + 1
+
+        if (month>12){
+        month = 1
+        year = year + 1
+        }
+    }
+
+
+    first_day = new Date(year + '-' + month + '-1')
+    last_day = new Date(year, month , 0)
+    
+    document.getElementById('month_year').innerHTML=months[month-1] + ' ' + year
+
+    var calendar = Calendar(first_day, last_day, month, year)
+
+    document.getElementById('calendar').appendChild(calendar)
 }

@@ -4,52 +4,50 @@
 
 			<div class="notification gold">
 				<div class="columns is-left">
-					<div class="column is-3">
-						<article class="media">
-						  	<figure class="media-left"> 
-						  		<a class="button add" href="{{url_for('communities.members_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  	</figure>
-						</article>
-					</div>
-					<div class="column is-right">
-						<div class="field is-horizontal is-pulled-right has-addons has-addons-centered">
-							<form action="" method="POST">
+					<div class="column search-box">
+						  <a class="button add" href="{{url_for('communities.members_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+							&nbsp&nbsp&nbsp
+						<div class="field is-pulled-right has-addons has-addons-centered">
+							<div class="control">
+								<form action="" method="POST">
 								{{form.hidden_tag()}}
-							<div class="field-body">
-								<p class="control">
-							    	{{form.search(class_='input', placeholder='Search')}}
-								</p>
-								<p class="control">
-							     	{{form.submit(class_='button search')}}
-								</p>
+						    		{{form.search(class_='input', placeholder='Search')}}
 							</div>
+							<p class="control">
+						     	{{form.submit(class_='button search')}}
+							</p>
 							</form>
 						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="columns is-gapless">
+			<div class="columns">
 
 				<div class="column">
-					<div class="card list">
-						<div class="card-header">
-							<p class="card-header-title">
+					<div class="card-header search-show">
+						<p class="card-header-title">
+							<span class="fas fa-poll-h"></span>&nbsp
 							{% if search!=' ' %}
-							You searched for '{{search}}'&nbsp; 
-							<a href="{{url_for('communities.members', search=' ')}}"><span class="fas fa-times"></span></a>&nbsp;in
+							You searched for &nbsp;
+							<span class="search-highlight">
+								&nbsp;'{{search}}'
+								<a href="{{url_for('communities.members', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+							</span>
+							&nbsp; in
 							{% endif %}
 							Members
+						</p>
+						<div class="is-pulled-right">
+							<p class="card-header-title">
+								Total: {{((members|length)/2)|int}}
 							</p>
-							<div class="is-pulled-right">
-								<p class="card-header-title">
-									Total: {{((members|length)/2)|int}}
-								</p>
-							</div>
 						</div>
+					</div>
+					<div class="card list">
 						<div class="card-content">
-							<div class="table">
-								<table class="table is-striped is-fullwidth">
+							<div class="table-responsive">
+								<table class="table is-striped is-hoverable is-fullwidth">
 								{% if members %}
 								<thead>
 									<tr>

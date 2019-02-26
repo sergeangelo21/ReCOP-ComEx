@@ -8,7 +8,8 @@
 									    	{% endfor %}
 									    	{% if event.address!='San Sebastian College Recoletos de Cavite' and event.organizer_id!=1 %}
 									    		<a class="tooltip" data-tooltip="Non-Institutional"><i class="fas fa-asterisk"></i></a>
-									    	{% else %}
+									    	{% endif %}
+									    	{% if event.organizer_id==1 %}
 									    		<a class="tooltip" data-tooltip="ReCOP Event"><i class="fas fa-star"></i></a>
 									    	{% endif %}
 									    </td>
@@ -22,6 +23,8 @@
 									    		Scheduled
 									    	{% elif event.event_status=='X' %}
 									    		Declined
+									    	{% elif event.event_status=='C' %}
+									    		Cancelled
 									    	{% elif event.event_status=='P' %}
 									    		{% if event.status=='A' %}
 									    			For Academic's Signing
@@ -58,7 +61,7 @@
 											{% endif %}
 											{% endfor %}
 											{% elif event.event_status=='S' %}
-											<a class="button is-link tooltip" data-tooltip="Reschedule" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
+											<a class="button is-link tooltip" data-tooltip="Reschedule" href="{{url_for('admin.event_reschedule', id=event.id)}}">
 												<span class="icon">
 													<i class="fas fa-clock"></i>
 												</span>

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, login_required
 from blueprints.communities.forms import *
-from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation, referral
+from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation, referral, event_attachment
 from data_access.queries import user_views, linkage_views, community_views, event_views
 
 from static.email import send_email
@@ -34,29 +34,132 @@ def index():
 
 	return render_template('/communities/index.html', title="Communities")
 
-@communities.route('/communities/events')
+@communities.route('/communities/events/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
-def events():
+def events(status, search):
 
-	events = event_views.community_events(current_user.info_id)
-	
-	return render_template('/communities/events/index.html', title="Communities", events=events)
+	if status=='scheduled':
+		value='S'
+	elif status=='new':
+		value='N'
+	elif status=='pending':
+		value='P'
+	elif status=='declined':
+		value='X'
+	elif status=='cancelled':
+		value='C'
+	elif status=='finished':
+		value='F'
+	else:
+		value=status
 
-@communities.route('/communities/event_<id>/participants')
-@login_required
-def event_participants(id):
+	events = event_views.show_list(value, search)
 
-	event = event_views.show_info(id)
-	joined = event_participation.show_joined(id)
-	participants = community_views.event_participants(id)
+	letters = event_attachment.letter_attached()
 
 	form = SearchForm()
 
+
 	if form.validate_on_submit():
 
-		return redirect(url_for('communities.event_participants', id=id))
 
-	return render_template('/communities/events/add_participants.html', title="Communities", participants=participants, event=event, joined=joined, form=form)
+
+		return redirect(url_for('communities.events', status=status, search=form.search.data))
+
+	return render_template('/communities/events/index.html', title="Events | communities", form=form, events=events, status=status,letters=letters,search=search)
+
+@communities.route('/communities/events/calendar', methods=['GET', 'POST'])
+@login_required
+def events_calendar():
+
+	events = event_views.show_list('S', ' ')
+	
+	return render_template('/communities/events/index-calendar.html', title="Events | communities", events=events)
+	
+@communities.route('/communities/events/show/id=<id>')
+@login_required
+def event_show(id):
+
+	event = event_views.show_info(id)
+	participants = event_views.show_participants(id)
+
+	return render_template('/communities/events/show.html', title= event.name.title() + " | communities", event = event, participants=participants)
+
+@communities.route('/communities/events/reschedule/id=<id>', methods=['GET', 'POST'])
+@login_required
+def event_reschedule(id):
+
+	form = RescheduleEventForm()
+
+	resched_event = event_information.reschedule(current_user.id)
+
+	if form.validate_on_submit():
+
+		resched_event.location = form.location.data
+		resched_event.event_date = form.event_date.data
+
+		db.session.commit()
+
+		flash('Event rescheduled!', 'success')
+
+		return redirect(url_for('communities.events', status='all', search=' '))
+
+	else:
+
+		form.location.data = resched_event.location
+		form.event_date.data = resched_event.event_date
+
+	return render_template('/communities/events/reschedule.html', form=form, event=resched_event)
+
+@communities.route('/communities/events/<action>/id=<id>')
+@login_required
+def event_action(id, action):
+
+	event = event_information.retrieve_event(id)
+	organizer = user_information.linkage_info(event.organizer_id)
+	email = user_account.retrieve_user(organizer.id)
+
+	if action=='approve':
+
+		signatory = user_views.signatory_info(4)
+		status = ['P','A']
+
+		recipient = signatory.email_address
+		user = 'Fr. ' + signatory.last_name + ', OAR'
+		token = generate(event.id)
+		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
+		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
+		html = render_template('communities/email/event.html', event=event , organizer=organizer.company_name, user=user, link = [approve, decline])
+		attachments = event_attachment.retrieve_files(id)
+		subject = "NEW EVENT PROPOSAL: " + event.name
+
+		email_parts = [html, subject, current_user.email_address, recipient, attachments]
+
+		send_email(email_parts)
+
+		event_information.update_status(event.id,status[0])
+		proposal_tracker.update_status(event.id,status[1])
+
+		proposal = proposal_tracker.query.filter(proposal_tracker.event_id==event.id).first()
+
+		value = [None,current_user.id,event.id,'event', 5]
+		audit_trail.add(value)
+
+		flash(event.name + ' was approved!', 'success')
+
+	elif action=='decline':
+
+		status='X'
+		proposal_tracker.update_status(event.id, status)
+		event_information.update_status(event.id, status)
+
+		value = [None,current_user.id,event.id,'event', 6]
+		audit_trail.add(value)
+
+		flash(event.name + ' was declined.', 'info') 	
+
+
+	return redirect(url_for('communities.events', status='all', search=' '))
 
 @communities.route('/communities/event_<id>/<action>/<participant>')
 @login_required

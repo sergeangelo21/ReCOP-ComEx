@@ -110,6 +110,9 @@ function prev_next(sender){
         }
     }
 
+    first_day = new Date(year + '-' + month + '-1')
+    last_day = new Date(year, month , 0)
+
     document.getElementById('month_year').innerHTML=months[month-1] + ' ' + year
 
     var calendar = Calendar(first_day, last_day, month, year)

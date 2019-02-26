@@ -20,7 +20,7 @@ class SignupForm(FlaskForm):
     bio = StringField('Bio', [validators.Length(min=0, max=160)])
     birthday = DateField('Birthday', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
-    telephone = StringField('Telephone Number', [validators.Length(min=7, max=15)])
+    telephone = StringField('Telephone Number')
     mobile = StringField('Mobile Number', [validators.Length(min=11, max=25)])
     sscr = RadioField('SSCR Member?', choices=[("Y","Yes"),("F","No")])
     type = StringField('Type', validators=[DataRequired()])

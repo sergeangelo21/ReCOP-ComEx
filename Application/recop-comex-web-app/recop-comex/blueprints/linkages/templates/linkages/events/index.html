@@ -4,80 +4,28 @@
 
 	<div class="notification gold">
 		<div class="columns is-centered">
-			<div class="column view-icons">
-				<article class="media">
-				  	<figure class="media-left"> 
-				  		<a href="{{url_for('linkages.events_create')}}" class="button add has-text-weight-bold">
-							<span class="icon">
-								<i class="fa fa-plus"></i>
-							</span>
-							<span>Create</span>
-						</a>
-				  	</figure>
-				  	<div class="media-content">
-				  		<div class="content">
-				  			<a href="" class="button viewbtn is-active">
-								<span class="icon">
-									<i class="fa fa-list"></i>
-								</span>
-							</a>
+			<div class="column search-box">
+		  		<a href="{{url_for('linkages.events_create')}}" class="button add">
+						<i class="fa fa-plus-circle"></i>&nbsp Create
+				</a>
+	  			<a href="" class="button viewbtn is-active">
+					<span class="icon">
+						<i class="fa fa-list"></i>
+					</span>
+				</a>&nbsp
 
-							<a href="" class="button viewbtn">
-								<span class="icon">
-									<i class="fa fa-calendar-alt"></i>
-								</span>
-							</a>
-				  		</div>
-				  	</div>
-				</article>
-			</div>
-					<div class="column">
-						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
-						  <ul>
-						    <li {% if status=='all' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('linkages.events', status='all', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
-						        <span class="proposal">All</span>
-						      </a>
-						    </li>
-						    <li {% if status=='new' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('linkages.events', status='new', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
-						        <span class="prop">New</span>
-						      </a>
-						    </li>
-						    <li {% if status=='pending' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('linkages.events', status='pending', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
-						        <span class="prop">Pending</span>
-						      </a>
-						    </li>
-						    <li {% if status=='scheduled' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('linkages.events', status='scheduled', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
-						        <span class="prop">Scheduled</span>
-						      </a>
-						    </li>
-						    <li {% if status=='declined' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('linkages.events', status='declined', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-calendar-times" aria-hidden="true"></i></span>
-						        <span class="prop">Declined</span>
-						      </a>
-						    </li>
-						    <li {% if status=='finished' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('linkages.events', status='finished', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
-						        <span>Finished</span>
-						      </a>
-						    </li>
-						  </ul>
-						</div>
-					</div>	
-			<div class="column is-narrow">
-				<div class="field has-addons has-addons-centered">
-					<p class="control">
+				<a href="{{url_for('linkages.events_calendar')}}" class="button viewbtn">
+					<span class="icon">
+						<i class="fa fa-calendar-alt"></i>
+					</span>
+				</a>
+
+				&nbsp&nbsp&nbsp
+
+				<div class="field has-addons has-addons-centered is-pulled-right">
+					<div class="control">
 					    <input class="input" type="text" placeholder="Search">
-					</p>
+					</div>
 					<p class="control">
 					    <a class="button search">
 					      Search
@@ -98,48 +46,33 @@
 	                <div class="column">
 	                	<p class="title is-size-5">Thrust</p>
 	                  	<div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="" type="checkbox" name="0" checked="checked">
-		                    <label for="">All</label>
+		                 	<div class="control">
+		                    	<div class="select is-warning">
+			                      	<select class="filter-dropdown">
+										<option>All</option>
+										<option>Educational</option>
+										<option>Environment</option>
+										<option>Health</option>
+										<option>Livelihood</option>
+										<option>Socio-Political</option>
+										<option>Spiritual</option>
+			                        </select>
+		                    	</div>
+		                  	</div>
 		                </div>
-		                <div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="1" type="checkbox" name="1">
-		                    <label for="1">Educational</label>
-		                </div>
-		                <div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="2" type="checkbox" name="2">
-		                    <label for="2">Environmental</label>
-		                </div>
-		                <div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="3" type="checkbox" name="3">
-		                    <label for="3">Health</label>
-		                </div>
-		                <div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="4" type="checkbox" name="4">
-		                    <label for="4">Livelihood</label>
-		                </div>
-		                <div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="5" type="checkbox" name="5">
-		                    <label for="5">Socio-Political</label>
-		                </div>
-		                <div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="6" type="checkbox" name="6">
-		                    <label for="6">Spiritual</label>
-		                </div>
-	                	
-	                	<p class="title is-size-5">Type</p>
+		                <p class="title is-size-5">Type</p>
 
-	                  	<div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="7" type="checkbox" name="7" checked="checked">
-		                    <label for="7">All</label>
-		                </div>
 		                <div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
-		                    <label for="8">Institutional</label>
-		                </div>
-		                <div class="field">
-		                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
-		                    <label for="9">Outside</label>
-		                </div>
+		                  	<div class="control">
+		                    	<div class="select is-warning">
+			                      	<select class="filter-dropdown">
+										<option>All</option>
+										<option>Institutional</option>
+										<option>Outside</option>
+			                        </select>
+		                    	</div>
+		                  	</div>
+                		</div>
 	                </div>
 	            </div>
 			 	

@@ -3,38 +3,79 @@
 		<td>{{ item.in_stock }}</td>
 		<td>{{ item.given }}</td>
 		<td>{{ item.expired }}</td>
-		<td>									   
-			<a class="button is-warning tooltip" data-tooltip="View" href="">
+		<td>									   	
+			<a class="button is-warning" onclick="show_item('{{item.type_id}}')">
 				<span class="icon">
 					<i class="fa fa-eye"></i>
-				</span>
-			</a>
-			<a class="button is-success tooltip" data-tooltip="Give" onclick="show_item('{{item.id}}')">
-				<span class="icon">
-					<i class="fa fa-gift"></i>
-				</span>
-			</a>
-			<a class="button is-danger tooltip" data-tooltip="Dispose" href="">
-				<span class="icon">
-					<i class="fa fa-trash"></i>
-				</span>
+				</span> &nbsp;
+				View
 			</a>
 		</td>
 	</tr>	
 
-	<div id={{item.id}}_modal class="modal">
+	<div id={{item.type_id}}_modal class="modal">
 		<div class="modal-background"></div>
 		<div class="modal-card">
 		    <header class="modal-card-head">
-		    	<p class="modal-card-title has-text-white">Give</p>
-		    	<button class="delete" onclick="close_item('{{item.id}}')"></button>
+		    	<p class="modal-card-title has-text-white">{{item.name}}</p>
+		    	<button class="delete" onclick="close_item('{{item.type_id}}')"></button>
 		    </header>
 		    <section class="modal-card-body">
-		      <!-- Content ... -->
+
+		    	{% for i in breakdown %}
+
+		    		{% if i.type_id==item.type_id %}
+
+	    			<div class="card">
+		              	<header class="card-header has-background-light">
+			                
+			                 <div class="columns card-header-title">
+			                	<div class="column">
+			                		Id
+			                	</div>
+			                	<div class="column">
+			                		Stock
+			                	</div>
+			                	<div class="column">
+			                		Given
+			                	</div>
+			                	<div class="column">
+			                		Expired
+			                	</div>
+			                	<div class="column">
+			                		Actions
+			                	</div>
+		                	</div>
+			               
+		              	</header>
+		              	<div class="card-content profile">
+             				<div class="columns card-header-title has-text-weight-normal">
+			                	<div class="column">
+			                		{{item.type_id}}
+			                	</div>
+			                	<div class="column">
+			                		{{item.in_stock}}
+			                	</div>
+			                	<div class="column">
+			                		{{item.given}}
+			                	</div>
+			                	<div class="column">
+			                		{{item.expired}}
+			                	</div>
+			                	<div class="column">
+			                		
+			                	</div>
+		                	</div>
+			            </div>
+			        </div>
+
+		    		{% endif %}
+
+		    	{% endfor %}
+
 		    </section>
+
 		    <footer class="modal-card-foot">
-		      <button class="button is-success">Save changes</button>
-		      <button class="button">Cancel</button>
 		    </footer>
 	  	</div>
 	</div>

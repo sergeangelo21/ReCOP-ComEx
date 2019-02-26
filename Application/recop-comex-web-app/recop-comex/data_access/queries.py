@@ -81,6 +81,7 @@ class linkage_views():
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name).label('coordinator'),
 				user_information.partner_thrust,
+				user_information.bio,
 				user_information.address,
 				user_information.telephone,
 				user_information.mobile_number,
@@ -99,6 +100,7 @@ class linkage_views():
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name).label('coordinator'),
 				user_information.partner_thrust,
+				user_information.bio,
 				user_information.address,
 				user_information.telephone,
 				user_information.mobile_number,
@@ -121,6 +123,7 @@ class linkage_views():
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name).label('coordinator'),
 				user_information.partner_thrust,
+				user_information.bio,
 				user_information.address,
 				user_information.telephone,
 				user_information.mobile_number,
@@ -637,6 +640,7 @@ class inventory_views():
 		record = inventory.query.join(
 			inventory_type
 			).add_columns(
+			inventory.type_id,
 			inventory_type.name,
 			func.SUM(inventory.in_stock).label('in_stock'),
 			func.SUM(inventory.given).label('given'),
