@@ -76,57 +76,61 @@
 
 
 
-				<div class="column">
-					<div class="card list">
-						<div class="card-header">
-							<p class="card-header-title">
+			<div class="column">
+				<div class="card list">
+					<div class="card-header">
+						<p class="card-header-title">
+							<span class="fas fa-poll-h"></span>&nbsp;
 							{% if search!=' ' %}
-							You searched for '{{search}}'
-							<a href="{{url_for('admin.communities', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
+							You searched for &nbsp;
+							<span class="search-highlight">
+								&nbsp;'{{search}}'
+								<a href="{{url_for('admin.communities', status=status, search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+							</span>
 							&nbsp; in
 							{% endif %}
 							{{status | title }} Communities
+						</p>
+						<div class="is-pulled-right">
+							<p class="card-header-title">
+								Total: {{communities | length}}
 							</p>
-							<div class="is-pulled-right">
-								<p class="card-header-title">
-									Total: {{communities | length}}
-								</p>
-							</div>
 						</div>
-						<div class="card-content">
-							<div class="table-responsive">
-								<table class="table is-fullwidth is-striped is-hoverable">
-								{% if communities %}
-								<thead>
-									<tr>
-										<th class="newlist">ID</th>
-									    <th class="newlist">Address</th>
-									    <th class="newlist">Coordinator</th>
-									    <th class="newlist">Population</th>
-									   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
-									    <th class="newlist hidedesktop">Actions</th>
-									 </tr>
-									
-								</thead>
-								<tbody>
-									{% for community in communities %}
-										{% include 'admin/communities/_communities.html' %}
-									{% endfor %}
-								</tbody>
-								{% else %}
+					</div>
+					<div class="card-content">
+						<div class="table-responsive">
+							<table class="table is-fullwidth is-striped is-hoverable">
+							{% if communities %}
+							<thead>
+								<tr>
+									<th class="newlist">ID</th>
+								    <th class="newlist">Address</th>
+								    <th class="newlist">Coordinator</th>
+								    <th class="newlist">Population</th>
+								   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
+								    <th class="newlist hidedesktop">Actions</th>
+								 </tr>
+								
+							</thead>
+							<tbody>
+								{% for community in communities %}
+									{% include 'admin/communities/_communities.html' %}
+								{% endfor %}
+							</tbody>
+							{% else %}
 
-								<tbody>
+							<tbody>
 
-									<tr class = "table-row">
-										<td class = "has-text-centered">---Nothing to show---</td>
-								 	</tr>
-									
-								</tbody>
+								<tr class = "table-row">
+									<td class = "has-text-centered">---Nothing to show---</td>
+							 	</tr>
+								
+							</tbody>
 
-								{% endif %}
-							</table>
-							</div>
+							{% endif %}
+						</table>
 						</div>
 					</div>
 				</div>
+			</div>
 {% endblock %}

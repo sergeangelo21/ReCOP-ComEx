@@ -110,12 +110,18 @@
 					<div class="card list">
 						<div class="card-header">
 							<p class="card-header-title">
-							{% if search!=' ' %}
-							You searched for '{{search}}'
-							<a href="{{url_for('admin.donations', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
-							&nbsp; in
-							{% endif %}
-							{{status | title }} Donations</p>
+								<span class="fas fa-poll-h"></span>&nbsp;
+								{% if search!=' ' %}
+								You searched for &nbsp;
+								<span class="search-highlight">
+									&nbsp;'{{search}}'
+									<a href="{{url_for('admin.donations', status=status, search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+								</span>
+								&nbsp; in
+								{% endif %}
+								{{status | title }} 
+								Donations
+							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
 									Total: {{donations | length}}
