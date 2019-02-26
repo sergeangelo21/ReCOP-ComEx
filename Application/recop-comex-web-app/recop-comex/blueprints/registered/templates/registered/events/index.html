@@ -18,16 +18,17 @@
 
 				&nbsp&nbsp&nbsp
 
-	          	<div class="field has-addons has-addons-centered is-pulled-right">
-		            <p class="control">
-		                <input class="input" type="text" placeholder="Search">
-		            </p>
-		            <p class="control">
-		                <a class="button search">
-		                  Search
-		                </a>
-		            </p>
-	          	</div>
+				<div class="field is-pulled-right has-addons has-addons-centered">
+					<div class="control">
+						<form action="" method="POST">
+						{{form.hidden_tag()}}
+				    		{{form.search(class_='input', placeholder='Search')}}
+					</div>
+					<p class="control">
+				     	{{form.submit(class_='button search')}}
+					</p>
+					</form>
+				</div>
 	        </div>
       	</div>
     </div>
@@ -75,13 +76,23 @@
 			 	
     		</div>
     	</div>
-
 		<div class="column">
-
 			<div class="columns padding-el is-multiline">
-				{% for event in events %}
-					{% include 'registered/events/_events.html' %}
-				{% endfor %}
+				{% if events %}
+					{% for event in events %}
+						{% include 'registered/events/_events.html' %}
+					{% endfor %}
+				{% else %}
+					<div class="has-text-centered">
+						<span class="fas fa-ellipsis-h"></span>
+						<span class="fas fa-ellipsis-h"></span>
+						<span class="fas fa-ellipsis-h"></span>
+						<span class="has-text-weight-bold"> NOTHING TO SHOW </span>
+						<span class="fas fa-ellipsis-h"></span>
+						<span class="fas fa-ellipsis-h"></span>
+						<span class="fas fa-ellipsis-h"></span>
+					</div>
+				{% endif %}
 			</div>
 		</div>	
 	</div>

@@ -163,8 +163,50 @@
 
 		  		</section>
 	    	
-				<footer class="modal-card-foot buttons is-right">
-	    			<button class="button is-info">Join Event</button>
-	    		</footer>
+				<footer class="modal-card-foot buttons is-centered">
+	    			{% if event.address=='San Sebastian College Recoletos de Cavite' %}
+	    			<div class="columns"{% for attach in letters %}{% if attach.event_id==event.id %}style="display:none"{% endif %}{% endfor %}">
+	    				<div class="column">
+	    					<a href="{{url_for('linkages.event_letter', id = event.id, name = event.name)}}" target='_blank' class="level-item">
+			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-download"></i></span>&nbsp Request Letter</button>
+							</a>
+	    				</div>
+	    				<div class="column">
+		    		<form action="" method="POST" enctype="multipart/form-data">
+		    		{{form.hidden_tag()}}
+							<div class="file">
+							  <label class="file-label">
+								{{form.attach_letter(class_='file-input')}}
+							    <span class="file-cta">
+							      <span class="file-icon">
+							        <i class="fas fa-paperclip"></i>
+							      </span>
+							      <span class="file-label">
+ 							       Signed Letter
+							      </span>
+							    </span>
+							  </label>
+								{{form.event_id(hidden='True', value = event.id)}}
+								{{form.submit(class_='button is-success')}}
+							</div>						
+	    			  </form>
+	    			</div>
+	    		</div>
+	    			{% endif %}	
+	    			{% if event.status=='S' %}
+	    			<div class="columns">
+	    				<div class="column">
+	    					<a href="" class="level-item">
+			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Reschedule</button>
+							</a>
+	    				</div>
+	    				<div class="column">
+	    					<a href="" class="level-item">
+			  					<button class="button is-danger"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Cancel</button>
+							</a>
+	    				</div>
+	    			</div>
+	    			{% endif %}
+    		</footer>
 	  		</div>
 	</div>

@@ -33,37 +33,21 @@ def index():
 
 	return render_template('/registered/index.html')
 
-@registered.route('/registered/events/<status>/filter_<search>', methods=['GET', 'POST'])
+@registered.route('/registered/events/filter_<search>', methods=['GET', 'POST'])
 @login_required
-def events(status, search):
+def events(search):
 
-	if status=='scheduled':
-		value='S'
-	elif status=='new':
-		value='N'
-	elif status=='pending':	
-		value='P'
-	elif status=='declined':
-		value='X'
-	elif status=='finished':
-		value='F'
-	else:
-		value=status
-
-	events = event_views.show_list(value, search)
+	events = event_views.show_list('S', search)
 
 	letters = event_attachment.letter_attached()
 
 	form = SearchForm()
 
-
 	if form.validate_on_submit():
 
+		return redirect(url_for('registered.events', search=form.search.data))
 
-
-		return redirect(url_for('registered.events', status=status, search=form.search.data))
-
-	return render_template('/registered/events/index.html', title="Events | registered", form=form, events=events, status=status,letters=letters,search=search)
+	return render_template('/registered/events/index.html', title="Events", form=form, events=events, letters=letters, search=search)
 
 @registered.route('/registered/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -71,68 +55,17 @@ def events_calendar():
 
 	events = event_views.show_list('S', ' ')
 	
-	return render_template('/registered/events/index-calendar.html', title="Events | registered", events=events)
-	
-@registered.route('/registered/events/show/id=<id>')
+	return render_template('/registered/events/index-calendar.html', title="Events", events=events)
+
+@registered.route('/registered/events/join/id=<id>')
 @login_required
-def event_show(id):
+def event_join(id):
 
 	event = event_views.show_info(id)
-	participants = event_views.show_participants(id)
 
-	return render_template('/registered/events/show.html', title= event.name.title() + " | registered", event = event, participants=participants)
+	flash(event)
 
-
-
-@registered.route('/registered/events/<action>/id=<id>')
-@login_required
-def event_action(id, action):
-
-	event = event_information.retrieve_event(id)
-	organizer = user_information.linkage_info(event.organizer_id)
-	email = user_account.retrieve_user(organizer.id)
-
-	if action=='approve':
-
-		signatory = user_views.signatory_info(4)
-		status = ['P','A']
-
-		recipient = signatory.email_address
-		user = 'Fr. ' + signatory.last_name + ', OAR'
-		token = generate(event.id)
-		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
-		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
-		html = render_template('registered/email/event.html', event=event , organizer=organizer.company_name, user=user, link = [approve, decline])
-		attachments = event_attachment.retrieve_files(id)
-		subject = "NEW EVENT PROPOSAL: " + event.name
-
-		email_parts = [html, subject, current_user.email_address, recipient, attachments]
-
-		send_email(email_parts)
-
-		event_information.update_status(event.id,status[0])
-		proposal_tracker.update_status(event.id,status[1])
-
-		proposal = proposal_tracker.query.filter(proposal_tracker.event_id==event.id).first()
-
-		value = [None,current_user.id,event.id,'event', 5]
-		audit_trail.add(value)
-
-		flash(event.name + ' was approved!', 'success')
-
-	elif action=='decline':
-
-		status='X'
-		proposal_tracker.update_status(event.id, status)
-		event_information.update_status(event.id, status)
-
-		value = [None,current_user.id,event.id,'event', 6]
-		audit_trail.add(value)
-
-		flash(event.name + ' was declined.', 'info') 	
-
-
-	return redirect(url_for('registered.events', status='all', search=' '))
+	return redirect(url_for('registered.events', search=' '))
 
 @registered.route('/registered/linkages')
 @login_required
@@ -142,7 +75,7 @@ def linkages():
 
 	return render_template('/registered/linkages/index.html', linkages=linkages)
 
-@registered.route('/registered/donate',methods=['GET', 'POST'])
+@registered.route('/registered/donate', methods=['GET', 'POST'])
 @login_required
 def donate():
 

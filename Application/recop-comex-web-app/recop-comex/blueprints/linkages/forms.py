@@ -3,7 +3,6 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField, IntegerField, validators
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
-
 class SearchForm(FlaskForm):
     search = StringField("Search", validators=[DataRequired()])
     submit = SubmitField("Search")
