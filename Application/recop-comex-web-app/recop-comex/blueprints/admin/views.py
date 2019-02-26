@@ -172,7 +172,7 @@ def events_create():
 		event_attachment.add(value)
 		programme.save(file_path)
 
-		signatory = user_views.signatory_info(4)
+		signatory = user_views.signatory_info(3)
 
 		recipient = signatory.email_address
 		user = 'Fr. ' + signatory.last_name + ', OAR'
@@ -193,7 +193,7 @@ def events_create():
 
 		flash('Event proposal submitted! Please wait for the approval.', 'success')
 
-		return redirect(url_for('admin.events', status='all', search=' '))
+		return redirect(url_for('admin.events', status='all', page='1', search=' '))
 
 	return render_template('/admin/events/create.html', form=form)
 
