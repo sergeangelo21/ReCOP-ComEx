@@ -91,9 +91,9 @@ def events(status, search, page):
 @login_required
 def events_calendar():
 
-	events = event_views.show_list('S', ' ')
+	events = event_views.show_list('S', ' ', 1)
 	
-	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events)
+	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events.items)
 	
 @admin.route('/admin/events/show/id=<id>')
 @login_required
