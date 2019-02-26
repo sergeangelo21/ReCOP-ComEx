@@ -596,7 +596,7 @@ def donation_add():
 
 	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, no_event=no_event)
 
-@admin.route('/admin/inventory/filter_<search>')
+@admin.route('/admin/inventory/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def inventory_show(search):
 
@@ -608,7 +608,7 @@ def inventory_show(search):
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('admin.communities', search=form.search.data))
+		return redirect(url_for('admin.inventory_show', search=form.search.data))
 
 	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items, breakdown=breakdown, search=search)
 

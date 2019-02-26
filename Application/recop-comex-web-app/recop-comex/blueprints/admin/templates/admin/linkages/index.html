@@ -1,4 +1,4 @@
-	{% extends "admin-base.html" %}
+{% extends "admin-base.html" %}
 
 {% block content %}
 			<div class="notification gold">
@@ -84,48 +84,34 @@
 			                <div class="column">
 			                	<p class="title is-size-5">Thrust</p>
 			                  	<div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox" checked = "checked">
-				                    <label for="0">All</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox" >
-				                    <label for="1">Educational</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
-				                    <label for="2">Environmental</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
-				                    <label for="3">Health</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
-				                    <label for="4">Livelihood</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox" >
-				                    <label for="5">Socio-Political</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
-				                    <label for="6">Spiritual</label>
-				                </div>
-			                	
-			                	<p class="title is-size-5">Type</p>
+							<div class="control">
+						    	<div class="select is-warning">
+							    	<select class="filter-dropdown">
+								        <option>All</option>
+								        <option>Educational</option>
+								        <option>Environmental</option>
+								        <option>Health</option>
+								        <option>Livelihood</option>
+								        <option>Socio-Political</option>
+								        <option>Spiritual</option>
+							      	</select>
+						    	</div>
+						  	</div>
+						</div>
+	                	
+	                	<p class="title is-size-5">Type</p>
 
-			                  	<div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox"checked="checked">
-				                    <label for="7">All</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
-				                    <label for="8">Inside</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" type="checkbox">
-				                    <label for="9">Outside</label>
-				                </div>
+	                  	<div class="field">
+							<div class="control">
+						    	<div class="select is-warning">
+							    	<select class="filter-dropdown">
+								        <option>All</option>
+								        <option>Institutional</option>
+								        <option>Outside</option>
+							      	</select>
+						    	</div>
+						  	</div>
+						</div>
 			                </div>
 			            </div>
 					</div>
@@ -135,12 +121,16 @@
 					<div class="card list">
 						<div class="card-header">
 							<p class="card-header-title">
-							{% if search!=' ' %}
-							You searched for '{{search}}'
-							<a href="{{url_for('admin.linkages', status=status, search=' ')}}"><span class="fas fa-times"></span></a>
-							&nbsp; in
-							{% endif %}
-							{{status | title }} Linkages
+								<span class="fas fa-poll-h"></span>&nbsp;
+								{% if search!=' ' %}
+								You searched for &nbsp;
+								<span class="search-highlight">
+									&nbsp;'{{search}}'
+									<a href="{{url_for('admin.linkages', status=status, search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+								</span>
+								&nbsp; in
+								{% endif %}
+								{{status | title }} Linkages
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
