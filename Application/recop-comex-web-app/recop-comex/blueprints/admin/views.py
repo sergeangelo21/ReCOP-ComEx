@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, url_for, redirect, flash, send_from_directory
+from flask import Blueprint, render_template, url_for, redirect, flash, send_from_directory, request
 from flask_login import current_user, login_required
 from blueprints.admin.forms import *
 from data_access.models import *
@@ -42,9 +42,9 @@ def index():
 
 	return render_template('/admin/index.html', title="Home | Admin", events_chart=events_chart)
 
-@admin.route('/admin/events/<status>/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/events/<status>/<page><search>', methods=['GET', 'POST'])
 @login_required
-def events(status, search):
+def events(status, search, page):
 
 	if status=='scheduled':
 		value='S'
@@ -61,20 +61,31 @@ def events(status, search):
 	else:
 		value=status
 
-	events = event_views.show_list(value, search)
+	events = event_views.show_list(value, search, page)
 
 	letters = event_attachment.letter_attached()
 
-	form = SearchForm()
+	page_nos=[]
+	no=1
 
+	if events.pages==1:
+		
+		pages_nos=None
+	
+	else:
+
+		while no <= events.pages:
+			print(events.pages)
+		
+			no+=1
+
+	form = SearchForm()
 
 	if form.validate_on_submit():
 
+		return redirect(url_for('admin.events', status=status, page='1', search=form.search.data))
 
-
-		return redirect(url_for('admin.events', status=status, search=form.search.data))
-
-	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,letters=letters,search=search)
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,letters=letters,page_nos=page_nos,search=search)
 
 @admin.route('/admin/events/calendar', methods=['GET', 'POST'])
 @login_required
