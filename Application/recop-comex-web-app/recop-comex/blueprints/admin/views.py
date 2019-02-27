@@ -40,7 +40,7 @@ def index():
 
 	events_chart.render_response()
 
-	return render_template('/admin/index.html', title="Home | Admin", events_chart=events_chart)
+	return render_template('/admin/index.html', title="Home | Admin", events_chart=events_chart, active='home')
 
 @admin.route('/admin/events/<status>/<page>/<search>', methods=['GET', 'POST'])
 @login_required
@@ -75,8 +75,7 @@ def events(status, search, page):
 	else:
 
 		while no <= events.pages:
-			print(events.pages)
-		
+
 			no+=1
 
 	form = SearchForm()
@@ -85,7 +84,7 @@ def events(status, search, page):
 
 		return redirect(url_for('admin.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,letters=letters,page_nos=page_nos,search=search)
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,letters=letters,page_nos=page_nos,search=search, active='events')
 
 @admin.route('/admin/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -93,7 +92,7 @@ def events_calendar():
 
 	events = event_views.show_list('S', ' ', 1)
 	
-	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events.items)
+	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events.items, active='events')
 	
 @admin.route('/admin/events/show/id=<id>')
 @login_required
@@ -102,7 +101,7 @@ def event_show(id):
 	event = event_views.show_info(id)
 	participants = event_views.show_participants(id)
 
-	return render_template('/admin/events/show.html', title= event.name.title() + " | Admin", event = event, participants=participants)
+	return render_template('/admin/events/show.html', title= event.name.title() + " | Admin", event = event, participants=participants,active='events')
 
 @admin.route('/admin/events/create', methods=['GET', 'POST'])
 @login_required
@@ -188,14 +187,15 @@ def events_create():
 
 		send_email(email_parts)
 
-		value = [None, event.id, 'A']
+		value = [None, event.id, 'F']
 		proposal_tracker.add(value)
+		proposal_tracker.update_status(event.id, 'F')
 
 		flash('Event proposal submitted! Please wait for the approval.', 'success')
 
 		return redirect(url_for('admin.events', status='all', page='1', search=' '))
 
-	return render_template('/admin/events/create.html', form=form)
+	return render_template('/admin/events/create.html', title="Create Event | Admin", form=form,active='events')
 
 @admin.route('/admin/events/reschedule/id=<id>', methods=['GET', 'POST'])
 @login_required
@@ -221,7 +221,7 @@ def event_reschedule(id):
 		form.location.data = resched_event.location
 		form.event_date.data = resched_event.event_date
 
-	return render_template('/admin/events/reschedule.html', form=form, event=resched_event)
+	return render_template('/admin/events/reschedule.html', title="Reschedule | Admin", form=form, event=resched_event, active='events')
 
 @admin.route('/admin/events/<action>/id=<id>')
 @login_required
