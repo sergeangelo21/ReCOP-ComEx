@@ -21,7 +21,7 @@
 						</article>
 					</div>
 					<div class="column">
-						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
+						<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.donations', status='all', search=search)}}">
@@ -76,32 +76,30 @@
 			                	<p class="title is-size-5">Sponsee</p>
 
 			                  	<div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="7" type="checkbox" name="7" checked="checked">
-				                    <label for="7">All</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
-				                    <label for="8">Community</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
-				                    <label for="9">Event</label>
-				                </div>
-
+									<div class="control">
+								    	<div class="select is-warning">
+									    	<select class="filter-dropdown">
+										        <option>All</option>
+										        <option>Community</option>
+										        <option>Envent</option>
+									      	</select>
+								    	</div>
+								  	</div>
+								</div>
+	                	
 			                	<p class="title is-size-5">Type</p>
 
 			                  	<div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="7" type="checkbox" name="7" checked="checked">
-				                    <label for="7">All</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="8" type="checkbox" name="8">
-				                    <label for="8">Cash</label>
-				                </div>
-				                <div class="field">
-				                  	<input class="is-checkradio has-background-color is-warning" id="9" type="checkbox" name="9">
-				                    <label for="9">In-kind</label>
-				                </div>
+									<div class="control">
+								    	<div class="select is-warning">
+									    	<select class="filter-dropdown">
+										        <option>All</option>
+										        <option>Cash</option>
+										        <option>In-kind</option>
+									      	</select>
+								    	</div>
+								  	</div>
+								</div>
 			                </div>
 			            </div>
 					</div>

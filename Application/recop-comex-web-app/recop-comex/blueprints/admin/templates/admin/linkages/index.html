@@ -22,7 +22,7 @@
 					</div>
 
 					<div class="column">
-						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
+						<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.linkages', status='all', search=search)}}">
@@ -83,35 +83,36 @@
 		    			<div class="columns">
 			                <div class="column">
 			                	<p class="title is-size-5">Thrust</p>
+			                  	
 			                  	<div class="field">
-							<div class="control">
-						    	<div class="select is-warning">
-							    	<select class="filter-dropdown">
-								        <option>All</option>
-								        <option>Educational</option>
-								        <option>Environmental</option>
-								        <option>Health</option>
-								        <option>Livelihood</option>
-								        <option>Socio-Political</option>
-								        <option>Spiritual</option>
-							      	</select>
-						    	</div>
-						  	</div>
-						</div>
+									<div class="control">
+								    	<div class="select is-warning">
+									    	<select class="filter-dropdown">
+										        <option>All</option>
+										        <option>Educational</option>
+										        <option>Environmental</option>
+										        <option>Health</option>
+										        <option>Livelihood</option>
+										        <option>Socio-Political</option>
+										        <option>Spiritual</option>
+									      	</select>
+								    	</div>
+								  	</div>
+								</div>
 	                	
-	                	<p class="title is-size-5">Type</p>
+			                	<p class="title is-size-5">Type</p>
 
-	                  	<div class="field">
-							<div class="control">
-						    	<div class="select is-warning">
-							    	<select class="filter-dropdown">
-								        <option>All</option>
-								        <option>Institutional</option>
-								        <option>Outside</option>
-							      	</select>
-						    	</div>
-						  	</div>
-						</div>
+			                  	<div class="field">
+									<div class="control">
+								    	<div class="select is-warning">
+									    	<select class="filter-dropdown">
+										        <option>All</option>
+										        <option>Institutional</option>
+										        <option>Outside</option>
+									      	</select>
+								    	</div>
+								  	</div>
+								</div>
 			                </div>
 			            </div>
 					</div>
