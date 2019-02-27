@@ -1,20 +1,113 @@
-	
-	<div class="column is-one-quarter">
-		<div class="card select-list has-text-centered">
-			<div class="card-content">
-				<div class="level">
-					<div class="level-item">
-						<img class="image is-128x128" src="../../../static/images/gg.png">
-					</div>
-				</div>
 
-	      		<div class="title is-5">Name</div>
-	      		<p class="subtitle is-6">
-	      			<i class="fas fa-calendar"></i>&nbsp date</br>
-					<i class="fas fa-map-marker-alt"></i>&nbsp location
-				</p>
-	      		
-	      		<div class="button event-btn">More Details</div>	
-			</div>
-		</div>
-	</div>
+  <div class="column is-one-quarter">
+    <div class="card select-list has-text-centered">
+      <div class="card-content">
+        <div class="level">
+          <div class="level-item">
+            <img class="image is-128x128" src="../../../static/images/Partners.png">
+          </div>
+        </div>
+
+        <div class="title is-5">{{ community.company_name }}</div>
+        <p class="subtitle is-6">{{ community.bio }}</p>
+
+        <div class="button event-btn" onclick="show_event('{{community.id}}')">More Details</div>  
+      </div>
+    </div>
+  </div>
+
+
+  <div id={{community.id}}_modal class="modal">
+    <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title has-text-white">{{community.company_name}}</p>
+          <button class="delete" onclick="close_event('{{community.id}}')"></button>
+        </header>
+        <div class="overlay-card-modal has-text-centered">
+          <div class="circular-event">
+            <img src="https://i.mydramalist.com/jrWO8c.jpg">
+          </div>
+        </div>
+        <section class="modal-card-body">
+          <div class="container modal-show" id="info_div">
+            <div class="card">
+              <header class="card-header has-background-light">
+                <p class="card-header-title">
+                 {% if community.address == 'San Sebastian College Recoletos de Cavite' %} Organizational Information
+                 {% else %}
+                 Company Information
+                 {% endif %}
+                </p>
+              </header>
+              <div class="card-content profile">
+                {% if community.address != 'San Sebastian College Recoletos de Cavite' %}
+                <div class="panel-block">
+                  <article class="media">
+                    <figure class="media-left">
+                      <p>Address</p>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                        <p>
+                          <strong>{{community.address}}</strong>
+                        </p>
+                      </div>
+                  </div>
+                  </article>
+                </div>
+                {% endif %}
+
+                <div class="panel-block">
+                  <article class="media">
+                    <figure class="media-left">
+                        <p>Outreach Coordinator</p>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                        <p>
+                          <strong>{{community.coordinator}}</strong>
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="panel-block">
+                  <article class="media">
+                    <figure class="media-left">
+                      <p>Telephone</p>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                        <p>
+                          <strong>{{community.telephone}}</strong>
+                        </p>
+                      </div>
+                    </div>
+                </article>
+                </div>
+
+                <div class="panel-block">
+                  <article class="media">
+                    <figure class="media-left">
+                      <p>Mobile</p>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                          <p>
+                            <strong>{{community.mobile_number}}</strong>
+                          </p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+        </section>
+
+        <footer class="modal-card-foot">
+        </footer>
+      </div>
+  </div>
+

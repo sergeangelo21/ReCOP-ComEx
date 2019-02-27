@@ -5,20 +5,21 @@
 	<div class="notification gold">
 		<div class="columns is-centered">
 			<div class="column refer-center">
-				<a href="{{url_for('communities.referral_users')}}" class="button refer is-warning">
+				<a href="{{url_for('linkages.referral_users')}}" class="button refer is-warning">
 	            	<span class="has-text-weight-bold">Do you know someone can help us?</span>
 	            </a>
 			</div>
 			<div class="column search-box">
-				<div class="field has-addons has-addons-centered is-pulled-right">
+				<div class="field is-pulled-right has-addons has-addons-centered">
+					<div class="control">
+						<form action="" method="POST">
+						{{form.hidden_tag()}}
+				    		{{form.search(class_='input', placeholder='Search')}}
+					</div>
 					<p class="control">
-					    <input class="input" type="text" placeholder="Search">
+				     	{{form.submit(class_='button search')}}
 					</p>
-					<p class="control">
-					    <a class="button search">
-					      Search
-					    </a>
-					</p>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -26,19 +27,36 @@
 
 	<!--  -->
 	<div class="columns">
-		<div class="column">
-			<div class="columns padding-el is-multiline">
-				<table class="table is-fullwidth">
-					<tbody>
-
-						<tr class = "table-row">
-							<td class = "has-text-centered">---Nothing to show---</td>
-					 	</tr>
-						
-					</tbody>
-				</table>
+      <div class="column">
+      	<div class="card-header">
+			<p class="card-header-title">
+				<span class="fas fa-poll-h"></span>&nbsp;
+				{% if search!=' ' %}
+				You searched for &nbsp;
+				<span class="search-highlight">
+					&nbsp;'{{search}}'
+					<a href="{{url_for('linkages.communities', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+				</span>
+				&nbsp; in
+				{% endif %}
+				{{status | title }} Communities
+			</p>
+			<div class="is-pulled-right">
+				<p class="card-header-title">
+					Total: {{communities | length}}
+				</p>
 			</div>
 		</div>
+		{% if communities %}
+        <div class="columns padding-el is-multiline">
+        	{% for community in communities %}
+            	{% include 'linkages/communities/_communities.html' %}
+        	{% endfor %}
+        </div>
+        {% else %}
+			<p class = "has-text-centered">---Nothing to show---</p>
+		{% endif %}
+      </div>  
 	</div>
 
 		

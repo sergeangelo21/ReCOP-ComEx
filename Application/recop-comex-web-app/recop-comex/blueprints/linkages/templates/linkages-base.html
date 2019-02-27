@@ -43,20 +43,11 @@
                     <a class="navbar-item" href="{{url_for('linkages.events', status='all', page='1', search=' ')}}">
                         <strong>Events</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('linkages.communities')}}">
+                    <a class="navbar-item" href="{{url_for('linkages.communities', search=' ')}}">
                         <strong>Communities</strong>
                     </a>
                     <a class="navbar-item" href="{{url_for('linkages.donate')}}">
                         <strong>Donate</strong>
-                    </a>
-                    <a class="navbar-item" href="{{url_for('linkages.referral_users')}}">
-                        <strong>Referral</strong>
-                    </a>
-                    <a class="navbar-item" href="{{url_for('linkages.contactus')}}">
-                        <strong>Contact Us</strong>
-                    </a>
-                    <a class="navbar-item" href="{{url_for('linkages.termsandconditions')}}">
-                        <strong>Terms & Conditions</strong>
                     </a>
                 </div>
 
@@ -102,15 +93,15 @@
                      
                 
                 <p class="footer-links">
-                    <a href="#">Home</a>
+                    <a href="{{url_for('linkages.index')}}">Home</a>
                     ·
                     <a href="#">About</a>
                     ·
-                    <a href="#">Terms and Conditions</a>
+                    <a href="{{url_for('linkages.termsandconditions')}}">Terms and Conditions</a>
                     ·
-                    <a href="#">Referrals</a>
+                    <a href="{{url_for('linkages.referral_users')}}">Referral</a>
                     ·
-                    <a href="#">Contact</a>
+                    <a href="{{url_for('linkages.contactus')}}">Contact Us</a>
                 </p>
 
                 <p class="footer-company-name">ReCOP-ComEx &copy; 2019</p>

@@ -200,11 +200,19 @@ def event_letter(id, name):
 
 	return send_from_directory(filepath, str(id) +'.pdf')
 
-@linkages.route('/linkages/communities')
+@linkages.route('/linkages/communities/filter_<search>', methods=['GET', 'POST'])
 @login_required
-def communities():
+def communities(search):
 
-	return render_template('/linkages/communities/index.html')
+	communities = linkage_views.show_list('all', 4, search=search)
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('linkages.communities', search=form.search.data))
+
+	return render_template('/linkages/communities/index.html', form=form, communities=communities, search=search)
 
 @linkages.route('/linkages/donate', methods=['GET', 'POST'])
 @login_required
