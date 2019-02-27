@@ -630,7 +630,7 @@ Modules - reusable parts of our design
 .cd-fixed-bg h1, .cd-fixed-bg h2 {
   position: absolute;
   left: 50%;
-  top: 50%;
+  top: 40%;
   bottom: auto;
   right: auto;
   -webkit-transform: translateX(-50%) translateY(-50%);
@@ -839,12 +839,9 @@ Modules - reusable parts of our design
 /*END*/
 /*FOOTER*/
 
-.bottom{
-  bottom: 0;
-}
 
 .footer-distributed{
-  background-color: #292c2f;
+  background-color: /*#292c2f*/#072000;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   width: 100%;
@@ -852,7 +849,7 @@ Modules - reusable parts of our design
   font: bold 16px;
 
   padding: 55px 50px;
-  margin-top:90px;
+  margin-top:0px;
 }
 
 .footer-distributed .footer-left,
@@ -909,8 +906,8 @@ Modules - reusable parts of our design
 }
 
 .footer-distributed .footer-center i{
-  background-color:  #33383b;
-  color: #ffffff;
+  
+  color: #ecad00;
   font-size: 25px;
   width: 38px;
   height: 38px;
@@ -941,7 +938,7 @@ Modules - reusable parts of our design
 }
 
 .footer-distributed .footer-center p a{
-  color:  #5383d3;
+  color: #5383d3;;
   text-decoration: none;;
 }
 
@@ -977,11 +974,11 @@ Modules - reusable parts of our design
   width: 35px;
   height: 35px;
   cursor: pointer;
-  background-color:  #33383b;
+ 
   border-radius: 2px;
 
   font-size: 20px;
-  color: #ffffff;
+  color: whitesmoke;
   text-align: center;
   line-height: 35px;
 
@@ -1020,3 +1017,14 @@ Modules - reusable parts of our design
 
 .nowrap {
     white-space: nowrap;
+}
+.getstarted{
+  width: 250px;
+  background-color: #072000;
+  border-color: #072000;
+}    
+.getstarted:hover{
+  background-color:#072000;
+  color:white; 
+
+}
