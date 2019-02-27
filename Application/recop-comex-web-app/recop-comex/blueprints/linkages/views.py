@@ -140,10 +140,9 @@ def events_create():
 		None,current_user.info_id,form.title.data,
 		form.description.data,form.objective.data,form.budget.data,form.location.data,
 		form.event_date.data,form.participant_no.data, form.min_age.data, form.max_age.data,
-		form.thrust.data,event_type,'P'
+		form.thrust.data,event_type,'N'
 		]
 
-		
 		event_information.add(value)
 
 		event = event_information.last_added(current_user.id)
@@ -178,23 +177,7 @@ def events_create():
 		event_attachment.add(value)
 		programme.save(file_path)
 
-		signatory = user_views.signatory_info(4)
-
-		recipient = signatory.email_address
-		user = 'Fr. ' + signatory.last_name + ', OAR'
-		token = generate(event.id)
-		organizer='Recoletos Community Outreach Program Office'
-		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
-		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
-		html = render_template('linkages/email/event.html', event=event , organizer=organizer, user=user, link = [approve, decline])
-		attachments = event_attachment.retrieve_files(event.id)
-		subject = "NEW EVENT PROPOSAL: " + event.name
-
-		email_parts = [html, subject, current_user.email_address, recipient, attachments]
-
-		send_email(email_parts)
-
-		value = [None, event.id, 'A']
+		value = [None, event.id, 'N']
 		proposal_tracker.add(value)
 
 		flash('Event proposal submitted! Please wait for the approval.', 'success')
