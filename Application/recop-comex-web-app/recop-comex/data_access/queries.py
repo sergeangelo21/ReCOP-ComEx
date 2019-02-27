@@ -374,6 +374,29 @@ class event_views():
 
 		return record
 
+	def linkages_events(value,  page, search):
+
+		record = event_information.query.join(
+			user_information
+			).add_columns(
+			event_information.id,
+			event_information.organizer_id,
+			event_information.name,
+			event_information.description,
+			event_information.objective,
+			event_information.budget,
+			event_information.location,
+			event_information.event_date,
+			event_information.thrust,
+			event_information.event_status,
+			event_participation.participant_id,
+			user_information.company_name
+			).filter(and_(event_information.organizer_id==current_user.info_id, 
+			event_information.event_status==value)
+			).paginate(int(page), Config.POSTS_PER_PAGE, False)
+
+		return record
+
 	def events_organized(value, search):
 
 		if value=='all' and search==' ':

@@ -34,9 +34,9 @@ def index():
 
 	return render_template('/linkages/index.html')
 
-@linkages.route('/linkages/events/<status>/<search>', methods=['GET', 'POST'])
+@linkages.route('/linkages/events/<status>/<page>/<search>', methods=['GET', 'POST'])
 @login_required
-def events(status, search):
+def events(status, page,search):
 
 	if status=='scheduled':
 		value='S'
@@ -51,9 +51,22 @@ def events(status, search):
 	else:
 		value=status
 
-	events = event_views.show_list(value, search)
+	events = event_views.show_list(value, page, search)
 
 	letters = event_attachment.letter_attached()
+
+	page_nos=[]
+	no=1
+
+	if events.pages==1:
+		
+		pages_nos=None
+	
+	else:
+
+		while no <= events.pages:
+			
+			no+=1
 
 	form = AttachLetterForm()
 
@@ -71,7 +84,7 @@ def events(status, search):
 
 		flash('Letter successfully attached!', 'success')
 
-		return redirect(url_for('linkages.events', status=status, search=' '))
+		return redirect(url_for('linkages.events', status=status, page='1', search=' '))
 
 	form_search = SearchForm()
 
