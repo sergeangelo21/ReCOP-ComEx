@@ -17,21 +17,21 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 @unregistered.route('/')
 def index():
 
-	return render_template('/unregistered/index.html')
+	return render_template('/unregistered/index.html', active='home')
 
 @unregistered.route('/events')
 def events():
 
 	events = event_views.select_list()
 
-	return render_template('/unregistered/events/index.html', events=events)
+	return render_template('/unregistered/events/index.html', events=events, active='events')
 
 @unregistered.route('/linkages')
 def linkages():
 
 	linkages = linkage_views.show_list('A', 3, ' ')
 
-	return render_template('/unregistered/linkages/index.html', linkages=linkages)
+	return render_template('/unregistered/linkages/index.html', linkages=linkages, active='linkages')
 	
 @unregistered.route('/donate', methods=['GET', 'POST'])
 def donate():
@@ -85,12 +85,12 @@ def donate():
 		flash('Donation given!', 'success')
 		return redirect('/')
 
-	return render_template('/unregistered/donate/index.html', form=form, no_event=no_event)
+	return render_template('/unregistered/donate/index.html', form=form, no_event=no_event, active='donate')
 
 @unregistered.route('/contactus')
 def contactus():
 
-	return render_template('/unregistered/contactus/index.html')
+	return render_template('/unregistered/contactus/index.html', active='contactus')
 
 @unregistered.route('/signup', methods=['GET', 'POST'])
 def signup():

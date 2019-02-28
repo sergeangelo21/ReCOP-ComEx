@@ -39,19 +39,19 @@
 
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item is-active" href="{{url_for('unregistered.index')}}">
+                    <a class="navbar-item {% if active=='home' %}is-active{% endif %}" href="{{url_for('unregistered.index')}}">
                         Home
                     </a>
-                    <a class="navbar-item" href="{{url_for('unregistered.events')}}">
+                    <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('unregistered.events')}}">
                         Events
                     </a>
-                    <a class="navbar-item" href="{{url_for('unregistered.linkages')}}">
+                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('unregistered.linkages')}}">
                         <strong>Linkages</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('unregistered.donate')}}">
+                    <a class="navbar-item {% if active=='donate' %}is-active{% endif %}" href="{{url_for('unregistered.donate')}}">
                         <strong>Donate</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('unregistered.contactus')}}">
+                    <a class="navbar-item {% if active=='contactus' %}is-active{% endif %}" href="{{url_for('unregistered.contactus')}}">
                         <strong>Contact Us</strong>
                     </a>
                 </div>
@@ -81,7 +81,7 @@
                      
                 
                 <p class="footer-links">
-                    <a href="#">Home</a>
+                    <a href="{{url_for('unregistered.index')}}">Home</a>
                     ·
                     <a href="#">About</a>
                     ·
@@ -89,7 +89,7 @@
                     ·
                     <a href="#">Referrals</a>
                     ·
-                    <a href="#">Contact Us</a>
+                    <a href="{{url_for('unregistered.contactus')}}">Contact Us</a>
                 </p>
 
                 <p class="footer-company-name">ReCOP-ComEx &copy; 2019</p>
@@ -157,20 +157,5 @@
             {% endfor %}
         {% endif %}
     {% endwith %} 
-    
-
-<script>
-    // Add active class to the current button (highlight it)
-var header = document.getElementById("navMenu");
-var text = header.getElementsByClassName("navbar-item");
-for (var i = 0; i < text.length; i++) {
-  text[i].addEventListener("click", function() {
-  var current = document.getElementsByClassName("a navbar-item is-active");
-  current[0].className = current[0].className.replace(" is-active", "");
-  this.className += " is-active";
-  });
-}
-</script>
-
    
 </html>

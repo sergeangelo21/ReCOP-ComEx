@@ -7,9 +7,9 @@
 	    margin: 0;
 	}
 
-  .modal-show{
-  	width: 100%;
-  }
+	.modal-show{
+	  	width: 100%;
+	}
 
   	.overlay-card-modal{
 		  background-color:#ecad00;
@@ -22,7 +22,7 @@
 		padding-left: 20px;
 		padding-right: 20px;
 	}
-
+	
 	@media screen and (max-width: 530px) {
 		.modal-card-title{
 			font-size: 18px;
