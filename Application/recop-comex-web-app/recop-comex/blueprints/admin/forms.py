@@ -35,6 +35,25 @@ class RescheduleEventForm(FlaskForm):
     event_date = DateField('New Date')
     submit = SubmitField('Update')
 
+class SignupForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    firstname = StringField('First Name', validators=[DataRequired()])
+    middlename = StringField('Middle Name', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
+    gender = RadioField('Gender', choices=[("M","Male"),("F","Female")], validators=[DataRequired()])
+    company = StringField('Company Name', validators=[DataRequired()])
+    bio = StringField('Bio', [validators.Length(min=0, max=160)])
+    birthday = DateField('Birthday', validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired()])
+    telephone = StringField('Telephone Number')
+    mobile = StringField('Mobile Number', [validators.Length(min=11, max=25)])
+    sscr = RadioField('SSCR Member?', choices=[("Y","Yes"),("F","No")])
+    type = StringField('Type', validators=[DataRequired()])
+    email = StringField('Email Address', validators=[DataRequired()])
+    thrust = SelectField('Thrust', choices = [("0","Please Choose One"),("1","Education"),("2","Environmental"),("3","Health"),("4","Livelihood"),("5","Socio-Political"),("6","Spiritual")])
+    submit = SubmitField('Submit')
+
 class NewInventoryForm(FlaskForm):
     item_type = RadioField('Item to be added', choices=[('1','New'), ('2','Existing')], validators=[DataRequired()])
     name = StringField('Item Name', validators=[DataRequired()])

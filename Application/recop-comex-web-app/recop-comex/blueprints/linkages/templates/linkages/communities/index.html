@@ -25,44 +25,32 @@
 		</div>
 	</div>
 
-	<!--  -->
-	<div class="columns">
-      <div class="column">
-      	<div class="card-header">
+  	<div class="card-header search-show">
+		<p class="card-header-title">
+			<span class="fas fa-poll-h"></span>&nbsp;
+			{% if search!=' ' %}
+			You searched for &nbsp;
+			<span class="search-highlight">
+				&nbsp;'{{search}}'
+				<a href="{{url_for('linkages.communities', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+			</span>
+			&nbsp; in
+			{% endif %}Communities
+		</p>
+		<div class="is-pulled-right">
 			<p class="card-header-title">
-				<span class="fas fa-poll-h"></span>&nbsp;
-				{% if search!=' ' %}
-				You searched for &nbsp;
-				<span class="search-highlight">
-					&nbsp;'{{search}}'
-					<a href="{{url_for('linkages.communities', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
-				</span>
-				&nbsp; in
-				{% endif %}
-				{{status | title }} Communities
+				Total: {{communities | length}}
 			</p>
-			<div class="is-pulled-right">
-				<p class="card-header-title">
-					Total: {{communities | length}}
-				</p>
-			</div>
 		</div>
-		{% if communities %}
-        <div class="columns padding-el is-multiline">
-        	{% for community in communities %}
-            	{% include 'linkages/communities/_communities.html' %}
-        	{% endfor %}
-        </div>
-        {% else %}
-			<p class = "has-text-centered">---Nothing to show---</p>
-		{% endif %}
-      </div>  
 	</div>
-
-		
-
-
-
-
-
+	{% if communities %}
+    <div class="columns padding-el is-multiline">
+    	{% for community in communities %}
+        	{% include 'linkages/communities/_communities.html' %}
+    	{% endfor %}
+    </div>
+    {% else %}
+		<p class = "has-text-centered">---Nothing to show---</p>
+	{% endif %}
+	
 {% endblock %}
