@@ -33,19 +33,19 @@
 						    <li {% if status=='new' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.events', status='new', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
-						        <span class="prop">New</span>
+						        <span class="proposal">New</span>
 						      </a>
 						    </li>
 						    <li {% if status=='pending' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.events', status='pending', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
-						        <span class="prop">Pending</span>
+						        <span class="proposal">Pending</span>
 						      </a>
 						    </li>
 						    <li {% if status=='scheduled' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.events', status='scheduled', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
-						        <span class="prop">Scheduled</span>
+						        <span class="proposal">Scheduled</span>
 						      </a>
 						    </li>
 						    <li {% if status=='declined' %} class="is-active" {% endif %}>
@@ -57,13 +57,13 @@
 						    <li {% if status=='cancelled' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.events', status='cancelled', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-times" aria-hidden="true"></i></span>
-						        <span class="prop">Cancelled</span>
+						        <span class="proposal">Cancelled</span>
 						      </a>
 						    </li>
 						    <li {% if status=='finished' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.events', status='finished', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
-						        <span>Finished</span>
+						        <span class="proposal">Finished</span>
 						      </a>
 						    </li>
 						  </ul>

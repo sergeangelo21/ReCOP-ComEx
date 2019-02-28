@@ -45,13 +45,13 @@
 						    <li {% if status=='active' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.linkages', status='active', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-check" aria-hidden="true"></i></span>
-						        <span class="prop">Active</span>
+						        <span class="proposal">Active</span>
 						      </a>
 						    </li>
 						    <li {% if status=='disabled' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.linkages', status='disabled', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-times" aria-hidden="true"></i></span>
-						        <span>Disabled</span>
+						        <span class="proposal">Disabled</span>
 						      </a>
 						    </li>
 						  </ul>

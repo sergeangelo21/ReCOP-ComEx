@@ -118,6 +118,13 @@
     	color: #072000;
     	border-color: white;
     }
+
+    @media only screen and (max-width: 600px) {
+      /* For mobile phones: */
+      span.proposal{
+        display: none;
+      }
+    }
     /*		END		*/
 
     /*		PROFILE		*/
