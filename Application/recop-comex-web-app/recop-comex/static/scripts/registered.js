@@ -71,12 +71,13 @@ function donate_type(value){
 function show_event(value){
 
     a = document.getElementById(value+'_modal')
-    a.style.display='block'
+    a.className="modal is-active"
 
 }
+
 function close_event(value){
     a = document.getElementById(value+'_modal')
-    a.style.display='none'
+    a.className="modal"
 
 }
 

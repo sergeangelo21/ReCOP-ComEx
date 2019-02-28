@@ -37,16 +37,16 @@
 
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item" href="{{url_for('linkages.index')}}">
+                    <a class="navbar-item {% if active=='home' %}is-active{% endif %}" href="{{url_for('linkages.index')}}">
                         <strong>Home</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('linkages.events', status='all', page='1', search=' ')}}">
+                    <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('linkages.events', status='all', page='1', search=' ')}}">
                         <strong>Events</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('linkages.communities', search=' ')}}">
+                    <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="{{url_for('linkages.communities', search=' ')}}">
                         <strong>Communities</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('linkages.donate')}}">
+                    <a class="navbar-item {% if active=='donate' %}is-active{% endif %}" href="{{url_for('linkages.donate')}}">
                         <strong>Donate</strong>
                     </a>
                 </div>
