@@ -79,11 +79,22 @@
 		<div class="column">
 
 			<div class="columns padding-el is-multiline">
-				{% for event in events %}
+				{% for event in events.items %}
 					{% include 'unregistered/events/_events.html' %}
 				{% endfor %}
 			</div>
 		</div>	
+        <div class="card-content">
+        {% if events.pages>1 %}
+        <nav class="pagination" role="navigation" aria-label="pagination">
+          <a class="pagination-previous"  {% if events.has_prev %}  href="{{url_for('unregistered.events', search=' ', page=events.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+          <a class="pagination-next" {% if events.has_next %} href="{{url_for('unregistered.events', search=' ', page=events.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+          <ul class="pagination-list">
+            Page {{events.page}} of {{events.pages}}
+          </ul>
+        </nav>
+        {% endif %}
+        </div>
 	</div>
 
 

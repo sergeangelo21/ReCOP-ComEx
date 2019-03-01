@@ -44,7 +44,7 @@ def index():
 
 	return render_template('/admin/index.html', title="Home | Admin", events_chart=events_chart, active='home')
 
-@admin.route('/admin/events/<status>/s_<search>.p_<page>', methods=['GET', 'POST'])
+@admin.route('/admin/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def events(status, page, search):
 
@@ -273,7 +273,7 @@ def event_action(id, action):
 
 	return redirect(url_for('admin.events', status='all', page='1', search=' '))
 
-@admin.route('/admin/linkages/<status>/s_<search>.p_<page>', methods=['GET', 'POST'])
+@admin.route('/admin/linkages/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def linkages(status, page, search):
 
@@ -410,7 +410,7 @@ def linkage_action(id):
 
 	return redirect(url_for('admin.linkages', status='all', page='1', search=' '))
 
-@admin.route('/admin/communities/<status>/s_<search>.p_<page>', methods=['GET', 'POST'])
+@admin.route('/admin/communities/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def communities(status, page, search):
 
@@ -538,7 +538,7 @@ def community_action(id):
 
 	return redirect(url_for('admin.communities', status='all', search=' '))
 
-@admin.route('/admin/donations/<status>/s_<search>.p_<page>', methods=['GET', 'POST'])
+@admin.route('/admin/donations/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def donations(status, page, search):	
 
@@ -683,7 +683,7 @@ def donation_add():
 
 	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, no_event=no_event, active='donations')
 
-@admin.route('/admin/inventory/s_<search>.p_<page>', methods=['GET', 'POST'])
+@admin.route('/admin/inventory/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def inventory_show(page, search):
 

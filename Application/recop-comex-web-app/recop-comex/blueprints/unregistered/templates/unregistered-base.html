@@ -42,10 +42,10 @@
                     <a class="navbar-item {% if active=='home' %}is-active{% endif %}" href="{{url_for('unregistered.index')}}">
                         Home
                     </a>
-                    <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('unregistered.events')}}">
+                    <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('unregistered.events', page='1', search=' ')}}">
                         Events
                     </a>
-                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('unregistered.linkages')}}">
+                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('unregistered.linkages', page='1', search=' ')}}">
                         <strong>Linkages</strong>
                     </a>
                     <a class="navbar-item {% if active=='donate' %}is-active{% endif %}" href="{{url_for('unregistered.donate')}}">

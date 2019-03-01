@@ -19,17 +19,17 @@ def index():
 
 	return render_template('/unregistered/index.html', active='home')
 
-@unregistered.route('/events')
-def events():
+@unregistered.route('/events/search_<search>.page_<page>', methods=['GET', 'POST'])
+def events(page, search):
 
-	events = event_views.select_list()
+	events = event_views.show_list(['S', search, page])
 
 	return render_template('/unregistered/events/index.html', events=events, active='events')
 
-@unregistered.route('/linkages')
-def linkages():
+@unregistered.route('/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
+def linkages(page, search):
 
-	linkages = linkage_views.show_list('A', 3, ' ')
+	linkages = linkage_views.show_list(['A', search, 3, page])
 
 	return render_template('/unregistered/linkages/index.html', linkages=linkages, active='linkages')
 	

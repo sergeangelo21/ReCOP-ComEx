@@ -89,7 +89,7 @@ class linkage_views():
 				user_account.status
 				).filter(user_account.type==value[2]
 				).order_by(user_account.info_id.asc()
-				).paginate(int(value[3]), Config.ADMIN_PER_PAGE, False)
+				).paginate(int(value[3]), Config.POSTS_PER_PAGE, False)
 		elif value[0]=='all' and value[1]!=' ' :
 			record = user_account.query.join(
 				user_information
@@ -112,7 +112,7 @@ class linkage_views():
 				user_information.first_name.like('%'+value[1]+'%'),
 				user_information.last_name.like('%'+value[1]+'%')))
 				).order_by(user_account.info_id.asc()
-				).paginate(int(value[3]), Config.ADMIN_PER_PAGE, False)
+				).paginate(int(value[3]), Config.POSTS_PER_PAGE, False)
 		elif value[1]!=' ':
 			record = user_account.query.join(
 				user_information
@@ -135,7 +135,7 @@ class linkage_views():
 				user_information.first_name.like('%'+value[1]+'%'),
 				user_information.last_name.like('%'+value[1]+'%')))
 				).order_by(user_account.info_id.asc()
-				).paginate(int(value[3]), Config.ADMIN_PER_PAGE, False)
+				).paginate(int(value[3]), Config.POSTS_PER_PAGE, False)
 		else:
 			record = user_account.query.join(
 				user_information
@@ -155,7 +155,7 @@ class linkage_views():
 				).filter(and_(user_account.type==value[2], 
 				user_account.status==value[0])
 				).order_by(user_account.info_id.asc()
-				).paginate(int(value[3]), Config.ADMIN_PER_PAGE, False)			
+				).paginate(int(value[3]), Config.POSTS_PER_PAGE, False)			
 
 		return record
 
@@ -226,7 +226,7 @@ class event_views():
 				event_information.event_status,
 				proposal_tracker.proposed_on,
 				proposal_tracker.status
-				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)
 
 		elif value[0]=='all' and value[1]!=' ':
 			record = event_information.query.join(
@@ -250,7 +250,7 @@ class event_views():
 				proposal_tracker.status
 				).filter(or_(user_information.company_name.like('%'+search+'%'),
 				event_information.name.like('%'+search+'%'))
-				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)
 
 		elif value[1]!=' ':
 			record = event_information.query.join(
@@ -275,7 +275,7 @@ class event_views():
 				).filter(and_(event_information.event_status==value[0],or_(
 				user_information.company_name.like('%'+value[1]+'%'),
 				event_information.name.like('%'+value[1]+'%')))
-				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)
 		else:
 			record = event_information.query.join(
 				user_information, proposal_tracker
@@ -297,7 +297,7 @@ class event_views():
 				proposal_tracker.proposed_on,
 				proposal_tracker.status
 				).filter(event_information.event_status==value[0]
-				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)			
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)			
 
 
 		return record
@@ -617,7 +617,7 @@ class donation_views():
 		if value[0]=='all' and value[1]==' ' :
 
 			record = sub1.union(sub2).order_by(donation.id.asc()
-				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)		
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)		
 
 		elif value[0]=='all' and value[1]!=' ' :
 
@@ -627,7 +627,7 @@ class donation_views():
 				donation.amount.like('%'+value[1]+'%'))
 				).group_by(donation.id
 				).order_by(donation.id.asc()
-				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)		
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)		
 
 		elif value[1]!=' ':
 
@@ -638,13 +638,13 @@ class donation_views():
 				donation.amount.like('%'+value[1]+'%')))
 				).group_by(donation.id
 				).order_by(donation.id.asc()
-				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)		
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)		
 
 		else:
 
 			record = sub1.union(sub2).filter(donation.status==value[0]
 				).order_by(donation.id.asc()
-				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)	
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)	
 
 		return record
 
@@ -679,7 +679,7 @@ class inventory_views():
 				func.SUM(inventory.given).label('given'),
 				func.SUM(inventory.expired).label('expired')
 				).group_by(inventory.type_id
-				).paginate(int(value[1]), Config.ADMIN_PER_PAGE, False)	
+				).paginate(int(value[1]), Config.POSTS_PER_PAGE, False)	
 		else:
 			record = inventory.query.join(
 				inventory_type
@@ -691,6 +691,6 @@ class inventory_views():
 				func.SUM(inventory.expired).label('expired')
 				).filter(inventory_type.name.like('%'+search+'%')
 				).group_by(inventory.type_id
-				).paginate(int(value[1]), Config.ADMIN_PER_PAGE, False)	
+				).paginate(int(value[1]), Config.POSTS_PER_PAGE, False)	
 
 		return record

@@ -19,5 +19,4 @@ class Config(object):
 
 	PDF_CONFIG = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
 	
-	ADMIN_PER_PAGE = 10
-	USER_PER_PAGE = 8
+	POSTS_PER_PAGE = 12
