@@ -6,13 +6,13 @@
 					<div class="column view-icons">
 						<article class="media">
 						  	<figure class="media-left"> 
-						  		<a class="button add" href="{{url_for('admin.communities_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  		<a href="" class="button viewbtn is-active">
+						  		<a class="button add" href="{{url_for('admin.communities_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+						  		<a href="{{url_for('admin.communities', status='all', search=' ')}}" class="button viewbtn is-active">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
 								</a>
-								<a href="" class="button viewbtn">
+								<a href="{{url_for('admin.communities_chart')}}" class="button viewbtn">
 									<span class="icon">
 										<i class="fa fa-chart-pie"></i>
 									</span>
@@ -22,11 +22,11 @@
 					</div>
 
 					<div class="column">
-						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
+						<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.communities', status='all', search=search)}}">
-						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
+						        <span class="icon is-small"><i class="fas fa-list-ul tooltip" aria-hidden="true"></i></span>
 						        <span class="proposal">All</span>
 						      </a>
 						    </li>
@@ -45,13 +45,13 @@
 						    <li {% if status=='active' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.communities', status='active', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-check" aria-hidden="true"></i></span>
-						        <span class="prop">Active</span>
+						        <span class="proposal">Active</span>
 						      </a>
 						    </li>
 						    <li {% if status=='disabled' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.communities', status='disabled', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-times" aria-hidden="true"></i></span>
-						        <span>Disabled</span>
+						        <span class="proposal">Disabled</span>
 						      </a>
 						    </li>
 						  </ul>
@@ -76,59 +76,61 @@
 
 
 
-			<div class="column">
-				<div class="card list">
-					<div class="card-header">
-						<p class="card-header-title">
-							<span class="fas fa-poll-h"></span>&nbsp;
-							{% if search!=' ' %}
-							You searched for &nbsp;
-							<span class="search-highlight">
-								&nbsp;'{{search}}'
-								<a href="{{url_for('admin.communities', status=status, search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
-							</span>
-							&nbsp; in
-							{% endif %}
-							{{status | title }} Communities
-						</p>
-						<div class="is-pulled-right">
+			<div class="columns is-gapless">
+				<div class="column">
+					<div class="card list">
+						<div class="card-header">
 							<p class="card-header-title">
-								Total: {{communities | length}}
+								<span class="fas fa-poll-h"></span>&nbsp;
+								{% if search!=' ' %}
+								You searched for &nbsp;
+								<span class="search-highlight">
+									&nbsp;'{{search}}'
+									<a href="{{url_for('admin.communities', status=status, search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+								</span>
+								&nbsp; in
+								{% endif %}
+								{{status | title }} Communities
 							</p>
+							<div class="is-pulled-right">
+								<p class="card-header-title">
+									Total: {{communities | length}}
+								</p>
+							</div>
 						</div>
-					</div>
-					<div class="card-content">
-						<div class="table-responsive">
-							<table class="table is-fullwidth is-striped is-hoverable">
-							{% if communities %}
-							<thead>
-								<tr>
-									<th class="newlist">ID</th>
-								    <th class="newlist">Address</th>
-								    <th class="newlist">Coordinator</th>
-								    <th class="newlist">Population</th>
-								   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
-								    <th class="newlist hidedesktop">Actions</th>
-								 </tr>
-								
-							</thead>
-							<tbody>
-								{% for community in communities %}
-									{% include 'admin/communities/_communities.html' %}
-								{% endfor %}
-							</tbody>
-							{% else %}
+						<div class="card-content">
+							<div class="table-responsive">
+								<table class="table is-fullwidth is-striped is-hoverable">
+								{% if communities %}
+								<thead>
+									<tr>
+										<th class="newlist">ID</th>
+									    <th class="newlist">Address</th>
+									    <th class="newlist">Coordinator</th>
+									    <th class="newlist">Population</th>
+									   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
+									    <th class="newlist hidedesktop">Actions</th>
+									 </tr>
+									
+								</thead>
+								<tbody>
+									{% for community in communities %}
+										{% include 'admin/communities/_communities.html' %}
+									{% endfor %}
+								</tbody>
+								{% else %}
 
-							<tbody>
+								<tbody>
 
-								<tr class = "table-row">
-									<td class = "has-text-centered">---Nothing to show---</td>
-							 	</tr>
-								
-							</tbody>
+									<tr class = "table-row">
+										<td class = "has-text-centered">---Nothing to show---</td>
+								 	</tr>
+									
+								</tbody>
 
-							{% endif %}
-						</table>
+								{% endif %}
+							</table>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -43,7 +43,7 @@
 		                    <select class="filter-dropdown">
 		                        <option>All</option>
 		                        <option>Educational</option>
-		                        <option>Environment</option>
+		                        <option>Environmental</option>
 		                        <option>Health</option>
 		                        <option>Livelihood</option>
 		                        <option>Socio-Political</option>
@@ -74,44 +74,35 @@
 
 		
     	<div class="column">
-    		<div class="card-header search-show">
+		<div class="card-header search-show">
+			<p class="card-header-title">
+				<span class="fas fa-poll-h"></span>&nbsp
+				{% if search!=' ' %}
+				You searched for &nbsp;
+				<span class="search-highlight">
+					&nbsp; '{{search}}'
+					<a href="{{url_for('communities.linkages', search=' ')}}"><span class="fas fa-times-circle"></span></a>
+					&nbsp; 
+				</span>
+				&nbsp; in
+				{% endif %}Linkages
+			</p>
+			<div class="is-pulled-right">
 				<p class="card-header-title">
-					<span class="fas fa-poll-h"></span>&nbsp
-					{% if search!=' ' %}
-					You searched for &nbsp;
-						<span class="search-highlight">
-						&nbsp; '{{search}}'
-						<a href="{{url_for('communities.linkages', search=' ')}}"><span class="fas fa-times-circle"></span></a>
-						&nbsp; 
-					</span>
-					&nbsp; in
-					{% endif %}Linkages
-					</p>
-					<div class="is-pulled-right">
-						<p class="card-header-title">
-							Total: {{linkages | length}}
-						</p>
-					</div>
+					Total: {{linkages | length}}
+				</p>
 			</div>
-	        <div class="columns padding-el is-multiline">
-	          {% if linkages %}
-					{% for linkage in linkages %}
-						{% include 'communities/linkages/_linkages.html' %}
-					{% endfor %}
+		</div>
 
-				{% else %}
-
-				<table class="table is-fullwidth">
-					<tbody>
-					<tr class = "table-row">
-						<td class = "has-text-centered">---Nothing to show---</td>
-				 	</tr>
-					
-				</tbody>
-				</table>
-
-				{% endif %}
-	        </div>
-	    </div> 
-	</div>
+        {% if linkages %}
+        <div class="columns padding-el is-multiline">
+			{% for linkage in linkages %}
+				{% include 'communities/linkages/_linkages.html' %}
+			{% endfor %}
+		</div>
+		{% else %}
+			<p class = "has-text-centered">---Nothing to show---</p>
+		{% endif %}
+        </div>
+    </div>
 {% endblock %}

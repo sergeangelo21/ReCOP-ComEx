@@ -505,3 +505,30 @@ function close_item(value){
     a.style.display='none'
 
 }
+
+function choose(sender){
+
+field = document.getElementById('address_field')
+hide = document.getElementById('address')
+lbl = document.getElementById('com_label')
+active = document.getElementById('company')
+revert = "Company Name" 
+
+if (sender=='Y'){
+
+    hide.value = 'San Sebastian College Recoletos de Cavite'
+    field.style.display = "none"
+    lbl.innerHTML = "Organization"
+    active.placeholder = "Organization"
+    document.getElementById('thrust_field').style.display="none"
+    document.getElementById('thrust').value=0
+    }
+
+else{
+    hide.value = ''
+    field.style.display = ""
+    lbl.innerHTML = revert
+    active.placeholder = revert
+    document.getElementById('thrust_field').style.display=""
+    }
+}

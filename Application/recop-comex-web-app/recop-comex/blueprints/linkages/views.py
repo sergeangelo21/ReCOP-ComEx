@@ -32,9 +32,9 @@ def before_request():
 @login_required
 def index():
 
-	return render_template('/linkages/index.html')
+	return render_template('/linkages/index.html', active='home')
 
-@linkages.route('/linkages/events/<status>/filter_<search>_page<page>', methods=['GET', 'POST'])
+@linkages.route('/linkages/events/<status>/filter_<search>|page_<page>', methods=['GET', 'POST'])
 @login_required
 def events(status, search, page):
 
@@ -91,7 +91,7 @@ def events(status, search, page):
 
 		return redirect(url_for('linkages.events', status=status, page='1', search=form_search.search.data))
 
-	return render_template('/linkages/events/index.html', title="Events", form_search=form_search, form=form, events=events, status=status, letters=letters, page_nos=page_nos, search=search)
+	return render_template('/linkages/events/index.html', title="Events", form_search=form_search, form=form, events=events, status=status, letters=letters, page_nos=page_nos, search=search, active='events')
 
 @linkages.route('/linkages/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -99,7 +99,7 @@ def events_calendar():
 
 	events = event_views.select_list()
 	
-	return render_template('/linkages/events/index-calendar.html', title="Events", events=events)
+	return render_template('/linkages/events/index-calendar.html', title="Events", events=events, active='events')
 	
 @linkages.route('/linkages/events/show/id=<id>')
 @login_required
@@ -108,7 +108,7 @@ def event_show(id):
 	event = event_views.show_info(id)
 	participants = event_views.show_participants(id)
 
-	return render_template('/linkages/events/show.html', title= event.name.title() + " | linkages", event = event, participants=participants)
+	return render_template('/linkages/events/show.html', title= event.name.title() + " | linkages", event = event, participants=participants, active='events')
 
 @linkages.route('/linkages/events/create', methods=['GET', 'POST'])
 @login_required
@@ -184,7 +184,7 @@ def events_create():
 
 		return redirect(url_for('linkages.events', status='all', page='1', search=' '))
 
-	return render_template('/linkages/events/create.html', form=form)
+	return render_template('/linkages/events/create.html', form=form, active='events')
 
 @linkages.route('/linkages/events/letter/<id>_<name>', methods=['GET', 'POST'])
 @login_required
@@ -200,11 +200,19 @@ def event_letter(id, name):
 
 	return send_from_directory(filepath, str(id) +'.pdf')
 
-@linkages.route('/linkages/communities')
+@linkages.route('/linkages/communities/filter_<search>', methods=['GET', 'POST'])
 @login_required
-def communities():
+def communities(search):
 
-	return render_template('/linkages/communities/index.html')
+	communities = linkage_views.show_list('all', 4, search=search)
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('linkages.communities', search=form.search.data))
+
+	return render_template('/linkages/communities/index.html', form=form, communities=communities, search=search, active='communities')
 
 @linkages.route('/linkages/donate', methods=['GET', 'POST'])
 @login_required
@@ -261,7 +269,7 @@ def donate():
 		flash('Donation given!', 'success')
 		return redirect(url_for('linkages.donate'))
 
-	return render_template('/linkages/donate/index.html', form=form, no_event=no_event)
+	return render_template('/linkages/donate/index.html', form=form, no_event=no_event, active='donate')
 
 @linkages.route('/linkages/referral', methods=['GET', 'POST'])
 @login_required
@@ -285,19 +293,19 @@ def referral_users():
 		flash('Referral has been sent!', 'success')
 		return redirect(url_for('linkages.referral_users'))	
 
-	return render_template('/linkages/referral/index.html', form=form)
+	return render_template('/linkages/referral/index.html', form=form, active='referral')
 
 @linkages.route('/linkages/contactus')
 @login_required
 def contactus():
 
-	return render_template('/linkages/contactus/index.html')
+	return render_template('/linkages/contactus/index.html', active='contactus')
 
 @linkages.route('/linkages/termsandconditions')
 @login_required
 def termsandconditions():
 
-	return render_template('/linkages/termsandconditions/index.html')
+	return render_template('/linkages/termsandconditions/index.html', active='termsandconditions')
 
 @linkages.route('/linkages/profile/about/<user>')
 @login_required

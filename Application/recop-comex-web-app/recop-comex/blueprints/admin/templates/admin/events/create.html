@@ -60,6 +60,9 @@
 							        {{form.title.label(class_='label')}}
 						            <div class="control">
 						            	{{form.title(class_='input')}}
+						            	{% for error in form.title.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 						            </div>
 						        </div>
 							</div>
@@ -71,6 +74,9 @@
 							        {{form.event_date.label(class_='label')}}
 						            <div class="control">
 						            	{{form.event_date(class_='input', type='date')}}
+						            	{% for error in form.event_date.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 						            </div>
 						        </div>
 							</div>
@@ -80,6 +86,9 @@
 							        {{form.location.label(class_='label')}}
 						            <div class="control">
 						            	{{form.location(class_='input')}}
+						            	{% for error in form.location.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 						            </div>
 						        </div>
 							</div>
@@ -92,6 +101,9 @@
 							        {{form.description.label(class_='label')}}
 						            <div class="control">
 						            	{{form.description(class_='input')}}
+						            	{% for error in form.description.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 						            </div>
 						        </div>
 							</div>
@@ -100,6 +112,9 @@
 									{{form.objective.label(class_='label')}}
 						            <div class="control">
 										{{form.objective(class_='input')}}
+						            	{% for error in form.objective.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 									</div>
 						        </div>
 							</div>
@@ -121,6 +136,9 @@
 							        {{form.participant_no.label(class_='label')}}
 						            <div class="control">
 						              	{{form.participant_no(class_='input')}}
+						            	{% for error in form.participant_no.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 						            </div>
 						        </div>
 							</div>
@@ -133,12 +151,18 @@
 						            		<div class="field">
 						            			<div class="control">
 									              	{{form.min_age(class_='input is-horizontal')}}
+									            	{% for error in form.min_age.errors %}
+			                                        	<span style="color: red;">[{{ error }}]</span>
+			                                        {% endfor %}
 												</div>
 						            		</div>
 						            		<label class="label">to &nbsp&nbsp</label>
 						            		<div class="field">
 						            			<div class="control">
 													{{form.max_age(class_='input is-horizontal')}}
+									            	{% for error in form.max_age.errors %}
+			                                        	<span style="color: red;">[{{ error }}]</span>
+			                                        {% endfor %}
 												</div>
 						            		</div>
 						            	</div>
@@ -153,6 +177,9 @@
 							        {{form.thrust.label(class_='label')}}
 						            <div class="control">
 						              	{{form.thrust(class_='input')}}
+						            	{% for error in form.thrust.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 						            </div>
 						        </div>
 							</div>
@@ -162,6 +189,9 @@
 									{{form.budget.label(class_='label')}}
 						            <div class="control">
 										{{form.budget(class_='input')}}
+						            	{% for error in form.budget.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 									</div>
 						        </div>
 							</div>
@@ -173,6 +203,9 @@
 							        {{form.budget_plan.label(class_='label')}}
 						            <div class="control">
 						              	{{form.budget_plan(class_='input')}}
+						            	{% for error in form.budget_plan.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 						            </div>
 						        </div>
 							</div>
@@ -182,6 +215,9 @@
 									{{form.programme.label(class_='label')}}
 						            <div class="control">
 										{{form.programme(class_='input')}}
+						            	{% for error in form.programme.errors %}
+                                        	<span style="color: red;">[{{ error }}]</span>
+                                        {% endfor %}
 									</div>
 						        </div>
 							</div>

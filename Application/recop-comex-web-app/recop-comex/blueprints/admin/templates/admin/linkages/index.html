@@ -6,13 +6,13 @@
 					<div class="column view-icons">
 						<article class="media">
 						  	<figure class="media-left"> 
-						  		<a class="button add" href="{{url_for('admin.linkages_create')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  		<a href="" class="button viewbtn is-active">
+						  		<a class="button add" href="{{url_for('admin.linkages_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+						  		<a href="{{url_for('admin.linkages', status='all', search=' ')}}" class="button viewbtn is-active">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
 								</a>
-								<a href="" class="button viewbtn">
+								<a href="{{url_for('admin.linkages_chart')}}" class="button viewbtn">
 									<span class="icon">
 										<i class="fa fa-chart-pie"></i>
 									</span>
@@ -22,7 +22,7 @@
 					</div>
 
 					<div class="column">
-						<div class="tabs proposal is-toggle has-text-weight-bold is-centered">
+						<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.linkages', status='all', search=search)}}">
@@ -45,13 +45,13 @@
 						    <li {% if status=='active' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.linkages', status='active', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-check" aria-hidden="true"></i></span>
-						        <span class="prop">Active</span>
+						        <span class="proposal">Active</span>
 						      </a>
 						    </li>
 						    <li {% if status=='disabled' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.linkages', status='disabled', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-times" aria-hidden="true"></i></span>
-						        <span>Disabled</span>
+						        <span class="proposal">Disabled</span>
 						      </a>
 						    </li>
 						  </ul>
@@ -83,35 +83,36 @@
 		    			<div class="columns">
 			                <div class="column">
 			                	<p class="title is-size-5">Thrust</p>
+			                  	
 			                  	<div class="field">
-							<div class="control">
-						    	<div class="select is-warning">
-							    	<select class="filter-dropdown">
-								        <option>All</option>
-								        <option>Educational</option>
-								        <option>Environmental</option>
-								        <option>Health</option>
-								        <option>Livelihood</option>
-								        <option>Socio-Political</option>
-								        <option>Spiritual</option>
-							      	</select>
-						    	</div>
-						  	</div>
-						</div>
+									<div class="control">
+								    	<div class="select is-warning">
+									    	<select class="filter-dropdown">
+										        <option>All</option>
+										        <option>Educational</option>
+										        <option>Environmental</option>
+										        <option>Health</option>
+										        <option>Livelihood</option>
+										        <option>Socio-Political</option>
+										        <option>Spiritual</option>
+									      	</select>
+								    	</div>
+								  	</div>
+								</div>
 	                	
-	                	<p class="title is-size-5">Type</p>
+			                	<p class="title is-size-5">Type</p>
 
-	                  	<div class="field">
-							<div class="control">
-						    	<div class="select is-warning">
-							    	<select class="filter-dropdown">
-								        <option>All</option>
-								        <option>Institutional</option>
-								        <option>Outside</option>
-							      	</select>
-						    	</div>
-						  	</div>
-						</div>
+			                  	<div class="field">
+									<div class="control">
+								    	<div class="select is-warning">
+									    	<select class="filter-dropdown">
+										        <option>All</option>
+										        <option>Institutional</option>
+										        <option>Outside</option>
+									      	</select>
+								    	</div>
+								  	</div>
+								</div>
 			                </div>
 			            </div>
 					</div>

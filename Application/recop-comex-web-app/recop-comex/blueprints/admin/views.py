@@ -7,6 +7,8 @@ from static.email import generate, send_email
 from sqlalchemy import or_
 import os, pygal
 
+from extensions import db
+
 admin = Blueprint('admin', __name__, template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -42,7 +44,7 @@ def index():
 
 	return render_template('/admin/index.html', title="Home | Admin", events_chart=events_chart, active='home')
 
-@admin.route('/admin/events/<status>/<page>/<search>', methods=['GET', 'POST'])
+@admin.route('/admin/events/<status>/filter_<search>|page_<page>', methods=['GET', 'POST'])
 @login_required
 def events(status, search, page):
 
@@ -84,7 +86,7 @@ def events(status, search, page):
 
 		return redirect(url_for('admin.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status,letters=letters,page_nos=page_nos,search=search, active='events')
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status, letters=letters, page_nos=page_nos, search=search, active='events')
 
 @admin.route('/admin/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -101,7 +103,7 @@ def event_show(id):
 	event = event_views.show_info(id)
 	participants = event_views.show_participants(id)
 
-	return render_template('/admin/events/show.html', title= event.name.title() + " | Admin", event = event, participants=participants,active='events')
+	return render_template('/admin/events/show.html', title= event.name.title() + " | Admin", event = event, participants=participants, active='events')
 
 @admin.route('/admin/events/create', methods=['GET', 'POST'])
 @login_required
@@ -195,7 +197,7 @@ def events_create():
 
 		return redirect(url_for('admin.events', status='all', page='1', search=' '))
 
-	return render_template('/admin/events/create.html', title="Create Event | Admin", form=form,active='events')
+	return render_template('/admin/events/create.html', title="Create Event | Admin", form=form, active='events')
 
 @admin.route('/admin/events/reschedule/id=<id>', methods=['GET', 'POST'])
 @login_required
@@ -214,7 +216,7 @@ def event_reschedule(id):
 
 		flash('Event rescheduled!', 'success')
 
-		return redirect(url_for('admin.events', status='all', search=' '))
+		return redirect(url_for('admin.events', status='all', page='1', search=' '))
 
 	else:
 
@@ -270,11 +272,21 @@ def event_action(id, action):
 
 		flash(event.name + ' was declined.', 'info') 	
 
+	elif action=='cancel':
 
-	return redirect(url_for('admin.events', status='all', search=' '))
+		status='C'
+		proposal_tracker.update_status(event.id, status)
+		event_information.update_status(event.id, status)
+
+		value = [None,current_user.id,event.id,'event', 8]
+		audit_trail.add(value)
+
+		flash(event.name + ' was cancelled.', 'success')	
 
 
-@admin.route('/admin/linkages/<status>/<search>', methods=['GET', 'POST'])
+	return redirect(url_for('admin.events', status='all', page='1', search=' '))
+
+@admin.route('/admin/linkages/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def linkages(status, search):
 
@@ -297,13 +309,57 @@ def linkages(status, search):
 
 		return redirect(url_for('admin.linkages', status=status, search=form.search.data))
 
-	return render_template('/admin/linkages/index.html', title="Linkages | Admin", form=form, linkages=linkages, status=status, search=search)
+	return render_template('/admin/linkages/index.html', title="Linkages | Admin", form=form, linkages=linkages, status=status, search=search, active='linkages')
 
-@admin.route('/admin/linkages/create')
+@admin.route('/admin/linkages/chart')
 @login_required
-def linkages_create():
+def linkages_chart():
 
-	return render_template('/admin/linkages/create.html')
+	query = db.session.query(user_account, func.count(user_account.type)).filter(user_account.type==3).all()
+
+	flash(query)
+
+	chart = pygal.Pie()
+	chart.title = 'Linkages'
+
+	for type in query:
+		chart.add('asd', [])
+
+	chart.render_response()
+
+	return render_template('/admin/linkages/chart.html', title="Linkages | Admin", chart=chart, active='linkages')
+
+@admin.route('/admin/linkages/add', methods=['GET', 'POST'])
+@login_required
+def linkages_add():
+
+	form = SignupForm()
+
+	if form.validate_on_submit():
+
+		value = [
+			None,form.firstname.data,form.middlename.data,
+			form.lastname.data,form.company.data,form.bio.data,form.gender.data,form.birthday.data,
+			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
+			]
+
+		user_information.add(value)	
+		user_id = user_information.reserve_id()
+
+		status = "N"
+
+		value = [
+			None,user_id,form.username.data,
+			form.password.data,form.email.data,3,datetime.now(),status
+			]
+
+		user_account.add(value)
+
+		flash('Linkage '+form.company.data+' was successfully added!', 'success')
+
+		return redirect(url_for('admin.linkages', status='all', search=' '))	
+
+	return render_template('/admin/linkages/add.html', title="Add Linkage | Admin", form=form, active='linkages')
 
 @admin.route('/admin/linkages/show/id=<id>')
 @login_required
@@ -311,7 +367,7 @@ def linkage_show(id):
 
 	linkage, mem_since = linkage_views.show_info([id,'linkage'])
 
-	return render_template('/admin/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage, mem_since=mem_since)
+	return render_template('/admin/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage, mem_since=mem_since, active='linkages')
 
 @admin.route('/admin/linkages/action/id=<id>')
 @login_required
@@ -365,9 +421,9 @@ def linkage_action(id):
 
 	user_account.update_status(user.id, status)
 
-	return redirect(url_for('admin.linkages', status='all', search=' '))
+	return redirect(url_for('admin.linkages', status='all', page='1', search=' '))
 
-@admin.route('/admin/communities/<status>/<search>', methods=['GET', 'POST'])
+@admin.route('/admin/communities/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def communities(status, search):
 
@@ -390,13 +446,57 @@ def communities(status, search):
 
 		return redirect(url_for('admin.communities', status=status, search=form.search.data))
 
-	return render_template('/admin/communities/index.html', title="Communities | Admin", form=form, communities=communities, status=status, search=search)
+	return render_template('/admin/communities/index.html', title="Communities | Admin", form=form, communities=communities, status=status, search=search, active='communities')
 
-@admin.route('/admin/communities/create')
+@admin.route('/admin/communities/chart')
 @login_required
-def communities_create():
+def communities_chart():
 
-	return render_template('/admin/communities/create.html')
+	chart = pygal.Pie()
+	chart.title = 'Communities'
+
+	chart.add('Education', [100])
+	chart.add('Environmental', [100])
+	chart.add('Health', [100])
+	chart.add('Livelihood', [100])
+	chart.add('Socio-political', [100])
+	chart.add('Spiritual', [100])
+
+	chart.render_response()
+
+	return render_template('/admin/communities/chart.html', title="Communities | Admin", chart=chart, active='communities')
+
+@admin.route('/admin/communities/add', methods=['GET', 'POST'])
+@login_required
+def communities_add():
+
+	form = SignupForm()
+
+	if form.validate_on_submit():
+
+		value = [
+			None,form.firstname.data,form.middlename.data,form.lastname.data,
+			'San Sebastian College Recoletos de Cavite',form.bio.data,form.gender.data,form.birthday.data,
+			form.address.data,form.telephone.data,form.mobile.data,0
+			]
+
+		user_information.add(value)	
+		user_id = user_information.reserve_id()
+
+		status = "N"
+
+		value = [
+			None,user_id,form.username.data,
+			form.password.data,form.email.data,4,datetime.now(),status
+			]
+
+		user_account.add(value)
+
+		flash('Community was successfully added!', 'success')
+
+		return redirect(url_for('admin.linkages', status='all', search=' '))
+
+	return render_template('/admin/communities/add.html', title="Add Community | Admin", form=form, active='communities')
 
 @admin.route('/admin/communities/show/id=<id>')
 @login_required
@@ -404,7 +504,7 @@ def community_show(id):
 
 	community, mem_since = linkage_views.show_info([id,'community'])
 
-	return render_template('/admin/communities/show.html', title= community.company_name.title() + " | Admin", community=community, mem_since=mem_since)
+	return render_template('/admin/communities/show.html', title= community.company_name.title() + " | Admin", community=community, mem_since=mem_since, active='communities')
 
 @admin.route('/admin/communities/action/id=<id>')
 @login_required
@@ -451,7 +551,7 @@ def community_action(id):
 
 	return redirect(url_for('admin.communities', status='all', search=' '))
 
-@admin.route('/admin/donations/<status>/<search>', methods=['GET', 'POST'])
+@admin.route('/admin/donations/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def donations(status, search):	
 
@@ -474,7 +574,7 @@ def donations(status, search):
 
 		return redirect(url_for('admin.donations', status=status, search=form.search.data))	
 
-	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations, sponsors=sponsors, status=status, search=search, form=form)
+	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations, sponsors=sponsors, status=status, search=search, form=form, active='donations')
 
 @admin.route('/admin/donations/<action>/id=<id>')
 @login_required
@@ -537,7 +637,7 @@ def donation_inkind(id):
 		flash('Items were successfully added!', 'success')
 		return redirect(url_for('admin.donations', status='all', search=' '))
 
-	return render_template('/admin/donations/inventory.html', title="Donation | Admin", form=form, donation=info)
+	return render_template('/admin/donations/inventory.html', title="Donation | Admin", form=form, donation=info, active='donations')
 
 @admin.route('/admin/donations/add', methods=['GET', 'POST'])
 @login_required
@@ -594,9 +694,9 @@ def donation_add():
 		flash('Donation given!', 'success')
 		return redirect(url_for('admin.donations', status='all', search=' '))
 
-	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, no_event=no_event)
+	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, no_event=no_event, active='donations')
 
-@admin.route('/admin/inventory/<search>', methods=['GET', 'POST'])
+@admin.route('/admin/inventory/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def inventory_show(search):
 
@@ -610,7 +710,7 @@ def inventory_show(search):
 
 		return redirect(url_for('admin.inventory_show', search=form.search.data))
 
-	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items, breakdown=breakdown, search=search)
+	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items, breakdown=breakdown, search=search, active='inventory')
 
 @admin.route('/admin/inventory/add', methods=['GET', 'POST'])
 @login_required
@@ -701,19 +801,19 @@ def inventory_add():
 		flash('Inventory type added!', 'success')
 		return redirect(url_for('admin.inventory_show', search=' '))
 
-	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form, no_event=no_event, no_item=no_item)
+	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form, no_event=no_event, no_item=no_item, active='donations')
 
 @admin.route('/admin/feedbacks')
 @login_required
 def feedbacks():
 
-	return render_template('/admin/feedbacks/index.html', title="Feedbacks | Admin")
+	return render_template('/admin/feedbacks/index.html', title="Feedbacks | Admin", active='feedbacks')
 
 @admin.route('/admin/referral')
 @login_required
 def referral():
 
-	return render_template('/admin/referral/index.html', title="referral | Admin")
+	return render_template('/admin/referral/index.html', title="Referral | Admin", active='referral')
 
 @admin.route('/admin/profile/about/<user>')
 @login_required

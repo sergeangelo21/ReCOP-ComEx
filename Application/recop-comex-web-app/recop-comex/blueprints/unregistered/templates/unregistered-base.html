@@ -10,12 +10,13 @@
 
         <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        <link rel="stylesheet" type="text/css" href="../../../../static/css/bulma-0.7.2/css/bulma.css">
+        <link rel="stylesheet" href="../../../../static/css/bulma-0.7.2/css/bulma.css">
         <link rel="stylesheet" href="../../../../static/css/fontawesome-5.5.0/css/all.css">
         <link rel="stylesheet" href="../../../../static/css/recop-comex-style/css/style.css">
         <link rel="stylesheet" href="../../../../static/css/recop-comex-style/css/modal.css">
-        <link rel="stylesheet" type="text/css" href="../../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.css">
-        <link rel="stylesheet" type="text/css" href="../../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.css">
+        <link rel="stylesheet" href="../../../../static/css/Bulma-extensions/bulma-steps/bulma-steps.min.css">
+        <link rel="stylesheet" href="../../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.css">
+        <link rel="stylesheet" href="../../../../static/css/Bulma-extensions/bulma-tooltip/bulma-tooltip.min.css">
         <script type="text/javascript" src = "../../../../static/scripts/base.js" ></script>   
 
     </head>
@@ -38,19 +39,19 @@
 
             <div id="navMenu" class="navbar-menu">
                 <div class="navbar-start">
-                    <a class="navbar-item is-active" href="{{url_for('unregistered.index')}}">
+                    <a class="navbar-item {% if active=='home' %}is-active{% endif %}" href="{{url_for('unregistered.index')}}">
                         Home
                     </a>
-                    <a class="navbar-item" href="{{url_for('unregistered.events')}}">
+                    <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('unregistered.events')}}">
                         Events
                     </a>
-                    <a class="navbar-item" href="{{url_for('unregistered.linkages')}}">
+                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('unregistered.linkages')}}">
                         <strong>Linkages</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('unregistered.donate')}}">
+                    <a class="navbar-item {% if active=='donate' %}is-active{% endif %}" href="{{url_for('unregistered.donate')}}">
                         <strong>Donate</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('unregistered.contactus')}}">
+                    <a class="navbar-item {% if active=='contactus' %}is-active{% endif %}" href="{{url_for('unregistered.contactus')}}">
                         <strong>Contact Us</strong>
                     </a>
                 </div>
@@ -74,13 +75,14 @@
 
             <div class="footer-left">
                 <figure class="footer-logo">
+                        <a href="{{url_for('unregistered.index')}}">
                     <img src="../../../static/images/logo-menu.png">
-
+                        </a>
                  </figure>
                      
                 
                 <p class="footer-links">
-                    <a href="#">Home</a>
+                    <a href="{{url_for('unregistered.index')}}">Home</a>
                     ·
                     <a href="#">About</a>
                     ·
@@ -88,7 +90,7 @@
                     ·
                     <a href="#">Referrals</a>
                     ·
-                    <a href="#">Contact Us</a>
+                    <a href="{{url_for('unregistered.contactus')}}">Contact Us</a>
                 </p>
 
                 <p class="footer-company-name">ReCOP-ComEx &copy; 2019</p>
@@ -102,7 +104,9 @@
                 </div>
 
                 <div>
+                  <a href="{{url_for('unregistered.contactus')}}">
                     <i class="fa fa-phone"></i>
+                  </a> 
                     <p>434-1234</p>
                 </div>
 
@@ -156,20 +160,5 @@
             {% endfor %}
         {% endif %}
     {% endwith %} 
-    
-
-<script>
-    // Add active class to the current button (highlight it)
-var header = document.getElementById("navMenu");
-var text = header.getElementsByClassName("navbar-item");
-for (var i = 0; i < text.length; i++) {
-  text[i].addEventListener("click", function() {
-  var current = document.getElementsByClassName("a navbar-item is-active");
-  current[0].className = current[0].className.replace(" is-active", "");
-  this.className += " is-active";
-  });
-}
-</script>
-
    
 </html>

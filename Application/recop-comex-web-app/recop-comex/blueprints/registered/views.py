@@ -31,7 +31,7 @@ def before_request():
 @login_required
 def index():
 
-	return render_template('/registered/index.html')
+	return render_template('/registered/index.html', active='home')
 
 @registered.route('/registered/events/<search>', methods=['GET', 'POST'])
 @login_required
@@ -47,7 +47,7 @@ def events(search):
 
 		return redirect(url_for('registered.events', search=form.search.data))
 
-	return render_template('/registered/events/index.html', title="Events", form=form, events=events, letters=letters, search=search)
+	return render_template('/registered/events/index.html', title="Events", form=form, events=events, letters=letters, search=search, active='events')
 
 @registered.route('/registered/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -55,7 +55,7 @@ def events_calendar():
 
 	events = event_views.select_list()
 	
-	return render_template('/registered/events/index-calendar.html', title="Events", events=events)
+	return render_template('/registered/events/index-calendar.html', title="Events", events=events, active='events')
 
 @registered.route('/registered/events/join/id=<id>')
 @login_required
@@ -73,7 +73,7 @@ def linkages():
 
 	linkages = linkage_views.show_list('A', 3, ' ')
 
-	return render_template('/registered/linkages/index.html', linkages=linkages)
+	return render_template('/registered/linkages/index.html', linkages=linkages, active='linkages')
 
 @registered.route('/registered/donate', methods=['GET', 'POST'])
 @login_required
@@ -130,7 +130,7 @@ def donate():
 		flash('Donation given!', 'success')
 		return redirect(url_for('registered.donate'))
 
-	return render_template('/registered/donate/index.html', form=form, no_event=no_event)
+	return render_template('/registered/donate/index.html', form=form, no_event=no_event, active='donate')
 
 @registered.route('/registered/referral', methods=['GET', 'POST'])
 @login_required
@@ -154,19 +154,19 @@ def referral_users():
 		flash('Referral has been sent!', 'success')
 		return redirect(url_for('registered.referral_users'))	
 
-	return render_template('/registered/referral/index.html', form=form)
+	return render_template('/registered/referral/index.html', form=form, active='referral')
 
 @registered.route('/registered/contactus')
 @login_required
 def contactus():
 
-	return render_template('/registered/contactus/index.html')
+	return render_template('/registered/contactus/index.html', active='contactus')
 
 @registered.route('/registered/termsandconditions')
 @login_required
 def termsandconditions():
 
-	return render_template('/registered/termsandconditions/index.html')
+	return render_template('/registered/termsandconditions/index.html', active='termsandconditions')
 
 @registered.route('/registered/profile/about/<user>')
 @login_required
@@ -174,13 +174,13 @@ def profile_about(user):
 
 	registered = user_views.profile_info(current_user.info_id)
 
-	return render_template('/registered/profile/about.html', title="registered", registered=registered)
+	return render_template('/registered/profile/about.html', title="registered", registered=registered, active='about')
 
 @registered.route('/registered/profile/eventsattended')
 @login_required
 def profile_eventsattended():
 
-	return render_template('/registered/profile/eventsattended.html', title="registered")	
+	return render_template('/registered/profile/eventsattended.html', title="registered", active='eventsattended')	
 
 @registered.route('/registered/profile/settings/personal', methods=['GET', 'POST'])
 @login_required
