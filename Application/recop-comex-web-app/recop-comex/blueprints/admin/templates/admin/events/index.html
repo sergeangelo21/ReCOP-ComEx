@@ -51,7 +51,7 @@
 						    <li {% if status=='declined' %} class="is-active" {% endif %}>
 						      <a href="{{url_for('admin.events', status='declined', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-calendar-times" aria-hidden="true"></i></span>
-						        <span class="prop">Declined</span>
+						        <span class="proposal">Declined</span>
 						      </a>
 						    </li>
 						    <li {% if status=='cancelled' %} class="is-active" {% endif %}>
@@ -147,10 +147,7 @@
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
-									Showing record(s) 
-									   {{events.page}} - 
-									   {{(events.per_page+events.total-events.per_page) }}  
-									of {{events.total}}
+									Total: {{events.total}}
 								</p>
 							</div>
 						</div>
@@ -190,18 +187,15 @@
 
 								</table>
 							</div>
-							<br>
+							{% if events.pages>1 %}
 							<nav class="pagination" role="navigation" aria-label="pagination">
-  								<a class="pagination-previous" href="{{url_for('admin.events', status=status, search=search, page=events.prev_num|string)}}" {% if not events.has_prev %} disabled {% endif %}>Previous</a>
-  								<a class="pagination-next" href="{{url_for('admin.events', status=status, search=search, page=events.next_num|string)}}" {% if not events.has_next %} disabled {% endif %}>Next page</a>
+  								<a class="pagination-previous"  {% if events.has_prev %}  href="{{url_for('admin.events', status=status, search=search, page=events.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+  								<a class="pagination-next" {% if events.has_next %} href="{{url_for('admin.events', status=status, search=search, page=events.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
   								<ul class="pagination-list">
-  									{% for no in page_nos %}
-									<li>
-  										<a class="pagination-link {% if page==no %}is-current{% endif %}" >{{no}}</a>
-									</li>
-									{% endfor %}
+  									Page {{events.page}} of {{events.pages}}
 								</ul>
 							</nav>
+							{% endif %}
 						</div>
 					</div>
 				</div>	

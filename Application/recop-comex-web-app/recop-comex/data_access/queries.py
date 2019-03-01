@@ -69,9 +69,9 @@ class user_views():
 
 class linkage_views():
 
-	def show_list(value, type, search):
+	def show_list(value):
 
-		if value=='all' and search==' ' :
+		if value[0]=='all' and value[1]==' ' :
 			record = user_account.query.join(
 				user_information
 				).add_columns(
@@ -87,10 +87,10 @@ class linkage_views():
 				user_information.telephone,
 				user_information.mobile_number,
 				user_account.status
-				).filter(user_account.type==type
+				).filter(user_account.type==value[2]
 				).order_by(user_account.info_id.asc()
-				).all()
-		elif value=='all' and search!=' ' :
+				).paginate(int(value[3]), Config.ADMIN_PER_PAGE, False)
+		elif value[0]=='all' and value[1]!=' ' :
 			record = user_account.query.join(
 				user_information
 				).add_columns(
@@ -106,14 +106,14 @@ class linkage_views():
 				user_information.telephone,
 				user_information.mobile_number,
 				user_account.status
-				).filter(and_(user_account.type==type,
-				or_(user_information.company_name.like('%'+search+'%'),
-				user_information.address.like('%'+search+'%'),
-				user_information.first_name.like('%'+search+'%'),
-				user_information.last_name.like('%'+search+'%')))
+				).filter(and_(user_account.type==value[2],
+				or_(user_information.company_name.like('%'+value[1]+'%'),
+				user_information.address.like('%'+value[1]+'%'),
+				user_information.first_name.like('%'+value[1]+'%'),
+				user_information.last_name.like('%'+value[1]+'%')))
 				).order_by(user_account.info_id.asc()
-				).all()
-		elif search!=' ':
+				).paginate(int(value[3]), Config.ADMIN_PER_PAGE, False)
+		elif value[1]!=' ':
 			record = user_account.query.join(
 				user_information
 				).add_columns(
@@ -129,13 +129,13 @@ class linkage_views():
 				user_information.telephone,
 				user_information.mobile_number,
 				user_account.status,
-				).filter(and_(user_account.type==type,user_account.status==value,
-				or_(user_information.company_name.like('%'+search+'%'),
-				user_information.address.like('%'+search+'%'),
-				user_information.first_name.like('%'+search+'%'),
-				user_information.last_name.like('%'+search+'%')))
+				).filter(and_(user_account.type==value[2],user_account.status==value[0],
+				or_(user_information.company_name.like('%'+value[1]+'%'),
+				user_information.address.like('%'+value[1]+'%'),
+				user_information.first_name.like('%'+value[1]+'%'),
+				user_information.last_name.like('%'+value[1]+'%')))
 				).order_by(user_account.info_id.asc()
-				).all()	
+				).paginate(int(value[3]), Config.ADMIN_PER_PAGE, False)
 		else:
 			record = user_account.query.join(
 				user_information
@@ -152,10 +152,10 @@ class linkage_views():
 				user_information.telephone,
 				user_information.mobile_number,
 				user_account.status,
-				).filter(and_(user_account.type==type, 
-				user_account.status==value)
+				).filter(and_(user_account.type==value[2], 
+				user_account.status==value[0])
 				).order_by(user_account.info_id.asc()
-				).all()			
+				).paginate(int(value[3]), Config.ADMIN_PER_PAGE, False)			
 
 		return record
 
@@ -204,9 +204,9 @@ class linkage_views():
 
 class event_views():
 
-	def show_list(value,search, page):
+	def show_list(value):
 
-		if value=='all' and search==' ':
+		if value[0]=='all' and value[1]==' ':
 			record = event_information.query.join(
 				user_information, proposal_tracker
 				).add_columns(
@@ -226,9 +226,9 @@ class event_views():
 				event_information.event_status,
 				proposal_tracker.proposed_on,
 				proposal_tracker.status
-				).paginate(int(page), Config.POSTS_PER_PAGE, False)
+				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)
 
-		elif value=='all' and search!=' ':
+		elif value[0]=='all' and value[1]!=' ':
 			record = event_information.query.join(
 				user_information, proposal_tracker
 				).add_columns(
@@ -250,9 +250,9 @@ class event_views():
 				proposal_tracker.status
 				).filter(or_(user_information.company_name.like('%'+search+'%'),
 				event_information.name.like('%'+search+'%'))
-				).paginate(int(page), Config.POSTS_PER_PAGE, False)
+				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)
 
-		elif search!=' ':
+		elif value[1]!=' ':
 			record = event_information.query.join(
 				user_information, proposal_tracker
 				).add_columns(
@@ -272,10 +272,10 @@ class event_views():
 				event_information.event_status,
 				proposal_tracker.proposed_on,
 				proposal_tracker.status
-				).filter(and_(event_information.event_status==value,or_(
-				user_information.company_name.like('%'+search+'%'),
-				event_information.name.like('%'+search+'%')))
-				).paginate(int(page), Config.POSTS_PER_PAGE, False)
+				).filter(and_(event_information.event_status==value[0],or_(
+				user_information.company_name.like('%'+value[1]+'%'),
+				event_information.name.like('%'+value[1]+'%')))
+				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)
 		else:
 			record = event_information.query.join(
 				user_information, proposal_tracker
@@ -296,8 +296,8 @@ class event_views():
 				event_information.event_status,
 				proposal_tracker.proposed_on,
 				proposal_tracker.status
-				).filter(event_information.event_status==value
-				).paginate(int(page), Config.POSTS_PER_PAGE, False)			
+				).filter(event_information.event_status==value[0]
+				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)			
 
 
 		return record
@@ -580,7 +580,7 @@ class community_views():
 
 class donation_views():
 
-	def show_list(value, search):
+	def show_list(value):
 
 		sub1 = donation.query.join(
 			user_information, 
@@ -614,32 +614,37 @@ class donation_views():
 			func.IF(donation.amount==0.00,'In kind',donation.amount).label('amount')
 			).filter(donation.event_id!=None)
 
-		if value=='all' and search==' ' :
+		if value[0]=='all' and value[1]==' ' :
 
-			record = sub1.union(sub2).order_by(donation.id.asc()).all()	
+			record = sub1.union(sub2).order_by(donation.id.asc()
+				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)		
 
-		elif value=='all' and search!=' ' :
+		elif value[0]=='all' and value[1]!=' ' :
 
 			record = sub1.union(sub2).filter(or_(
-				event_information.name.like('%'+search+'%'),
-				user_information.address.like('%'+search+'%'),
-				donation.amount.like('%'+search+'%'))
+				event_information.name.like('%'+value[1]+'%'),
+				user_information.address.like('%'+value[1]+'%'),
+				donation.amount.like('%'+value[1]+'%'))
 				).group_by(donation.id
-				).order_by(donation.id.asc()).all()		
+				).order_by(donation.id.asc()
+				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)		
 
-		elif search!=' ':
+		elif value[1]!=' ':
 
 			record = sub1.union(sub2).filter(and_(
-				donation.status==value,or_(
-				event_information.name.like('%'+search+'%'),
-				user_information.address.like('%'+search+'%'),
-				donation.amount.like('%'+search+'%')))
+				donation.status==value[0],or_(
+				event_information.name.like('%'+value[1]+'%'),
+				user_information.address.like('%'+value[1]+'%'),
+				donation.amount.like('%'+value[1]+'%')))
 				).group_by(donation.id
-				).order_by(donation.id.asc()).all()	
+				).order_by(donation.id.asc()
+				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)		
 
 		else:
 
-			record = sub1.union(sub2).filter(donation.status==value).order_by(donation.id.asc()).all()	
+			record = sub1.union(sub2).filter(donation.status==value[0]
+				).order_by(donation.id.asc()
+				).paginate(int(value[2]), Config.ADMIN_PER_PAGE, False)	
 
 		return record
 
@@ -662,9 +667,9 @@ class donation_views():
 
 class inventory_views():
 
-	def show_list(search):
+	def show_list(value):
 
-		if search==' ':
+		if value[0]==' ':
 			record = inventory.query.join(
 				inventory_type
 				).add_columns(
@@ -674,7 +679,7 @@ class inventory_views():
 				func.SUM(inventory.given).label('given'),
 				func.SUM(inventory.expired).label('expired')
 				).group_by(inventory.type_id
-				).all()
+				).paginate(int(value[1]), Config.ADMIN_PER_PAGE, False)	
 		else:
 			record = inventory.query.join(
 				inventory_type
@@ -686,6 +691,6 @@ class inventory_views():
 				func.SUM(inventory.expired).label('expired')
 				).filter(inventory_type.name.like('%'+search+'%')
 				).group_by(inventory.type_id
-				).all()
+				).paginate(int(value[1]), Config.ADMIN_PER_PAGE, False)	
 
 		return record

@@ -7,7 +7,7 @@
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('admin.linkages_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  		<a href="{{url_for('admin.linkages', status='all', search=' ')}}" class="button viewbtn is-active">
+						  		<a href="{{url_for('admin.linkages', status='all', page='1', search=' ')}}" class="button viewbtn is-active">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
@@ -25,31 +25,31 @@
 						<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.linkages', status='all', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='all', page='1',search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
 						        <span class="proposal">All</span>
 						      </a>
 						    </li>
 						    <li {% if status=='new' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.linkages', status='new', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='new', page='1',search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-plus" aria-hidden="true"></i></span>
 						        <span class="proposal">New</span>
 						      </a>
 						    </li>
 						    <li {% if status=='pending' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.linkages', status='pending', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='pending', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-clock" aria-hidden="true"></i></span>
 						        <span class="proposal">Pending</span>
 						      </a>
 						    </li>
 						    <li {% if status=='active' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.linkages', status='active', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='active', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-check" aria-hidden="true"></i></span>
 						        <span class="proposal">Active</span>
 						      </a>
 						    </li>
 						    <li {% if status=='disabled' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.linkages', status='disabled', search=search)}}">
+						      <a href="{{url_for('admin.linkages', status='disabled', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-times" aria-hidden="true"></i></span>
 						        <span class="proposal">Disabled</span>
 						      </a>
@@ -135,7 +135,7 @@
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
-									Total: {{linkages | length}}
+									Total: {{linkages.total}}
 								</p>
 							</div>
 						</div>
@@ -157,7 +157,7 @@
 
 									<tbody>
 
-										{% for linkage in linkages %}
+										{% for linkage in linkages.items %}
 											{% include 'admin/linkages/_linkages.html' %}
 										{% endfor %}
 									</tbody>
@@ -175,6 +175,15 @@
 									{% endif %}
 								</table>
 							</div>
+							{% if linkages.pages>1 %}
+							<nav class="pagination" role="navigation" aria-label="pagination">
+  								<a class="pagination-previous"  {% if linkages.has_prev %}  href="{{url_for('admin.linkages', status=status, search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+  								<a class="pagination-next" {% if linkages.has_next %} href="{{url_for('admin.linkages', status=status, search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+  								<ul class="pagination-list">
+  									Page {{linkages.page}} of {{linkages.pages}}
+								</ul>
+							</nav>
+							{% endif %}
 						</div>
 					</div>
 				</div>

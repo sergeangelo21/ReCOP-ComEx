@@ -7,7 +7,7 @@
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('admin.communities_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
-						  		<a href="{{url_for('admin.communities', status='all', search=' ')}}" class="button viewbtn is-active">
+						  		<a href="{{url_for('admin.communities', status='all', page='1', search=' ')}}" class="button viewbtn is-active">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
@@ -25,31 +25,31 @@
 						<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.communities', status='all', search=search)}}">
+						      <a href="{{url_for('admin.communities', status='all', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-list-ul tooltip" aria-hidden="true"></i></span>
 						        <span class="proposal">All</span>
 						      </a>
 						    </li>
 						    <li {% if status=='new' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.communities', status='new', search=search)}}">
+						      <a href="{{url_for('admin.communities', status='new', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-plus" aria-hidden="true"></i></span>
 						        <span class="proposal">New</span>
 						      </a>
 						    </li>
 						    <li {% if status=='pending' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.communities', status='pending', search=search)}}">
+						      <a href="{{url_for('admin.communities', status='pending', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-clock" aria-hidden="true"></i></span>
 						        <span class="proposal">Pending</span>
 						      </a>
 						    </li>
 						    <li {% if status=='active' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.communities', status='active', search=search)}}">
+						      <a href="{{url_for('admin.communities', status='active', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-check" aria-hidden="true"></i></span>
 						        <span class="proposal">Active</span>
 						      </a>
 						    </li>
 						    <li {% if status=='disabled' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.communities', status='disabled', search=search)}}">
+						      <a href="{{url_for('admin.communities', status='disabled', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-user-times" aria-hidden="true"></i></span>
 						        <span class="proposal">Disabled</span>
 						      </a>
@@ -94,7 +94,7 @@
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
-									Total: {{communities | length}}
+									Total: {{communities.total}}
 								</p>
 							</div>
 						</div>
@@ -114,7 +114,7 @@
 									
 								</thead>
 								<tbody>
-									{% for community in communities %}
+									{% for community in communities.items %}
 										{% include 'admin/communities/_communities.html' %}
 									{% endfor %}
 								</tbody>
@@ -131,6 +131,15 @@
 								{% endif %}
 							</table>
 							</div>
+							{% if communities.pages>1 %}
+							<nav class="pagination" role="navigation" aria-label="pagination">
+  								<a class="pagination-previous"  {% if communities.has_prev %}  href="{{url_for('admin.communities', status=status, search=search, page=communities.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+  								<a class="pagination-next" {% if communities.has_next %} href="{{url_for('admin.communities', status=status, search=search, page=communities.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+  								<ul class="pagination-list">
+  									Page {{communities.page}} of {{communities.pages}}
+								</ul>
+							</nav>
+							{% endif %}
 						</div>
 					</div>
 				</div>

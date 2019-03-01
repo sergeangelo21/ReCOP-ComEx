@@ -18,4 +18,6 @@ class Config(object):
 	MAIL_ASCII_ATTACHMENTS = True 
 
 	PDF_CONFIG = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
-	POSTS_PER_PAGE = 10
+	
+	ADMIN_PER_PAGE = 10
+	USER_PER_PAGE = 8

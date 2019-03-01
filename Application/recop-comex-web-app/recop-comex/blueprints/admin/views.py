@@ -44,9 +44,9 @@ def index():
 
 	return render_template('/admin/index.html', title="Home | Admin", events_chart=events_chart, active='home')
 
-@admin.route('/admin/events/<status>/filter_<search>|page_<page>', methods=['GET', 'POST'])
+@admin.route('/admin/events/<status>/s_<search>.p_<page>', methods=['GET', 'POST'])
 @login_required
-def events(status, search, page):
+def events(status, page, search):
 
 	if status=='scheduled':
 		value='S'
@@ -63,22 +63,9 @@ def events(status, search, page):
 	else:
 		value=status
 
-	events = event_views.show_list(value, search, page)
+	events = event_views.show_list([value, search, page])
 
 	letters = event_attachment.letter_attached()
-
-	page_nos=[]
-	no=1
-
-	if events.pages==1:
-		
-		pages_nos=None
-	
-	else:
-
-		while no <= events.pages:
-
-			no+=1
 
 	form = SearchForm()
 
@@ -86,15 +73,15 @@ def events(status, search, page):
 
 		return redirect(url_for('admin.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status, letters=letters, page_nos=page_nos, search=search, active='events')
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status, letters=letters, search=search, active='events')
 
 @admin.route('/admin/events/calendar', methods=['GET', 'POST'])
 @login_required
 def events_calendar():
 
-	events = event_views.show_list('S', ' ', 1)
+	events = event_views.select_list()
 	
-	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events.items, active='events')
+	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events, active='events')
 	
 @admin.route('/admin/events/show/id=<id>')
 @login_required
@@ -286,9 +273,9 @@ def event_action(id, action):
 
 	return redirect(url_for('admin.events', status='all', page='1', search=' '))
 
-@admin.route('/admin/linkages/<status>/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/linkages/<status>/s_<search>.p_<page>', methods=['GET', 'POST'])
 @login_required
-def linkages(status, search):
+def linkages(status, page, search):
 
 	if status=='active':
 		value='A'
@@ -301,13 +288,13 @@ def linkages(status, search):
 	else:
 		value=status
 
-	linkages = linkage_views.show_list(value, 3, search)
+	linkages = linkage_views.show_list([value,search,3,page])
 
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('admin.linkages', status=status, search=form.search.data))
+		return redirect(url_for('admin.linkages', status=status, page='1', search=form.search.data))
 
 	return render_template('/admin/linkages/index.html', title="Linkages | Admin", form=form, linkages=linkages, status=status, search=search, active='linkages')
 
@@ -423,9 +410,9 @@ def linkage_action(id):
 
 	return redirect(url_for('admin.linkages', status='all', page='1', search=' '))
 
-@admin.route('/admin/communities/<status>/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/communities/<status>/s_<search>.p_<page>', methods=['GET', 'POST'])
 @login_required
-def communities(status, search):
+def communities(status, page, search):
 
 	if status=='active':
 		value='A'
@@ -438,13 +425,13 @@ def communities(status, search):
 	else:
 		value=status
 
-	communities = linkage_views.show_list(value, 4, search=search)
+	communities = linkage_views.show_list([value,search,4,page])
 
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('admin.communities', status=status, search=form.search.data))
+		return redirect(url_for('admin.communities', status=status, page='1', search=form.search.data))
 
 	return render_template('/admin/communities/index.html', title="Communities | Admin", form=form, communities=communities, status=status, search=search, active='communities')
 
@@ -551,9 +538,9 @@ def community_action(id):
 
 	return redirect(url_for('admin.communities', status='all', search=' '))
 
-@admin.route('/admin/donations/<status>/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/donations/<status>/s_<search>.p_<page>', methods=['GET', 'POST'])
 @login_required
-def donations(status, search):	
+def donations(status, page, search):	
 
 	if status=='new':
 		value='N'
@@ -564,7 +551,7 @@ def donations(status, search):
 	else:
 		value=status
 
-	donations=donation_views.show_list(value, search)
+	donations=donation_views.show_list([value, search,page])
 
 	sponsors = donation_views.show_sponsors()
 
@@ -572,7 +559,7 @@ def donations(status, search):
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('admin.donations', status=status, search=form.search.data))	
+		return redirect(url_for('admin.donations', status=status, page='1', search=form.search.data))	
 
 	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations, sponsors=sponsors, status=status, search=search, form=form, active='donations')
 
@@ -696,19 +683,19 @@ def donation_add():
 
 	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, no_event=no_event, active='donations')
 
-@admin.route('/admin/inventory/filter_<search>', methods=['GET', 'POST'])
+@admin.route('/admin/inventory/s_<search>.p_<page>', methods=['GET', 'POST'])
 @login_required
-def inventory_show(search):
+def inventory_show(page, search):
 
 	form = SearchForm()
 
-	items = inventory_views.show_list(search)
+	items = inventory_views.show_list([search,page])
 
 	breakdown = inventory.item_breakdown()
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('admin.inventory_show', search=form.search.data))
+		return redirect(url_for('admin.inventory_show', page='1', search=form.search.data))
 
 	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items, breakdown=breakdown, search=search, active='inventory')
 

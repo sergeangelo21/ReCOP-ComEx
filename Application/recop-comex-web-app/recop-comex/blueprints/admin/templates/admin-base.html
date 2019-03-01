@@ -43,16 +43,16 @@
                     <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('admin.events', status='all', page='1' ,search=' ')}}">
                         <strong>Events</strong>
                     </a>
-                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('admin.linkages', status='all', search=' ')}}">
+                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('admin.linkages', status='all', page='1', search=' ')}}">
                         <strong>Linkages</strong>
                     </a>
-                    <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="{{url_for('admin.communities', status='all', search=' ')}}">
+                    <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="{{url_for('admin.communities', status='all', page='1', search=' ')}}">
                         <strong>Communities</strong>
                     </a>
-                    <a class="navbar-item {% if active=='donations' %}is-active{% endif %}" href="{{url_for('admin.donations', status='all', search=' ')}}">
+                    <a class="navbar-item {% if active=='donations' %}is-active{% endif %}" href="{{url_for('admin.donations', status='all', page='1', search=' ')}}">
                         <strong>Donations</strong>
                     </a>
-                    <a class="navbar-item {% if active=='inventory' %}is-active{% endif %}" href="{{url_for('admin.inventory_show', search=' ')}}">
+                    <a class="navbar-item {% if active=='inventory' %}is-active{% endif %}" href="{{url_for('admin.inventory_show', page='1', search=' ')}}">
                         <strong>Inventory</strong>
                     </a>
                     <a class="navbar-item {% if active=='feedbacks' %}is-active{% endif %}" href="{{url_for('admin.feedbacks')}}">

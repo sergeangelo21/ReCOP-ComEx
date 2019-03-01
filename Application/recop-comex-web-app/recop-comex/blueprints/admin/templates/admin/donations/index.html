@@ -24,25 +24,25 @@
 						<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
 						  <ul>
 						    <li {% if status=='all' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.donations', status='all', search=search)}}">
+						      <a href="{{url_for('admin.donations', status='all', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
 						        <span class="proposal">All</span>
 						      </a>
 						    </li>
 						    <li {% if status=='new' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.donations', status='new', search=search)}}">
+						      <a href="{{url_for('admin.donations', status='new', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-plus" aria-hidden="true"></i></span>
 						        <span class="proposal">New</span>
 						      </a>
 						    </li>
 						    <li {% if status=='received' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.donations', status='received', search=search)}}">
+						      <a href="{{url_for('admin.donations', status='received', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-check" aria-hidden="true"></i></span>
 						        <span class="proposal">Received</span>
 						      </a>
 						    </li>
 						    <li {% if status=='declined' %} class="is-active" {% endif %}>
-						      <a href="{{url_for('admin.donations', status='declined', search=search)}}">
+						      <a href="{{url_for('admin.donations', status='declined', page='1', search=search)}}">
 						        <span class="icon is-small"><i class="fas fa-times" aria-hidden="true"></i></span>
 						        <span class="proposal">Declined</span>
 						      </a>
@@ -122,7 +122,7 @@
 							</p>
 							<div class="is-pulled-right">
 								<p class="card-header-title">
-									Total: {{donations | length}}
+									Total: {{donations.total}}
 								</p>
 							</div>
 						</div>
@@ -143,7 +143,7 @@
 										
 									</thead>
 									<tbody>
-										{% for donation in donations %}
+										{% for donation in donations.items %}
 											{% include 'admin/donations/_donations.html' %}
 										{% endfor %}
 									</tbody>
@@ -159,6 +159,15 @@
 								{% endif %}
 								</table>
 							</div>
+							{% if donations.pages>1 %}
+							<nav class="pagination" role="navigation" aria-label="pagination">
+  								<a class="pagination-previous"  {% if donations.has_prev %}  href="{{url_for('admin.donations', status=status, search=search, page=donations.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+  								<a class="pagination-next" {% if donations.has_next %} href="{{url_for('admin.donations', status=status, search=search, page=donations.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+  								<ul class="pagination-list">
+  									Page {{donations.page}} of {{donations.pages}}
+								</ul>
+							</nav>
+							{% endif %}
 						</div>
 					</div>	
 				</div>
