@@ -7,6 +7,8 @@ from static.email import generate, send_email
 from sqlalchemy import or_
 import os, pygal
 
+from extensions import db
+
 admin = Blueprint('admin', __name__, template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -284,7 +286,6 @@ def event_action(id, action):
 
 	return redirect(url_for('admin.events', status='all', page='1', search=' '))
 
-
 @admin.route('/admin/linkages/<status>/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def linkages(status, search):
@@ -309,6 +310,24 @@ def linkages(status, search):
 		return redirect(url_for('admin.linkages', status=status, search=form.search.data))
 
 	return render_template('/admin/linkages/index.html', title="Linkages | Admin", form=form, linkages=linkages, status=status, search=search, active='linkages')
+
+@admin.route('/admin/linkages/chart')
+@login_required
+def linkages_chart():
+
+	query = db.session.query(user_account, func.count(user_account.type)).filter(user_account.type==3).all()
+
+	flash(query)
+
+	chart = pygal.Pie()
+	chart.title = 'Linkages'
+
+	for type in query:
+		chart.add('asd', [])
+
+	chart.render_response()
+
+	return render_template('/admin/linkages/chart.html', title="Linkages | Admin", chart=chart, active='linkages')
 
 @admin.route('/admin/linkages/add', methods=['GET', 'POST'])
 @login_required
@@ -428,6 +447,24 @@ def communities(status, search):
 		return redirect(url_for('admin.communities', status=status, search=form.search.data))
 
 	return render_template('/admin/communities/index.html', title="Communities | Admin", form=form, communities=communities, status=status, search=search, active='communities')
+
+@admin.route('/admin/communities/chart')
+@login_required
+def communities_chart():
+
+	chart = pygal.Pie()
+	chart.title = 'Communities'
+
+	chart.add('Education', [100])
+	chart.add('Environmental', [100])
+	chart.add('Health', [100])
+	chart.add('Livelihood', [100])
+	chart.add('Socio-political', [100])
+	chart.add('Spiritual', [100])
+
+	chart.render_response()
+
+	return render_template('/admin/communities/chart.html', title="Communities | Admin", chart=chart, active='communities')
 
 @admin.route('/admin/communities/add', methods=['GET', 'POST'])
 @login_required
