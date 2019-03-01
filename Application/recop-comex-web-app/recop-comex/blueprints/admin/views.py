@@ -310,11 +310,35 @@ def linkages(status, search):
 
 	return render_template('/admin/linkages/index.html', title="Linkages | Admin", form=form, linkages=linkages, status=status, search=search, active='linkages')
 
-@admin.route('/admin/linkages/add')
+@admin.route('/admin/linkages/add', methods=['GET', 'POST'])
 @login_required
 def linkages_add():
 
 	form = SignupForm()
+
+	if form.validate_on_submit():
+
+		value = [
+			None,form.firstname.data,form.middlename.data,
+			form.lastname.data,form.company.data,form.bio.data,form.gender.data,form.birthday.data,
+			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
+			]
+
+		user_information.add(value)	
+		user_id = user_information.reserve_id()
+
+		status = "N"
+
+		value = [
+			None,user_id,form.username.data,
+			form.password.data,form.email.data,3,datetime.now(),status
+			]
+
+		user_account.add(value)
+
+		flash('Linkage '+form.company.data+' was successfully added!', 'success')
+
+		return redirect(url_for('admin.linkages', status='all', search=' '))	
 
 	return render_template('/admin/linkages/add.html', title="Add Linkage | Admin", form=form, active='linkages')
 
@@ -405,11 +429,37 @@ def communities(status, search):
 
 	return render_template('/admin/communities/index.html', title="Communities | Admin", form=form, communities=communities, status=status, search=search, active='communities')
 
-@admin.route('/admin/communities/create')
+@admin.route('/admin/communities/add', methods=['GET', 'POST'])
 @login_required
-def communities_create():
+def communities_add():
 
-	return render_template('/admin/communities/create.html', title="Add Community | Admin", active='communities')
+	form = SignupForm()
+
+	if form.validate_on_submit():
+
+		value = [
+			None,form.firstname.data,form.middlename.data,form.lastname.data,
+			'San Sebastian College Recoletos de Cavite',form.bio.data,form.gender.data,form.birthday.data,
+			form.address.data,form.telephone.data,form.mobile.data,0
+			]
+
+		user_information.add(value)	
+		user_id = user_information.reserve_id()
+
+		status = "N"
+
+		value = [
+			None,user_id,form.username.data,
+			form.password.data,form.email.data,4,datetime.now(),status
+			]
+
+		user_account.add(value)
+
+		flash('Community was successfully added!', 'success')
+
+		return redirect(url_for('admin.linkages', status='all', search=' '))
+
+	return render_template('/admin/communities/add.html', title="Add Community | Admin", form=form, active='communities')
 
 @admin.route('/admin/communities/show/id=<id>')
 @login_required
