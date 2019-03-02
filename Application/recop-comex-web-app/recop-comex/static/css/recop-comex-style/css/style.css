@@ -195,6 +195,31 @@
 	.active-prof-nav:hover{
 		border-bottom: 3px solid #ffb901;
 	}
+
+  .panel-block > .media > .media-left{
+    width: 180px;
+  }
+
+  .prof-panel-icon{
+    display: none;
+  }
+
+  @media only screen and (max-width: 420px) {
+    /* For mobile phones: */
+    .prof-panel-icon{
+      display: block;
+      margin-top: 5px;
+    }
+
+    .panel-block > .media > .media-left{
+      width: auto;
+    }
+
+    .panel-block > .media > .media-left > p{
+      display: none;
+     }
+  }
+
 /* ------PROFILE END------   */
 
 
