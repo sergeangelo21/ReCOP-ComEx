@@ -1287,9 +1287,60 @@ Modules - reusable parts of our design
   width: 220px;
   height: auto;
 }
+.footer-margin-top{
+  margin-top:120px;
+}
 
 /**/
 
-  .nowrap {
-      white-space: nowrap;
-  }
+
+        .nowrap{
+            white-space: nowrap;
+        }
+        .green-donate{
+            background-color: #072000;
+            color: white;
+            border-color: #072000;
+        }
+
+        .green-donate:hover{
+            background-color: #07200;
+            color: white;
+            border-color: #072000;
+            
+        }
+        .left-donate{
+            text-align: left;
+    
+        }
+        .padding-donation{
+            padding: 5px 35px;
+        }
+       
+        .width-donate{
+            width: 280px;
+            margin-left: 5px;
+        }
+        .margin-top-donate{
+            margin-top: 20px;
+            margin-left: 0px;
+        }
+        .gold-donate{
+            background-color: #ecad00;
+            color: white;
+            border-color: #ecad00;
+            padding: 10px 10px;
+
+        }
+
+        .gold-donate:hover{
+            background-color: #ecad00;
+            color: white;
+            border-color: #ecad00;
+            opacity: 0.9;
+        }
+        .image-donation{
+            width: 400px;
+            height: auto;
+            padding: 10px;
+        }
