@@ -192,7 +192,7 @@ def participant_action(id, action, participant):
 def linkages(search):
 
 
-	linkages = linkage_views.show_list('A', 3, search=search)
+	linkages = linkage_views.show_list(['A', search,3,'1'])
 
 	form = SearchForm()
 

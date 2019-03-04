@@ -43,7 +43,7 @@
                     <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('linkages.events', status='all', page='1', search=' ')}}">
                         <strong>Events</strong>
                     </a>
-                    <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="{{url_for('linkages.communities', search=' ')}}">
+                    <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="{{url_for('linkages.communities', page='1', search=' ')}}">
                         <strong>Communities</strong>
                     </a>
                     <a class="navbar-item {% if active=='donate' %}is-active{% endif %}" href="{{url_for('linkages.donate')}}">
@@ -93,7 +93,7 @@
                      
                 
                 <p class="footer-links">
-                    <a href="{{url_for('linkages.index')}}">Home</a>
+                    <a href="{{url_for('linkages.index', status='all', page='1', search=' ')}}">Home</a>
                     ·
                     <a href="#">About</a>
                     ·

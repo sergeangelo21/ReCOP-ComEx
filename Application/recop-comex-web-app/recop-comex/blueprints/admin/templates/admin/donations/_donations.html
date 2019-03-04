@@ -47,14 +47,14 @@
 												{% if donation.status=='N' or donation.status=='D' %}
 												<a class="button is-success tooltip" data-tooltip="Receive" href="{{url_for('admin.donation_action', action='receive', id=donation.id)}}">
 													<span class="icon">
-														<i class="fas fa-check-circle"></i>
+														<i class="fas fa-check"></i>
 													</span>
 												</a>
 												{% endif %}
 												{% if donation.status=='N' %}
 												<a class="button is-danger tooltip" data-tooltip="Decline" href="{{url_for('admin.donation_action', action='decline', id=donation.id)}}">
 													<span class="icon">
-														<i class="fas fa-times-circle"></i>
+														<i class="fas fa-times"></i>
 													</span>
 												</a>
 												{% endif %}

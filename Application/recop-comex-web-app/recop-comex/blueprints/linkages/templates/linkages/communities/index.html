@@ -39,13 +39,13 @@
 		</p>
 		<div class="is-pulled-right">
 			<p class="card-header-title">
-				Total: {{communities | length}}
+				Total: {{communities.total}}
 			</p>
 		</div>
 	</div>
 	{% if communities %}
     <div class="columns padding-el is-multiline">
-    	{% for community in communities %}
+    	{% for community in communities.items %}
         	{% include 'linkages/communities/_communities.html' %}
     	{% endfor %}
     </div>

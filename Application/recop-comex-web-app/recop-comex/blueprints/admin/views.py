@@ -587,12 +587,12 @@ def donation_action(id,action):
 			donation.update_status([id,'R'])
 			flash('Donation was received', 'success')
 
-		return redirect(url_for('admin.donations', status='all', search=' '))
+		return redirect(url_for('admin.donations', status='all', page='1', search=' '))
 
 	else:
 		donation.update_status([id,'D'])
 		flash('Donation was declined.', 'success')
-		return redirect(url_for('admin.donations', status='all', search=' '))
+		return redirect(url_for('admin.donations', status='all', page='1', search=' '))
 
 @admin.route('/admin/donations/inkind/<id>', methods=['GET', 'POST'])
 @login_required
@@ -622,7 +622,7 @@ def donation_inkind(id):
 		donation.update_status([info.id,'R'])
 
 		flash('Items were successfully added!', 'success')
-		return redirect(url_for('admin.donations', status='all', search=' '))
+		return redirect(url_for('admin.donations', status='all', page='1', search=' '))
 
 	return render_template('/admin/donations/inventory.html', title="Donation | Admin", form=form, donation=info, active='donations')
 
@@ -679,7 +679,7 @@ def donation_add():
 		file.save(trans_path)
 
 		flash('Donation given!', 'success')
-		return redirect(url_for('admin.donations', status='all', search=' '))
+		return redirect(url_for('admin.donations', status='all', page='1', search=' '))
 
 	return render_template('/admin/donations/add.html', title="Donation | Admin", form=form, no_event=no_event, active='donations')
 
@@ -786,7 +786,7 @@ def inventory_add():
 		inventory.add(value)
 
 		flash('Inventory type added!', 'success')
-		return redirect(url_for('admin.inventory_show', search=' '))
+		return redirect(url_for('admin.inventory_show', page='1', search=' '))
 
 	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form, no_event=no_event, no_item=no_item, active='donations')
 

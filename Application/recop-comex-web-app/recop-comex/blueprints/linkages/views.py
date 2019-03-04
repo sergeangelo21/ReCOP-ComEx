@@ -51,8 +51,7 @@ def events(status, search, page):
 	else:
 		value=status
 
-	events = event_views.show_list(value, search, page)
-
+	events = event_views.show_list([value, search, page])
 	letters = event_attachment.letter_attached()
 
 	page_nos=[]
@@ -200,11 +199,11 @@ def event_letter(id, name):
 
 	return send_from_directory(filepath, str(id) +'.pdf')
 
-@linkages.route('/linkages/communities/filter_<search>', methods=['GET', 'POST'])
+@linkages.route('/linkages/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
-def communities(search):
+def communities(page, search):
 
-	communities = linkage_views.show_list('all', 4, search=search)
+	communities = linkage_views.show_list(['all',search,4, page])
 
 	form = SearchForm()
 

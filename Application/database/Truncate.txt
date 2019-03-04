@@ -4,9 +4,9 @@ TRUNCATE table `donation`;
 TRUNCATE table `event_attachment`;
 TRUNCATE table `event_information`;
 TRUNCATE table `event_participation`;
+TRUNCATE table `proposal_tracker`;
 TRUNCATE table `inventory`;
 TRUNCATE table `inventory_type`;
-TRUNCATE table `proposal_tracker`;
 TRUNCATE table `referral`;
 
 DELETE from `user_information` where id>4;
