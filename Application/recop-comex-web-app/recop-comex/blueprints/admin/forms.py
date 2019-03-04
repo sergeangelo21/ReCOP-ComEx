@@ -35,7 +35,7 @@ class RescheduleEventForm(FlaskForm):
     event_date = DateField('New Date')
     submit = SubmitField('Update')
 
-class SignupForm(FlaskForm):
+class AddLinkageForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     firstname = StringField('First Name', validators=[DataRequired()])
@@ -47,10 +47,25 @@ class SignupForm(FlaskForm):
     birthday = DateField('Birthday', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
     telephone = StringField('Telephone Number')
-    mobile = StringField('Mobile Number', [validators.Length(min=11, max=25)])
+    mobile = StringField('Mobile Number')
     sscr = RadioField('SSCR Member?', choices=[("Y","Yes"),("F","No")])
     email = StringField('Email Address', validators=[DataRequired()])
     thrust = SelectField('Thrust', choices = [("0","Please Choose One"),("1","Education"),("2","Environmental"),("3","Health"),("4","Livelihood"),("5","Socio-Political"),("6","Spiritual")])
+    submit = SubmitField('Submit')
+
+class AddCommunityForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+    firstname = StringField('First Name', validators=[DataRequired()])
+    middlename = StringField('Middle Name', validators=[DataRequired()])
+    lastname = StringField('Last Name', validators=[DataRequired()])
+    gender = RadioField('Gender', choices=[("M","Male"),("F","Female")], validators=[DataRequired()])
+    bio = StringField('Bio', [validators.Length(min=0, max=160)])
+    birthday = DateField('Birthday', validators=[DataRequired()])
+    address = StringField('Address', validators=[DataRequired()])
+    telephone = StringField('Telephone Number')
+    mobile = StringField('Mobile Number')
+    email = StringField('Email Address', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 class NewInventoryForm(FlaskForm):

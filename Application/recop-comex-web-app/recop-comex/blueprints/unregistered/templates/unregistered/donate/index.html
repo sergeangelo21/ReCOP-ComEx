@@ -1,34 +1,35 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
-  
- <div class="columns is-gapless">
+
+ <!--  -->
+<div class="container padding">
+ <div class="columns is-centered">
     <div class="column">
-        <figure class="donate-image">
-            
-        </figure>
+
+        <div class="level">
+            <div class="level-item">
+                <figure class="image-donation">
+                    <img src="../../static/images/Logo.png">
+                </figure>
+            </div>
+        </div>
+
+        
     </div>
-    <div class="column is-5">
+
+    <div class="column is-7 margin-top-donate">
+        <div class="card">
+            <div class="card-content">
         <form action ="" method = "POST" enctype="multipart/form-data">
         {{form.hidden_tag()}}
-        <section class="hero donation-container">
-            <div class="columns">
-                <div class="column">
                 
-                    <h1 class="has-text-centered title is-3 notification gold">
-                        Help someone Today
-                    </h1>
-                </div>
-            </div>
-            
-            <div class="hero-body">
-                <div class="columns is-centered">
-                    <div class="column is-8">
-                        <div class="field is-horizontal">
-                            <div class="field-label">
-                                {{form.give_to.label(class_='label nowrap')}}
+                        <h1 class="green-donate notification title is-4 has-text-centered">Bring Hope to the Community</h1>
+                        <div class="field is-horizontal padding-donation nowrap left-donate">
+                            <div class="field-label is-normal">
+                                {{form.give_to.label(class_='label notification is-light')}}
                             </div>
-                            <div class="field-body">
+                            <div class="field-body margin-top-donate">
                                 <div class="field">
                                     <div class="control has-icon has-icon-right">
                                         {% for subfield in form.give_to %}
@@ -41,21 +42,26 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="hidden" id='comm'>
-                            <div class="field-label">
-                                {{form.sponsee.label(class_='label')}}
+                            <div class="field is-horizontal padding-donation nowrap left-donate">
+                            <div class="field-label is-normal">
+                                {{form.sponsee.label(class_='label notification is-light')}}
                             </div>
-                            <div class="field-body">
+                            <div class="field-body margin-top-donate">
                                 <div class="field">
                                     <div class="control has-icon has-icon-right">
+                                        <div class="select width-donate left-donate">
                                         {{form.sponsee(class_='input', placeholder='Amount')}}
                                         {% for error in form.sponsee.errors %}
                                         <span style="color: red;">[{{ error }}]</span>
                                         {% endfor %}
                                     </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                         <div class="hidden" id='events'>
                             {% if no_event==0 %}
                             <div class="field-label">
@@ -74,15 +80,15 @@
                             {% else %}
                             <div class="field-body">
                                 <div class="field">
-                                    Sorry there are no scheduled events as of the moment
+                                    <p class="notification title is-6 gold-donate has-text-centered">Sorry there are no scheduled events as of the moment</p>
                                 </div>
                             </div>{% endif %}
                         </div>
-                        <div class="field is-horizontal">
-                            <div class="field-label">
-                                {{form.type.label(class_='label nowrap')}}
+                        <div class="field is-horizontal padding-donation nowrap left-donate">
+                            <div class="field-label is-normal">
+                                {{form.type.label(class_='label notification is-light')}}
                             </div>
-                            <div class="field-body">
+                            <div class="field-body margin-top-donate">
                                 <div class="field">
                                     <div class="control has-icon has-icon-right">
                                         {% for subfield in form.type %}
@@ -96,55 +102,64 @@
                             </div>
                         </div>
                         <div class="hidden" id = "amount_div">
-                            <div class="field-label">
-                                {{form.amount.label(class_='label')}}
+                            <div class="field-label is-normal padding-donation nowrap left-donate">
+                                {{form.amount.label(class_='label notification green-donate')}}
                             </div>
-                            <div class="field-body">
+                            <div class="field-body margin-top-donate width-donate">
                                 <div class="field">
-                                    <div class="control has-icon has-icon-right">
-                                        {{form.amount(class_='input', placeholder='Amount')}}
+                                    <div class="control has-icon has-icon-left">
+                                        {{form.amount(class_='input width-donate', placeholder='Amount')}}
                                         {% for error in form.amount.errors %}
-                                        <span style="color: red;">[{{ error }}]</span>
-                                        {% endfor %}
+
+                                       <span style="color: red;">[{{ error }}]</span>
+                                                {% endfor %}
+                                                <span class="icon is-small is-left">
+                                                   <i class="fas fa-money-bill-alt"></i>
+                                                </span>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="hidden" id = "trans_div">
-                            <div class="field-label">
-                                {{form.trans_slip.label(class_='label nowrap')}}
+                            <div class="field-label is-normal padding-donation nowrap left-donate">
+                                {{form.trans_slip.label(class_='label nowrap notification is-light')}}
                             </div>
-                            <div class="field-body">
+                            <div class="field-body margin-top-donate">
                                 <div class="field">
                                     <div class="control has-icon has-icon-right">
-                                        {{form.trans_slip(class_='input', placeholder='Amount')}}
+                                        {{form.trans_slip(class_='input width-donate', placeholder='Amount')}}
                                         {% for error in form.trans_slip.errors %}
                                         <span style="color: red;">[{{ error }}]</span>
                                         {% endfor %}
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="columns">
+                <div class="columns has-text-centered padding-donation">
                     <div class="column">
                             <p class="control has-text-centered">
-                                Note: Your donation will be sent as anonymous. If you want to be recognized, kindly click here.
+                                <strong class="has-text-grey">Note: Your donation will be sent as anonymous. If you want to be recognized, kindly click here.</strong>
                             </p>
                             <br>
-                        <div class="field is-grouped is-grouped-centered">
+                        <div class="field padding">
                             <p class="control">
-                                {{form.submit(class='button is-primary')}}
+                                {{form.submit(class='button gold-donate padding-donation is-pulled-right title is-6')}}
                             </p>
                         </div>
+                        <br>
                     </div>
                 </div>
-            </div>
-        </section>
+         
+                </div>
+                
     </form>
-    </div>
-</div>
 
+</div>
+</div>
+</div>
+<div class="footer-margin-top"></div>
 
 {% endblock %}

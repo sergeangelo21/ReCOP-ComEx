@@ -320,7 +320,7 @@ def linkages_chart():
 @login_required
 def linkages_add():
 
-	form = SignupForm()
+	form = AddLinkageForm()
 
 	if form.validate_on_submit():
 
@@ -344,7 +344,7 @@ def linkages_add():
 
 		flash('Linkage '+form.company.data+' was successfully added!', 'success')
 
-		return redirect(url_for('admin.linkages', status='all', search=' '))	
+		return redirect(url_for('admin.linkages', status='all', page='1', search=' '))	
 
 	return render_template('/admin/linkages/add.html', title="Add Linkage | Admin", form=form, active='linkages')
 
@@ -457,7 +457,7 @@ def communities_chart():
 @login_required
 def communities_add():
 
-	form = SignupForm()
+	form = AddCommunityForm()
 
 	if form.validate_on_submit():
 
@@ -481,7 +481,7 @@ def communities_add():
 
 		flash('Community was successfully added!', 'success')
 
-		return redirect(url_for('admin.linkages', status='all', search=' '))
+		return redirect(url_for('admin.communities', status='all', page='1', search=' '))
 
 	return render_template('/admin/communities/add.html', title="Add Community | Admin", form=form, active='communities')
 

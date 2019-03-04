@@ -21,12 +21,24 @@
     <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-          <p class="modal-card-title has-text-white">{{community.company_name}}</p>
+          <p class="modal-card-title"></p>
           <button class="delete" onclick="close_event('{{community.id}}')"></button>
         </header>
         <div class="overlay-card-modal has-text-centered">
-          <div class="circular-event">
-            <img src="https://i.mydramalist.com/jrWO8c.jpg">
+          <div class="modal-media">
+            <article class="media">
+              <figure class="media-left">
+                <div class="circular-event-modal">
+                  <img src="https://i.mydramalist.com/jrWO8c.jpg">
+                </div>
+              </figure>
+              <div class="media-content">
+                <div class="content modal-text has-text-centered">
+                  <p class="title is-size-4">{{community.company_name}}</p>
+                  <i class="icon fas fa-user-tag"></i>{{community.bio}}
+                </div>
+              </div>
+            </article>
           </div>
         </div>
         <section class="modal-card-body">
@@ -45,6 +57,7 @@
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
+                      <span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
                       <p>Address</p>
                     </figure>
                     <div class="media-content">
@@ -61,7 +74,8 @@
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
-                        <p>Outreach Coordinator</p>
+                      <span><i class="fas fa-user prof-panel-icon"></i></span>
+                      <p>Outreach Coordinator</p>
                     </figure>
                     <div class="media-content">
                       <div class="content">
@@ -76,6 +90,7 @@
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
+                      <span><i class="fas fa-telephone prof-panel-icon"></i></span>
                       <p>Telephone</p>
                     </figure>
                     <div class="media-content">
@@ -91,6 +106,7 @@
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
+                      <span><i class="fas fa-mobile prof-panel-icon"></i></span>
                       <p>Mobile</p>
                     </figure>
                     <div class="media-content">

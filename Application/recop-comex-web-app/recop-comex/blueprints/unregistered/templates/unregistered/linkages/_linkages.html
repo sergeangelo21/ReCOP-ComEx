@@ -8,7 +8,6 @@
           </div>
         </div>
 
-
         <div class="title is-5">{{ linkage.company_name }}</div>
         <p class="subtitle is-6">{{ linkage.bio }}</p>
 
@@ -23,19 +22,19 @@
     <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
-            <p class="modal-card-title has-text-white">{{linkage.company_name}}</p>
+            <p class="modal-card-title"></p>
             <button class="delete" onclick="close_event('{{linkage.id}}')"></button>
         </header>
         <div class="overlay-card-modal has-text-centered">
           <div class="modal-media">
             <article class="media">
               <figure class="media-left">
-                <div class="circular-event">
+                <div class="circular-event-modal">
                   <img src="https://i.mydramalist.com/jrWO8c.jpg">
                 </div>
               </figure>
               <div class="media-content">
-                <div class="content has-text-centered">
+                <div class="content modal-text has-text-centered">
                   <p class="title is-size-4">{{linkage.company_name}}</p>
                   <i class="icon fas fa-user-tag"></i>{{linkage.bio}}
                 </div>
@@ -59,9 +58,8 @@
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
-                     <p class="tooltip" data-tooltip="Address">
-                        <i class="fas fa-map-marker-alt"></i>
-                     </p>
+                      <span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
+                       <p>Address</p>
                     </figure>
                     <div class="media-content">
                       <div class="content">
@@ -77,9 +75,8 @@
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
-                      <p class="tooltip" data-tooltip="Outreach Coordinator">
-                        <i class="fas fa-user"></i>
-                      </p>
+                      <span><i class="fas fa-user prof-panel-icon"></i></span>
+                      <p>Outreach Coordinator</p>
                     </figure>
                     <div class="media-content">
                       <div class="content">
@@ -94,14 +91,17 @@
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
-                      <p class="tooltip" data-tooltip="Telephone">
-                        <i class="fas fa-phone"></i>
-                      </p>
+                      <span><i class="fas fa-phone prof-panel-icon"></i></span>
+                      <p>Telephone</p>
                     </figure>
                     <div class="media-content">
                       <div class="content">
                           <p>
+                            {% if linkage.telephone=='' %}
+                            <strong>N/A</strong>
+                            {% else %}
                             <strong>{{linkage.telephone}}</strong>
+                            {% endif %}
                           </p>
                       </div>
                     </div>
@@ -111,9 +111,8 @@
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
-                      <p class="tooltip" data-tooltip="Mobile">
-                        <i class="fas fa-mobile"></i>
-                      </p>
+                      <span><i class="fas fa-mobile prof-panel-icon"></i></span>
+                      <p>Mobile</p>
                     </figure>
                     <div class="media-content">
                       <div class="content">
