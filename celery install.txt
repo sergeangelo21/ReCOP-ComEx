@@ -1,0 +1,3 @@
+pip install celery[redis] flask-celery-helper
+
+install redis.msi

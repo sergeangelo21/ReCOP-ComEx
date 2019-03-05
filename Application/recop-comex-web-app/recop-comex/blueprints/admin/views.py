@@ -4,7 +4,7 @@ from blueprints.admin.forms import *
 from data_access.models import *
 from data_access.queries import *
 from static.email import generate, send_email
-from sqlalchemy import or_
+
 import os, pygal
 
 from extensions import db

@@ -1,9 +1,13 @@
-from flask import current_app
+from flask import Flask, current_app
+#from make_celery import make_celery
 from flask_mail import Message
 from itsdangerous import URLSafeTimedSerializer, BadSignature	
 from mimetypes import MimeTypes
 from config import Config
 from extensions import mail
+
+#app = Flask(__name__)
+#celery = make_celery(app)
 
 def generate(email):
 

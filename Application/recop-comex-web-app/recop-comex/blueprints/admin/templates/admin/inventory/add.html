@@ -69,11 +69,9 @@
 							</div>
                         {% else %}
                             <div class="field">
+								{{form.items.label(class_='label')}}
                                 <div class="control">
-                                    Sorry there are no items in inventory
-                                    {% for error in form.name.errors %}
-	                                <span style="color: red;">[{{ error }}]</span>
-	                                {% endfor %}
+                                   <span class="tag is-warning is-medium">Sorry there are no items in inventory.</span>
                                 </div>
                             </div>
                         {% endif %}
@@ -142,8 +140,9 @@
 							</div>
                         {% else %}
                             <div class="field">
+								{{form.event.label(class_='label')}}
                                 <div class="control">
-                                    Sorry there are no scheduled events
+                                    <span class="tag is-warning is-medium">Sorry there are no scheduled events.</span>
                                 </div>
                             </div>
                         {% endif %}

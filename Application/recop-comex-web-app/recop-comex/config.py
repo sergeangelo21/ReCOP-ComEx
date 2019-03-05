@@ -20,3 +20,6 @@ class Config(object):
 	PDF_CONFIG = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
 	
 	POSTS_PER_PAGE = 12
+
+	CELERY_BROKER_URL='redis://localhost:6379/0'
+	CELERY_RESULT_BACKEND='redis://localhost:6379/0'
