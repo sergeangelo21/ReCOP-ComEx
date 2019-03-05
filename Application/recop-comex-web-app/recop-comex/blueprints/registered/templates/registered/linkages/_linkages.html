@@ -96,7 +96,11 @@
                     <div class="media-content">
                       <div class="content">
                         <p>
-                          <strong>{{linkage.telephone}}</strong>
+                          {% if linkage.telephone=='' %}
+                            <strong>N/A</strong>
+                            {% else %}
+                            <strong>{{linkage.telephone}}</strong>
+                            {% endif %}
                         </p>
                       </div>
                     </div>

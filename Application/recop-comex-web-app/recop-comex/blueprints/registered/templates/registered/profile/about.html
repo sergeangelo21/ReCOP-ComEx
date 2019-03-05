@@ -61,6 +61,11 @@
 			<div class="hero-body">
 			    <div class="container">
 			      	<div class="card">
+			      		<header class="card-header has-background-light">
+						    <p class="card-header-title">
+						      Basic Information
+						    </p>
+					  	</header>
 					  	<div class="card-content profile">
 						    <div class="panel-block">
 							    <article class="media">
@@ -150,7 +155,11 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ registered.telephone }}</strong>
+							        			{% if registered.telephone=='' %}
+						                            <strong>N/A</strong>
+					                            {% else %}
+					                            	<strong>{{registered.telephone}}</strong>
+					                            {% endif %}
 							      			</p>
 							    		</div>
 							  		</div>

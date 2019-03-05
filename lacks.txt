@@ -14,10 +14,10 @@ Linkages
 events calendar (ivan)
 Dashboard
 LINKAGES MENU
-Conduct event (attendance->evaluation of participant->photos/description)
+Conduct event (attendance->evaluation of participant->photos/description) (Done Marian 3-5)
 Reports(All finished events/proposals nakatab)
 Search events
-events tabs (all |new| blabla|)
+events tabs (all |new| blabla|) (Done Marian 3-5)
 Volunteers(serge)
 
 Communities
@@ -33,10 +33,10 @@ Registered
 Dashboard
 events	
 linkages
-communities tab
+communities tab 
 donate layout
 join event
-remove referral contact us | terms and condition
+remove referral contact us | terms and condition (done Marian 3-5)
 
 
 General (Maybe kaartehan)
