@@ -3,7 +3,7 @@
 
     <head>
         {% if title %}
-        <title>{{ title }} | ReCOP-ComEx</title>
+        <title>{{ title }}</title>
         {% else %}
         <title>ReCOP-ComEx</title>
         {% endif %}
@@ -40,10 +40,10 @@
                     <a class="navbar-item" href="{{url_for('communities.index')}}">
                         <strong>Home</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('communities.events', status='all', search=' ')}}">
+                    <a class="navbar-item" href="{{url_for('communities.events', search=' ')}}">
                         <strong>Events</strong>
                     </a>
-                    <a class="navbar-item" href="{{url_for('communities.linkages', search=' ')}}">
+                    <a class="navbar-item" href="{{url_for('communities.linkages', page='1', search=' ')}}">
                         <strong>Linkages</strong>
                     </a>
                      <a class="navbar-item" href="{{url_for('communities.members', search=' ')}}">
@@ -51,15 +51,6 @@
                     </a>
                     <a class="navbar-item" href="{{url_for('communities.reports')}}">
                         <strong>Reports</strong>
-                    </a>
-                    <a class="navbar-item" href="{{url_for('communities.referral_users')}}">
-                        <strong>Referral</strong>
-                    </a>
-                    <a class="navbar-item" href="{{url_for('communities.contactus')}}">
-                        <strong>Contact Us</strong>
-                    </a>
-                    <a class="navbar-item" href="{{url_for('communities.termsandconditions')}}">
-                        <strong>Terms & Conditions</strong>
                     </a>
                 </div>
                 <div class="navbar-end">
@@ -106,15 +97,15 @@
                      
                 
                 <p class="footer-links">
-                    <a href="#">Home</a>
+                    <a href="{{url_for('communities.index')}}">Home</a>
                     ·
                     <a href="#">About</a>
                     ·
-                    <a href="#">Terms and Conditions</a>
+                    <a href="{{url_for('communities.termsandconditions')}}">Terms and Conditions</a>
                     ·
-                    <a href="#">Referrals</a>
+                    <a href="{{url_for('communities.referral_users')}}">Referral</a>
                     ·
-                    <a href="#">Contact Us</a>
+                    <a href="{{url_for('communities.contactus')}}">Contact Us</a>
                 </p>
 
                 <p class="footer-company-name">ReCOP-ComEx &copy; 2019</p>

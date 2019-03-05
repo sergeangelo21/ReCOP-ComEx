@@ -29,37 +29,43 @@
 				<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
 				  <ul>
 				    <li {% if status=='all' %} class="is-active" {% endif %}>
-				      <a href="">
+				      <a href="{{url_for('linkages.events', status='all', page='1',search=search)}}">
 				        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
 				        <span class="proposal">All</span>
 				      </a>
 				    </li>
 				    <li {% if status=='new' %} class="is-active" {% endif %}>
-				      <a href="">
+				      <a href="{{url_for('linkages.events', status='new', page='1',search=search)}}">
 				        <span class="icon is-small"><i class="fas fa-calendar-plus" aria-hidden="true"></i></span>
 				        <span class="proposal">New</span>
 				      </a>
 				    </li>
 				    <li {% if status=='pending' %} class="is-active" {% endif %}>
-				      <a href="">
+				      <a href="{{url_for('linkages.events', status='pending', page='1',search=search)}}">
 				        <span class="icon is-small"><i class="fas fa-file-signature" aria-hidden="true"></i></span>
 				        <span class="proposal">Pending</span>
 				      </a>
 				    </li>
 				    <li {% if status=='scheduled' %} class="is-active" {% endif %}>
-				      <a href="">
+				      <a href="{{url_for('linkages.events', status='scheduled', page='1',search=search)}}">
 				        <span class="icon is-small"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
 				        <span class="proposal">Scheduled</span>
 				      </a>
 				    </li>
+				    <li {% if status=='declined' %} class="is-active" {% endif %}>
+				      <a href="{{url_for('linkages.events', status='declined', page='1',search=search)}}">
+				        <span class="icon is-small"><i class="fas fa-calendar-minus" aria-hidden="true"></i></span>
+				        <span class="proposal">Declined</span>
+				      </a>
+				    </li>
 				    <li {% if status=='cancelled' %} class="is-active" {% endif %}>
-				      <a href="">
+				      <a href="{{url_for('linkages.events', status='cancelled', page='1',search=search)}}">
 				        <span class="icon is-small"><i class="fas fa-calendar-times" aria-hidden="true"></i></span>
 				        <span class="proposal">Cancelled</span>
 				      </a>
 				    </li>
 				    <li {% if status=='finished' %} class="is-active" {% endif %}>
-				      <a href="">
+				      <a href="{{url_for('linkages.events', status='finished', page='1',search=search)}}">
 				        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
 				        <span class="proposal">Finished</span>
 				      </a>

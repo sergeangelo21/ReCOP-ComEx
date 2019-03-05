@@ -44,6 +44,8 @@ def events(status, search, page):
 		value='N'
 	elif status=='pending':
 		value='P'
+	elif status=='cancelled':
+		value='C'
 	elif status=='declined':
 		value='X'
 	elif status=='finished':
