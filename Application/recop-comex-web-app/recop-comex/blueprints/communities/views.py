@@ -223,7 +223,7 @@ def members(search):
 
 @communities.route('/communities/members/add', methods=['GET', 'POST'])
 @login_required
-def members_add():
+def member_add():
 
 	form = AddMemberForm()
 
@@ -255,9 +255,54 @@ def members_add():
 
 	return render_template('/communities/members/add.html', title="Communities", form=form)
 
-@communities.route('/communities/members/action/id=<id>', methods=['GET', 'POST'])
+@communities.route('/communities/members/update/id=<id>', methods=['GET', 'POST'])
 @login_required
-def members_action(id):
+def member_updateinfo(id):
+
+	user = community.retrieve_member(id)
+	member = user_information.linkage_info(user.member_id)
+
+	form = UpdateMemberForm()
+
+	if form.validate_on_submit():
+
+		member.first_name = form.firstname.data
+		member.middle_name = form.middlename.data
+		member.last_name = form.lastname.data
+		member.gender = form.gender.data
+		member.birthday = form.birthday.data
+		user.occupation = form.occupation.data
+		user.income = form.income.data
+		user.religion = form.religion.data
+		member.address = form.address.data
+		member.telephone = form.telephone.data
+		member.mobile_number = form.mobile.data
+
+		db.session.commit()
+
+		flash('Member updated!', 'success')
+
+		return redirect(url_for('communities.members', search=' '))
+
+	else:
+
+		form.firstname.data = member.first_name
+		form.middlename.data = member.middle_name
+		form.lastname.data = member.last_name
+		form.gender.data = member.gender
+		form.birthday.data = member.birthday
+		form.occupation.data = user.occupation
+		form.income.data = user.income
+		form.religion.data = user.religion
+		form.address.data = member.address
+		form.telephone.data = member.telephone
+		form.mobile.data = member.mobile_number
+
+	return render_template('/communities/members/update.html', title="Communities", form=form)
+
+@communities.route('/communities/members/action/id=<id>')
+@login_required
+def member_action(id):
 
 	user = community.retrieve_member(id)
 	member = user_information.linkage_info(user.member_id)

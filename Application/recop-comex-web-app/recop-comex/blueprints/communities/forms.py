@@ -21,6 +21,22 @@ class AddMemberForm(FlaskForm):
     mobile = StringField('Mobile Number', [validators.Length(min=11, max=25)])
     submit = SubmitField('Add')
 
+class UpdateMemberForm(FlaskForm):
+    firstname = StringField('First Name')
+    middlename = StringField('Middle Name')
+    lastname = StringField('Last Name')
+    gender = RadioField('Gender', choices=[("M","Male"),("F","Female")])
+    birthday = DateField('Birthday')
+    is_employed = RadioField(choices=[("Y","Yes"),("N","No")])
+    occupation = StringField('Occupation')
+    income = StringField('Income')
+    religion = StringField('Religion')
+    address = StringField('Address')
+    telephone = StringField('Telephone Number')
+    mobile = StringField('Mobile Number')
+    submit = SubmitField('Update')
+
+
 class ReferralForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     email = StringField('Email Address', validators=[DataRequired()])
