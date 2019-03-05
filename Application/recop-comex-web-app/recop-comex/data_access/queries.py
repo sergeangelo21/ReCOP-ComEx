@@ -346,7 +346,7 @@ class event_views():
 			).label('name'),
 			event_participation.is_target
 			).filter(
-			event_participation.event_id==value
+			event_participation.event_id==value, event_participation.status!='R'
 			).order_by(user_information.last_name.asc()).all()
 
 		return record

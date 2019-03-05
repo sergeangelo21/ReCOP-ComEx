@@ -58,12 +58,15 @@ def events_calendar():
 	
 @communities.route('/communities/events/show/id=<id>')
 @login_required
-def event_show(id):
+def event_participants(id):
 
 	event = event_views.show_info(id)
-	participants = event_views.show_participants(id)
+	participants = community_views.event_participants(id)
+	joined = event_participation.show_joined(id)
 
-	return render_template('/communities/events/show.html', title= event.name.title() + " | Communities", event = event, participants=participants)
+	form = SearchForm()
+
+	return render_template('/communities/events/add_participants.html', title= event.name.title() + " | Communities", event = event, participants=participants,joined=joined, form=form)
 
 @communities.route('/communities/event_<id>/<action>/<participant>')
 @login_required
