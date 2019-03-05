@@ -392,7 +392,7 @@ def linkage_action(id):
 
 			token = generate(user.info_id)
 			link = url_for('unregistered.confirm_linkage', token=token , _external = True)	
-			html = render_template('admin/email/moa.html', user = user.username+', OAR', link = link)
+			html = render_template('admin/email/moa.html', user = user.username, link = link)
 			subject = "MEMORANDUM OF AGREEMENT"
 
 			email_parts = [html, subject, current_user.email_address, user.email_address, None]

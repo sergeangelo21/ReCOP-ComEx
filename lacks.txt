@@ -50,6 +50,4 @@ pdf css static
 Serge: Create Celery Instance for email and pdf generation
        Change pdf plugin to xhtmltopdf
 
-errors: linkages email | may ',OAR'
-
 forms.py validators.length pwede dapat null
