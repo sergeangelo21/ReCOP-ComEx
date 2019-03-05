@@ -153,7 +153,7 @@
 				</div>
 			</div>
 			<div class="columns padding-el is-multiline">
-				{% if events %}
+				{% if events.items %}
 
 						{% for event in events.items %}
 							{% include 'linkages/events/_events.html' %}
@@ -174,5 +174,15 @@
 			</div>
 		</div>	
 	</div>
-
+	{% if events.pages>1 %}
+        <div class="card-content">
+	<nav class="pagination" role="navigation" aria-label="pagination">
+		<a class="pagination-previous"  {% if events.has_prev %}  href="{{url_for('linkages.events', search=search, page=events.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+		<a class="pagination-next" {% if events.has_next %} href="{{url_for('linkages.events', search=search, page=events.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+		<ul class="pagination-list">
+			Page {{events.page}} of {{events.pages}}
+		</ul>
+	</nav>
+</div>
+	{% endif %}
 {% endblock %}

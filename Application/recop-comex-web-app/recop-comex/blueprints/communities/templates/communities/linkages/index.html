@@ -95,9 +95,9 @@
 			</div>
 		</div>
 
-        {% if linkages %}
+        {% if linkages.items %}
         <div class="columns padding-el is-multiline">
-			{% for linkage in linkages %}
+			{% for linkage in linkages.items %}
 				{% include 'communities/linkages/_linkages.html' %}
 			{% endfor %}
 		</div>
@@ -107,12 +107,14 @@
         </div>
     </div>
 	{% if linkages.pages>1 %}
+        <div class="card-content">
 	<nav class="pagination" role="navigation" aria-label="pagination">
-		<a class="pagination-previous"  {% if linkages.has_prev %}  href="{{url_for('admin.linkages', status=status, search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
-		<a class="pagination-next" {% if linkages.has_next %} href="{{url_for('admin.linkages', status=status, search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+		<a class="pagination-previous"  {% if linkages.has_prev %}  href="{{url_for('communities.linkages', search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+		<a class="pagination-next" {% if linkages.has_next %} href="{{url_for('communities.linkages', search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
 		<ul class="pagination-list">
 			Page {{linkages.page}} of {{linkages.pages}}
 		</ul>
 	</nav>
+</div>
 	{% endif %}
 {% endblock %}

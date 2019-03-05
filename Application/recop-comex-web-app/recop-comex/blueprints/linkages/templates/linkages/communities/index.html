@@ -43,7 +43,7 @@
 			</p>
 		</div>
 	</div>
-	{% if communities %}
+	{% if communities.items %}
     <div class="columns padding-el is-multiline">
     	{% for community in communities.items %}
         	{% include 'linkages/communities/_communities.html' %}
@@ -51,6 +51,18 @@
     </div>
     {% else %}
 		<p class = "has-text-centered">---Nothing to show---</p>
+	{% endif %}
+
+	{% if communities.pages>1 %}
+        <div class="card-content">
+	<nav class="pagination" role="navigation" aria-label="pagination">
+		<a class="pagination-previous"  {% if communities.has_prev %}  href="{{url_for('linkages.communities', search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+		<a class="pagination-next" {% if communities.has_next %} href="{{url_for('linkages.communities', search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+		<ul class="pagination-list">
+			Page {{communities.page}} of {{communities.pages}}
+		</ul>
+	</nav>
+</div>
 	{% endif %}
 	
 {% endblock %}

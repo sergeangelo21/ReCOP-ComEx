@@ -353,24 +353,46 @@ class event_views():
 
 	def community_events(value):
 
-		record = event_participation.query.join(
-			event_information, user_information
-			).add_columns(
-			event_information.id,
-			event_information.organizer_id,
-			event_information.name,
-			event_information.description,
-			event_information.objective,
-			event_information.budget,
-			event_information.location,
-			event_information.event_date,
-			event_information.thrust,
-			event_information.event_status,
-			event_participation.participant_id,
-			user_information.company_name
-			).filter(and_(event_participation.participant_id==value, 
-			event_information.event_status=='S')
-			).all()
+		if value[1]==' ':
+			record = event_participation.query.join(
+				event_information, user_information
+				).add_columns(
+				event_information.id,
+				event_information.organizer_id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.budget,
+				event_information.location,
+				event_information.event_date,
+				event_information.thrust,
+				event_information.event_status,
+				event_participation.participant_id,
+				user_information.company_name
+				).filter(and_(event_participation.participant_id==value[0], 
+				event_information.event_status=='S')
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)
+		else:
+			record = event_participation.query.join(
+				event_information, user_information
+				).add_columns(
+				event_information.id,
+				event_information.organizer_id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.budget,
+				event_information.location,
+				event_information.event_date,
+				event_information.thrust,
+				event_information.event_status,
+				event_participation.participant_id,
+				user_information.company_name
+				).filter(and_(event_participation.participant_id==value[0], 
+				event_information.event_status=='P',or_(
+				user_information.company_name.like('%'+value[1]+'%'),
+				event_information.name.like('%'+value[1]+'%')))
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)	
 
 		return record
 

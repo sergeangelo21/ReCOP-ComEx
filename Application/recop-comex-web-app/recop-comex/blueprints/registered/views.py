@@ -33,21 +33,19 @@ def index():
 
 	return render_template('/registered/index.html', active='home')
 
-@registered.route('/registered/events/<search>', methods=['GET', 'POST'])
+@registered.route('/registered/events/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
-def events(search):
+def events(page, search):
 
-	events = event_views.show_list('S', search)
-
-	letters = event_attachment.letter_attached()
+	events = event_views.show_list(['S', search, page])
 
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('registered.events', search=form.search.data))
+		return redirect(url_for('registered.events', page='1', search=form.search.data))
 
-	return render_template('/registered/events/index.html', title="Events", form=form, events=events, letters=letters, search=search, active='events')
+	return render_template('/registered/events/index.html', title="Events", form=form, events=events,  page=page,search=search, active='events')
 
 @registered.route('/registered/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -65,15 +63,15 @@ def event_join(id):
 
 	flash(event)
 
-	return redirect(url_for('registered.events', search=' '))
+	return redirect(url_for('registered.events', page='1', search=' '))
 
-@registered.route('/registered/linkages')
+@registered.route('/registered/linkages/search_<search>.page_<page>')
 @login_required
-def linkages():
+def linkages(page, search):
 
-	linkages = linkage_views.show_list('A', 3, ' ')
+	linkages = linkage_views.show_list(['A', search, 3, page])
 
-	return render_template('/registered/linkages/index.html', linkages=linkages, active='linkages')
+	return render_template('/registered/linkages/index.html', linkages=linkages, active='linkages', page=page, search=search)
 
 @registered.route('/registered/donate', methods=['GET', 'POST'])
 @login_required

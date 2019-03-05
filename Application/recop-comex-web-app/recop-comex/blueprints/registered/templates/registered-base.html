@@ -40,10 +40,10 @@
                     <a class="navbar-item {% if active=='home' %}is-active{% endif %}" href="{{url_for('registered.index')}}">
                         <strong>Home</strong>
                     </a>
-                    <a class="navbar-item {% if active=='Events' %}is-active{% endif %}" href="{{url_for('registered.events', search=' ')}}">
+                    <a class="navbar-item {% if active=='Events' %}is-active{% endif %}" href="{{url_for('registered.events', page='1', search=' ')}}">
                         <strong>Events</strong>
                     </a>
-                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('registered.linkages')}}">
+                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('registered.linkages', page='1', search= ' ')}}">
                         <strong>Linkages</strong>
                     </a>
                     <a class="navbar-item {% if active=='donate' %}is-active{% endif %}" href="{{url_for('registered.donate')}}">

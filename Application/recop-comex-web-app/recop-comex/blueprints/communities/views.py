@@ -34,17 +34,17 @@ def index():
 
 	return render_template('/communities/index.html', title="Communities")
 
-@communities.route('/communities/events/filter_<search>', methods=['GET', 'POST'])
+@communities.route('/communities/events/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
-def events(search):
+def events(page, search):
 
-	events = event_views.community_events(current_user.info_id)
+	events = event_views.community_events([current_user.info_id,search, page])
 
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('communities.events', search=form.search.data))
+		return redirect(url_for('communities.events', page='1', search=form.search.data))
 
 	return render_template('/communities/events/index.html', title="Events | Communities", form=form, events=events, search=search)
 
@@ -91,23 +91,11 @@ def participant_action(id, action, participant):
 	return redirect(url_for('communities.event_participants',id=id))
 
 
-@communities.route('/communities/linkages/filter_<search>.page_<page>', methods=['GET', 'POST'])
+@communities.route('/communities/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
-def linkages(search, page):
+def linkages(page, search):
 
 	linkages = linkage_views.show_list(['A', search, 3, page])
-
-	page_nos=[]
-	no=1
-
-	if linkages.pages==1:
-
-		pages_nos=None
-	
-	else:
-
-		while no <= linkages.pages:		
-			no+=1
 
 	form = SearchForm()
 
@@ -115,7 +103,7 @@ def linkages(search, page):
 
 		return redirect(url_for('communities.linkages', page='1', search=form.search.data))
 
-	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, page_nos=page_nos, search=search)
+	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, page=page, search=search)
 
 @communities.route('/communities/linkages/show/id=<id>')
 @login_required
