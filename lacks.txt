@@ -7,17 +7,14 @@ Dashboard
 Event reports
 events organized/attended	
 feedbacks
-Donation and Inventory
 referrals remove tab
 
 Linkages
 events calendar (ivan)
 Dashboard
 LINKAGES MENU
-Conduct event (attendance->evaluation of participant->photos/description) (Done Marian 3-5)
 Reports(All finished events/proposals nakatab)
 Search events
-events tabs (all |new| blabla|) (Done Marian 3-5)
 Volunteers(serge)
 
 Communities
@@ -26,18 +23,12 @@ Dashboard
 linkages (query only)
 communities menu
 remove contact us report terms
-members view info (DONE 03-05 c/o Alex)
 members audit_trail(???)
 
 Registered
 Dashboard
-events	
-linkages
-communities tab 
 donate layout
 join event
-remove referral contact us | terms and condition (done Marian 3-5)
-
 
 General (Maybe kaartehan)
 
