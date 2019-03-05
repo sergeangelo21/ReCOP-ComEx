@@ -1288,7 +1288,7 @@ Modules - reusable parts of our design
   height: auto;
 }
 .footer-margin-top{
-  margin-top:120px;
+  margin-top:50px;
 }
 
 /**/
@@ -1314,7 +1314,7 @@ Modules - reusable parts of our design
     
         }
         .padding-donation{
-            padding: 5px 35px;
+            padding: 5px;
         }
        
         .width-donate{
@@ -1322,8 +1322,8 @@ Modules - reusable parts of our design
             margin-left: 5px;
         }
         .margin-top-donate{
-            margin-top: 20px;
-            margin-left: 0px;
+            margin-top: 15px;
+            
         }
         .gold-donate{
             background-color: #ecad00;
@@ -1342,5 +1342,9 @@ Modules - reusable parts of our design
         .image-donation{
             width: 400px;
             height: auto;
-            padding: 10px;
+            padding: 0px 30px;
+        }
+ .margin-donate{
+          margin-top:10px;
+            
         }
