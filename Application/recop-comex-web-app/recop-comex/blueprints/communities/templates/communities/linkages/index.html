@@ -81,15 +81,16 @@
 				You searched for &nbsp;
 				<span class="search-highlight">
 					&nbsp; '{{search}}'
-					<a href="{{url_for('communities.linkages', search=' ')}}"><span class="fas fa-times-circle"></span></a>
+					<a href="{{url_for('communities.linkages', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>
 					&nbsp; 
 				</span>
 				&nbsp; in
-				{% endif %}Linkages
+				{% endif %}
+				{{status | title }} Linkages
 			</p>
 			<div class="is-pulled-right">
 				<p class="card-header-title">
-					Total: {{linkages | length}}
+					Total: {{linkages.total}}
 				</p>
 			</div>
 		</div>
@@ -105,4 +106,13 @@
 		{% endif %}
         </div>
     </div>
+	{% if linkages.pages>1 %}
+	<nav class="pagination" role="navigation" aria-label="pagination">
+		<a class="pagination-previous"  {% if linkages.has_prev %}  href="{{url_for('admin.linkages', status=status, search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+		<a class="pagination-next" {% if linkages.has_next %} href="{{url_for('admin.linkages', status=status, search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+		<ul class="pagination-list">
+			Page {{linkages.page}} of {{linkages.pages}}
+		</ul>
+	</nav>
+	{% endif %}
 {% endblock %}

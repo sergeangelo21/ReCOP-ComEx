@@ -34,39 +34,19 @@ def index():
 
 	return render_template('/communities/index.html', title="Communities")
 
-@communities.route('/communities/events/<status>/<search>', methods=['GET', 'POST'])
+@communities.route('/communities/events/filter_<search>', methods=['GET', 'POST'])
 @login_required
-def events(status, search):
-
-	if status=='scheduled':
-		value='S'
-	elif status=='new':
-		value='N'
-	elif status=='pending':
-		value='P'
-	elif status=='declined':
-		value='X'
-	elif status=='cancelled':
-		value='C'
-	elif status=='finished':
-		value='F'
-	else:
-		value=status
+def events(search):
 
 	events = event_views.community_events(current_user.info_id)
 
-	letters = event_attachment.letter_attached()
-
 	form = SearchForm()
-
 
 	if form.validate_on_submit():
 
+		return redirect(url_for('communities.events', search=form.search.data))
 
-
-		return redirect(url_for('communities.events', status=status, search=form.search.data))
-
-	return render_template('/communities/events/index.html', title="Events | communities", form=form, events=events, status=status,letters=letters,search=search)
+	return render_template('/communities/events/index.html', title="Events | Communities", form=form, events=events, search=search)
 
 @communities.route('/communities/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -74,7 +54,7 @@ def events_calendar():
 
 	events = event_views.select_list()
 	
-	return render_template('/communities/events/index-calendar.html', title="Events | communities", events=events)
+	return render_template('/communities/events/index-calendar.html', title="Events | Communities", events=events)
 	
 @communities.route('/communities/events/show/id=<id>')
 @login_required
@@ -83,83 +63,7 @@ def event_show(id):
 	event = event_views.show_info(id)
 	participants = event_views.show_participants(id)
 
-	return render_template('/communities/events/show.html', title= event.name.title() + " | communities", event = event, participants=participants)
-
-@communities.route('/communities/events/reschedule/id=<id>', methods=['GET', 'POST'])
-@login_required
-def event_reschedule(id):
-
-	form = RescheduleEventForm()
-
-	resched_event = event_information.reschedule(current_user.id)
-
-	if form.validate_on_submit():
-
-		resched_event.location = form.location.data
-		resched_event.event_date = form.event_date.data
-
-		db.session.commit()
-
-		flash('Event rescheduled!', 'success')
-
-		return redirect(url_for('communities.events', status='all', search=' '))
-
-	else:
-
-		form.location.data = resched_event.location
-		form.event_date.data = resched_event.event_date
-
-	return render_template('/communities/events/reschedule.html', form=form, event=resched_event)
-
-@communities.route('/communities/events/<action>/id=<id>')
-@login_required
-def event_action(id, action):
-
-	event = event_information.retrieve_event(id)
-	organizer = user_information.linkage_info(event.organizer_id)
-	email = user_account.retrieve_user(organizer.id)
-
-	if action=='approve':
-
-		signatory = user_views.signatory_info(4)
-		status = ['P','A']
-
-		recipient = signatory.email_address
-		user = 'Fr. ' + signatory.last_name + ', OAR'
-		token = generate(event.id)
-		approve = url_for('unregistered.event_signing', token=token , action='approve', _external = True)
-		decline = url_for('unregistered.event_signing', token=token , action='decline', _external = True)		
-		html = render_template('communities/email/event.html', event=event , organizer=organizer.company_name, user=user, link = [approve, decline])
-		attachments = event_attachment.retrieve_files(id)
-		subject = "NEW EVENT PROPOSAL: " + event.name
-
-		email_parts = [html, subject, current_user.email_address, recipient, attachments]
-
-		send_email(email_parts)
-
-		event_information.update_status(event.id,status[0])
-		proposal_tracker.update_status(event.id,status[1])
-
-		proposal = proposal_tracker.query.filter(proposal_tracker.event_id==event.id).first()
-
-		value = [None,current_user.id,event.id,'event', 5]
-		audit_trail.add(value)
-
-		flash(event.name + ' was approved!', 'success')
-
-	elif action=='decline':
-
-		status='X'
-		proposal_tracker.update_status(event.id, status)
-		event_information.update_status(event.id, status)
-
-		value = [None,current_user.id,event.id,'event', 6]
-		audit_trail.add(value)
-
-		flash(event.name + ' was declined.', 'info') 	
-
-
-	return redirect(url_for('communities.events', status='all', search=' '))
+	return render_template('/communities/events/show.html', title= event.name.title() + " | Communities", event = event, participants=participants)
 
 @communities.route('/communities/event_<id>/<action>/<participant>')
 @login_required
@@ -187,20 +91,31 @@ def participant_action(id, action, participant):
 	return redirect(url_for('communities.event_participants',id=id))
 
 
-@communities.route('/communities/linkages/<search>', methods=['GET', 'POST'])
+@communities.route('/communities/linkages/filter_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
-def linkages(search):
+def linkages(search, page):
 
+	linkages = linkage_views.show_list(['A', search, 3, page])
 
-	linkages = linkage_views.show_list(['A', search,3,'1'])
+	page_nos=[]
+	no=1
+
+	if linkages.pages==1:
+
+		pages_nos=None
+	
+	else:
+
+		while no <= linkages.pages:		
+			no+=1
 
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('communities.linkages', search=form.search.data))
+		return redirect(url_for('communities.linkages', page='1', search=form.search.data))
 
-	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, search=search)
+	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, page_nos=page_nos, search=search)
 
 @communities.route('/communities/linkages/show/id=<id>')
 @login_required
@@ -208,9 +123,9 @@ def linkage_show(id):
 
 	linkage, mem_since = linkage_views.show_info(id)
 
-	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
+	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Communities", linkage=linkage)
 
-@communities.route('/communities/members/<search>', methods=['GET', 'POST'])
+@communities.route('/communities/members/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def members(search):
 
@@ -226,7 +141,7 @@ def members(search):
 
 @communities.route('/communities/members/add', methods=['GET', 'POST'])
 @login_required
-def members_add():
+def member_add():
 
 	form = AddMemberForm()
 
@@ -257,6 +172,72 @@ def members_add():
 		return redirect(url_for('communities.members', search=' '))
 
 	return render_template('/communities/members/add.html', title="Communities", form=form)
+
+@communities.route('/communities/members/update/id=<id>', methods=['GET', 'POST'])
+@login_required
+def member_updateinfo(id):
+
+	user = community.retrieve_member(id)
+	member = user_information.linkage_info(user.member_id)
+
+	form = UpdateMemberForm()
+
+	if form.validate_on_submit():
+
+		member.first_name = form.firstname.data
+		member.middle_name = form.middlename.data
+		member.last_name = form.lastname.data
+		member.gender = form.gender.data
+		member.birthday = form.birthday.data
+		user.occupation = form.occupation.data
+		user.income = form.income.data
+		user.religion = form.religion.data
+		member.address = form.address.data
+		member.telephone = form.telephone.data
+		member.mobile_number = form.mobile.data
+
+		db.session.commit()
+
+		flash('Member updated!', 'success')
+
+		return redirect(url_for('communities.members', search=' '))
+
+	else:
+
+		form.firstname.data = member.first_name
+		form.middlename.data = member.middle_name
+		form.lastname.data = member.last_name
+		form.gender.data = member.gender
+		form.birthday.data = member.birthday
+		form.occupation.data = user.occupation
+		form.income.data = user.income
+		form.religion.data = user.religion
+		form.address.data = member.address
+		form.telephone.data = member.telephone
+		form.mobile.data = member.mobile_number
+
+	return render_template('/communities/members/update.html', title="Communities", form=form)
+
+@communities.route('/communities/members/action/id=<id>')
+@login_required
+def member_action(id):
+
+	user = community.retrieve_member(id)
+	member = user_information.linkage_info(user.member_id)
+
+	if user.status == "A":
+
+		status = "D"
+		flash(member.first_name.title() + " was disabled!", "success")
+
+	elif user.status == "D":
+
+		status = "A"
+		flash(member.first_name.title() + " was activated!", "success")
+
+	community.update_status(user.id, status)
+
+	return redirect(url_for('communities.members', search=' '))
 
 @communities.route('/communities/reports')
 @login_required

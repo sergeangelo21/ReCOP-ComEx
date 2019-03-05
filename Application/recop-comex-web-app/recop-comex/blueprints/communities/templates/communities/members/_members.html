@@ -1,19 +1,257 @@
-								<tbody>
-									<tr class="table-row">
-									    <td>{{ member.member }}</td>
-									    <td>{{ member.address }}</td>
-									    <td>{{ member.status }}</td>
-										<td>
-											<a class="button is-warning tooltip" data-tooltip="View" href="">
-												<span class="icon">
-													<i class="fa fa-eye"></i>
-												</span>
-											</a>
-											<a class="button is-danger tooltip" data-tooltip="Archive" href="">
-												<span class="icon">
-													<i class="fa fa-archive"></i>
-												</span>
-											</a>
-										</td>
-									</tr>	
-								</tbody>
+	<tbody>
+		<tr class="table-row">
+		    <td>{{ member.member }}</td>
+		    <td>{{ member.address }}</td>
+		    {% if member.occupation == '' %}
+		    <td>Not employed</td>
+		    {% else %}
+		    <td>Employed</td>
+		    {% endif %}
+		    <td>{{ member.status }}</td>
+			<td>
+				<a class="button is-warning tooltip" data-tooltip="View" onclick="show_event('{{member.id}}')">
+					<span class="icon">
+						<i class="fa fa-eye"></i>
+					</span>
+				</a>
+				{% if member.status=='A' %}
+				<a class="button is-danger tooltip" data-tooltip="Disable" href="{{url_for('communities.member_action', id = member.member_id)}}")'>
+					<span class="icon">
+						<i class="fas fa-user-times"></i>
+					</span>
+				</a>
+				{% else %}
+				<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('communities.member_action', id = member.id)}}")'>
+					<span class="icon">
+						<i class="fas fa-user-check"></i>
+					</span>
+				</a>
+				{% endif %}
+			</td>
+		</tr>	
+	</tbody>
+
+
+	<div id={{member.id}}_modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+    				<p class="modal-card-title"></p>
+      				<button class="delete" onclick="close_event('{{member.id}}')"></button>
+				</header>
+	    		<div class="overlay-card-modal has-text-centered">
+			    	<div class="modal-media">
+			            <article class="media">
+			              	<figure class="media-left">
+				                <div class="circular-member-modal">
+				                	<img src="https://i.mydramalist.com/jrWO8c.jpg">
+				                </div>
+			              	</figure>
+			              	<div class="media-content">
+			                	<div class="content modal-text has-text-centered">
+				                	<p class="title is-size-4">{{member.member}}</p>
+			                	</div>
+			              </div>
+			            </article>
+			        </div>
+			    </div>
+	    		<section class="modal-card-body">
+	    			<div class="container modal-show" id="info_div">
+				      	<div class="card">
+							<header class="card-header has-background-light">
+							    <p class="card-header-title">
+							    	Member Information
+							    </p>
+							    <a href="{{url_for('communities.member_updateinfo', id=member.id)}}" class="card-header-icon" aria-label="more options">
+									<span class="icon">
+										<i class="fas fa-edit" aria-hidden="true"></i>
+									</span>
+							    </a>
+						  	</header>
+						  	<div class="card-content profile">
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-user prof-panel-icon"></i></span>
+									    	<p>Name</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{member.member}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
+									    	<p>Address</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{member.address}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-venus-mars prof-panel-icon"></i></span>
+									    	<p>Gender</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									      			{% if member.gender == 'M' %}
+									      			<strong>Male</strong>
+									      			{% else %}
+									      			<strong>Female</strong>
+									      			{% endif %}
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-birthday-cake prof-panel-icon"></i></span>
+									    	<p>Birthday</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									      			<strong>{{ member.birthday }}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-user-tie prof-panel-icon"></i></span>
+									    	<p>Employed?</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+												    {% if member.occupation == '' %}
+												    <strong>Not employed</strong>
+												    {% else %}
+												    <strong>Employed</strong>
+												    {% endif %}
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    {% if member.occupation == '' %}
+							    {% else %}
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-briefcase prof-panel-icon"></i></span>
+									    	<p>Occupation</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									      			<strong>{{ member.occupation }}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-money-bill-alt prof-panel-icon"></i></span>
+									    	<p>Income</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									      			<strong>{{ member.income }}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+								{% endif %}
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-church prof-panel-icon"></i></span>
+									    	<p>Religion</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									      			<strong>{{ member.religion }}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-phone prof-panel-icon"></i></span>
+									    	<p>Telephone</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									      			<strong>{{ member.telephone }}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-mobile prof-panel-icon"></i></span>
+									    	<p>Mobile Number</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									      			<strong>{{ member.mobile }}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-info-circle prof-panel-icon"></i></span>
+									    	<p>Status</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									      			{% if member.status == 'A' %}
+									      			<strong>Active</strong>
+									      			{% else %}
+									      			<strong>Disabled</strong>
+									      			{% endif %}
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							</div>
+						</div>
+				    </div>
+		  		</section>
+	  		</div>
+	</div>

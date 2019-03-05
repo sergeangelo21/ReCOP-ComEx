@@ -39,8 +39,8 @@ function employed(value)
     {
         document.getElementById('occupation_field').style.display="none"
         document.getElementById('income_field').style.display="none"
-        occupation.value = null
-        income.value = 0.00
+        document.getElementById('occupation').value = ''
+        document.getElementById('income').value = 0
 
     }
 
@@ -48,8 +48,6 @@ function employed(value)
     {
         document.getElementById('occupation_field').style.display="block"
         document.getElementById('income_field').style.display="block"
-        occupation.value = null
-        income.value = 0.00
     }
 }
 

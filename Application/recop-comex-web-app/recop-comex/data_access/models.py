@@ -55,6 +55,18 @@ class community(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
+	def retrieve_member(value):
+
+		record = community.query.filter(community.member_id==value).first()
+
+		return record
+
+	def update_status(id, status):
+
+		user = community.query.filter(community.id==id).first()
+		user.status = status
+		db.session.commit()
+
 class donation(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -285,50 +297,23 @@ class inventory(db.Model):
 
 	def item_breakdown():
 
-		record = inventory.query.order_by(
-			inventory.in_stock.desc(), inventory.donation_id.asc()
+		record = inventory.query.filter(inventory.donation_id!=None
+			).order_by(inventory.in_stock.desc(), inventory.donation_id.asc()
 			).all()
 
 		return record
 
-	def get_info(value):
+	def recop_item():
 
-		record = inventory.query.filter(inventory.id==value[0]).first()
+		record = inventory.query.add_columns(
+			func.SUM(inventory.in_stock).label('in_stock'),
+			func.SUM(inventory.given).label('given'),
+			func.SUM(inventory.expired).label('expired')
+			).group_by(inventory.type_id
+			).filter(inventory.donation_id==None
+			).all()
 
 		return record
-
-	def get_recop(value):
-
-		record = inventory.query.filter(and_(inventory.type_id==value, inventory.donation_id==None)).first()
-
-		return record
-
-	def update_recop(value):
-
-		record = inventory.query.filter(inventory.id==value[0]).first()
-
-		record.in_stock=value[1]
-
-		db.session.commit()
-
-	def give(value):
-
-		record = inventory.query.filter(inventory.id==value[0]).first()
-
-		record.given = value[1]
-		record.in_stock = value[2]
-
-		db.session.commit()
-
-	def dispose(value):
-
-		record = inventory.query.filter(inventory.id==value[0]).first()
-
-		record.expired= value[1]
-		record.in_stock= value[2]
-
-		db.session.commit()
-
 
 class inventory_type(db.Model):
 
