@@ -248,8 +248,8 @@ class event_views():
 				event_information.event_status,
 				proposal_tracker.proposed_on,
 				proposal_tracker.status
-				).filter(or_(user_information.company_name.like('%'+search+'%'),
-				event_information.name.like('%'+search+'%'))
+				).filter(or_(user_information.company_name.like('%'+value[1]+'%'),
+				event_information.name.like('%'+value[1]+'%'))
 				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)
 
 		elif value[1]!=' ':

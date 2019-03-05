@@ -109,7 +109,7 @@ def event_show(id):
 	event = event_views.show_info(id)
 	participants = event_views.show_participants(id)
 
-	return render_template('/linkages/events/show.html', title= event.name.title() + " | linkages", event = event, participants=participants, active='events')
+	return render_template('/linkages/events/show.html', title= event.name.title() + " | Linkages", event = event, participants=participants, active='events')
 
 @linkages.route('/linkages/events/create', methods=['GET', 'POST'])
 @login_required
@@ -201,7 +201,7 @@ def event_letter(id, name):
 
 	return send_from_directory(filepath, str(id) +'.pdf')
 
-@linkages.route('/linkages/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
+@linkages.route('/linkages/communities/filter_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def communities(page, search):
 
@@ -211,7 +211,7 @@ def communities(page, search):
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('linkages.communities', search=form.search.data))
+		return redirect(url_for('linkages.communities', page='1', search=form.search.data))
 
 	return render_template('/linkages/communities/index.html', form=form, communities=communities, search=search, active='communities')
 

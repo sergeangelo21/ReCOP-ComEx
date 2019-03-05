@@ -134,7 +134,24 @@
     	</div>
 
 		<div class="column">
-
+			<div class="card-header search-show">
+				<p class="card-header-title">
+					<span class="fas fa-poll-h"></span>&nbsp;
+					{% if search!=' ' %}
+					You searched for &nbsp;
+					<span class="search-highlight">
+						&nbsp;'{{search}}'
+						<a href="{{url_for('linkages.events', status='all', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+					</span>
+					&nbsp; in
+					{% endif %}Events
+				</p>
+				<div class="is-pulled-right">
+					<p class="card-header-title">
+						Total: {{events.total}}
+					</p>
+				</div>
+			</div>
 			<div class="columns padding-el is-multiline">
 				{% if events %}
 
