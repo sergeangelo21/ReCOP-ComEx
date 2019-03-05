@@ -553,15 +553,44 @@ def donations(status, page, search):
 
 	donations=donation_views.show_list([value, search,page])
 
+	items=donation_views.breakdown()
+
 	sponsors = donation_views.show_sponsors()
 
 	form = SearchForm()
 
+	update = UpdateForm()
+
 	if form.validate_on_submit():
 
-		return redirect(url_for('admin.donations', status=status, page='1', search=form.search.data))	
+		return redirect(url_for('admin.donations', status=status, page='1', search=form.search.data))
 
-	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations, sponsors=sponsors, status=status, search=search, form=form, active='donations')
+	if update.validate_on_submit():
+
+		value = inventory.get_info(update.source.data)
+
+		if int(update.quantity.data)>value.in_stock:
+
+			flash('Quantity must not exceed available stocks!', 'error')
+			return redirect(url_for('admin.donations', status=status, page=page, search=search))
+
+		if update.action.data=='give':
+
+			given = value.given + int(update.quantity.data)
+			in_stock = value.in_stock - int(update.quantity.data)
+			inventory.give([update.source.data, given, in_stock])
+			flash('Stocks has been given!', 'success')
+
+		else:
+
+			disposed = value.expired + int(update.quantity.data)
+			in_stock = value.in_stock - int(update.quantity.data)
+			inventory.dispose([update.source.data, disposed, in_stock])
+			flash('Stocks has been disposed!', 'success')
+
+		return redirect(url_for('admin.donations', status=status, page=page, search=search))		
+
+	return render_template('/admin/donations/index.html', title="Donations | Admin", donations=donations, sponsors=sponsors, status=status, items=items,search=search, update=update, form=form, active='donations')
 
 @admin.route('/admin/donations/<action>/id=<id>')
 @login_required
@@ -701,7 +730,28 @@ def inventory_show(page, search):
 
 	if update.validate_on_submit():
 
-		print(update.submit)
+		value = inventory.get_info(update.source.data)
+
+		if int(update.quantity.data)>value.in_stock:
+
+			flash('Quantity must not exceed available stocks!', 'error')
+			return redirect(url_for('admin.inventory_show', page=page, search=search))
+
+		if update.action.data=='give':
+
+			given = value.given + int(update.quantity.data)
+			in_stock = value.in_stock - int(update.quantity.data)
+			inventory.give([update.source.data, given, in_stock])
+			flash('Stocks has been given!', 'success')
+
+		else:
+
+			disposed = value.expired + int(update.quantity.data)
+			in_stock = value.in_stock - int(update.quantity.data)
+			inventory.dispose([update.source.data, disposed, in_stock])
+			flash('Stocks has been disposed!', 'success')
+
+		return redirect(url_for('admin.inventory_show', page=page, search=search))		
 
 	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, update=update, items=items, breakdown=breakdown, search=search, active='inventory')
 
@@ -744,6 +794,19 @@ def inventory_add():
 
 	if form.validate_on_submit():
 
+		if form.item_type.data=='1':
+			value = [None, form.name.data, 'A']
+
+			inventory_type.add(value)
+			id = inventory_type.last_added()
+
+			value = [None,current_user.id,id,'inventory', 1]
+			audit_trail.add(value)
+
+		else:
+
+			id=form.items.data
+
 		if form.is_donation.data=='1':
 			
 			if form.give_to.data=='1':
@@ -772,26 +835,26 @@ def inventory_add():
 			donation.add(value)
 			file.save(trans_path)
 
-		else:
-			donation_id=None
-
-		if form.item_type.data=='1':
-			value = [None, form.name.data, 'A']
-
-			inventory_type.add(value)
-			id = inventory_type.last_added()
-
-			value = [None,current_user.id,id,'inventory', 1]
-			audit_trail.add(value)
+			value=[None, donation_id, id, form.quantity.data , 0,0]
+			inventory.add(value)
 
 		else:
+			
+			record = inventory.get_recop(id)
 
-			id=form.items.data
+			if record:
 
-		value=[None, donation_id, id, form.quantity.data , 0,0]
-		inventory.add(value)
+				in_stock= record.in_stock + int(form.quantity.data)
+				inventory.update_recop([record.id, in_stock])
 
-		flash('Inventory type added!', 'success')
+			else:
+
+				donation_id=None
+				value=[None, donation_id, id, form.quantity.data , 0,0]
+				inventory.add(value)
+
+
+		flash('Items successfully added!', 'success')
 		return redirect(url_for('admin.inventory_show', page='1', search=' '))
 
 	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form, no_event=no_event, no_item=no_item, active='inventory')

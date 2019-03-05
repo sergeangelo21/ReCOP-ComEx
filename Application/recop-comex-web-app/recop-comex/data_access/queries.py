@@ -665,6 +665,21 @@ class donation_views():
 
 		return record
 
+	def breakdown():
+
+		record = inventory.query.join(
+				inventory_type
+				).add_columns(
+				inventory.id,
+				inventory.donation_id,
+				inventory_type.name,
+				inventory.in_stock,
+				inventory.given,
+				inventory.expired
+				).all()
+
+		return record
+
 class inventory_views():
 
 	def show_list(value):
@@ -677,8 +692,11 @@ class inventory_views():
 				inventory_type.name,
 				func.SUM(inventory.in_stock).label('in_stock'),
 				func.SUM(inventory.given).label('given'),
-				func.SUM(inventory.expired).label('expired')
+				func.SUM(inventory.expired).label('expired'),
+				func.COUNT(inventory.id).label('total'),
+				func.COUNT(inventory.donation_id).label('donations')
 				).group_by(inventory.type_id
+				).order_by(inventory_type.name.asc()
 				).paginate(int(value[1]), Config.POSTS_PER_PAGE, False)	
 		else:
 			record = inventory.query.join(
@@ -688,9 +706,12 @@ class inventory_views():
 				inventory_type.name,
 				func.SUM(inventory.in_stock).label('in_stock'),
 				func.SUM(inventory.given).label('given'),
-				func.SUM(inventory.expired).label('expired')
-				).filter(inventory_type.name.like('%'+search+'%')
+				func.SUM(inventory.expired).label('expired'),
+				func.COUNT(inventory.id).label('total'),
+				func.COUNT(inventory.donation_id).label('donations')
+				).filter(inventory_type.name.like('%'+value[0]+'%')
 				).group_by(inventory.type_id
+				).order_by(inventory_type.name.asc()
 				).paginate(int(value[1]), Config.POSTS_PER_PAGE, False)	
 
 		return record

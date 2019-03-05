@@ -357,26 +357,27 @@ function donate_choose(value){
     comm = document.getElementById('comm')
     events = document.getElementById('events')
     sponsor = document.getElementById('sponsor')
-    trans_slip = document.getElementById('trans_slip')
     sel_comm = document.getElementById('sponsee')
-
     if (value==1){
         comm.className="column"
         events.className="hidden"
         sponsor.className="column"
-        trans_slip.className="columns"
 
-        if (sel_event){
+        if (document.getElementById('event')){
     		sel_event.value=''
 		}
-        
+
     }
     else{
         comm.className="hidden"
         events.className="column"
         sponsor.className="column"
-        trans_slip.className="columns"
         sel_comm.value=''
+
+    }
+
+    if (window.location.pathname=='/admin/inventory/add'){
+		document.getElementById('trans_slip').className="columns"
     }
 
 }
@@ -420,13 +421,13 @@ function donate_type(value){
     money = document.getElementById('amount')
 
     if (value==1){
-        amount.className="field is-horizontal"
-        trans.className="field is-horizontal"
+        amount.className="column"
+        trans.className="column"
         money.value=''
     }
     else{
         amount.className="hidden"
-        trans.className="field is-horizontal"
+        trans.className="column"
         money.value = 0.00
     }
 
@@ -503,6 +504,49 @@ function show_item(value){
 function close_item(value){
     a = document.getElementById(value+'_modal')
     a.style.display='none'
+
+}
+
+function show_breakdown(value){
+
+    a = document.getElementById(value+'_items')
+    a.style.display='block'
+
+}
+
+function close_breakdown(value){
+    a = document.getElementById(value+'_items')
+    a.style.display='none'
+
+}
+
+function show_action(value){
+
+    a = document.getElementById(value[0]+'_action')
+    b = document.getElementById(value[1]+'_modal')
+    p = document.getElementById(value[0]+'_head')
+    a.style.display='block'
+    b.style.display='none'
+
+    if(value[2]=='give'){
+
+    	document.getElementById(value[0]).value='give'
+    	p.innerHTML='Give Items'
+
+    }
+    else{
+		document.getElementById(value[0]).value='dispose' 	
+    	p.innerHTML='Dispose Items'
+    }
+
+}
+
+function close_action(value){
+    a = document.getElementById(value[0]+'_action')
+    b = document.getElementById(value[1]+'_modal')
+   	document.getElementById(value[0]).value=''
+    a.style.display='none'
+    b.style.display='block'
 
 }
 

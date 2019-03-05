@@ -7,7 +7,6 @@ Dashboard
 Event reports
 events organized/attended	
 feedbacks
-Donation and Inventory
 referrals remove tab
 
 Linkages

@@ -3,12 +3,13 @@
 		<td>{{ item.in_stock }}</td>
 		<td>{{ item.given }}</td>
 		<td>{{ item.expired }}</td>
+		<td>{{ '%0.2f'| format(((item.total-item.donations) / item.total) * 100) | float }} %</td>
+		<td>{{ '%0.2f'| format((item.donations / item.total) * 100) | float }} %</td>
 		<td>									   	
 			<a class="button is-warning" onclick="show_item('{{item.type_id}}')">
-				<span class="icon">
-					<i class="fa fa-eye"></i>
-				</span> &nbsp;
-				View
+				<i class="fas fa-box-open"></i>
+				&nbsp;
+				Item Breakdown
 			</a>
 		</td>
 	</tr>	
@@ -21,7 +22,6 @@
 		    	<button class="delete" onclick="close_item('{{item.type_id}}')"></button>
 		    </header>
 		    <section class="modal-card-body">
-
 
 	    		<div class="card">
 		           	<header class="card-header has-background-light">
@@ -69,21 +69,12 @@
 			                		{{i.expired}}
 			                	</div>
 			                	<div class="column is-3">
-			                		<form action="" method="POST">
-			                			{{update.hidden_tag()}}
-			                		<div class="field">
-			                			{{update.quantity(class_='input', type='number', placeholder='Quantity', value='')}}
-			                			{{update.donation(hidden='True', value=i.donation_id)}}
-			                		</div>
-                                    {% for subfield in update.action %}
-                                        <label class = "radio">
-                                          {{subfield}}
-                                          {{subfield.label}}
-                                        </label>
-                                    {% endfor %}
-			                		{{update.submit(class_='button is-success is-small')}}
-			                		</button>
-			                		</form>
+			                		{% if i.in_stock!=0 %}
+			                		<button class="button is-success tooltip" onclick="show_action(['{{i.id}}','{{i.type_id}}', 'give'])" data-tooltip='Give'><i class="fas fa-gift"></i></button>
+			                		<button class="button is-danger tooltip" onclick="show_action(['{{i.id}}', '{{i.type_id}}','dispose'])" data-tooltip='Dispose'><i class="fas fa-trash"></i></button>
+			                		{% else %}
+			                			<span class='tag is-dark'>No stocks available</span>
+			                		{% endif %}
 			                	</div>
 		                	</div>
 			            </div>
@@ -100,3 +91,45 @@
 		    </footer>
 	  	</div>
 	</div>
+
+{% for i in breakdown %}
+
+	{% if i.type_id==item.type_id %}
+
+	<div id={{i.id}}_action class="modal">
+		<div class="modal-background"></div>
+		<div class="modal-card">
+		    <header class="modal-card-head">
+		    	<p class="modal-card-title has-text-white" id={{i.id}}_head></p>
+		    	<button class="delete" onclick="close_action(['{{i.id}}', '{{i.type_id}}'])"></button>
+		    </header>
+		    <section class="modal-card-body">
+
+		    	<label class="label">Item Source: {% if i.donation_id %}Donation #{{i.donation_id}} {% else %}ReCOP Office{% endif %}</label>
+			    <label class="label">Item Type: {{item.name}}</label>
+			    <label class="label">In Stock: {{i.in_stock}}</label><br>  	
+
+		    	<form action='' method='POST'>
+
+		    		{{update.hidden_tag()}}
+		    		{{update.action(hidden='True', id=i.id)}}
+		    		{{update.source(value=i.id, hidden='True')}}
+		    		<div class='field'>
+		    			<label class='label'>{{update.quantity.label}}</label>
+		    			{{update.quantity(class_='input', type='number')}}
+		    		</div>
+
+
+		    		{{update.submit(class_='button add')}}
+
+		    	</form>
+
+		    </section>
+
+		    <footer class="modal-card-foot">
+		    </footer>
+	  	</div>
+	</div>
+
+	{% endif %}
+{% endfor %}
