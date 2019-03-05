@@ -7,6 +7,7 @@ Dashboard
 Event reports
 events organized/attended	
 feedbacks
+Donation and Inventory
 referrals remove tab
 
 Linkages
@@ -25,7 +26,8 @@ Dashboard
 linkages (query only)
 communities menu
 remove contact us report terms
-members view info
+members view info (DONE 03-05 c/o Alex)
+members audit_trail(???)
 
 Registered
 Dashboard

@@ -59,10 +59,7 @@ def events(status, search):
 
 	form = SearchForm()
 
-
 	if form.validate_on_submit():
-
-
 
 		return redirect(url_for('communities.events', status=status, search=form.search.data))
 
@@ -187,7 +184,7 @@ def participant_action(id, action, participant):
 	return redirect(url_for('communities.event_participants',id=id))
 
 
-@communities.route('/communities/linkages/<search>', methods=['GET', 'POST'])
+@communities.route('/communities/linkages/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def linkages(search):
 
@@ -210,7 +207,7 @@ def linkage_show(id):
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Admin", linkage=linkage)
 
-@communities.route('/communities/members/<search>', methods=['GET', 'POST'])
+@communities.route('/communities/members/filter_<search>', methods=['GET', 'POST'])
 @login_required
 def members(search):
 
@@ -257,6 +254,27 @@ def members_add():
 		return redirect(url_for('communities.members', search=' '))
 
 	return render_template('/communities/members/add.html', title="Communities", form=form)
+
+@communities.route('/communities/members/action/id=<id>', methods=['GET', 'POST'])
+@login_required
+def members_action(id):
+
+	user = community.retrieve_member(id)
+	member = user_information.linkage_info(user.member_id)
+
+	if user.status == "A":
+
+		status = "D"
+		flash(member.first_name.title() + " was disabled!", "success")
+
+	elif user.status == "D":
+
+		status = "A"
+		flash(member.first_name.title() + " was activated!", "success")
+
+	community.update_status(user.id, status)
+
+	return redirect(url_for('communities.members', search=' '))
 
 @communities.route('/communities/reports')
 @login_required

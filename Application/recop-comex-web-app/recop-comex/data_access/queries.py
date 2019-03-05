@@ -518,7 +518,16 @@ class community_views():
 				func.IF(user_information.id!=current_user.info_id,(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name),'').label('member'),
+				user_information.id,
+				user_information.gender,
+				user_information.birthday,
 				user_information.address,
+				user_information.telephone,
+				user_information.mobile_number,
+				community.member_id,
+				community.occupation,
+				community.income,
+				community.religion,
 				community.status,
 				user_information.id
 				).filter(community.community_id==current_user.info_id
@@ -534,7 +543,16 @@ class community_views():
 				func.IF(user_information.id!=current_user.info_id,(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name),'').label('member'),
+				user_information.id,
+				user_information.gender,
+				user_information.birthday,
 				user_information.address,
+				user_information.telephone,
+				user_information.mobile_number,
+				community.member_id,
+				community.occupation,
+				community.income,
+				community.religion,
 				community.status,
 				user_information.id
 				).filter(community.community_id==current_user.info_id
