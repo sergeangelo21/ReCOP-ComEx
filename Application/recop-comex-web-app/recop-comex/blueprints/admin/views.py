@@ -689,6 +689,8 @@ def inventory_show(page, search):
 
 	form = SearchForm()
 
+	update = UpdateForm()
+
 	items = inventory_views.show_list([search,page])
 
 	breakdown = inventory.item_breakdown()
@@ -697,7 +699,11 @@ def inventory_show(page, search):
 
 		return redirect(url_for('admin.inventory_show', page='1', search=form.search.data))
 
-	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, items=items, breakdown=breakdown, search=search, active='inventory')
+	if update.validate_on_submit():
+
+		print(update.submit)
+
+	return render_template('/admin/inventory/index.html', title="Inventory | Admin", form=form, update=update, items=items, breakdown=breakdown, search=search, active='inventory')
 
 @admin.route('/admin/inventory/add', methods=['GET', 'POST'])
 @login_required
@@ -788,7 +794,7 @@ def inventory_add():
 		flash('Inventory type added!', 'success')
 		return redirect(url_for('admin.inventory_show', page='1', search=' '))
 
-	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form, no_event=no_event, no_item=no_item, active='donations')
+	return render_template('/admin/inventory/add.html', title="Inventory | Admin", form=form, no_event=no_event, no_item=no_item, active='inventory')
 
 @admin.route('/admin/feedbacks')
 @login_required

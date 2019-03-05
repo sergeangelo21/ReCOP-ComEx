@@ -1,45 +1,41 @@
 Unregistered
-events calendar (ivan)
-home text overlay(leen)
-communities tab 
-donate layout(leen)
-refer someone(leen) 
+events calendar
+refer someone buttons
 
 Admin
 Dashboard
 Event reports
 events organized/attended	
 feedbacks
-inventory give and dispose
+Donation and Inventory
+referrals remove tab
 
 Linkages
 events calendar (ivan)
 Dashboard
 LINKAGES MENU
-Communities query
 Conduct event (attendance->evaluation of participant->photos/description)
-Donation button na lang for comm and event na di sila nagorganize
 Reports(All finished events/proposals nakatab)
 Search events
+events tabs (all |new| blabla|)
 Volunteers(serge)
-Remove reports|contact uss
 
 Communities
-event calendar (ivan)
+event tabs(all|scheduled|finished)
 Dashboard
-reports
+linkages (query only)
 communities menu
-remove contact us report 
+remove contact us report terms
 members view info
 
 Registered
 Dashboard
-events
+events	
 linkages
+communities tab
+donate layout
 join event
-calendar (ivan)
-Search
-remove contact us | terms and condition
+remove referral contact us | terms and condition
 
 
 General (Maybe kaartehan)
@@ -49,22 +45,12 @@ Notifications
 Help
 change dp
 filters dropdown
+
 validations
 error traps
-footer update-terms|referral|contact us (leen)
-filter (marian)(done 02-25)
-event reschedule (OK 02-25) and cancellation(alexx) (OK 02-25)
 event show -status button under the blahblah (marian)
 finish reports (serge)
-linkages create(alex)
-graphs(alex)
-communities add (ADMIN) (alex)
-linkage show(serge)
-communities (palitan ng members ung settings)
-Donation (give)
-Inventory (give)
-removed feedbacks
-referral (alex) (OK 02-25)
+graphs(alex)communities (palitan ng members ung settings)
 normalized 
 pdf css static
 

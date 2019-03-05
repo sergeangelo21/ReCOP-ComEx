@@ -13,6 +13,12 @@ class SearchForm(FlaskForm):
 	search = StringField("Search", validators=[DataRequired()])
 	submit = SubmitField("Search")
 
+class UpdateForm(FlaskForm):
+    donation = StringField("Donation", validators=[DataRequired()])
+    quantity = StringField("Quantity", validators=[DataRequired()])
+    action = RadioField('Choose', choices=[('1', 'Give'), ('2', 'Dispose')], validators=[DataRequired()])
+    submit = SubmitField("Go")
+
 class ProposalForm(FlaskForm):
     title = StringField('Title of the Activity', validators=[DataRequired()])
     description = StringField('Description', validators=[DataRequired()])

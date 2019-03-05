@@ -22,56 +22,77 @@
 		    </header>
 		    <section class="modal-card-body">
 
+
+	    		<div class="card">
+		           	<header class="card-header has-background-light">
+			                
+			            <div class="columns card-header-title">
+			               	<div class="column is-3">
+			               		Source
+			               	</div>
+			               	<div class="column">
+			               		In Stock
+			              	</div>
+			               	<div class="column">
+			               		Given
+			               	</div>
+			               	<div class="column">
+			               		Expired
+			               	</div>
+			               	<div class="column is-3">
+			               		Actions
+			                </div>
+		                </div>
+			               
+		            </header>
+
 		    	{% for i in breakdown %}
 
 		    		{% if i.type_id==item.type_id %}
 
-	    			<div class="card">
-		              	<header class="card-header has-background-light">
-			                
-			                 <div class="columns card-header-title">
-			                	<div class="column">
-			                		Id
-			                	</div>
-			                	<div class="column">
-			                		Stock
-			                	</div>
-			                	<div class="column">
-			                		Given
-			                	</div>
-			                	<div class="column">
-			                		Expired
-			                	</div>
-			                	<div class="column">
-			                		Actions
-			                	</div>
-		                	</div>
-			               
-		              	</header>
 		              	<div class="card-content profile">
              				<div class="columns card-header-title has-text-weight-normal">
-			                	<div class="column">
-			                		{{item.type_id}}
+			                	<div class="column is-3">
+			                		{% if i.donation_id %}
+			                			Donation #{{i.donation_id}}
+			                		{% else %}
+			                			ReCOP Office
+			                		{% endif %}
 			                	</div>
 			                	<div class="column">
-			                		{{item.in_stock}}
+			                		{{i.in_stock}}
 			                	</div>
 			                	<div class="column">
-			                		{{item.given}}
+			                		{{i.given}}
 			                	</div>
 			                	<div class="column">
-			                		{{item.expired}}
+			                		{{i.expired}}
 			                	</div>
-			                	<div class="column">
-			                		
+			                	<div class="column is-3">
+			                		<form action="" method="POST">
+			                			{{update.hidden_tag()}}
+			                		<div class="field">
+			                			{{update.quantity(class_='input', type='number', placeholder='Quantity', value='')}}
+			                			{{update.donation(hidden='True', value=i.donation_id)}}
+			                		</div>
+                                    {% for subfield in update.action %}
+                                        <label class = "radio">
+                                          {{subfield}}
+                                          {{subfield.label}}
+                                        </label>
+                                    {% endfor %}
+			                		{{update.submit(class_='button is-success is-small')}}
+			                		</button>
+			                		</form>
 			                	</div>
 		                	</div>
 			            </div>
-			        </div>
 
 		    		{% endif %}
 
 		    	{% endfor %}
+
+			    </div>
 
 		    </section>
 

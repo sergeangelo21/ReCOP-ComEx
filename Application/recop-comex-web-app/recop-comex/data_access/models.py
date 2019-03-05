@@ -1,7 +1,7 @@
 #Table specifications and basic CRUD queries goes here
 from extensions import login, db, bcrypt
 from flask_login import UserMixin, current_user
-from sqlalchemy import and_
+from sqlalchemy import and_, func
 
 from datetime import datetime
 
@@ -285,7 +285,21 @@ class inventory(db.Model):
 
 	def item_breakdown():
 
-		record = inventory.query.all()
+		record = inventory.query.filter(inventory.donation_id!=None
+			).order_by(inventory.in_stock.desc(), inventory.donation_id.asc()
+			).all()
+
+		return record
+
+	def recop_item():
+
+		record = inventory.query.add_columns(
+			func.SUM(inventory.in_stock).label('in_stock'),
+			func.SUM(inventory.given).label('given'),
+			func.SUM(inventory.expired).label('expired')
+			).group_by(inventory.type_id
+			).filter(inventory.donation_id==None
+			).all()
 
 		return record
 
