@@ -62,10 +62,15 @@
 			    <div class="container">
 			      	<div class="card">
 					  	<div class="card-content profile">
-
+					  		<header class="card-header has-background-light">
+							    <p class="card-header-title">
+							      Basic Information
+							    </p>
+					  		</header>
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-building prof-panel-icon"></i></span>
 								    	<p>Company Name</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -81,6 +86,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-user prof-panel-icon"></i></span>
 								    	<p>Name</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -96,6 +102,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-user-tag prof-panel-icon"></i></span>
 								    	<p>Bio</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -111,6 +118,7 @@
 							<div class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
+										<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
 							    		<p>Lives in</p>
 							  		</figure>
 							  		<div class="media-content">
@@ -126,6 +134,7 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
+							  			<span><i class="fas fa-birthday-cake prof-panel-icon"></i></span>
 							    		<p>Birthday</p>
 							  		</figure>
 							  		<div class="media-content">
@@ -141,6 +150,7 @@
 						  	<div class="panel-block">
 						     	<article class="media">
 							  		<figure class="media-left">
+							  			<span><i class="fas fa-venus-mars prof-panel-icon"></i></span>
 							    		<p>Gender</p>
 							    	</figure>
 							  		<div class="media-content">
@@ -160,12 +170,17 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
+							  			<span><i class="fas fa-phone prof-panel-icon"></i></span>
 							    		<p>Telephone Number</p>
 							  		</figure>
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ linkages.telephone }}</strong>
+							        			{% if linkages.telephone=='' %}
+						                            <strong>N/A</strong>
+						                        {% else %}
+						                            <strong>{{linkages.telephone}}</strong>
+						                        {% endif %}
 							      			</p>
 							    		</div>
 							  		</div>
@@ -175,7 +190,8 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
-							    		<p>Phone Number</p>
+							  			<span><i class="fas fa-mobile prof-panel-icon"></i></span>
+							    		<p>Mobile Number</p>
 							  		</figure>
 							  		<div class="media-content">
 							   			<div class="content">

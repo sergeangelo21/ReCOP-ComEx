@@ -83,14 +83,14 @@ function check_pass(){
 
 function show_event(value){
 
-	a = document.getElementById(value+'_modal')
-	a.style.display='block'
+    a = document.getElementById(value+'_modal')
+    a.className="modal is-active"
 
 }
 
 function close_event(value){
-	a = document.getElementById(value+'_modal')
-	a.style.display='none'
+    a = document.getElementById(value+'_modal')
+    a.className="modal"
 
 }
 
