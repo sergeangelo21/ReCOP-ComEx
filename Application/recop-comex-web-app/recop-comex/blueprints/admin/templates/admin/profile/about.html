@@ -4,7 +4,7 @@
 		<div class="panel panel-default">
 		    <div class="overlay-card has-text-centered">
 		    	<div class="circular">
-		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
+		    		<img src="../../../static/images/user-default.png">
 		    	</div>
 
 		        <div class="row-profile has-text-centered">
@@ -61,7 +61,7 @@
 			<div class="hero-body">
 			    <div class="container">
 			      	<div class="card">
-						<header class="card-header is-active">
+						<header class="card-header has-background-light">
 						    <p class="card-header-title">
 						      Basic Information
 						    </p>
@@ -71,6 +71,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								    	<span><i class="fas fa-building prof-panel-icon"></i></span>
 								    	<p>Company Name</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -86,6 +87,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								    	<span><i class="fas fa-user prof-panel-icon"></i></span>
 								    	<p>Name</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -101,6 +103,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								    	<span><i class="fas fa-user-tag prof-panel-icon"></i></span>
 								    	<p>Bio</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -116,6 +119,7 @@
 							<div class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
+							    		<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
 							    		<p>Lives in</p>
 							  		</figure>
 							  		<div class="media-content">
@@ -131,6 +135,7 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
+							    		<span><i class="fas fa-birthday-cake prof-panel-icon"></i></span>
 							    		<p>Birthday</p>
 							  		</figure>
 							  		<div class="media-content">
@@ -146,6 +151,7 @@
 						  	<div class="panel-block">
 						     	<article class="media">
 							  		<figure class="media-left">
+							  			<span><i class="fas fa-venus-mars prof-panel-icon"></i></span>
 							    		<p>Gender</p>
 							    	</figure>
 							  		<div class="media-content">
@@ -165,12 +171,17 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
+							    		<span><i class="fas fa-phone prof-panel-icon"></i></span>
 							    		<p>Telephone Number</p>
 							  		</figure>
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ admin.telephone }}</strong>
+							      				{% if admin.telephone=='' %}
+					                            <strong>N/A</strong>
+					                            {% else %}
+					                            <strong>{{ admin.telephone }}</strong>
+					                            {% endif %}
 							      			</p>
 							    		</div>
 							  		</div>
@@ -180,12 +191,18 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
-							    		<p>Phone Number</p>
+							    		<span><i class="fas fa-mobile prof-panel-icon"></i></span>
+							    		<p>Mobile Number</p>
 							  		</figure>
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ admin.mobile_number }}</strong>
+							      				{% if admin.mobile_number=='' %}
+					                            <strong>N/A</strong>
+					                            {% else %}
+					                            <strong>{{ admin.mobile_number }}</strong>
+					                            {% endif %}
+							        			
 							      			</p>
 							    		</div>
 							  		</div>
