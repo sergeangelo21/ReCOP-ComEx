@@ -13,7 +13,7 @@
 			</div>
 		    <div class="overlay-card has-text-centered">
 		    	<div class="circular">
-		    		<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpor1YLOvnGDBQ_kPENgXeX8Nk0m_WQ9TCmQrFyFmHFqlZICVqIA">
+		    		<img src="../../../static/images/user-default.png">
 		    	</div>
 		        
 		        <div class="row has-text-centered">
@@ -78,6 +78,7 @@
 							<div class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
+										<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
 							    		<p>Address</p>
 							  		</figure>
 							  		<div class="media-content">
@@ -93,6 +94,7 @@
 							<div class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
+										<span><i class="fas fa-user prof-panel-icon"></i></span>
 							    		<p>Outreach Coordinator</p>
 							  		</figure>
 							  		<div class="media-content">
@@ -108,12 +110,17 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
+							  			<span><i class="fas fa-phone prof-panel-icon"></i></span>
 							    		<p>Telephone</p>
 							  		</figure>
 							  		<div class="media-content">
 							    		<div class="content">
 							      			<p>
-							        			<strong>{{community.telephone}}</strong>
+							      				{% if community.telephone=='' %}
+					                            <strong>N/A</strong>
+					                            {% else %}
+					                            <strong>{{community.telephone}}</strong>
+					                            {% endif %}
 							      			</p>
 							    		</div>
 							  		</div>
@@ -123,6 +130,7 @@
 						  	<div class="panel-block">
 						     	<article class="media">
 							  		<figure class="media-left">
+							  			<span><i class="fas fa-mobile prof-panel-icon"></i></span>
 							    		<p>Mobile</p>
 							    	</figure>
 							  		<div class="media-content">
@@ -138,6 +146,7 @@
 						  	<div class="panel-block">
 						     	<article class="media">
 							  		<figure class="media-left">
+							  			<span><i class="fas fa-user-clock prof-panel-icon"></i></span>
 							    		<p>Member Since</p>
 							    	</figure>
 							  		<div class="media-content">
@@ -153,6 +162,7 @@
 						  	<div class="panel-block">
 						     	<article class="media">
 							  		<figure class="media-left">
+							  			<span><i class="fas fa-users-cog prof-panel-icon"></i></span>
 							    		<p>Status</p>
 							    	</figure>
 							  		<div class="media-content">
