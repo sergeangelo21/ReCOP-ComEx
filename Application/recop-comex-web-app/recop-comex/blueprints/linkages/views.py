@@ -51,7 +51,7 @@ def events(status, search, page):
 	else:
 		value=status
 
-	events = event_views.show_list([value, search, page])
+	events = event_views.linkages_events([value, search, page])
 	letters = event_attachment.letter_attached()
 	
 	form = AttachLetterForm()
@@ -171,7 +171,6 @@ def event_evaluation(id, search):
 
 
 	return render_template('/linkages/events/evaluation.html', title= event.name.title() + " | Linkages",event=event,participants=participants,form=form, evaluate = evaluate, search=search, active='events')
-
 
 @linkages.route('/linkages/events/create', methods=['GET', 'POST'])
 @login_required

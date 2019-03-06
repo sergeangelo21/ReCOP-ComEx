@@ -576,3 +576,54 @@ else{
     document.getElementById('thrust_field').style.display=""
     }
 }
+function show_eval(value){
+
+    a = document.getElementById('modal')
+    a.className="modal is-active"
+
+    document.getElementById(value+'_div').className='fields'
+    document.getElementById(value+'_btn').className='delete'
+    document.getElementById('participant').value=value
+
+}
+
+function close_eval(value){
+    a = document.getElementById('modal')
+    a.className="modal"
+    document.getElementById(value+'_div').className='hidden'
+    document.getElementById(value+'_btn').className='hidden'
+    document.getElementById('participant').value=''
+}
+
+function show_rating(value){
+
+    a = document.getElementById(value+'_rating')
+    a.className="modal is-active"
+
+}
+
+function close_rating(value){
+    a = document.getElementById(value+'_rating')
+    a.className="modal"
+
+}
+
+function scale(value){
+
+    lbl = document.getElementById('scale')
+    if (value=='rating-0'){
+        lbl.innerHTML='Excellent (5)'
+    }
+    else if (value=='rating-1'){
+         lbl.innerHTML='Very Good (4)'       
+    }
+    else if (value=='rating-2'){
+         lbl.innerHTML='Fair (3)'       
+    }
+    else if (value=='rating-3'){
+         lbl.innerHTML='Poor (2)'       
+    }
+    else{
+        lbl.innerHTML='Very Poor (1)'
+    }
+}

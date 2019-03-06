@@ -1,0 +1,194 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+
+	<section class="hero is-height">
+		<div class="hero-body">
+			<div class="box white">
+				<div class="columns">
+				   	<div class="column">
+						<article class="media">
+							<figure class="media-left">
+			    				<a class="btn btn-follow btn-sm text-center" href="{{url_for('admin.event_conduct', id=event.id)}}" role="button">
+									<span class="back-icon">
+				  						<i class="fas fa-arrow-circle-left fa-2x"></i>
+				  					</span>
+								</a>
+							</figure>
+						</article>
+				      </div>
+				</div>
+				<div class="columns">
+				   	<div class="column">
+				   		<p class="title has-text-centered">Evaluations & Ratings</p>
+				  		<p class="subtitle has-text-centered">{{event.name|title}}</p>
+				   	</div>
+				</div>
+				<div class="columns">
+					<div class="column">
+					<div class="field is-pulled-left has-addons has-addons-centered">
+						<div class="control">
+							<p class="control">
+				     			Present Partipants: {{participants|length}}
+							</p>
+						</div>
+					</div>
+					<div class="field is-pulled-right has-addons has-addons-centered">
+						<div class="control">
+							<form action="" method="POST">
+							{{form.hidden_tag()}}
+				    		{{form.search(class_='input', placeholder='Search')}}
+						</div>
+						<p class="control">
+				     		{{form.submit(class_='button search')}}
+						</p>
+						</form>
+					</div>
+				</div>
+				</div>
+				<div class="columns">
+					<div class="column">
+				<p class="card-header-title">
+					<span class="fas fa-poll-h"></span>&nbsp;
+					{% if search!=' ' %}
+					You searched for &nbsp;
+					<span class="search-highlight">
+						&nbsp;'{{search}}'
+						<a href="{{url_for('admin.event_evaluation', id=event.id, search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+					</span>
+					&nbsp; in
+					{% endif %}Present Participants
+				</p>
+					{% if participants %}
+						<div class="table-responsive">
+							<table class="table is-striped is-hoverable is-fullwidth">
+								<thead>
+									<th>ID</th>
+									<th>Name</th>
+									<th>Address</th>
+									<th>Actions</th>
+								</thead>
+									{% for participant in participants %}
+											{% include 'admin/events/_evaluation.html' %}
+									{% endfor %}
+							</table>
+						</div>
+					{% else %}
+
+						<div class='field has-text-centered'>
+							<span class='tag is-warning is-large'>No results found</span>
+						</div>
+
+					{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<div id=modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title  has-text-white"> Evaluate and Rate</p>
+      				{% for participant in participants %}
+      				<button class="hidden" id={{participant.id}}_btn onclick="close_eval('{{participant.id}}')"></button>
+      				{% endfor %}
+    			</header>
+	    		<section class="modal-card-body">
+		    	<form action='' method='POST'>
+
+		    	{{evaluate.hidden_tag()}}
+	    		{% for participant in participants %}
+	    			<div class='hidden' id={{participant.id}}_div>
+	    				Event Name: <label class="label">{{event.name}} </label>
+			    		Participant: <label class="label">{{participant.name}}</label>
+			   			Address: <label class="label">{{participant.address}}</label><br>	
+			   		</div>
+			   	{% endfor %}
+
+		    		<div class='field'>
+		    			{{evaluate.rating.label(class='label')}}
+		    			<div class="control rate">
+		    			{% for star in evaluate.rating %}
+		    				{{star}}
+		    				{{star.label(class='fas fa-star fa-3x', onmouseover='scale(this.htmlFor)')}}
+		    			{% endfor %}
+		    			</div>&nbsp;
+		    			<span class='tag is-warning is-large' id='scale'>No rating yet</span>
+		    		</div>
+		    		<div class='field'>
+		    			<div class="control">
+		    			{{evaluate.participant(hidden='True')}} 
+		    			{{evaluate.comment.label(class='label')}}
+		    			{{evaluate.comment(class='textarea', placeholder='Enter comment here')}}
+		    			</div>
+		    		</div>
+
+
+	      		</section>
+
+	    		<footer class="modal-card-foot buttons is-right">
+	    			{{evaluate.submit(class_='button add')}}
+	    		</footer>
+		    	</form>
+	  		</div>
+	</div>
+
+{% for participant in participants %}
+	{% if participant.rating %}
+	<div id={{participant.id}}_rating class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title  has-text-white">User's Review</p>
+      				<button class="delete" onclick="close_rating('{{participant.id}}')"></button>
+    			</header>
+	    		<section class="modal-card-body">
+
+	    			Event Name: <label class="label">{{event.name}} </label>
+			    	Participant: <label class="label">{{participant.name}}</label>
+			   		Address: <label class="label">{{participant.address}}</label><br>  	
+
+		    		<div class='field'>
+		    			{{evaluate.rating.label(class='label')}}
+		    			<div class="control">
+							<span class="fas fa-star fa-3x {% if participant.rating>=1 %}checked{% endif %}"></span>
+							<span class="fas fa-star fa-3x {% if participant.rating>=2 %}checked{% endif %}" ></span>
+							<span class="fas fa-star fa-3x {% if participant.rating>=3 %}checked{% endif %}"></span>
+							<span class="fas fa-star fa-3x {% if participant.rating>=4 %}checked{% endif %}"></span>
+							<span class="fas fa-star fa-3x {% if participant.rating>=5 %}checked{% endif %}"></span>
+							<span class='tag is-warning is-large'>
+							{% if participant.rating==1 %}
+								Very Poor
+							{% elif participant.rating==2 %}
+								Poor
+							{% elif participant.rating==3 %}
+								Fair
+							{% elif participant.rating==4 %}
+								Very Good
+							{% else %}
+								Excellent
+							{% endif %}
+							({{participant.rating}})</span>
+		    			</div>
+		    		</div>
+		    		{% if participant.comment %}
+		    		<div class='field'>
+		    			<div class="control">
+		    			<label class='label'>Comment</label>	    			
+		    			<textarea class='textarea' readonly>{{participant.comment}}</textarea>
+		    			</div>
+		    		</div>
+		    		{% endif %}
+
+	      		</section>
+
+	    		<footer class="modal-card-foot buttons is-right">
+	    		</footer>
+	  		</div>
+	</div>
+	{% endif %}
+
+{% endfor %}
+
+{% endblock %}

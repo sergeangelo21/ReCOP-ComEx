@@ -2,6 +2,7 @@ from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField, IntegerField, validators
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email, Length
+from wtforms.widgets import TextArea
 from datetime import date
 
 
@@ -12,6 +13,13 @@ class PostForm(FlaskForm):
 class SearchForm(FlaskForm):
 	search = StringField("Search", validators=[DataRequired()])
 	submit = SubmitField("Search")
+
+class EvaluationForm(FlaskForm):
+
+    rating  = RadioField('Rating', choices=[('5','Five'),('4','Four'),('3','Three'),('2','Two'),('1','One')], validators=[DataRequired()])
+    participant = StringField('Participant', validators=[DataRequired()])
+    comment = StringField('Comment', widget=TextArea())
+    submit= SubmitField('Submit')
 
 class UpdateForm(FlaskForm):
     source = StringField("Stock Source", validators=[DataRequired()])

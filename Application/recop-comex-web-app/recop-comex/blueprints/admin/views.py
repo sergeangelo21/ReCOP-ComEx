@@ -4,6 +4,7 @@ from blueprints.admin.forms import *
 from data_access.models import *
 from data_access.queries import *
 from static.email import generate, send_email
+from datetime import datetime
 
 import os, pygal
 
@@ -72,7 +73,7 @@ def events(status, page, search):
 
 		return redirect(url_for('admin.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status, letters=letters, search=search, active='events')
+	return render_template('/admin/events/index.html', title="Events | Admin", form=form, events=events, status=status, now=datetime.now(), letters=letters, search=search, active='events')
 
 @admin.route('/admin/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -191,7 +192,7 @@ def event_reschedule(id):
 
 	form = RescheduleEventForm()
 
-	resched_event = event_information.reschedule(current_user.id)
+	resched_event = event_information.reschedule(id)
 
 	if form.validate_on_submit():
 
@@ -271,6 +272,85 @@ def event_action(id, action):
 
 
 	return redirect(url_for('admin.events', status='all', page='1', search=' '))
+
+@admin.route('/admin/events/conduct/<id>')
+@login_required
+def event_conduct(id):
+
+	event = event_views.show_info(id)
+
+	return render_template('/admin/events/conduct.html', title= event.name.title() + " | Admin",event=event, active='events')
+
+@admin.route('/admin/events/finish/<id>')
+@login_required
+def event_finish(id):
+
+	event_information.update_status(id, 'F')
+	flash('Event was finished! Kindly submit activity photos to complete the report.','success')
+
+	return redirect(url_for('admin.events', status='all', search=' ', page='1'))
+
+@admin.route('/admin/events/attendance/<id>.search_<search>', methods=['GET', 'POST'])
+@login_required
+def event_attendance(id, search):
+
+	event = event_views.show_info(id)
+	participants = event_views.show_participants([id,search])
+
+	form=SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('admin.event_attendance', id=id, search=form.search.data))
+
+	return render_template('/admin/events/attendance.html', title= event.name.title() + " | Admin",event=event,participants=participants,form=form, search=search, active='events')
+
+@admin.route('/admin/events/attendance/<id>/<action>.user_<user>')
+@login_required
+def attendance_action(id, action, user):
+
+	if action=='present':
+
+		event_participation.update([id,user,'P'])
+		flash('Participant was marked as present!', 'success')
+
+	if action=='absent':
+
+		event_participation.update([id,user,'A'])
+		flash('Participant was marked as absent!', 'success')
+
+	return redirect(url_for('admin.event_attendance', id=id, search=' '))
+
+@admin.route('/admin/events/evaluation/<id>.search_<search>', methods=['GET', 'POST'])
+@login_required
+def event_evaluation(id, search):
+
+	event = event_views.show_info(id)
+	participants = event_views.show_attended([id,search])
+
+	form=SearchForm()
+	evaluate = EvaluationForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('admin.event_evaluation', id=id, search=form.search.data))
+
+	if evaluate.validate_on_submit():
+
+		print(evaluate.participant.data)
+		event_participation.evaluate([event.id, evaluate.participant.data, evaluate.rating.data, evaluate.comment.data])
+		
+		flash('Rating successfully submitted!', 'success')
+		return redirect(url_for('admin.event_evaluation', id=id, search=search))
+
+
+	return render_template('/admin/events/evaluation.html', title= event.name.title() + " | Linkages",event=event,participants=participants,form=form, evaluate = evaluate, search=search, active='events')
+
+@admin.route('/admin/events/stream/<id>')
+@login_required
+def event_stream(id):
+
+	return render_template('admin/events/stream.html', id=id)
 
 @admin.route('/admin/linkages/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required

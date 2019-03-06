@@ -1,0 +1,37 @@
+								<tbody>
+									<tr class="table-row">
+									    <td>{{ participant.id }}</td>
+									    <td>{{ participant.name }}</td>
+									    <td>{{ participant.address }}</td>
+									    <td>
+									    	{% if participant.status=='P' %}
+									    		Present
+									    	{% elif participant.status=='A' %}
+									    		Absent
+									    	{% else %}
+									    		Joined
+									    	{% endif %}
+									    </td>
+										<td>
+											<a class="button is-warning tooltip" data-tooltip="View" href="">
+												<span class="icon">
+													<i class="fa fa-eye"></i>
+												</span>
+											</a>
+											{% if participant.status=='J' or participant.status=='A' %}
+											<a class="button is-success tooltip" data-tooltip="Present" href="{{url_for('admin.attendance_action', id=event.id, action='present', user=participant.id)}}">
+												<span class="icon">
+													<i class="fa fa-check"></i>
+												</span>
+											</a>
+											{% endif %}
+											{% if participant.status=='J' or participant.status=='P' %}
+											<a class="button is-danger tooltip" data-tooltip="Absent" href="{{url_for('admin.attendance_action', id=event.id, action='absent', user=participant.id)}}">
+												<span class="icon">
+													<i class="fa fa-times"></i>
+												</span>
+											</a>
+											{% endif %}
+										</td>
+									</tr>	
+								</tbody>
