@@ -88,7 +88,7 @@ def events_calendar():
 def event_show(id):
 
 	event = event_views.show_info(id)
-	participants = event_views.show_participants(id)
+	participants = event_views.show_participants([id,' '])
 
 	return render_template('/admin/events/show.html', title= event.name.title() + " | Admin", event = event, participants=participants, active='events')
 

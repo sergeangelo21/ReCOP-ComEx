@@ -127,9 +127,9 @@
 							</div>
 						</div>
 						<div class="card-content">
+							{% if donations.items %}
 							<div class="table-responsive">
 								<table class="table is-fullwidth is-striped is-hoverable">
-									{% if donations.items %}
 									<thead>
 										<tr>
 											<th class="newlist">ID</th>
@@ -147,18 +147,13 @@
 											{% include 'admin/donations/_donations.html' %}
 										{% endfor %}
 									</tbody>
-									{% else %}
-								<tbody>
-
-									<tr class = "table-row">
-										<td class = "has-text-centered">---Nothing to show---</td>
-								 	</tr>
-									
-								</tbody>
-
-								{% endif %}
 								</table>
 							</div>
+						{% else %}
+						<div class='field has-text-centered'>
+							<span class='tag is-warning is-large'>No results found</span>
+						</div>
+						{% endif %}
 							{% if donations.pages>1 %}
 							<nav class="pagination" role="navigation" aria-label="pagination">
   								<a class="pagination-previous"  {% if donations.has_prev %}  href="{{url_for('admin.donations', status=status, search=search, page=donations.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>

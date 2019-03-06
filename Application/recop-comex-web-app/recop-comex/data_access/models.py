@@ -257,7 +257,7 @@ class event_participation(db.Model):
 		record = event_participation.query.filter(
 			and_(event_participation.event_id==value,
 			event_participation.is_target!='Y',
-			event_participation.status=='J')
+			event_participation.status!='R')
 			).count()
 
 		return record
@@ -272,6 +272,18 @@ class event_participation(db.Model):
 		record.status=value[2]
 
 		db.session.commit()
+
+	def evaluate(value):
+
+		record = event_participation.query.filter(
+			event_participation.event_id==value[0], 
+			event_participation.participant_id==value[1]
+			).first()
+
+		record.rating=value[2]
+		record.comment=value[3]
+
+		db.session.commit()		
 
 class inventory(db.Model):
 
