@@ -27,7 +27,7 @@ Communities
 Dashboard
 menu is active. naah so eassy
 finished event reports
-communities menu
+communities and donations menu
 event participant add search(serge)
 remove reports
 members audit_trail(???)
