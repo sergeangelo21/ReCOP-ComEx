@@ -13,16 +13,31 @@
 			</div>
 		    <div class="overlay-card-event has-text-centered">
 		    	<div class="circular-event">
-		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
+		    		<img src="../../../static/images/event-default.png">
 		    	</div>
 		        
 		        <div class="row-profile has-text-centered">
 		            <p class="has-text-white is-size-4 has-text-weight-bold">{{event.name}}</p>
-		            <a class="btn btn-follow btn-sm is-size-6 text-center has-text-white" href="{{url_for('admin.linkage_show', id=event.organizer_id)}}" role="button">{{event.company_name}}</a>
+		            <a class="btn btn-follow btn-sm is-size-6 text-center has-text-white" href="{{url_for('admin.linkage_show', id=event.organizer_id)}}" role="button">{{event.company_name}}</a><br>
+		            <span class="tag status-tag is-medium">
+                		{% if event.event_status=='N' %}
+					    		New
+					    	{% elif event.event_status=='S' %}
+					    		Scheduled
+					    	{% elif event.event_status=='X' %}
+					    		Declined
+					    	{% elif event.event_status=='C' %}
+					    		Cancelled
+					    	{% elif event.event_status=='P' %}
+					    		Pending
+					    	{% else %}
+					    		Finished
+					    {% endif %}
+                	</span>
 		        </div>
 		    </div>
 		   	
-		</div>
+		</div> 
 
 		<nav class="level is-mobile">
 			<div class="level-item has-text-centered">
@@ -78,6 +93,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-user prof-panel-icon"></i></span>
 								    	<p>Name</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -92,6 +108,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-building prof-panel-icon"></i></span>
 								    	<p>Organizer</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -106,6 +123,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-newspaper prof-panel-icon"></i></span>
 								    	<p>Description</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -120,6 +138,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-exclamation prof-panel-icon"></i></span>
 								    	<p>Objective</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -134,6 +153,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-money-bill-alt prof-panel-icon"></i></span>
 								  		<p>{% if event.status!='A' %}
 								    	Proposed Budget
 								    	{% else %}
@@ -152,6 +172,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
 								    	<p>Location</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -166,6 +187,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-calendar-alt prof-panel-icon"></i></span>
 								  		<p>{% if event.status!='A' %}
 								    	Target Date
 								    	{% else %}
@@ -184,6 +206,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-clipboard-list prof-panel-icon"></i></span>
 								  		<p>Thrust</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -212,6 +235,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-calendar-plus prof-panel-icon"></i></span>
 								  		<p>Proposed On</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -229,6 +253,7 @@
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
+								  		<span><i class="fas fa-calendar-check prof-panel-icon"></i></span>
 								  		<p>Approved On</p>
 								  	</figure>
 								  	<div class="media-content">
