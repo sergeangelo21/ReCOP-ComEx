@@ -1316,6 +1316,19 @@ Modules - reusable parts of our design
             border-color: #072000;
             
         }
+          .green-donate-button{
+            background-color: #072000;
+            color: white;
+            border-color: #072000;
+        }
+
+        .green-donate-button:hover{
+            background-color: #07200;
+            opacity: 0.9;
+            color: white;
+            border-color: #072000;
+            
+        }
         .left-donate{
             text-align: left;
     
