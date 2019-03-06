@@ -14,23 +14,50 @@
 						<i class="fa fa-calendar-alt"></i>
 					</span>
 				</a>
-				&nbsp&nbsp&nbsp
-
-	          	<div class="field has-addons has-addons-centered is-pulled-right">
-		            <div class="control">
-		                <input class="input" type="text" placeholder="Search">
-		            </div>
-		            <p class="control">
-		                <a class="button search">
-		                  Search
-		                </a>
-		            </p>
-	          	</div>
 	        </div>
+
+			<div class="column">
+				<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
+				  <ul>
+				    <li {% if status=='all' %} class="is-active" {% endif %}>
+				      <a href="{{url_for('communities.events', status='all', page='1', search=search)}}">
+				        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
+				        <span class="proposal">All</span>
+				      </a>
+				    </li>
+				    <li {% if status=='scheduled' %} class="is-active" {% endif %}>
+				      <a href="{{url_for('communities.events', status='scheduled', page='1', search=search)}}">
+				        <span class="icon is-small"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
+				        <span class="proposal">Scheduled</span>
+				      </a>
+				    </li>
+				    <li {% if status=='finished' %} class="is-active" {% endif %}>
+				      <a href="{{url_for('communities.events', status='finished', page='1', search=search)}}">
+				        <span class="icon is-small"><i class="fas fa-calendar-check" aria-hidden="true"></i></span>
+				        <span class="proposal">Finished</span>
+				      </a>
+				    </li>
+				  </ul>
+				</div>
+			</div>
+
+			<div class="column search-box">
+				<div class="field is-pulled-right has-addons has-addons-centered">
+					<div class="control">
+						<form action="" method="POST">
+						{{form.hidden_tag()}}
+				    		{{form.search(class_='input', placeholder='Search')}}
+					</div>
+					<p class="control">
+				     	{{form.submit(class_='button search')}}
+					</p>
+					</form>
+				</div>
+			</div>
       	</div>
 	</div>
 
-	<div class="columns">
+	<div class="columns is-gapless">
 		<div class="column is-2">
 			<div class="filter-btn is-size-5" onclick="filtershrink()">
 				<i class="fas fa-filter"></i>&nbspFilter
@@ -74,29 +101,50 @@
 		</div>
 
 		<div class="column">
+			<div class="card-header search-show">
+				<p class="card-header-title">
+					<span class="fas fa-poll-h"></span>&nbsp;
+					{% if search!=' ' %}
+					You searched for &nbsp;
+					<span class="search-highlight">
+						&nbsp;'{{search}}'
+						<a href="{{url_for('communities.events', status='all', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+					</span>
+					&nbsp; in
+					{% endif %}Events
+				</p>
+				<div class="is-pulled-right">
+					<p class="card-header-title">
+						Total: {{events.total}}
+					</p>
+				</div>
+			</div>
 			<div class="columns padding-el is-multiline">
-
 				{% if events.items %}
 
 						{% for event in events.items %}
 							{% include 'communities/events/_events.html' %}
 						{% endfor %}
 
-				{% else %}
-				<table class="table is-fullwidth">
-					<thead></thead>
-				<tbody>
+					{% else %}
+					<table class="table is-fullwidth">
+						<thead></thead>
+					<tbody>
 
-					<tr class = "table-row">
-						<td class = "has-text-centered">---Nothing to show---</td>
-				 	</tr>
-					
-				</tbody>
+						<tr class = "table-row">
+							<td class="has-text-centered">
+								<div class='field has-text-centered'>
+									<span class='tag is-warning is-large'>No results found</span>
+								</div>
+							</td>
+					 	</tr>
+						
+					</tbody>
+				</table>
 
 				{% endif %}	
-				</table>
 			</div>
-		</div>
+		</div>	
 	</div>
 	{% if events.pages>1 %}
         <div class="card-content">

@@ -4,7 +4,7 @@
 		<div class="panel panel-default">
 		    <div class="overlay-card has-text-centered">
 		    	<div class="circular">
-		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
+		    		<img src="../../../static/images/user-default.png">
 		    	</div>
 
 		        <div class="row-profile has-text-centered">
@@ -177,7 +177,11 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ communities.telephone }}</strong>
+							      				{% if communities.telephone=='' %}
+					                            <strong>N/A</strong>
+					                            {% else %}
+					                            <strong>{{ communities.telephone }}</strong>
+					                            {% endif %}
 							      			</p>
 							    		</div>
 							  		</div>

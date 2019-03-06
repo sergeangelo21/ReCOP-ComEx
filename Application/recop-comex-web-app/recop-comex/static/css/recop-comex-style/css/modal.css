@@ -52,12 +52,19 @@
 	}
 	
 	.modal-text{
-		margin-top: 10%;
+		margin-top: 7%;
 	}
+
+
 	@media screen and (max-width: 530px) {
 		.modal-card-title{
 			font-size: 18px;
 		}
+	}
+
+	.tag.status-tag{
+		background-color: #092d01;
+		color: white;
 	}
 
 .rate {

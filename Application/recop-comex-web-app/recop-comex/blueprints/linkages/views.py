@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, send_from_directory
-from flask_login import current_user, login_required
+from flask_login import current_user, logout_user, login_required
 from blueprints.linkages.forms import *
 from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, donation, referral
 from data_access.queries import user_views, linkage_views, event_views
@@ -18,14 +18,12 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 def before_request():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
-
 		if current_user.type == 1:
 			return redirect(url_for('admin.index'))
 		elif current_user.type == 2:
 			return redirect(url_for('registered.index'))
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
-
 		user_account.logout()
 
 @linkages.route('/linkages/index')
@@ -34,7 +32,7 @@ def index():
 
 	return render_template('/linkages/index.html', active='home')
 
-@linkages.route('/linkages/events/<status>/filter_<search>.page_<page>', methods=['GET', 'POST'])
+@linkages.route('/linkages/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def events(status, search, page):
 
@@ -55,19 +53,7 @@ def events(status, search, page):
 
 	events = event_views.show_list([value, search, page])
 	letters = event_attachment.letter_attached()
-
-	page_nos=[]
-	no=1
-
-	if events.pages==1:
-
-		pages_nos=None
 	
-	else:
-
-		while no <= events.pages:		
-			no+=1
-
 	form = AttachLetterForm()
 
 	if form.validate_on_submit():
@@ -283,7 +269,7 @@ def event_stream(id):
 
 	return render_template('linkages/events/stream.html', id=id)
 
-@linkages.route('/linkages/communities/filter_<search>.page_<page>', methods=['GET', 'POST'])
+@linkages.route('/linkages/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def communities(page, search):
 
@@ -531,3 +517,14 @@ def profile_settings_password():
 			flash('Wrong password.', 'error')
 
 	return render_template('/linkages/profile/settings/password.html', title="Linkages", form=form)
+
+@linkages.route('/logout/linkages')
+def logout():
+
+	user_account.logout()
+
+	logout_user()
+
+	flash('You are logged out.', 'success')
+
+	return redirect('/')
