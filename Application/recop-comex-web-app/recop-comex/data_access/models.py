@@ -309,20 +309,9 @@ class inventory(db.Model):
 
 	def item_breakdown():
 
-		record = inventory.query.filter(inventory.donation_id!=None
-			).order_by(inventory.in_stock.desc(), inventory.donation_id.asc()
-			).all()
-
-		return record
-
-	def recop_item():
-
-		record = inventory.query.add_columns(
-			func.SUM(inventory.in_stock).label('in_stock'),
-			func.SUM(inventory.given).label('given'),
-			func.SUM(inventory.expired).label('expired')
-			).group_by(inventory.type_id
-			).filter(inventory.donation_id==None
+		record = inventory.query.order_by(
+			inventory.in_stock.desc(), 
+			inventory.donation_id.asc()
 			).all()
 
 		return record
