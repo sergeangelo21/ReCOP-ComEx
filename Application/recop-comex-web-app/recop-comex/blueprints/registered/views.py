@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, login_required
 from blueprints.registered.forms import *
-from data_access.models import donation, user_account, user_information, event_information, event_attachment, donation
+from data_access.models import donation, user_account, user_information, event_information, event_participation, event_attachment, donation
 from data_access.queries import user_views, linkage_views, event_views
 from datetime import datetime
 
@@ -55,13 +55,38 @@ def events_calendar():
 	
 	return render_template('/registered/events/index-calendar.html', title="Events", events=events, active='events')
 
-@registered.route('/registered/events/join/id=<id>')
+@registered.route('/registered/events/<action>/id=<id>')
 @login_required
-def event_join(id):
+def event_action(id, action):
 
 	event = event_views.show_info(id)
+	status = event_participation.show_status([id, current_user.info_id])
 
-	flash(event)
+	if action == 'join':
+
+		if status:
+
+			value = [event.id, current_user.info_id, 'J']
+
+			event_participation.update(value)
+
+			flash('Event '+event.name+'  successfully joined!', 'success')
+
+		else:
+
+			value = [None, id, current_user.info_id, 'N']
+
+			event_participation.add(value)
+
+			flash('Event '+event.name+' successfully joined!', 'success')
+
+	elif action == 'cancel':
+
+		value = [event.id, current_user.info_id, 'C']
+
+		event_participation.update(value)
+
+		flash('Event '+event.name+' participation has been cancelled!', 'success')
 
 	return redirect(url_for('registered.events', page='1', search=' '))
 

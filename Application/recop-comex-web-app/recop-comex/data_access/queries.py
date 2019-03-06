@@ -300,7 +300,6 @@ class event_views():
 				).filter(event_information.event_status==value[0]
 				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)			
 
-
 		return record
 
 	def show_info(value):
@@ -591,6 +590,12 @@ class event_views():
 
 		return record
 
+	def select_list():
+
+		record = event_information.query.filter(event_information.event_status=='S').all()
+
+		return record
+		
 class community_views():
 
 	def members_list(search):

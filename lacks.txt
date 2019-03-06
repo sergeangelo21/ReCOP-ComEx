@@ -12,6 +12,7 @@ referrals remove tab
 
 Linkages
 events calendar (ivan)
+event resched and cancel on modal
 Dashboard
 LINKAGES MENU
 Reports(All finished events/proposals nakatab)
@@ -28,8 +29,8 @@ members audit_trail(???)
 
 Registered
 Dashboard
-donate layout
-join event
+donate layout (OK c/o PL marian or marieleen)
+join event (DONE 03-06 c/o Alex pero diko pa mapagisa yung button)
 
 General (Maybe kaartehan)
 
