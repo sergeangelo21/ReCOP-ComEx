@@ -47,7 +47,7 @@ def events(status, page, search):
 	else:
 		value=status
 
-	events = event_views.community_events([status, search, page, current_user.info_id])
+	events = event_views.community_events([value, search, page, current_user.info_id])
 
 	form = SearchForm()
 
