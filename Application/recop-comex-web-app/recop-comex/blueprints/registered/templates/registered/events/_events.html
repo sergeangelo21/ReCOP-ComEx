@@ -39,21 +39,12 @@
 			                	<p class="title is-size-4">{{event.name}}</p>
 			                	<i class="icon fas fa-calendar-alt"></i>{{event.event_date.strftime('%B %e, %Y')}}<br>
 			                	<span class="tag status-tag is-medium">
-				                		Status:
-				                		{% if event.event_status=='N' %}
-									    		New
-									    	{% elif event.event_status=='S' %}
-									    		Scheduled
-									    	{% elif event.event_status=='X' %}
-									    		Declined
-									    	{% elif event.event_status=='C' %}
-									    		Cancelled
-									    	{% elif event.event_status=='P' %}
-									    		Pending
-									    	{% else %}
-									    		Finished
-									    {% endif %}
-				                	</span>
+			                		{% if event.event_status=='S' %}
+								    		Scheduled
+								    	{% else %}
+								    		Finished
+								    {% endif %}
+			                	</span>
 		                	</div>
 		              </div>
 		            </article>
