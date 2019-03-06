@@ -61,9 +61,9 @@
 							</div>
 						</div>
 						<div class="card-content">
+							{% if items.items %}
 							<div class="table-responsive">
 								<table class="table is-fullwidth is-striped is-hoverable">
-									{% if items.items %}
 									<thead>
 										<tr>
 										    <th class="newlist">Item</th>
@@ -82,19 +82,13 @@
 											{% include 'admin/inventory/_inventory.html' %}
 										{% endfor %}
 									</tbody>
-									{% else %}
-
-									<tbody>
-
-										<tr class = "table-row">
-											<td class = "has-text-centered">---Nothing to show---</td>
-									 	</tr>
-										
-									</tbody>
-
-									{% endif %}
 								</table>
 							</div>
+						{% else %}
+						<div class='field has-text-centered'>
+							<span class='tag is-warning is-large'>No results found</span>
+						</div>
+						{% endif %}
 							{% if items.pages>1 %}
 							<nav class="pagination" role="navigation" aria-label="pagination">
   								<a class="pagination-previous"  {% if items.has_prev %}  href="{{url_for('admin.inventory_show', search=search, page=items.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
