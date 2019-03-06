@@ -50,7 +50,20 @@
     	{% endfor %}
     </div>
     {% else %}
-		<p class = "has-text-centered">---Nothing to show---</p>
+		<table class="table is-fullwidth">
+			<thead></thead>
+		<tbody>
+
+			<tr class = "table-row">
+				<td class="has-text-centered">
+					<div class='field has-text-centered'>
+						<span class='tag is-warning is-large'>No results found</span>
+					</div>
+				</td>
+		 	</tr>
+			
+		</tbody>
+	</table>
 	{% endif %}
 
 	{% if communities.pages>1 %}

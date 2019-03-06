@@ -31,9 +31,8 @@ function check_pass()
         return true
     }
 }
-{
 
-function employed(value)
+function employed(value){
 
     occupation = document.getElementById('occupation_field')
     income = document.getElementById('income_field')

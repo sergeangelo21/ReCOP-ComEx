@@ -83,15 +83,20 @@
 						{% include 'registered/events/_events.html' %}
 					{% endfor %}
 				{% else %}
-					<div class="has-text-centered">
-						<span class="fas fa-ellipsis-h"></span>
-						<span class="fas fa-ellipsis-h"></span>
-						<span class="fas fa-ellipsis-h"></span>
-						<span class="has-text-weight-bold"> NOTHING TO SHOW </span>
-						<span class="fas fa-ellipsis-h"></span>
-						<span class="fas fa-ellipsis-h"></span>
-						<span class="fas fa-ellipsis-h"></span>
-					</div>
+					<table class="table is-fullwidth">
+						<thead></thead>
+						<tbody>
+
+							<tr class = "table-row">
+								<td class="has-text-centered">
+									<div class='field has-text-centered'>
+										<span class='tag is-warning is-large'>No results found</span>
+									</div>
+								</td>
+						 	</tr>
+							
+						</tbody>
+					</table>
 				{% endif %}
 			</div>
 		</div>	
