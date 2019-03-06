@@ -51,7 +51,7 @@ def events(page, search):
 @login_required
 def events_calendar():
 
-	events = event_views.select_list()
+	events = event_information.calendar()
 	
 	return render_template('/registered/events/index-calendar.html', title="Events", events=events, active='events')
 
@@ -86,7 +86,7 @@ def donate():
 		if c.type==4:
 			form.sponsee.choices.extend([(str(c.id), c.address)])
 
-	events = event_views.select_list()
+	events = event_information.select_list()
 
 	if events:
 

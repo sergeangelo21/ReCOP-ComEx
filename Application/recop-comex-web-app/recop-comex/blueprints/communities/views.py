@@ -52,7 +52,7 @@ def events(page, search):
 @login_required
 def events_calendar():
 
-	events = event_views.select_list()
+	events = event_information.calendar()
 	
 	return render_template('/communities/events/index-calendar.html', title="Events | Communities", events=events)
 	

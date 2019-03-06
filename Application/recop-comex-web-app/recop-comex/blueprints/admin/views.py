@@ -79,7 +79,7 @@ def events(status, page, search):
 @login_required
 def events_calendar():
 
-	events = event_views.select_list()
+	events = event_information.calendar()
 	
 	return render_template('/admin/events/index-calendar.html', title="Events | Admin", events=events, active='events')
 	
@@ -671,7 +671,7 @@ def donation_add():
 		else:
 			form.sponsor.choices.extend([(str(o.id), o.company_name)])
 
-	events = event_views.select_list()
+	events = event_information.select_list()
 
 	if events:
 		for e in events:
@@ -771,7 +771,7 @@ def inventory_add():
 		else:
 			form.sponsor.choices.extend([(str(o.id), o.company_name)])
 
-	events = event_views.select_list()
+	events = event_information.select_list()
 
 	if events:
 		for e in events:

@@ -45,7 +45,7 @@ def donate():
 		if c.type==4:
 			form.sponsee.choices.extend([(str(c.id), c.address)])
 
-	events = event_views.select_list()
+	events = event_information.select_list()
 
 	if events:
 		for e in events:

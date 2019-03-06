@@ -7,7 +7,7 @@
 					<div class="column">
 						<article class="media">
 						  	<figure class="media-left"> 
-						  		<a class="button viewbtn" href="{{url_for('communities.events', status='all', search=' ')}}">
+						  		<a class="button viewbtn" href="{{url_for('communities.events', page='1', search=' ')}}">
 									<span class="icon">
 										<i class="fa fa-list"></i>
 									</span>
@@ -117,7 +117,7 @@
 
 												if ({{event.event_date.strftime('%e')}}==day && {{event.event_date.strftime('%m')}}==month && {{event.event_date.strftime('%Y')}}==year){
 													name = '{{event.name}}<br>'
-													url = "{{url_for('communities.event_show', id=event.id)}}"
+													url = ""
 													td.innerHTML= td.innerHTML + '<br><a href = "'+url+'"><span class="tag is-success is-small">'+ name+'</span></a>'
 												}
 

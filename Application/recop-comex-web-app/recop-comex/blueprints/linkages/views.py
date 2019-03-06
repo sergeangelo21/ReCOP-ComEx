@@ -98,7 +98,7 @@ def events(status, search, page):
 @login_required
 def events_calendar():
 
-	events = event_views.select_list()
+	events = event_information.calendar()
 	
 	return render_template('/linkages/events/index-calendar.html', title="Events", events=events, active='events')
 	
@@ -120,6 +120,15 @@ def event_conduct(id):
 	event = event_views.show_info(id)
 
 	return render_template('/linkages/events/conduct.html', title= event.name.title() + " | Linkages",event=event, active='events')
+
+@linkages.route('/linkages/events/finish/<id>')
+@login_required
+def event_finish(id):
+
+	event_information.update_status(id, 'F')
+	flash('Event was finished! Kindly submit activity photos to complete the report.','success')
+
+	return redirect(url_for('linkages.events', status='all', search=' ', page='1'))
 
 @linkages.route('/linkages/events/attendance/<id>.search_<search>', methods=['GET', 'POST'])
 @login_required
@@ -301,7 +310,7 @@ def donate():
 		if c.type==4:
 			form.sponsee.choices.extend([(str(c.id), c.address)])
 
-	events = event_views.select_list()
+	events = event_information.select_list()
 
 	if events:
 

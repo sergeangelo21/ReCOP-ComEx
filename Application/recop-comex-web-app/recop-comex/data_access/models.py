@@ -1,7 +1,7 @@
 #Table specifications and basic CRUD queries goes here
 from extensions import login, db, bcrypt
 from flask_login import UserMixin, current_user
-from sqlalchemy import and_, func
+from sqlalchemy import and_, or_, func
 
 from datetime import datetime
 
@@ -204,6 +204,20 @@ class event_information(db.Model):
 	def retrieve_event(value):
 
 		record = event_information.query.filter(event_information.id==value).first()
+
+		return record
+
+	def select_list():
+
+		record = event_information.query.filter(event_information.event_status=='S').all()
+
+		return record
+
+	def calendar():
+
+		record = event_information.query.filter(or_(
+			event_information.event_status=='S', 
+			event_information.event_status=='F')).all()
 
 		return record
 

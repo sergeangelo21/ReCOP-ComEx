@@ -120,7 +120,7 @@
 
 												if ({{event.event_date.strftime('%e')}}==day && {{event.event_date.strftime('%m')}}==month && {{event.event_date.strftime('%Y')}}==year){
 													name = '{{event.name}}<br>'
-													url = "{{url_for('linkages.event_show', id=event.id)}}"
+													url = ""
 													td.innerHTML= td.innerHTML + '<br><a href = "'+url+'"><span class="tag is-success is-small">'+ name+'</span></a>'
 												}
 

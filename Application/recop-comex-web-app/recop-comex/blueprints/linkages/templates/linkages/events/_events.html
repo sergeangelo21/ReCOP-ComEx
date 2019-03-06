@@ -212,7 +212,7 @@
 	    			</div>
 	    		</div>
 	    			{% endif %}	
-	    			{% if event.status=='S' %}
+	    			{% if event.event_status=='S' and event.event_status!='F' %}
 	    			<div class="columns">
 	    				{% if event.event_date.strftime('%B-%e-%Y')==now.strftime('%B-%e-%Y') %}
 	    				<div class="column">
@@ -229,6 +229,14 @@
 	    				<div class="column">
 	    					<a href="" class="level-item">
 			  					<button class="button is-danger"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Cancel</button>
+							</a>
+	    				</div>
+	    			</div>
+	    			{% else %}
+	    			<div class="columns">
+	    				<div class="column">
+	    					<a href="" class="level-item">
+			  					<button class="button is-success"><span class="icon is-small"><i class="fas fa-images"></i></span>&nbsp Photos</button>
 							</a>
 	    				</div>
 	    			</div>
