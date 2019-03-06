@@ -1,0 +1,28 @@
+								<tbody>
+									<tr class="table-row">
+									    <td>{{ participant.id }}</td>
+									    <td>{{ participant.name }}</td>
+									    <td>{{ participant.address }}</td>
+										<td>
+											<a class="button is-warning tooltip" data-tooltip="View" href="">
+												<span class="icon">
+													<i class="fa fa-eye"></i>
+												</span>
+											</a>
+											{% if participant.rating %}
+											<a class="button is-success tooltip" data-tooltip="Rating" onclick="show_rating('{{participant.id}}')">
+												<span class="icon">
+													<i class="fas fa-star"></i>
+												</span>
+											</a>
+											{% else %}
+											<a class="button is-success tooltip" data-tooltip="Evaluation" onclick="show_eval('{{participant.id}}')">
+												<span class="icon">
+													<i class="fas fa-glasses"></i>
+												</span>
+											</a>
+											{% endif %}
+										</td>
+									</tr>	
+								</tbody>
+

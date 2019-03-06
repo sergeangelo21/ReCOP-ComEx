@@ -17,20 +17,20 @@
 	    	Conduct Event : {{event.name|title}}
 		    <ul class="card1-list">
 			    <li class="card1">
-			        <a class="card1-image has-text-success" onclick="conduct_choose('attendance')">
+			        <a class="card1-image has-text-success" href="{{url_for('linkages.event_attendance', id=event.id, search=' ')}}">
 			            <span class="fas fa-user-check fa-10x color" aria-hidden="true"></span>
 			        </a>
-			        <a class="card1-description notification gold" onclick="conduct_choose('attendance')">
+			        <a class="card1-description notification gold" href="{{url_for('linkages.event_attendance', id=event.id, search=' ')}}">
 			            <h2 class="title is-5">Attendance</h2>
 			            
 			        </a>
 			    </li>
 
 			    <li class="card1">
-			        <a class="card1-image has-text-success" onclick="conduct_choose('eval_rating')">
+			        <a class="card1-image has-text-success" href="{{url_for('linkages.event_evaluation', id=event.id, search=' ')}}">
 			            <span class="fas fa-user-tag fa-10x color" aria-hidden="true"></span>
 			        </a>
-			        <a class="card1-description notification gold" onclick="conduct_choose('eval_rating')">
+			        <a class="card1-description notification gold" href="{{url_for('linkages.event_evaluation', id=event.id, search=' ')}}">
 			            <h2 class="title is-5">Evaluation and Ratings</h2>         
 			        </a>
 			    </li>
@@ -46,27 +46,6 @@
 			</ul>
 		</div> 
 	</div>
-
-	<section class="hidden" id='attendance'>
-		<div class="hero-body">
-			<div class="box white">
-				<div class="columns">
-				   	<div class="column">
-						<article class="media">
-							<figure class="media-left">
-			    				<a class="btn btn-follow btn-sm text-center" onclick="conduct_choose('back')" role="button">
-									<span class="back-icon">
-				  						<i class="fas fa-arrow-circle-left fa-2x"></i>
-				  					</span>
-								</a>
-							</figure>
-						</article>
-				      </div>
-				</div>
-				attendance
-			</div>
-		</div>
-	</section>
 
 	<section class="hidden" id='eval_rating'>
 		<div class="hero-body">
@@ -84,7 +63,22 @@
 						</article>
 				      </div>
 				</div>
-				evaluation
+				<div class="columns">
+				   	<div class="column">
+				   		<p class="title has-text-centered">Evaluations & Ratings</p>
+				  		<p class="subtitle has-text-centered">{{event.name|title}}</p>
+				   	</div>
+			    </div>
+				<div class="columns">
+					<div class="column">
+						<div class="field">
+							
+						  	<div class="control">
+							    
+						  	</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -105,7 +99,22 @@
 						</article>
 				      </div>
 				</div>
-				photos
+				<div class="columns">
+				   	<div class="column">
+				   		<p class="title has-text-centered">Photos</p>
+				  		<p class="subtitle has-text-centered">{{event.name|title}}</p>
+				   	</div>
+			    </div>
+				<div class="columns">
+					<div class="column">
+						<div class="field">
+							
+						  	<div class="control">
+							    
+						  	</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</section>

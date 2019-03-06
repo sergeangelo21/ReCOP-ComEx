@@ -99,9 +99,9 @@
 							</div>
 						</div>
 						<div class="card-content">
+							{% if communities.items %}
 							<div class="table-responsive">
 								<table class="table is-fullwidth is-striped is-hoverable">
-								{% if communities.items %}
 								<thead>
 									<tr>
 										<th class="newlist">ID</th>
@@ -118,19 +118,13 @@
 										{% include 'admin/communities/_communities.html' %}
 									{% endfor %}
 								</tbody>
-								{% else %}
-
-								<tbody>
-
-									<tr class = "table-row">
-										<td class = "has-text-centered">---Nothing to show---</td>
-								 	</tr>
-									
-								</tbody>
-
-								{% endif %}
 							</table>
 							</div>
+						{% else %}
+						<div class='field has-text-centered'>
+							<span class='tag is-warning is-large'>No results found</span>
+						</div>
+						{% endif %}
 							{% if communities.pages>1 %}
 							<nav class="pagination" role="navigation" aria-label="pagination">
   								<a class="pagination-previous"  {% if communities.has_prev %}  href="{{url_for('admin.communities', status=status, search=search, page=communities.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>

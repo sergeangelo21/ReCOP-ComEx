@@ -336,18 +336,89 @@ class event_views():
 
 	def show_participants(value):
 
-		record = event_participation.query.join(
-			 user_information
-			).add_columns(
-			event_participation.event_id,
-			(user_information.last_name + ', ' +
-			user_information.first_name + ' '+ 
-			func.left(user_information.middle_name,1) + '. '
-			).label('name'),
-			event_participation.is_target
-			).filter(
-			event_participation.event_id==value, event_participation.status!='R'
-			).order_by(user_information.last_name.asc()).all()
+		if value[1]==' ':
+			record = event_participation.query.join(
+				 user_information
+				).add_columns(
+				user_information.id,
+				event_participation.event_id,
+				(user_information.last_name + ', ' +
+				user_information.first_name + ' '+ 
+				func.left(user_information.middle_name,1) + '. '
+				).label('name'),
+				user_information.address,
+				event_participation.is_target,
+				event_participation.status
+				).filter(and_(event_participation.event_id==value[0], 
+				event_participation.status!='R', event_participation.is_target=='N')
+				).order_by(user_information.last_name.asc()).all()
+		else:
+			record = event_participation.query.join(
+				 user_information
+				).add_columns(
+				user_information.id,
+				event_participation.event_id,
+				(user_information.last_name + ', ' +
+				user_information.first_name + ' '+ 
+				func.left(user_information.middle_name,1) + '. '
+				).label('name'),
+				user_information.address,
+				event_participation.is_target,
+				event_participation.status
+				).filter(and_(event_participation.event_id==value[0], 
+				event_participation.status!='R',
+				event_participation.is_target=='N', or_(
+				user_information.last_name.like('%'+value[1]+'%'),
+				user_information.first_name.like('%'+value[1]+'%'),
+				user_information.middle_name.like('%'+value[1]+'%'),
+				user_information.address.like('%'+value[1]+'%')))
+				).order_by(user_information.last_name.asc()).all()
+
+		return record
+
+	def show_attended(value):
+
+		if value[1]==' ':
+			record = event_participation.query.join(
+				 user_information
+				).add_columns(
+				user_information.id,
+				event_participation.event_id,
+				(user_information.last_name + ', ' +
+				user_information.first_name + ' '+ 
+				func.left(user_information.middle_name,1) + '. '
+				).label('name'),
+				user_information.address,
+				event_participation.is_target,
+				event_participation.status, 
+				event_participation.rating,
+				event_participation.comment
+				).filter(and_(event_participation.event_id==value[0], 
+				event_participation.status=='P', event_participation.is_target=='N')
+				).order_by(user_information.last_name.asc()).all()
+		else:
+			record = event_participation.query.join(
+				 user_information
+				).add_columns(
+				user_information.id,
+				event_participation.event_id,
+				(user_information.last_name + ', ' +
+				user_information.first_name + ' '+ 
+				func.left(user_information.middle_name,1) + '. '
+				).label('name'),
+				user_information.address,
+				event_participation.is_target,
+				event_participation.status, 
+				event_participation.rating,
+				event_participation.comment
+				).filter(and_(event_participation.event_id==value[0], 
+				event_participation.status=='P',
+				event_participation.is_target=='N', or_(
+				user_information.last_name.like('%'+value[1]+'%'),
+				user_information.first_name.like('%'+value[1]+'%'),
+				user_information.middle_name.like('%'+value[1]+'%'),
+				user_information.address.like('%'+value[1]+'%')))
+				).order_by(user_information.last_name.asc()).all()
 
 		return record
 

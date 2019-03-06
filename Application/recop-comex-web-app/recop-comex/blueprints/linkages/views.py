@@ -102,23 +102,81 @@ def events_calendar():
 	
 	return render_template('/linkages/events/index-calendar.html', title="Events", events=events, active='events')
 	
-@linkages.route('/linkages/events/show/id=<id>')
+@linkages.route('/linkages/events/show/<id>')
 @login_required
 def event_show(id):
 
 	event = event_views.show_info(id)
-	participants = event_views.show_participants(id)
+	participants = event_views.show_participants([id,' '])
 
-	return render_template('/linkages/events/show.html', title= event.name.title() + " | Linkages", event = event, participants=participants, active='events')
+	form=SearchForm()
 
-@linkages.route('/linkages/events/conduct/id=<id>')
+	return render_template('/linkages/events/show.html', title= event.name.title() + " | Linkages", event = event, participants=participants,form=form, active='events')
+
+@linkages.route('/linkages/events/conduct/<id>')
 @login_required
 def event_conduct(id):
 
 	event = event_views.show_info(id)
-	participants = event_views.show_participants(id)
 
 	return render_template('/linkages/events/conduct.html', title= event.name.title() + " | Linkages",event=event, active='events')
+
+@linkages.route('/linkages/events/attendance/<id>.search_<search>', methods=['GET', 'POST'])
+@login_required
+def event_attendance(id, search):
+
+	event = event_views.show_info(id)
+	participants = event_views.show_participants([id,search])
+
+	form=SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('linkages.event_attendance', id=id, search=form.search.data))
+
+	return render_template('/linkages/events/attendance.html', title= event.name.title() + " | Linkages",event=event,participants=participants,form=form, search=search, active='events')
+
+@linkages.route('/linkages/events/attendance/<id>/<action>.user_<user>')
+@login_required
+def attendance_action(id, action, user):
+
+	if action=='present':
+
+		event_participation.update([id,user,'P'])
+		flash('Participant was marked as present!', 'success')
+
+	if action=='absent':
+
+		event_participation.update([id,user,'A'])
+		flash('Participant was marked as absent!', 'success')
+
+	return redirect(url_for('linkages.event_attendance', id=id, search=' '))
+
+@linkages.route('/linkages/events/evaluation/<id>.search_<search>', methods=['GET', 'POST'])
+@login_required
+def event_evaluation(id, search):
+
+	event = event_views.show_info(id)
+	participants = event_views.show_attended([id,search])
+
+	form=SearchForm()
+	evaluate = EvaluationForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('linkages.event_evaluation', id=id, search=form.search.data))
+
+	if evaluate.validate_on_submit():
+
+		event_participation.evaluate([event.id, evaluate.participant.data, evaluate.rating.data, evaluate.comment.data])
+		
+		flash('Rating successfully submitted!', 'success')
+		return redirect(url_for('linkages.event_evaluation', id=id, search=search))
+
+
+	return render_template('/linkages/events/evaluation.html', title= event.name.title() + " | Linkages",event=event,participants=participants,form=form, evaluate = evaluate, search=search, active='events')
+
+
 @linkages.route('/linkages/events/create', methods=['GET', 'POST'])
 @login_required
 def events_create():

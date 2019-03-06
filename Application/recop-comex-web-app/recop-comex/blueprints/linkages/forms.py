@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField, IntegerField, validators
+from wtforms.widgets import TextArea
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class SearchForm(FlaskForm):
@@ -28,6 +29,13 @@ class AttachLetterForm(FlaskForm):
     attach_letter = FileField('Attach Letter', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     event_id = StringField('Event ID', validators=[DataRequired()])
     submit = SubmitField('Submit')
+
+class EvaluationForm(FlaskForm):
+
+    rating  = RadioField('Rating', choices=[('5','Five'),('4','Four'),('3','Three'),('2','Two'),('One','One')], validators=[DataRequired()])
+    participant = StringField('Participant', validators=[DataRequired()])
+    comment = StringField('Comment', widget=TextArea())
+    submit= SubmitField('Submit')
 
 class DonationForm(FlaskForm):
     give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
