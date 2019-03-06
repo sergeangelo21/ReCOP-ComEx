@@ -1,3 +1,6 @@
+var carousels = bulmaCarousel.attach(); // carousels now contains an array of all Carousel instances
+setInterval(3000);
+
 if(window.location.pathname=='/linkages/events/calendar'){
     var today = new Date()
     var month = today.getMonth() + 1
@@ -94,6 +97,51 @@ function close_event(value){
 
 }
 
+function show_eval(value){
+
+    a = document.getElementById(value+'_modal')
+    a.className="modal is-active"
+
+}
+
+function close_eval(value){
+    a = document.getElementById(value+'_modal')
+    a.className="modal"
+
+}
+
+function show_rating(value){
+
+    a = document.getElementById(value+'_rating')
+    a.className="modal is-active"
+
+}
+
+function close_rating(value){
+    a = document.getElementById(value+'_rating')
+    a.className="modal"
+
+}
+
+function scale(value){
+
+    lbl = document.getElementById('scale')
+    if (value=='rating-0'){
+        lbl.innerHTML='Excellent (5)'
+    }
+    else if (value=='rating-1'){
+         lbl.innerHTML='Very Good (4)'       
+    }
+    else if (value=='rating-2'){
+         lbl.innerHTML='Fair (3)'       
+    }
+    else if (value=='rating-3'){
+         lbl.innerHTML='Poor (2)'       
+    }
+    else{
+        lbl.innerHTML='Very Poor (1)'
+    }
+}
 function donate_choose(value){
 
     comm = document.getElementById('comm')
@@ -175,46 +223,4 @@ function prev_next(sender){
     var calendar = Calendar(first_day, last_day, month, year)
 
     document.getElementById('calendar').appendChild(calendar)
-}
-
-function conduct_choose(value){
-
-    attendance=document.getElementById('attendance')
-    eval_rating=document.getElementById('eval_rating')
-    photos=document.getElementById('photos')
-    control=document.getElementById('controls')
-
-    if (value=='attendance'){
-
-        attendance.className='hero is-fullheight'
-        eval_rating.className='hidden'
-        photos.className='hidden'
-        control.className='hidden'
-
-    }
-    else if(value=='eval_rating'){
-        
-        attendance.className='hidden'
-        eval_rating.className='hero is-fullheight'
-        photos.className='hidden'
-        control.className='hidden'
-
-    }
-    else if(value=='photos'){
-        
-        attendance.className='hidden'
-        eval_rating.className='hidden'
-        photos.className='hero is-fullheight'
-        control.className='hidden'
-
-    }
-    else{
-
-        attendance.className='hidden'
-        eval_rating.className='hidden'
-        photos.className='hidden'
-        control.className='container padding'
-
-    }
-
 }
