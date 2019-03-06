@@ -32,7 +32,7 @@ class AttachLetterForm(FlaskForm):
 
 class EvaluationForm(FlaskForm):
 
-    rating  = RadioField('Rating', choices=[('5','Five'),('4','Four'),('3','Three'),('2','Two'),('One','One')], validators=[DataRequired()])
+    rating  = RadioField('Rating', choices=[('5','Five'),('4','Four'),('3','Three'),('2','Two'),('1','One')], validators=[DataRequired()])
     participant = StringField('Participant', validators=[DataRequired()])
     comment = StringField('Comment', widget=TextArea())
     submit= SubmitField('Submit')
