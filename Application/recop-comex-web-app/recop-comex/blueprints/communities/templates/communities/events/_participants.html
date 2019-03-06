@@ -1,8 +1,12 @@
 								<tbody>
 									<tr class="table-row">
 									    <td>{{ participant.name }}</td>
-									    <td>{{ participant.birthday.strftime('%B %e, %Y') }}</td>
+									    <td>{{ participant.address }}</td>
+									    {% if participant.occupation == '' %}
+									   	<td>Not employed</td>
+									    {% else %}
 									    <td>{{ participant.occupation }}</td>
+									    {% endif %}
 									    <td>{{ participant.religion }}</td>
 										<td>
 											<a class="button is-warning tooltip" data-tooltip="View" href="">

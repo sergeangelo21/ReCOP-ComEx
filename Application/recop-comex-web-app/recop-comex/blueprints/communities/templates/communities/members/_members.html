@@ -30,8 +30,8 @@
 			    	<div class="modal-media">
 			            <article class="media">
 			              	<figure class="media-left">
-				                <div class="circular-member-modal">
-				                	<img src="https://i.mydramalist.com/jrWO8c.jpg">
+				                <div class="circular-event-modal">
+				                	<img src="../../../static/images/user-default.png">
 				                </div>
 			              	</figure>
 			              	<div class="media-content">
@@ -124,7 +124,7 @@
 								    <article class="media">
 									  	<figure class="media-left">
 									  		<span><i class="fas fa-user-tie prof-panel-icon"></i></span>
-									    	<p>Employed?</p>
+									    	<p>Occupation</p>
 									  	</figure>
 									  	<div class="media-content">
 									    	<div class="content">
@@ -132,7 +132,7 @@
 												    {% if member.occupation == '' %}
 												    <strong>Not employed</strong>
 												    {% else %}
-												    <strong>Employed</strong>
+												    <strong>{{ member.occupation }}</strong>
 												    {% endif %}
 									      		</p>
 									    	</div>
@@ -141,21 +141,6 @@
 								</div>
 							    {% if member.occupation == '' %}
 							    {% else %}
-							    <div class="panel-block">
-								    <article class="media">
-									  	<figure class="media-left">
-									  		<span><i class="fas fa-briefcase prof-panel-icon"></i></span>
-									    	<p>Occupation</p>
-									  	</figure>
-									  	<div class="media-content">
-									    	<div class="content">
-									      		<p>
-									      			<strong>{{ member.occupation }}</strong>
-									      		</p>
-									    	</div>
-									  	</div>
-									</article>
-								</div>
 							    <div class="panel-block">
 								    <article class="media">
 									  	<figure class="media-left">
@@ -211,7 +196,11 @@
 									  	<div class="media-content">
 									    	<div class="content">
 									      		<p>
-									      			<strong>{{ member.mobile }}</strong>
+									      			{% if member.mobile_number=='' %}
+						                            <strong>N/A</strong>
+						                            {% else %}
+						                            <strong>{{ member.mobile_number }}</strong>
+						                            {% endif %}
 									      		</p>
 									    	</div>
 									  	</div>
@@ -240,5 +229,7 @@
 						</div>
 				    </div>
 		  		</section>
+		  		<footer class="modal-card-foot">
+          		</footer>
 	  		</div>
 	</div>

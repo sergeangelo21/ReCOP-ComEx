@@ -699,7 +699,7 @@ class community_views():
 				event_participation.status.label('status'),
 				func.IF(community.occupation==None,"Unemployed",community.occupation).label('occupation'),
 				community.religion,
-				user_information.birthday
+				user_information.address
 				).filter(community.community_id==current_user.info_id, event_participation.event_id==value
 				)
 
@@ -714,7 +714,7 @@ class community_views():
 				community.status.label('status'),
 				func.IF(community.occupation==None,"Unemployed",community.occupation).label('occupation'),
 				community.religion,
-				user_information.birthday
+				user_information.address
 				).filter(community.community_id==current_user.info_id, community.status=='A')
 
 		record = sub1.union(sub2).group_by(user_information.id).all()
