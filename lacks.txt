@@ -43,7 +43,8 @@ validations
 error traps
 event show -status button under the blahblah (marian)
 finish reports (serge)
-graphs(alex)communities (palitan ng members ung settings)
+graphs(alex)
+communities (palitan ng members ung settings) (DONE 03-06 c/o Alex)
 normalized 
 pdf css static
 

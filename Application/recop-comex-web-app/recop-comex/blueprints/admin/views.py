@@ -490,8 +490,9 @@ def communities_add():
 def community_show(id):
 
 	community, mem_since = linkage_views.show_info([id,'community'])
-
-	return render_template('/admin/communities/show.html', title= community.company_name.title() + " | Admin", community=community, mem_since=mem_since, active='communities')
+	members = community_views.members_show(str(community.info_id))
+	
+	return render_template('/admin/communities/show.html', title= community.company_name.title() + " | Admin", community=community, mem_since=mem_since, members=members, active='communities')
 
 @admin.route('/admin/communities/action/id=<id>')
 @login_required

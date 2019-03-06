@@ -14,19 +14,6 @@
 						<i class="fa fa-eye"></i>
 					</span>
 				</a>
-				{% if member.status=='A' %}
-				<a class="button is-danger tooltip" data-tooltip="Disable" href="{{url_for('communities.member_action', id = member.member_id)}}")'>
-					<span class="icon">
-						<i class="fas fa-user-times"></i>
-					</span>
-				</a>
-				{% else %}
-				<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('communities.member_action', id = member.id)}}")'>
-					<span class="icon">
-						<i class="fas fa-user-check"></i>
-					</span>
-				</a>
-				{% endif %}
 			</td>
 		</tr>	
 	</tbody>

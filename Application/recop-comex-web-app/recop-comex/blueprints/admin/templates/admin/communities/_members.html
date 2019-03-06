@@ -1,0 +1,14 @@
+	<tbody>
+		<tr class="table-row">
+		    <td>{{ member.member }}</td>
+		    <td>{{ member.address }}</td>
+		    {% if member.occupation == '' %}
+		    <td>Not employed</td>
+		    {% else %}
+		    <td>Employed</td>
+		    {% endif %}
+		    <td>{{ member.status }}</td>
+			<td>
+			</td>
+		</tr>	
+	</tbody>

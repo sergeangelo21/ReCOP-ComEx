@@ -27,7 +27,7 @@
 		<nav class="level is-mobile">
 			<div class="level-item has-text-centered">
 			    <div class="active-prof-nav">
-			      	<a class="prof-icon">
+			      	<a class="menu prof-icon" id = "info" onclick = "event_pages(this.id)">
 			      		<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-user fa-2x prof"></i>
@@ -40,7 +40,7 @@
 
 			<div class="level-item has-text-centered">
 			    <div class="active-prof-nav">
-			    	<a class="prof-icon">
+			    	<a class="menu prof-icon" id = "tracker" onclick = "event_pages(this.id)">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-calendar-alt fa-2x""></i>
@@ -53,13 +53,13 @@
 
 			<div class="level-item has-text-centered">
 			    <div class="active-prof-nav">
-			    	<a class="prof-icon">
+			    	<a class="menu prof-icon" id = "participants" onclick = "event_pages(this.id)">
 				      	<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-cog fa-2x"></i>
+					      		<i class="fas fa-users fa-2x"></i>
 					      	</span>
 					    </p>
-				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
+				      	<p class="is-size-6 has-text-weight-bold">Members</p>
 				    </a>
 			    </div>
 			</div>
@@ -67,7 +67,7 @@
 
 		<section class="hero">
 			<div class="hero-body">
-			    <div class="container">
+			    <div class="container" id="info_div">
 			      	<div class="card">
 						<header class="card-header has-background-light">
 						    <p class="card-header-title">
@@ -164,6 +164,149 @@
 							  		</div>
 								</article>
 						  	</div>
+						</div>
+					</div>
+			    </div>
+
+			    <div class="container hidden" id="tracker_div">
+			      	<div class="card">
+						<header class="card-header has-background-light">
+						    <p class="card-header-title">
+						    	Events Attended
+						    </p>
+					  	</header>
+					  	<div class="card-content profile">
+							<div class="panel-block">
+						    	<article class="media">
+									<figure class="media-left">
+							    		<p>Address</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{community.address}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+							<div class="panel-block">
+						    	<article class="media">
+									<figure class="media-left">
+							    		<p>Outreach Coordinator</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{community.first_name}} {{community.middle_name}} {{community.last_name}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Telephone</p>
+							  		</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{community.telephone}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Mobile</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{community.mobile_number}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+						  	{% if mem_since %}
+						  	<div class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Member Since</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{mem_since.date_created.strftime('%b %e, %Y')}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+						  	{% endif %}
+						  	<div class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Status</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{community.status}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+						</div>
+					</div>
+			    </div>
+
+			    <div class="container hidden" id="participant_div">
+			      	<div class="card">
+						<header class="card-header has-background-light">
+						    <p class="card-header-title">
+						    	Members
+						    </p>
+					  	</header>
+					  	<div class="card-content profile">
+							<table class="table is-striped is-hoverable is-fullwidth">
+								{% if members %}
+								<thead>
+									<tr>
+									    <th class="newlist">Name</th>
+									    <th class="newlist">Address</th>
+									    <th class="newlist">Employed?</th>
+									    <th class="newlist">Status</th>
+									 </tr>
+									
+								</thead>
+
+									{% for member in members %}
+										{% if member.member %}
+											{% include 'admin/communities/_members.html' %}
+										{% endif %}
+									{% endfor %}
+
+								{% else %}
+
+								<tbody>
+
+									<tr class = "table-row">
+										<td class = "has-text-centered">---Nothing to show---</td>
+								 	</tr>
+									
+								</tbody>
+
+								{% endif %}
+							</table>
 						</div>
 					</div>
 			    </div>

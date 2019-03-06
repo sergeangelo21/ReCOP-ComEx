@@ -165,6 +165,7 @@ class linkage_views():
 			user_information
 			).add_columns(
 			user_account.id,
+			user_account.info_id,
 			user_information.first_name,
 			user_information.middle_name,
 			user_information.last_name,
@@ -652,6 +653,37 @@ class community_views():
 				).all()			
 
 		return record
+
+	# for admin.communities	
+	def members_show(value):
+
+		record = community.query.join(
+			user_information, 
+			or_(
+			community.member_id==user_information.id,
+			community.community_id==user_information.id)
+			).add_columns(
+			func.IF(user_information.id!=value,(user_information.first_name + ' ' +
+			func.left(user_information.middle_name,1) + '. ' +
+			user_information.last_name),'').label('member'),
+			user_information.id,
+			user_information.gender,
+			user_information.birthday,
+			user_information.address,
+			user_information.telephone,
+			user_information.mobile_number,
+			community.member_id,
+			community.occupation,
+			community.income,
+			community.religion,
+			community.status,
+			user_information.id
+			).filter(community.community_id==value
+			).order_by(user_information.id.asc()
+			).all()
+
+		return record
+
 
 	def event_participants(value):
 
