@@ -34,19 +34,28 @@ def index():
 
 	return render_template('/communities/index.html', title="Communities")
 
-@communities.route('/communities/events/search_<search>.page_<page>', methods=['GET', 'POST'])
+@communities.route('/communities/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
-def events(page, search):
+def events(status, page, search):
 
-	events = event_views.community_events([current_user.info_id,search, page])
+	if status=='scheduled':
+		value='S'
+	elif status=='new':
+		value='N'
+	elif status=='finished':
+		value='F'
+	else:
+		value=status
+
+	events = event_views.community_events([status, search, page, current_user.info_id])
 
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('communities.events', page='1', search=form.search.data))
+		return redirect(url_for('communities.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/communities/events/index.html', title="Events | Communities", form=form, events=events, search=search)
+	return render_template('/communities/events/index.html', title="Events | Communities", form=form, events=events, status=status, search=search)
 
 @communities.route('/communities/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -116,7 +125,7 @@ def linkage_show(id):
 
 	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Communities", linkage=linkage)
 
-@communities.route('/communities/members/filter_<search>', methods=['GET', 'POST'])
+@communities.route('/communities/members/search_<search>', methods=['GET', 'POST'])
 @login_required
 def members(search):
 

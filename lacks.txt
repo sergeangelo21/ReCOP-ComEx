@@ -16,11 +16,11 @@ event resched and cancel on modal
 Dashboard
 LINKAGES MENU
 Reports(All finished events/proposals nakatab)
-Search events
+Search events (DONE)
 Volunteers(serge)
 
 Communities
-event tabs(all|scheduled|finished)
+event tabs(all|scheduled|finished) (DONE 03-06 c/o Alex)
 Dashboard
 linkages (query only)
 communities menu

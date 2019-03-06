@@ -34,7 +34,7 @@ def index():
 
 	return render_template('/linkages/index.html', active='home')
 
-@linkages.route('/linkages/events/<status>/filter_<search>.page_<page>', methods=['GET', 'POST'])
+@linkages.route('/linkages/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def events(status, search, page):
 
@@ -55,19 +55,7 @@ def events(status, search, page):
 
 	events = event_views.show_list([value, search, page])
 	letters = event_attachment.letter_attached()
-
-	page_nos=[]
-	no=1
-
-	if events.pages==1:
-
-		pages_nos=None
 	
-	else:
-
-		while no <= events.pages:		
-			no+=1
-
 	form = AttachLetterForm()
 
 	if form.validate_on_submit():
@@ -283,7 +271,7 @@ def event_stream(id):
 
 	return render_template('linkages/events/stream.html', id=id)
 
-@linkages.route('/linkages/communities/filter_<search>.page_<page>', methods=['GET', 'POST'])
+@linkages.route('/linkages/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def communities(page, search):
 
