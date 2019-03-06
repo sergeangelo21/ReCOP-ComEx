@@ -76,6 +76,14 @@
   .button.search{
     font-family: monospace;
   }
+
+  .fas.fa-times-circle.x{
+    background-color: transparent;
+  }
+
+  .fas.fa-times-circle.x:hover{
+    color: white;
+  }
 /*  ------BUTTONS END------  */
 
 
@@ -96,6 +104,7 @@
   .search-highlight:hover, .fa-times-circle:hover{
     color: #ffb901;
   }
+
 
 /* ------SEARCH RESULT END------  */
 

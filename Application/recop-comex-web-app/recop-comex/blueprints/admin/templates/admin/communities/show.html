@@ -286,37 +286,39 @@
 						    	Members
 						    </p>
 					  	</header>
-					  	<div class="card-content profile">
-							<table class="table is-striped is-hoverable is-fullwidth">
-								{% if members %}
-								<thead>
-									<tr>
-									    <th class="newlist">Name</th>
-									    <th class="newlist">Address</th>
-									    <th class="newlist">Employed?</th>
-									    <th class="newlist">Status</th>
-									 </tr>
-									
-								</thead>
+					  	<div class="card-content profile"> 
+					  		<div class="table-responsive">
+								<table class="table is-striped is-hoverable is-fullwidth">
+									{% if members %}
+									<thead>
+										<tr>
+										    <th class="newlist">Name</th>
+										    <th class="newlist">Address</th>
+										    <th class="newlist">Occupation</th>
+										    <th class="newlist">Status</th>
+										 </tr>
+										
+									</thead>
 
-									{% for member in members %}
-										{% if member.member %}
-											{% include 'admin/communities/_members.html' %}
-										{% endif %}
-									{% endfor %}
+										{% for member in members %}
+											{% if member.member %}
+												{% include 'admin/communities/_members.html' %}
+											{% endif %}
+										{% endfor %}
 
-								{% else %}
+									{% else %}
 
-								<tbody>
+									<tbody>
 
-									<tr class = "table-row">
-										<td class = "has-text-centered">---Nothing to show---</td>
-								 	</tr>
-									
-								</tbody>
+										<tr class = "table-row">
+											<td class = "has-text-centered">---Nothing to show---</td>
+									 	</tr>
+										
+									</tbody>
 
-								{% endif %}
-							</table>
+									{% endif %}
+								</table>
+							</div>
 						</div>
 					</div>
 			    </div>
