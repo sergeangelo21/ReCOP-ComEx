@@ -214,9 +214,16 @@
 	    			{% endif %}	
 	    			{% if event.status=='S' %}
 	    			<div class="columns">
+	    				{% if event.event_date.strftime('%B-%e-%Y')==now.strftime('%B-%e-%Y') %}
+	    				<div class="column">
+	    					<a href="{{url_for('linkages.event_conduct', id=event.id)}}" class="level-item">
+			  					<button class="button is-warning"><span class="icon is-small"><i class="fas fa-exclamation"></i></span>&nbsp Conduct</button>
+							</a>
+	    				</div>
+	    				{% endif %}
 	    				<div class="column">
 	    					<a href="" class="level-item">
-			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Reschedule</button>
+			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-clock"></i></span>&nbsp Reschedule</button>
 							</a>
 	    				</div>
 	    				<div class="column">
@@ -226,6 +233,7 @@
 	    				</div>
 	    			</div>
 	    			{% endif %}
+
     		</footer>
 	  		</div>
 	</div>

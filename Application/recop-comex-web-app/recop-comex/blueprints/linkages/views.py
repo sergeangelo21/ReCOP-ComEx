@@ -92,7 +92,7 @@ def events(status, search, page):
 
 		return redirect(url_for('linkages.events', status=status, page='1', search=form_search.search.data))
 
-	return render_template('/linkages/events/index.html', title="Events", form_search=form_search, form=form, events=events, status=status, letters=letters, page_nos=page_nos, search=search, active='events')
+	return render_template('/linkages/events/index.html', title="Events", form_search=form_search, form=form, events=events, status=status, letters=letters, now=datetime.now(), search=search, active='events')
 
 @linkages.route('/linkages/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -111,6 +111,14 @@ def event_show(id):
 
 	return render_template('/linkages/events/show.html', title= event.name.title() + " | Linkages", event = event, participants=participants, active='events')
 
+@linkages.route('/linkages/events/conduct/id=<id>')
+@login_required
+def event_conduct(id):
+
+	event = event_views.show_info(id)
+	participants = event_views.show_participants(id)
+
+	return render_template('/linkages/events/conduct.html', title= event.name.title() + " | Linkages",event=event, active='events')
 @linkages.route('/linkages/events/create', methods=['GET', 'POST'])
 @login_required
 def events_create():

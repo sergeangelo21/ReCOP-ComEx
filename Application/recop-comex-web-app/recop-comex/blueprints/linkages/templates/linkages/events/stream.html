@@ -1,0 +1,31 @@
+{% extends "linkages-base.html" %}
+
+{% block content %}
+
+	<video id='video_{{id}}' width='400' height='300' autoplay controls=true style="border:1px black"></video>
+
+	<script>
+
+		var video = document.getElementById('video_{{id}}'),
+		vendorURL = window.URL || window.webkitURL;
+
+		navigator.getMedia = navigator.getUserMedia || 
+							navigator.webkitGetUserMedia ||
+							navigator.mozGetUserMedia ||
+							navigator.msGetUserMedia;
+
+		navigator.getMedia({
+
+			video:true,
+			audio:true
+
+		}, function(stream){
+			video.srcObject=(stream);
+			video.play();
+		}, function(error){
+			alert('error')
+		});
+
+	</script>
+
+{% endblock %}

@@ -176,3 +176,45 @@ function prev_next(sender){
 
     document.getElementById('calendar').appendChild(calendar)
 }
+
+function conduct_choose(value){
+
+    attendance=document.getElementById('attendance')
+    eval_rating=document.getElementById('eval_rating')
+    photos=document.getElementById('photos')
+    control=document.getElementById('controls')
+
+    if (value=='attendance'){
+
+        attendance.className='hero is-fullheight'
+        eval_rating.className='hidden'
+        photos.className='hidden'
+        control.className='hidden'
+
+    }
+    else if(value=='eval_rating'){
+        
+        attendance.className='hidden'
+        eval_rating.className='hero is-fullheight'
+        photos.className='hidden'
+        control.className='hidden'
+
+    }
+    else if(value=='photos'){
+        
+        attendance.className='hidden'
+        eval_rating.className='hidden'
+        photos.className='hero is-fullheight'
+        control.className='hidden'
+
+    }
+    else{
+
+        attendance.className='hidden'
+        eval_rating.className='hidden'
+        photos.className='hidden'
+        control.className='container padding'
+
+    }
+
+}
