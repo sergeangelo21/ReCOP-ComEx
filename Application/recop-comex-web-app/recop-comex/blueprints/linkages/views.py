@@ -168,6 +168,7 @@ def event_evaluation(id, search):
 
 	if evaluate.validate_on_submit():
 
+		print(evaluate.participant.data)
 		event_participation.evaluate([event.id, evaluate.participant.data, evaluate.rating.data, evaluate.comment.data])
 		
 		flash('Rating successfully submitted!', 'success')
@@ -266,6 +267,12 @@ def event_letter(id, name):
 	generate_pdf(html, filepath + str(id) + '.pdf')
 
 	return send_from_directory(filepath, str(id) +'.pdf')
+
+@linkages.route('/linkages/events/stream/<id>')
+@login_required
+def event_stream(id):
+
+	return render_template('linkages/events/stream.html', id=id)
 
 @linkages.route('/linkages/communities/filter_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required

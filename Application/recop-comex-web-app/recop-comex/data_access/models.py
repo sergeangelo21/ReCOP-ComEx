@@ -327,6 +327,44 @@ class inventory(db.Model):
 
 		return record
 
+	def get_info(value):
+
+		record = inventory.query.filter(inventory.id==value[0]).first()
+
+		return record
+
+	def get_recop(value):
+
+		record = inventory.query.filter(and_(inventory.type_id==value, inventory.donation_id==None)).first()
+
+		return record
+
+	def update_recop(value):
+
+		record = inventory.query.filter(inventory.id==value[0]).first()
+
+		record.in_stock=value[1]
+
+		db.session.commit()
+
+	def give(value):
+
+		record = inventory.query.filter(inventory.id==value[0]).first()
+
+		record.given = value[1]
+		record.in_stock = value[2]
+
+		db.session.commit()
+
+	def dispose(value):
+
+		record = inventory.query.filter(inventory.id==value[0]).first()
+
+		record.expired= value[1]
+		record.in_stock= value[2]
+
+		db.session.commit()
+		
 class inventory_type(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)

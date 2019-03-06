@@ -18,7 +18,7 @@
 		    <ul class="card1-list">
 			    <li class="card1">
 			        <a class="card1-image has-text-success" href="{{url_for('linkages.event_attendance', id=event.id, search=' ')}}">
-			            <span class="fas fa-user-check fa-10x color" aria-hidden="true"></span>
+			            <span class="fas fa-users fa-10x color" aria-hidden="true"></span>
 			        </a>
 			        <a class="card1-description notification gold" href="{{url_for('linkages.event_attendance', id=event.id, search=' ')}}">
 			            <h2 class="title is-5">Attendance</h2>
@@ -28,19 +28,19 @@
 
 			    <li class="card1">
 			        <a class="card1-image has-text-success" href="{{url_for('linkages.event_evaluation', id=event.id, search=' ')}}">
-			            <span class="fas fa-user-tag fa-10x color" aria-hidden="true"></span>
+			            <span class="fas fa-poll fa-10x color" aria-hidden="true"></span>
 			        </a>
 			        <a class="card1-description notification gold" href="{{url_for('linkages.event_evaluation', id=event.id, search=' ')}}">
-			            <h2 class="title is-5">Evaluation and Ratings</h2>         
+			            <h2 class="title is-5">Evaluation & Ratings</h2>         
 			        </a>
 			    </li>
 
 			    <li class="card1">
-			        <a class="card1-image has-text-success" onclick="conduct_choose('photos')">
-			            <span class="fas fa-images fa-10x color" aria-hidden="true"></span>
+			        <a class="card1-image has-text-success" href="{{url_for('linkages.event_stream', id=event.id)}}">
+			            <span class="fas fa-video fa-10x color" aria-hidden="true"></span>
 			        </a>
-			        <a class="card1-description notification gold" onclick="conduct_choose('photos')">
-			            <h2 class="title is-5">Photos</h2>
+			        <a class="card1-description notification gold" href="{{url_for('linkages.event_stream', id=event.id)}}">
+			            <h2 class="title is-5">Livestream</h2>
 			        </a>
 			    </li>  
 			</ul>

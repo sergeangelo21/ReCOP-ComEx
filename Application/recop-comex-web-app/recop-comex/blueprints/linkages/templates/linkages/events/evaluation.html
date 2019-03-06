@@ -85,53 +85,54 @@
 			</div>
 		</div>
 	</section>
-
-{% for participant in participants %}
-	<div id={{participant.id}}_modal class="modal">
+	<div id=modal class="modal">
   		<div class="modal-background"></div>
   			<div class="modal-card">
     			<header class="modal-card-head">
       				<p class="modal-card-title  has-text-white"> Evaluate and Rate</p>
-      				<button class="delete" onclick="close_eval('{{participant.id}}')"></button>
+      				{% for participant in participants %}
+      				<button class="hidden" id={{participant.id}}_btn onclick="close_eval('{{participant.id}}')"></button>
+      				{% endfor %}
     			</header>
 	    		<section class="modal-card-body">
-
-	    			Event Name: <label class="label">{{event.name}} </label>
-			    	Participant: <label class="label">{{participant.name}}</label>
-			   		Address: <label class="label">{{participant.address}}</label><br>  	
-
 		    	<form action='' method='POST'>
 
-		    		{{evaluate.hidden_tag()}}
+		    	{{evaluate.hidden_tag()}}
+	    		{% for participant in participants %}
+	    			<div class='hidden' id={{participant.id}}_div>
+	    				Event Name: <label class="label">{{event.name}} </label>
+			    		Participant: <label class="label">{{participant.name}}</label>
+			   			Address: <label class="label">{{participant.address}}</label><br>	
+			   		</div>
+			   	{% endfor %}
 
 		    		<div class='field'>
-		    			<label class='label'>{{evaluate.rating.label}}:</label>
-		    			<div class="rate">
+		    			{{evaluate.rating.label(class='label')}}
+		    			<div class="control rate">
 		    			{% for star in evaluate.rating %}
 		    				{{star}}
-		    				{{star.label(onmouseover='stars([this.htmlFor,'+ participant.id|string + '])')}}
+		    				{{star.label(class='fas fa-star fa-3x', onmouseover='scale(this.htmlFor)')}}
 		    			{% endfor %}
-		    			</div><br>
-		    			<label class='label' id='{{participant.id}}_stars'>&nbsp;No rating (0)</label>
+		    			</div>&nbsp;
+		    			<span class='tag is-warning is-large' id='scale'>No rating yet</span>
 		    		</div>
 		    		<div class='field'>
 		    			<div class="control">
-		    			{{evaluate.participant(hidden='True', value=participant.id)}}
+		    			{{evaluate.participant(hidden='True')}} 
+		    			{{evaluate.comment.label(class='label')}}
 		    			{{evaluate.comment(class='textarea', placeholder='Enter comment here')}}
 		    			</div>
 		    		</div>
 
 
 	      		</section>
-    	
+
 	    		<footer class="modal-card-foot buttons is-right">
 	    			{{evaluate.submit(class_='button add')}}
 	    		</footer>
 		    	</form>
 	  		</div>
 	</div>
-
-{% endfor %}
 
 {% for participant in participants %}
 	{% if participant.rating %}
@@ -149,14 +150,26 @@
 			   		Address: <label class="label">{{participant.address}}</label><br>  	
 
 		    		<div class='field'>
-		    			<label class='label'>Rating:</label>
+		    			{{evaluate.rating.label(class='label')}}
 		    			<div class="control">
-							<span class="fas fa-star {% if participant.rating>=1 %}checked{% endif %}"></span>
-							<span class="fas fa-star {% if participant.rating>=2 %}checked{% endif %}" ></span>
-							<span class="fas fa-star {% if participant.rating>=3 %}checked{% endif %}"></span>
-							<span class="fas fa-star {% if participant.rating>=4 %}checked{% endif %}"></span>
-							<span class="fas fa-star {% if participant.rating>=5 %}checked{% endif %}"></span>
-							<span>{{participant.rating}}</span>
+							<span class="fas fa-star fa-3x {% if participant.rating>=1 %}checked{% endif %}"></span>
+							<span class="fas fa-star fa-3x {% if participant.rating>=2 %}checked{% endif %}" ></span>
+							<span class="fas fa-star fa-3x {% if participant.rating>=3 %}checked{% endif %}"></span>
+							<span class="fas fa-star fa-3x {% if participant.rating>=4 %}checked{% endif %}"></span>
+							<span class="fas fa-star fa-3x {% if participant.rating>=5 %}checked{% endif %}"></span>
+							<span class='tag is-warning is-large'>
+							{% if participant.rating==1 %}
+								Very Poor
+							{% elif participant.rating==2 %}
+								Poor
+							{% elif participant.rating==3 %}
+								Fair
+							{% elif participant.rating==4 %}
+								Very Good
+							{% else %}
+								Excellent
+							{% endif %}
+							({{participant.rating}})</span>
 		    			</div>
 		    		</div>
 		    		{% if participant.comment %}
@@ -169,7 +182,7 @@
 		    		{% endif %}
 
 	      		</section>
-    	
+
 	    		<footer class="modal-card-foot buttons is-right">
 	    		</footer>
 	  		</div>

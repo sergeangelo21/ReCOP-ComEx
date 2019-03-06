@@ -6,7 +6,7 @@
 		<td>{{ '%0.2f'| format(((item.total-item.donations) / item.total) * 100) | float }} %</td>
 		<td>{{ '%0.2f'| format((item.donations / item.total) * 100) | float }} %</td>
 		<td>									   	
-			<a class="button is-warning" onclick="show_item('{{item.type_id}}')">
+			<a class="button is-success" onclick="show_item('{{item.type_id}}')">
 				<i class="fas fa-box-open"></i>
 				&nbsp;
 				Item Breakdown
