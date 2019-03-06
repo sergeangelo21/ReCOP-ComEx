@@ -62,7 +62,7 @@
 
 
 /*  ------BUTTONS------		*/
-	.button.submit, .button.send, .button.search, .button.add{
+	.button.submit, .button.send, .button.search, .button.add, .btn-follow:hover{
 		background-color: #072000; 
 		color: #ffb901;
 		border-color: #072000;
@@ -378,9 +378,6 @@
     margin-top: -160px;
   }
 
-	.fa-arrow-circle-left{
-		color: #072000; 
-	}
 /*  ------LINKAGES PROPOSAL & ADD MEMBERS END ------  */
 
 
