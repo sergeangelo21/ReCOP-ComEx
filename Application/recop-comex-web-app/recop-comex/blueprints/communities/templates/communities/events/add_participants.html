@@ -4,7 +4,7 @@
 
 			<div class="notification gold">
 				<div class="columns is-left">
-					<div class="column is-3">
+					<div class="column view-icons">
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('communities.events', page='1', search=' ')}}" ><i class="fas fa-arrow-alt-circle-left"> </i>&nbsp Back</a>
@@ -15,18 +15,16 @@
 						  	</figure>
 						</article>
 					</div>
-					<div class="column is-right">
-						<div class="field is-horizontal is-pulled-right has-addons has-addons-centered">
-							<form action="" method="POST">
+					<div class="column search-box">
+						<div class="field is-pulled-right has-addons has-addons-centered">
+							<div class="control">
+								<form action="" method="POST">
 								{{form.hidden_tag()}}
-							<div class="field-body">
-								<p class="control">
 							    	{{form.search(class_='input', placeholder='Search')}}
-								</p>
-								<p class="control">
-							     	{{form.submit(class_='button search')}}
-								</p>
 							</div>
+							<p class="control">
+						     	{{form.submit(class_='button search')}}
+							</p>
 							</form>
 						</div>
 					</div>
@@ -39,6 +37,7 @@
 					<div class="card list">
 						<div class="card-header">
 							<p class="card-header-title">
+							<span class="fas fa-poll-h"></span>&nbsp;
 							Qualified Members
 							</p>
 							<div class="is-pulled-right">
@@ -48,13 +47,13 @@
 							</div>
 						</div>
 						<div class="card-content">
-							<div class="table">
-								<table class="table is-striped is-fullwidth">
+							<div class="table-responsive">
+								<table class="table is-striped is-fullwidth is-hoverable">
 								{% if participants %}
 								<thead>
 									<tr>
 									    <th class="newlist">Name</th>
-									    <th class="newlist">Birthday</th>
+									    <th class="newlist">Address</th>
 									    <th class="newlist">Occupation</th>
 									    <th class="newlist">Religion</th>
 									    <th class="newlist hidedesktop">Actions</th>
