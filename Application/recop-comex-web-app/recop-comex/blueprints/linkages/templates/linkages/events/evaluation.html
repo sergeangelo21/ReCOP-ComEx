@@ -109,10 +109,10 @@
 		    			<div class="rate">
 		    			{% for star in evaluate.rating %}
 		    				{{star}}
-		    				{{star.label(onmouseover='scale(this.htmlFor)')}}
+		    				{{star.label(onmouseover='stars([this.htmlFor,'+ participant.id|string + '])')}}
 		    			{% endfor %}
 		    			</div><br>
-		    			<label class='label' id='scale'>&nbsp;No rating (0)</label>
+		    			<label class='label' id='{{participant.id}}_stars'>&nbsp;No rating (0)</label>
 		    		</div>
 		    		<div class='field'>
 		    			<div class="control">

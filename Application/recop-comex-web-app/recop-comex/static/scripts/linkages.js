@@ -123,19 +123,19 @@ function close_rating(value){
 
 }
 
-function scale(value){
+function stars(value){
 
-    lbl = document.getElementById('scale')
-    if (value=='rating-0'){
+    lbl = document.getElementById(value[1]+'_stars')
+    if (value[0]=='rating-0'){
         lbl.innerHTML='Excellent (5)'
     }
-    else if (value=='rating-1'){
+    else if (value[0]=='rating-1'){
          lbl.innerHTML='Very Good (4)'       
     }
-    else if (value=='rating-2'){
+    else if (value[0]=='rating-2'){
          lbl.innerHTML='Fair (3)'       
     }
-    else if (value=='rating-3'){
+    else if (value[0]=='rating-3'){
          lbl.innerHTML='Poor (2)'       
     }
     else{
