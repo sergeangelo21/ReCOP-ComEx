@@ -1,3 +1,7 @@
+DONATION LAYOUT (Leen)
+For registered add previous donations views on the left side
+
+
 Unregistered
 communities tab
 events calendar
@@ -10,6 +14,7 @@ Event reports
 events organized/attended	
 feedbacks
 referrals remove tab
+feedbacks
 
 Linkages
 Dashboard
@@ -35,6 +40,7 @@ join event (DONE 03-06 c/o Alex pero diko pa mapagisa yung button)???
 General (Maybe kaartehan)
 
 Admin (activity logs)
+contact us
 Notifications 
 Help
 change dp
