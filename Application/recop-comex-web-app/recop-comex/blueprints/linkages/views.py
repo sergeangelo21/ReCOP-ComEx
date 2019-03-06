@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, send_from_directory
-from flask_login import current_user, login_required
+from flask_login import current_user, logout_user, login_required
 from blueprints.linkages.forms import *
 from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, donation, referral
 from data_access.queries import user_views, linkage_views, event_views
@@ -18,14 +18,12 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 def before_request():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
-
 		if current_user.type == 1:
 			return redirect(url_for('admin.index'))
 		elif current_user.type == 2:
 			return redirect(url_for('registered.index'))
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
-
 		user_account.logout()
 
 @linkages.route('/linkages/index')
@@ -519,3 +517,14 @@ def profile_settings_password():
 			flash('Wrong password.', 'error')
 
 	return render_template('/linkages/profile/settings/password.html', title="Linkages", form=form)
+
+@linkages.route('/logout/linkages')
+def logout():
+
+	user_account.logout()
+
+	logout_user()
+
+	flash('You are logged out.', 'success')
+
+	return redirect('/')

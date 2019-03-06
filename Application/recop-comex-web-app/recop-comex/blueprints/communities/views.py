@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import current_user, login_required
+from flask_login import current_user, logout_user, login_required
 from blueprints.communities.forms import *
 from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation, referral, event_attachment
 from data_access.queries import user_views, linkage_views, community_views, event_views
@@ -18,16 +18,14 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 def before_request():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
-
 		if current_user.type == 1:
 			return redirect(url_for('admin.index'))
 		elif current_user.type == 2:
 			return redirect(url_for('registered.index'))
 		elif current_user.type == 3:
 			return redirect(url_for('linkages.index'))
-
 		user_account.logout()
-
+		
 @communities.route('/communities')
 @login_required
 def index():
@@ -422,3 +420,15 @@ def profile_settings_password():
 			flash('Wrong password.', 'error')
 
 	return render_template('/communities/profile/settings/password.html', title="Communities", form=form)
+
+@communities.route('/logout/communities')
+@login_required
+def logout():
+
+	user_account.logout()
+
+	logout_user()
+
+	flash('You are logged out.', 'success')
+
+	return redirect('/')

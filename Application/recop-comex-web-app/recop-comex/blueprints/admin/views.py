@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, send_from_directory, request
-from flask_login import current_user, login_required
+from flask_login import current_user, logout_user, login_required
 from blueprints.admin.forms import *
 from data_access.models import *
 from data_access.queries import *
@@ -23,7 +23,6 @@ def before_request():
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
-
 		user_account.logout()
 
 @admin.route('/admin')
@@ -1049,3 +1048,15 @@ def profile_settings_password(user):
 			flash('Wrong password.', 'error')
 
 	return render_template('/admin/profile/settings/password.html', form=form)
+
+@admin.route('/logout/admin')
+@login_required
+def logout():
+
+	user_account.logout()
+
+	logout_user()
+
+	flash('You are logged out.', 'success')
+
+	return redirect('/')

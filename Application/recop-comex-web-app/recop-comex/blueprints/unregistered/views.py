@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
-from flask_login import login_user, logout_user, current_user, login_required
+from flask_login import login_user, current_user, login_required
 from blueprints.unregistered.forms import *
 from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment, donation
 from data_access.queries import user_views, event_views, linkage_views
@@ -13,6 +13,19 @@ import os, json, random, string
 unregistered = Blueprint('unregistered', __name__, template_folder="templates")
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+@unregistered.before_request
+def before_request():
+
+	if current_user.is_authenticated and not current_user.is_anonymous:
+		if current_user.type == 1:
+			return redirect(url_for('admin.index'))
+		elif current_user.type == 2:
+			return redirect(url_for('registered.index'))
+		elif current_user.type == 3:
+			return redirect(url_for('linkages.index'))
+		elif current_user.type == 4:
+			return redirect(url_for('communities.index'))
 
 @unregistered.route('/')
 def index():
@@ -208,17 +221,6 @@ def forgot_password():
 			flash('Email not existing.', 'error')
 
 	return render_template('/unregistered/login/forgot_password.html', form=form)
-
-@unregistered.route('/logout')
-def logout():
-
-	user_account.logout()
-
-	logout_user()
-
-	flash('You are logged out.', 'success')
-
-	return redirect('/')
 
 @unregistered.route('/linkages/<token>')
 def confirm_linkage(token):

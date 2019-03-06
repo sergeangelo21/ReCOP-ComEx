@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, render_template, url_for, redirect, flash
-from flask_login import current_user, login_required
+from flask_login import current_user, logout_user, login_required
 from blueprints.registered.forms import *
 from data_access.models import donation, user_account, user_information, event_information, event_participation, event_attachment, donation
 from data_access.queries import user_views, linkage_views, event_views
@@ -17,14 +17,12 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 def before_request():
 
 	if current_user.is_authenticated and not current_user.is_anonymous:
-
-		if current_user.type == 3:
+		if current_user.type == 1:
+			return redirect(url_for('admin.index'))
+		elif current_user.type == 3:
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
-		elif current_user.type == 1:
-			return redirect(url_for('admin.index'))
-
 		user_account.logout()
 
 @registered.route('/registered')
@@ -332,3 +330,14 @@ def profile_settings_password():
 			flash('Wrong password.', 'error')
 
 	return render_template('/registered/profile/settings/password.html', form=form)
+
+@registered.route('/logout/registered')
+def logout():
+
+	user_account.logout()
+
+	logout_user()
+
+	flash('You are logged out.', 'success')
+
+	return redirect('/')

@@ -22,9 +22,9 @@ Volunteers(serge)
 Communities
 event tabs(all|scheduled|finished) (DONE 03-06 c/o Alex)
 Dashboard
-linkages (query only)
+linkages (query only) (DONE)
 communities menu
-remove contact us report terms
+remove contact us report terms (DONE)
 members audit_trail(???)
 
 Registered
