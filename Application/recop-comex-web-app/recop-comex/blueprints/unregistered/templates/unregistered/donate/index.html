@@ -1,55 +1,57 @@
+
 {% extends "unregistered-base.html" %}
 
 {% block content %}
 
+
  <!--  -->
- <br>
+
 <div class="container margin-donate">
     <div class="columns is-centered padding-donation">
-        <div class="column">
-            <div class="level">
-                <div class="level-item">
-                    <figure class="image-donation">
-                        <img src="../../static/images/Logo.png">
-                    </figure>
-                </div>
+        <div class="column has-text-centered">
+          <div class="card has-text-left">
+            <div class="card notification gold-donate">
+              <h1 class="title is-4">Donation Details</h1>
+            </div>
+            
+              <div class="card-content">
+                <label class="label">Payment Information</label>
+                <p></p>
+
+              </div>
             </div>
         </div>
 
-        <div class="column is-7">
+        <div class="column is-8">
             <form action ="" method = "POST" enctype="multipart/form-data">
             {{form.hidden_tag()}}
                 <div class="card">
                     <div class="card-content">
-                        <h1 class="green-donate notification title is-4 has-text-centered">Bring Hope to the Community</h1>
-                           
                            <div class="columns is-centered">
-                                <div class="column is-10">
-                                    <div class="field is-horizontal">
-                                        <div class="field-label has-text-left notification is-light">
-                                        {{form.give_to.label(class_='label nowrap')}}
+                                <div class="column is-9">
+                                    <h1>Donate Now</h1>
+          <p class="subtitle fancy"><span>Help us build hope</span>
+                                    <div class="field">
+                                        <div class="label">
+                                        {{form.give_to.label(class_='label')}}
                                         </div>
-                                        <div class="field-body margin-top-donate">
-                                            <div class="field">
-                                                <div class="control has-icon has-icon-right">
-                                                      &nbsp;&nbsp;&nbsp;
-                                                {% for subfield in form.give_to %}
-                                                    <label class = "radio">
-                                                        {{subfield(onclick='donate_choose(this.value)')}}
-                                                        {{subfield.label}}
-                                                    </label>
-                                                {% endfor %}
-                                                </div>
-                                            </div>
+                                        
+                                        <div class="control has-icon has-icon-right">
+                                          &nbsp;&nbsp;&nbsp;
+                                          {% for subfield in form.give_to %}
+                                          <label class = "radio">
+                                            {{subfield(onclick='donate_choose(this.value)')}}
+                                            {{subfield.label}}
+                                          </label>
+                                            {% endfor %}
                                         </div>
                                     </div>
 
                         <div class="hidden" id='comm'>
-                                <div class="field-label has-text-left notification is-light">
+                                <div class="field width">
+                                  <label class="label">
                                 {{form.sponsee.label(class_='label')}}
-                                </div>
-                            <div class="field-body margin-top-donate">
-                                <div class="field">
+                                  </label>  
                                     <div class="control has-icon has-icon-right is-expanded">
                                         <div class="select is-fullwidth">
                                         {{form.sponsee(class_='input', placeholder='Amount')}}
@@ -58,26 +60,26 @@
                                         {% endfor %}
                                         </div>
                                     </div>
-                                </div>
-                            </div>
+                                  </div>
                             </div>
                        
                         
                         <div class="hidden" id='events'>
                             {% if no_event==0 %}
-                            <div class="field-label has-text-left notification is-light">
+                            <div class="field">
+                              <label class="label">
                                 {{form.event.label(class_='label')}}
-                            </div>
-                            <div class="field-body">
-                                <div class="field">
+                              </label> 
+                           
+
                                     <div class="control has-icon has-icon-right">
                                         {{form.event(class_='input')}}
                                         {% for error in form.event.errors %}
                                         <span style="color: red;">[{{ error }}]</span>
                                         {% endfor %}
                                     </div>
-                                </div>
-                            </div>
+                                
+                          </div>
                             {% else %}
                             <div class="field-body">
                                 <div class="field">
@@ -86,12 +88,10 @@
                             </div>
                             {% endif %}
                         </div>
-                        <div class="field is-horizontal">
-                            <div class="field-label has-text-left notification is-light">
-                                {{form.type.label(class_='label nowrap')}}
-                            </div>
-                            <div class="field-body margin-top-donate">
-                                <div class="field">
+                        <div class="field">
+                            <label class="label">
+                                {{form.type.label(class_='label')}}
+                            </label>
                                     <div class="control has-icon has-icon-right">
                                         {% for subfield in form.type %}
                                           &nbsp;&nbsp;&nbsp;
@@ -100,63 +100,56 @@
                                                 {{subfield.label}}
                                             </label>
                                             {% endfor %}
-                                    </div>
-                                </div>
-                            </div>
+                                    </div>  
                         </div>
+
                         <div class="hidden" id = "amount_div">
-                            <div class="field-label has-text-left notification is-light">
+                            <div class="field width">
+                              <label class="label">
                                 {{form.amount.label(class_='label')}}
-                            </div>
-                            <div class="field-body margin-top-donate">
-                                <div class="field">
+                              </label>
                                     <div class="control has-icon has-icon-left">
                                         {{form.amount(class_='input', placeholder='Amount')}}
                                         {% for error in form.amount.errors %}
 
                                        <span style="color: red;">[{{ error }}]</span>
                                                 {% endfor %}
-                                                &nbsp;&nbsp;&nbsp;
-                                                <span class="icon is-small is-left">
-                                                   <i class="fas fa-money-bill-alt"></i>
-                                                </span>
-
+                                        &nbsp;&nbsp;&nbsp;
+                                          <span class="icon is-small is-left">
+                                            <i class="fas fa-money-bill-alt"></i>
+                                          </span>
                                     </div>
-                                </div>
                             </div>
                         </div>
 
                         <div class="hidden" id = "trans_div">
-                            <div class="field-label  has-text-left notification is-light">
-                                {{form.trans_slip.label(class_='label nowrap')}}
-                            </div>
-                            <div class="field-body margin-top-donate">
-                                <div class="field">
+                            <div class="field width">
+                              <label class="label">
+                                {{form.trans_slip.label(class_='label')}}
+                              </label>
                                     <div class="control has-icon has-icon-right">
-                            {{form.trans_slip(class_='input', accept='.png, .jpg, .jpeg, .gif')}}
+                                        {{form.trans_slip(class_='input', accept='.png, .jpg, .jpeg, .gif')}}
                                         {% for error in form.trans_slip.errors %}
                                         <span style="color: red;">[{{ error }}]</span>
                                         {% endfor %}
 
                                     </div>
-                                </div>
                             </div>
                         </div>
-            
+            <br>
                 <div class="columns has-text-centered">
                     <div class="column">
-                            <p class="control has-text-centered">
-                                <strong class="has-text-grey">Note: Your donation will be sent as anonymous. If you want to be recognized, kindly click here.</strong>
+                            <p class="control has-text-centered has-text-grey title is-7">
+                                Note: Your donation will be sent as anonymous. If you want to be recognized, kindly <a href=#>click here</a>.</
                             </p>
                             <br>
                         <div class="field padding">
                             <p class="control">
-                                {{form.submit(class='button gold-donate padding-donation is-pulled-right title is-6')}}
+                                {{form.submit(class='button green-donate is-pulled-right title is-6')}}
                             </p>
                         </div>
-                        
                         <br>
-                        <br>
+                       
                     </div>
                 </div>
                     </div>
