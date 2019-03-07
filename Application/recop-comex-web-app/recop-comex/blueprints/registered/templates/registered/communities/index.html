@@ -1,0 +1,81 @@
+{% extends "registered-base.html" %}
+
+{% block content %}
+
+	<div class="notification gold">
+		<div class="columns is-centered">
+			<div class="column refer-center">
+				<a href="{{url_for('registered.referral_users')}}" class="button refer is-warning">
+	            	<span class="has-text-weight-bold">Do you know someone can help us?</span>
+	            </a>
+			</div>
+			<div class="column search-box">
+				<div class="field is-pulled-right has-addons has-addons-centered">
+					<div class="control">
+						<form action="" method="POST">
+						{{form.hidden_tag()}}
+				    		{{form.search(class_='input', placeholder='Search')}}
+					</div>
+					<p class="control">
+				     	{{form.submit(class_='button search')}}
+					</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  	<div class="card-header search-show">
+		<p class="card-header-title">
+			<span class="fas fa-poll-h"></span>&nbsp;
+			{% if search!=' ' %}
+			You searched for &nbsp;
+			<span class="search-highlight">
+				&nbsp;'{{search}}'
+				<a href="{{url_for('linkages.communities', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+			</span>
+			&nbsp; in
+			{% endif %}Communities
+		</p>
+		<div class="is-pulled-right">
+			<p class="card-header-title">
+				Total: {{communities.total}}
+			</p>
+		</div>
+	</div>
+	{% if communities.items %}
+    <div class="columns padding-el is-multiline">
+    	{% for community in communities.items %}
+        	{% include 'linkages/communities/_communities.html' %}
+    	{% endfor %}
+    </div>
+    {% else %}
+		<table class="table is-fullwidth">
+			<thead></thead>
+		<tbody>
+
+			<tr class = "table-row">
+				<td class="has-text-centered">
+					<div class='field has-text-centered'>
+						<span class='tag is-warning is-large'>No results found</span>
+					</div>
+				</td>
+		 	</tr>
+			
+		</tbody>
+	</table>
+	{% endif %}
+
+	{% if communities.pages>1 %}
+        <div class="card-content">
+	<nav class="pagination" role="navigation" aria-label="pagination">
+		<a class="pagination-previous"  {% if communities.has_prev %}  href="{{url_for('linkages.communities', search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+		<a class="pagination-next" {% if communities.has_next %} href="{{url_for('linkages.communities', search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+		<ul class="pagination-list">
+			Page {{communities.page}} of {{communities.pages}}
+		</ul>
+	</nav>
+</div>
+	{% endif %}
+	
+{% endblock %}

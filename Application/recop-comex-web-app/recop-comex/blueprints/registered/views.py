@@ -96,6 +96,20 @@ def linkages(page, search):
 
 	return render_template('/registered/linkages/index.html', linkages=linkages, active='linkages', page=page, search=search)
 
+@registered.route('/registered/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
+@login_required
+def communities(page, search):
+
+	communities = linkage_views.show_list(['all',search,4, page])
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('registered.communities', page='1', search=form.search.data))
+
+	return render_template('/registered/communities/index.html', form=form, communities=communities, search=search, active='communities')
+
 @registered.route('/registered/donate', methods=['GET', 'POST'])
 @login_required
 def donate():

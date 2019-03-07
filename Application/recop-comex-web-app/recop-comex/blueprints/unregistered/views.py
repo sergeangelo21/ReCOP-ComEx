@@ -43,7 +43,7 @@ def events(page, search):
 def linkages(page, search):
 
 	linkages = linkage_views.show_list(['A', search, 3, page])
-
+	
 	return render_template('/unregistered/linkages/index.html', linkages=linkages, active='linkages')
 	
 @unregistered.route('/donate', methods=['GET', 'POST'])

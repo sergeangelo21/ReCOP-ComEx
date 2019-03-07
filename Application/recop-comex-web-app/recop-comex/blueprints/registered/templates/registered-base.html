@@ -47,11 +47,11 @@
                     <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('registered.linkages', page='1', search= ' ')}}">
                         <strong>Linkages</strong>
                     </a>
+                    <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="{{url_for('registered.communities', page='1', search= ' ')}}">
+                        <strong>Communities</strong>
+                    </a>
                     <a class="navbar-item {% if active=='donate' %}is-active{% endif %}" href="{{url_for('registered.donate')}}">
                         <strong>Donate</strong>
-                    </a>
-                    <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="">
-                        <strong>Communities</strong>
                     </a>
                 </div>
 

@@ -34,7 +34,6 @@ members audit_trail(???)
 
 Registered
 Dashboard
-communities query
 join event (DONE 03-06 c/o Alex pero diko pa mapagisa yung button)???
 
 General (Maybe kaartehan)
