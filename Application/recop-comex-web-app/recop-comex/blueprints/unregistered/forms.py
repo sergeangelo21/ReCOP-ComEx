@@ -37,7 +37,6 @@ class ForgotPasswordForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class DonationForm(FlaskForm):
-
     give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
     sponsee = SelectField('Communities', choices=[('','ReCOP')])
     event = SelectField('Events', choices=[('', 'Please Choose One')])
@@ -45,3 +44,9 @@ class DonationForm(FlaskForm):
     amount = StringField('Amount', validators=[DataRequired()])
     trans_slip   = FileField('Deposit Slip', validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     submit = SubmitField('Donate')
+
+class ReferralForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email Address', validators=[DataRequired()])
+    type = SelectField('Type', choices=[('', 'Please Choose One'), ('1', 'Volunteer'), ('2', 'Linkage'), ('3', 'Community')])
+    submit = SubmitField('Submit')

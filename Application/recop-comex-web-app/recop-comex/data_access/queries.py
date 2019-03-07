@@ -422,6 +422,88 @@ class event_views():
 
 		return record
 
+	def religious_admin_events(value):
+
+		if value[0]=='all' and value[1]==' ':
+			record = event_information.query.join(
+				user_information
+				).add_columns(
+				event_information.id,
+				event_information.organizer_id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.budget,
+				event_information.location,
+				event_information.event_date,
+				event_information.thrust,
+				event_information.event_status,
+				user_information.company_name
+				).filter(or_(event_information.event_status=='S', event_information.event_status=='F')
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)
+		
+		elif value[0]=='all' and value[1]!=' ':
+			record = event_information.query.join(
+				user_information
+				).add_columns(
+				event_information.id,
+				event_information.organizer_id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.budget,
+				event_information.location,
+				event_information.event_date,
+				event_information.thrust,
+				event_information.event_status,
+				user_information.company_name
+				).filter(or_(event_information.event_status=='S', event_information.event_status=='F'),
+				or_(user_information.company_name.like('%'+value[1]+'%'),
+				event_information.name.like('%'+value[1]+'%'))
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)	
+
+		elif value[1]!=' ':
+			record = event_information.query.join(
+				user_information
+				).add_columns(
+				event_information.id,
+				event_information.organizer_id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.budget,
+				event_information.location,
+				event_information.event_date,
+				event_information.thrust,
+				event_information.event_status,
+				user_information.company_name
+				).filter(event_information.event_status==value[0],
+				or_(user_information.company_name.like('%'+value[1]+'%'),
+				event_information.name.like('%'+value[1]+'%'))
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)	
+
+		else:
+			record = event_information.query.join(
+				user_information
+				).add_columns(
+				event_information.id,
+				event_information.organizer_id,
+				event_information.name,
+				event_information.description,
+				event_information.objective,
+				event_information.budget,
+				event_information.location,
+				event_information.event_date,
+				event_information.thrust,
+				event_information.event_status,
+				user_information.company_name
+				).filter(event_information.event_status==value[0],or_(
+				user_information.company_name.like('%'+value[1]+'%'),
+				event_information.name.like('%'+value[1]+'%'))
+				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)	
+
+		return record
+
 	def community_events(value):
 
 		if value[0]=='all' and value[1]==' ':

@@ -5,6 +5,7 @@ from blueprints.admin import admin
 from blueprints.linkages import linkages
 from blueprints.communities import communities
 from blueprints.registered import registered
+from blueprints.religious_admin import religious_admin
 from blueprints.unregistered import unregistered
 
 from extensions import login, db, bcrypt, mail
@@ -18,6 +19,7 @@ def create_app():
 	app.register_blueprint(linkages)
 	app.register_blueprint(communities)
 	app.register_blueprint(registered)
+	app.register_blueprint(religious_admin)
 	app.register_blueprint(unregistered)
 
 	extensions(app)

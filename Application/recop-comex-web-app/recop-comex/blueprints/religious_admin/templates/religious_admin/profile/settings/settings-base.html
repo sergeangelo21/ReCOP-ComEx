@@ -1,0 +1,38 @@
+
+<div class="columns">
+	<div class="column is-2">
+		<div class="padding">
+			<aside class="menu">
+				<p class="menu-label">
+					<span class="icon">
+						<i class="fas fa-cogs"></i>
+					</span>
+					General
+				</p>
+				<ul class="menu-list">
+					<li>
+						<ul>
+							<li><a href="{{url_for('religious_admin.profile_settings_personal', user=current_user.username)}}">Personal</a></li>
+							<li><a href="{{url_for('religious_admin.profile_settings_contact', user=current_user.username)}}">Contact</a></li>
+						</ul>
+					</li>
+				</ul>
+
+				<p class="menu-label">
+					<span class="icon">
+						<i class="fas fa-lock"></i>
+					</span>
+					Security
+				</p>
+				<ul class="menu-list">
+					<li>
+						<ul>
+							<li><a href="{{url_for('religious_admin.profile_settings_username', user=current_user.username)}}">Username</a></li>
+							<li><a href="{{url_for('religious_admin.profile_settings_password', user=current_user.username)}}">Password</a></li>
+						</ul>
+					</li>
+				</ul>
+
+			</aside>
+		</div>
+	</div>

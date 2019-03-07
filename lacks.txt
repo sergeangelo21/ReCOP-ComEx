@@ -48,6 +48,8 @@ graphs(alex)
 pdf and email templates
 real data in home
 
+Religious Admin
+contact us
 
 Serge: Create Celery Instance for email and pdf generation
        Change pdf plugin to xhtmltopdf

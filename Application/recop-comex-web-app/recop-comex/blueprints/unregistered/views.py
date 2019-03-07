@@ -26,6 +26,8 @@ def before_request():
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
+		elif current_user.type == 5:
+			return redirect(url_for('religious_admin.index'))
 
 @unregistered.route('/')
 def index():
@@ -75,7 +77,7 @@ def linkages(page, search):
 @unregistered.route('/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
 def communities(page, search):
 
-	communities = linkage_views.show_list(['all',search,4, page])
+	communities = linkage_views.show_list(['A', search, 4, page])
 
 	form = SearchForm()
 
@@ -139,6 +141,27 @@ def donate():
 
 	return render_template('/unregistered/donate/index.html', form=form, no_event=no_event, active='donate')
 
+@unregistered.route('/unregistered/referral', methods=['GET', 'POST'])
+def referral_users():
+
+	form = ReferralForm()
+
+	if form.validate_on_submit():
+
+		html = 'asdlkfjasfd'
+		subject = 'REFFERAL: '
+		admin = user_account.query.by(id=1).first()
+
+		email_parts = [html, subject, admin.email_address, form.email.data, None]
+		send_email(email_parts)
+
+		value = [None, admin.info_id, form.name.data, form.email.data, form.type.data, 'N']
+
+		referral.add(value)
+
+		flash('Referral has been sent!', 'success')
+		return redirect(url_for('uregistered.referral_users'))
+
 @unregistered.route('/contactus')
 def contactus():
 
@@ -191,7 +214,7 @@ def login():
         
 		user = user_account.login([form.username.data, form.password.data])
 
-		if user is None or user.type==5:
+		if user is None:
 			flash('Invalid username or password', 'error')
 			return redirect(url_for('unregistered.login'))
 
@@ -217,14 +240,16 @@ def login():
 			
 		flash('Welcome ' + name + '!', 'success')
 
-		if current_user.type == 2:
+		if current_user.type == 1:
+			return redirect(url_for('admin.index'))	
+		elif current_user.type == 2:
 			return redirect(url_for('registered.index'))
 		elif current_user.type == 3:
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
-		elif current_user.type == 1:
-			return redirect(url_for('admin.index'))	
+		elif current_user.type == 5:
+			return redirect(url_for('religious_admin.index'))	
 	
 	return render_template('/unregistered/login/index.html', form=form)
 

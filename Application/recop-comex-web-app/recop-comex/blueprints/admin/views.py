@@ -24,6 +24,8 @@ def before_request():
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
+		elif current_user.type == 5:
+			return redirect(url_for('religious_admin.index'))
 		user_account.logout()
 
 @admin.route('/admin')

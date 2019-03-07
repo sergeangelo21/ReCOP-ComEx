@@ -1,0 +1,1 @@
+from blueprints.religious_admin.views import religious_admin

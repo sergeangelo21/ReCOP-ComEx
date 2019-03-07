@@ -24,6 +24,8 @@ def before_request():
 			return redirect(url_for('registered.index'))
 		elif current_user.type == 3:
 			return redirect(url_for('linkages.index'))
+		elif current_user.type == 5:
+			return redirect(url_for('religious_admin.index'))
 		user_account.logout()
 		
 @communities.route('/communities')
@@ -119,7 +121,7 @@ def linkages(page, search):
 @login_required
 def communities_show(page, search):
 
-	communities = linkage_views.show_list(['all',search,4, page])
+	communities = linkage_views.show_list(['A',search, 4, page])
 
 	form = SearchForm()
 

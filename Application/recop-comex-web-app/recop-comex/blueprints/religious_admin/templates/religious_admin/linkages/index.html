@@ -1,0 +1,126 @@
+{% extends "religious_admin-base.html" %}
+
+{% block content %}
+	<div class="notification gold">
+		<div class="columns is-centered">
+			<div class="column search-box">
+				<div class="field is-pulled-right has-addons has-addons-centered">
+					<div class="field is-pulled-right has-addons has-addons-centered">
+						<div class="control">
+							<form action="" method="POST">
+							{{form.hidden_tag()}}
+					    		{{form.search(class_='input', placeholder='Search')}}
+						</div>
+						<p class="control">
+					     	{{form.submit(class_='button search')}}
+						</p>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="columns">
+		<div class="column is-2">
+			<div class="filter-btn is-size-5" onclick="filtershrink()">
+				<i class="fas fa-filter"></i>&nbspFilter
+			</div>
+    		<div class="notification filter" id="filterDIV">
+    			<div class="columns">
+	                <div class="column">
+	                	<p class="title is-size-5">Thrust</p>
+	                  	<div class="field">
+		                <div class="control">
+		                  <div class="select is-warning">
+		                    <select class="filter-dropdown">
+		                        <option>All</option>
+		                        <option>Educational</option>
+		                        <option>Environmental</option>
+		                        <option>Health</option>
+		                        <option>Livelihood</option>
+		                        <option>Socio-Political</option>
+		                        <option>Spiritual</option>
+		                      </select>
+		                    </div>
+		                  </div>
+		                </div>
+		                
+		                <p class="title is-size-5">Type</p>
+
+		                <div class="field">
+		                  <div class="control">
+		                    <div class="select is-warning">
+		                      <select class="filter-dropdown">
+		                          <option>All</option>
+		                          <option>Institutional</option>
+		                          <option>Outside</option>
+		                      </select>
+		                    </div>
+		                  </div>
+		                </div>
+	                </div>
+	            </div>
+			 	
+    		</div>
+    	</div>
+
+		
+    	<div class="column">
+		<div class="card-header search-show">
+			<p class="card-header-title">
+				<span class="fas fa-poll-h"></span>&nbsp
+				{% if search!=' ' %}
+				You searched for &nbsp;
+				<span class="search-highlight">
+					&nbsp; '{{search}}'
+					<a href="{{url_for('religious_admin.linkages', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>
+					&nbsp; 
+				</span>
+				&nbsp; in
+				{% endif %}
+				{{status | title }} Linkages
+			</p>
+			<div class="is-pulled-right">
+				<p class="card-header-title">
+					Total: {{linkages.total}}
+				</p>
+			</div>
+		</div>
+
+        {% if linkages.items %}
+        <div class="columns padding-el is-multiline">
+			{% for linkage in linkages.items %}
+				{% include 'religious_admin/linkages/_linkages.html' %}
+			{% endfor %}
+		</div>
+		{% else %}
+					<table class="table is-fullwidth">
+						<thead></thead>
+					<tbody>
+
+						<tr class = "table-row">
+							<td class="has-text-centered">
+								<div class='field has-text-centered'>
+									<span class='tag is-warning is-large'>No results found</span>
+								</div>
+							</td>
+					 	</tr>
+						
+					</tbody>
+				</table>
+		{% endif %}
+        </div>
+    </div>
+	{% if linkages.pages>1 %}
+        <div class="card-content">
+	<nav class="pagination" role="navigation" aria-label="pagination">
+		<a class="pagination-previous"  {% if linkages.has_prev %}  href="{{url_for('religious_admin.linkages', search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+		<a class="pagination-next" {% if linkages.has_next %} href="{{url_for('religious_admin.linkages', search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+		<ul class="pagination-list">
+			Page {{linkages.page}} of {{linkages.pages}}
+		</ul>
+	</nav>
+</div>
+	{% endif %}
+{% endblock %}

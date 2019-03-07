@@ -23,6 +23,8 @@ def before_request():
 			return redirect(url_for('linkages.index'))
 		elif current_user.type == 4:
 			return redirect(url_for('communities.index'))
+		elif current_user.type == 5:
+			return redirect(url_for('religious_admin.index'))
 		user_account.logout()
 
 @registered.route('/registered')
@@ -202,7 +204,7 @@ def referral_users():
 		referral.add(value)
 
 		flash('Referral has been sent!', 'success')
-		return redirect(url_for('registered.referral_users'))	
+		return redirect(url_for('registered.referral_users'))
 
 	return render_template('/registered/referral/index.html', form=form, active='referral')
 

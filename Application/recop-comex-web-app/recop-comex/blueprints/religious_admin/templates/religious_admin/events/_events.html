@@ -1,0 +1,175 @@
+
+	<div class="column is-one-quarter">
+		<div class="card select-list has-text-centered">
+			<div class="card-content">
+				<div class="level">
+					<div class="level-item">
+						<img class="image is-128x128" src="../../../static/images/event-default.png">
+					</div>
+				</div>
+
+	      		<div class="title is-5">{{ event.name }}</div>
+	      		<p class="subtitle is-6">
+	      			<i class="fas fa-calendar"></i>&nbsp; {{event.event_date.strftime('%B %e, %Y')}}</br>
+					<i class="fas fa-map-marker-alt"></i>&nbsp; {{ event.location }}
+				</p>
+	      		
+	      		<div class="button event-btn" onclick="show_event('{{event.id}}')">More Details</div>
+			</div>
+		</div>
+	</div>
+
+	<div id={{event.id}}_modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title"></p>
+      				<button class="delete" onclick="close_event('{{event.id}}')"></button>
+				</header>
+				<div class="overlay-card-modal has-text-centered">
+			    	<div class="modal-media">
+			            <article class="media">
+			              	<figure class="media-left">
+				                <div class="circular-event-modal">
+				                	<img src="../../../static/images/event-default.png">
+				                </div>
+			              	</figure>
+			              	<div class="media-content">
+			                	<div class="content modal-text has-text-centered">
+				                	<p class="title is-size-4">{{event.name}}</p>
+				                	<i class="icon fas fa-calendar-alt"></i>{{event.event_date.strftime('%B %e, %Y')}}<br>
+			                		<span class="tag status-tag is-medium">
+				                		{% if event.event_status=='S' %}
+									    		Scheduled
+									    	{% else %}
+									    		Finished
+									    {% endif %}
+				                	</span>
+			                	</div>
+			              </div>
+			            </article>
+			        </div>
+			    </div>
+    			<section class="modal-card-body">
+	    			<div class="container modal-show" id="info_div">
+				      	<div class="card">
+							<header class="card-header has-background-light">
+							    <p class="card-header-title">
+							    	Event Information
+							    </p>
+						  	</header>
+						  	<div class="card-content show-modal">
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-building prof-panel-icon"></i></span>
+									    	<p>Organizer</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.company_name}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-newspaper prof-panel-icon"></i></span>
+									    	<p>Description</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.description}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-exclamation prof-panel-icon"></i></span>
+									    	<p>Objective</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.objective}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
+									    	<p>Location</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.location}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-calendar-alt prof-panel-icon"></i></span>
+									  		<p>{% if event.status!='A' %}
+									    	Target Date
+									    	{% else %}
+									    	Date
+									  		{% endif %}</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>{{event.event_date.strftime('%B %e, %Y')}}</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							    <div class="panel-block">
+								    <article class="media">
+									  	<figure class="media-left">
+									  		<span><i class="fas fa-elementor prof-panel-icon"></i></span>
+									  		<p>Thrust</p>
+									  	</figure>
+									  	<div class="media-content">
+									    	<div class="content">
+									      		<p>
+									        		<strong>
+									        			{% if event.thrust==1 %}
+									        				Educational
+									        			{% elif event.thrust==2 %}
+									        				Environmental
+									        			{% elif event.thrust==3 %}
+									        				Health
+									        			{% elif event.thrust==4 %}
+									        				Livelihood
+									        			{% elif event.thrust==5 %}
+									        				Socio-Political
+									        			{% elif event.thrust==6 %}
+									        				Spiritual   
+									        			{% endif %}
+									        		</strong>
+									      		</p>
+									    	</div>
+									  	</div>
+									</article>
+								</div>
+							</div>
+						</div>
+				    </div>
+		  		</section>
+  			</div>
+	</div>

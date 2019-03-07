@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        {% if title %}
+        <title>{{ title }}</title>
+        {% else %}
+        <title>ReCOP-ComEx</title>
+        {% endif %}
+
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" type="text/css" href="../../../../static/css/bulma-0.7.2/css/bulma.css">
+        <link rel="stylesheet" href="../../../../static/css/fontawesome-5.5.0/css/all.css">
+        <link rel="stylesheet" href="../../../../static/css/recop-comex-style/css/style.css">
+        <link rel="stylesheet" href="../../../../static/css/recop-comex-style/css/modal.css">
+        <link rel="stylesheet" type="text/css" href="../../../../static/css/Bulma-extensions/bulma-checkradio/bulma-checkradio.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../../static/css/Bulma-extensions/bulma-tooltip/bulma-tooltip.min.css">
+
+        <link rel="stylesheet" href="../../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.css">
+        <script type="text/javascript" src = "../../../../static/scripts/base.js" ></script>
+          
+    </head>
+
+    <body> 
+    
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="">
+                    <img src="../../../../static/images/logo-menu.png">
+                </a>
+
+                <span class="navbar-burger burger" data-target="navMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </span>
+            </div>
+
+            <div id="navMenu" class="navbar-menu">
+                <div class="navbar-start">
+                    <a class="navbar-item {% if active=='home' %}is-active{% endif %}" href="{{url_for('religious_admin.index')}}">
+                        <strong>Home</strong>
+                    </a>
+                    <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('religious_admin.events', status='all', page='1', search=' ')}}">
+                        <strong>Events</strong>
+                    </a>
+                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('religious_admin.linkages', page='1', search=' ')}}">
+                        <strong>Linkages</strong>
+                    </a>
+                     <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="{{url_for('religious_admin.communities', page='1', search=' ')}}">
+                        <strong>Communities</strong>
+                    </a>
+                </div>
+                <div class="navbar-end">
+                    <a onclick='show_notif()'class="navbar-item">
+                        <input type="checkbox" id="navtoggle" checked>
+                        <div class="toggleNotifications">
+                            <div class="count">
+                                 <div class="num">4</div>
+                            </div>
+                            <label class="show">
+                                <span class="icon is-small has-text-white">
+                                   <i class="nav-icons fas fa-bell"></i>
+                                </span>
+                            </label>
+                            <div class="hidden" id='notifications'>
+                                <div class="btnbar">
+                                    <div class="text full">Notifications</div>
+                                </div>
+      
+                                <div class="note read">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> 
+                                    This is a notification
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="#" class="navbar-item">
+                        <span class="icon is-small has-text-white">
+                            <i class="nav-icons fas fa-question-circle "></i>
+                        </span>
+                    </a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            <div>
+                                <i class="nav-icons fas fa-user-circle fa-2x"></i>
+                            </div>
+                        </a>
+
+                        <div class="navbar-dropdown is-right">
+                            <a class="navbar-item" href="{{url_for('religious_admin.profile_about', user=current_user.username)}}">
+                                My Profile
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item" href="{{url_for('religious_admin.logout')}}">
+                                Logout
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</nav>
+               
+                {% block content %} {% endblock %}	
+
+       <footer class="footer-distributed">
+
+            <div class="footer-left">
+                <figure class="footer-logo">
+                    <img src="../../../static/images/logo-menu.png">
+
+                 </figure>
+                     
+                
+                <p class="footer-links">
+                    <a href="{{url_for('religious_admin.index')}}">Home</a>
+                    ·
+                    <a href="#">About</a>
+                    ·
+                    <a href="">Terms and Conditions</a>
+                    ·
+                    <a href="">Referral</a>
+                    ·
+                    <a href="">Contact Us</a>
+                </p>
+
+                <p class="footer-company-name">ReCOP-ComEx &copy; 2019</p>
+            </div>
+
+            <div class="footer-center">
+
+                <div>
+                    <i class="fa fa-map-marker-alt"></i>
+                    <p>Manila- Cavite Road, Sta. Cruz,<br> Cavite Ciy, 4100 Philippines</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-phone"></i>
+                    <p>434-1234</p>
+                </div>
+
+                <div>
+                    <i class="fa fa-envelope"></i>
+                    <p><a href="Recopcomex@yahoo.com">support@Recopcomex@yahoo.com</a></p>
+                </div>
+
+            </div>
+
+            <div class="footer-right">
+
+                <p class="footer-company-about">
+                    <span>About the company</span>
+                    Lorem ipsum dolor sit amet, consectateur adispicing elit. Fusce euismod convallis velit, eu auctor lacus vehicula sit amet.
+                </p>
+
+                <div class="footer-icons">
+
+                    <a href="#"><i class="fab fa-facebook-square"></i></a>
+                    <a href="#"><i class="fab fa-twitter-square"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-google-plus-square"></i></a>
+                </div>
+
+            </div>
+
+        </footer>
+	</body>
+
+    
+    
+    <script type="text/javascript" src="../../../../static/css/Bulma-extensions/bulma-carousel/bulma-carousel.min.js"></script>
+    <script type="text/javascript" src = "../../../../static/scripts/communities.js" ></script>
+    <script type = "text/javascript" src="../../../../static/scripts/sweetalert2.all.min.js"></script>
+
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+             <script>
+                Swal.fire({
+                    title: "{{message}}", 
+                    type: "{{category}}",
+                    customClass: "modal",
+                    buttonsStyling: false,
+                    allowOutsideClick: false,
+                    heightAuto: false,
+                    confirmButtonClass: 'button is-medium submit'
+                })
+            </script>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+  
+</html>

@@ -1,7 +1,7 @@
-
+	
   <div class="column is-one-quarter">
     <div class="card select-list has-text-centered">
-      <div class="card-content all-view">
+      <div class="card-content">
         <div class="level">
           <div class="level-item">
             <img class="image is-128x128" src="../../../static/images/image-default.png">
@@ -15,7 +15,6 @@
       </div>
     </div>
   </div>
-   <span class="clear"></span>
 
 
   <div id={{linkage.id}}_modal class="modal">
@@ -41,7 +40,7 @@
               </div>
             </article>
           </div>
-        </div> 
+        </div>
         <section class="modal-card-body">
           <div class="container modal-show" id="info_div">
             <div class="card">
@@ -59,7 +58,7 @@
                   <article class="media">
                     <figure class="media-left">
                       <span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
-                       <p>Address</p>
+                      <p>Address</p>
                     </figure>
                     <div class="media-content">
                       <div class="content">
@@ -91,17 +90,13 @@
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
-                      <span><i class="fas fa-phone prof-panel-icon"></i></span>
+                      <span><i class="fas fa-telephone prof-panel-icon"></i></span>
                       <p>Telephone</p>
                     </figure>
                     <div class="media-content">
                       <div class="content">
                           <p>
-                            {% if linkage.telephone=='' %}
-                            <strong>N/A</strong>
-                            {% else %}
                             <strong>{{linkage.telephone}}</strong>
-                            {% endif %}
                           </p>
                       </div>
                     </div>
@@ -125,9 +120,11 @@
                 </div>
               </div>
             </div>
-          </section>
-          <footer class="modal-card-foot">
-          </footer>
+          </div>
+        </section>
+
+        <footer class="modal-card-foot">
+        </footer>
       </div>
   </div>
 
