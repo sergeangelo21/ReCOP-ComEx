@@ -176,7 +176,7 @@
 								<div class="field">
 							        {{form.budget_plan.label(class_='label')}}
 						            <div class="control">
-						              	{{form.budget_plan(class_='input')}}
+						              	{{form.budget_plan(class_='input', accept='.doc, .docx')}}
 						            	{% for error in form.budget_plan.errors %}
                                         	<span style="color: red;">[{{ error }}]</span>
                                         {% endfor %}
@@ -188,7 +188,7 @@
 								<div class="field">
 									{{form.programme.label(class_='label')}}
 						            <div class="control">
-										{{form.programme(class_='input')}}
+										{{form.programme(class_='input', accept='.doc, .docx')}}
 						            	{% for error in form.programme.errors %}
                                         	<span style="color: red;">[{{ error }}]</span>
                                         {% endfor %}

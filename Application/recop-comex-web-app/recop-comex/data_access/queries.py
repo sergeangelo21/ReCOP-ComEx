@@ -765,12 +765,15 @@ class community_views():
 				community.religion,
 				community.status,
 				user_information.id
-				).filter(community.community_id==current_user.info_id
+				).filter(and_(community.community_id==current_user.info_id,
+				or_(user_information.last_name.like('%'+search+'%'),
+				user_information.first_name	.like('%'+search+'%'),
+				user_information.last_name.like('%'+search+'%'),
+				user_information.address.like('%'+search+'%'),))
 				).all()			
 
 		return record
 
-	# for admin.communities	
 	def members_show(value):
 
 		record = community.query.join(

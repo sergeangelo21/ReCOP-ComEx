@@ -32,12 +32,25 @@ def index():
 
 	return render_template('/unregistered/index.html', active='home')
 
-@unregistered.route('/events/search_<search>.page_<page>', methods=['GET', 'POST'])
-def events(page, search):
+@unregistered.route('/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
+def events(status, search, page):
 
-	events = event_views.show_list(['S', search, page])
+	if status=='scheduled':
+		value='S'
+	elif status=='finished':
+		value='F'
+	else:
+		value=status
 
-	return render_template('/unregistered/events/index.html', events=events, active='events')
+	events = event_views.show_list([value, search, page])
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('unregistered.events', status=status, page='1', search=form.search.data))
+
+	return render_template('/unregistered/events/index.html', events=events, status=status, search=search, form = form, active='events')
 
 @unregistered.route('/events/calendar', methods=['GET', 'POST'])
 def events_calendar():
@@ -50,9 +63,28 @@ def events_calendar():
 def linkages(page, search):
 
 	linkages = linkage_views.show_list(['A', search, 3, page])
-	
-	return render_template('/unregistered/linkages/index.html', linkages=linkages, active='linkages')
-	
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('unregistered.linkages', page='1', search=form.search.data))
+
+	return render_template('/unregistered/linkages/index.html', linkages=linkages, form = form, search=search, active='linkages')
+
+@unregistered.route('/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
+def communities(page, search):
+
+	communities = linkage_views.show_list(['all',search,4, page])
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('unregistered.communities', page='1', search=form.search.data))
+
+	return render_template('/unregistered/communities/index.html', form=form, communities=communities, search=search, active='communities')
+
 @unregistered.route('/donate', methods=['GET', 'POST'])
 def donate():
 

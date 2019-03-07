@@ -1,6 +1,5 @@
 MENU FOR LEEN
 
-U - Communities
 A -  Volunteers	(after comm)
 L - Linkages 
 C - Communities & Donations
@@ -9,6 +8,7 @@ C - Communities & Donations
 
 
 Unregistered
+donate redesign lang
 refer someone buttons
 
 Admin

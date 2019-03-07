@@ -1,93 +1,133 @@
 {% extends "unregistered-base.html" %}
 
 {% block content %}
-
-    <div class="notification gold"> 
-      <div class="columns is-centered">
-        <div class="column">
-          <div class="refer-center">
-            <a href="" class="button refer is-warning">
-              <span class="has-text-weight-bold">Do you know someone can help us?</span>
-            </a>
+  <div class="notification gold">
+    <div class="columns is-centered">
+      <div class="column">
+            <div class="refer-center">
+              <a href="" class="button refer is-warning">
+                  <span class="has-text-weight-bold">Do you know someone can help us?</span>
+                </a>
+            </div>
           </div>
-        </div>
-        <div class="column search-box">
-          <div class="field has-addons has-addons-centered is-pulled-right">
+      <div class="column search-box">
+        <div class="field is-pulled-right has-addons has-addons-centered">
+          <div class="field is-pulled-right has-addons has-addons-centered">
             <div class="control">
-                <input class="input" type="text" placeholder="Search">
+              <form action="" method="POST">
+              {{form.hidden_tag()}}
+                  {{form.search(class_='input', placeholder='Search')}}
             </div>
             <p class="control">
-                <a class="button search">
-                  Search
-                </a>
+                {{form.submit(class_='button search')}}
             </p>
+            </form>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="columns">
-      <div class="column is-2">
-        <div class="filter-btn is-size-5" onclick="filtershrink()">
-          <i class="fas fa-filter"></i>&nbspFilter
-        </div>
+  <div class="columns">
+    <div class="column is-2">
+      <div class="filter-btn is-size-5" onclick="filtershrink()">
+        <i class="fas fa-filter"></i>&nbspFilter
+      </div>
         <div class="notification filter" id="filterDIV">
           <div class="columns">
-            <div class="column">
-              <p class="title is-size-5">Thrust</p>
-                <div class="field">
-                  <div class="control">
-                    <div class="select is-warning">
-                      <select class="filter-dropdown">
-                          <option>All</option>
-                          <option>Educational</option>
-                          <option>Environmental</option>
-                          <option>Health</option>
-                          <option>Livelihood</option>
-                          <option>Socio-Political</option>
-                          <option>Spiritual</option>
-                        </select>
+                  <div class="column">
+                    <p class="title is-size-5">Thrust</p>
+                      <div class="field">
+                    <div class="control">
+                      <div class="select is-warning">
+                        <select class="filter-dropdown">
+                            <option>All</option>
+                            <option>Educational</option>
+                            <option>Environmental</option>
+                            <option>Health</option>
+                            <option>Livelihood</option>
+                            <option>Socio-Political</option>
+                            <option>Spiritual</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                <p class="title is-size-5">Type</p>
+                    
+                    <p class="title is-size-5">Type</p>
 
-                <div class="field">
-                  <div class="control">
-                    <div class="select is-warning">
-                      <select class="filter-dropdown">
-                          <option>All</option>
-                          <option>Institutional</option>
-                          <option>Outside</option>
-                        </select>
+                    <div class="field">
+                      <div class="control">
+                        <div class="select is-warning">
+                          <select class="filter-dropdown">
+                              <option>All</option>
+                              <option>Institutional</option>
+                              <option>Outside</option>
+                          </select>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-            </div>
-          </div>
-          
+              </div>
+        
         </div>
       </div>
 
+    
       <div class="column">
-        <div class="columns padding-el is-multiline">
-          {% for linkage in linkages.items %}
-            {% include 'unregistered/linkages/_linkages.html' %}
-          {% endfor %}
-        </div>
-        <div class="card-content">
-        {% if linkages.pages>1 %}
-        <nav class="pagination" role="navigation" aria-label="pagination">
-          <a class="pagination-previous"  {% if linkages.has_prev %}  href="{{url_for('unregistered.linkages', search=' ', page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
-          <a class="pagination-next" {% if linkages.has_next %} href="{{url_for('unregistered.linkages', search=' ', page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
-          <ul class="pagination-list">
-            Page {{linkages.page}} of {{linkages.pages}}
-          </ul>
-        </nav>
+    <div class="card-header search-show">
+      <p class="card-header-title">
+        <span class="fas fa-poll-h"></span>&nbsp
+        {% if search!=' ' %}
+        You searched for &nbsp;
+        <span class="search-highlight">
+          &nbsp; '{{search}}'
+          <a href="{{url_for('unregistered.linkages', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>
+          &nbsp; 
+        </span>
+        &nbsp; in
         {% endif %}
-        </div>
-      </div>  
-  </div>
-<div class="footer-margin-top"></div>
+        {{status | title }} Linkages
+      </p>
+      <div class="is-pulled-right">
+        <p class="card-header-title">
+          Total: {{linkages.total}}
+        </p>
+      </div>
+    </div>
 
+        {% if linkages.items %}
+        <div class="columns padding-el is-multiline">
+      {% for linkage in linkages.items %}
+        {% include 'unregistered/linkages/_linkages.html' %}
+      {% endfor %}
+    </div>
+    {% else %}
+          <table class="table is-fullwidth">
+            <thead></thead>
+          <tbody>
+
+            <tr class = "table-row">
+              <td class="has-text-centered">
+                <div class='field has-text-centered'>
+                  <span class='tag is-warning is-large'>No results found</span>
+                </div>
+              </td>
+            </tr>
+            
+          </tbody>
+        </table>
+    {% endif %}
+        </div>
+    </div>
+  {% if linkages.pages>1 %}
+        <div class="card-content">
+  <nav class="pagination" role="navigation" aria-label="pagination">
+    <a class="pagination-previous"  {% if linkages.has_prev %}  href="{{url_for('unregistered.linkages', search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+    <a class="pagination-next" {% if linkages.has_next %} href="{{url_for('unregistered.linkages', search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+    <ul class="pagination-list">
+      Page {{linkages.page}} of {{linkages.pages}}
+    </ul>
+  </nav>
+</div>
+  {% endif %}
 {% endblock %}
