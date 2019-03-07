@@ -1,0 +1,133 @@
+
+  <div class="column is-one-quarter">
+    <div class="card select-list has-text-centered">
+      <div class="card-content all-view">
+        <div class="level">
+          <div class="level-item">
+            <img class="image is-128x128" src="../../../static/images/image-default.png">
+          </div>
+        </div>
+
+        <div class="title is-5">{{ linkage.company_name }}</div>
+        <p class="subtitle is-6">{{ linkage.bio }}</p>
+
+        <div class="button event-btn" onclick="show_event('{{linkage.id}}')">More Details</div>  
+      </div>
+    </div>
+  </div>
+   <span class="clear"></span>
+
+
+  <div id={{linkage.id}}_modal class="modal">
+    <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+            <p class="modal-card-title"></p>
+            <button class="delete" onclick="close_event('{{linkage.id}}')"></button>
+        </header>
+        <div class="overlay-card-modal has-text-centered">
+          <div class="modal-media">
+            <article class="media">
+              <figure class="media-left">
+                <div class="circular-event-modal">
+                  <img src="../../../static/images/image-default.png">
+                </div>
+              </figure>
+              <div class="media-content">
+                <div class="content modal-text has-text-centered">
+                  <p class="title is-size-4">{{linkage.company_name}}</p>
+                  <i class="icon fas fa-user-tag"></i>{{linkage.bio}}
+                </div>
+              </div>
+            </article>
+          </div>
+        </div> 
+        <section class="modal-card-body">
+          <div class="container modal-show" id="info_div">
+            <div class="card">
+              <header class="card-header has-background-light">
+                <p class="card-header-title">
+                 {% if linkage.address == 'San Sebastian College Recoletos de Cavite' %} Organizational Information
+                 {% else %}
+                 Company Information
+                 {% endif %}
+                </p>
+              </header>
+              <div class="card-content profile">
+                {% if linkage.address != 'San Sebastian College Recoletos de Cavite' %}
+                <div class="panel-block">
+                  <article class="media">
+                    <figure class="media-left">
+                      <span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
+                       <p>Address</p>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                          <p>
+                            <strong>{{linkage.address}}</strong>
+                          </p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+                  {% endif %}
+
+                <div class="panel-block">
+                  <article class="media">
+                    <figure class="media-left">
+                      <span><i class="fas fa-user prof-panel-icon"></i></span>
+                      <p>Outreach Coordinator</p>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                          <p>
+                            <strong>{{linkage.coordinator}}</strong>
+                          </p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="panel-block">
+                  <article class="media">
+                    <figure class="media-left">
+                      <span><i class="fas fa-phone prof-panel-icon"></i></span>
+                      <p>Telephone</p>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                          <p>
+                            {% if linkage.telephone=='' %}
+                            <strong>N/A</strong>
+                            {% else %}
+                            <strong>{{linkage.telephone}}</strong>
+                            {% endif %}
+                          </p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+
+                <div class="panel-block">
+                  <article class="media">
+                    <figure class="media-left">
+                      <span><i class="fas fa-mobile prof-panel-icon"></i></span>
+                      <p>Mobile</p>
+                    </figure>
+                    <div class="media-content">
+                      <div class="content">
+                          <p>
+                            <strong>{{linkage.mobile_number}}</strong>
+                          </p>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </section>
+          <footer class="modal-card-foot">
+          </footer>
+      </div>
+  </div>
+

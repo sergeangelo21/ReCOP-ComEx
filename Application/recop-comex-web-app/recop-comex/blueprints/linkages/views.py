@@ -107,6 +107,19 @@ def event_conduct(id):
 
 	return render_template('/linkages/events/conduct.html', title= event.name.title() + " | Linkages",event=event, active='events')
 
+@linkages.route('/linkages/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
+def linkages_show(page, search):
+
+	linkages = linkage_views.show_list(['A', search, 3, page])
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('linkages.linkages_show', page='1', search=form.search.data))
+
+	return render_template('/linkages/linkages/index.html', linkages=linkages, form = form, search=search, user=current_user.info_id, active='linkages')
+
 @linkages.route('/linkages/events/finish/<id>')
 @login_required
 def event_finish(id):

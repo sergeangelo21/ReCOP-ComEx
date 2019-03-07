@@ -44,6 +44,9 @@
                     <a class="navbar-item {% if active=='events' %}is-active{% endif %}" href="{{url_for('linkages.events', status='all', page='1', search=' ')}}">
                         <strong>Events</strong>
                     </a>
+                    <a class="navbar-item {% if active=='linkages' %}is-active{% endif %}" href="{{url_for('linkages.linkages_show', page='1', search=' ')}}">
+                        <strong>Linkages</strong>
+                    </a>
                     <a class="navbar-item {% if active=='communities' %}is-active{% endif %}" href="{{url_for('linkages.communities', page='1', search=' ')}}">
                         <strong>Communities</strong>
                     </a>

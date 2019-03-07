@@ -31,19 +31,28 @@ def index():
 
 	return render_template('/registered/index.html', active='home')
 
-@registered.route('/registered/events/search_<search>.page_<page>', methods=['GET', 'POST'])
+@registered.route('/registered/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
-def events(page, search):
+def events(status, page, search):
 
-	events = event_views.show_list(['S', search, page])
+	if status=='scheduled':
+		value='S'
+	elif status=='new':
+		value='N'
+	elif status=='finished':
+		value='F'
+	else:
+		value=status
+
+	events = event_views.show_list([value, search, page])
 
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
-		return redirect(url_for('registered.events', page='1', search=form.search.data))
+		return redirect(url_for('registered.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/registered/events/index.html', title="Events", form=form, events=events,  page=page,search=search, active='events')
+	return render_template('/registered/events/index.html', title="Events | Registered", form=form, events=events, status=status, search=search, active='events')
 
 @registered.route('/registered/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -88,13 +97,19 @@ def event_action(id, action):
 
 	return redirect(url_for('registered.events', page='1', search=' '))
 
-@registered.route('/registered/linkages/search_<search>.page_<page>')
+@registered.route('/registered/linkages/search_<search>.page_<page>', methods=['GET','POST'])
 @login_required
 def linkages(page, search):
 
 	linkages = linkage_views.show_list(['A', search, 3, page])
 
-	return render_template('/registered/linkages/index.html', linkages=linkages, active='linkages', page=page, search=search)
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('registered.linkages', page='1', search=form.search.data))
+
+	return render_template('/registered/linkages/index.html', title="linkages", form=form, linkages=linkages, page=page, search=search, active='linkages')
 
 @registered.route('/registered/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required

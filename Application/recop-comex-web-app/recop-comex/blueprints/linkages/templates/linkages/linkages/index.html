@@ -1,11 +1,11 @@
-{% extends "registered-base.html" %}
+{% extends "linkages-base.html" %}
 
 {% block content %}
   <div class="notification gold">
     <div class="columns is-centered">
       <div class="column">
             <div class="refer-center">
-              <a href="{{url_for('registered.referral_users')}}" class="button refer is-warning">
+              <a href="{{url_for('linkages.referral_users')}}" class="button refer is-warning">
                   <span class="has-text-weight-bold">Do you know someone can help us?</span>
                 </a>
             </div>
@@ -81,7 +81,7 @@
         You searched for &nbsp;
         <span class="search-highlight">
           &nbsp; '{{search}}'
-          <a href="{{url_for('registered.linkages', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>
+          <a href="{{url_for('unregistered.linkages', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>
           &nbsp; 
         </span>
         &nbsp; in
@@ -98,7 +98,7 @@
         {% if linkages.items %}
         <div class="columns padding-el is-multiline">
       {% for linkage in linkages.items %}
-        {% include 'registered/linkages/_linkages.html' %}
+        {% include 'unregistered/linkages/_linkages.html' %}
       {% endfor %}
     </div>
     {% else %}
@@ -122,13 +122,12 @@
   {% if linkages.pages>1 %}
         <div class="card-content">
   <nav class="pagination" role="navigation" aria-label="pagination">
-    <a class="pagination-previous"  {% if linkages.has_prev %}  href="{{url_for('registered.linkages', search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
-    <a class="pagination-next" {% if linkages.has_next %} href="{{url_for('registered.linkages', search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+    <a class="pagination-previous"  {% if linkages.has_prev %}  href="{{url_for('unregistered.linkages', search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+    <a class="pagination-next" {% if linkages.has_next %} href="{{url_for('unregistered.linkages', search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
     <ul class="pagination-list">
       Page {{linkages.page}} of {{linkages.pages}}
     </ul>
   </nav>
 </div>
   {% endif %}
-
 {% endblock %}

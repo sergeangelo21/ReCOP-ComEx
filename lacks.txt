@@ -1,9 +1,7 @@
 MENU FOR LEEN
 
 A -  Volunteers	(after comm)
-L - Linkages 
 C - Communities & Donations
-
 
 
 
@@ -21,12 +19,14 @@ Volunteers
 
 Linkages
 Dashboard
+donotshow himself
 FInished events reports
 resched cancel (alex)
 
 Communities
 Dashboard
 menu is active. naah so eassy
+donotshow himself
 finished event reports
 event participant add search(serge)
 remove reports

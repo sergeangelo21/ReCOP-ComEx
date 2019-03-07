@@ -30,7 +30,7 @@ def before_request():
 @login_required
 def index():
 
-	return render_template('/communities/index.html', title="Communities")
+	return render_template('/communities/index.html', title="Communities", active='home')
 
 @communities.route('/communities/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -53,7 +53,7 @@ def events(status, page, search):
 
 		return redirect(url_for('communities.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/communities/events/index.html', title="Events | Communities", form=form, events=events, status=status, search=search)
+	return render_template('/communities/events/index.html', title="Events | Communities", form=form, events=events, status=status, search=search, active='events')
 
 @communities.route('/communities/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -61,7 +61,7 @@ def events_calendar():
 
 	events = event_information.calendar()
 	
-	return render_template('/communities/events/index-calendar.html', title="Events | Communities", events=events)
+	return render_template('/communities/events/index-calendar.html', title="Events | Communities", events=events, active='events')
 	
 @communities.route('/communities/events/show/id=<id>')
 @login_required
@@ -73,7 +73,7 @@ def event_participants(id):
 
 	form = SearchForm()
 
-	return render_template('/communities/events/add_participants.html', title= event.name.title() + " | Communities", event = event, participants=participants,joined=joined, form=form)
+	return render_template('/communities/events/add_participants.html', title= event.name.title() + " | Communities", event = event, participants=participants,joined=joined, form=form, active='events')
 
 @communities.route('/communities/event_<id>/<action>/<participant>')
 @login_required
@@ -113,15 +113,21 @@ def linkages(page, search):
 
 		return redirect(url_for('communities.linkages', page='1', search=form.search.data))
 
-	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, page=page, search=search)
+	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, page=page, search=search, active='linkages')
 
-@communities.route('/communities/linkages/show/id=<id>')
+@communities.route('/communities/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
-def linkage_show(id):
+def communities_show(page, search):
 
-	linkage, mem_since = linkage_views.show_info(id)
+	communities = linkage_views.show_list(['all',search,4, page])
 
-	return render_template('/communities/linkages/show.html', title= linkage.company_name.title() + " | Communities", linkage=linkage)
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('communities.communities_show', page='1', search=form.search.data))
+
+	return render_template('/communities/communities/index.html', form=form, communities=communities, search=search, active='communities')
 
 @communities.route('/communities/members/search_<search>', methods=['GET', 'POST'])
 @login_required
@@ -135,7 +141,7 @@ def members(search):
 
 		return redirect(url_for('communities.members', search=form.search.data))
 
-	return render_template('/communities/members/index.html', title="Communities", members=members, form=form, search=search)
+	return render_template('/communities/members/index.html', title="Communities", members=members, form=form, search=search, active='members')
 
 @communities.route('/communities/members/add', methods=['GET', 'POST'])
 @login_required
@@ -169,7 +175,7 @@ def member_add():
 		flash('Member added!', 'success')
 		return redirect(url_for('communities.members', search=' '))
 
-	return render_template('/communities/members/add.html', title="Communities", form=form)
+	return render_template('/communities/members/add.html', title="Communities", form=form, active='members')
 
 @communities.route('/communities/members/update/id=<id>', methods=['GET', 'POST'])
 @login_required
@@ -214,7 +220,7 @@ def member_updateinfo(id):
 		form.telephone.data = member.telephone
 		form.mobile.data = member.mobile_number
 
-	return render_template('/communities/members/update.html', title="Communities", form=form)
+	return render_template('/communities/members/update.html', title="Communities", form=form, active='members')
 
 @communities.route('/communities/members/action/id=<id>')
 @login_required
@@ -236,12 +242,6 @@ def member_action(id):
 	community.update_status(user.id, status)
 
 	return redirect(url_for('communities.members', search=' '))
-
-@communities.route('/communities/reports')
-@login_required
-def reports():
-
-	return render_template('/communities/reports/index.html', title="Communities")
 
 @communities.route('/communities/referral', methods=['GET', 'POST'])
 @login_required
