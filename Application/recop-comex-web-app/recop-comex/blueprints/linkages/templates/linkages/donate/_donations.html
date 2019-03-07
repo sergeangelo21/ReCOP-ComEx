@@ -1,0 +1,18 @@
+										    <td>
+										    	{% if donation.sponsee_id==1 %}
+										    	ReCOP Office
+										    	{% else %}
+										    	{{donation.sponsee}}
+										    	{% endif %}
+										    </td>
+										    <td>{% if donation.amount!='In kind' %}P {% endif %}{{donation.amount}}</td>
+										    <td>{{donation.date_given.strftime('%B %e, %Y')}}</td>
+										    <td>
+										    	{% if donation.status=='R' %}
+										    		Received
+										    	{% elif donation.status=='N' %}
+										    		New
+										    	{% else %}
+										    		Declined
+										    	{% endif %}
+											</td>

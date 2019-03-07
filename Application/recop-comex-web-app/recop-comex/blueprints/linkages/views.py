@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, redirect, url_for, flash, send_fro
 from flask_login import current_user, logout_user, login_required
 from blueprints.linkages.forms import *
 from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, event_photo, donation, referral
-from data_access.queries import user_views, linkage_views, event_views
+from data_access.queries import user_views, linkage_views, event_views, donation_views
 from extensions import db, bcrypt
 from static.email import generate, send_email
 from static.pdf import generate_pdf
@@ -376,6 +376,8 @@ def donate():
 
 	communities = linkage_views.target_linkages()
 
+	donations = donation_views.donation_history(current_user.info_id)
+
 	for c in communities:
 
 		if c.type==4:
@@ -423,7 +425,7 @@ def donate():
 		flash('Donation given!', 'success')
 		return redirect(url_for('linkages.donate'))
 
-	return render_template('/linkages/donate/index.html', form=form, no_event=no_event, active='donate')
+	return render_template('/linkages/donate/index.html', form=form, no_event=no_event, donations=donations, active='donate')
 
 @linkages.route('/linkages/referral', methods=['GET', 'POST'])
 @login_required

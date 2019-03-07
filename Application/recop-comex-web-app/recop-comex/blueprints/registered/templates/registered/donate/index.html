@@ -14,73 +14,40 @@
             <div class="card events-card">
                             <div class="card-table">
                                 <div class="content">
-                                    <table class="table is-fullwidth is-striped">
+                                    {% if donations %}
+                                    <table class="table is-fullwidth is-hoverable is-striped">
                                         <thead>
-                                          <tr>
-                                            <label class="label is-3 has-text-grey">
-                                            <th>Donated to</th>
-                                            <th>Type</th>
+                                            <th>Gave to</th>
+                                            <th>Amount</th>
                                             <th>Date</th>
-                                            <th></th>
-                                        </label>
-                                            
-                                          </tr>
+                                            <th>Status</th>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Cavite City</td>
-                                                <td>In Kind</td>
-                                                <td>01/01/2019</td>
-                                                <td><a class="button is-small" href="#">See details</a></td>
-                                                
-                                            </tr>
-                                           <tr>
-                                                <td>Cavite City</td>
-                                                <td>In Kind</td>
-                                                <td>01/01/2019</td>
-                                                <td><a class="button is-small" href="#">See details</a></td>
-                                                
-                                            </tr>
-                                           <tr>
-                                                <td>Cavite City</td>
-                                                <td>In Kind</td>
-                                                <td>01/01/2019</td>
-                                                <td><a class="button is-small" href="#">See details</a></td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td>Cavite City</td>
-                                                <td>In Kind</td>
-                                                <td>01/01/2019</td>
-                                                <td><a class="button is-small" href="#">See details</a></td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td>Cavite City</td>
-                                                <td>In Kind</td>
-                                                <td>01/01/2019</td>
-                                                <td><a class="button is-small" href="#">See details</a></td>
-                                                
-                                            </tr>
-                                           <tr>
-                                                <td>Cavite City</td>
-                                                <td>In Kind</td>
-                                                <td>01/01/2019</td>
-                                                <td><a class="button is-small" href="#">See details</a></td>
-                                                
-                                            </tr>
-                                           
-                                        </tbody>
+                                        {% for donation in donations %}
+                                             {% include 'registered/donate/_donations.html' %}
+                                        {% endfor %}
                                     </table>
+                                    {% else %}
+                                    <table class="table is-fullwidth is-hoverable is-striped">
+            <thead></thead>
+          <tbody>
+
+            <tr class = "table-row">
+              <td class="has-text-centered">
+                <div class='field has-text-centered'>
+                  <span class='tag is-warning is-medium'>No results found</span>
+                </div>
+              </td>
+            </tr>
+            
+          </tbody>
+                                    </table>
+                                    {% endif %}
                                 </div>
                             </div>
-                            <footer class="card-footer">
-                                <a href="#" class="card-footer-item">View All</a>
-                            </footer>
                         </div>
         </div>
         
-        <div class="column is-7">
+        <div class="column is-6">
             <form action ="" method = "POST" enctype="multipart/form-data">
             {{form.hidden_tag()}}
                 <div class="card">

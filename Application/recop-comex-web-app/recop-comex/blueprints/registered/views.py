@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, logout_user, login_required
 from blueprints.registered.forms import *
 from data_access.models import donation, user_account, user_information, event_information, event_participation, event_attachment, donation
-from data_access.queries import user_views, linkage_views, event_views
+from data_access.queries import user_views, linkage_views, event_views, donation_views
 from datetime import datetime
 
 from extensions import db, bcrypt
@@ -133,6 +133,8 @@ def donate():
 
 	form = DonationForm()
 
+	donations = donation_views.donation_history(current_user.info_id)
+
 	communities = linkage_views.target_linkages()
 
 	for c in communities:
@@ -182,7 +184,7 @@ def donate():
 		flash('Donation given!', 'success')
 		return redirect(url_for('registered.donate'))
 
-	return render_template('/registered/donate/index.html', form=form, no_event=no_event, active='donate')
+	return render_template('/registered/donate/index.html', form=form, no_event=no_event, donations=donations, active='donate')
 
 @registered.route('/registered/referral', methods=['GET', 'POST'])
 @login_required
