@@ -1,5 +1,4 @@
 Queries
-Donation History
 Notification
 
 Unregistered
