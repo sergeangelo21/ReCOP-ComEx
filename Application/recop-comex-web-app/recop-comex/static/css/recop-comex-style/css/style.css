@@ -1368,3 +1368,139 @@ Modules - reusable parts of our design
           margin-top:10px;
             
         }
+
+/*NOTIFICATION*/
+.toggleNotifications {
+    position: relative;
+    display: inline-flex;
+  height: auto;
+  width: 10px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.toggleNotifications .show {
+  flex: 1;
+  margin: auto;
+  height: auto;
+  max-width: 10px;
+  text-align: center;
+  margin-top: -1px;  
+  background: transparent;
+  font-size: 18px;
+  transition: all 0.2s;
+}
+
+.toggleNotifications .show i {
+  line-height: 38px;
+}
+
+.count {
+  position: absolute;
+  top: 5px;
+  right: 26px;
+}
+.count .num {
+  position: absolute;
+  top: -12px;
+  left: 22px;
+  background: #f22;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 17px;
+  font-size: 11px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+
+.notifications {
+  position: absolute;
+  top: 28px;
+  right: 10px;
+  width: 300px;
+  background: #465;
+  border: 1px solid #455;
+  border-radius: 2px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s;
+}
+
+/*arrow na invisible*/
+.notifications:after {
+  content: ' ';
+  position: absolute;
+  top: -20px;
+  right: 0px;
+  width: 0px;
+  height: 10px;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  pointer-events: none;
+
+}
+.notifications:before {
+ 
+  position: absolute;
+  top: -10px;
+  right: 0px;
+  width: 0px;
+  height: 10px;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-bottom: 10px solid white;
+  pointer-events: none;
+}
+.notifications .btnbar {
+  position: relative;
+  height: 60px;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.5));
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+.notifications .btnbar .text {
+  line-height: 60px;
+  padding: 0px 20px;
+  position: absolute;
+  top: 0px;
+  transition: all 1s;
+}
+
+.notifications .note {
+  padding: 0px 20px;
+  height: 40px;
+  line-height: 40px;
+  border-radius: 2px;
+  transition: all 0.2s;
+  overflow: hidden;
+  max-height: 40px;
+}
+.notifications .note:first-of-type {
+  margin-top: 0px;
+}
+.notifications .note.read {
+  color: whitesmoke;
+}
+.notifications .note:hover {
+  background: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+.notifications .note i {
+  position: relative;
+  top: -1px;
+  margin-right: 5px;
+  vertical-align: middle;
+  color: white;
+}
+
+#navtoggle {
+  display: none;
+}
+#navtoggle:checked ~ .toggleNotifications .notifications {
+  opacity: 0;
+}
+
+    
