@@ -1,3 +1,6 @@
+Queries
+Donation History
+Notification
 
 Unregistered
 donate redesign lang
@@ -31,10 +34,9 @@ General (Maybe kaartehan)
 
 Admin (activity logs)
 contact us
-Notifications 
 Help
-change dp
-filters dropdown
+change dp (Marian)
+filters dropdown (Alex)
 error traps
 graphs(alex)
 pdf and email templates
