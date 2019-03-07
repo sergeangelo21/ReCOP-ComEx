@@ -1,9 +1,3 @@
-MENU FOR LEEN
-
-A -  Volunteers	(after comm)
-C - Communities & Donations
-
-
 
 Unregistered
 donate redesign lang
@@ -25,34 +19,27 @@ resched cancel (alex)
 
 Communities
 Dashboard
-menu is active. naah so eassy
 donotshow himself
 finished event reports
 event participant add search(serge)
-remove reports
-members audit_trail(???)
 
 Registered
 Dashboard
-join event (DONE 03-06 c/o Alex pero diko pa mapagisa yung button)???
+join event
 
 General (Maybe kaartehan)
 
 Admin (activity logs)
-file element accept!
 contact us
 Notifications 
 Help
 change dp
 filters dropdown
-NOTHING TO SHOW!!!
-validations
 error traps
 graphs(alex)
-normalized 
 pdf and email templates
 real data in home
-css static
+
 
 Serge: Create Celery Instance for email and pdf generation
        Change pdf plugin to xhtmltopdf

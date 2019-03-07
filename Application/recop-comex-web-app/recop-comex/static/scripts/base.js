@@ -9,3 +9,18 @@ window.onload = function() {
  	})
 
 }
+
+function show_notif(){
+
+	toogle = document.getElementById('navtoggle').checked
+
+	if (toogle==true){
+		document.getElementById('notifications').className='notifications'
+		document.getElementById('navtoggle').checked=false
+	}
+	else{
+		document.getElementById('notifications').className='hidden'
+		document.getElementById('navtoggle').checked=true		
+	}
+
+}

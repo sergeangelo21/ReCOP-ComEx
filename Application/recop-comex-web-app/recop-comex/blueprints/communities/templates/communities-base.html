@@ -59,10 +59,28 @@
                     </a>
                 </div>
                 <div class="navbar-end">
-                    <a href="#" class="navbar-item">
-                        <span class="icon is-small has-text-white">
-                            <i class="nav-icons fas fa-bell"></i>
-                        </span>
+                    <a onclick='show_notif()'class="navbar-item">
+                        <input type="checkbox" id="navtoggle" checked>
+                        <div class="toggleNotifications">
+                            <div class="count">
+                                 <div class="num">4</div>
+                            </div>
+                            <label class="show">
+                                <span class="icon is-small has-text-white">
+                                   <i class="nav-icons fas fa-bell"></i>
+                                </span>
+                            </label>
+                            <div class="hidden" id='notifications'>
+                                <div class="btnbar">
+                                    <div class="text full">Notifications</div>
+                                </div>
+      
+                                <div class="note read">
+                                    <i class="fa fa-info-circle" aria-hidden="true"></i> 
+                                    This is a notification
+                                </div>
+                            </div>
+                        </div>
                     </a>
                     <a href="#" class="navbar-item">
                         <span class="icon is-small has-text-white">
