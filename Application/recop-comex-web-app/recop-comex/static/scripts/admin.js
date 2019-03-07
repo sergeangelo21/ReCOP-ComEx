@@ -458,33 +458,6 @@ function item_add(value){
 
 }
 
-function settingsVPACAD() {
-    var div = document.getElementById("settingsACAD");
-    if (div.style.display === "none") {
-        div.style.display = "block";
-    } else {
-        div.style.display = "none";
-    }
-}
-
-function settingsVPFMI() {
-    var div = document.getElementById("settingsFMI");
-    if (div.style.display === "none") {
-        div.style.display = "block";
-    } else {
-        div.style.display = "none";
-    }
-}
-
-function settingsPRES() {
-    var div = document.getElementById("settingsSPRES");
-    if (div.style.display === "none") {
-        div.style.display = "block";
-    } else {
-        div.style.display = "none";
-    }
-}
-
 function filtershrink() {
     var div = document.getElementById("filterDIV");
     if (div.style.display === "none") {

@@ -390,7 +390,7 @@ def termsandconditions():
 
 	return render_template('/linkages/termsandconditions/index.html', active='termsandconditions')
 
-@linkages.route('/linkages/profile/about/<user>')
+@linkages.route('/linkages/profile/about|<user>')
 @login_required
 def profile_about(user):
 
@@ -398,15 +398,15 @@ def profile_about(user):
 
 	return render_template('/linkages/profile/about.html', title="Linkages", linkages=linkages)
 
-@linkages.route('/linkages/profile/eventsattended')
+@linkages.route('/linkages/profile/eventsattended|<user>')
 @login_required
-def profile_eventsattended():
+def profile_eventsattended(user):
 
 	return render_template('/linkages/profile/eventsattended.html', title="Linkages")	
 
-@linkages.route('/linkages/profile/settings/personal', methods=['GET', 'POST'])
+@linkages.route('/linkages/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_personal():
+def profile_settings_personal(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 
@@ -425,7 +425,7 @@ def profile_settings_personal():
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('linkages.profile_settings_personal'))
+		return redirect(url_for('linkages.profile_settings_personal', user=current_user.username))
 
 	else:
 
@@ -438,9 +438,9 @@ def profile_settings_personal():
 
 	return render_template('/linkages/profile/settings/personal.html', title="Linkages", form=form)
 
-@linkages.route('/linkages/profile/settings/contact', methods=['GET', 'POST'])
+@linkages.route('/linkages/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_contact():
+def profile_settings_contact(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
@@ -461,7 +461,7 @@ def profile_settings_contact():
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('linkages.profile_settings_contact'))
+		return redirect(url_for('linkages.profile_settings_contact', user=current_user.username))
 
 	else:
 
@@ -472,9 +472,9 @@ def profile_settings_contact():
 
 	return render_template('/linkages/profile/settings/contact.html', title="Linkages", form=form)	
 
-@linkages.route('/linkages/profile/settings/username', methods=['GET', 'POST'])
+@linkages.route('/linkages/profile/settings/username|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_username():
+def profile_settings_username(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
 
@@ -492,7 +492,7 @@ def profile_settings_username():
 
 			flash('Username was successfully updated!', 'success')
 
-			return redirect(url_for('linkages.profile_settings_username'))
+			return redirect(url_for('linkages.profile_settings_username', user=current_user.username))
 
 		else:
 
@@ -504,9 +504,9 @@ def profile_settings_username():
 
 	return render_template('/linkages/profile/settings/username.html', title="Linkages", form=form)
 
-@linkages.route('/linkages/profile/update/password', methods=['GET', 'POST'])
+@linkages.route('/linkages/profile/settings/password|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_password():
+def profile_settings_password(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
 
@@ -524,7 +524,7 @@ def profile_settings_password():
 
 			flash('Password was successfully updated!', 'success')
 
-			return redirect(url_for('linkages.profile_settings_password'))
+			return redirect(url_for('linkages.profile_settings_password', user=current_user.username))
 
 		else:
 

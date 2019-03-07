@@ -953,7 +953,7 @@ def referral():
 
 	return render_template('/admin/referral/index.html', title="Referral | Admin", active='referral')
 
-@admin.route('/admin/profile/about/<user>')
+@admin.route('/admin/profile/about|<user>')
 @login_required
 def profile_about(user):
 
@@ -961,26 +961,17 @@ def profile_about(user):
 
 	return render_template('/admin/profile/about.html', title="Admin", admin=admin)
 
-@admin.route('/admin/profile/eventsattended')
+@admin.route('/admin/profile/eventsattended|<user>')
 @login_required
-def profile_eventsattended():
+def profile_eventsattended(user):
 
 	return render_template('/admin/profile/eventsattended.html', title="Admin")	
 
-@admin.route('/admin/profile/settings/personal_<user>', methods=['GET', 'POST'])
+@admin.route('/admin/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_personal(user):
 
-	if user == 'academicservices':
-		value = 4
-	elif user == 'formationmissionidentity':
-		value = 3
-	elif user == 'president':
-		value = 2
-	else:
-		value = 1
-
-	user_information_update = user_information.profile_info_update(value)
+	user_information_update = user_information.profile_info_update(current_user.id)
 
 	form = ProfilePersonalUpdateForm()
 
@@ -997,7 +988,7 @@ def profile_settings_personal(user):
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('admin.profile_settings_personal', user=user))
+		return redirect(url_for('admin.profile_settings_personal', user=current_user.username))
 
 	else:
 
@@ -1010,21 +1001,12 @@ def profile_settings_personal(user):
 
 	return render_template('/admin/profile/settings/personal.html', title="Admin", form=form)
 
-@admin.route('/admin/profile/settings/contact_<user>', methods=['GET', 'POST'])
+@admin.route('/admin/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_contact(user):
 
-	if user == 'academicservices':
-		value = 4
-	elif user == 'formationmissionidentity':
-		value = 3
-	elif user == 'president':
-		value = 2
-	else:
-		value = 1
-
-	user_information_update = user_information.profile_info_update(value)
-	user_account_update = user_account.profile_acc_update(value)
+	user_information_update = user_information.profile_info_update(current_user.id)
+	user_account_update = user_account.profile_acc_update(current_user.id)
 
 	form = ProfileContactUpdateForm()
 
@@ -1042,7 +1024,7 @@ def profile_settings_contact(user):
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('admin.profile_settings_contact', user=user))
+		return redirect(url_for('admin.profile_settings_contact', user=current_user.username))
 
 	else:
 
@@ -1053,20 +1035,11 @@ def profile_settings_contact(user):
 
 	return render_template('/admin/profile/settings/contact.html', title="Admin", form=form)	
 
-@admin.route('/admin/profile/settings/username_<user>', methods=['GET', 'POST'])
+@admin.route('/admin/profile/settings/username|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_username(user):
 
-	if user == 'academicservices':
-		value = 4
-	elif user == 'formationmissionidentity':
-		value = 3
-	elif user == 'president':
-		value = 2
-	else:
-		value = 1
-
-	user_account_update = user_account.profile_acc_update(value)
+	user_account_update = user_account.profile_acc_update(current_user.id)
 
 	form = ProfileUsernameUpdateForm()
 
@@ -1082,7 +1055,7 @@ def profile_settings_username(user):
 
 			flash('Username was successfully updated!', 'success')
 
-			return redirect(url_for('admin.profile_settings_username', user=user))
+			return redirect(url_for('admin.profile_settings_username', user=current_user.username))
 
 		else:
 
@@ -1094,20 +1067,11 @@ def profile_settings_username(user):
 
 	return render_template('/admin/profile/settings/username.html', title="Admin", form=form)
 
-@admin.route('/admin/profile/update/password_<user>', methods=['GET', 'POST'])
+@admin.route('/admin/profile/settings/password|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_password(user):
 
-	if user == 'academicservices':
-		value = 4
-	elif user == 'formationmissionidentity':
-		value = 3
-	elif user == 'president':
-		value = 2
-	else:
-		value = 1
-
-	user_account_update = user_account.profile_acc_update(value)
+	user_account_update = user_account.profile_acc_update(current_user.id)
 
 	form = PasswordUpdateForm()
 
@@ -1123,7 +1087,7 @@ def profile_settings_password(user):
 
 			flash('Password was successfully updated!', 'success')
 
-			return redirect(url_for('admin.profile_settings_password', user=user))
+			return redirect(url_for('admin.profile_settings_password', user=current_user.username))
 
 		else:
 

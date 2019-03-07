@@ -92,7 +92,7 @@ def communities(page, search):
 
 	return render_template('/religious_admin/communities/index.html', form=form, communities=communities, search=search, active='communities')
 
-@religious_admin.route('/religious_admin/profile/about/<user>')
+@religious_admin.route('/religious_admin/profile/about|<user>')
 @login_required
 def profile_about(user):
 
@@ -100,7 +100,7 @@ def profile_about(user):
 
 	return render_template('/religious_admin/profile/about.html', title="religious_admin", religious_admin=religious_admin)
 
-@religious_admin.route('/religious_admin/profile/settings/personal_<user>', methods=['GET', 'POST'])
+@religious_admin.route('/religious_admin/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_personal(user):
 
@@ -134,7 +134,7 @@ def profile_settings_personal(user):
 
 	return render_template('/religious_admin/profile/settings/personal.html', title="religious_admin", form=form)
 
-@religious_admin.route('/religious_admin/profile/settings/contact_<user>', methods=['GET', 'POST'])
+@religious_admin.route('/religious_admin/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_contact(user):
 
@@ -168,7 +168,7 @@ def profile_settings_contact(user):
 
 	return render_template('/religious_admin/profile/settings/contact.html', title="religious_admin", form=form)	
 
-@religious_admin.route('/religious_admin/profile/settings/username_<user>', methods=['GET', 'POST'])
+@religious_admin.route('/religious_admin/profile/settings/username|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_username(user):
 
@@ -200,7 +200,7 @@ def profile_settings_username(user):
 
 	return render_template('/religious_admin/profile/settings/username.html', title="religious_admin", form=form)
 
-@religious_admin.route('/religious_admin/profile/update/password_<user>', methods=['GET', 'POST'])
+@religious_admin.route('/religious_admin/profile/update/password|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_password(user):
 

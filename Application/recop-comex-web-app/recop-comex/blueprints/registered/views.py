@@ -220,7 +220,7 @@ def termsandconditions():
 
 	return render_template('/registered/termsandconditions/index.html', active='termsandconditions')
 
-@registered.route('/registered/profile/about/<user>')
+@registered.route('/registered/profile/about|<user>')
 @login_required
 def profile_about(user):
 
@@ -228,15 +228,15 @@ def profile_about(user):
 
 	return render_template('/registered/profile/about.html', title="registered", registered=registered, active='about')
 
-@registered.route('/registered/profile/eventsattended')
+@registered.route('/registered/profile/eventsattended|<user>')
 @login_required
-def profile_eventsattended():
+def profile_eventsattended(user):
 
 	return render_template('/registered/profile/eventsattended.html', title="registered", active='eventsattended')	
 
-@registered.route('/registered/profile/settings/personal', methods=['GET', 'POST'])
+@registered.route('/registered/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_personal():
+def profile_settings_personal(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 
@@ -255,7 +255,7 @@ def profile_settings_personal():
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('registered.profile_settings_personal'))
+		return redirect(url_for('registered.profile_settings_personal', user=current_user.username))
 
 	else:
 
@@ -268,9 +268,9 @@ def profile_settings_personal():
 
 	return render_template('/registered/profile/settings/personal.html', form=form)
 
-@registered.route('/registered/profile/settings/contact', methods=['GET', 'POST'])
+@registered.route('/registered/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_contact():
+def profile_settings_contact(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
@@ -291,7 +291,7 @@ def profile_settings_contact():
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('registered.profile_settings_contact'))
+		return redirect(url_for('registered.profile_settings_contact'), user=current_user.username)
 
 	else:
 
@@ -302,9 +302,9 @@ def profile_settings_contact():
 
 	return render_template('/registered/profile/settings/contact.html', form=form)	
 
-@registered.route('/registered/profile/settings/username', methods=['GET', 'POST'])
+@registered.route('/registered/profile/settings/username|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_username():
+def profile_settings_username(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
 
@@ -322,7 +322,7 @@ def profile_settings_username():
 
 			flash('Username was successfully updated!', 'success')
 
-			return redirect(url_for('registered.profile_settings_username'))
+			return redirect(url_for('registered.profile_settings_username', user=current_user.username))
 
 		else:
 
@@ -334,9 +334,9 @@ def profile_settings_username():
 
 	return render_template('/registered/profile/settings/username.html', form=form)
 
-@registered.route('/registered/profile/update/password', methods=['GET', 'POST'])
+@registered.route('/registered/profile/settings/password|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_password():
+def profile_settings_password(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
 
@@ -354,7 +354,7 @@ def profile_settings_password():
 
 			flash('Password was successfully updated!', 'success')
 
-			return redirect(url_for('registered.profile_settings_password'))
+			return redirect(url_for('registered.profile_settings_password', user=current_user.username))
 
 		else:
 
