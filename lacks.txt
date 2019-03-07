@@ -31,6 +31,7 @@ finished event reports
 event participant add search(serge)
 remove reports
 members audit_trail(???)
+members( no. of child??)
 
 Registered
 Dashboard
