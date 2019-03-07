@@ -55,7 +55,7 @@ def events(status, page, search):
 
 		return redirect(url_for('communities.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/communities/events/index.html', title="Events | Communities", form=form, events=events, status=status, search=search, active='events')
+	return render_template('/communities/events/index.html', title="Events", form=form, events=events, status=status, search=search, active='events')
 
 @communities.route('/communities/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -63,7 +63,7 @@ def events_calendar():
 
 	events = event_information.calendar()
 	
-	return render_template('/communities/events/index-calendar.html', title="Events | Communities", events=events, active='events')
+	return render_template('/communities/events/index-calendar.html', title="Events", events=events, active='events')
 	
 @communities.route('/communities/events/show/id=<id>')
 @login_required
@@ -75,7 +75,7 @@ def event_participants(id):
 
 	form = SearchForm()
 
-	return render_template('/communities/events/add_participants.html', title= event.name.title() + " | Communities", event = event, participants=participants,joined=joined, form=form, active='events')
+	return render_template('/communities/events/add_participants.html', title= event.name.title() , event = event, participants=participants,joined=joined, form=form, active='events')
 
 @communities.route('/communities/event_<id>/<action>/<participant>')
 @login_required

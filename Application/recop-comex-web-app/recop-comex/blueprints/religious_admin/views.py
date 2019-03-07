@@ -54,7 +54,7 @@ def events(status, page, search):
 
 		return redirect(url_for('religious_admin.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/religious_admin/events/index.html', title="Events | Religious Admin", form=form, events=events, status=status, search=search, active='events')
+	return render_template('/religious_admin/events/index.html', title="Events", form=form, events=events, status=status, search=search, active='events')
 
 @religious_admin.route('/religious_admin/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -62,7 +62,7 @@ def events_calendar():
 
 	events = event_information.calendar()
 	
-	return render_template('/religious_admin/events/index-calendar.html', title="Events | Communities", events=events, active='events')
+	return render_template('/religious_admin/events/index-calendar.html', title="Events", events=events, active='events')
 	
 @religious_admin.route('/religious_admin/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required

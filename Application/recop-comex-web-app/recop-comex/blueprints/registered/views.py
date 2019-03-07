@@ -54,7 +54,7 @@ def events(status, page, search):
 
 		return redirect(url_for('registered.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/registered/events/index.html', title="Events | Registered", form=form, events=events, status=status, search=search, active='events')
+	return render_template('/registered/events/index.html', title="Events", form=form, events=events, status=status, search=search, active='events')
 
 @registered.route('/registered/events/calendar', methods=['GET', 'POST'])
 @login_required

@@ -1,0 +1,57 @@
+{% extends "linkages-base.html" %}
+
+{% block content %}
+		
+		<section class="hero is-fullheight">
+			<div class="hero-body">
+			    <div class="box white is-white">
+			    	<form action="" method="POST" enctype="multipart/form-data">
+			    		{{form.hidden_tag()}}
+					    <div class="columns">
+					      	<div class="column">
+					      		<article class="media">
+									<figure class="media-left">
+									    <a class="btn btn-follow btn-sm text-center" href="{{url_for('linkages.event_photos', id=event.id)}}" role="button">
+											<span class="back-icon">
+									  			<i class="fas fa-arrow-circle-left fa-2x"></i>
+									  		</span>
+									  	</a>
+									</figure>
+								</article>
+					      	</div>
+					    </div>
+
+				        <div class="columns">
+					      	<div class="column">
+					      		<p class="title has-text-centered">Add Event Photos</p>
+					      		<p class="subtitle has-text-centered">{{event.name}}</p>
+					      	</div>
+				     	</div>
+
+				     	<div class="columns">
+							<div class="column">
+								<div class="field">
+									{{form.photos.label(class_='label')}}
+						            <div class="control">
+										{{form.photos(class_='input', accept='.png, .jpg, .jpeg, .gif')}}
+									</div>
+									{% for error in form.photos.errors %}
+									<span>{{error}}</span>
+									{% endfor %}
+						        </div>
+							</div>
+						</div>
+
+						<div class="field is-grouped is-grouped-centered">
+							<p class="control">
+							  	{{form.submit(class_='button submit')}}
+							</p>
+						</div>
+
+					</form>
+
+				</div>
+			</div>
+		</section>
+
+{% endblock %}

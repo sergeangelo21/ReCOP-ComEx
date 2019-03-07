@@ -3,14 +3,12 @@ Donation History
 Notification
 
 Unregistered
-donate redesign lang
 refer someone buttons
 
 Admin
 Dashboard
 Event reports
 events organized/attended	
-referrals remove tab
 feedbacks
 Volunteers
 
@@ -25,12 +23,6 @@ Dashboard
 donotshow himself
 finished event reports
 event participant add search(serge)
-<<<<<<< HEAD
-=======
-remove reports
-members audit_trail(???)
-members( no. of child??)
->>>>>>> 4c041ac6d7e409fa0a36aade7c41a3261c1a10d8
 
 Registered
 Dashboard

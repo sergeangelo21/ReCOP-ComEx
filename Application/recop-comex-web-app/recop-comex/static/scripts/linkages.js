@@ -116,6 +116,41 @@ function close_eval(value){
     document.getElementById('participant').value=''
 }
 
+function show_caption(value){
+
+    a = document.getElementById('modal')
+    a.className="modal is-active"
+
+    document.getElementById(value+'_div').className='fields'
+    document.getElementById(value+'_btn').className='delete'
+    document.getElementById('photo').value=value
+
+}
+
+function close_caption(value){
+    a = document.getElementById('modal')
+    a.className="modal"
+    document.getElementById(value+'_div').className='hidden'
+    document.getElementById(value+'_btn').className='hidden'
+    document.getElementById('photo').value=''
+}
+
+function show_captioned(value){
+    a = document.getElementById(value+'_finished')
+    a.className="modal is-active"
+
+}
+
+function close_captioned(value){
+    a = document.getElementById(value+'_finished')
+    a.className="modal"
+}
+
+function edit_caption(value){
+    close_captioned(value)
+    show_caption(value)
+}
+
 function show_rating(value){
 
     a = document.getElementById(value+'_rating')

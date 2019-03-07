@@ -236,7 +236,7 @@
 	    			{% if event.event_status=='F' %}
 	    			<div class="columns">
 	    				<div class="column">
-	    					<a href="" class="level-item">
+	    					<a  href="{{url_for('linkages.event_photos', id=event.id)}}" class="level-item">
 			  					<button class="button is-success"><span class="icon is-small"><i class="fas fa-images"></i></span>&nbsp Photos</button>
 							</a>
 	    				</div>

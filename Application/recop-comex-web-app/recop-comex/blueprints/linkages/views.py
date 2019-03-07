@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, send_from_directory
+from flask import Blueprint, render_template, redirect, url_for, flash, send_from_directory, request
 from flask_login import current_user, logout_user, login_required
 from blueprints.linkages.forms import *
-from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, donation, referral
+from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, event_photo, donation, referral
 from data_access.queries import user_views, linkage_views, event_views
 from extensions import db, bcrypt
 from static.email import generate, send_email
@@ -99,7 +99,7 @@ def event_show(id):
 
 	form=SearchForm()
 
-	return render_template('/linkages/events/show.html', title= event.name.title() + " | Linkages", event = event, participants=participants,form=form, active='events')
+	return render_template('/linkages/events/show.html', title= event.name.title() , event = event, participants=participants,form=form, active='events')
 
 @linkages.route('/linkages/events/conduct/<id>')
 @login_required
@@ -107,9 +107,80 @@ def event_conduct(id):
 
 	event = event_views.show_info(id)
 
-	return render_template('/linkages/events/conduct.html', title= event.name.title() + " | Linkages",event=event, active='events')
+	return render_template('/linkages/events/conduct.html', title= event.name.title() ,event=event, active='events')
+
+@linkages.route('/linkages/events/photos/<id>', methods=['GET', 'POST'])
+@login_required
+def event_photos(id):
+
+	event = event_views.show_info(id)
+
+	photos  = event_photo.show(id)
+
+	form = CaptionForm()
+
+	if form.validate_on_submit():
+
+		value = [form.photo.data, form.caption.data]
+		event_photo.caption(value)
+		flash('Caption added to photo!', 'success')
+		return redirect(url_for('linkages.event_photos', id=event.id))
+
+	return render_template('/linkages/events/photos.html', title= event.name.title() ,event=event, photos=photos, form=form, active='events')
+
+@linkages.route('/linkages/events/photos/add/<id>', methods=['GET', 'POST'])
+@login_required
+def add_photos(id):
+
+	event = event_views.show_info(id)
+	form = PhotoForm()
+
+	print()
+	if form.validate_on_submit():
+
+		for file in form.photos.data:
+
+			old, extension = os.path.splitext(file.filename)
+
+			extension = extension.lower()
+			
+			if extension==".jpg" or extension==".jpeg" or extension==".png" or extension==".gif":
+				continue
+			else:
+				flash('Invalid file detected!', 'error')
+				return redirect(url_for('linkages.add_photos', id=id))
+
+		path = 'static/photos/events/'+id
+
+		if not os.path.isdir(path):
+			os.mkdir(path)
+
+		for file in form.photos.data:
+
+			old, extension = os.path.splitext(file.filename)
+			filepath = path + '/' + file.filename
+			file.save(filepath)
+
+			value = [None, id, filepath, None, 'Y']
+			event_photo.add(value)
+
+		flash('Photos successfully uploaded!', 'success')
+		return redirect(url_for('linkages.event_photos', id=id))
+
+	return render_template('/linkages/events/add_photos.html', title= event.name.title() ,event=event, form=form, active='events')
+
+@linkages.route('/linkages/events/photos/delete/<id>_from_<event>', methods=['GET', 'POST'])
+@login_required
+def delete_photo(id, event):
+
+	event_photo.delete(id)
+
+	flash('Photo was deleted!', 'success')
+
+	return redirect(url_for('linkages.event_photos', id=event))
 
 @linkages.route('/linkages/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
+@login_required
 def linkages_show(page, search):
 
 	linkages = linkage_views.show_list(['A', search, 3, page])
@@ -144,7 +215,7 @@ def event_attendance(id, search):
 
 		return redirect(url_for('linkages.event_attendance', id=id, search=form.search.data))
 
-	return render_template('/linkages/events/attendance.html', title= event.name.title() + " | Linkages",event=event,participants=participants,form=form, search=search, active='events')
+	return render_template('/linkages/events/attendance.html', title= event.name.title() ,event=event,participants=participants,form=form, search=search, active='events')
 
 @linkages.route('/linkages/events/attendance/<id>/<action>.user_<user>')
 @login_required
@@ -185,7 +256,7 @@ def event_evaluation(id, search):
 		return redirect(url_for('linkages.event_evaluation', id=id, search=search))
 
 
-	return render_template('/linkages/events/evaluation.html', title= event.name.title() + " | Linkages",event=event,participants=participants,form=form, evaluate = evaluate, search=search, active='events')
+	return render_template('/linkages/events/evaluation.html', title= event.name.title() ,event=event,participants=participants,form=form, evaluate = evaluate, search=search, active='events')
 
 @linkages.route('/linkages/events/create', methods=['GET', 'POST'])
 @login_required
