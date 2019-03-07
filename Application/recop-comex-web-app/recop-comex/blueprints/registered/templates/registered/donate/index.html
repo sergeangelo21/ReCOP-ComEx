@@ -196,7 +196,7 @@
                             <div class="field-body">
                                 <div class="field">
                                     <div class="control has-icon has-icon-right">
-                                        {{form.trans_slip(class_='input', placeholder='Amount')}}
+                                        {{form.trans_slip(class_='input', accept='.png, .jpg, .jpeg, .gif')}}
                                         {% for error in form.trans_slip.errors %}
                                         <span style="color: red;">[{{ error }}]</span>
                                         {% endfor %}

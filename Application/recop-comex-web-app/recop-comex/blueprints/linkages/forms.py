@@ -62,9 +62,9 @@ class ProfilePersonalUpdateForm(FlaskForm):
     submit = SubmitField('Update')
 
 class ProfileContactUpdateForm(FlaskForm):
-    address = StringField('Address', [validators.Length(min=10, max=100)])
-    telephone = StringField('Telephone Number', [validators.Length(min=7, max=15)])
-    mobile = StringField('Mobile Number', [validators.Length(min=11, max=25)])
+    address = StringField('Address', [validators.Length(min=0, max=100)])
+    telephone = StringField('Telephone Number', [validators.Length(min=0, max=15)])
+    mobile = StringField('Mobile Number', [validators.Length(min=0, max=25)])
     email = StringField('Email Address', [validators.Length(min=0, max=30)] )
     submit = SubmitField('Update')
 
