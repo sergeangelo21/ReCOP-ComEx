@@ -79,5 +79,19 @@
 												</span>
 											</a>
 											{% endif %}
+											{% if event.event_status=='F' %}
+											{% if event.organizer_id==1 %}
+											<a class="button is-success tooltip" data-tooltip="Photos" href="">
+												<span class="icon">
+													<i class="fas fa-images"></i>
+												</span>
+											</a>
+											{% endif %}
+											<a class="button is-primary tooltip" data-tooltip="Reports" href="">
+												<span class="icon">
+													<i class="fas fa-folder-open"></i>
+												</span>
+											</a>
+											{% endif %}
 										</td>
 									</tr>

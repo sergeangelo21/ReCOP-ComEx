@@ -1,33 +1,33 @@
-DONATION LAYOUT (Leen)
-For registered add previous donations views on the left side
+MENU FOR LEEN
+
+U - Communities
+A -  Volunteers	(after comm)
+L - Linkages 
+C - Communities & Donations
+
+
 
 
 Unregistered
-communities tab
-events calendar
 refer someone buttons
-join event redirect lang utang na loob hahahha
 
 Admin
 Dashboard
 Event reports
 events organized/attended	
-feedbacks
 referrals remove tab
 feedbacks
+Volunteers
 
 Linkages
 Dashboard
-LINKAGES MENU
 FInished events reports
 resched cancel (alex)
-Volunteers?(serge)
 
 Communities
 Dashboard
 menu is active. naah so eassy
 finished event reports
-communities and donations menu
 event participant add search(serge)
 remove reports
 members audit_trail(???)
@@ -49,7 +49,6 @@ filters dropdown
 NOTHING TO SHOW!!!
 validations
 error traps
-finish reports (serge)
 graphs(alex)
 normalized 
 pdf and email templates

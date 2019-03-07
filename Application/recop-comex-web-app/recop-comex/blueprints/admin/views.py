@@ -616,7 +616,7 @@ def community_action(id):
 
 	user_account.update_status(user.id, status)
 
-	return redirect(url_for('admin.communities', status='all', search=' '))
+	return redirect(url_for('admin.communities', status='all', page='1', search=' '))
 
 @admin.route('/admin/donations/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
