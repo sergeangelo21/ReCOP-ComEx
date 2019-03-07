@@ -39,6 +39,13 @@ def events(page, search):
 
 	return render_template('/unregistered/events/index.html', events=events, active='events')
 
+@unregistered.route('/events/calendar', methods=['GET', 'POST'])
+def events_calendar():
+
+	events = event_information.calendar()
+	
+	return render_template('/unregistered/events/index-calendar.html', title="Events", events=events, active='events')
+
 @unregistered.route('/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
 def linkages(page, search):
 
