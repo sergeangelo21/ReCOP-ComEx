@@ -295,6 +295,8 @@ def event_photos(id):
 
 	event = event_views.show_info(id)
 
+	photos = event_photo.show(id)
+
 	photo = user_photo.photo(current_user.info_id)
 
 	form = CaptionForm()
@@ -306,7 +308,7 @@ def event_photos(id):
 		flash('Caption added to photo!', 'success')
 		return redirect(url_for('admin.event_photos', id=event.id))
 
-	return render_template('/admin/events/photos.html', title= event.name.title() ,event=event, photo=photo, form=form, active='events')
+	return render_template('/admin/events/photos.html', title= event.name.title() ,event=event, photos=photos, photo=photo, form=form, active='events')
 
 @admin.route('/admin/events/photos/add/<id>', methods=['GET', 'POST'])
 @login_required
@@ -1065,7 +1067,7 @@ def profile_about(user):
 		else:
 			user_photo.add([None, current_user.info_id, file_path])
 
-		flash('Profile picture has been updated!')
+		flash('Profile picture has been updated!', 'success')
 		return redirect(url_for('admin.profile_about', user=user))
 
 	return render_template('/admin/profile/about.html', title="Admin", photo=photo, form=form,admin=admin)
