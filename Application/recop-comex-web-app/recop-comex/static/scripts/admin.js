@@ -214,7 +214,7 @@ function remove_comm(value){
 function show_slip(value){
 
 	a = document.getElementById(value+'_modal')
-	a.className="modal is-active"
+	a.style.display='block'
 
 }
 
@@ -357,27 +357,26 @@ function donate_choose(value){
     comm = document.getElementById('comm')
     events = document.getElementById('events')
     sponsor = document.getElementById('sponsor')
+    trans_slip = document.getElementById('trans_slip')
     sel_comm = document.getElementById('sponsee')
+
     if (value==1){
         comm.className="column"
         events.className="hidden"
         sponsor.className="column"
+        trans_slip.className="columns"
 
-        if (document.getElementById('event')){
+        if (sel_event){
     		sel_event.value=''
 		}
-
+        
     }
     else{
         comm.className="hidden"
         events.className="column"
         sponsor.className="column"
+        trans_slip.className="columns"
         sel_comm.value=''
-
-    }
-
-    if (window.location.pathname=='/admin/inventory/add'){
-		document.getElementById('trans_slip').className="columns"
     }
 
 }
@@ -421,13 +420,13 @@ function donate_type(value){
     money = document.getElementById('amount')
 
     if (value==1){
-        amount.className="column"
-        trans.className="column"
+        amount.className="field is-horizontal"
+        trans.className="field is-horizontal"
         money.value=''
     }
     else{
         amount.className="hidden"
-        trans.className="column"
+        trans.className="field is-horizontal"
         money.value = 0.00
     }
 
@@ -497,56 +496,13 @@ function filtershrink() {
 function show_item(value){
 
     a = document.getElementById(value+'_modal')
-    a.className="modal is-active"
+    a.style.display='block'
 
 }
 
 function close_item(value){
     a = document.getElementById(value+'_modal')
-    a.className="modal"
-
-}
-
-function show_breakdown(value){
-
-    a = document.getElementById(value+'_items')
-    a.className="modal is-active"
-
-}
-
-function close_breakdown(value){
-    a = document.getElementById(value+'_items')
-    a.className="modal"
-
-}
-
-function show_action(value){
-
-    a = document.getElementById(value[0]+'_action')
-    b = document.getElementById(value[1]+'_modal')
-    p = document.getElementById(value[0]+'_head')
-    a.className="modal is-active"
-    b.className="modal"
-
-    if(value[2]=='give'){
-
-    	document.getElementById(value[0]).value='give'
-    	p.innerHTML='Give Items'
-
-    }
-    else{
-		document.getElementById(value[0]).value='dispose' 	
-    	p.innerHTML='Dispose Items'
-    }
-
-}
-
-function close_action(value){
-    a = document.getElementById(value[0]+'_action')
-    b = document.getElementById(value[1]+'_modal')
-   	document.getElementById(value[0]).value=''
-   	a.className="modal"
-    b.className="modal is-active"
+    a.style.display='none'
 
 }
 
@@ -574,56 +530,5 @@ else{
     lbl.innerHTML = revert
     active.placeholder = revert
     document.getElementById('thrust_field').style.display=""
-    }
-}
-function show_eval(value){
-
-    a = document.getElementById('modal')
-    a.className="modal is-active"
-
-    document.getElementById(value+'_div').className='fields'
-    document.getElementById(value+'_btn').className='delete'
-    document.getElementById('participant').value=value
-
-}
-
-function close_eval(value){
-    a = document.getElementById('modal')
-    a.className="modal"
-    document.getElementById(value+'_div').className='hidden'
-    document.getElementById(value+'_btn').className='hidden'
-    document.getElementById('participant').value=''
-}
-
-function show_rating(value){
-
-    a = document.getElementById(value+'_rating')
-    a.className="modal is-active"
-
-}
-
-function close_rating(value){
-    a = document.getElementById(value+'_rating')
-    a.className="modal"
-
-}
-
-function scale(value){
-
-    lbl = document.getElementById('scale')
-    if (value=='rating-0'){
-        lbl.innerHTML='Excellent (5)'
-    }
-    else if (value=='rating-1'){
-         lbl.innerHTML='Very Good (4)'       
-    }
-    else if (value=='rating-2'){
-         lbl.innerHTML='Fair (3)'       
-    }
-    else if (value=='rating-3'){
-         lbl.innerHTML='Poor (2)'       
-    }
-    else{
-        lbl.innerHTML='Very Poor (1)'
     }
 }

@@ -1,6 +1,3 @@
-var carousels = bulmaCarousel.attach(); // carousels now contains an array of all Carousel instances
-setInterval(3000);
-
 if(window.location.pathname=='/communities/events/calendar'){
     var today = new Date()
     var month = today.getMonth() + 1
@@ -32,7 +29,8 @@ function check_pass()
     }
 }
 
-function employed(value){
+function employed(value)
+{
 
     occupation = document.getElementById('occupation_field')
     income = document.getElementById('income_field')
@@ -41,8 +39,8 @@ function employed(value){
     {
         document.getElementById('occupation_field').style.display="none"
         document.getElementById('income_field').style.display="none"
-        document.getElementById('occupation').value = ''
-        document.getElementById('income').value = 0
+        occupation.value = null
+        income.value = 0.00
 
     }
 
@@ -50,6 +48,8 @@ function employed(value){
     {
         document.getElementById('occupation_field').style.display="block"
         document.getElementById('income_field').style.display="block"
+        occupation.value = null
+        income.value = 0.00
     }
 }
 
