@@ -32,7 +32,6 @@ General (Maybe kaartehan)
 Admin (activity logs)
 contact us
 Help
-change dp (Marian)
 filters dropdown (Alex)
 error traps
 graphs(alex)
