@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, logout_user, current_user, login_required
 from blueprints.religious_admin.forms import *
-from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment, donation
+from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment, donation, user_photo
 from data_access.queries import user_views, event_views, linkage_views
 from datetime import datetime
 
@@ -92,13 +92,32 @@ def communities(page, search):
 
 	return render_template('/religious_admin/communities/index.html', form=form, communities=communities, search=search, active='communities')
 
-@religious_admin.route('/religious_admin/profile/about|<user>')
+@religious_admin.route('/religious_admin/profile/about|<user>' , methods=['GET', 'POST'])
 @login_required
 def profile_about(user):
 
 	religious_admin = user_views.profile_info(current_user.info_id)
+	photo = user_photo.photo(current_user.info_id)
+	form = PictureForm()
 
-	return render_template('/religious_admin/profile/about.html', title="religious_admin", religious_admin=religious_admin)
+	if form.validate_on_submit():
+
+		file = form.photo.data
+		old, extension = os.path.splitext(file.filename)
+		filename = str(current_user.info_id)+extension
+		file_path = 'static/photos/profiles/' + filename
+
+		file.save(file_path)
+
+		if photo:
+			user_photo.update([current_user.info_id, file_path])
+		else:
+			user_photo.add([None, current_user.info_id, file_path])
+
+		flash('Profile picture has been updated!')
+		return redirect(url_for('religious_admin.profile_about', user=user))
+
+	return render_template('/religious_admin/profile/about.html', title="religious_admin",  photo=photo, form=form, religious_admin=religious_admin)
 
 @religious_admin.route('/religious_admin/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required

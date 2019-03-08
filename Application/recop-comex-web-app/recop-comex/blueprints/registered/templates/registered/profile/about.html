@@ -4,7 +4,12 @@
 		<div class="panel panel-default">
 		    <div class="overlay-card has-text-centered">
 		    	<div class="circular">
-		    		<img src="https://i.mydramalist.com/jrWO8c.jpg">
+		    		{% if photo.path %}
+		    		<img src="../../../{{photo.path}}" id='dp'>
+		    		{% else %}
+		    		<img src="../../../static/images/user-default.png" id='dp'>
+		    		{% endif %}
+		    		<button class="button is-small add" style="top:85%;" onclick='show_profile()'><i class="fas fa-pen"></i></button>
 		    	</div>
 
 		        <div class="row-profile has-text-centered">
@@ -193,4 +198,36 @@
 			    </div>
 			</div>
 		</section>
+
+	<div id=modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title  has-text-white">Change Picture</p>
+      				<button class="delete" onclick="close_profile()"></button>
+    			</header>
+	    		<section class="modal-card-body">
+		    	<form action='' method='POST' enctype="multipart/form-data">
+		    		{{form.hidden_tag()}}
+		    		<div class='field'>
+		    			<div class="control">
+		    			<img class="image is-128x128" id='show'>
+		    			{{form.photo.label(class='label')}}
+		    			{{form.photo(class='input', accept=".jpg, .jpeg, .png,.gif'", onchange="profile()")}}
+		    			{% for e in form.photo.errors %}
+		    				{{e}}
+		    			{% endfor %}
+
+		    			</div>
+		    		</div>
+
+
+	      		</section>
+
+	    		<footer class="modal-card-foot buttons is-right">
+	    			{{form.submit(class="button add")}}
+	    		</footer>
+		    	</form>
+	  		</div>
+	</div>
 {% endblock %}

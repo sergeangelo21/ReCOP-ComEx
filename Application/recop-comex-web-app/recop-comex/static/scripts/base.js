@@ -24,3 +24,30 @@ function show_notif(){
 	}
 
 }
+
+function show_profile(){
+
+	a = document.getElementById('modal')
+	a.className = "modal is-active"
+	 document.getElementById('photo').value=''
+	document.getElementById('show').src = document.getElementById('dp').src
+}
+
+function close_profile(){
+
+	a = document.getElementById('modal')
+	a.className = "modal"
+}
+
+function profile() {
+    var file = document.getElementById('photo').files[0];
+    var reader  = new FileReader();
+    // it's onload event and you forgot (parameters)
+    reader.onload = function(e)  {
+        var image = document.getElementById('show');
+        // the result image data
+        image.src = e.target.result;
+    }
+     // you have to declare the file loading
+     reader.readAsDataURL(file);
+ }

@@ -8,6 +8,10 @@ class SearchForm(FlaskForm):
     search = StringField("Search", validators=[DataRequired()])
     submit = SubmitField("Search")
 
+class PictureForm(FlaskForm):
+    photo = FileField("Photo", validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField("Change Picture")
+    
 class PhotoForm(FlaskForm):
     photos   = MultipleFileField('Photos to Add', validators=[DataRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
     submit = SubmitField('Upload')

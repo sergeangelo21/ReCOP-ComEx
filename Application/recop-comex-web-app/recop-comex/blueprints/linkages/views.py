@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, send_from_directory, request
 from flask_login import current_user, logout_user, login_required
 from blueprints.linkages.forms import *
-from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, event_photo, donation, referral
+from data_access.models import user_account, event_information, event_participation, proposal_tracker, user_information, event_attachment, event_photo, donation, referral, user_photo
 from data_access.queries import user_views, linkage_views, event_views, donation_views
 from extensions import db, bcrypt
 from static.email import generate, send_email
@@ -463,13 +463,33 @@ def termsandconditions():
 
 	return render_template('/linkages/termsandconditions/index.html', active='termsandconditions')
 
-@linkages.route('/linkages/profile/about|<user>')
+@linkages.route('/linkages/profile/about|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_about(user):
 
 	linkages = user_views.profile_info(current_user.info_id)
 
-	return render_template('/linkages/profile/about.html', title="Linkages", linkages=linkages)
+	photo = user_photo.photo(current_user.info_id)
+	form = PictureForm()
+
+	if form.validate_on_submit():
+
+		file = form.photo.data
+		old, extension = os.path.splitext(file.filename)
+		filename = str(current_user.info_id)+extension
+		file_path = 'static/photos/profiles/' + filename
+
+		file.save(file_path)
+
+		if photo:
+			user_photo.update([current_user.info_id, file_path])
+		else:
+			user_photo.add([None, current_user.info_id, file_path])
+
+		flash('Profile picture has been updated!')
+		return redirect(url_for('linkages.profile_about', user=user))
+
+	return render_template('/linkages/profile/about.html', title="Linkages",  photo=photo, form=form, linkages=linkages)
 
 @linkages.route('/linkages/profile/eventsattended|<user>')
 @login_required

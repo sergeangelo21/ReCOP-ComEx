@@ -1023,13 +1023,32 @@ def referral():
 
 	return render_template('/admin/referral/index.html', title="Referral", active='referral')
 
-@admin.route('/admin/profile/about|<user>')
+@admin.route('/admin/profile/about|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_about(user):
 
 	admin = user_views.profile_info(current_user.info_id)
+	photo = user_photo.photo(current_user.info_id)
+	form = PictureForm()
 
-	return render_template('/admin/profile/about.html', title="Admin", admin=admin)
+	if form.validate_on_submit():
+
+		file = form.photo.data
+		old, extension = os.path.splitext(file.filename)
+		filename = str(current_user.info_id)+extension
+		file_path = 'static/photos/profiles/' + filename
+
+		file.save(file_path)
+
+		if photo:
+			user_photo.update([current_user.info_id, file_path])
+		else:
+			user_photo.add([None, current_user.info_id, file_path])
+
+		flash('Profile picture has been updated!')
+		return redirect(url_for('admin.profile_about', user=user))
+
+	return render_template('/admin/profile/about.html', title="Admin", photo=photo, form=form,admin=admin)
 
 @admin.route('/admin/profile/eventsattended|<user>')
 @login_required

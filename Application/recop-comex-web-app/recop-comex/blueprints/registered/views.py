@@ -1,7 +1,7 @@
 from flask import Flask, Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, logout_user, login_required
 from blueprints.registered.forms import *
-from data_access.models import donation, user_account, user_information, event_information, event_participation, event_attachment, donation
+from data_access.models import donation, user_account, user_information, event_information, event_participation, event_attachment, donation, user_photo
 from data_access.queries import user_views, linkage_views, event_views, donation_views
 from datetime import datetime
 
@@ -222,13 +222,32 @@ def termsandconditions():
 
 	return render_template('/registered/termsandconditions/index.html', active='termsandconditions')
 
-@registered.route('/registered/profile/about|<user>')
+@registered.route('/registered/profile/about|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_about(user):
 
 	registered = user_views.profile_info(current_user.info_id)
+	photo = user_photo.photo(current_user.info_id)
+	form = PictureForm()
 
-	return render_template('/registered/profile/about.html', title="registered", registered=registered, active='about')
+	if form.validate_on_submit():
+
+		file = form.photo.data
+		old, extension = os.path.splitext(file.filename)
+		filename = str(current_user.info_id)+extension
+		file_path = 'static/photos/profiles/' + filename
+
+		file.save(file_path)
+
+		if photo:
+			user_photo.update([current_user.info_id, file_path])
+		else:
+			user_photo.add([None, current_user.info_id, file_path])
+
+		flash('Profile picture has been updated!')
+		return redirect(url_for('registered.profile_about', user=user))
+
+	return render_template('/registered/profile/about.html', title="registered", registered=registered, photo=photo, form=form, active='about')
 
 @registered.route('/registered/profile/eventsattended|<user>')
 @login_required

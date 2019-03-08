@@ -4,12 +4,17 @@
 		<div class="panel panel-default">
 		    <div class="overlay-card has-text-centered">
 		    	<div class="circular">
-		    		<img src="../../../static/images/user-default.png">
+		    		{% if photo.path %}
+		    		<img src="../../../{{photo.path}}" id='dp'>
+		    		{% else %}
+		    		<img src="../../../static/images/user-default.png" id='dp'>
+		    		{% endif %}
+		    		<button class="button is-small add" style="top:85%;" onclick='show_profile()'><i class="fas fa-pen"></i></button>
 		    	</div>
 
 		        <div class="row-profile has-text-centered">
-		            <p class="has-text-white is-size-3 has-text-weight-bold">{{ admin.company_name }}</p>
-		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ admin.first_name }} {{ admin.middle_name }} {{ admin.last_name}} ({{ admin.username }})</a><br>
+		            <p class="has-text-white is-size-3 has-text-weight-bold">{{ admin.first_name }} {{ admin.middle_name }} {{ admin.last_name}} ({{ admin.username }}) </p>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ admin.company_name }}</a><br>
 		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ admin.email_address }}</a>
 		        </div>
 		    </div>
@@ -35,7 +40,7 @@
 			    	<a class="menu prof-icon" href="{{url_for('admin.profile_eventsattended', user=current_user.username)}}">
 				      	<p class="icon">
 					      	<span class="icon">
-					      		<i class="fas fa-calendar-alt fa-2x"></i>
+					      		<i class="fas fa-calendar-alt fa-2x""></i>
 					      	</span>
 					    </p>
 				      	<p class="is-size-6 has-text-weight-bold">Events Attended</p>
@@ -44,14 +49,14 @@
 			</div>
 
 			<div class="level-item has-text-centered">
-			    <div class="active-prof-nav" >
+			    <div class="active-prof-nav">
 			    	<a class="menu prof-icon" href="{{url_for('admin.profile_settings_personal', user=current_user.username)}}">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-cog fa-2x"></i>
 					      	</span>
 					    </p>
-				      	<p class="is-size-6 has-text-weight-bold prof-nav">Settings</p>
+				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
 				    </a>
 			    </div>
 			</div>
@@ -61,33 +66,16 @@
 			<div class="hero-body">
 			    <div class="container">
 			      	<div class="card">
-						<header class="card-header has-background-light">
+			      		<header class="card-header has-background-light">
 						    <p class="card-header-title">
 						      Basic Information
 						    </p>
 					  	</header>
 					  	<div class="card-content profile">
-
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<span><i class="fas fa-building prof-panel-icon"></i></span>
-								    	<p>Company Name</p>
-								  	</figure>
-								  	<div class="media-content">
-								    	<div class="content">
-								      		<p>
-								        		<strong>{{ admin.company_name }}</strong>
-								      		</p>
-								    	</div>
-								  	</div>
-								</article>
-							</div>
-
-						    <div class="panel-block">
-							    <article class="media">
-								  	<figure class="media-left">
-								    	<span><i class="fas fa-user prof-panel-icon"></i></span>
+								  		<span><i class="fas fa-user prof-panel-icon"></i></span>
 								    	<p>Name</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -100,10 +88,11 @@
 								</article>
 							</div>
 
+					  	
 						    <div class="panel-block">
 							    <article class="media">
 								  	<figure class="media-left">
-								    	<span><i class="fas fa-user-tag prof-panel-icon"></i></span>
+								  		<span><i class="fas fa-user-tag prof-panel-icon"></i></span>
 								    	<p>Bio</p>
 								  	</figure>
 								  	<div class="media-content">
@@ -119,7 +108,7 @@
 							<div class="panel-block">
 						    	<article class="media">
 									<figure class="media-left">
-							    		<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
+										<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
 							    		<p>Lives in</p>
 							  		</figure>
 							  		<div class="media-content">
@@ -135,7 +124,7 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
-							    		<span><i class="fas fa-birthday-cake prof-panel-icon"></i></span>
+							  			<span><i class="fas fa-birthday-cake prof-panel-icon"></i></span>
 							    		<p>Birthday</p>
 							  		</figure>
 							  		<div class="media-content">
@@ -171,16 +160,16 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
-							    		<span><i class="fas fa-phone prof-panel-icon"></i></span>
+							  			<span><i class="fas fa-phone prof-panel-icon"></i></span>
 							    		<p>Telephone Number</p>
 							  		</figure>
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							      				{% if admin.telephone=='' %}
-					                            <strong>N/A</strong>
+							        			{% if admin.telephone=='' %}
+						                            <strong>N/A</strong>
 					                            {% else %}
-					                            <strong>{{ admin.telephone }}</strong>
+					                            	<strong>{{admin.telephone}}</strong>
 					                            {% endif %}
 							      			</p>
 							    		</div>
@@ -191,18 +180,13 @@
 						  	<div class="panel-block">
 						    	<article class="media">
 							  		<figure class="media-left">
-							    		<span><i class="fas fa-mobile prof-panel-icon"></i></span>
+							  			<span><i class="fas fa-mobile prof-panel-icon"></i></span>
 							    		<p>Mobile Number</p>
 							  		</figure>
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							      				{% if admin.mobile_number=='' %}
-					                            <strong>N/A</strong>
-					                            {% else %}
-					                            <strong>{{ admin.mobile_number }}</strong>
-					                            {% endif %}
-							        			
+							        			<strong>{{ admin.mobile_number }}</strong>
 							      			</p>
 							    		</div>
 							  		</div>
@@ -214,4 +198,36 @@
 			    </div>
 			</div>
 		</section>
+
+	<div id=modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title  has-text-white">Change Picture</p>
+      				<button class="delete" onclick="close_profile()"></button>
+    			</header>
+	    		<section class="modal-card-body">
+		    	<form action='' method='POST' enctype="multipart/form-data">
+		    		{{form.hidden_tag()}}
+		    		<div class='field'>
+		    			<div class="control">
+		    			<img class="image is-128x128" id='show'>
+		    			{{form.photo.label(class='label')}}
+		    			{{form.photo(class='input', accept=".jpg, .jpeg, .png,.gif'", onchange="profile()")}}
+		    			{% for e in form.photo.errors %}
+		    				{{e}}
+		    			{% endfor %}
+
+		    			</div>
+		    		</div>
+
+
+	      		</section>
+
+	    		<footer class="modal-card-foot buttons is-right">
+	    			{{form.submit(class="button add")}}
+	    		</footer>
+		    	</form>
+	  		</div>
+	</div>
 {% endblock %}

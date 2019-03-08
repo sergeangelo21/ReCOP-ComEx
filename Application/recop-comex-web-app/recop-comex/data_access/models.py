@@ -615,6 +615,7 @@ class user_information(db.Model):
 	comm_info_id = db.relationship('community', foreign_keys=[community.community_id], backref='user_information_community', lazy=True)
 	mem_info_id = db.relationship('community', foreign_keys=[community.member_id], backref='user_information_member', lazy=True)
 	organizer_info_id = db.relationship('event_information', backref='user_information', lazy=True)
+	photo_info_id = db.relationship('user_photo', backref='user_information', lazy=True)
 
 	def add(value):
 
@@ -654,3 +655,35 @@ class user_information(db.Model):
 		record = user_information.query.filter_by(id=value).first()
 
 		return record
+
+class user_photo(db.Model):
+
+	id = db.Column(db.INT, primary_key=True)
+	user_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable='False')
+	path = db.Column(db.VARCHAR(200),nullable=False)
+
+	def add(value):
+
+		record = user_photo(
+			id=value[0],
+			user_id=value[1],
+			path=value[2]
+			)
+
+		db.session.add(record)
+		db.session.commit()
+
+	def update(value):
+
+		record = user_photo.query.filter_by(user_id=value[0]).first()
+
+		record.path = value[1]
+
+		db.session.commit()		
+		
+	def photo(value):
+
+		record = user_photo.query.filter_by(user_id=value).first()
+
+		return record
+

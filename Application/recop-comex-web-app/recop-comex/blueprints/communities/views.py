@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, logout_user, login_required
 from blueprints.communities.forms import *
-from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation, referral, event_attachment
+from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation, referral, event_attachment, user_photo
 from data_access.queries import user_views, linkage_views, community_views, event_views
 
 from static.email import send_email
@@ -281,13 +281,32 @@ def termsandconditions():
 
 	return render_template('/communities/termsandconditions/index.html', title="Communities")
 
-@communities.route('/communities/profile/about|<user>')
+@communities.route('/communities/profile/about|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_about(user):
 
 	communities = user_views.profile_info(current_user.info_id)
+	photo = user_photo.photo(current_user.info_id)
+	form = PictureForm()
 
-	return render_template('/communities/profile/about.html', title="Communities", communities=communities)
+	if form.validate_on_submit():
+
+		file = form.photo.data
+		old, extension = os.path.splitext(file.filename)
+		filename = str(current_user.info_id)+extension
+		file_path = 'static/photos/profiles/' + filename
+
+		file.save(file_path)
+
+		if photo:
+			user_photo.update([current_user.info_id, file_path])
+		else:
+			user_photo.add([None, current_user.info_id, file_path])
+
+		flash('Profile picture has been updated!')
+		return redirect(url_for('communities.profile_about', user=user))
+
+	return render_template('/communities/profile/about.html', title="Communities",  photo=photo, form=form, communities=communities)
 
 @communities.route('/communities/profile/eventsattended|<user>')
 @login_required

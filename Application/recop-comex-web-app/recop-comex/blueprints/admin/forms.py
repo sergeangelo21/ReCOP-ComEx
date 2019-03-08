@@ -5,6 +5,9 @@ from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRan
 from wtforms.widgets import TextArea
 from datetime import date
 
+class PictureForm(FlaskForm):
+    photo = FileField("Photo", validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField("Change Picture")
 
 class PostForm(FlaskForm):
     post = TextAreaField('Say something', validators=[ DataRequired(), Length(min=1, max=140)])
