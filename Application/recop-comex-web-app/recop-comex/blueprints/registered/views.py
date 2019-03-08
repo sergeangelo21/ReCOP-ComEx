@@ -31,7 +31,9 @@ def before_request():
 @login_required
 def index():
 
-	return render_template('/registered/index.html', active='home')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/registered/index.html', photo=photo, active='home')
 
 @registered.route('/registered/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -48,21 +50,25 @@ def events(status, page, search):
 
 	events = event_views.show_list([value, search, page])
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('registered.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/registered/events/index.html', title="Events", form=form, events=events, status=status, search=search, active='events')
+	return render_template('/registered/events/index.html', title="Events", form=form, events=events, status=status, search=search, photo=photo, active='events')
 
 @registered.route('/registered/events/calendar', methods=['GET', 'POST'])
 @login_required
 def events_calendar():
 
+	photo = user_photo.photo(current_user.info_id)
+
 	events = event_information.calendar()
 	
-	return render_template('/registered/events/index-calendar.html', title="Events", events=events, active='events')
+	return render_template('/registered/events/index-calendar.html', title="Events", events=events, photo=photo, active='events')
 
 @registered.route('/registered/events/<action>/id=<id>')
 @login_required
@@ -105,13 +111,15 @@ def linkages(page, search):
 
 	linkages = linkage_views.show_list(['A', search, 3, page])
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('registered.linkages', page='1', search=form.search.data))
 
-	return render_template('/registered/linkages/index.html', title="linkages", form=form, linkages=linkages, page=page, search=search, active='linkages')
+	return render_template('/registered/linkages/index.html', title="linkages", form=form, linkages=linkages, page=page, search=search, photo=photo, active='linkages')
 
 @registered.route('/registered/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -119,17 +127,21 @@ def communities(page, search):
 
 	communities = linkage_views.show_list(['all',search,4, page])
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('registered.communities', page='1', search=form.search.data))
 
-	return render_template('/registered/communities/index.html', form=form, communities=communities, search=search, active='communities')
+	return render_template('/registered/communities/index.html', form=form, communities=communities, search=search, photo=photo, active='communities')
 
 @registered.route('/registered/donate', methods=['GET', 'POST'])
 @login_required
 def donate():
+
+	photo = user_photo.photo(current_user.info_id)
 
 	form = DonationForm()
 
@@ -184,11 +196,13 @@ def donate():
 		flash('Donation given!', 'success')
 		return redirect(url_for('registered.donate'))
 
-	return render_template('/registered/donate/index.html', form=form, no_event=no_event, donations=donations, active='donate')
+	return render_template('/registered/donate/index.html', form=form, no_event=no_event, donations=donations, photo=photo, active='donate')
 
 @registered.route('/registered/referral', methods=['GET', 'POST'])
 @login_required
 def referral_users():
+
+	photo = user_photo.photo(current_user.info_id)
 
 	form = ReferralForm()
 
@@ -208,19 +222,23 @@ def referral_users():
 		flash('Referral has been sent!', 'success')
 		return redirect(url_for('registered.referral_users'))
 
-	return render_template('/registered/referral/index.html', form=form, active='referral')
+	return render_template('/registered/referral/index.html', form=form, photo=photo, active='referral')
 
 @registered.route('/registered/contactus')
 @login_required
 def contactus():
 
-	return render_template('/registered/contactus/index.html', active='contactus')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/registered/contactus/index.html', photo=photo, active='contactus')
 
 @registered.route('/registered/termsandconditions')
 @login_required
 def termsandconditions():
 
-	return render_template('/registered/termsandconditions/index.html', active='termsandconditions')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/registered/termsandconditions/index.html', photo=photo, active='termsandconditions')
 
 @registered.route('/registered/profile/about|<user>', methods=['GET', 'POST'])
 @login_required
@@ -253,7 +271,9 @@ def profile_about(user):
 @login_required
 def profile_eventsattended(user):
 
-	return render_template('/registered/profile/eventsattended.html', title="registered", active='eventsattended')	
+	photo = user_photo.photo(current_user.info_id)
+	
+	return render_template('/registered/profile/eventsattended.html', title="registered", photo=photo, active='eventsattended')	
 
 @registered.route('/registered/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required

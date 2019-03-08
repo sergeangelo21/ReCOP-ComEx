@@ -85,9 +85,10 @@ def events(status, page, search):
 @login_required
 def events_calendar():
 
+	photo = user_photo.photo(current_user.info_id)
 	events = event_information.calendar()
 	
-	return render_template('/admin/events/index-calendar.html', title="Events", events=events, active='events')
+	return render_template('/admin/events/index-calendar.html', title="Events", events=events, photo=photo, active='events')
 	
 @admin.route('/admin/events/show/id=<id>')
 @login_required
