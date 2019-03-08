@@ -303,7 +303,7 @@ def profile_about(user):
 		else:
 			user_photo.add([None, current_user.info_id, file_path])
 
-		flash('Profile picture has been updated!')
+		flash('Profile picture has been updated!', 'success')
 		return redirect(url_for('communities.profile_about', user=user))
 
 	return render_template('/communities/profile/about.html', title="Communities",  photo=photo, form=form, communities=communities)

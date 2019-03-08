@@ -504,8 +504,6 @@ else{
     active.placeholder = revert
     document.getElementById('thrust_field').style.display=""
     }
-<<<<<<< HEAD
-=======
 }
 function show_eval(value){
 
@@ -592,5 +590,4 @@ function close_captioned(value){
 function edit_caption(value){
     close_captioned(value)
     show_caption(value)
->>>>>>> ed41dd78e3d90906e0a1d1b66d3b95b6b7f9ad82
 }

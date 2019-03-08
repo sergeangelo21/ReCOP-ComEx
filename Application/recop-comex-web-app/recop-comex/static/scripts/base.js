@@ -8,9 +8,6 @@ window.onload = function() {
  		nav.classList.toggle('is-active');
  	})
 
-<<<<<<< HEAD
-}
-=======
 }
 
 function show_notif(){
@@ -54,4 +51,3 @@ function profile() {
      // you have to declare the file loading
      reader.readAsDataURL(file);
  }
->>>>>>> ed41dd78e3d90906e0a1d1b66d3b95b6b7f9ad82

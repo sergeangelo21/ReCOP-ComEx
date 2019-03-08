@@ -114,7 +114,7 @@ def profile_about(user):
 		else:
 			user_photo.add([None, current_user.info_id, file_path])
 
-		flash('Profile picture has been updated!')
+		flash('Profile picture has been updated!', 'success')
 		return redirect(url_for('religious_admin.profile_about', user=user))
 
 	return render_template('/religious_admin/profile/about.html', title="religious_admin",  photo=photo, form=form, religious_admin=religious_admin)
