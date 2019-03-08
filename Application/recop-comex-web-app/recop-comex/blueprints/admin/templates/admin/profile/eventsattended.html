@@ -4,12 +4,19 @@
 <div class="panel panel-default">
 		    <div class="overlay-card has-text-centered">
 		    	<div class="circular">
-		    		<img src="../../../static/images/user-default.png">
+		    		{% if photo.path %}
+		    		<img src="../../../{{photo.path}}" id='dp'>
+		    		{% else %}
+		    		<img src="../../../static/images/user-default.png" id='dp'>
+		    		{% endif %}
+		    		<button class="button is-small add" style="top:85%;" onclick='show_profile()'><i class="fas fa-pen"></i></button>
 		    	</div>
+		    	
 		        
 		        <div class="row-profile has-text-centered">
-		            <p class="has-text-white is-size-3 has-text-weight-bold">Liza Soberano</p>
-		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">hopesoberano@gmail.com</a>
+		            <p class="has-text-white is-size-3 has-text-weight-bold">{{ admin.first_name }} {{ admin.middle_name }} {{ admin.last_name}} ({{ admin.username }}) </p>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ admin.company_name }}</a><br>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ admin.email_address }}</a>
 		        </div>
 		    </div>
 		   	

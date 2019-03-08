@@ -1077,7 +1077,10 @@ def profile_about(user):
 @login_required
 def profile_eventsattended(user):
 
-	return render_template('/admin/profile/eventsattended.html', title="Admin")	
+	admin = user_views.profile_info(current_user.info_id)
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/admin/profile/eventsattended.html', title="Admin", photo=photo, admin=admin)	
 
 @admin.route('/admin/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required
