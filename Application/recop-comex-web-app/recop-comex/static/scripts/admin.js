@@ -211,7 +211,7 @@ function remove_comm(value){
 
 }
 
-function show_slip(value){
+function show_captionslip(value){
 
 	a = document.getElementById(value+'_modal')
 	a.style.display='block'
@@ -476,6 +476,49 @@ function show_item(value){
 function close_item(value){
     a = document.getElementById(value+'_modal')
     a.style.display='none'
+
+}
+
+function show_breakdown(value){
+
+    a = document.getElementById(value+'_items')
+    a.className="modal is-active"
+
+}
+
+function close_breakdown(value){
+    a = document.getElementById(value+'_items')
+    a.className="modal"
+
+}
+
+function show_action(value){
+
+    a = document.getElementById(value[0]+'_action')
+    b = document.getElementById(value[1]+'_modal')
+    p = document.getElementById(value[0]+'_head')
+    a.className="modal is-active"
+    b.className="modal"
+
+    if(value[2]=='give'){
+
+    	document.getElementById(value[0]).value='give'
+    	p.innerHTML='Give Items'
+
+    }
+    else{
+		document.getElementById(value[0]).value='dispose' 	
+    	p.innerHTML='Dispose Items'
+    }
+
+}
+
+function close_action(value){
+    a = document.getElementById(value[0]+'_action')
+    b = document.getElementById(value[1]+'_modal')
+   	document.getElementById(value[0]).value=''
+   	a.className="modal"
+    b.className="modal is-active"
 
 }
 
