@@ -238,3 +238,7 @@ function prev_next(sender){
 
     document.getElementById('calendar').appendChild(calendar)
 }
+function close_rating(value){
+    a = document.getElementById(value+'_rating')
+    a.className="modal"
+}

@@ -578,7 +578,6 @@ function show_rating(value){
 function close_rating(value){
     a = document.getElementById(value+'_rating')
     a.className="modal"
-
 }
 
 function scale(value){
