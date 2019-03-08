@@ -89,13 +89,10 @@ function show_event(value){
 }
 
 function close_event(value){
-<<<<<<< HEAD
 	a = document.getElementById(value+'_modal')
 	a.style.display='none'
-=======
     a = document.getElementById(value+'_modal')
     a.className="modal"
-
 }
 
 function show_eval(value){
@@ -156,7 +153,6 @@ function show_rating(value){
 
     a = document.getElementById(value+'_rating')
     a.className="modal is-active"
->>>>>>> ed41dd78e3d90906e0a1d1b66d3b95b6b7f9ad82
 
 }
 
