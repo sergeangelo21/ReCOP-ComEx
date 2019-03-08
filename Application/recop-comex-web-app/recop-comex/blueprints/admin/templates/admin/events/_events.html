@@ -81,7 +81,7 @@
 											{% endif %}
 											{% if event.event_status=='F' %}
 											{% if event.organizer_id==1 %}
-											<a class="button is-success tooltip" data-tooltip="Photos" href="">
+											<a class="button is-success tooltip" data-tooltip="Photos" href="{{url_for('admin.event_photos', id=event.id)}}">
 												<span class="icon">
 													<i class="fas fa-images"></i>
 												</span>

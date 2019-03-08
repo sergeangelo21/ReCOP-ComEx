@@ -1,0 +1,94 @@
+{% extends "linkages-base.html" %}
+
+{% block content %}
+
+	<div class="notification gold">
+ 				<div class="columns is-left">
+					<div class="column view-icons">
+						<article class="media">
+						  	<figure class="media-left"> 
+						  		<a class="button add" href="{{url_for('linkages.events', page='1', status='all', search=' ')}}" ><i class="fas fa-arrow-alt-circle-left"> </i>&nbsp Back</a>
+						  	</figure>
+						  	<figure class="media-left"> 
+						  		<span class='button add'>{{event.name}} Photos</span>
+						  		<a class="button add" href="{{url_for('linkages.add_photos', id=event.id)}}" ><i class="fas fa-plus-circle"> </i></a>
+						  	</figure>
+						</article>
+					</div>
+				</div>
+    </div>
+
+		<div class="column">
+			<div class="card-header search-show">
+				<p class="card-header-title">
+					<span class="fas fa-poll-h"></span>&nbsp;
+					Photos
+				</p>
+				<div class="is-pulled-right">
+					<p class="card-header-title">
+						Total: {{photos|length}}
+					</p>
+				</div>
+			</div>
+			<div class="columns padding-el is-multiline">
+				{% if photos %}
+					{% for photo in photos %}
+						{% include 'linkages/events/_photo.html' %}
+					{% endfor %}
+				{% else %}
+					<table class="table is-fullwidth">
+						<thead></thead>
+					<tbody>
+
+						<tr class = "table-row">
+							<td class="has-text-centered">
+								<div class='field has-text-centered'>
+									<span class='tag is-warning is-large'>No results found</span>
+								</div>
+							</td>
+					 	</tr>
+						
+					</tbody>
+				</table>
+				{% endif %}
+			</div>
+		</div>	
+	</div>
+
+	<div id=modal class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title"></p>
+      				{% for photo in photos %}
+      				<button class="hidden" onclick="close_caption('{{photo.id}}')" id="{{photo.id}}_btn"></button>
+      				{% endfor %}
+    			</header>
+	    		<section class="modal-card-body">
+	    		<form action='' method="POST">
+	    			{{form.hidden_tag()}}
+					{% for photo in photos %}
+	    			<div class='hidden' id="{{photo.id}}_div">
+						<img class="image is-128x128" src="../../../{{photo.photo}}">
+					</div>
+     				{% endfor %}
+					<div class='field'>
+						{{form.photo}}
+		    			{{form.caption.label(class='label')}}
+		    			<div class="control">
+		    				{{form.caption(class='textarea', placeholder='Enter caption here')}}
+		    			</div>
+		    		</div>
+	      		</section>
+    	
+	    		<footer class="modal-card-foot buttons is-right">
+	    			{{form.submit(class='button add')}}
+	    		</footer>
+		    	</form>
+	  		</div>
+	</div>
+<div class="footer-margin-top"></div>
+
+
+					
+{% endblock %}

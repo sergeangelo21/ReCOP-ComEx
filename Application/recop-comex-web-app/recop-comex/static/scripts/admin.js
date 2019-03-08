@@ -457,33 +457,6 @@ function item_add(value){
 
 }
 
-function settingsVPACAD() {
-    var div = document.getElementById("settingsACAD");
-    if (div.style.display === "none") {
-        div.style.display = "block";
-    } else {
-        div.style.display = "none";
-    }
-}
-
-function settingsVPFMI() {
-    var div = document.getElementById("settingsFMI");
-    if (div.style.display === "none") {
-        div.style.display = "block";
-    } else {
-        div.style.display = "none";
-    }
-}
-
-function settingsPRES() {
-    var div = document.getElementById("settingsSPRES");
-    if (div.style.display === "none") {
-        div.style.display = "block";
-    } else {
-        div.style.display = "none";
-    }
-}
-
 function filtershrink() {
     var div = document.getElementById("filterDIV");
     if (div.style.display === "none") {
@@ -531,4 +504,93 @@ else{
     active.placeholder = revert
     document.getElementById('thrust_field').style.display=""
     }
+<<<<<<< HEAD
+=======
+}
+function show_eval(value){
+
+    a = document.getElementById('modal')
+    a.className="modal is-active"
+
+    document.getElementById(value+'_div').className='fields'
+    document.getElementById(value+'_btn').className='delete'
+    document.getElementById('participant').value=value
+
+}
+
+function close_eval(value){
+    a = document.getElementById('modal')
+    a.className="modal"
+    document.getElementById(value+'_div').className='hidden'
+    document.getElementById(value+'_btn').className='hidden'
+    document.getElementById('participant').value=''
+}
+
+function show_rating(value){
+
+    a = document.getElementById(value+'_rating')
+    a.className="modal is-active"
+
+}
+
+function close_rating(value){
+    a = document.getElementById(value+'_rating')
+    a.className="modal"
+
+}
+
+function scale(value){
+
+    lbl = document.getElementById('scale')
+    if (value=='rating-0'){
+        lbl.innerHTML='Excellent (5)'
+    }
+    else if (value=='rating-1'){
+         lbl.innerHTML='Very Good (4)'       
+    }
+    else if (value=='rating-2'){
+         lbl.innerHTML='Fair (3)'       
+    }
+    else if (value=='rating-3'){
+         lbl.innerHTML='Poor (2)'       
+    }
+    else{
+        lbl.innerHTML='Very Poor (1)'
+    }
+}
+
+function show_caption(value){
+
+    a = document.getElementById('modal')
+    a.className="modal is-active"
+
+    document.getElementById(value+'_div').className='fields'
+    document.getElementById(value+'_btn').className='delete'
+    document.getElementById('photo').value=value
+
+}
+
+function close_caption(value){
+    a = document.getElementById('modal')
+    a.className="modal"
+    document.getElementById(value+'_div').className='hidden'
+    document.getElementById(value+'_btn').className='hidden'
+    document.getElementById('photo').value=''
+}
+
+function show_captioned(value){
+    a = document.getElementById(value+'_finished')
+    a.className="modal is-active"
+
+}
+
+function close_captioned(value){
+    a = document.getElementById(value+'_finished')
+    a.className="modal"
+}
+
+function edit_caption(value){
+    close_captioned(value)
+    show_caption(value)
+>>>>>>> ed41dd78e3d90906e0a1d1b66d3b95b6b7f9ad82
 }

@@ -3,7 +3,7 @@
 
     <head>
         {% if title %}
-        <title>{{ title }}</title>
+        <title>{{ title }} | Communities</title>
         {% else %}
         <title>ReCOP-ComEx</title>
         {% endif %}
@@ -90,7 +90,11 @@
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
                             <div>
+                                {% if photo %}
+                                <img class='nav-icons fa-2x' src='../../../{{photo.path}}'>
+                                {% else %}
                                 <i class="nav-icons fas fa-user-circle fa-2x"></i>
+                                {% endif %}
                             </div>
                         </a>
 

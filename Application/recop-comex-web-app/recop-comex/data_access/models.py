@@ -169,6 +169,7 @@ class event_information(db.Model):
 	event_part_id = db.relationship('event_participation', backref='event_information', lazy=True)
 	event_att_id = db.relationship('event_attachment', backref='event_information', lazy=True)
 	event_donate_id = db.relationship('donation', backref='event_information', lazy=True)
+	event_photo_id = db.relationship('event_photo', backref='event_information', lazy=True)
 
 	def add(value):
 
@@ -298,6 +299,54 @@ class event_participation(db.Model):
 		record.comment=value[3]
 
 		db.session.commit()		
+
+class event_photo(db.Model):
+
+	id = db.Column(db.INT, primary_key=True)
+	event_id = db.Column(db.INT, db.ForeignKey('event_information.id'))
+	photo = db.Column(db.VARCHAR(200), nullable=False)
+	description = db.Column(db.VARCHAR(140))
+	is_used = db.Column(db.CHAR(1), nullable=False)
+
+	def add(value):
+
+		record = event_photo(
+			id = value[0],
+			event_id = value[1],
+			photo = value[2],
+			description = value[3],
+			is_used = value[4]
+			)
+
+		db.session.add(record)
+		db.session.commit()
+
+	def show(value):
+
+		record = event_photo.query.filter(and_(
+			event_photo.event_id==value,
+			event_photo.is_used=='Y')
+			).order_by(event_photo.id.desc()
+			).all()
+
+		return record
+
+	def caption(value):
+
+		record = event_photo.query.filter(event_photo.id==value[0]).first()
+
+		record.description = value[1]
+
+		db.session.commit()
+
+	def delete(value):
+
+		record = event_photo.query.filter(event_photo.id==value).first()
+
+		record.is_used = 'N'
+
+		db.session.commit()
+
 
 class inventory(db.Model):
 
@@ -566,6 +615,7 @@ class user_information(db.Model):
 	comm_info_id = db.relationship('community', foreign_keys=[community.community_id], backref='user_information_community', lazy=True)
 	mem_info_id = db.relationship('community', foreign_keys=[community.member_id], backref='user_information_member', lazy=True)
 	organizer_info_id = db.relationship('event_information', backref='user_information', lazy=True)
+	photo_info_id = db.relationship('user_photo', backref='user_information', lazy=True)
 
 	def add(value):
 
@@ -605,3 +655,35 @@ class user_information(db.Model):
 		record = user_information.query.filter_by(id=value).first()
 
 		return record
+
+class user_photo(db.Model):
+
+	id = db.Column(db.INT, primary_key=True)
+	user_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable='False')
+	path = db.Column(db.VARCHAR(200),nullable=False)
+
+	def add(value):
+
+		record = user_photo(
+			id=value[0],
+			user_id=value[1],
+			path=value[2]
+			)
+
+		db.session.add(record)
+		db.session.commit()
+
+	def update(value):
+
+		record = user_photo.query.filter_by(user_id=value[0]).first()
+
+		record.path = value[1]
+
+		db.session.commit()		
+		
+	def photo(value):
+
+		record = user_photo.query.filter_by(user_id=value).first()
+
+		return record
+

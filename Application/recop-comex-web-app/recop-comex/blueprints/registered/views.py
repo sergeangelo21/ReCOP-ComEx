@@ -1,8 +1,8 @@
 from flask import Flask, Blueprint, render_template, url_for, redirect, flash
 from flask_login import current_user, logout_user, login_required
 from blueprints.registered.forms import *
-from data_access.models import donation, user_account, user_information, event_information, event_participation, event_attachment, donation
-from data_access.queries import user_views, linkage_views, event_views
+from data_access.models import donation, user_account, user_information, event_information, event_participation, event_attachment, donation, user_photo
+from data_access.queries import user_views, linkage_views, event_views, donation_views
 from datetime import datetime
 
 from extensions import db, bcrypt
@@ -54,7 +54,7 @@ def events(status, page, search):
 
 		return redirect(url_for('registered.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/registered/events/index.html', title="Events | Registered", form=form, events=events, status=status, search=search, active='events')
+	return render_template('/registered/events/index.html', title="Events", form=form, events=events, status=status, search=search, active='events')
 
 @registered.route('/registered/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -133,6 +133,8 @@ def donate():
 
 	form = DonationForm()
 
+	donations = donation_views.donation_history(current_user.info_id)
+
 	communities = linkage_views.target_linkages()
 
 	for c in communities:
@@ -182,7 +184,7 @@ def donate():
 		flash('Donation given!', 'success')
 		return redirect(url_for('registered.donate'))
 
-	return render_template('/registered/donate/index.html', form=form, no_event=no_event, active='donate')
+	return render_template('/registered/donate/index.html', form=form, no_event=no_event, donations=donations, active='donate')
 
 @registered.route('/registered/referral', methods=['GET', 'POST'])
 @login_required
@@ -220,23 +222,42 @@ def termsandconditions():
 
 	return render_template('/registered/termsandconditions/index.html', active='termsandconditions')
 
-@registered.route('/registered/profile/about/<user>')
+@registered.route('/registered/profile/about|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_about(user):
 
 	registered = user_views.profile_info(current_user.info_id)
+	photo = user_photo.photo(current_user.info_id)
+	form = PictureForm()
 
-	return render_template('/registered/profile/about.html', title="registered", registered=registered, active='about')
+	if form.validate_on_submit():
 
-@registered.route('/registered/profile/eventsattended')
+		file = form.photo.data
+		old, extension = os.path.splitext(file.filename)
+		filename = str(current_user.info_id)+extension
+		file_path = 'static/photos/profiles/' + filename
+
+		file.save(file_path)
+
+		if photo:
+			user_photo.update([current_user.info_id, file_path])
+		else:
+			user_photo.add([None, current_user.info_id, file_path])
+
+		flash('Profile picture has been updated!')
+		return redirect(url_for('registered.profile_about', user=user))
+
+	return render_template('/registered/profile/about.html', title="registered", registered=registered, photo=photo, form=form, active='about')
+
+@registered.route('/registered/profile/eventsattended|<user>')
 @login_required
-def profile_eventsattended():
+def profile_eventsattended(user):
 
 	return render_template('/registered/profile/eventsattended.html', title="registered", active='eventsattended')	
 
-@registered.route('/registered/profile/settings/personal', methods=['GET', 'POST'])
+@registered.route('/registered/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_personal():
+def profile_settings_personal(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 
@@ -255,7 +276,7 @@ def profile_settings_personal():
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('registered.profile_settings_personal'))
+		return redirect(url_for('registered.profile_settings_personal', user=current_user.username))
 
 	else:
 
@@ -268,9 +289,9 @@ def profile_settings_personal():
 
 	return render_template('/registered/profile/settings/personal.html', form=form)
 
-@registered.route('/registered/profile/settings/contact', methods=['GET', 'POST'])
+@registered.route('/registered/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_contact():
+def profile_settings_contact(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
@@ -291,7 +312,7 @@ def profile_settings_contact():
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('registered.profile_settings_contact'))
+		return redirect(url_for('registered.profile_settings_contact'), user=current_user.username)
 
 	else:
 
@@ -302,9 +323,9 @@ def profile_settings_contact():
 
 	return render_template('/registered/profile/settings/contact.html', form=form)	
 
-@registered.route('/registered/profile/settings/username', methods=['GET', 'POST'])
+@registered.route('/registered/profile/settings/username|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_username():
+def profile_settings_username(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
 
@@ -322,7 +343,7 @@ def profile_settings_username():
 
 			flash('Username was successfully updated!', 'success')
 
-			return redirect(url_for('registered.profile_settings_username'))
+			return redirect(url_for('registered.profile_settings_username', user=current_user.username))
 
 		else:
 
@@ -334,9 +355,9 @@ def profile_settings_username():
 
 	return render_template('/registered/profile/settings/username.html', form=form)
 
-@registered.route('/registered/profile/update/password', methods=['GET', 'POST'])
+@registered.route('/registered/profile/settings/password|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_password():
+def profile_settings_password(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
 
@@ -354,7 +375,7 @@ def profile_settings_password():
 
 			flash('Password was successfully updated!', 'success')
 
-			return redirect(url_for('registered.profile_settings_password'))
+			return redirect(url_for('registered.profile_settings_password', user=current_user.username))
 
 		else:
 

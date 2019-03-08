@@ -992,6 +992,40 @@ class donation_views():
 
 		return record
 
+	def donation_history(value):
+
+		sub1 = donation.query.join(
+			user_information, 
+			donation.sponsee_id==user_information.id
+			).add_columns(
+			donation.id,
+			user_information.address.label('sponsee'),
+			user_information.company_name,
+			donation.event_id,
+			donation.sponsee_id,
+			donation.status,
+			donation.date_given,
+			func.IF(donation.amount==0.00,'In kind',donation.amount).label('amount')
+			).filter(donation.sponsee_id!=None)
+
+		sub2 = donation.query.join(
+			event_information).join(
+			user_information, 
+			donation.sponsor_id==user_information.id).add_columns(
+			donation.id,
+			event_information.name.label('sponsee'),
+			user_information.company_name,
+			donation.event_id,
+			donation.sponsee_id,
+			donation.status,
+			donation.date_given,
+			func.IF(donation.amount==0.00,'In kind',donation.amount).label('amount')
+			).filter(donation.event_id!=None)
+
+		record = sub1.union(sub2).filter(donation.sponsor_id==value).all()
+
+		return record
+		
 	def show_sponsors():
 
 		record = donation.query.join(

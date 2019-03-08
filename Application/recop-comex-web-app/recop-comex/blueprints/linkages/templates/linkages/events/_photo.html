@@ -1,0 +1,50 @@
+
+	<div class="column is-one-quarter">
+		<div class="card select-list has-text-centered">
+			<div class="card-content all-view">
+				<div class="level">
+					<div class="level-item">
+						<img class="image is-128x128" src="../../../{{photo.photo}}">
+					</div>
+				</div>
+				{% if photo.description %}
+	      		<button class="button is-success" onclick="show_captioned('{{photo.id}}')">
+	      			<i class="fa fa-eye"></i>&nbsp;View Caption</button>
+				{% else %}
+	      		<button class="button" onclick="show_caption('{{photo.id}}')">
+	      			<i class="fa fa-pen"></i>&nbsp;Add Caption</button>
+	      		{% endif %}	
+	      		&nbsp;
+	      		<a class="button is-danger" href="{{url_for('linkages.delete_photo', id=photo.id, event=event.id)}}">
+	      			<i class="fa fa-trash"></i>&nbsp;Delete
+	      		</a>
+			</div>
+		</div>
+	</div>
+
+	<div id={{photo.id}}_finished class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+      				<p class="modal-card-title"></p>
+      				<button class="delete" onclick="close_captioned('{{photo.id}}')"></button>
+    			</header>
+	    		<section class="modal-card-body">
+	    			<div class='field'>
+						<img class="image is-128x128" src="../../../{{photo.photo}}" id="{{photo.id}}">
+					</div>
+					<div class='field'>
+		    			{{form.caption.label(class='label')}}
+		    			<div class="control">
+		    				<textarea class='textarea' readonly>{{photo.description}}</textarea>
+		    			</div>
+		    		</div>
+	      		</section>
+    	
+	    		<footer class="modal-card-foot buttons is-right">
+	    			<button class='button add' onclick="edit_caption('{{photo.id}}')">Edit</button>
+	    		</footer>
+		    	</form>
+	  		</div>
+	</div>
+

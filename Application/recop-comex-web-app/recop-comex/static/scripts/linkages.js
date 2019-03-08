@@ -89,8 +89,74 @@ function show_event(value){
 }
 
 function close_event(value){
+<<<<<<< HEAD
 	a = document.getElementById(value+'_modal')
 	a.style.display='none'
+=======
+    a = document.getElementById(value+'_modal')
+    a.className="modal"
+
+}
+
+function show_eval(value){
+
+    a = document.getElementById('modal')
+    a.className="modal is-active"
+
+    document.getElementById(value+'_div').className='fields'
+    document.getElementById(value+'_btn').className='delete'
+    document.getElementById('participant').value=value
+
+}
+
+function close_eval(value){
+    a = document.getElementById('modal')
+    a.className="modal"
+    document.getElementById(value+'_div').className='hidden'
+    document.getElementById(value+'_btn').className='hidden'
+    document.getElementById('participant').value=''
+}
+
+function show_caption(value){
+
+    a = document.getElementById('modal')
+    a.className="modal is-active"
+
+    document.getElementById(value+'_div').className='fields'
+    document.getElementById(value+'_btn').className='delete'
+    document.getElementById('photo').value=value
+
+}
+
+function close_caption(value){
+    a = document.getElementById('modal')
+    a.className="modal"
+    document.getElementById(value+'_div').className='hidden'
+    document.getElementById(value+'_btn').className='hidden'
+    document.getElementById('photo').value=''
+}
+
+function show_captioned(value){
+    a = document.getElementById(value+'_finished')
+    a.className="modal is-active"
+
+}
+
+function close_captioned(value){
+    a = document.getElementById(value+'_finished')
+    a.className="modal"
+}
+
+function edit_caption(value){
+    close_captioned(value)
+    show_caption(value)
+}
+
+function show_rating(value){
+
+    a = document.getElementById(value+'_rating')
+    a.className="modal is-active"
+>>>>>>> ed41dd78e3d90906e0a1d1b66d3b95b6b7f9ad82
 
 }
 

@@ -172,7 +172,9 @@
 				    </div>
 		  		</section>
 	    		<footer class="modal-card-foot buttons is-right">
+	    			{% if event.event_status=='S' %}
 	    			<a class="button is-info" href="{{url_for('communities.event_participants',id=event.id)}}"><i class="fas fa-users"></i>&nbsp;Participants</a>
+	    			{% endif %}
 	    		</footer>
   			</div>
 	</div>

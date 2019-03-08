@@ -8,6 +8,10 @@ class SearchForm(FlaskForm):
     search = StringField("Search", validators=[DataRequired()])
     submit = SubmitField("Search")
 
+class PictureForm(FlaskForm):
+    photo = FileField("Photo", validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField("Change Picture")
+
 class ProfilePersonalUpdateForm(FlaskForm):
     firstname = StringField('First Name', [validators.Length(min=0, max=30)])
     middlename = StringField('Middle Name', [validators.Length(min=0, max=20)])

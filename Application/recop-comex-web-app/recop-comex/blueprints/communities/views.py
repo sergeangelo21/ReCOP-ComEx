@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, logout_user, login_required
 from blueprints.communities.forms import *
-from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation, referral, event_attachment
+from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation, referral, event_attachment, user_photo
 from data_access.queries import user_views, linkage_views, community_views, event_views
 
 from static.email import send_email
@@ -55,7 +55,7 @@ def events(status, page, search):
 
 		return redirect(url_for('communities.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/communities/events/index.html', title="Events | Communities", form=form, events=events, status=status, search=search, active='events')
+	return render_template('/communities/events/index.html', title="Events", form=form, events=events, status=status, search=search, active='events')
 
 @communities.route('/communities/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -63,7 +63,7 @@ def events_calendar():
 
 	events = event_information.calendar()
 	
-	return render_template('/communities/events/index-calendar.html', title="Events | Communities", events=events, active='events')
+	return render_template('/communities/events/index-calendar.html', title="Events", events=events, active='events')
 	
 @communities.route('/communities/events/show/id=<id>')
 @login_required
@@ -75,7 +75,7 @@ def event_participants(id):
 
 	form = SearchForm()
 
-	return render_template('/communities/events/add_participants.html', title= event.name.title() + " | Communities", event = event, participants=participants,joined=joined, form=form, active='events')
+	return render_template('/communities/events/add_participants.html', title= event.name.title() , event = event, participants=participants,joined=joined, form=form, active='events')
 
 @communities.route('/communities/event_<id>/<action>/<participant>')
 @login_required
@@ -281,23 +281,42 @@ def termsandconditions():
 
 	return render_template('/communities/termsandconditions/index.html', title="Communities")
 
-@communities.route('/communities/profile/about/<user>')
+@communities.route('/communities/profile/about|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_about(user):
 
 	communities = user_views.profile_info(current_user.info_id)
+	photo = user_photo.photo(current_user.info_id)
+	form = PictureForm()
 
-	return render_template('/communities/profile/about.html', title="Communities", communities=communities)
+	if form.validate_on_submit():
 
-@communities.route('/communities/profile/eventsattended')
+		file = form.photo.data
+		old, extension = os.path.splitext(file.filename)
+		filename = str(current_user.info_id)+extension
+		file_path = 'static/photos/profiles/' + filename
+
+		file.save(file_path)
+
+		if photo:
+			user_photo.update([current_user.info_id, file_path])
+		else:
+			user_photo.add([None, current_user.info_id, file_path])
+
+		flash('Profile picture has been updated!')
+		return redirect(url_for('communities.profile_about', user=user))
+
+	return render_template('/communities/profile/about.html', title="Communities",  photo=photo, form=form, communities=communities)
+
+@communities.route('/communities/profile/eventsattended|<user>')
 @login_required
-def profile_eventsattended():
+def profile_eventsattended(user):
 
 	return render_template('/communities/profile/eventsattended.html', title="Communities")	
 
-@communities.route('/communities/profile/settings/personal', methods=['GET', 'POST'])
+@communities.route('/communities/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_personal():
+def profile_settings_personal(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 
@@ -316,7 +335,7 @@ def profile_settings_personal():
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('communities.profile_settings_personal'))
+		return redirect(url_for('communities.profile_settings_personal', user=current_user.username))
 
 	else:
 
@@ -329,9 +348,9 @@ def profile_settings_personal():
 
 	return render_template('/communities/profile/settings/personal.html', title="Communities", form=form)
 
-@communities.route('/communities/profile/settings/contact', methods=['GET', 'POST'])
+@communities.route('/communities/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_contact():
+def profile_settings_contact(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
@@ -352,7 +371,7 @@ def profile_settings_contact():
 
 		flash('Profile was successfully updated!', 'success')
 
-		return redirect(url_for('communities.profile_settings_contact'))
+		return redirect(url_for('communities.profile_settings_contact', user=current_user.username))
 
 	else:
 
@@ -363,9 +382,9 @@ def profile_settings_contact():
 
 	return render_template('/communities/profile/settings/contact.html', title="Communities", form=form)	
 
-@communities.route('/communities/profile/settings/username', methods=['GET', 'POST'])
+@communities.route('/communities/profile/settings/username|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_username():
+def profile_settings_username(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
 
@@ -383,7 +402,7 @@ def profile_settings_username():
 
 			flash('Username was successfully updated!', 'success')
 
-			return redirect(url_for('communities.profile_settings_username'))
+			return redirect(url_for('communities.profile_settings_username', user=current_user.username))
 
 		else:
 
@@ -395,9 +414,9 @@ def profile_settings_username():
 
 	return render_template('/communities/profile/settings/username.html', title="Communities", form=form)
 
-@communities.route('/communities/profile/update/password', methods=['GET', 'POST'])
+@communities.route('/communities/profile/settings/password|<user>', methods=['GET', 'POST'])
 @login_required
-def profile_settings_password():
+def profile_settings_password(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.info_id)
 
@@ -415,7 +434,7 @@ def profile_settings_password():
 
 			flash('Password was successfully updated!', 'success')
 
-			return redirect(url_for('communities.profile_settings_password'))
+			return redirect(url_for('communities.profile_settings_password', user=current_user.username))
 
 		else:
 

@@ -1,12 +1,25 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileRequired, FileAllowed
-from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField, IntegerField, validators
+from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, RadioField, IntegerField, MultipleFileField, HiddenField, validators
 from wtforms.widgets import TextArea
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
 class SearchForm(FlaskForm):
     search = StringField("Search", validators=[DataRequired()])
     submit = SubmitField("Search")
+
+class PictureForm(FlaskForm):
+    photo = FileField("Photo", validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField("Change Picture")
+    
+class PhotoForm(FlaskForm):
+    photos   = MultipleFileField('Photos to Add', validators=[DataRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField('Upload')
+
+class CaptionForm(FlaskForm):
+    photo = HiddenField('Photo', validators=[DataRequired()])
+    caption = StringField('Caption', widget=TextArea())
+    submit= SubmitField('Save')      
 
 class ProposalForm(FlaskForm):
     title = StringField('Title of the Activity', validators=[DataRequired()])

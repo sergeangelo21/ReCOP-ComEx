@@ -6,6 +6,10 @@ from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRan
 class SearchForm(FlaskForm):
     search = StringField("Search", validators=[DataRequired()])
     submit = SubmitField("Search")
+
+class PictureForm(FlaskForm):
+    photo = FileField("Photo", validators=[FileRequired(), FileAllowed(['png', 'jpg', 'jpeg', 'gif'], 'Invalid file!')])
+    submit = SubmitField("Change Picture")
     
 class DonationForm(FlaskForm):
     give_to = RadioField('Give To', choices=[('1','Community'), ('2','Event')], validators=[DataRequired()])
