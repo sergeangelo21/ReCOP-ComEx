@@ -32,7 +32,9 @@ def before_request():
 @login_required
 def index():
 
-	return render_template('/linkages/index.html', active='home')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/linkages/index.html', photo=photo, active='home')
 
 @linkages.route('/linkages/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -56,6 +58,8 @@ def events(status, search, page):
 	events = event_views.linkages_events([value, search, page])
 	letters = event_attachment.letter_attached()
 	
+	photo = user_photo.photo(current_user.info_id)
+
 	form = AttachLetterForm()
 
 	if form.validate_on_submit():
@@ -80,15 +84,17 @@ def events(status, search, page):
 
 		return redirect(url_for('linkages.events', status=status, page='1', search=form_search.search.data))
 
-	return render_template('/linkages/events/index.html', title="Events", form_search=form_search, form=form, events=events, status=status, letters=letters, now=datetime.now(), search=search, active='events')
+	return render_template('/linkages/events/index.html', title="Events", form_search=form_search, form=form, events=events, status=status, letters=letters, now=datetime.now(), search=search, photo=photo, active='events')
 
 @linkages.route('/linkages/events/calendar', methods=['GET', 'POST'])
 @login_required
 def events_calendar():
 
+	photo = user_photo.photo(current_user.info_id)
+
 	events = event_information.calendar()
 	
-	return render_template('/linkages/events/index-calendar.html', title="Events", events=events, active='events')
+	return render_template('/linkages/events/index-calendar.html', title="Events", events=events, photo=photo, active='events')
 	
 @linkages.route('/linkages/events/show/<id>')
 @login_required
@@ -185,13 +191,15 @@ def linkages_show(page, search):
 
 	linkages = linkage_views.show_list(['A', search, 3, page])
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('linkages.linkages_show', page='1', search=form.search.data))
 
-	return render_template('/linkages/linkages/index.html', linkages=linkages, form = form, search=search, user=current_user.info_id, active='linkages')
+	return render_template('/linkages/linkages/index.html', linkages=linkages, form = form, search=search, user=current_user.info_id, photo=photo, active='linkages')
 
 @linkages.route('/linkages/events/finish/<id>')
 @login_required
@@ -360,17 +368,21 @@ def communities(page, search):
 
 	communities = linkage_views.show_list(['all',search,4, page])
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('linkages.communities', page='1', search=form.search.data))
 
-	return render_template('/linkages/communities/index.html', form=form, communities=communities, search=search, active='communities')
+	return render_template('/linkages/communities/index.html', form=form, communities=communities, search=search, photo=photo, active='communities')
 
 @linkages.route('/linkages/donate', methods=['GET', 'POST'])
 @login_required
 def donate():
+
+	photo = user_photo.photo(current_user.info_id)
 
 	form = DonationForm()
 
@@ -425,11 +437,13 @@ def donate():
 		flash('Donation given!', 'success')
 		return redirect(url_for('linkages.donate'))
 
-	return render_template('/linkages/donate/index.html', form=form, no_event=no_event, donations=donations, active='donate')
+	return render_template('/linkages/donate/index.html', form=form, no_event=no_event, donations=donations, photo=photo, active='donate')
 
 @linkages.route('/linkages/referral', methods=['GET', 'POST'])
 @login_required
 def referral_users():
+
+	photo = user_photo.photo(current_user.info_id)
 
 	form = ReferralForm()
 
@@ -449,19 +463,23 @@ def referral_users():
 		flash('Referral has been sent!', 'success')
 		return redirect(url_for('linkages.referral_users'))	
 
-	return render_template('/linkages/referral/index.html', form=form, active='referral')
+	return render_template('/linkages/referral/index.html', form=form, photo=photo, active='referral')
 
 @linkages.route('/linkages/contactus')
 @login_required
 def contactus():
 
-	return render_template('/linkages/contactus/index.html', active='contactus')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/linkages/contactus/index.html', photo=photo, active='contactus')
 
 @linkages.route('/linkages/termsandconditions')
 @login_required
 def termsandconditions():
 
-	return render_template('/linkages/termsandconditions/index.html', active='termsandconditions')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/linkages/termsandconditions/index.html', photo=photo, active='termsandconditions')
 
 @linkages.route('/linkages/profile/about|<user>', methods=['GET', 'POST'])
 @login_required
