@@ -177,6 +177,8 @@
 	    		<a 	{% for u in user %}{% if event.id==u.event_id and u.status=='J' %}class="hidden"{% endif %} {% endfor %} href="{{url_for('registered.event_action', id=event.id, action='join')}}" class="level-item">
   					<button class="button is-info"><span class="icon is-small"><i class="fas fa-check"></i></span>&nbsp Join Event</button>
 				</a>
+				&nbsp;
+	    		<button class="button is-warning" onclick="show_location('{{event.id}}')"><span class="fa fa-map"></span>&nbsp;Location</button>
 	    		{% for u in user %}
 	    			{% if event.id==u.event_id and u.status=='J' %}
 				<a href="{{url_for('registered.event_action', id=event.id, action='cancel')}}" class="level-item">
@@ -187,4 +189,24 @@
 				{% endif %}
 			</footer>
   		</div>
+	</div>
+	<div id={{event.id}}_location class="modal">
+  		<div class="modal-background"></div>
+  			<div class="modal-card">
+    			<header class="modal-card-head">
+     				<p class="modal-card-title has-text-white">{{event.name}} Location</p>
+      				<button class="delete" onclick="close_location('{{event.id}}')"></button>
+    			</header>
+	    		<section class="modal-card-body">
+	  				<div class="mapouter">
+						<div class="gmap_canvas">
+							<iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q={{event.location}}&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+						</div>
+					</div>
+	      		</section>
+    	
+	    		<footer class="modal-card-foot buttons is-right">
+
+	    		</footer>
+	  		</div>
 	</div>

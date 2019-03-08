@@ -38,6 +38,21 @@ function close_profile(){
 	a = document.getElementById('modal')
 	a.className = "modal"
 }
+function show_location(value){
+
+	a = document.getElementById(value+'_modal')
+	a.className = "modal"
+	b = document.getElementById(value+'_location')
+	b.className = "modal is-active"
+}
+
+function close_location(value){
+
+	a = document.getElementById(value+'_location')
+	a.className = "modal"
+	b = document.getElementById(value+'_modal')
+	b.className = "modal is-active"
+}
 
 function profile() {
     var file = document.getElementById('photo').files[0];

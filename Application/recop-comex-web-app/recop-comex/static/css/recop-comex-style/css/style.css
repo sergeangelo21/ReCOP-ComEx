@@ -1576,3 +1576,5 @@ h1 {
 .width{
   width: 100%;
 }
+.mapouter{text-align:right;height:100%;width:100%;overflow: hidden;}
+.gmap_canvas {overflow:hidden;background:none!important;height:100%;width:100%;}
