@@ -44,7 +44,9 @@ def index():
 
 	events_chart.render_response()
 
-	return render_template('/admin/index.html', title="Home", events_chart=events_chart, active='home')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/admin/index.html', title="Home", events_chart=events_chart, photo=photo, active='home')
 
 @admin.route('/admin/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -69,13 +71,15 @@ def events(status, page, search):
 
 	letters = event_attachment.letter_attached()
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('admin.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/admin/events/index.html', title="Events", form=form, events=events, status=status, now=datetime.now(), letters=letters, search=search, active='events')
+	return render_template('/admin/events/index.html', title="Events", form=form, events=events, status=status, now=datetime.now(), letters=letters, search=search, photo=photo, active='events')
 
 @admin.route('/admin/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -92,7 +96,9 @@ def event_show(id):
 	event = event_views.show_info(id)
 	participants = event_views.show_participants([id,' '])
 
-	return render_template('/admin/events/show.html', title= event.name.title() , event = event, participants=participants, active='events')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/admin/events/show.html', title= event.name.title() , event = event, participants=participants, photo=photo, active='events')
 
 @admin.route('/admin/events/create', methods=['GET', 'POST'])
 @login_required
@@ -289,7 +295,7 @@ def event_photos(id):
 
 	event = event_views.show_info(id)
 
-	photos  = event_photo.show(id)
+	photo = user_photo.photo(current_user.info_id)
 
 	form = CaptionForm()
 
@@ -300,7 +306,7 @@ def event_photos(id):
 		flash('Caption added to photo!', 'success')
 		return redirect(url_for('admin.event_photos', id=event.id))
 
-	return render_template('/admin/events/photos.html', title= event.name.title() ,event=event, photos=photos, form=form, active='events')
+	return render_template('/admin/events/photos.html', title= event.name.title() ,event=event, photo=photo, form=form, active='events')
 
 @admin.route('/admin/events/photos/add/<id>', methods=['GET', 'POST'])
 @login_required
@@ -441,13 +447,15 @@ def linkages(status, page, search):
 
 	linkages = linkage_views.show_list([value,search,3,page])
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('admin.linkages', status=status, page='1', search=form.search.data))
 
-	return render_template('/admin/linkages/index.html', title="Linkages", form=form, linkages=linkages, status=status, search=search, active='linkages')
+	return render_template('/admin/linkages/index.html', title="Linkages", form=form, linkages=linkages, status=status, search=search, photo=photo, active='linkages')
 
 @admin.route('/admin/linkages/chart')
 @login_required
@@ -504,8 +512,9 @@ def linkages_add():
 def linkage_show(id):
 
 	linkage, mem_since = linkage_views.show_info([id,'linkage'])
+	photo = user_photo.photo(current_user.info_id)
 
-	return render_template('/admin/linkages/show.html', title= linkage.company_name.title() , linkage=linkage, mem_since=mem_since, active='linkages')
+	return render_template('/admin/linkages/show.html', title= linkage.company_name.title() , linkage=linkage, mem_since=mem_since, photo=photo, active='linkages')
 
 @admin.route('/admin/linkages/action/id=<id>')
 @login_required
@@ -578,13 +587,15 @@ def communities(status, page, search):
 
 	communities = linkage_views.show_list([value,search,4,page])
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('admin.communities', status=status, page='1', search=form.search.data))
 
-	return render_template('/admin/communities/index.html', title="Communities", form=form, communities=communities, status=status, search=search, active='communities')
+	return render_template('/admin/communities/index.html', title="Communities", form=form, communities=communities, status=status, search=search, photo=photo, active='communities')
 
 @admin.route('/admin/communities/chart')
 @login_required
@@ -642,8 +653,9 @@ def community_show(id):
 
 	community, mem_since = linkage_views.show_info([id,'community'])
 	members = community_views.members_show(str(community.info_id))
+	photo = user_photo.photo(current_user.info_id)
 	
-	return render_template('/admin/communities/show.html', title= community.company_name.title() , community=community, mem_since=mem_since, members=members, active='communities')
+	return render_template('/admin/communities/show.html', title= community.company_name.title() , community=community, mem_since=mem_since, members=members, photo=photo, active='communities')
 
 @admin.route('/admin/communities/action/id=<id>')
 @login_required
@@ -709,6 +721,8 @@ def donations(status, page, search):
 
 	sponsors = donation_views.show_sponsors()
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	update = UpdateForm()
@@ -742,7 +756,7 @@ def donations(status, page, search):
 
 		return redirect(url_for('admin.donations', status=status, page=page, search=search))		
 
-	return render_template('/admin/donations/index.html', title="Donations", donations=donations, sponsors=sponsors, status=status, items=items,search=search, update=update, form=form, active='donations')
+	return render_template('/admin/donations/index.html', title="Donations", donations=donations, sponsors=sponsors, status=status, items=items,search=search, update=update, form=form, photo=photo, active='donations')
 
 @admin.route('/admin/donations/<action>/id=<id>')
 @login_required
@@ -868,6 +882,8 @@ def donation_add():
 @login_required
 def inventory_show(page, search):
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	update = UpdateForm()
@@ -905,7 +921,7 @@ def inventory_show(page, search):
 
 		return redirect(url_for('admin.inventory_show', page=page, search=search))		
 
-	return render_template('/admin/inventory/index.html', title="Inventory", form=form, update=update, items=items, breakdown=breakdown, search=search, active='inventory')
+	return render_template('/admin/inventory/index.html', title="Inventory", form=form, update=update, items=items, breakdown=breakdown, search=search, photo=photo, active='inventory')
 
 @admin.route('/admin/inventory/add', methods=['GET', 'POST'])
 @login_required
@@ -1015,13 +1031,17 @@ def inventory_add():
 @login_required
 def feedbacks():
 
-	return render_template('/admin/feedbacks/index.html', title="Feedbacks", active='feedbacks')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/admin/feedbacks/index.html', title="Feedbacks", photo=photo, active='feedbacks')
 
 @admin.route('/admin/referral')
 @login_required
 def referral():
 
-	return render_template('/admin/referral/index.html', title="Referral", active='referral')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/admin/referral/index.html', title="Referral", photo=photo, active='referral')
 
 @admin.route('/admin/profile/about|<user>', methods=['GET', 'POST'])
 @login_required

@@ -26,6 +26,10 @@
   .burger{
       color: white;
   }
+
+  img.nav-icons{
+    border-radius: 50%;
+  }
 /*	------NAVIGATION BAR END------	*/
 
 
@@ -67,6 +71,14 @@
 		color: #ffb901;
 		border-color: #072000;
 	}
+
+  .btn-follow{
+    color: #072000;
+  }
+
+  .btn-follow:hover{
+    background-color: transparent;
+  }
 
 	.button-back{
 		position:absolute;
@@ -214,6 +226,11 @@
     display: none;
   }
 
+  /* Change picture*/
+
+ 
+  /* end change picture*/
+
   @media only screen and (max-width: 420px) {
     /* For mobile phones: */
     .prof-panel-icon{
@@ -234,7 +251,7 @@
 
 
 /*	------ADMIN - PARTNERS - PROFILE------   */
-	.backbtnprof{
+	.backbtnprof, .btn-upload, .btn-upload:hover{
 		background-color: #072000; 
 		color: #ffb901;
 		border-color: #072000;
