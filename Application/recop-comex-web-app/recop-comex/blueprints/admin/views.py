@@ -900,7 +900,7 @@ def inventory_show(page, search):
 		return redirect(url_for('admin.inventory_show', page='1', search=form.search.data))
 
 	if update.validate_on_submit():
-
+		
 		value = inventory.get_info(update.source.data)
 
 		if int(update.quantity.data)>value.in_stock:
