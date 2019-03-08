@@ -1,6 +1,3 @@
-var carousels = bulmaCarousel.attach(); // carousels now contains an array of all Carousel instances
-setInterval(3000);
-
 if(window.location.pathname=='/linkages/events/calendar'){
     var today = new Date()
     var month = today.getMonth() + 1
@@ -86,12 +83,16 @@ function check_pass(){
 
 function show_event(value){
 
-    a = document.getElementById(value+'_modal')
-    a.className="modal is-active"
+	a = document.getElementById(value+'_modal')
+	a.style.display='block'
 
 }
 
 function close_event(value){
+<<<<<<< HEAD
+	a = document.getElementById(value+'_modal')
+	a.style.display='none'
+=======
     a = document.getElementById(value+'_modal')
     a.className="modal"
 
@@ -155,33 +156,8 @@ function show_rating(value){
 
     a = document.getElementById(value+'_rating')
     a.className="modal is-active"
+>>>>>>> ed41dd78e3d90906e0a1d1b66d3b95b6b7f9ad82
 
-}
-
-function close_rating(value){
-    a = document.getElementById(value+'_rating')
-    a.className="modal"
-
-}
-
-function scale(value){
-
-    lbl = document.getElementById('scale')
-    if (value=='rating-0'){
-        lbl.innerHTML='Excellent (5)'
-    }
-    else if (value=='rating-1'){
-         lbl.innerHTML='Very Good (4)'       
-    }
-    else if (value=='rating-2'){
-         lbl.innerHTML='Fair (3)'       
-    }
-    else if (value=='rating-3'){
-         lbl.innerHTML='Poor (2)'       
-    }
-    else{
-        lbl.innerHTML='Very Poor (1)'
-    }
 }
 
 function donate_choose(value){

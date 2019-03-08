@@ -1,6 +1,3 @@
-var carousels = bulmaCarousel.attach(); // carousels now contains an array of all Carousel instances
-setInterval(3000);
-
 if(window.location.pathname=='/registered/events/calendar'){
     var today = new Date()
     var month = today.getMonth() + 1

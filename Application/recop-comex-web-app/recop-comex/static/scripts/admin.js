@@ -214,7 +214,7 @@ function remove_comm(value){
 function show_slip(value){
 
 	a = document.getElementById(value+'_modal')
-	a.className="modal is-active"
+	a.style.display='block'
 
 }
 
@@ -357,27 +357,26 @@ function donate_choose(value){
     comm = document.getElementById('comm')
     events = document.getElementById('events')
     sponsor = document.getElementById('sponsor')
+    trans_slip = document.getElementById('trans_slip')
     sel_comm = document.getElementById('sponsee')
+
     if (value==1){
         comm.className="column"
         events.className="hidden"
         sponsor.className="column"
+        trans_slip.className="columns"
 
-        if (document.getElementById('event')){
+        if (sel_event){
     		sel_event.value=''
 		}
-
+        
     }
     else{
         comm.className="hidden"
         events.className="column"
         sponsor.className="column"
+        trans_slip.className="columns"
         sel_comm.value=''
-
-    }
-
-    if (window.location.pathname=='/admin/inventory/add'){
-		document.getElementById('trans_slip').className="columns"
     }
 
 }
@@ -421,13 +420,13 @@ function donate_type(value){
     money = document.getElementById('amount')
 
     if (value==1){
-        amount.className="column"
-        trans.className="column"
+        amount.className="field is-horizontal"
+        trans.className="field is-horizontal"
         money.value=''
     }
     else{
         amount.className="hidden"
-        trans.className="column"
+        trans.className="field is-horizontal"
         money.value = 0.00
     }
 
@@ -470,56 +469,13 @@ function filtershrink() {
 function show_item(value){
 
     a = document.getElementById(value+'_modal')
-    a.className="modal is-active"
+    a.style.display='block'
 
 }
 
 function close_item(value){
     a = document.getElementById(value+'_modal')
-    a.className="modal"
-
-}
-
-function show_breakdown(value){
-
-    a = document.getElementById(value+'_items')
-    a.className="modal is-active"
-
-}
-
-function close_breakdown(value){
-    a = document.getElementById(value+'_items')
-    a.className="modal"
-
-}
-
-function show_action(value){
-
-    a = document.getElementById(value[0]+'_action')
-    b = document.getElementById(value[1]+'_modal')
-    p = document.getElementById(value[0]+'_head')
-    a.className="modal is-active"
-    b.className="modal"
-
-    if(value[2]=='give'){
-
-    	document.getElementById(value[0]).value='give'
-    	p.innerHTML='Give Items'
-
-    }
-    else{
-		document.getElementById(value[0]).value='dispose' 	
-    	p.innerHTML='Dispose Items'
-    }
-
-}
-
-function close_action(value){
-    a = document.getElementById(value[0]+'_action')
-    b = document.getElementById(value[1]+'_modal')
-   	document.getElementById(value[0]).value=''
-   	a.className="modal"
-    b.className="modal is-active"
+    a.style.display='none'
 
 }
 
@@ -548,6 +504,8 @@ else{
     active.placeholder = revert
     document.getElementById('thrust_field').style.display=""
     }
+<<<<<<< HEAD
+=======
 }
 function show_eval(value){
 
@@ -634,4 +592,5 @@ function close_captioned(value){
 function edit_caption(value){
     close_captioned(value)
     show_caption(value)
+>>>>>>> ed41dd78e3d90906e0a1d1b66d3b95b6b7f9ad82
 }
