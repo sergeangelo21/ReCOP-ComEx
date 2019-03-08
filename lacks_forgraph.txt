@@ -1,0 +1,19 @@
+Admin
+	Home
+	Frequency of Events (per thrust) Monthly ???
+	Linkages
+	Communities
+	Donations (In kind and Money)
+
+	Linkage
+	Count of Linkages Inside and Outside
+
+	Communities
+	Number of Communities and Members ???
+
+	Donations
+	New Received and Denied
+
+	Inventory
+	In stock, Given and Trashed
+	

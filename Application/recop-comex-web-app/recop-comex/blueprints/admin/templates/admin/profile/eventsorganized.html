@@ -1,0 +1,187 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+<div class="panel panel-default">
+		    <div class="overlay-card has-text-centered">
+		    	<div class="circular">
+		    		{% if photo.path %}
+		    		<img src="../../../{{photo.path}}" id='dp'>
+		    		{% else %}
+		    		<img src="../../../static/images/user-default.png" id='dp'>
+		    		{% endif %}
+		    		<button class="button is-small add" style="top:85%;" onclick='show_profile()'><i class="fas fa-pen"></i></button>
+		    	</div>
+		    	
+		        
+		        <div class="row-profile has-text-centered">
+		            <p class="has-text-white is-size-3 has-text-weight-bold">{{ admin.first_name }} {{ admin.middle_name }} {{ admin.last_name}} ({{ admin.username }}) </p>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ admin.company_name }}</a><br>
+		            <a class="btn btn-follow btn-sm text-center has-text-white" href="#" role="button">{{ admin.email_address }}</a>
+		        </div>
+		    </div>
+		   	
+		</div>
+
+		<nav class="level is-mobile">
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			      	<a class="menu prof-icon" href="{{url_for('admin.profile_about', user=current_user.username)}}">
+			      		<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-user fa-2x"></i>
+					      	</span>
+					    </p>
+			     	 	<p class="is-size-6 has-text-weight-bold">About</p>
+			  	  	</a>
+			    </div>
+			</div>
+
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			    	<a class="menu prof-icon" href="{{url_for('admin.profile_eventsorganized', user=current_user.username)}}">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-calendar-alt fa-2x""></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Events Organized</p>
+				    </a>
+			    </div>
+			</div>
+		</nav>
+
+		<section class="hero">
+			<div class="hero-body">
+			    <div class="container">
+			      	<div class="card">
+						<header class="card-header has-background-light">
+						    <p class="card-header-title">
+						      Basic Information
+						    </p>
+					  	</header>
+					  	<div class="card-content profile">
+						    <a class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								    	<p>Name</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>Hope Elizabeth Soberano</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</a>
+							
+							<a class="panel-block">
+						    	<article class="media">
+									<figure class="media-left">
+							    		<p>Lives in</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>123 Sampaguita St. San Antonio</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+						  	<a class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Birthday</p>
+							  		</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>January 20, 1997</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+						  	<a class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Gender</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>Female</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+						  	<a class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Civil Status </p>
+							  		</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>Single</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+						  	<a class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Telephone Number</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>4311213</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+						  	<a class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>Phone Number</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>09123456789</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+
+						  	<a class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							    		<p>I am a</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>Participant</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</a>
+						</div>
+					</div>
+			    </div>
+			</div>
+		</section>
+{% endblock %}

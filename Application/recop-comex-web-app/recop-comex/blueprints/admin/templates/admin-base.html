@@ -109,6 +109,9 @@
                             <a class="navbar-item" href="{{url_for('admin.profile_about', user=current_user.username)}}">
                                 My Profile
                             </a>
+                            <a class="navbar-item" href="{{url_for('admin.profile_settings_personal', user=current_user.username)}}">
+                                Settings
+                            </a>
                             <hr class="navbar-divider">
                             <a class="navbar-item" href="{{url_for('admin.logout')}}">
                                 Logout

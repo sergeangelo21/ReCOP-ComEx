@@ -294,7 +294,6 @@ def event_action(id, action):
 
 		flash(event.name + ' was cancelled.', 'success')	
 
-
 	return redirect(url_for('admin.events', status='all', page='1', search=' '))
 
 @admin.route('/admin/events/conduct/<id>')
@@ -1102,14 +1101,14 @@ def profile_about(user):
 
 	return render_template('/admin/profile/about.html', title="Admin", photo=photo, form=form,admin=admin)
 
-@admin.route('/admin/profile/eventsattended|<user>')
+@admin.route('/admin/profile/eventsorganized|<user>')
 @login_required
-def profile_eventsattended(user):
+def profile_eventsorganized(user):
 
 	admin = user_views.profile_info(current_user.info_id)
 	photo = user_photo.photo(current_user.info_id)
 
-	return render_template('/admin/profile/eventsattended.html', title="Admin", photo=photo, admin=admin)	
+	return render_template('/admin/profile/eventsorganized.html', title="Profile", photo=photo, admin=admin)	
 
 @admin.route('/admin/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required
@@ -1143,7 +1142,7 @@ def profile_settings_personal(user):
 		form.birthday.data = user_information_update.birthday
 		form.bio.data = user_information_update.bio
 
-	return render_template('/admin/profile/settings/personal.html', title="Admin", photo=photo, form=form)
+	return render_template('/admin/profile/settings/personal.html', title="Update", photo=photo, form=form)
 
 @admin.route('/admin/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
@@ -1177,7 +1176,7 @@ def profile_settings_contact(user):
 		form.mobile.data = user_information_update.mobile_number
 		form.email.data = user_account_update.email_address
 
-	return render_template('/admin/profile/settings/contact.html', title="Admin", photo=photo, form=form)	
+	return render_template('/admin/profile/settings/contact.html', title="Update", photo=photo, form=form)	
 
 @admin.route('/admin/profile/settings/username|<user>', methods=['GET', 'POST'])
 @login_required
@@ -1209,7 +1208,7 @@ def profile_settings_username(user):
 
 		form.username.data = user_account_update.username
 
-	return render_template('/admin/profile/settings/username.html', title="Admin",photo=photo, form=form)
+	return render_template('/admin/profile/settings/username.html', title="Update", photo=photo, form=form)
 
 @admin.route('/admin/profile/settings/password|<user>', methods=['GET', 'POST'])
 @login_required
@@ -1237,7 +1236,7 @@ def profile_settings_password(user):
 
 			flash('Wrong password.', 'error')
 
-	return render_template('/admin/profile/settings/password.html', photo=photo, form=form)
+	return render_template('/admin/profile/settings/password.html', title="Update", photo=photo, form=form)
 
 @admin.route('/logout/admin')
 @login_required

@@ -206,8 +206,9 @@
 							    </span>
 							  </label>
 								{{form.event_id(hidden='True', value = event.id)}}
-								{{form.submit(class_='button is-success')}}
-							</div>						
+								{{form.submit(class_='button is-success')}}	
+							</div>
+					        <i class="fas fa-image"></i> file only
 	    			  </form>
 	    			</div>
 	    		</div>
@@ -221,13 +222,15 @@
 							</a>
 	    				</div>
 	    				{% endif %}
+	    				{% if event.organizer_id==1 and event.event_date.strftime('%B %e, %Y')<now.strftime('%B %e, %Y') %}
 	    				<div class="column">
-	    					<a href="" class="level-item">
+	    					<a href="{{url_for('linkages.event_reschedule', id=event.id)}}" class="level-item">
 			  					<button class="button is-info"><span class="icon is-small"><i class="fas fa-clock"></i></span>&nbsp Reschedule</button>
 							</a>
 	    				</div>
+						{% endif %}
 	    				<div class="column">
-	    					<a href="" class="level-item">
+	    					<a href="{{url_for('linkages.event_action', id=event.id, action='cancel')}}" class="level-item">
 			  					<button class="button is-danger"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Cancel</button>
 							</a>
 	    				</div>

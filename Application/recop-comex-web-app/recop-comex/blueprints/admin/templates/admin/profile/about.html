@@ -37,26 +37,13 @@
 
 			<div class="level-item has-text-centered">
 			    <div class="active-prof-nav">
-			    	<a class="menu prof-icon" href="{{url_for('admin.profile_eventsattended', user=current_user.username)}}">
+			    	<a class="menu prof-icon" href="{{url_for('admin.profile_eventsorganized', user=current_user.username)}}">
 				      	<p class="icon">
 					      	<span class="icon">
 					      		<i class="fas fa-calendar-alt fa-2x""></i>
 					      	</span>
 					    </p>
-				      	<p class="is-size-6 has-text-weight-bold">Events Attended</p>
-				    </a>
-			    </div>
-			</div>
-
-			<div class="level-item has-text-centered">
-			    <div class="active-prof-nav">
-			    	<a class="menu prof-icon" href="{{url_for('admin.profile_settings_personal', user=current_user.username)}}">
-				      	<p class="icon">
-					      	<span class="icon">
-					      		<i class="fas fa-cog fa-2x"></i>
-					      	</span>
-					    </p>
-				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
+				      	<p class="is-size-6 has-text-weight-bold">Events Organized</p>
 				    </a>
 			    </div>
 			</div>

@@ -82,11 +82,13 @@
 												</span>
 											</a>
 											{% endif %}
+											{% if event.organizer_id==1 and event.event_date.strftime('%B %e, %Y')<now.strftime('%B %e, %Y') %}
 											<a class="button is-link tooltip" data-tooltip="Reschedule" href="{{url_for('admin.event_reschedule', id=event.id)}}">
 												<span class="icon">
 													<i class="fas fa-clock"></i>
 												</span>
 											</a>
+											{% endif %}
 											<a class="button is-danger tooltip" data-tooltip="Cancel" href="{{url_for('admin.event_action', id=event.id, action='cancel')}}">
 												<span class="icon">
 													<i class="fas fa-calendar-times"></i>

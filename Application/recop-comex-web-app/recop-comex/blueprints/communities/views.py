@@ -34,7 +34,7 @@ def index():
 
 	photo = user_photo.photo(current_user.info_id)
 
-	return render_template('/communities/index.html', title="Communities", photo=photo, active='home')
+	return render_template('/communities/index.html', title="Home", photo=photo, active='home')
 
 @communities.route('/communities/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -81,7 +81,7 @@ def event_participants(id):
 
 	form = SearchForm()
 
-	return render_template('/communities/events/add_participants.html', title= event.name.title() , event = event, participants=participants,joined=joined, form=form, active='events')
+	return render_template('/communities/events/add_participants.html', title= event.name.title() , event = event, participants=participants, joined=joined, form=form, active='events')
 
 @communities.route('/communities/event_<id>/<action>/<participant>')
 @login_required
@@ -108,39 +108,6 @@ def participant_action(id, action, participant):
 
 	return redirect(url_for('communities.event_participants',id=id))
 
-
-@communities.route('/communities/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
-@login_required
-def linkages(page, search):
-
-	linkages = linkage_views.show_list(['A', search, 3, page])
-
-	photo = user_photo.photo(current_user.info_id)
-
-	form = SearchForm()
-
-	if form.validate_on_submit():
-
-		return redirect(url_for('communities.linkages', page='1', search=form.search.data))
-
-	return render_template('/communities/linkages/index.html', title="Communities", form=form, linkages=linkages, page=page, search=search, photo=photo, active='linkages')
-
-@communities.route('/communities/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
-@login_required
-def communities_show(page, search):
-
-	communities = linkage_views.show_list(['A',search, 4, page])
-
-	photo = user_photo.photo(current_user.info_id)
-
-	form = SearchForm()
-
-	if form.validate_on_submit():
-
-		return redirect(url_for('communities.communities_show', page='1', search=form.search.data))
-
-	return render_template('/communities/communities/index.html', form=form, communities=communities, search=search, photo=photo, active='communities')
-
 @communities.route('/communities/members/search_<search>', methods=['GET', 'POST'])
 @login_required
 def members(search):
@@ -155,7 +122,7 @@ def members(search):
 
 		return redirect(url_for('communities.members', search=form.search.data))
 
-	return render_template('/communities/members/index.html', title="Communities", members=members, form=form, search=search, photo=photo,  active='members')
+	return render_template('/communities/members/index.html', title="Members", members=members, form=form, search=search, photo=photo,  active='members')
 
 @communities.route('/communities/members/add', methods=['GET', 'POST'])
 @login_required
@@ -189,7 +156,7 @@ def member_add():
 		flash('Member added!', 'success')
 		return redirect(url_for('communities.members', search=' '))
 
-	return render_template('/communities/members/add.html', title="Communities", form=form, active='members')
+	return render_template('/communities/members/add.html', title="Add Member", form=form, active='members')
 
 @communities.route('/communities/members/update/id=<id>', methods=['GET', 'POST'])
 @login_required
@@ -234,7 +201,7 @@ def member_updateinfo(id):
 		form.telephone.data = member.telephone
 		form.mobile.data = member.mobile_number
 
-	return render_template('/communities/members/update.html', title="Communities", form=form, active='members')
+	return render_template('/communities/members/update.html', title="Update Member", form=form, active='members')
 
 @communities.route('/communities/members/action/id=<id>')
 @login_required
@@ -256,6 +223,38 @@ def member_action(id):
 	community.update_status(user.id, status)
 
 	return redirect(url_for('communities.members', search=' '))
+
+@communities.route('/communities/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
+@login_required
+def linkages(page, search):
+
+	linkages = linkage_views.show_list(['A', search, 3, page])
+
+	photo = user_photo.photo(current_user.info_id)
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('communities.linkages', page='1', search=form.search.data))
+
+	return render_template('/communities/linkages/index.html', title="Linkages", form=form, linkages=linkages, page=page, search=search, photo=photo, active='linkages')
+
+@communities.route('/communities/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
+@login_required
+def communities_show(page, search):
+
+	communities = linkage_views.show_list(['A',search, 4, page])
+
+	photo = user_photo.photo(current_user.info_id)
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('communities.communities_show', page='1', search=form.search.data))
+
+	return render_template('/communities/communities/index.html', title="Communities", form=form, communities=communities, search=search, photo=photo, active='communities')
 
 @communities.route('/communities/referral', methods=['GET', 'POST'])
 @login_required
@@ -279,7 +278,7 @@ def referral_users():
 		flash('Referral has been sent!', 'success')
 		return redirect(url_for('communities.referral_users'))	
 
-	return render_template('/communities/referral/index.html', title="Communities", form=form)
+	return render_template('/communities/referral/index.html', title="Referral", form=form)
 
 @communities.route('/communities/contactus')
 @login_required
@@ -287,7 +286,7 @@ def contactus():
 
 	photo = user_photo.photo(current_user.info_id)
 
-	return render_template('/communities/contactus/index.html', title="Communities", photo=photo)
+	return render_template('/communities/contactus/index.html', title="Contact Us", photo=photo)
 
 @communities.route('/communities/termsandconditions')
 @login_required
@@ -295,7 +294,7 @@ def termsandconditions():
 
 	photo = user_photo.photo(current_user.info_id)
 
-	return render_template('/communities/termsandconditions/index.html', title="Communities", photo=photo)
+	return render_template('/communities/termsandconditions/index.html', title="Terms and Conditions", photo=photo)
 
 @communities.route('/communities/profile/about|<user>', methods=['GET', 'POST'])
 @login_required
@@ -322,7 +321,7 @@ def profile_about(user):
 		flash('Profile picture has been updated!', 'success')
 		return redirect(url_for('communities.profile_about', user=user))
 
-	return render_template('/communities/profile/about.html', title="Communities",  photo=photo, form=form, communities=communities)
+	return render_template('/communities/profile/about.html', title="Profile",  photo=photo, form=form, communities=communities)
 
 @communities.route('/communities/profile/eventsattended|<user>')
 @login_required
@@ -330,7 +329,7 @@ def profile_eventsattended(user):
 
 	photo = user_photo.photo(current_user.info_id)
 
-	return render_template('/communities/profile/eventsattended.html', title="Communities", photo=photo)	
+	return render_template('/communities/profile/eventsattended.html', title="Profile", photo=photo)	
 
 @communities.route('/communities/profile/settings/personal|<user>', methods=['GET', 'POST'])
 @login_required
@@ -364,7 +363,7 @@ def profile_settings_personal(user):
 		form.birthday.data = user_information_update.birthday
 		form.bio.data = user_information_update.bio
 
-	return render_template('/communities/profile/settings/personal.html', title="Communities", form=form)
+	return render_template('/communities/profile/settings/personal.html', title="Update", form=form)
 
 @communities.route('/communities/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
@@ -398,7 +397,7 @@ def profile_settings_contact(user):
 		form.mobile.data = user_information_update.mobile_number
 		form.email.data = user_account_update.email_address
 
-	return render_template('/communities/profile/settings/contact.html', title="Communities", form=form)	
+	return render_template('/communities/profile/settings/contact.html', title="Update", form=form)	
 
 @communities.route('/communities/profile/settings/username|<user>', methods=['GET', 'POST'])
 @login_required
@@ -430,7 +429,7 @@ def profile_settings_username(user):
 
 		form.username.data = user_account_update.username
 
-	return render_template('/communities/profile/settings/username.html', title="Communities", form=form)
+	return render_template('/communities/profile/settings/username.html', title="Update", form=form)
 
 @communities.route('/communities/profile/settings/password|<user>', methods=['GET', 'POST'])
 @login_required
@@ -458,7 +457,7 @@ def profile_settings_password(user):
 
 			flash('Wrong password.', 'error')
 
-	return render_template('/communities/profile/settings/password.html', title="Communities", form=form)
+	return render_template('/communities/profile/settings/password.html', title="Update", form=form)
 
 @communities.route('/logout/communities')
 @login_required

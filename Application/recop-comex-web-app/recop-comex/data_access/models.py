@@ -675,6 +675,12 @@ class user_information(db.Model):
 		record = user_information.query.filter_by(id=value).first()
 
 		return record
+		
+	def retrieve_user(value):
+
+		record = user_information.query.filter(user_account.id==value).first()
+
+		return record
 
 class user_photo(db.Model):
 

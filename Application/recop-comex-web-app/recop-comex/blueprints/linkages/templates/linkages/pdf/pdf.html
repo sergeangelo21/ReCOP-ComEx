@@ -47,7 +47,11 @@
 						</div>
 
 						<div class="container greetings">
-							<p>To whom it may concern,</p>
+							{% if admin.gender == 'M' %}
+							<p>Dear Mr. {{ admin.last_name }},</p>
+							{% else %}
+							<p>Dear Ms./Mrs. {{ admin.last_name }},</p>
+							{% endif %}
 						</div>
 
 						<div class="container letter-body">
@@ -138,19 +142,19 @@
 						</div>
 					</div>
 				</div>
-
+				<br>
 				<div class="container two-signatures">
-					<div class="columns has-text-centered">
+					<div class="columns">
 						<div class="column">
-							<hr class="sign-line">
+							<hr class="signature-line">
 							<p class="has-text-weight-bold">Department Head</p>
 							<p>Signature Over Printed Name</p>
 						</div>
-
+						<br>
 						<div class="column">
-							<hr class="sign-line">
+							<hr class="signature-line">
 							<p class="has-text-weight-bold">Dean</p>
-							<p>Dean</p>
+							<p>Signature Over Printed Name</p>
 						</div>
 					</div>
 				</div>

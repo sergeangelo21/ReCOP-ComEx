@@ -185,22 +185,6 @@ def delete_photo(id, event):
 
 	return redirect(url_for('linkages.event_photos', id=event))
 
-@linkages.route('/linkages/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
-@login_required
-def linkages_show(page, search):
-
-	linkages = linkage_views.show_list(['A', search, 3, page])
-
-	photo = user_photo.photo(current_user.info_id)
-
-	form = SearchForm()
-
-	if form.validate_on_submit():
-
-		return redirect(url_for('linkages.linkages_show', page='1', search=form.search.data))
-
-	return render_template('/linkages/linkages/index.html', linkages=linkages, form = form, search=search, user=current_user.info_id, photo=photo, active='linkages')
-
 @linkages.route('/linkages/events/finish/<id>')
 @login_required
 def event_finish(id):
@@ -342,6 +326,51 @@ def events_create():
 
 	return render_template('/linkages/events/create.html', form=form, active='events')
 
+@linkages.route('/linkages/events/reschedule/id=<id>', methods=['GET', 'POST'])
+@login_required
+def event_reschedule(id):
+
+	form = RescheduleEventForm()
+
+	resched_event = event_information.reschedule(id)
+
+	if form.validate_on_submit():
+
+		resched_event.location = form.location.data
+		resched_event.event_date = form.event_date.data
+
+		db.session.commit()
+
+		flash('Event rescheduled!', 'success')
+
+		return redirect(url_for('linkages.events', status='all', page='1', search=' '))
+
+	else:
+
+		form.location.data = resched_event.location
+		form.event_date.data = resched_event.event_date
+
+	return render_template('/linkages/events/reschedule.html', title="Reschedule", form=form, event=resched_event, active='events')
+
+@linkages.route('/linkages/events/<action>/id=<id>')
+@login_required
+def event_action(id, action):
+
+	event = event_information.retrieve_event(id)
+
+	if action=='cancel':
+
+		status='C'
+		proposal_tracker.update_status(event.id, status)
+		event_information.update_status(event.id, status)
+
+		value = [None,current_user.id,event.id,'event', 8]
+		audit_trail.add(value)
+
+		flash(event.name + ' was cancelled.', 'success')	
+
+	return redirect(url_for('linkages.events', status='all', page='1', search=' '))
+
 @linkages.route('/linkages/events/letter/<id>_<name>', methods=['GET', 'POST'])
 @login_required
 def event_letter(id, name):
@@ -349,8 +378,9 @@ def event_letter(id, name):
 	filepath = 'static/output/events/letters/'
 
 	event = event_views.show_info(id)
+	admin = user_information.retrieve_user(1)
 
-	html = render_template('linkages/pdf/pdf.html', event = event, date = datetime.now())
+	html = render_template('linkages/pdf/pdf.html', event=event, admin=admin, date = datetime.now())
 
 	generate_pdf(html, filepath + str(id) + '.pdf')
 
@@ -361,6 +391,22 @@ def event_letter(id, name):
 def event_stream(id):
 
 	return render_template('linkages/events/stream.html', id=id)
+
+@linkages.route('/linkages/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
+@login_required
+def linkages_show(page, search):
+
+	linkages = linkage_views.show_list(['A', search, 3, page])
+
+	photo = user_photo.photo(current_user.info_id)
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('linkages.linkages_show', page='1', search=form.search.data))
+
+	return render_template('/linkages/linkages/index.html', linkages=linkages, form = form, search=search, user=current_user.info_id, photo=photo, active='linkages')
 
 @linkages.route('/linkages/communities/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
