@@ -46,6 +46,8 @@
 												</span>
 											</a>
 											{% if event.event_status=='N' %}
+											{% if event.address=='San Seba%tian College Recoletos de Cavite' and event.organizer_id!=1 
+											%}
 											{% for attach in letters %}
 									    	{% if attach.event_id==event.id %}
 											<a class="button is-success tooltip" data-tooltip="Approve" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
@@ -60,6 +62,18 @@
 											</a>
 											{% endif %}
 											{% endfor %}
+											{% else %}
+											<a class="button is-success tooltip" data-tooltip="Approve" href="{{url_for('admin.event_action', id=event.id, action='approve')}}">
+												<span class="icon">
+													<i class="fas fa-check-circle"></i>
+												</span>
+											</a>
+											<a class="button is-danger tooltip" data-tooltip="Decline" href="{{url_for('admin.event_action', id=event.id, action='decline')}}">
+												<span class="icon">
+													<i class="fas fa-times-circle x"></i>
+												</span>
+											</a>
+											{% endif %}
 											{% elif event.event_status=='S' %}
 											{% if event.organizer_id==1 and event.event_date.strftime('%B %e, %Y')==now.strftime('%B %e, %Y') %}
 											<a class="button is-warning tooltip" data-tooltip="Conduct" href="{{url_for('admin.event_conduct', id=event.id)}}">
