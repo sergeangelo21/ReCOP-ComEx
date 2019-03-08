@@ -71,21 +71,25 @@
       <div class="column is-half">
         <div class="box">
           <h1 class="title is-4">Photos</h1> 
-        <div class="table rep">
-        {% for pic in photos %}
-             <table class="table is-fullwidth is-bordered is-hoverable">
-                  <thead>
-                    <th>Photo</th>
-                    <th>Caption</th>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><img class='image is-128x128' src='../../../../{{pic.photo}}'></td>
-                      <td>{{pic.description}}</td>
-                    </tr>
-                  </tbody>
-              </table>
-        {% endfor %}
+      <div class="columns rep">
+               {% for pic in photos %}
+
+  <div class="column is-half">
+    <div class="card select-list has-text-centered">
+      <div class="card-content  all-view">
+        <div class="level">
+          <div class="level-item">
+            <img class='image is-128x128' src='../../../../{{pic.photo}}'>
+          </div>
+        </div>
+            <div class="subtitle is-6">
+              <i class="fas fa-comment"></i>&nbsp; {{pic.description}}
+            </div>
+      </div>
+    </div>
+  </div>
+                {% endfor %}
+</div>
         </div>
       </div>
     </div>
@@ -143,17 +147,4 @@
         </div>
       </div>
     </div>
-  <div class="columns is-centered has-text-centered">
-      <div class="column is-half">
-        <button class="button is-large is-primary is-fullwidth">
-        <span class="fas fa-users">    
-        </span>&nbsp;&nbsp;Attendance</button>
-      </div>
-      <div class="column is-half">
-        <button class="button is-large is-warning is-fullwidth">
-        <span class="fas fa-file-invoice">    
-        </span> &nbsp;&nbsp;FIles</button>
-      </div>
-    </div>
-</div>  
 {% endblock %}
