@@ -307,6 +307,15 @@ class event_participation(db.Model):
 
 		return record
 
+	def user_joined(value):
+
+		record = event_participation.query.filter(
+			and_(event_participation.participant_id==value,
+			event_participation.status=='J')
+			).all()
+
+		return record
+
 	def show_joined(value):
 
 		record = event_participation.query.filter(

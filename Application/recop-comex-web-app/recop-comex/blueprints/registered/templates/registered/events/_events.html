@@ -173,12 +173,18 @@
 
 	  		</section>
 	    	<footer class="modal-card-foot buttons is-right">
-				<a href="{{url_for('registered.event_action', id=event.id, action='join')}}" class="level-item">
+	    		{% if event.event_status!='F'%}
+	    		<a 	{% for u in user %}{% if event.id==u.event_id and u.status=='J' %}class="hidden"{% endif %} {% endfor %} href="{{url_for('registered.event_action', id=event.id, action='join')}}" class="level-item">
   					<button class="button is-info"><span class="icon is-small"><i class="fas fa-check"></i></span>&nbsp Join Event</button>
-				</a>&nbsp
+				</a>
+	    		{% for u in user %}
+	    			{% if event.id==u.event_id and u.status=='J' %}
 				<a href="{{url_for('registered.event_action', id=event.id, action='cancel')}}" class="level-item">
   					<button class="button is-danger"><span class="icon is-small"><i class="fas fa-times"></i></span>&nbsp Cancel Participation</button>
 				</a>
-    		</footer>
+				{% endif %}
+				{% endfor %}
+				{% endif %}
+			</footer>
   		</div>
 	</div>

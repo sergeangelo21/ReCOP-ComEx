@@ -48,17 +48,19 @@ def events(status, page, search):
 	else:
 		value=status
 
-	events = event_views.show_list([value, search, page])
+	events = event_views.registered_events([value, search, page])
 
 	photo = user_photo.photo(current_user.info_id)
 
 	form = SearchForm()
 
+	user = event_participation.user_joined(current_user.info_id)
+
 	if form.validate_on_submit():
 
 		return redirect(url_for('registered.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/registered/events/index.html', title="Events", form=form, events=events, status=status, search=search, photo=photo, active='events')
+	return render_template('/registered/events/index.html', title="Events", form=form, events=events, user=user, status=status, search=search, photo=photo, active='events')
 
 @registered.route('/registered/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -85,7 +87,7 @@ def event_action(id, action):
 
 			event_participation.update(value)
 
-			flash('Event '+event.name+'  successfully joined!', 'success')
+			flash('Successfully	 joined '+event.name, 'success')
 
 		else:
 
@@ -93,17 +95,17 @@ def event_action(id, action):
 
 			event_participation.add(value)
 
-			flash('Event '+event.name+' successfully joined!', 'success')
+			flash('Successfully	 joined '+event.name, 'success')
 
-	elif action == 'cancel':
+	else:
 
 		value = [event.id, current_user.info_id, 'C']
 
 		event_participation.update(value)
 
-		flash('Event '+event.name+' participation has been cancelled!', 'success')
+		flash('Participation has been cancelled!', 'success')
 
-	return redirect(url_for('registered.events', page='1', search=' '))
+	return redirect(url_for('registered.events', status='all', page='1', search=' '))
 
 @registered.route('/registered/linkages/search_<search>.page_<page>', methods=['GET','POST'])
 @login_required

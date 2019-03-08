@@ -44,7 +44,7 @@ def events(status, search, page):
 	else:
 		value=status
 
-	events = event_views.show_list([value, search, page])
+	events = event_views.registered_events([value, search, page])
 
 	form = SearchForm()
 

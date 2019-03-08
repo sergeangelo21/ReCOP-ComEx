@@ -7,7 +7,7 @@ class Config(object):
 	SECURITY_PASSWORD_SALT = "yes_we_can"
 
 	SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root@localhost/recop-comex'
-	SQLALCHEMY_TRACK_MODIFICATIONS = False
+	SQLALCHEMY_TRACK_MODIFICATIONS = True
 	#SQLALCHEMY_ECHO = True
 
 	MAIL_SERVER='smtp.gmail.com'

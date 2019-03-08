@@ -174,10 +174,11 @@
 	      		</section>
     	
 	    		<footer class="modal-card-foot buttons is-right">
+	    			{% if event.event_status=='S' %}
 	    			<a href="{{url_for('unregistered.login')}}">
 	    				<button class="button is-info">Join Event</button>
 	    			</a>
-
+	    			{% endif %}
 	    		</footer>
 	  		</div>
 	</div>
