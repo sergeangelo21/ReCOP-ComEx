@@ -5,7 +5,7 @@
 	<div class="notification gold">
 		<div class="columns is-centered">
 			<div class="column refer-center">
-				<a href="" class="button refer is-warning">
+				<a href="{{url_for('unregistered.referral_users')}}" class="button refer is-warning">
 	            	<span class="has-text-weight-bold">Do you know someone can help us?</span>
 	            </a>
 			</div>
@@ -32,7 +32,7 @@
 			You searched for &nbsp;
 			<span class="search-highlight">
 				&nbsp;'{{search}}'
-				<a href="{{url_for('linkages.communities', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+				<a href="{{url_for('unregistered.communities', page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
 			</span>
 			&nbsp; in
 			{% endif %}Communities
@@ -46,7 +46,7 @@
 	{% if communities.items %}
     <div class="columns padding-el is-multiline">
     	{% for community in communities.items %}
-        	{% include 'linkages/communities/_communities.html' %}
+        	{% include 'unregistered/communities/_communities.html' %}
     	{% endfor %}
     </div>
     {% else %}
@@ -69,8 +69,8 @@
 	{% if communities.pages>1 %}
         <div class="card-content">
 	<nav class="pagination" role="navigation" aria-label="pagination">
-		<a class="pagination-previous"  {% if communities.has_prev %}  href="{{url_for('linkages.communities', search=search, page=linkages.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
-		<a class="pagination-next" {% if communities.has_next %} href="{{url_for('linkages.communities', search=search, page=linkages.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+		<a class="pagination-previous"  {% if communities.has_prev %}  href="{{url_for('unregistered.communities', search=search, page=unregistered.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+		<a class="pagination-next" {% if communities.has_next %} href="{{url_for('unregistered.communities', search=search, page=unregistered.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
 		<ul class="pagination-list">
 			Page {{communities.page}} of {{communities.pages}}
 		</ul>

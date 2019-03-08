@@ -261,15 +261,13 @@ def member_action(id):
 @login_required
 def referral_users():
 
-	photo = user_photo.photo(current_user.info_id)
-
 	form = ReferralForm()
 
 	if form.validate_on_submit():
 
 		html = 'asdlkfjasfd'
 		subject = 'REFFERAL: '
-		admin = user_account.query.by(id=1).first()
+		admin = user_account.retrieve_user(1)
 
 		email_parts = [html, subject, admin.email_address, form.email.data, None]
 		send_email(email_parts)
@@ -281,7 +279,7 @@ def referral_users():
 		flash('Referral has been sent!', 'success')
 		return redirect(url_for('communities.referral_users'))	
 
-	return render_template('/communities/referral/index.html', title="Communities", form=form, photo=photo)
+	return render_template('/communities/referral/index.html', title="Communities", form=form)
 
 @communities.route('/communities/contactus')
 @login_required

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, current_user, login_required
 from blueprints.unregistered.forms import *
-from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment, donation
+from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment, referral, donation
 from data_access.queries import user_views, event_views, linkage_views
 from datetime import datetime
 
@@ -141,7 +141,7 @@ def donate():
 
 	return render_template('/unregistered/donate/index.html', form=form, no_event=no_event, active='donate')
 
-@unregistered.route('/unregistered/referral', methods=['GET', 'POST'])
+@unregistered.route('/referral', methods=['GET', 'POST'])
 def referral_users():
 
 	form = ReferralForm()
@@ -150,17 +150,19 @@ def referral_users():
 
 		html = 'asdlkfjasfd'
 		subject = 'REFFERAL: '
-		admin = user_account.query.by(id=1).first()
+		admin = user_account.retrieve_user(1)
 
 		email_parts = [html, subject, admin.email_address, form.email.data, None]
 		send_email(email_parts)
 
-		value = [None, admin.info_id, form.name.data, form.email.data, form.type.data, 'N']
+		value = [None, admin.id, form.name.data, form.email.data, form.type.data, 'N']
 
 		referral.add(value)
 
 		flash('Referral has been sent!', 'success')
-		return redirect(url_for('uregistered.referral_users'))
+		return redirect(url_for('unregistered.index'))	
+
+	return render_template('/unregistered/referral/index.html', form=form, active='referral')
 
 @unregistered.route('/contactus')
 def contactus():

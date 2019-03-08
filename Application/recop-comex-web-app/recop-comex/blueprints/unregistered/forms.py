@@ -3,6 +3,13 @@ from flask_wtf.file import FileField, FileRequired, FileAllowed
 from wtforms import StringField, TextAreaField, PasswordField, SubmitField, SelectField, DecimalField, DateField, BooleanField, RadioField, IntegerField, validators
 from wtforms.validators import DataRequired, EqualTo, ValidationError, NumberRange, Email
 
+
+class ReferralForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email Address', validators=[DataRequired()])
+    type = SelectField('Type', choices=[('', 'Please Choose One'), ('1', 'Volunteer'), ('2', 'Linkage'), ('3', 'Community')])
+    submit = SubmitField('Submit')
+    
 class SearchForm(FlaskForm):
     search = StringField("Search", validators=[DataRequired()])
     submit = SubmitField("Search")
