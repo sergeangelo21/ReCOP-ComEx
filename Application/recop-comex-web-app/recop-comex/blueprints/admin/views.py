@@ -232,9 +232,10 @@ def event_report(id):
 	ratings = event_participation.ratings(id)
 	average = event_participation.average_rating(id)
 	comments = event_views.comments(id)
+	photos = event_photo.show(id)
 	photo = user_photo.photo(current_user.info_id)
 
-	return render_template('/admin/events/report.html', event=event, photo=photo, ratings=ratings, comments=comments, average=average, active='events')
+	return render_template('/admin/events/report.html', event=event, photo=photo, ratings=ratings, photos=photos, comments=comments, average=average, active='events')
 
 @admin.route('/admin/events/<action>/id=<id>')
 @login_required

@@ -70,24 +70,22 @@
       </div>
       <div class="column is-half">
         <div class="box">
-          <h1 class="title is-4">Photos</h1>
-        
-        <div class="wrapper">
-          <div class="slider-wrapper">
-            <div class=inner>
-
-                    <ul id=”image_slider”>
-                        <li>
-                         <article>
-                          <div class="info top-left">
-                          <img src="https://farm9.staticflickr.com/8059/28286750501_dcc27b1332_h_d.jpg" />
-                          <h3>Malacca</h3>
-                        </div>
-                          </article>
-                        </li>
-                    </ul>                  
-            </div>         
-         </div>
+          <h1 class="title is-4">Photos</h1> 
+        <div class="table rep">
+        {% for pic in photos %}
+             <table class="table is-fullwidth is-bordered is-hoverable">
+                  <thead>
+                    <th>Photo</th>
+                    <th>Caption</th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><img class='image is-128x128' src='../../../../{{pic.photo}}'></td>
+                      <td>{{pic.description}}</td>
+                    </tr>
+                  </tbody>
+              </table>
+        {% endfor %}
         </div>
       </div>
     </div>
