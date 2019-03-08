@@ -180,6 +180,100 @@
 						</div>
 				    </div>
 
+			    <div class="card">
+				  	<header class="card-header has-background-light">
+					    <p class="card-header-title">
+					      Proposal Status: 
+								        		{% if event.event_status=='N' %}
+								        			For ReCOP Signing
+								        		{% elif event.event_status=='P' %}
+								        			{% if event.acad_signed %}
+								        				For FMI's Signing
+								        			{% elif event.fmi_signed %}
+								        				For President's Signing
+								        			{% elif event.recop_accepted %}
+								        				For Academics' Signing
+								       				{% endif %}
+								        		{% elif event.event_status=="S" %}
+								        			Approved
+								        		{% endif %}
+					    </p>
+					</header>
+				  	<div class="card-content tracker">
+					    <div class="content">
+					        <div class="columns is-centered">
+							{% if event.organizer_id!=1 %}
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-file-contract fa-4x track-icon {% if event.recop_accepted %} mark {% endif %}"></i>
+					          			<label class="label">Accepted</label>
+					          			{% if event.recop_accepted %} 
+					          			{{event.recop_accepted.strftime('%B %e, %Y')}}<br>
+					          			{{event.recop_accepted.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles {% if event.acad_signed %} mark {% endif %}">
+					          			<br>					          			
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-4x" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-user-graduate fa-4x track-icon {% if event.acad_signed %} mark {% endif %}"></i>
+					          			<label class="label">Academics</label>
+					          			{% if event.acad_signed %} 
+					          			{{event.acad_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.acad_signed.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles {% if event.fmi_signed %} mark {% endif %}">
+					          			<br>
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-4x" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	{%  endif %}
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-heart fa-4x track-icon {% if event.fmi_signed %} mark {% endif %}"></i>
+					          			<label class="label">FMI</label>
+					          			{% if event.fmi_signed %} 
+					          			{{event.fmi_signed.strftime('%B %e, %Y')}}<br>
+					          			{{event.fmi_signed.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					          	<div class="column has-text-centered">
+					          		<div class="circles {% if event.approved_on %} mark {% endif %}">
+					          			<br>
+					          			<span class="icon"><i class="fas fa-ellipsis-h fa-4x" aria-hidden="true"></i></span>
+					          		</div>
+					          	</div>
+					          	<div class="column">
+					          		<div class="has-text-centered">
+					          			<i class="fas fa-check fa-4x track-icon {% if event.approved_on %} mark {% endif %}"></i>
+					          			<label class="label">Approved</label>
+					          			{% if event.approved_on %} 
+					          			{{event.approved_on.strftime('%B %e, %Y')}}<br>
+					          			{{event.approved_on.strftime('%I:%M %p')}}
+					          			{% else %}
+					          			<i class="icon fas fa-ellipsis-h"></i><br>		          			
+					          			{% endif %}
+					          		</div>
+					          	</div>
+					        </div>
+					    </div>
+				  	</div>
+				  </div>
 		  		</section>
 	    	
 				<footer class="modal-card-foot buttons is-centered">

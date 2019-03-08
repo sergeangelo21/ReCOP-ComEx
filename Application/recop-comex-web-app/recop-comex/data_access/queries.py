@@ -613,6 +613,10 @@ class event_views():
 				user_information.company_name,
 				user_information.address,
 				proposal_tracker.proposed_on,
+				proposal_tracker.recop_accepted,
+				proposal_tracker.fmi_signed,
+				proposal_tracker.acad_signed,
+				proposal_tracker.approved_on,
 				proposal_tracker.status
 				).filter(event_information.organizer_id==current_user.info_id
 				).paginate(int(value[2]), Config.POSTS_PER_PAGE, False)
@@ -634,6 +638,10 @@ class event_views():
 				user_information.company_name,
 				user_information.address,
 				proposal_tracker.proposed_on,
+				proposal_tracker.recop_accepted,
+				proposal_tracker.fmi_signed,
+				proposal_tracker.acad_signed,
+				proposal_tracker.approved_on,
 				proposal_tracker.status
 				).filter(and_(event_information.organizer_id==current_user.info_id,
 				or_(user_information.company_name.like('%'+value[1]+'%'),
@@ -657,6 +665,10 @@ class event_views():
 				user_information.company_name,
 				user_information.address,
 				proposal_tracker.proposed_on,
+				proposal_tracker.recop_accepted,
+				proposal_tracker.fmi_signed,
+				proposal_tracker.acad_signed,
+				proposal_tracker.approved_on,
 				proposal_tracker.status
 				).filter(and_(event_information.organizer_id==current_user.info_id, 
 				event_information.event_status==value[0],
@@ -681,6 +693,10 @@ class event_views():
 				user_information.company_name,
 				user_information.address,
 				proposal_tracker.proposed_on,
+				proposal_tracker.recop_accepted,
+				proposal_tracker.fmi_signed,
+				proposal_tracker.acad_signed,
+				proposal_tracker.approved_on,
 				proposal_tracker.status
 				).filter(and_(event_information.organizer_id==current_user.info_id, 
 				event_information.event_status==value[0],or_(
