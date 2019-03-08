@@ -795,6 +795,22 @@ class event_views():
 		record = event_information.query.filter(event_information.event_status=='S').all()
 
 		return record
+
+	def comments(value):
+
+		record = event_participation.query.join(
+			user_information
+			).add_columns(
+			(user_information.first_name + ' ' +
+			func.left(user_information.middle_name,1) + '. ' +
+			user_information.last_name).label('name'),
+			event_participation.comment,
+			event_participation.rating
+			).filter(and_(event_participation.event_id==value,
+			event_participation.comment!=None, event_participation.comment!='')
+			).all()
+
+		return record
 		
 class community_views():
 

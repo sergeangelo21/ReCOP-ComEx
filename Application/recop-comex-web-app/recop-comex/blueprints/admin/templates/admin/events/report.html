@@ -1,0 +1,160 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+ <link rel="stylesheet" href="../../../../static/css/recop-comex-style/css/reports.css">
+      <div class="notification gold">
+        <div class="columns is-centered">
+          <div class="column is-1">
+            <article class="media">
+                <figure class="media-left"> 
+                  <a class="button add" href="{{url_for('admin.events', status='all', page='1', search=' ')}}" ><i class="fas fa-arrow-left"> </i>&nbsp Back</a>
+                </figure>
+            </article>
+          </div>
+          <br>
+          <div class="column">
+            <div class="has-text-weight-bold is-centered">
+              <label class='title'>{{event.name|title}}</label>
+            </div>
+            <div class="has-text-weight-bold is-centered">
+              <label class='subtitle'>Reports</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<div class="hero is-white main">
+  <div class="columns is-centered has-text-centered">
+      <div class="column is-half">
+        <div class="box">
+          <h1 class="title is-4">Information</h1>
+           <div class="table">
+                 <table class="table is-fullwidth is-bordered is-hoverable is-striped">
+                  <tbody>
+                    <tr>
+                      <td><label class='label'>Name</label></td>
+                      <td>{{event.name|title}}</td>
+                    </tr>
+                    <tr>
+                      <td><label class='label'>Organizer</label></td>
+                      <td>{{event.company_name}}</td>
+                    </tr>
+                    <tr>
+                      <td><label class='label'>Description</label></td>
+                      <td>{{event.description}}</td>
+                    </tr>
+                    <tr>
+                      <td><label class='label'>Objective</label></td>
+                      <td>{{event.objective}}</td>
+                    </tr>
+                    <tr>
+                      <td><label class='label'>Budget</label></td>
+                      <td>₱ {{event.budget}}</td>
+                    </tr>
+                    <tr>
+                      <td><label class='label'>Location</label></td>
+                      <td>{{event.location}}</td>
+                    </tr>
+                    <tr>
+                      <td><label class='label'>Proposed On</label></td>
+                      <td>{{event.proposed_on.strftime('%B %e, %Y')}}</td>
+                    </tr>
+                    <tr>
+                      <td><label class='label'>Approved On</label></td>
+                      <td>{{event.approved_on.strftime('%B %e, %Y')}}</td>
+                    </tr>
+                  </tbody>
+                  </table>
+          </div>
+        </div>  
+      </div>
+      <div class="column is-half">
+        <div class="box">
+          <h1 class="title is-4">Photos</h1>
+        
+        <div class="wrapper">
+          <input checked type=radio name="slider" id="slide1" />
+          <input type=radio name="slider" id="slide2" />
+          <input type=radio name="slider" id="slide3" />
+          <input type=radio name="slider" id="slide4" />
+          <input type=radio name="slider" id="slide5" />
+          <div class="slider-wrapper">
+            <div class=inner>
+              <article>
+                <div class="info top-left">
+                  <h3>Malacca</h3></div>
+                  <img src="https://farm9.staticflickr.com/8059/28286750501_dcc27b1332_h_d.jpg" />
+              </article>
+            </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="columns is-centered has-text-centered">
+      <div class="column is-half">
+        <div class="box">
+          
+          <h1 class="title is-4">Average Rating</h1>
+              <span class="fas fa-star fa-3x {% if average.average>=1 %}checked{% endif %}"></span>
+              <span class="fas fa-star fa-3x {% if average.average>=2 %}checked{% endif %}" ></span>
+              <span class="fas fa-star fa-3x {% if average.average>=3 %}checked{% endif %}"></span>
+              <span class="fas fa-star fa-3x {% if average.average>=4 %}checked{% endif %}"></span>
+              <span class="fas fa-star fa-3x {% if average.average>=5 %}checked{% endif %}"></span>
+          <br>
+           <p class='subtitle'>
+              {% if average.average==1 %}
+                Very Poor
+              {% elif average.average==2 %}
+                Poor
+              {% elif average.average==3 %}
+                Fair
+              {% elif average.average==4 %}
+                Very Good
+              {% else %}
+                Excellent
+              {% endif %}
+              ({{average.average}}) 
+           </p>
+        </div>  
+      </div>
+      <div class="column is-half">
+        <div class="box">
+        <h1 class="title is-4">Comments ({{comments|length}})</h1>
+        <div class="table rep">
+        {% for comment in comments %}
+             <table class="table is-fullwidth is-bordered is-hoverable">
+                  <thead>
+                    <th class='is-white'>{{comment.name}}</th>
+                    <th class='is-dark is-pulled-right'>Rating:  
+              <span class="fas fa-star {% if comment.rating>=1 %}checked{% endif %}"></span>
+              <span class="fas fa-star  {% if comment.rating>=2 %}checked{% endif %}" ></span>
+              <span class="fas fa-star  {% if comment.rating>=3 %}checked{% endif %}"></span>
+              <span class="fas fa-star  {% if comment.rating>=4 %}checked{% endif %}"></span>
+              <span class="fas fa-star  {% if comment.rating>=5 %}checked{% endif %}"></span></th>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="2">{{comment.comment}}</td>
+                    </tr>
+                  </tbody>
+              </table>
+        {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="columns is-centered has-text-centered">
+      <div class="column is-half">
+        <button class="button is-large is-primary is-fullwidth">
+        <span class="fas fa-users">    
+        </span>&nbsp;&nbsp;Attendance</button>
+      </div>
+      <div class="column is-half">
+        <button class="button is-large is-warning is-fullwidth">
+        <span class="fas fa-file-invoice">    
+        </span> &nbsp;&nbsp;FIles</button>
+      </div>
+    </div>
+</div>  
+{% endblock %}

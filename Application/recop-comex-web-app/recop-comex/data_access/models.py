@@ -300,6 +300,26 @@ class event_participation(db.Model):
 
 		db.session.commit()		
 
+	def ratings(value):
+
+		record = event_participation.query.add_columns(
+			event_participation.rating,
+			func.COUNT(event_participation.rating).label('count')
+			).group_by(event_participation.rating
+			).filter(event_participation.event_id==value
+			).all()
+
+		return record
+
+	def average_rating(value):
+
+		record = event_participation.query.add_columns(
+			func.AVG(event_participation.rating).label('average')
+			).filter(event_participation.event_id==value
+			).first()
+
+		return record
+
 class event_photo(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)

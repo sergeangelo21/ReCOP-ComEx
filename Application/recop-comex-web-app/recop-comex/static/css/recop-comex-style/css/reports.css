@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Donate</title>
-</head>
-    <link rel="stylesheet" type="text/css" href="..\Bulma\bulma-0.7.1\css\bulma.css">
-  	<link rel="stylesheet" type="text/css" href="..\Bulma\fontawesome-5.5.0\css\all.css">
-  	<link rel="stylesheet" type="text/css" href="..\Bulma\bulma-extensions-4.0.0\bulma-checkradio\dist\css\bulma-checkradio.min.css">
-  	<link rel="stylesheet" type="text/css" href="F:\bulma-carousel.min.css">	
-<style type="text/css">
-	/*---- NUMBER OF SLIDE CONFIGURATION ----*/
 .wrapper {
   width: 100%;
   margin: 2em auto;
@@ -223,147 +212,15 @@ article img {
     opacity: 0;
   }
 }
-@media only screen and (min-width: 850px) {
-  body {
-    padding: 0 80px;
-  }
-}
+
 .padding{
 	padding:20px;
 }
 
-</style>
-<body>
-	<br>
-	<div class="container padding">
-		<div class="columns is-centered">
-			<div class="column notification is-light has-text-centered">
-					<h1 class="title">FEEDING PROGRAM</h1>
-					<label class="label">REPORT</label>
-			</div>
-		</div>
-		
-		<div class="columns is-centered has-text-centered">
-			<div class="column is-half">
-				<div class="box">
-					
-					<h1 class="title is-4">INFO</h1>
-					<label class="label has-text-left">Information:</label>
-
-				</div>	
-			</div>
-			<div class="column has-text-centered">
-				<div class="box">
-				<h1 class="title is-4">PHOTOS</h1>
-				
-				<div class="wrapper">
-  <input checked type=radio name="slider" id="slide1" />
-  <input type=radio name="slider" id="slide2" />
-  <input type=radio name="slider" id="slide3" />
-  <input type=radio name="slider" id="slide4" />
-  <input type=radio name="slider" id="slide5" />
-
-  <div class="slider-wrapper">
-    <div class=inner>
-      <article>
-        <div class="info top-left">
-          <h3>Malacca</h3></div>
-        <img src="https://farm9.staticflickr.com/8059/28286750501_dcc27b1332_h_d.jpg" />
-      </article>
-
-      <article>
-        <div class="info bottom-right">
-          <h3>Cameron Highland</h3></div>
-        <img src="https://farm6.staticflickr.com/5812/23394215774_b76cd33a87_h_d.jpg" />
-      </article>
-
-      <article>
-        <div class="info bottom-left">
-          <h3>New Delhi</h3></div>
-        <img src="https://farm8.staticflickr.com/7455/27879053992_ef3f41c4a0_h_d.jpg" />
-      </article>
-
-      <article>
-        <div class="info top-right">
-          <h3>Ladakh</h3></div>
-        <img src="https://farm8.staticflickr.com/7367/27980898905_72d106e501_h_d.jpg" />
-      </article>
-
-      <article>
-        <div class="info bottom-left">
-          <h3>Nubra Valley</h3></div>
-        <img src="https://farm8.staticflickr.com/7356/27980899895_9b6c394fec_h_d.jpg" />
-      </article>
-    </div>
-    <!-- .inner -->
-  </div>
-  <!-- .slider-wrapper -->
-
-  <div class="slider-prev-next-control">
-    <label for=slide1></label>
-    <label for=slide2></label>
-    <label for=slide3></label>
-    <label for=slide4></label>
-    <label for=slide5></label>
-  </div>
-  <!-- .slider-prev-next-control -->
-
-  <div class="slider-dot-control">
-    <label for=slide1></label>
-    <label for=slide2></label>
-    <label for=slide3></label>
-    <label for=slide4></label>
-    <label for=slide5></label>
-  </div>
-  <!-- .slider-dot-control -->
-</div>
-</div>
-
-				<p></p>
-				</div>
-			</div>
-		</div>
-		<div class="columns is-centered has-text-centered">
-			<div class="column is-half">
-				<div class="box">
-					
-					<h1 class="title is-4">RATING</h1>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star checked"></span>
-					<span class="fa fa-star"></span>
-					<span class="fa fa-star"></span>
-				</div>	
-			</div>
-			<div class="column has-text-centered">
-				<div class="box">
-				<h1 class="title is-4">COMMENTS</h1>
-				<label class="label has-text-left">Information:</label>
-				<p></p>
-				</div>
-			</div>
-		</div>
-
-		<div class="columns">
-			<div class="column is-half">
-				<button class="button is-large is-primary is-fullwidth">
-				<span class="fas fa-user-check">		
-				</span>&nbsp;&nbsp;ATTENDANCE</button>
-			</div>
-			<div class="column">
-				<button class="button is-large is-warning is-fullwidth">
-				<span class="fas fa-file-invoice">		
-				</span> &nbsp;&nbsp;FILES</button>
-			</div>
-			
-		</div>
-
-	</div>
-
-<div class="columns is-centered">
-	<div class="column">
-		<h1 class="title"></h1>
-	
-</body>
-
-</html>
+.main{
+  margin: 1%
+}
+.rep {
+  overflow-y: scroll; 
+  overflow-x: hidden; 
+}

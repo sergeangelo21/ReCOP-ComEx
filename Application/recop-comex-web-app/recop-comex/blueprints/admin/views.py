@@ -109,6 +109,8 @@ def events_create():
 
 	linkages = linkage_views.target_linkages()
 
+	photo = user_photo.photo(current_user.info_id)
+
 	for item in linkages:
 
 		if item.type==3:
@@ -193,7 +195,7 @@ def events_create():
 
 		return redirect(url_for('admin.events', status='all', page='1', search=' '))
 
-	return render_template('/admin/events/create.html', title="Create Event", form=form, active='events')
+	return render_template('/admin/events/create.html', title="Create Event", form=form, photo=photo, active='events')
 
 @admin.route('/admin/events/reschedule/id=<id>', methods=['GET', 'POST'])
 @login_required
@@ -202,6 +204,8 @@ def event_reschedule(id):
 	form = RescheduleEventForm()
 
 	resched_event = event_information.reschedule(id)
+
+	photo = user_photo.photo(current_user.info_id)
 
 	if form.validate_on_submit():
 
@@ -219,7 +223,18 @@ def event_reschedule(id):
 		form.location.data = resched_event.location
 		form.event_date.data = resched_event.event_date
 
-	return render_template('/admin/events/reschedule.html', title="Reschedule", form=form, event=resched_event, active='events')
+	return render_template('/admin/events/reschedule.html', title="Reschedule", form=form, event=resched_event,photo=photo, active='events')
+
+@admin.route('/admin/events/report/<id>')
+def event_report(id):
+
+	event = event_views.show_info(id)
+	ratings = event_participation.ratings(id)
+	average = event_participation.average_rating(id)
+	comments = event_views.comments(id)
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/admin/events/report.html', event=event, photo=photo, ratings=ratings, comments=comments, average=average, active='events')
 
 @admin.route('/admin/events/<action>/id=<id>')
 @login_required
@@ -288,7 +303,9 @@ def event_conduct(id):
 
 	event = event_views.show_info(id)
 
-	return render_template('/admin/events/conduct.html', title= event.name.title() ,event=event, active='events')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/admin/events/conduct.html', title= event.name.title() ,event=event, photo=photo, active='events')
 
 @admin.route('/admin/events/photos/<id>', methods=['GET', 'POST'])
 @login_required
@@ -315,10 +332,10 @@ def event_photos(id):
 @login_required
 def add_photos(id):
 
+	photo = user_photo.photo(current_user.info_id)
 	event = event_views.show_info(id)
 	form = PhotoForm()
 
-	print()
 	if form.validate_on_submit():
 
 		for file in form.photos.data:
@@ -350,7 +367,7 @@ def add_photos(id):
 		flash('Photos successfully uploaded!', 'success')
 		return redirect(url_for('admin.event_photos', id=id))
 
-	return render_template('/admin/events/add_photos.html', title= event.name.title() ,event=event, form=form, active='events')
+	return render_template('/admin/events/add_photos.html', title= event.name.title() ,event=event, form=form, photo=photo, active='events')
 
 @admin.route('/admin/events/photos/delete/<id>_from_<event>', methods=['GET', 'POST'])
 @login_required
@@ -377,14 +394,14 @@ def event_attendance(id, search):
 
 	event = event_views.show_info(id)
 	participants = event_views.show_participants([id,search])
-
+	photo = user_photo.photo(current_user.info_id)
 	form=SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('admin.event_attendance', id=id, search=form.search.data))
 
-	return render_template('/admin/events/attendance.html', title= event.name.title() ,event=event,participants=participants,form=form, search=search, active='events')
+	return render_template('/admin/events/attendance.html', title= event.name.title() ,event=event,participants=participants,form=form, search=search, photo=photo, active='events')
 
 @admin.route('/admin/events/attendance/<id>/<action>.user_<user>')
 @login_required
@@ -408,7 +425,7 @@ def event_evaluation(id, search):
 
 	event = event_views.show_info(id)
 	participants = event_views.show_attended([id,search])
-
+	photo = user_photo.photo(current_user.info_id)
 	form=SearchForm()
 	evaluate = EvaluationForm()
 
@@ -425,13 +442,15 @@ def event_evaluation(id, search):
 		return redirect(url_for('admin.event_evaluation', id=id, search=search))
 
 
-	return render_template('/admin/events/evaluation.html', title= event.name.title() ,event=event,participants=participants,form=form, evaluate = evaluate, search=search, active='events')
+	return render_template('/admin/events/evaluation.html', title= event.name.title() ,event=event,participants=participants,form=form, evaluate = evaluate, search=search, photo=photo, active='events')
 
 @admin.route('/admin/events/stream/<id>')
 @login_required
 def event_stream(id):
 
-	return render_template('admin/events/stream.html', id=id)
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('admin/events/stream.html', photo=photo, id=id)
 
 @admin.route('/admin/linkages/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -465,7 +484,7 @@ def linkages(status, page, search):
 def linkages_chart():
 
 	query = db.session.query(user_account, func.count(user_account.type)).filter(user_account.type==3).all()
-
+	photo = user_photo.photo(current_user.info_id)
 	flash(query)
 
 	chart = pygal.Pie()
@@ -476,13 +495,14 @@ def linkages_chart():
 
 	chart.render_response()
 
-	return render_template('/admin/linkages/chart.html', title="Linkages", chart=chart, active='linkages')
+	return render_template('/admin/linkages/chart.html', title="Linkages", chart=chart, photo=photo, active='linkages')
 
 @admin.route('/admin/linkages/add', methods=['GET', 'POST'])
 @login_required
 def linkages_add():
 
 	form = AddLinkageForm()
+	photo = user_photo.photo(current_user.info_id)
 
 	if form.validate_on_submit():
 
@@ -508,7 +528,7 @@ def linkages_add():
 
 		return redirect(url_for('admin.linkages', status='all', page='1', search=' '))	
 
-	return render_template('/admin/linkages/add.html', title="Add Linkage", form=form, active='linkages')
+	return render_template('/admin/linkages/add.html', title="Add Linkage", form=form, photo=photo, active='linkages')
 
 @admin.route('/admin/linkages/show/id=<id>')
 @login_required
@@ -616,13 +636,16 @@ def communities_chart():
 
 	chart.render_response()
 
-	return render_template('/admin/communities/chart.html', title="Communities", chart=chart, active='communities')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/admin/communities/chart.html', title="Communities", chart=chart, photo=photo, active='communities')
 
 @admin.route('/admin/communities/add', methods=['GET', 'POST'])
 @login_required
 def communities_add():
 
 	form = AddCommunityForm()
+	photo = user_photo.photo(current_user.info_id)
 
 	if form.validate_on_submit():
 
@@ -648,7 +671,7 @@ def communities_add():
 
 		return redirect(url_for('admin.communities', status='all', page='1', search=' '))
 
-	return render_template('/admin/communities/add.html', title="Add Community", form=form, active='communities')
+	return render_template('/admin/communities/add.html', title="Add Community", form=form, photo=photo, active='communities')
 
 @admin.route('/admin/communities/show/id=<id>')
 @login_required
@@ -800,6 +823,8 @@ def donation_inkind(id):
 
 	types = inventory_type.show_list()
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = AddInventoryForm()
 
 	form.type_select.choices.extend([(str(t.id), t.name) for t in types])
@@ -822,13 +847,15 @@ def donation_inkind(id):
 		flash('Items were successfully added!', 'success')
 		return redirect(url_for('admin.donations', status='all', page='1', search=' '))
 
-	return render_template('/admin/donations/inventory.html', title="Donation", form=form, donation=info, active='donations')
+	return render_template('/admin/donations/inventory.html', title="Donation", form=form, donation=info, photo=photo, active='donations')
 
 @admin.route('/admin/donations/add', methods=['GET', 'POST'])
 @login_required
 def donation_add():	
 
 	form=DonationForm()
+
+	photo = user_photo.photo(current_user.info_id)
 
 	organizations = linkage_views.target_linkages()
 
@@ -879,7 +906,7 @@ def donation_add():
 		flash('Donation given!', 'success')
 		return redirect(url_for('admin.donations', status='all', page='1', search=' '))
 
-	return render_template('/admin/donations/add.html', title="Donation", form=form, no_event=no_event, active='donations')
+	return render_template('/admin/donations/add.html', title="Donation", form=form, no_event=no_event, photo=photo, active='donations')
 
 @admin.route('/admin/inventory/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -933,6 +960,8 @@ def inventory_add():
 	form = NewInventoryForm()
 
 	organizations = linkage_views.target_linkages()
+
+	photo = user_photo.photo(current_user.info_id)
 
 	for o in organizations:
 
@@ -1028,7 +1057,7 @@ def inventory_add():
 		flash('Items successfully added!', 'success')
 		return redirect(url_for('admin.inventory_show', page='1', search=' '))
 
-	return render_template('/admin/inventory/add.html', title="Inventory", form=form, no_event=no_event, no_item=no_item, active='inventory')
+	return render_template('/admin/inventory/add.html', title="Inventory", form=form, no_event=no_event, no_item=no_item, photo=photo, active='inventory')
 
 @admin.route('/admin/feedbacks')
 @login_required
@@ -1087,7 +1116,7 @@ def profile_eventsattended(user):
 def profile_settings_personal(user):
 
 	user_information_update = user_information.profile_info_update(current_user.id)
-
+	photo = user_photo.photo(current_user.info_id)
 	form = ProfilePersonalUpdateForm()
 
 	if form.validate_on_submit():
@@ -1114,7 +1143,7 @@ def profile_settings_personal(user):
 		form.birthday.data = user_information_update.birthday
 		form.bio.data = user_information_update.bio
 
-	return render_template('/admin/profile/settings/personal.html', title="Admin", form=form)
+	return render_template('/admin/profile/settings/personal.html', title="Admin", photo=photo, form=form)
 
 @admin.route('/admin/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
@@ -1122,7 +1151,7 @@ def profile_settings_contact(user):
 
 	user_information_update = user_information.profile_info_update(current_user.id)
 	user_account_update = user_account.profile_acc_update(current_user.id)
-
+	photo = user_photo.photo(current_user.info_id)
 	form = ProfileContactUpdateForm()
 
 	if form.validate_on_submit():
@@ -1148,14 +1177,14 @@ def profile_settings_contact(user):
 		form.mobile.data = user_information_update.mobile_number
 		form.email.data = user_account_update.email_address
 
-	return render_template('/admin/profile/settings/contact.html', title="Admin", form=form)	
+	return render_template('/admin/profile/settings/contact.html', title="Admin", photo=photo, form=form)	
 
 @admin.route('/admin/profile/settings/username|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_username(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.id)
-
+	photo = user_photo.photo(current_user.info_id)
 	form = ProfileUsernameUpdateForm()
 
 	if form.validate_on_submit():
@@ -1180,14 +1209,14 @@ def profile_settings_username(user):
 
 		form.username.data = user_account_update.username
 
-	return render_template('/admin/profile/settings/username.html', title="Admin", form=form)
+	return render_template('/admin/profile/settings/username.html', title="Admin",photo=photo, form=form)
 
 @admin.route('/admin/profile/settings/password|<user>', methods=['GET', 'POST'])
 @login_required
 def profile_settings_password(user):
 
 	user_account_update = user_account.profile_acc_update(current_user.id)
-
+	photo = user_photo.photo(current_user.info_id)
 	form = PasswordUpdateForm()
 
 	if form.validate_on_submit():
@@ -1208,7 +1237,7 @@ def profile_settings_password(user):
 
 			flash('Wrong password.', 'error')
 
-	return render_template('/admin/profile/settings/password.html', form=form)
+	return render_template('/admin/profile/settings/password.html', photo=photo, form=form)
 
 @admin.route('/logout/admin')
 @login_required
