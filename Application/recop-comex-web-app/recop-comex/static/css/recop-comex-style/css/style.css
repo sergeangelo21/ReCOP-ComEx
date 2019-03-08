@@ -679,7 +679,7 @@
   
 /*cover image*/
 .cd-fixed-bg.cd-bg-1 {
-  background-image: url("/static/images/pic1.jpg");
+  background-image: url("/static/images/bg1.jpg");
 }
 
 html * {
@@ -777,11 +777,11 @@ Modules - reusable parts of our design
 
 /*bg2*/
 .cd-fixed-bg2.cd-bg-2 {
-  background-image: url("/static/images/donate2.jpg");
+  background-image: url("/static/images/sscrdc.jpg");
 }
 .cd-fixed-bg2 {
   position: relative;
-  min-height: 60%;
+  min-height: 40%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -842,7 +842,7 @@ Modules - reusable parts of our design
 
 /*bg3*/
 .cd-fixed-bg3.cd-bg-3 {
-  background-image: url("/static/images/donate2.jpg");
+  background-image: url("/static/images/sscrdc.jpg");
 }
 .cd-fixed-bg3 {
   position: relative;
@@ -1113,7 +1113,7 @@ Modules - reusable parts of our design
     background-repeat: no-repeat;
   }
   .donate{
-    width: 525px;
+    width: 455px;
     height: auto; 
 
   }
