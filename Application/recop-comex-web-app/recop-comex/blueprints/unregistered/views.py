@@ -332,6 +332,7 @@ def event_signing(token, action):
 
 	event = event_views.show_info(id)
 	organizer = user_information.linkage_info(event.organizer_id)
+	success = user_account.retrieve_user(event.organizer_id)
 
 	form = LoginForm()
 
@@ -382,6 +383,16 @@ def event_signing(token, action):
 					attachments = event_attachment.retrieve_files(id)
 
 					email_parts = [html, subject, user.email_address, recipient, attachments]
+
+					send_email(email_parts)
+
+				else:
+
+					recipient = success.email_address
+					html = 'Hey ' + success.username + '! Your event entitled ' + event.name.title() + ' was already approved!'
+					subject = "NEW EVENT: " + event.name
+
+					email_parts = [html, subject, user.email_address, recipient, None]
 
 					send_email(email_parts)
 
