@@ -34,15 +34,6 @@
 			            <h2 class="title is-5">Evaluation & Ratings</h2>         
 			        </a>
 			    </li>
-
-			    <li class="card1">
-			        <a class="card1-image has-text-success" href="{{url_for('admin.event_stream', id=event.id)}}">
-			            <span class="fas fa-video fa-10x color" aria-hidden="true"></span>
-			        </a>
-			        <a class="card1-description notification gold" href="{{url_for('admin.event_stream', id=event.id)}}">
-			            <h2 class="title is-5">Livestream</h2>
-			        </a>
-			    </li>  
 			</ul>
 			<a href='{{url_for('admin.event_finish', id=event.id)}}'><button class='button add is-large'>Finish Event</button><a>
 		</div> 

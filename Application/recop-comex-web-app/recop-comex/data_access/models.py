@@ -127,7 +127,7 @@ class donation(db.Model):
 
 		db.session.commit()
 
-	def status():
+	def d_status():
 
 		record = donation.query.add_columns(
 			donation.status,
@@ -254,7 +254,7 @@ class event_information(db.Model):
 
 		return record
 
-	def thrust():
+	def thrusts():
 
 		record = event_information.query.add_columns(
 			event_information.thrust,
@@ -675,7 +675,7 @@ class user_account(db.Model, UserMixin):
 
 		return record
 
-	def type():
+	def user_type():
 
 		record = user_account.query.add_columns(
 			user_account.type,
@@ -754,7 +754,7 @@ class user_information(db.Model):
 
 		return record
 
-	def thrust():
+	def thrusts():
 
 		record = user_information.query.add_columns(
 			user_information.thrust,
