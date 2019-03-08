@@ -1,19 +1,21 @@
 Admin
 	Home
-	Frequency of Events (per thrust) Monthly ???
-	Linkages
-	Communities
-	Donations (In kind and Money)
+	event thrust= event_information.thrust() 
+	event status = event_information.status()
+	Users PIE (LInk, Comm, Volun) = user_account.type()
+	In stock, Given and Trashed = inventory.status()
 
 	Linkage
-	Count of Linkages Inside and Outside
+	by thrust = user_information.thrust()
 
 	Communities
-	Number of Communities and Members ???
+	distribution of members per community = community.member_count()
 
 	Donations
-	New Received and Denied
-
+	New Received and Denied = donation.status()
+	
 	Inventory
-	In stock, Given and Trashed
+	per item = inventory.type()
+
+	Rating sa reports. meron na igagraph na lang! HAHAHAHA
 	

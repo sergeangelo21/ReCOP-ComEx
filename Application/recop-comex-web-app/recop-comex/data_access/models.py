@@ -67,6 +67,16 @@ class community(db.Model):
 		user.status = status
 		db.session.commit()
 
+	def member_count():
+
+		record = community.query.add_columns(
+			community.community_id,
+			func.COUNT(community.member_id).label('count')
+			).group_by(community.community_id
+			).all()
+
+		return record
+
 class donation(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -116,6 +126,16 @@ class donation(db.Model):
 		record.status=value[1]
 
 		db.session.commit()
+
+	def status():
+
+		record = donation.query.add_columns(
+			donation.status,
+			func.COUNT(donation.id).label('count')
+			).group_by(donation.status
+			).all()
+
+		return record		
 
 class event_attachment(db.Model):
 
@@ -231,6 +251,26 @@ class event_information(db.Model):
 	def reschedule(value):
 
 		record = event_information.query.filter_by(id=value).first()
+
+		return record
+
+	def thrust():
+
+		record = event_information.query.add_columns(
+			event_information.thrust,
+			func.COUNT(event_information.thrust).label('count')
+			).group_by(event_information.thrust
+			).all()
+
+		return record
+
+	def status():
+
+		record = event_information.query.add_columns(
+			event_information.status,
+			func.COUNT(event_information.id).label('count')
+			).group_by(event_information.status
+			).all()
 
 		return record
 
@@ -436,7 +476,28 @@ class inventory(db.Model):
 		record.in_stock= value[2]
 
 		db.session.commit()
-		
+
+	def status():
+
+		record = inventory.query.add_columns(
+			func.SUM(inventory.in_stock).label('in_stock'),
+			func.SUM(inventory.given).label('given'),
+			func.SUM(inventory.expired).label('expired')
+			).all()
+
+		return record	
+
+	def type():
+
+		record = inventory.query.add_columns(
+			inventory.type_id,
+			func.SUM(inventory.in_stock).label('in_stock'),
+			func.SUM(inventory.given).label('given'),
+			func.SUM(inventory.expired).label('expired')
+			).group_by(inventory.type_id
+			).all()
+
+		return record	
 class inventory_type(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -614,6 +675,17 @@ class user_account(db.Model, UserMixin):
 
 		return record
 
+	def type():
+
+		record = user_account.query.add_columns(
+			user_account.type,
+			func.COUNT(user_account.id).label('count')
+			).group_by(user_account.type
+			).filter(and_(user_account.type!=1, user_account.type!=5)
+			).all()
+
+		return record
+
 class user_information(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
@@ -678,7 +750,18 @@ class user_information(db.Model):
 		
 	def retrieve_user(value):
 
-		record = user_information.query.filter(user_account.id==value).first()
+		record = user_information.query.filter(user_information.id==value).first()
+
+		return record
+
+	def thrust():
+
+		record = user_information.query.add_columns(
+			user_information.thrust,
+			func.COUNT(user_information.thrust).label('count')
+			).group_by(user_information.thrust
+			).filter(user_information.thrust!=0
+			).all()
 
 		return record
 
