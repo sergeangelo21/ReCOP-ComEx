@@ -34,7 +34,7 @@
               </figure>
               <div class="media-content">
                 <div class="content modal-text has-text-centered">
-                  <p class="title is-size-4">{{community.company_name}}</p>
+                  <p class="title is-size-4">{{community.address}}</p>
                   <i class="icon fas fa-user-tag"></i>{{community.bio}}
                 </div>
               </div>
@@ -46,14 +46,10 @@
             <div class="card">
               <header class="card-header has-background-light">
                 <p class="card-header-title">
-                 {% if community.address == 'San Sebastian College Recoletos de Cavite' %} Organizational Information
-                 {% else %}
-                 Company Information
-                 {% endif %}
+                 Community Information
                 </p>
               </header>
               <div class="card-content profile">
-                {% if community.address != 'San Sebastian College Recoletos de Cavite' %}
                 <div class="panel-block">
                   <article class="media">
                     <figure class="media-left">
@@ -69,7 +65,6 @@
                   </div>
                   </article>
                 </div>
-                {% endif %}
 
                 <div class="panel-block">
                   <article class="media">
