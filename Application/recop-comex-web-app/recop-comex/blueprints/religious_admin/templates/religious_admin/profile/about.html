@@ -154,7 +154,7 @@
 							   			<div class="content">
 							      			<p>
 							        			{% if religious_admin.telephone=='' %}
-						                            <strong>N/A</strong>
+						                            <strong>None</strong>
 					                            {% else %}
 					                            	<strong>{{religious_admin.telephone}}</strong>
 					                            {% endif %}
@@ -173,7 +173,11 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ religious_admin.mobile_number }}</strong>
+							      				 {% if religious_admin.mobile_number=='' %}
+						                            <strong>None</strong>
+						                            {% else %}
+						                            <strong>{{ religious_admin.mobile_number }}</strong>
+						                         {% endif %}
 							      			</p>
 							    		</div>
 							  		</div>
