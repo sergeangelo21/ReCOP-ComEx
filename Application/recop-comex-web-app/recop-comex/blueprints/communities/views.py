@@ -337,6 +337,8 @@ def profile_settings_personal(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = ProfilePersonalUpdateForm()
 
 	if form.validate_on_submit():
@@ -363,7 +365,7 @@ def profile_settings_personal(user):
 		form.birthday.data = user_information_update.birthday
 		form.bio.data = user_information_update.bio
 
-	return render_template('/communities/profile/settings/personal.html', title="Update", form=form)
+	return render_template('/communities/profile/settings/personal.html', title="Update", form=form, photo=photo)
 
 @communities.route('/communities/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required

@@ -283,6 +283,8 @@ def profile_settings_personal(user):
 
 	user_information_update = user_information.profile_info_update(current_user.info_id)
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = ProfilePersonalUpdateForm()
 
 	if form.validate_on_submit():
@@ -309,7 +311,7 @@ def profile_settings_personal(user):
 		form.birthday.data = user_information_update.birthday
 		form.bio.data = user_information_update.bio
 
-	return render_template('/registered/profile/settings/personal.html', form=form)
+	return render_template('/registered/profile/settings/personal.html', form=form, photo=photo)
 
 @registered.route('/registered/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
