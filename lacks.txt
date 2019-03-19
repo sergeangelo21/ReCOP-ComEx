@@ -1,6 +1,9 @@
 Queries
 Notification
 
+URGENT!
+reports
+
 Unregistered
 refer someone buttons
 
@@ -25,14 +28,11 @@ event participant add search(serge)
 
 Registered
 Dashboard
-join event
 
 General (Maybe kaartehan)
 
-Admin (activity logs)
 contact us
 Help
-filters dropdown (Alex)
 error traps
 graphs(alex)
 pdf and email templates

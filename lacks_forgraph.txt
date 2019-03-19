@@ -1,18 +1,18 @@
 Admin
 	Home
-	event thrust= event_information.thrust() 
+	event thrust= event_information.thrusts() 
 	event status = event_information.status()
-	Users PIE (LInk, Comm, Volun) = user_account.type()
+	Users PIE (LInk, Comm, Volun) = user_account.user_type()
 	In stock, Given and Trashed = inventory.status()
 
 	Linkage
-	by thrust = user_information.thrust()
+	by thrust = user_information.thrusts()
 
 	Communities
 	distribution of members per community = community.member_count()
 
 	Donations
-	New Received and Denied = donation.status()
+	New Received and Denied = donation.d_status()
 	
 	Inventory
 	per item = inventory.type()

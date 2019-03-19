@@ -170,26 +170,58 @@ def contactus():
 	return render_template('/unregistered/contactus/index.html', active='contactus')
 
 @unregistered.route('/signup', methods=['GET', 'POST'])
-def signup():
+def signup_choose():
 
-	form = SignupForm()
+	return render_template('/unregistered/signup/index.html')
+
+@unregistered.route('/signup/<type>', methods=['GET', 'POST'])
+def signup(type):
+
+	if type=='volunteer':
+
+		form = VolunteerForm()
+		template = '/unregistered/signup/volunteer.html'
+
+	elif type=='linkage':
+
+		form = LinkageForm()
+		template = '/unregistered/signup/linkage.html'	
+
+	elif type=='community':
+
+		form = LinkageForm()
+		template = '/unregistered/signup/linkage.html'	
 
 	if form.validate_on_submit():
 
-		value = [
-			None,form.firstname.data,form.middlename.data,
-			form.lastname.data,form.company.data,form.bio.data,form.gender.data,form.birthday.data,
-			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
-			]
+		if type=='volunteer':
+
+			value=[None,form.firstname.data, form.middlename.data,
+				form.lastname.data, form.organization.data, form.bio.data, form.gender.data, form.birthday.data,
+				form.address.data, form.telephone.data, form.mobile.data, 0]
+
+			status = "A"
+			user_type=2
+			flash('Your account was successfully created!', 'success')
+
+		elif type=='linkage':
+
+			if form.sscr.data=='Y':
+				thrust = 0
+			else:
+				thrust = form.thrust.data
+
+			value=[None,form.firstname.data, form.middlename.data,
+				form.lastname.data, form.company.data, form.bio.data, form.gender.data, form.birthday.data,
+				form.address.data, form.telephone.data, form.mobile.data, thrust]
+
+			status = "N"
+			user_type=3
 
 		user_information.add(value)	
 		user_id = user_information.reserve_id()
 
-		if form.type.data == '2': 
-			status = "A"
-			flash('Your account was successfully created!', 'success')
-		elif form.type.data == '3' or form.type.data == '4':
-			status = "N"
+		if type!='volunteer':
 			if form.address.data == 'San Sebastian College Recoletos de Cavite':
 				flash('Your account has been created! Please wait for the Re-COP Director to confirm your account.', 'success')
 			else:
@@ -197,15 +229,14 @@ def signup():
 
 		value = [
 			None,user_id,form.username.data,
-			form.password.data,form.email.data,form.type.data,datetime.now(),status
+			form.password.data,form.email.data,user_type,datetime.now(),status
 			]
 
 		user_account.add(value)
 
 		return redirect(url_for('unregistered.login'))
 
-
-	return render_template('/unregistered/signup/index.html', form=form)
+	return render_template(template, type=type, form=form)
 
 @unregistered.route('/login', methods=['GET', 'POST'])
 def login():

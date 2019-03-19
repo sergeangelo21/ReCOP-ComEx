@@ -1,5 +1,4 @@
-var page=0	
-var user = 0;
+var page=1	
 
 var carousels = bulmaCarousel.attach(); // carousels now contains an array of all Carousel instances
 setInterval(3000);
@@ -16,7 +15,12 @@ if(window.location.pathname=='/events/calendar'){
     document.getElementById('calendar').appendChild(calendar)
 }
 
-if(window.location.pathname=='/signup'){
+if(window.location.pathname!='/signup' && window.location.pathname.startsWith('/signup')){
+
+    if (document.getElementById('thrust')){
+        document.getElementById('thrust').options.item(0).hidden=true
+        document.getElementById('thrust').options.item(0).selected=true   
+    }
     
     new bulmaSteps(document.getElementById('signup'), {	
     })
@@ -45,103 +49,26 @@ function check_pass(){
 
 function choose(sender){
     
-    if (user==3){
-        field = document.getElementById('address_field')
-        hide = document.getElementById('address')
-        lbl = document.getElementById('com_label')
-        active = document.getElementById('company')
-        revert = "Company Name" 
-    }
-    else if (user==2){
-        field = document.getElementById('company_field')
-        hide = document.getElementById('company')
-        lbl = document.getElementById('add_label')
-        active = document.getElementById('address')  
-        revert = "Address"     
-    }
+    field = document.getElementById('address_field')
+    thrust = document.getElementById('thrust_field')
+    hide = document.getElementById('address')
 
     if (sender=='Y'){
 
         hide.value = 'San Sebastian College Recoletos de Cavite'
-        field.style.display = "none"
-
-        if (user!=2){
-        lbl.innerHTML = "Organization"
-        active.placeholder = "Organization"
-        document.getElementById('thrust_field').style.display="none"
-        document.getElementById('thrust').value=0
-        }
+        field.className = "hidden"
+        thrust.className="hidden"
 
 
     }
     else{
         hide.value = ''
-        field.style.display = ""
-        if (user!=2){
-        lbl.innerHTML = revert
-        active.placeholder = revert
-        document.getElementById('thrust_field').style.display=""
-        }
+        field.className='field is-horizontal'
+       thrust.className="field is-horizontal"
     }
 
 }
 
-function show_form(sender){
-
-    document.getElementById('signup').style.display = "block"
-    document.getElementById('illusion').style.display = ""
-    document.getElementById('next').style.display = ""
-    types = document.getElementById('select_type')
-    types.style.display = "none"
-    document.getElementById('type').value=sender
-
-    if(sender==3){
-        document.getElementById('thrust_field').style.display=""
-        document.getElementById('thrust').options.item(0).selected="True"
-        document.getElementById('thrust').options.item(0).hidden="True"
-    }
-    else{
-        document.getElementById('thrust_field').style.display="none" 
-        document.getElementById('thrust').value = 0       
-    }
-
-    if (sender==4){
-        document.getElementById('sscr_field').style.display = "none"
-        document.getElementById('company_field').style.display = "none"
-        document.getElementById('company').value="San Sebastian College Recoletos de Cavite" 
-        document.getElementById('sscr-0').checked=true  
-    }
-    else{
-        document.getElementById('company_field').style.display = ""
-        document.getElementById('sscr_field').style.display = ""    
-        document.getElementById('company').value=""  
-        document.getElementById('sscr-0').checked=false  
-    }
-
-    page=1
-    user=sender
-
-}
-
-function hide_form(){
-
-
-   document.getElementById('address_field').style.display = ""
-   document.getElementById('company_field').style.display = ""
-   document.getElementById('add_label').innerHTML = "Address"
-   document.getElementById('address').placeholder = "Address"
-   document.getElementById('company').placeholder = "Company Name"
-   document.getElementById('com_label').innerHTML = "Company Name"
-   document.getElementById('signup_form').reset()
-
-   document.getElementById('signup').style.display = "none"
-   document.getElementById('illusion').style.display = "none"
-   document.getElementById('next').style.display = "none"
-   types = document.getElementById('select_type')
-   types.style.display = ""
-   page=0
-
-}
 
 function btn(sender){
 

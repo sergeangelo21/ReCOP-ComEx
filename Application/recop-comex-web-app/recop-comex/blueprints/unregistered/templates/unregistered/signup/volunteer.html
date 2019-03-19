@@ -1,0 +1,307 @@
+{% extends "unregistered-base.html" %}
+
+{% block content %}
+
+    <div class="columns is-centered">
+        <div class="column is-10" id="signup">
+                <div class="card padding-signup">
+                     
+                      <div class="columns is-centered">
+
+                        <div class="column is-10">
+                            
+                            <br>
+                            <h1 class="title is-3 has-text-centered">SIGN UP | {{type|upper}}</h1>
+                           <div class="steps">
+                              <div class="step-item is-active is-success">
+                                <div class="step-marker"><i class="fas fa-user"></i></div>
+                                    <div class="step-details">
+                                          <p class="step-title" id="variant">Personal</p>
+                                    </div>
+                                  </div>
+                              
+                              <div class="step-item  is-success">
+                                <div class="step-marker"><i class="fas fa-phone"></i></div>
+                                    <div class="step-details">
+                                          <p class="step-title">Contact</p>
+                                    </div>
+                              </div>
+                              
+                              <div class="step-item  is-success">
+                                <div class="step-marker"><i class="fas fa-lock"></i></div>
+                                    <div class="step-details">
+                                          <p class="step-title">Account</p>
+                                    </div>
+                                </div>
+                                   
+                            <!-- Steps-Content -->
+                            <div class="steps-content">
+                                <form action="" method="POST" id = "signup_form" onsubmit="return check_pass()">
+                                    {{form.hidden_tag()}}
+                                    <!-- PERSONAL DETAILS -->
+                                    <div class="step-content has-text-centered">
+                                        <!-- FIRST NAME -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.firstname.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        {{form.firstname(class_='input', placeholder='First Name')}}
+                                                        {% for error in form.firstname.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- MIDDLE NAME -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.middlename.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        {{form.middlename(class_='input', placeholder='Middle Name')}}
+                                                        {% for error in form.middlename.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- LAST NAME -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.lastname.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        {{form.lastname(class_='input', placeholder='Last Name')}}
+                                                        {% for error in form.lastname.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- GENDER -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.gender.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+
+                                                        {% for subfield in form.gender %}
+                                                            <label class = "radio">
+                                                            {{subfield}}
+                                                            {{subfield.label}}
+                                                             </label>
+
+                                                        {% endfor %}
+
+                                                        {% for error in form.gender.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                        
+                                                    </div>
+                                               </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- BIRTHDATE -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.birthday.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        {{form.birthday(class_='input', type='date')}}
+                                                        {% for error in form.birthday.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.bio.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        {{form.bio(class_='input', placeholder='Bio')}}
+                                                        {% for error in form.bio.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                    <!-- CONTACT DETAILS -->
+
+                                    <div class="step-content has-text-centered">
+                                        <!-- COMPANY NAME -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.organization.label(class_='label', id='com_label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        {{form.organization(class_='input', placeholder='Organization')}}
+                                                        {% for error in form.organization.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="field is-horizontal" id = "address_field">
+                                            <div class="field-label is-normal">
+                                                {{form.address.label(class_='label', id='add_label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        {{form.address(class_='input', placeholder='Address')}}
+                                                        {% for error in form.address.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- TELEPHONE NUMBER -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.telephone.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        {{form.telephone(class_='input', placeholder='Telephone Number')}}
+                                                        {% for error in form.telephone.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- MOBILE NUMBER -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.mobile.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        {{form.mobile(class_='input', placeholder='Mobile Number')}}
+                                                        {% for error in form.mobile.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- EMAIL ADDRESS -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.email.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        {{form.email(class_='input', placeholder='Email Address')}}
+                                                        {% for error in form.email.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- ACCOUNT DETAILS -->
+                                    <div class="step-content has-text-centered is-active">
+                                        <!-- USERNAME -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.username.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        {{form.username(class_='input', placeholder='Username')}}
+                                                        {% for error in form.username.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- PASSWORD -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                {{form.password.label(class_='label')}}
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        {{form.password(class_='input', placeholder='Password')}}
+                                                        {% for error in form.password.errors %}
+                                                        <span style="color: red;">[{{ error }}]</span>
+                                                        {% endfor %}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- CONFIRM PASSWORD -->
+                                        <div class="field is-horizontal">
+                                            <div class="field-label is-normal">
+                                                <label class="label">Confirm</label>
+                                            </div>
+                                            <div class="field-body">
+                                                <div class="field">
+                                                    <div class="control has-icon has-icon-right">
+                                                        <input class="input" type="password" name="password_confirm" id="password_confirm" placeholder="Confirm password" data-validate="require">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                
+                                     <!-- PREVIOUS & NEXT -->
+                                    <div class="steps-actions padding">
+                                        <div class="steps-action">
+                                            <a href="#" data-nav="previous" class="button is-primary hidden"  id = "prev" tabindex=-1 onclick='btn(this.id)'>Previous</a>
+                                            <a class="button is-primary" id="illusion" tabindex=-1 href='{{url_for('unregistered.signup_choose')}}'>Previous</a>
+                                        </div>
+                                        <div class="steps-action">
+                                            <a href="#" data-nav="next" class="button is-success" id = "next" onclick='btn(this.id)'>Next</a>
+                                            {{form.submit(class_='button is-success hidden')}}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+                  </div>
+
+{% endblock %}
