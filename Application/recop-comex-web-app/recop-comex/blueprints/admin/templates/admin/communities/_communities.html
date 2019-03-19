@@ -24,25 +24,42 @@
 												</span>
 											</a>
 											{% if community.status!='P'%}
-												{% if community.status=='N' %}
-												<a class="button is-info tooltip" data-tooltip="Send MOA" href="{{url_for('admin.community_action', id = community.info_id)}}")'>
+												{% if community.status=='N' or community.status=='X' %}
+												{% if community.address=='San Sebastian College Recoletos de Cavite' %}
+												<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('admin.community_action', action='activate', id = community.info_id)}}")'>
+													<span class="icon">
+														<i class="fas fa-user-check"></i>
+													</span>
+												</a>
+												{% else %}
+												<a class="button is-info tooltip" data-tooltip="Send MOA" href="{{url_for('admin.community_action', action='send', id = community.info_id)}}")'>
 													<span class="icon">
 														<i class="fas fa-location-arrow"></i>
 													</span>
 												</a>
+												{% endif %}
+												{% if community.status!='X' %}
+												<a class="button is-danger tooltip" data-tooltip="Decline" href="{{url_for('admin.community_action', action='decline', id = community.info_id)}}")'>
+													<span class="icon">
+														<i class="fas fa-user-slash"></i>
+													</span>
+												</a>
+												{% endif %}
 												{% elif community.status=='A' %}
-												<a class="button is-danger tooltip" data-tooltip="Disable" href="{{url_for('admin.community_action', id = community.info_id)}}")'>
+												<a class="button is-danger tooltip" data-tooltip="Disable" href="{{url_for('admin.community_action', action='disable', id = community.info_id)}}")'>
 													<span class="icon">
 														<i class="fas fa-user-times"></i>
 													</span>
 												</a>
 												{% else %}
-												<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('admin.community_action', id = community.info_id)}}")'>
+												<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('admin.community_action', action='activate', id = community.id)}}")'>
 													<span class="icon">
 														<i class="fas fa-user-check"></i>
 													</span>
 												</a>
 												{% endif %}
+												</span>
+											</a>
 											{% endif %}
 										</td>
 									</tr>	

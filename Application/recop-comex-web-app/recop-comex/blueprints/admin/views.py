@@ -462,6 +462,8 @@ def linkages(status, page, search):
 		value='N'
 	elif status=='pending':
 		value='P'
+	elif status=='declined':
+		value='X'
 	elif status=='disabled':
 		value='D'
 	else:
@@ -539,14 +541,14 @@ def linkage_show(id):
 
 	return render_template('/admin/linkages/show.html', title= linkage.company_name.title() , linkage=linkage, mem_since=mem_since, photo=photo, active='linkages')
 
-@admin.route('/admin/linkages/action/id=<id>')
+@admin.route('/admin/linkages/<action>/id=<id>')
 @login_required
-def linkage_action(id):
+def linkage_action(action, id):
 
 	user = user_account.retrieve_user(id)
 	linkage = user_information.linkage_info(user.info_id)
 
-	if user.status == "A":
+	if action=='disable':
 	
 		status = "D"
 		flash(linkage.company_name.title() + " was disabled!","success")
@@ -554,10 +556,18 @@ def linkage_action(id):
 		value = [None,current_user.id,user.id,'linkage', 4]
 		audit_trail.add(value)
 	
-	elif user.status== "D":
+	elif action=='activate':
 		
 		status = "A"
 		flash(linkage.company_name.title() + " was activated! ", "success")
+
+		value = [None,current_user.id,user.id,'linkage', 3]
+		audit_trail.add(value)
+
+	elif action=='decline':
+		
+		status = "X"
+		flash(linkage.company_name.title() + " was declined! ", "success")
 
 		value = [None,current_user.id,user.id,'linkage', 3]
 		audit_trail.add(value)
@@ -603,6 +613,8 @@ def communities(status, page, search):
 		value='N'
 	elif status=='pending':
 		value='P'
+	elif status=='declined':
+		value='X'
 	elif status=='disabled':
 		value='D'
 	else:
@@ -683,14 +695,14 @@ def community_show(id):
 	
 	return render_template('/admin/communities/show.html', title= community.company_name.title() , community=community, mem_since=mem_since, members=members, photo=photo, active='communities')
 
-@admin.route('/admin/communities/action/id=<id>')
+@admin.route('/admin/communities/<action>/id=<id>')
 @login_required
-def community_action(id):
+def community_action(action, id):
 
 	user = user_account.retrieve_user(id)
 	community = user_information.linkage_info(user.info_id)
 
-	if user.status == "A":
+	if action=='disable':
 	
 		status = "D"
 		flash(community.company_name.title() + " was disabled!","success")
@@ -698,10 +710,18 @@ def community_action(id):
 		value = [None,current_user.id,user.id,'community', 4]
 		audit_trail.add(value)
 	
-	elif user.status== "D":
+	elif action=='activate':
 		
 		status = "A"
 		flash(community.company_name.title() + " was activated! ", "success")
+
+		value = [None,current_user.id,user.id,'community', 3]
+		audit_trail.add(value)
+
+	elif action=='decline':
+		
+		status = "X"
+		flash(community.company_name.title() + " was declined! ", "success")
 
 		value = [None,current_user.id,user.id,'community', 3]
 		audit_trail.add(value)
