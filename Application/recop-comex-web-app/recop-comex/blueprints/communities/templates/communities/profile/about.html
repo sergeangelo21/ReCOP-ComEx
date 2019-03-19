@@ -173,7 +173,11 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
-							        			<strong>{{ communities.mobile_number }}</strong>
+							        			{% if communities.mobile_number=='' %}
+						                            <strong>N/A</strong>
+					                            {% else %}
+					                            	<strong>{{communities.mobile_number}}</strong>
+					                            {% endif %}
 							      			</p>
 							    		</div>
 							  		</div>

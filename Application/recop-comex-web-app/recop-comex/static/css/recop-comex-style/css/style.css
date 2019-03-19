@@ -364,8 +364,14 @@
 
 
 /*  ------ADMIN -  EVENTS ------     */
+   .content-track {
+    position: relative; 
+    overflow-x: auto;
+    padding: 0;
+  }
+
 	.tracker{
-	  	color: black;
+	  color: black;
 	}
 
 	.track-icon{
@@ -463,6 +469,7 @@
   .table-responsive {
 	  overflow-x: auto;
 	}	
+
 /*  ------ ADMIN -TABLE END ------  */
 
 
@@ -1039,6 +1046,10 @@ Modules - reusable parts of our design
 
       .select-list{
         position: relative;
+      }
+
+      .btn-join{
+        margin-top: 10px;
       }
     }
    /*  ------RESPONSIVE FILTER END ------ */
