@@ -36,7 +36,12 @@
               <div class="media-content">
                 <div class="content modal-text has-text-centered">
                   <p class="title is-size-4">{{linkage.company_name}}</p>
-                  <i class="icon fas fa-user-tag"></i>{{linkage.bio}}
+                  <i class="icon fas fa-user-tag"></i>
+                   {% if linkage.bio=='' %}
+                        N/A
+                      {% else %}
+                      {{linkage.bio}}
+                    {% endif %}
                 </div>
               </div>
             </article>
@@ -117,7 +122,11 @@
                     <div class="media-content">
                       <div class="content">
                           <p>
+                            {% if linkage.mobile_number=='' %}
+                            <strong>N/A</strong>
+                            {% else %}
                             <strong>{{linkage.mobile_number}}</strong>
+                            {% endif %}
                           </p>
                       </div>
                     </div>

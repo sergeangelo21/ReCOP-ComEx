@@ -4,7 +4,7 @@
 
 			<div class="notification gold">
 				<div class="columns is-centered">
-					<div class="column">
+					<div class="column view-icons">
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button viewbtn" href="{{url_for('unregistered.events',status='all', page='1', search=' ')}}">
@@ -28,57 +28,59 @@
 
 					<hr class="is-marginless">
 					<div class="card-content">
-						<table class="table is-hoverable is-fullwidth" id = "event">
+						<div class="table-responsive">
+							<table class="table is-hoverable is-fullwidth" id = "event">
 
-							{% if events %}
-							<tbody>
+								{% if events %}
+								<tbody>
 
-								<tr class = "table">
-									<td>
-									<table class = "table is-bordered is-hoverable is-fullwidth">
-										<tr class="table-row">
+									<tr class = "table">
+										<td>
+										<table class = "table is-bordered is-hoverable is-fullwidth">
+											<tr class="table-row">
 
-											<td colspan="1" id="prev">
-												<button class = "button backbtnprof is-small" id="prev" onclick="prev_next(this.id)">
-													<i class="fas fa-arrow-left"></i>
-												</button>
-											</td>
+												<td colspan="1" id="prev">
+													<button class = "button backbtnprof is-small" id="prev" onclick="prev_next(this.id)">
+														<i class="fas fa-arrow-left"></i>
+													</button>
+												</td>
 
-											<td colspan="5" id="month_year" style = "text-align:center"></td>
+												<td colspan="5" id="month_year" style = "text-align:center"></td>
 
-											<td colspan="1" id="next">
-												<button class = "button backbtnprof is-small is-pulled-right" id="next" onclick="prev_next(this.id)">
-													<i class="fas fa-arrow-right"></i>
-												</button>
-											</td>
+												<td colspan="1" id="next">
+													<button class = "button backbtnprof is-small is-pulled-right" id="next" onclick="prev_next(this.id)">
+														<i class="fas fa-arrow-right"></i>
+													</button>
+												</td>
 
-										</tr>	
+											</tr>	
 
-										<tr class="table-row">
+											<tr class="table-row">
 
-											<td width = "14%">Sun</td>
-											<td width = "14%">Mon</td>
-											<td width = "14%">Tue</td>
-											<td width = "14%">Wed</td>
-											<td width = "14%">Thu</td>
-											<td width = "14%">Fri</td>
-											<td width = "14%">Sat</td>
+												<td width = "14%">Sun</td>
+												<td width = "14%">Mon</td>
+												<td width = "14%">Tue</td>
+												<td width = "14%">Wed</td>
+												<td width = "14%">Thu</td>
+												<td width = "14%">Fri</td>
+												<td width = "14%">Sat</td>
 
-										</tr>
-									</table>
-									</td>
-								</tr>
+											</tr>
+										</table>
+										</td>
+									</tr>
 
-								<tr class = "table-row">
+									<tr class = "table-row">
 
-									<td colspan = 7 id = "calendar"> </td>
+										<td colspan = 7 id = "calendar"> </td>
 
 
-								</tr>	
+									</tr>	
 
-							</tbody>
+								</tbody>
 
-						</table>
+							</table>
+						</div>
 
 
 						<script>
