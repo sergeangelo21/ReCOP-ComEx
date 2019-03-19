@@ -31,7 +31,9 @@ def before_request():
 @login_required
 def index():
 
-	return render_template('/religious_admin/index.html', active='home')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/religious_admin/index.html', active='home', photo=photo)
 
 @religious_admin.route('/religious_admin/events/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -48,13 +50,15 @@ def events(status, page, search):
 
 	events = event_views.religious_admin_events([value, search, page])
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('religious_admin.events', status=status, page='1', search=form.search.data))
 
-	return render_template('/religious_admin/events/index.html', title="Events", form=form, events=events, status=status, search=search, active='events')
+	return render_template('/religious_admin/events/index.html', title="Events", form=form, events=events, status=status, search=search, active='events', photo=photo)
 
 @religious_admin.route('/religious_admin/events/calendar', methods=['GET', 'POST'])
 @login_required
@@ -62,7 +66,9 @@ def events_calendar():
 
 	events = event_information.calendar()
 	
-	return render_template('/religious_admin/events/index-calendar.html', title="Events", events=events, active='events')
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/religious_admin/events/index-calendar.html', title="Events", events=events, active='events', photo=photo)
 	
 @religious_admin.route('/religious_admin/linkages/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
@@ -84,13 +90,15 @@ def communities(page, search):
 
 	communities = linkage_views.show_list(['A', search, 4, page])
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = SearchForm()
 
 	if form.validate_on_submit():
 
 		return redirect(url_for('religious_admin.communities', page='1', search=form.search.data))
 
-	return render_template('/religious_admin/communities/index.html', form=form, communities=communities, search=search, active='communities')
+	return render_template('/religious_admin/communities/index.html', form=form, communities=communities, search=search, active='communities', photo=photo)
 
 @religious_admin.route('/religious_admin/profile/about|<user>' , methods=['GET', 'POST'])
 @login_required
@@ -125,6 +133,8 @@ def profile_settings_personal(user):
 
 	user_information_update = user_information.profile_info_update(current_user.id)
 
+	photo = user_photo.photo(current_user.info_id)
+
 	form = ProfilePersonalUpdateForm()
 
 	if form.validate_on_submit():
@@ -151,7 +161,7 @@ def profile_settings_personal(user):
 		form.birthday.data = user_information_update.birthday
 		form.bio.data = user_information_update.bio
 
-	return render_template('/religious_admin/profile/settings/personal.html', title="religious_admin", form=form)
+	return render_template('/religious_admin/profile/settings/personal.html', title="religious_admin", form=form, photo=photo)
 
 @religious_admin.route('/religious_admin/profile/settings/contact|<user>', methods=['GET', 'POST'])
 @login_required
