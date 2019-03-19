@@ -35,7 +35,12 @@
               <div class="media-content">
                 <div class="content modal-text has-text-centered">
                   <p class="title is-size-4">{{community.address}}</p>
-                  <i class="icon fas fa-user-tag"></i>{{community.bio}}
+                  <i class="icon fas fa-user-tag"></i>
+                   {% if community.bio=='' %}
+                        N/A
+                      {% else %}
+                      {{community.bio}}
+                      {% endif %}
                 </div>
               </div>
             </article>
@@ -91,7 +96,11 @@
                     <div class="media-content">
                       <div class="content">
                         <p>
-                          <strong>{{community.telephone}}</strong>
+                          {% if community.telephone=='' %}
+                            <strong>N/A</strong>
+                            {% else %}
+                            <strong>{{community.telephone}}</strong>
+                            {% endif %}
                         </p>
                       </div>
                     </div>
@@ -107,7 +116,11 @@
                     <div class="media-content">
                       <div class="content">
                           <p>
+                             {% if community.mobile_number=='' %}
+                            <strong>N/A</strong>
+                            {% else %}
                             <strong>{{community.mobile_number}}</strong>
+                            {% endif %}
                           </p>
                       </div>
                     </div>

@@ -1,4 +1,4 @@
-
+ 
 	<div class="column is-one-quarter">
 		<div class="card select-list has-text-centered">
 			<div class="card-content all-view">
@@ -7,6 +7,7 @@
 						<img class="image is-128x128" src="../../../static/images/event-default.png">
 					</div>
 				</div>
+
 	      		<div class="title is-5">{{ event.name }}</div>
 	      		<p class="subtitle is-6">
 	      			<i class="fas fa-calendar"></i>&nbsp; {{event.event_date.strftime('%B %e, %Y')}}</br>
@@ -36,7 +37,22 @@
 			              	<div class="media-content">
 			                	<div class="content modal-text has-text-centered">
 				                	<p class="title is-size-4">{{event.name}}</p>
-				                	<i class="icon fas fa-calendar-alt"></i>{{event.event_date.strftime('%B %e, %Y')}}
+				                	<i class="icon fas fa-calendar-alt"></i>{{event.event_date.strftime('%B %e, %Y')}}<br>
+				                	<span class="tag status-tag is-medium">
+				                		{% if event.event_status=='N' %}
+								    		New
+								    	{% elif event.event_status=='S' %}
+								    		Scheduled
+								    	{% elif event.event_status=='X' %}
+								    		Declined
+								    	{% elif event.event_status=='C' %}
+								    		Cancelled
+								    	{% elif event.event_status=='P' %}
+								    		Pending
+								    	{% else %}
+								    		Finished
+								    {% endif %}
+			                		</span>
 			                	</div>
 			              </div>
 			            </article>
@@ -200,7 +216,7 @@
 					    </p>
 					</header>
 				  	<div class="card-content tracker">
-					    <div class="content">
+					    <div class="content-track">
 					        <div class="columns is-centered">
 							{% if event.organizer_id!=1 %}
 					          	<div class="column">
@@ -372,3 +388,4 @@
 	    		</footer>
 	  		</div>
 	</div>
+	

@@ -4,7 +4,7 @@
 
 			<div class="notification gold">
 				<div class="columns is-centered">
-					<div class="column">
+					<div class="column view-icons">
 						<article class="media">
 						  	<figure class="media-left"> 
 						  		<a class="button add" href="{{url_for('linkages.events_create')}}" >
@@ -31,6 +31,7 @@
 
 					<hr class="is-marginless">
 					<div class="card-content">
+						<div class="table-responsive">
 						<table class="table is-hoverable is-fullwidth" id = "event">
 
 							{% if events %}
@@ -82,6 +83,7 @@
 							</tbody>
 
 						</table>
+					</div>
 
 
 						<script>

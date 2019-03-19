@@ -173,7 +173,11 @@
 							  		<div class="media-content">
 							   			<div class="content">
 							      			<p>
+							      				{% if linkages.mobile_number=='' %}
+					                            <strong>N/A</strong>
+					                            {% else %}
 							        			<strong>{{ linkages.mobile_number }}</strong>
+					                            {% endif %}
 							      			</p>
 							    		</div>
 							  		</div>
