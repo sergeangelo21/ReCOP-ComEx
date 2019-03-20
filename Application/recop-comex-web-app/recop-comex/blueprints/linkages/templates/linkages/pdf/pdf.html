@@ -29,6 +29,12 @@
 				width: 250px;
 			}
 
+			.signature-line-center{
+				width: 300px;
+				margin-left: 300px;
+				background-color: black;
+			}
+
 			.sign-line{
 				margin-left: 210px;
 				height: 3px;
@@ -46,11 +52,24 @@
 							<p class="has-text-right has-text-weight-bold">{{date.strftime('%B %e, %Y')}}</p>
 						</div>
 
+						<div class="container">
+							{% if admin.gender == 'M' %}
+							<strong>Mr. {{ admin.first_name }} {{ admin.last_name }}</strong>
+							{% else %}
+							<strong>Mrs. {{ admin.first_name }} {{ admin.last_name }}</strong>
+							{% endif %}
+
+							<p>Recoletos Community Outreach Program Director</p>
+							<p>San Sebastian College - Recoletos de Cavite</p>
+							<p>Cavite City</p>
+						</div>
+						<br><br>
+
 						<div class="container greetings">
 							{% if admin.gender == 'M' %}
-							<p>Dear Mr. {{ admin.last_name }},</p>
+							<p>Mr. {{ admin.last_name }}:</p>
 							{% else %}
-							<p>Dear Ms./Mrs. {{ admin.last_name }},</p>
+							<p>Ms./Mrs. {{ admin.last_name }}:</p>
 							{% endif %}
 						</div>
 
@@ -141,23 +160,27 @@
 							</div>
 						</div>
 					</div>
-				</div>
-				<br>
-				<div class="container two-signatures">
+
+					<div class="column">
+						<div class="container two-signatures">
 					<div class="columns">
-						<div class="column">
-							<hr class="signature-line">
+						<div class="column has-text-centered">
+							<hr class="signature-line-center">
 							<p class="has-text-weight-bold">Department Head</p>
 							<p>Signature Over Printed Name</p>
 						</div>
 						<br>
-						<div class="column">
-							<hr class="signature-line">
+						<div class="column has-text-centered">
+							<hr class="signature-line-center">
 							<p class="has-text-weight-bold">Dean</p>
 							<p>Signature Over Printed Name</p>
 						</div>
 					</div>
 				</div>
+					</div>
+				</div>
+				<br>
+				
 			</div>
 		</div>
 

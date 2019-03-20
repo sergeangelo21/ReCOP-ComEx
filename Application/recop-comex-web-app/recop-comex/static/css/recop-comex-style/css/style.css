@@ -364,12 +364,7 @@
 
 
 /*  ------ADMIN -  EVENTS ------     */
-   .content-track {
-    position: relative; 
-    overflow-x: auto;
-    padding: 0;
-  }
-
+   
 	.tracker{
 	  color: black;
 	}
@@ -386,6 +381,13 @@
 	  .track-icon{
 			width: 40%;
 		}
+
+    .content-track {
+    position: relative; 
+    overflow-x: auto;
+    padding: 0;
+  }
+
 	}
 
 	.circles{
