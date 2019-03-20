@@ -929,11 +929,11 @@ class community_views():
 	def members_list(search):
 
 		if search==' ' :
-			record = community.query.join(
+			record = community_member.query.join(
 				user_information, 
 				or_(
-				community.member_id==user_information.id,
-				community.community_id==user_information.id)
+				community_member.member_id==user_information.id,
+				community_member.community_id==user_information.id)
 				).add_columns(
 				func.IF(user_information.id!=current_user.info_id,(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
@@ -944,21 +944,21 @@ class community_views():
 				user_information.address,
 				user_information.telephone,
 				user_information.mobile_number,
-				community.member_id,
-				community.occupation,
-				community.income,
-				community.religion,
-				community.status,
+				community_member.member_id,
+				community_member.occupation,
+				community_member.income,
+				community_member.religion,
+				community_member.status,
 				user_information.id
-				).filter(community.community_id==current_user.info_id
+				).filter(community_member.community_id==current_user.info_id
 				).order_by(user_information.id.asc()
 				).all()
 		else:
-			record = community.query.join(
+			record = community_member.query.join(
 				user_information,
 				or_(
-				community.member_id==user_information.id,
-				community.community_id==user_information.id)
+				community_member.member_id==user_information.id,
+				community_member.community_id==user_information.id)
 				).add_columns(
 				func.IF(user_information.id!=current_user.info_id,(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
@@ -969,13 +969,13 @@ class community_views():
 				user_information.address,
 				user_information.telephone,
 				user_information.mobile_number,
-				community.member_id,
-				community.occupation,
-				community.income,
-				community.religion,
-				community.status,
+				community_member.member_id,
+				community_member.occupation,
+				community_member.income,
+				community_member.religion,
+				community_member.status,
 				user_information.id
-				).filter(and_(community.community_id==current_user.info_id,
+				).filter(and_(community_member.community_id==current_user.info_id,
 				or_(user_information.last_name.like('%'+search+'%'),
 				user_information.first_name	.like('%'+search+'%'),
 				user_information.last_name.like('%'+search+'%'),
@@ -986,11 +986,11 @@ class community_views():
 
 	def members_show(value):
 
-		record = community.query.join(
+		record = community_member.query.join(
 			user_information, 
 			or_(
-			community.member_id==user_information.id,
-			community.community_id==user_information.id)
+			community_member.member_id==user_information.id,
+			community_member.community_id==user_information.id)
 			).add_columns(
 			func.IF(user_information.id!=value,(user_information.first_name + ' ' +
 			func.left(user_information.middle_name,1) + '. ' +
@@ -1001,13 +1001,13 @@ class community_views():
 			user_information.address,
 			user_information.telephone,
 			user_information.mobile_number,
-			community.member_id,
-			community.occupation,
-			community.income,
-			community.religion,
-			community.status,
+			community_member.member_id,
+			community_member.occupation,
+			community_member.income,
+			community_member.religion,
+			community_member.status,
 			user_information.id
-			).filter(community.community_id==value
+			).filter(community_member.community_id==value
 			).order_by(user_information.id.asc()
 			).all()
 
@@ -1016,9 +1016,9 @@ class community_views():
 
 	def event_participants(value):
 
-		sub1 = community.query.join(
+		sub1 = community_member.query.join(
 				user_information,
-				community.member_id==user_information.id
+				community_member.member_id==user_information.id
 				).join(event_participation
 				).add_columns(
 				(user_information.first_name + ' ' +
@@ -1026,25 +1026,25 @@ class community_views():
 				user_information.last_name).label('name'),
 				user_information.id,
 				event_participation.status.label('status'),
-				func.IF(community.occupation==None,"Unemployed",community.occupation).label('occupation'),
-				community.religion,
+				func.IF(community_member.occupation==None,"Unemployed",community_member.occupation).label('occupation'),
+				community_member.religion,
 				user_information.address
-				).filter(community.community_id==current_user.info_id, event_participation.event_id==value
+				).filter(community_member.community_id==current_user.info_id, event_participation.event_id==value
 				)
 
-		sub2 = community.query.join(
+		sub2 = community_member.query.join(
 				user_information,
-				community.member_id==user_information.id
+				community_member.member_id==user_information.id
 				).add_columns(
 				(user_information.first_name + ' ' +
 				func.left(user_information.middle_name,1) + '. ' +
 				user_information.last_name).label('name'),
 				user_information.id,
-				community.status.label('status'),
-				func.IF(community.occupation==None,"Unemployed",community.occupation).label('occupation'),
-				community.religion,
+				community_member.status.label('status'),
+				func.IF(community_member.occupation==None,"Unemployed",community_member.occupation).label('occupation'),
+				community_member.religion,
 				user_information.address
-				).filter(community.community_id==current_user.info_id, community.status=='A')
+				).filter(community_member.community_id==current_user.info_id, community_member.status=='A')
 
 		record = sub1.union(sub2).group_by(user_information.id).all()
 

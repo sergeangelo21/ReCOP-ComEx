@@ -21,6 +21,11 @@ if(window.location.pathname!='/signup' && window.location.pathname.startsWith('/
         document.getElementById('thrust').options.item(0).hidden=true
         document.getElementById('thrust').options.item(0).selected=true   
     }
+
+    if (document.getElementById('classification')){
+        document.getElementById('classification').options.item(0).hidden=true
+        document.getElementById('classification').options.item(0).selected=true   
+    }
     
     new bulmaSteps(document.getElementById('signup'), {	
     })

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, url_for, redirect, flash, request
 from flask_login import login_user, current_user, login_required
 from blueprints.unregistered.forms import *
-from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment, referral, donation
+from data_access.models import user_account, user_information, audit_trail, proposal_tracker, event_information, event_attachment, referral, donation, community_info
 from data_access.queries import user_views, event_views, linkage_views
 from datetime import datetime
 
@@ -189,8 +189,8 @@ def signup(type):
 
 	elif type=='community':
 
-		form = LinkageForm()
-		template = '/unregistered/signup/linkage.html'	
+		form = CommunityForm()
+		template = '/unregistered/signup/community.html'	
 
 	if form.validate_on_submit():
 
@@ -218,14 +218,35 @@ def signup(type):
 			status = "N"
 			user_type=3
 
-		user_information.add(value)	
-		user_id = user_information.reserve_id()
-
-		if type!='volunteer':
 			if form.address.data == 'San Sebastian College Recoletos de Cavite':
 				flash('Your account has been created! Please wait for the Re-COP Director to confirm your account.', 'success')
 			else:
 				flash('Your account has been created! Please wait for MOA at your email.', 'success')
+
+		elif type=='community':
+
+			company = 'San Sebastian College Recoletos de Cavite'
+
+			value=[None,form.firstname.data, form.middlename.data,
+				form.lastname.data, company, form.bio.data, form.gender.data, form.birthday.data,
+				form.address.data, form.telephone.data, form.mobile.data, 0]
+
+			status = "N"
+			user_type=4		
+
+			flash('Your account has been created! Please wait for MOA at your email.', 'success')
+
+		user_information.add(value)	
+		user_id = user_information.reserve_id()
+
+		if type=='community':
+			
+			value = [
+				None,user_id,form.classification.data,
+				form.population.data,form.economic.data,form.problem.data,form.need.data
+				]
+
+			community_info.add(value)
 
 		value = [
 			None,user_id,form.username.data,

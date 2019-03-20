@@ -20,23 +20,24 @@ class LoginForm(FlaskForm):
     remember_me = BooleanField('Remember Me')
     submit = SubmitField('Login')
 
-class SignupForm(FlaskForm):
+class CommunityForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
     firstname = StringField('First Name', validators=[DataRequired()])
     middlename = StringField('Middle Name', validators=[DataRequired()])
     lastname = StringField('Last Name', validators=[DataRequired()])
     gender = RadioField('Gender', choices=[("M","Male"),("F","Female")], validators=[DataRequired()])
-    company = StringField('Company Name', validators=[DataRequired()])
     bio = StringField('Bio', [validators.Length(min=0, max=160)])
     birthday = DateField('Birthday', validators=[DataRequired()])
     address = StringField('Address', validators=[DataRequired()])
     telephone = StringField('Telephone Number')
     mobile = StringField('Mobile Number', [validators.Length(min=0, max=25)])
-    sscr = RadioField('SSCR Organization?', choices=[("Y","Yes"),("F","No")])
-    type = StringField('Type', validators=[DataRequired()])
     email = StringField('Email Address', validators=[DataRequired()])
-    thrust = SelectField('Thrust', choices = [("0","Please Choose One"),("1","Education"),("2","Environmental"),("3","Health"),("4","Livelihood"),("5","Socio-Political"),("6","Spiritual")])
+    population = StringField('Population', validators=[DataRequired()])
+    economic = StringField('Economic Activities', validators=[DataRequired()])
+    problem = StringField('Primary Problem', validators=[DataRequired()])
+    need = StringField('Priority Need', validators=[DataRequired()])
+    classification = SelectField('Classification', choices=[("0","Please Choose One"),("1","Urban"),("2","Highland"),("3","Lowland"), ("4","Coastal")], validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 class LinkageForm(FlaskForm):

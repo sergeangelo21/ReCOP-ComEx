@@ -1,28 +1,11 @@
-create table `event_photo`(
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
-    `event_id` INT,
-    `photo` VARCHAR(200) not null,
-    `description` VARCHAR(140),
-    `is_used` CHAR(1) NOT NULL    
-);
+create table `community_info`(
+    `id` INT PRIMARY KEY AUTO_INCREMENT,
+    `community_id` INT,
+    `classification` iNT NOT NULL,
+    `population` INT NOT NULL,
+	`economic` VARCHAR(50) NOT NULL, 
+    `problem` VARCHAR(50) NOT NULL,
+    `need` VARCHAR(50) NOT NULL
+)
 
-create table `notifications`(
-     `id` INT PRIMARY KEY AUTO_INCREMENT,
-    `user_id` INT,
-    `body` VARCHAR(140) not null,
-    `status` CHAR(1) NOT NULL    
-);
-
-create table `user_photo`(
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
-    `user_id` INT,
-    `path` VARCHAR(200) not null
-);
-
-create table `feedback`(
-	`id` INT PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(70) NOT NULL,
-    `email_address` VARCHAR(60) not null,
-    `contact_no` VARCHAR(15),
-    `query` VARCHAR(140) not null
-);
+alter table community RENAME `community_member`

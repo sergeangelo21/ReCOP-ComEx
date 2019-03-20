@@ -690,6 +690,7 @@ def communities_add():
 def community_show(id):
 
 	community, mem_since = linkage_views.show_info([id,'community'])
+	info = community_info.show(id)
 	members = community_views.members_show(str(community.info_id))
 	photo = user_photo.photo(current_user.info_id)
 	

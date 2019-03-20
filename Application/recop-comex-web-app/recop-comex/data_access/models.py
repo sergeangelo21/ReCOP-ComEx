@@ -31,7 +31,37 @@ class audit_trail(db.Model):
 		db.session.add(record)
 		db.session.commit()
 
-class community(db.Model):
+class community_info(db.Model):
+
+	id = db.Column(db.INT, primary_key=True)
+	community_id = db.Column(db.INT, db.ForeignKey('user_information.id'), nullable=False)
+	classification = db.Column(db.INT, nullable=False)
+	population = db.Column(db.INT, nullable=False)
+	economic = db.Column(db.VARCHAR(50), nullable=False)
+	problem = db.Column(db.VARCHAR(50), nullable=False)
+	need = db.Column(db.VARCHAR(50), nullable=False)
+
+	def add(value):
+
+		record = community_info(
+			id = value[0],
+			community_id = value[1],
+			classification = value[2],
+			population = value[3],
+			economic = value[4],
+			problem = value[5],
+			need = value[6])
+
+		db.session.add(record)
+		db.session.commit()
+
+	def show(value):
+
+		record = community_info.query.filter(community_info.id==value).first()
+
+		return record
+
+class community_member(db.Model):
 
 	id = db.Column(db.INT, primary_key=True)
 	member_id = db.Column(db.INT,db.ForeignKey('user_information.id'), nullable=False)
@@ -43,7 +73,7 @@ class community(db.Model):
 
 	def add(value):
 
-		record = community(
+		record = community_member(
 			id = value[0],
 			member_id = value[1],
 			community_id = value[2],
@@ -57,22 +87,22 @@ class community(db.Model):
 
 	def retrieve_member(value):
 
-		record = community.query.filter(community.member_id==value).first()
+		record = community_member.query.filter(community_member.member_id==value).first()
 
 		return record
 
 	def update_status(id, status):
 
-		user = community.query.filter(community.id==id).first()
+		user = community_member.query.filter(community_member.id==id).first()
 		user.status = status
 		db.session.commit()
 
 	def member_count():
 
-		record = community.query.add_columns(
-			community.community_id,
-			func.COUNT(community.member_id).label('count')
-			).group_by(community.community_id
+		record = community_member.query.add_columns(
+			community_member.community_id,
+			func.COUNT(community_member.member_id).label('count')
+			).group_by(community_member.community_id
 			).all()
 
 		return record
@@ -713,8 +743,9 @@ class user_information(db.Model):
 	account_info_id = db.relationship('user_account', backref = 'user_information', lazy = True)
 	sponsee_info_id = db.relationship('donation', foreign_keys=[donation.sponsee_id], backref='user_information_sponsee', lazy=True)
 	sponsor_info_id = db.relationship('donation', foreign_keys=[donation.sponsor_id], backref='user_information_sponsor', lazy=True)
-	comm_info_id = db.relationship('community', foreign_keys=[community.community_id], backref='user_information_community', lazy=True)
-	mem_info_id = db.relationship('community', foreign_keys=[community.member_id], backref='user_information_member', lazy=True)
+	comm_id = db.relationship('community_info', foreign_keys=[community_info.community_id], backref='user_information_community', lazy=True)
+	comm_info_id = db.relationship('community_member', foreign_keys=[community_member.community_id], backref='user_information_community', lazy=True)
+	mem_info_id = db.relationship('community_member', foreign_keys=[community_member.member_id], backref='user_information_member', lazy=True)
 	organizer_info_id = db.relationship('event_information', backref='user_information', lazy=True)
 	photo_info_id = db.relationship('user_photo', backref='user_information', lazy=True)
 

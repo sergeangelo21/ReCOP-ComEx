@@ -1,5 +1,6 @@
 TRUNCATE table `audit_trail`;
-TRUNCATE table `community`;
+TRUNCATE table `community_info`;
+TRUNCATE table `community_member`;
 TRUNCATE table `donation`;
 TRUNCATE table `event_attachment`;
 TRUNCATE table `event_information`;

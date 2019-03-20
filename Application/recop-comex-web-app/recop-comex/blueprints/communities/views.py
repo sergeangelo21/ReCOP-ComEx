@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import current_user, logout_user, login_required
 from blueprints.communities.forms import *
-from data_access.models import user_account, user_information, proposal_tracker, event_information, community, event_participation, referral, event_attachment, user_photo
+from data_access.models import user_account, user_information, proposal_tracker, event_information, community_member, community_info, event_participation, referral, event_attachment, user_photo
 from data_access.queries import user_views, linkage_views, community_views, event_views
 
 from static.email import send_email
