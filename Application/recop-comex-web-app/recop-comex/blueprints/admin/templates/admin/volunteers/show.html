@@ -1,0 +1,183 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+
+		<div class="panel panel-default">
+			<div class="button-back">
+				<a href="{{ url_for('admin.volunteers', status='all', page='1', search=' ') }}" class = "button backbtnprof">
+					<span class="icon is-small">
+                		<i class="fas fa-arrow-alt-circle-left"></i>
+					</span>
+					<span>Back</span>
+				</a>
+			</div>
+		    <div class="overlay-card has-text-centered">
+		    	<div class="circular">
+		    		<img src="../../../static/images/image-default.png">
+		    	</div>
+		        
+		        <div class="row has-text-centered">
+		            <p class="has-text-white is-size-4 has-text-weight-bold">{{title}}</p>
+		            <a class="btn btn-follow is-size-6 btn-sm text-center has-text-white" href="#" role="button">{{volunteer.email_address}}</a>
+		            <p class="has-text-white is-size-6"> Last active on {{volunteer.last_active.strftime('%b %e, %Y at %I:%M %p')}} </p>
+		        </div>
+		    </div>
+		</div>
+
+		<nav class="level is-mobile">
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			      	<a class="prof-icon">
+			      		<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-user fa-2x prof"></i>
+					      	</span>
+					    </p>
+			     	 	<p class="is-size-6 has-text-weight-bold ">About</p>
+			  	  	</a>
+			    </div>
+			</div>
+
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			    	<a class="prof-icon">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-calendar-alt fa-2x""></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Events Attended</p>
+				    </a>
+			    </div>
+			</div>
+
+			<div class="level-item has-text-centered">
+			    <div class="active-prof-nav">
+			    	<a class="prof-icon">
+				      	<p class="icon">
+					      	<span class="icon">
+					      		<i class="fas fa-cog fa-2x"></i>
+					      	</span>
+					    </p>
+				      	<p class="is-size-6 has-text-weight-bold">Settings</p>
+				    </a>
+			    </div>
+			</div>
+		</nav>
+
+		<section class="hero">
+			<div class="hero-body">
+			    <div class="container">
+			      	<div class="card">
+						<header class="card-header has-background-light">
+						    <p class="card-header-title">
+						    	Personal Information
+						    </p>
+					  	</header>
+					  	<div class="card-content profile">
+						    <div class="panel-block">
+							    <article class="media">
+								  	<figure class="media-left">
+								  		<span><i class="fas fa-building prof-panel-icon"></i></span>
+								    	<p>Name</p>
+								  	</figure>
+								  	<div class="media-content">
+								    	<div class="content">
+								      		<p>
+								        		<strong>{{volunteer.first_name}} {{volunteer.middle_name}} {{volunteer.last_name}}</strong>
+								      		</p>
+								    	</div>
+								  	</div>
+								</article>
+							</div>
+							<div class="panel-block">
+						    	<article class="media">
+									<figure class="media-left">
+										<span><i class="fas fa-map-marker-alt prof-panel-icon"></i></span>
+							    		<p>Address</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{volunteer.address}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+							<div class="panel-block">
+						    	<article class="media">
+									<figure class="media-left">
+										<span><i class="fas fa-user prof-panel-icon"></i></span>
+							    		<p>Company Name</p>
+							  		</figure>
+							  		<div class="media-content">
+							   			<div class="content">
+							      			<p>
+							        			<strong>{{volunteer.company_name}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						    	<article class="media">
+							  		<figure class="media-left">
+							  			<span><i class="fas fa-phone prof-panel-icon"></i></span>
+							    		<p>Telephone</p>
+							  		</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							      				{% if volunteer.telephone=='' %}
+					                            <strong>N/A</strong>
+					                            {% else %}
+							        			<strong>{{volunteer.telephone}}</strong>
+					                            {% endif %}
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+
+						  	<div class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							  			<span><i class="fas fa-mobile prof-panel-icon"></i></span>
+							    		<p>Mobile</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							      				{% if volunteer.mobile_number=='' %}
+					                            <strong>N/A</strong>
+					                            {% else %}
+							        			<strong>{{volunteer.mobile_number}}</strong>
+					                            {% endif %}
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+						  	<div class="panel-block">
+						     	<article class="media">
+							  		<figure class="media-left">
+							  			<span><i class="fas fa-user-cog prof-panel-icon"></i></span>
+							    		<p>Status</p>
+							    	</figure>
+							  		<div class="media-content">
+							    		<div class="content">
+							      			<p>
+							        			<strong>{{volunteer.status}}</strong>
+							      			</p>
+							    		</div>
+							  		</div>
+								</article>
+						  	</div>
+						</div>
+					</div>
+			    </div>
+			</div>
+		</section>
+{% endblock %}

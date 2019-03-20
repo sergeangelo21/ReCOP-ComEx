@@ -603,6 +603,129 @@ def linkage_action(action, id):
 
 	return redirect(url_for('admin.linkages', status='all', page='1', search=' '))
 
+@admin.route('/admin/volunteers/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
+@login_required
+def volunteers(status, page, search):
+
+	if status=='active':
+		value='A'
+	elif status=='new':
+		value='N'
+	elif status=='declined':
+		value='X'
+	elif status=='disabled':
+		value='D'
+	else:
+		value=status
+
+	volunteers = linkage_views.show_list([value,search,2,page])
+
+	photo = user_photo.photo(current_user.info_id)
+
+	form = SearchForm()
+
+	if form.validate_on_submit():
+
+		return redirect(url_for('admin.volunteers', status=status, page='1', search=form.search.data))
+
+	return render_template('/admin/volunteers/index.html', title="Volunteers", form=form, volunteers=volunteers, status=status, search=search, photo=photo, active='volunteers')
+
+@admin.route('/admin/volunteers/chart')
+@login_required
+def volunteers_chart():
+
+	query = db.session.query(user_account, func.count(user_account.type)).filter(user_account.type==3).all()
+	photo = user_photo.photo(current_user.info_id)
+	flash(query)
+
+	chart = pygal.Pie()
+	chart.title = 'Linkages'
+
+	for type in query:
+		chart.add('asd', [])
+
+	chart.render_response()
+
+	return render_template('/admin/linkages/chart.html', title="Volunteers", chart=chart, photo=photo, active='volunteers')
+
+@admin.route('/admin/volunteers/add', methods=['GET', 'POST'])
+@login_required
+def volunteers_add():
+
+	form = AddLinkageForm()
+	photo = user_photo.photo(current_user.info_id)
+
+	if form.validate_on_submit():
+
+		value = [
+			None,form.firstname.data,form.middlename.data,
+			form.lastname.data,form.company.data,form.bio.data,form.gender.data,form.birthday.data,
+			form.address.data,form.telephone.data,form.mobile.data,form.thrust.data
+			]
+
+		user_information.add(value)	
+		user_id = user_information.reserve_id()
+
+		status = "N"
+
+		value = [
+			None,user_id,form.username.data,
+			form.password.data,form.email.data,3,datetime.now(),status
+			]
+
+		user_account.add(value)
+
+		flash('Linkage '+form.company.data+' was successfully added!', 'success')
+
+		return redirect(url_for('admin.linkages', status='all', page='1', search=' '))	
+
+	return render_template('/admin/linkages/add.html', title="Add Volunteers", form=form, photo=photo, active='volunteers')
+
+@admin.route('/admin/volunteer/show/id=<id>')
+@login_required
+def volunteer_show(id):
+
+	volunteer, mem_since = linkage_views.show_info([id,'linkage'])
+	name = volunteer.first_name	+ ' ' + volunteer.middle_name + ' ' + volunteer.last_name
+	photo = user_photo.photo(current_user.info_id)
+
+	return render_template('/admin/volunteers/show.html', title= name.title() , volunteer=volunteer, mem_since=mem_since, photo=photo, active='volunteer')
+
+@admin.route('/admin/volunteer/<action>/id=<id>')
+@login_required
+def volunteer_action(action, id):
+
+	user = user_account.retrieve_user(id)
+	volunteer = user_information.linkage_info(user.info_id)
+
+	if action=='disable':
+	
+		status = "D"
+		flash("Volunteer was disabled!","success")
+
+		value = [None,current_user.id,user.id,'volunteer', 4]
+		audit_trail.add(value)
+
+	elif action=='decline':
+		
+		status = "X"
+		flash("Volunteer was declined! ", "success")
+
+		value = [None,current_user.id,user.id,'volunteer', 3]
+		audit_trail.add(value)
+
+	else:
+
+		status = "A"
+		flash("Volunteer was activated! ", "success")
+
+		value = [None,current_user.id,user.id,'volunteer', 3]
+		audit_trail.add(value)
+
+	user_account.update_status(user.id, status)
+
+	return redirect(url_for('admin.volunteers', status='all', page='1', search=' '))
+
 @admin.route('/admin/communities/<status>/search_<search>.page_<page>', methods=['GET', 'POST'])
 @login_required
 def communities(status, page, search):

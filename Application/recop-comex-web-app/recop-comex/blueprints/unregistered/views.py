@@ -200,9 +200,8 @@ def signup(type):
 				form.lastname.data, form.organization.data, form.bio.data, form.gender.data, form.birthday.data,
 				form.address.data, form.telephone.data, form.mobile.data, 0]
 
-			status = "A"
 			user_type=2
-			flash('Your account was successfully created!', 'success')
+			flash('Your account has been created! Please wait for the Re-COP Director to confirm your account.', 'success')
 
 		elif type=='linkage':
 
@@ -215,7 +214,6 @@ def signup(type):
 				form.lastname.data, form.company.data, form.bio.data, form.gender.data, form.birthday.data,
 				form.address.data, form.telephone.data, form.mobile.data, thrust]
 
-			status = "N"
 			user_type=3
 
 			if form.address.data == 'San Sebastian College Recoletos de Cavite':
@@ -231,13 +229,13 @@ def signup(type):
 				form.lastname.data, company, form.bio.data, form.gender.data, form.birthday.data,
 				form.address.data, form.telephone.data, form.mobile.data, 0]
 
-			status = "N"
 			user_type=4		
 
 			flash('Your account has been created! Please wait for MOA at your email.', 'success')
 
 		user_information.add(value)	
 		user_id = user_information.reserve_id()
+		status = "N"
 
 		if type=='community':
 			

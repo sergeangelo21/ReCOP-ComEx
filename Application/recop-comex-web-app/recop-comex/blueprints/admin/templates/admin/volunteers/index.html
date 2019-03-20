@@ -1,0 +1,140 @@
+{% extends "admin-base.html" %}
+
+{% block content %}
+			<div class="notification gold">
+				<div class="columns is-centered">
+					<div class="column view-icons">
+						<article class="media">
+						  	<figure class="media-left"> 
+						  		<a class="button add" href="{{url_for('admin.volunteers_add')}}" ><i class="fas fa-plus-circle"> </i>&nbsp Add</a>
+						  		<a href="{{url_for('admin.volunteers', status='all', page='1', search=' ')}}" class="button viewbtn is-active">
+									<span class="icon">
+										<i class="fa fa-list"></i>
+									</span>
+								</a>
+								<a href="{{url_for('admin.volunteers_chart')}}" class="button viewbtn">
+									<span class="icon">
+										<i class="fa fa-chart-pie"></i>
+									</span>
+								</a>
+						  	</figure>
+						</article>
+					</div>
+
+					<div class="column">
+						<div class="tabs proposal is-toggle is-toggle-rounded has-text-weight-bold is-centered">
+						  <ul>
+						    <li {% if status=='all' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.volunteers', status='all', page='1',search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-list-ul" aria-hidden="true"></i></span>
+						        <span class="proposal">All</span>
+						      </a>
+						    </li>
+						    <li {% if status=='new' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.volunteers', status='new', page='1',search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-user-plus" aria-hidden="true"></i></span>
+						        <span class="proposal">New</span>
+						      </a>
+						    </li>
+						    <li {% if status=='declined' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.volunteers', status='declined', page='1', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-user-slash" aria-hidden="true"></i></span>
+						        <span class="proposal">Declined</span>
+						      </a>
+						    </li>
+						    <li {% if status=='active' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.volunteers', status='active', page='1', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-user-check" aria-hidden="true"></i></span>
+						        <span class="proposal">Active</span>
+						      </a>
+						    </li>
+						    <li {% if status=='disabled' %} class="is-active" {% endif %}>
+						      <a href="{{url_for('admin.volunteers', status='disabled', page='1', search=search)}}">
+						        <span class="icon is-small"><i class="fas fa-user-times" aria-hidden="true"></i></span>
+						        <span class="proposal">Disabled</span>
+						      </a>
+						    </li>
+						  </ul>
+						</div>
+					</div>
+
+					<div class="column search-box">
+						<div class="field is-pulled-right has-addons has-addons-centered">
+							<div class="control">
+								<form action="" method="POST">
+								{{form.hidden_tag()}}
+						    		{{form.search(class_='input', placeholder='Search')}}
+							</div>
+							<p class="control">
+						     	{{form.submit(class_='button search')}}
+							</p>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+				<div class="column">
+					<div class="card list">
+						<div class="card-header">
+							<p class="card-header-title">
+								<span class="fas fa-poll-h"></span>&nbsp;
+								{% if search!=' ' %}
+								You searched for &nbsp;
+								<span class="search-highlight">
+									&nbsp;'{{search}}'
+									<a href="{{url_for('admin.volunteers', status=status, page='1', search=' ')}}"><span class="fas fa-times-circle"></span></a>&nbsp;
+								</span>
+								&nbsp; in
+								{% endif %}
+								{{status | title }} Volunteers
+							</p>
+							<div class="is-pulled-right">
+								<p class="card-header-title">
+									Total: {{volunteers.total}}
+								</p>
+							</div>
+						</div>
+						<div class="card-content">
+							{% if volunteers.items %}
+							<div class="table-responsive">
+								<table class="table is-fullwidth is-striped is-hoverable">
+									<thead>
+										<tr>
+											<th class="newlist">ID</th>
+										    <th class="newlist">Name</th>
+										    <th class="newlist">Organization</th>
+										    <th class="newlist">Address</th>
+										   	{% if status=='all' %}<th class="newlist">Status</th>{% endif %}
+										    <th class="newlist hidedesktop">Actions</th>
+										 </tr>
+										
+									</thead>
+
+									<tbody>
+
+										{% for volunteer in volunteers.items %}
+											{% include 'admin/volunteers/_volunteers.html' %}
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						{% else %}
+						<div class='field has-text-centered'>
+							<span class='tag is-warning is-large'>No results found</span>
+						</div>
+						{% endif %}
+							{% if volunteers.pages>1 %}
+							<nav class="pagination" role="navigation" aria-label="pagination">
+  								<a class="pagination-previous"  {% if volunteers.has_prev %}  href="{{url_for('admin.volunteers', status=status, search=search, page=volunteers.prev_num|string)}}"{% else %} disabled {% endif %}>Previous</a>
+  								<a class="pagination-next" {% if volunteers.has_next %} href="{{url_for('admin.volunteers', status=status, search=search, page=volunteers.next_num|string)}}" {% else %} disabled {% endif %}>Next page</a>
+  								<ul class="pagination-list">
+  									Page {{volunteers.page}} of {{volunteers.pages}}
+								</ul>
+							</nav>
+							{% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+{% endblock %}

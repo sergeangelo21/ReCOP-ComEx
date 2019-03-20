@@ -1,0 +1,50 @@
+									<tr class="table-row" >
+										<td>{{ volunteer.id }}</td>
+									    <td>{{ volunteer.coordinator }}</td>
+									    <td>{{ volunteer.company_name }}</td>
+									    <td>{{ volunteer.address }}</td>
+									    {% if status=='all' %}
+									    <td>
+									    	{% if volunteer.status=='A' %}
+									    		Active
+									    	{% elif volunteer.status=='D' %}
+									    		Disabled
+									    	{% elif volunteer.status=='X' %}
+									    		Declined
+									    	{% else %}
+									    		New
+									    	{% endif %}
+
+										</td>
+										{% endif %}
+										<td>
+											<a class="button is-warning tooltip" data-tooltip="View" href="{{url_for('admin.volunteer_show', id=volunteer.info_id)}}">
+												<span class="icon">
+													<i class="fa fa-eye"></i>
+												</span>
+											</a>
+												{% if volunteer.status!='A' %}
+												<a class="button is-success tooltip" data-tooltip="Activate" href="{{url_for('admin.volunteer_action', action='activate', id = volunteer.info_id)}}")'>
+													<span class="icon">
+														<i class="fas fa-user-check"></i>
+													</span>
+												</a>
+												{% endif %}
+												{% if volunteer.status=='N' and volunteer.status!='X' %}
+												<a class="button is-danger tooltip" data-tooltip="Decline" href="{{url_for('admin.volunteer_action', action='decline', id = volunteer.info_id)}}")'>
+													<span class="icon">
+														<i class="fas fa-user-slash"></i>
+													</span>
+												</a>
+												{% endif %}
+												{% if volunteer.status=='A' %}
+												<a class="button is-danger tooltip" data-tooltip="Disable" href="{{url_for('admin.volunteer_action', action='disable', id = volunteer.info_id)}}")'>
+													<span class="icon">
+														<i class="fas fa-user-times"></i>
+													</span>
+												</a>
+												{% endif %}
+												</span>
+											</a>
+										</td>
+									</tr>
