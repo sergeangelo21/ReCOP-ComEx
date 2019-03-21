@@ -48,7 +48,7 @@
 						  	<div class="card-content">
 						    	<div class="media">
 						      		<div class="media-content has-text-centered">
-								        <p class="title is-5 has-text-weight-bold">Event Name</p>
+								        <p class="title is-5 has-text-weight-bold">{{event.name}}</p>
 						      		</div>
 						    	</div>
 
@@ -59,7 +59,7 @@
 								  	<div class="media-content">
 								    	<div class="content">
 								      		<p>
-								        		<strong>Company name</strong>
+								        		<strong>{{event.company_name}}</strong>
 								      		</p>
 								    	</div>
 								  	</div>
@@ -72,7 +72,7 @@
 								  	<div class="media-content">
 								    	<div class="content">
 								      		<p>
-								        		<strong>Description</strong>
+								        		<strong>{{event.description}}</strong>
 								      		</p>
 								    	</div>
 								  	</div>
@@ -86,7 +86,7 @@
 								  	<div class="media-content">
 								    	<div class="content">
 								      		<p>
-								        		<strong>objective</strong>
+								        		<strong>{{event.objective}}</strong>
 								      		</p>
 								    	</div>
 								  	</div>
@@ -100,7 +100,7 @@
 								  	<div class="media-content">
 								    	<div class="content">
 								      		<p>
-								        		<strong>₱ 2,000</strong>
+								        		<strong>{{event.budget}}</strong>
 								      		</p>
 								    	</div>
 								  	</div>
@@ -114,7 +114,7 @@
 								  	<div class="media-content">
 								    	<div class="content">
 								      		<p>
-								        		<strong>Cavite City</strong>
+								        		<strong>{{event.location}}</strong>
 								      		</p>
 								    	</div>
 								  	</div>
@@ -127,7 +127,7 @@
 								  	<div class="media-content">
 								    	<div class="content">
 								      		<p>
-								        		<strong>date</strong>
+								        		<strong>{{event.event_date.strftime('%B %e, %Y')}}</strong>
 								      		</p>
 								    	</div>
 								  	</div>
@@ -142,7 +142,19 @@
 								    	<div class="content">
 								      		<p>
 								        		<strong>
-								        			Health
+								        			{% if event.thrust==1 %}
+								        				Educational
+								        			{% elif event.thrust==2 %}
+								        				Environmental
+								        			{% elif event.thrust==3 %}
+								        				Health
+								        			{% elif event.thrust==4 %}
+								        				Livelihood
+								        			{% elif event.thrust==5 %}
+								        				Socio-Political
+								        			{% elif event.thrust==6 %}
+								        				Spiritual   
+								        			{% endif %}
 								        		</strong>
 								      		</p>
 								    	</div>
@@ -158,7 +170,7 @@
 								    	<div class="content">
 								      		<p>
 								        		<strong>
-								        			date
+								        			{{event.proposed_on.strftime('%B %e, %Y')}}
 								        		</strong>
 								      		</p>
 								    	</div>
@@ -173,7 +185,7 @@
 								    	<div class="content">
 								      		<p>
 								        		<strong>
-								        			date
+								        			{{event.approved_on.strftime('%B %e, %Y')}}
 								        		</strong>
 								      		</p>
 								    	</div>
